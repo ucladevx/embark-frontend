@@ -3,12 +3,15 @@ export const mediaQueries = {
 };
 
 export const colors = {
-  white: "#FFFFFFF",
+  white: "#FFFFFF",
   lightblue: "#C3DAFE",
   mediumblue: "#667EEA",
-  brightgray: "#F2F5F6",
+  lightgray: "#F2F5F6",
   pink: "#FFBFBF",
-  gray: "#EDEDED",
+  gray: "#E5E5E5",
+  black: "#000000",
+  mediumgray: "#5f6368",
+  darkgray: "#5F6368",
 };
 
 export const font = {
