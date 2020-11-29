@@ -1,13 +1,14 @@
 import { createMuiTheme } from "@material-ui/core/styles";
+import {blue, pink} from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "blue",
+      main: blue[500],
       contrastText: "#fff",
     },
     secondary: {
-      main: "pink",
+      main: pink[500],
     },
   },
   typography: {
