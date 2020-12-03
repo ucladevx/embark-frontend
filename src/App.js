@@ -8,6 +8,9 @@ import { getUserData } from "./redux/actions/userActions";
 // Utilities
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
+import { StylesProvider } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "./utils/theme";
 
 // Pages
 import OnBoarding from "./pages/OnBoarding";
@@ -27,15 +30,19 @@ if (token) {
 
 function App() {
   return (
-    <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route exact path="/" component={OnBoarding}></Route>
-          <Route exact path="/landing" component={Landing}></Route>
-          <Route exact path="/user/:id" component={User}></Route>
-        </Switch>
-      </Router>
-    </Provider>
+    <StylesProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={OnBoarding}></Route>
+              <Route exact path="/landing" component={Landing}></Route>
+              <Route exact path="/user/:id" component={User}></Route>
+            </Switch>
+          </Router>
+        </Provider>
+      </ThemeProvider>
+    </StylesProvider>
   );
 }
 
