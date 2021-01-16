@@ -17,7 +17,7 @@ import OnBoarding from "./pages/OnBoarding";
 import Landing from "./pages/Landing/Landing";
 import Profile from "./pages/Profile/Profile";
 
-axios.defaults.baseURL = "http://localhost:9000/";
+axios.defaults.baseURL = "https://uclaembark.me";
 
 const token = localStorage.getItem("AuthToken");
 

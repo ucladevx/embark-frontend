@@ -19,17 +19,15 @@ export const LeftWrapper = styled.div`
 export const MiddleWrapper = styled.div`
   grid-column: 4 / 8;
   padding-top: 20px;
-  margin-left: 40px;
 `;
 
 export const RightWrapper = styled.div`
   grid-column: 8 / 10;
   padding-top: 20px;
-  margin-right: -40px;
 `;
 
 export const InfoBoxes = styled.div`
-  width: 270px;
+  width: min(90%, 310px);
   height: 235px;
   background-color: ${colors.white};
   border-radius: 5px;
@@ -67,7 +65,7 @@ export const FilterWrapper = styled.div`
   box-sizing: border-box;
   margin-top: 20px;
   padding: 20px;
-  width: 290px;
+  width: min(90%, 310px);
   height: 260px;
   background: ${colors.white};
   display: flex;
@@ -78,7 +76,7 @@ export const FilterWrapper = styled.div`
 
 export const FilterObj = styled(Typography)`
   height: 40.66px;
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => props.bgcolor};
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -142,6 +140,7 @@ export const MakePostWrapper = styled.div`
 
 export const CalanderWrapper = styled.div`
   margin-left: 3vw;
+  width: min(90%, 300px);
 `;
 
 export const EventsWrapper = styled.div`
@@ -149,6 +148,7 @@ export const EventsWrapper = styled.div`
   background-color: ${colors.white};
   margin-top: 20px;
   padding: 15px;
+  width: min(90%, 300px);
 `;
 
 export const EventItems = styled.div`
@@ -202,7 +202,7 @@ export const PostTagWrapper = styled.div`
 `;
 
 export const PostTag = styled(Button)`
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => props.bgcolor};
   text-transform: none;
   width: fit-content;
   height: 18px;
@@ -210,7 +210,7 @@ export const PostTag = styled(Button)`
   border-radius: 5px;
   padding: 10px;
   &:hover {
-    background-color: ${(props) => props.color};
+    background-color: ${(props) => props.bgcolor};
     opacity: 0.8;
   }
 `;

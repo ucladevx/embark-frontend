@@ -51,6 +51,7 @@ import { BoldTypograhpy, TitleTypography } from "../../shared/Typography";
 import avatarImg from "../../images/avatar.png";
 import bookImg from "../../images/book.png";
 import compassImg from "../../images/compass.png";
+// Utils
 import { colors } from "../../shared/config";
 import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
@@ -97,8 +98,8 @@ const Landing = () => {
 
           <FilterWrapper>
             <TitleTypography>Filters:</TitleTypography>
-            <FilterObj color={colors.lightred}>Product Management</FilterObj>
-            <FilterObj color={colors.darkyellow}>Product Deisign</FilterObj>
+            <FilterObj bgcolor={colors.lightred}>Product Management</FilterObj>
+            <FilterObj bgcolor={colors.darkyellow}>Product Deisign</FilterObj>
             <InfoSeperator style={{ marginTop: "15px" }}></InfoSeperator>
             <AddFilter>+ Add Filter</AddFilter>
           </FilterWrapper>
@@ -127,8 +128,8 @@ const Landing = () => {
                 <PostTime>{dayjs("2020-12-01").fromNow()}</PostTime>
               </PostNameTime>
               <PostTagWrapper>
-                <PostTag color={colors.lightred}>Product Management</PostTag>
-                <PostTag color={colors.mediumblue}>Computer Science</PostTag>
+                <PostTag bgcolor={colors.lightred}>Product Management</PostTag>
+                <PostTag bgcolor={colors.mediumblue}>Computer Science</PostTag>
               </PostTagWrapper>
             </PostHeader>
 
