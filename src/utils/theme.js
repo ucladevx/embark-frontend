@@ -1,5 +1,5 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import {blue, pink} from '@material-ui/core/colors';
+import { blue, pink } from "@material-ui/core/colors";
 
 const theme = createMuiTheme({
   palette: {
@@ -12,7 +12,7 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: "helvetica, arial, verdana, sans-serif",
+    fontFamily: "Open Sans, helvetica, arial, verdana, sans-serif",
   },
 });
 
