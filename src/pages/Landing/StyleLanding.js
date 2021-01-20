@@ -1,33 +1,38 @@
 import styled from "styled-components";
 import { colors } from "../../shared/config";
 import { Avatar, Button, TextField, Typography } from "@material-ui/core";
-import { BoldTypograhpy } from "../../shared/Typography";
+import { BoldTypography } from "../../shared/Typography";
+
+export const LandingPage = styled.div`
+  background: ${colors.skyblue};
+`;
 
 export const LandingPageWrapper = styled.div`
-  display: grid;
-  width: 100vw;
+  margin: 0 auto;
+  padding-top: 20px;
+  display: flex;
+  width: 80vw;
   min-height: 100vh;
-  background: ${colors.skyblue};
-  grid-template-columns: repeat(10, 1fr);
+  gap: 30px;
 `;
 
 export const LeftWrapper = styled.div`
-  padding-top: 20px;
-  grid-column: 2 / 4;
+  flex: 1 1 auto;
+  white-space: nowrap;
 `;
 
 export const MiddleWrapper = styled.div`
-  grid-column: 4 / 8;
-  padding-top: 20px;
+  flex: 2 1 auto;
 `;
 
 export const RightWrapper = styled.div`
-  grid-column: 8 / 10;
-  padding-top: 20px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 export const InfoBoxes = styled.div`
-  width: min(90%, 310px);
   height: 235px;
   background-color: ${colors.white};
   border-radius: 5px;
@@ -40,7 +45,7 @@ export const InfoEntryWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 13px 0;
+  padding: 20px 10px;
 `;
 
 export const InfoEntryText = styled(Typography)`
@@ -57,15 +62,14 @@ export const InfoSeperator = styled.div`
 `;
 
 export const InfoImage = styled.img`
-  width: 53px;
-  height: 53px;
+  width: 35px;
+  height: 35px;
 `;
 
 export const FilterWrapper = styled.div`
   box-sizing: border-box;
   margin-top: 20px;
   padding: 20px;
-  width: min(90%, 310px);
   height: 260px;
   background: ${colors.white};
   display: flex;
@@ -82,9 +86,14 @@ export const FilterObj = styled(Typography)`
   align-items: center;
   width: fit-content;
   padding: 0 8px;
+  font-size: 14px;
 `;
 
-export const AddFilter = styled.p`
+export const FilterTitle = styled(BoldTypography)`
+  font-size: 18px;
+`;
+
+export const AddFilter = styled(Typography)`
   text-transform: none;
   align-self: flex-end;
   color: ${colors.darkgray};
@@ -136,19 +145,18 @@ export const PostButton = styled(Button)`
 export const MakePostWrapper = styled.div`
   position: relative;
   margin-top: 10px;
+  border-radius: 5px;
 `;
 
 export const CalanderWrapper = styled.div`
-  margin-left: 3vw;
-  width: min(90%, 300px);
+  width: 290px;
 `;
 
 export const EventsWrapper = styled.div`
-  margin-left: 3vw;
   background-color: ${colors.white};
-  margin-top: 20px;
   padding: 15px;
-  width: min(90%, 300px);
+  width: 290px;
+  border-radius: 5px;
 `;
 
 export const EventItems = styled.div`
@@ -156,6 +164,7 @@ export const EventItems = styled.div`
   flex-direction: column;
   gap: 20px;
   min-height: 250px;
+  position: relative;
 `;
 
 export const EventItem = styled.div`
@@ -167,17 +176,17 @@ export const EventDescription = styled.div`
 `;
 
 export const EventAvatar = styled(Avatar)`
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   text-align: center;
   font-size: 15px;
-  background-color: ${colors.darkgray};
 `;
 
 export const ViewPost = styled.div`
   background: ${colors.white};
   margin-top: 20px;
   padding: 20px;
+  border-radius: 5px;
 `;
 
 export const PostHeader = styled.div`
@@ -226,25 +235,28 @@ export const PostTime = styled(Typography)`
   font-size: 12px;
 `;
 
-export const PostUserName = styled(BoldTypograhpy)`
-  font-size: 21px;
+export const PostUserName = styled(BoldTypography)`
+  font-size: 16px;
   margin-left: -4px;
 `;
 
-export const PostTitle = styled(BoldTypograhpy)`
+export const PostTitle = styled(BoldTypography)`
   font-size: 19px;
   margin-top: 20px;
+  font-size: 14px;
 `;
 
 export const PostContent = styled(Typography)`
   margin-top: 5px;
+  font-size: 12px;
 `;
 
 export const CommentWrapper = styled.div`
   display: flex;
   width: 100%;
-  margin-top: 30px;
   gap: 20px;
+  padding: 5px;
+  background: ${colors.white};
 `;
 
 export const CommentIcon = styled.img`
@@ -252,10 +264,11 @@ export const CommentIcon = styled.img`
   height: 25px;
 `;
 
-export const ViewPreviousCommentLink = styled(Typography)`
+export const ViewCommentLink = styled(Typography)`
   text-decoration: underline;
   background: none;
   margin: 10px 0 0 10px;
+  font-size: 11px;
   color: ${colors.darkgray};
   &:hover {
     opacity: 0.8;
@@ -270,19 +283,61 @@ export const PreviousCommentItem = styled.div`
 export const PreviousCommentAvatar = styled(Avatar)`
   width: 35px;
   height: 35px;
-  margin-left: 30px;
 `;
 
 export const ViewPreviousCommentWrapper = styled.div`
-  background: ${colors.lightpurple};
   display: flex;
   gap: 10px;
   flex-direction: column;
-  padding: 5px 20px;
+  padding: 5px;
+  background: ${colors.white};
+`;
+
+export const PreviousCommentTitle = styled(BoldTypography)`
+  font-size: 14px;
+  margin-bottom: 2px;
+`;
+
+export const PreviousCommentText = styled(Typography)`
+  font-size: 12px;
 `;
 
 export const PreviousCommentContent = styled.div`
+  background: ${(props) => props.bgcolor};
+  border-radius: 15px;
+  padding: 10px 10px;
   display: flex;
   margin-left: 20px;
   flex-direction: column;
 `;
+
+export const LikeReply = styled.div`
+  display: flex;
+  gap: 5px;
+  margin: 5px 0 0 20px;
+`;
+
+export const LikeReplyText = styled(BoldTypography)`
+  font-size: 11px;
+  color: ${colors.mediumgray};
+`;
+
+export const EventTypography = styled(Typography)`
+  font-size: 11px;
+`;
+
+export const TimeTypography = styled(EventTypography)`
+  color: ${colors.mediumgray};
+`;
+
+export const GoingBtn = styled(Button)`
+  text-transform: none;
+  background-color: ${(props) => props.bgcolor};
+  height: 25px;
+  align-self: center;
+  color: ${(props) => props.fcolor};
+  position: absolute;
+  right: 1px;
+`;
+
+export const CommentAvatar = styled(PreviousCommentAvatar)``;

@@ -7,9 +7,11 @@ import { Typography, TextField } from "@material-ui/core";
 import ImageIcon from "@material-ui/icons/Image";
 import LinkIcon from "@material-ui/icons/Link";
 import {
+  LandingPage,
   LandingPageWrapper,
   LeftWrapper,
   RightWrapper,
+  FilterTitle,
   FilterObj,
   FilterWrapper,
   QuestionBox,
@@ -22,9 +24,10 @@ import {
   EventItem,
   EventItems,
   EventsWrapper,
+  TimeTypography,
   CalanderWrapper,
   ViewPost,
-  ViewPreviousCommentLink,
+  ViewCommentLink,
   ViewPreviousCommentWrapper,
   PostHeader,
   PostTagWrapper,
@@ -32,8 +35,13 @@ import {
   PreviousCommentItem,
   CommentWrapper,
   CommentIcon,
+  PreviousCommentTitle,
   PreviousCommentAvatar,
   PreviousCommentContent,
+  PreviousCommentText,
+  CommentAvatar,
+  LikeReply,
+  LikeReplyText,
   InfoBoxes,
   InfoEntryWrapper,
   InfoImage,
@@ -45,8 +53,10 @@ import {
   PostNameTime,
   PostTime,
   PostUserName,
+  EventTypography,
+  GoingBtn,
 } from "./StyleLanding";
-import { BoldTypograhpy, TitleTypography } from "../../shared/Typography";
+import { BoldTypography, TitleTypography } from "../../shared/Typography";
 // Images
 import avatarImg from "../../images/avatar.png";
 import bookImg from "../../images/book.png";
@@ -75,7 +85,7 @@ const Landing = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <LandingPage>
       <NavBar></NavBar>
       <LandingPageWrapper>
         <LeftWrapper>
@@ -97,7 +107,7 @@ const Landing = () => {
           </InfoBoxes>
 
           <FilterWrapper>
-            <TitleTypography>Filters:</TitleTypography>
+            <FilterTitle>Filters:</FilterTitle>
             <FilterObj bgcolor={colors.lightred}>Product Management</FilterObj>
             <FilterObj bgcolor={colors.darkyellow}>Product Deisign</FilterObj>
             <InfoSeperator style={{ marginTop: "15px" }}></InfoSeperator>
@@ -109,7 +119,12 @@ const Landing = () => {
           <QuestionBox>
             <AskAvatar></AskAvatar>
             <AskaQuestion
-              InputProps={{ disableUnderline: true }}
+              InputProps={{
+                disableUnderline: true,
+                style: {
+                  fontSize: 12,
+                },
+              }}
               placeholder="Ask a question or start a conversation..."
               onChange={handleQuestionChange}
             ></AskaQuestion>
@@ -141,28 +156,59 @@ const Landing = () => {
               started? Thanks :)
             </PostContent>
 
+            <ViewPreviousCommentWrapper>
+              <ViewCommentLink>View previous comments</ViewCommentLink>
+              <PreviousCommentItem>
+                <PreviousCommentAvatar></PreviousCommentAvatar>
+                <div>
+                  <PreviousCommentContent bgcolor={colors.lightpurple}>
+                    <PreviousCommentTitle>UCLA DevX</PreviousCommentTitle>
+                    <PreviousCommentText>
+                      Hey Christie! We have a slidedeck all about product
+                      thinking on our profile. You should totally apply to be on
+                      one of our teams this quarter to gain some more experience
+                      with the product development process!!
+                    </PreviousCommentText>
+                  </PreviousCommentContent>
+                  <LikeReply>
+                    <LikeReplyText>Like</LikeReplyText>
+                    <LikeReplyText>·</LikeReplyText>
+                    <LikeReplyText>Reply</LikeReplyText>
+                  </LikeReply>
+                </div>
+              </PreviousCommentItem>
+              <PreviousCommentItem>
+                <PreviousCommentAvatar></PreviousCommentAvatar>
+                <div>
+                  <PreviousCommentContent bgcolor={colors.lightgray}>
+                    <PreviousCommentTitle>Justin Chen</PreviousCommentTitle>
+                    <PreviousCommentText>
+                      Same!! The CS30 series killed my GPA.
+                    </PreviousCommentText>
+                  </PreviousCommentContent>
+                  <LikeReply>
+                    <LikeReplyText>Like</LikeReplyText>
+                    <LikeReplyText>·</LikeReplyText>
+                    <LikeReplyText>Reply</LikeReplyText>
+                  </LikeReply>
+                </div>
+              </PreviousCommentItem>
+              <ViewCommentLink>View More comments</ViewCommentLink>
+            </ViewPreviousCommentWrapper>
             <CommentWrapper>
+              <CommentAvatar></CommentAvatar>
               <TextField
-                placeholder="Add your comment here..."
+                placeholder="Write a comment..."
                 fullWidth
+                InputProps={{
+                  disableUnderline: true,
+                  style: {
+                    fontSize: 12,
+                  },
+                }}
               ></TextField>
             </CommentWrapper>
           </ViewPost>
-
-          <ViewPreviousCommentWrapper>
-            <ViewPreviousCommentLink>
-              View previous comments
-            </ViewPreviousCommentLink>
-            <PreviousCommentItem>
-              <PreviousCommentAvatar></PreviousCommentAvatar>
-              <PreviousCommentContent>
-                <Typography>Club1234</Typography>
-                <Typography>
-                  Hi user1234! Here is our answer to your question. :)
-                </Typography>
-              </PreviousCommentContent>
-            </PreviousCommentItem>
-          </ViewPreviousCommentWrapper>
         </MiddleWrapper>
 
         <RightWrapper>
@@ -177,25 +223,35 @@ const Landing = () => {
               <EventItem>
                 <EventAvatar></EventAvatar>
                 <EventDescription>
-                  <BoldTypograhpy>Demo Day</BoldTypograhpy>
-                  <Typography>UCLA DevX</Typography>
-                  <Typography>{dayjs().format("MM-DD HH:mm:ss")}</Typography>
+                  <BoldTypography sz={"16px"}>Demo Day</BoldTypography>
+                  <EventTypography>UCLA DevX</EventTypography>
+                  <TimeTypography>
+                    {dayjs().format("MMM DD HH:mm a")}
+                  </TimeTypography>
                 </EventDescription>
+                <GoingBtn bgcolor={colors.lightgreen} fcolor={colors.darkgreen}>
+                  Going
+                </GoingBtn>
               </EventItem>
               <InfoSeperator></InfoSeperator>
               <EventItem>
                 <EventAvatar></EventAvatar>
                 <EventDescription>
-                  <BoldTypograhpy>Industry Speaker</BoldTypograhpy>
-                  <Typography>Club1234</Typography>
-                  <Typography>{dayjs().format("MM-DD HH:mm:ss")}</Typography>
+                  <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
+                  <EventTypography>Club1234</EventTypography>
+                  <TimeTypography>
+                    {dayjs().format("MMM DD HH:mm a")}
+                  </TimeTypography>
                 </EventDescription>
+                <GoingBtn bgcolor={colors.lightgray} fcolor={colors.mediumgray}>
+                  Going
+                </GoingBtn>
               </EventItem>
             </EventItems>
           </EventsWrapper>
         </RightWrapper>
       </LandingPageWrapper>
-    </div>
+    </LandingPage>
   );
 };
 
