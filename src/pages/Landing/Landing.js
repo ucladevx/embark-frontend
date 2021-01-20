@@ -110,7 +110,7 @@ const Landing = () => {
             <FilterTitle>Filters:</FilterTitle>
             <FilterObj bgcolor={colors.lightred}>Product Management</FilterObj>
             <FilterObj bgcolor={colors.darkyellow}>Product Deisign</FilterObj>
-            <InfoSeperator style={{ marginTop: "15px" }}></InfoSeperator>
+            <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
             <AddFilter>+ Add Filter</AddFilter>
           </FilterWrapper>
         </LeftWrapper>

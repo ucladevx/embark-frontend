@@ -79,7 +79,7 @@ export const FilterWrapper = styled.div`
 `;
 
 export const FilterObj = styled(Typography)`
-  height: 40.66px;
+  height: 26px;
   background-color: ${(props) => props.bgcolor};
   border-radius: 5px;
   display: flex;
