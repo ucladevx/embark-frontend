@@ -1,39 +1,35 @@
 import React from "react";
-import {Grid, TextField, Button} from "@material-ui/core";
+import FormUserDetails from '../components/FormUserDetails.js';
+import FormPersonalDetails from '../components/FormPersonalDetails.js';
+
+import { useForm, useStep } from "react-hooks-helper";
+
+
+const steps =[
+  {id: "userSignUp"},
+  {id: "userPersonalInfo"}
+]
+
+const defaultData = {
+  firstName: "fname",
+  lastName: "lname",
+
+}
 
 const OnBoarding = () => {
-  return (
-    <div>
-      <Grid container style={{minHeight: "100vh"}}>
-        <Grid item xs={6}>
-          Welcome to Embark!
-        </Grid>
-        <Grid item></Grid>
-        <Grid container item xs={12} sm={6} alignItems="center" justify="space-between" direction="column">
-          <div/>
-          <div>
-            <div style={{display:"flex", flexDirection:"column", maxWidth:400, minWidth: 300}}>
-              <div>
-                <TextField label="First Name" margin="normal" />
-                <TextField label="Last Name" margin="normal" />
-              </div>
-              <TextField label="Email" margin="normal" />
-              <TextField label="Password" margin="normal" />
-            </div>
-            <Button
-              type="submit"
-              variant="contained"
-              color="secondary"
-            >
-              Sign Up
-            </Button>
-          </div>
-          <div/>
-        </Grid>
-      </Grid>
-    </div>
-  );
-};
+  const [formData, setForm] = useForm(defaultData);
+  const { step, navigation } = useStep({ initialStep: 0, steps });
+  const { id } = step;
+  const props = { formData, setForm, navigation };
 
+  switch(id) {
+    case "userSignUp":
+      return <FormUserDetails {...props}/>
+    case "userPersonalInfo":
+      return<FormPersonalDetails {...props}/>
+    default:
+      return null;
+  }
+}
 export default OnBoarding;
 

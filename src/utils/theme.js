@@ -1,19 +1,23 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import {blue, pink} from '@material-ui/core/colors';
+import {colors} from '../shared/config.js';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: blue[500],
+      main: colors.pink,
       contrastText: "#fff",
     },
     secondary: {
-      main: pink[500],
+      main: colors.lightblue,
     },
+    background: {
+      default: colors.lightblue
+    }
   },
   typography: {
     fontFamily: "helvetica, arial, verdana, sans-serif",
   },
 });
+
 
 export default theme;
