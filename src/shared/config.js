@@ -4,14 +4,21 @@ export const mediaQueries = {
 
 export const colors = {
   white: "#FFFFFF",
+  skyblue: "#F3F6F9",
+  lightpurple: "#E6EFFF",
+  silver: "#ADAFB0",
   lightblue: "#C3DAFE",
-  mediumblue: "#667EEA",
-  lightgray: "#F2F5F6",
+  mediumblue: "#8DC5D7",
+  lightgray: "#EDEDED",
   pink: "#FFBFBF",
   gray: "#E5E5E5",
   black: "#000000",
-  mediumgray: "#5f6368",
+  mediumgray: "#C4C4C4",
   darkgray: "#5F6368",
+  lightred: "#EBAFAF",
+  darkyellow: "#EFD69A",
+  lightgreen: "rgba(89, 193, 122, 0.4);",
+  darkgreen: "#4C9C65",
 };
 
 export const font = {

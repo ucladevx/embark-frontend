@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { SET_AUTHENTICATED } from "./redux/types";
 import { getUserData } from "./redux/actions/userActions";
 
-// Utilities
+// Utils
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import { StylesProvider } from "@material-ui/core/styles";
@@ -14,10 +14,10 @@ import theme from "./utils/theme";
 
 // Pages
 import OnBoarding from "./pages/OnBoarding";
-import Landing from "./pages/Landing";
-import User from "./pages/User";
+import Landing from "./pages/Landing/Landing";
+import Profile from "./pages/Profile/Profile";
 
-// axios.defaults.baseURL =
+axios.defaults.baseURL = "http://localhost:9000/";
 
 const token = localStorage.getItem("AuthToken");
 
@@ -37,7 +37,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={OnBoarding}></Route>
               <Route exact path="/landing" component={Landing}></Route>
-              <Route exact path="/user/:id" component={User}></Route>
+              <Route exact path="/user/:userid" component={Profile}></Route>
             </Switch>
           </Router>
         </Provider>

@@ -21,7 +21,6 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         posts: action.payload,
-        loading: false,
       };
     case LIKE_POST:
     case UNLIKE_POST:

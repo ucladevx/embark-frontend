@@ -1,32 +1,41 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { colors, font } from "../shared/config";
+
+import AddIcon from "@material-ui/icons/Add";
+
+import { colors } from "../shared/config";
+import { TipButton } from "../shared/Buttons";
+import { useDispatch } from "react-redux";
+import NewPost from "./NewPost";
 
 const NavBarWrapper = styled.div`
   display: flex;
   border-bottom: 1px solid ${colors.black};
-  height: 90px;
+  height: max(45px, 4%);
+  padding: 4px 0;
   align-items: center;
-  font-family: ${font.text}, sans-serif;
-  justify-content: space-between;
+  gap: 30px;
   color: ${colors.mediumgray};
+  width: 100%;
+  background: ${colors.white};
 `;
 const NavBarLogo = styled.div`
-  border-radius: 30px;
+  border-radius: 50%;
   background-color: ${colors.gray};
-  height: 42px;
-  width: 160px;
+  height: 38px;
+  width: 38px;
   display: grid;
   place-items: center;
-  margin-left: 50px;
+  margin: auto 20px;
 `;
 const SearchBar = styled.input`
   background-color: ${colors.gray};
   width: 530px;
-  height: 38px;
-  border-radius: 25px;
+  height: 30px;
+  border-radius: 15px;
   display: flex;
   justify-content: flex-start;
+
   align-items: center;
   padding-left: 20px;
   &::placeholder {
@@ -37,24 +46,44 @@ const SearchBar = styled.input`
 `;
 const UserLogo = styled.div`
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  width: 38px;
+  height: 38px;
+  margin: auto 10px;
   background-color: ${colors.gray};
-  margin-right: 50px;
 `;
 
 const NavBar = () => {
   const [search, setSearch] = useState("");
+  const [newPost, setNewPost] = useState(false);
+
+  const dispatch = useDispatch();
+
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
-  console.log(search);
+  const handlePostClose = () => {
+    setNewPost(false);
+  };
+
+  const handlePostOpen = () => {
+    setNewPost(true);
+  };
+
   return (
-    <NavBarWrapper>
-      <NavBarLogo>Logo</NavBarLogo>
-      <SearchBar placeholder="Search Embark" onChange={handleChange} />
-      <UserLogo></UserLogo>
-    </NavBarWrapper>
+    <>
+      <NewPost open={newPost} handleClose={handlePostClose}></NewPost>
+
+      <NavBarWrapper>
+        <NavBarLogo></NavBarLogo>
+        <div style={{ display: "flex", flexGrow: 2, justifyContent: "center" }}>
+          <SearchBar placeholder="Search Embark" onChange={handleChange} />
+        </div>
+        <TipButton tip="Create a post" onClick={handlePostOpen}>
+          <AddIcon></AddIcon>
+        </TipButton>
+        <UserLogo></UserLogo>
+      </NavBarWrapper>
+    </>
   );
 };
 
