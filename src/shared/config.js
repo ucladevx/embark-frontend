@@ -13,10 +13,12 @@ export const colors = {
   pink: "#FFBFBF",
   gray: "#E5E5E5",
   black: "#000000",
-  mediumgray: "#9A9494",
+  mediumgray: "#C4C4C4",
   darkgray: "#5F6368",
   lightred: "#EBAFAF",
   darkyellow: "#EFD69A",
+  lightgreen: "rgba(89, 193, 122, 0.4);",
+  darkgreen: "#4C9C65",
 };
 
 export const font = {

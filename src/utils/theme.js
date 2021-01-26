@@ -13,6 +13,10 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: "Open Sans, helvetica, arial, verdana, sans-serif",
+    fontSize: "12",
+    button: {
+      textTransform: "none",
+    },
   },
 });
 
