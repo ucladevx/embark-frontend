@@ -122,7 +122,6 @@ export const AskaQuestion = styled(TextField)`
   height: 38px;
   background-color: ${colors.lightgray};
   justify-content: center;
-  box-sizing: border-box;
   padding-left: 13px;
   border-radius: 5px;
 `;
@@ -274,6 +273,13 @@ export const ViewCommentLink = styled(Typography)`
     opacity: 0.8;
     cursor: pointer;
   }
+`;
+
+export const CommentTextField = styled(TextField)`
+  background: ${colors.lightgray};
+  border-radius: 10px;
+  padding-left: 5px;
+  justify-content: center;
 `;
 
 export const PreviousCommentItem = styled.div`

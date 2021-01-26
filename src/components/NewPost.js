@@ -15,29 +15,36 @@ import {
   Divider,
 } from "@material-ui/core";
 import { BoldTypography } from "../shared/Typography";
-import styled from "styled-components";
 import { colors } from "../shared/config";
+import { useDispatch } from "react-redux";
+import { newPost } from "../redux/actions/dataActions";
+import styled from "styled-components";
 
 const NewPostInfo = styled.div`
   display: flex;
 `;
+
 const NewPostUser = styled.div`
   display: flex;
   margin-left: 12px;
   flex-direction: column;
 `;
+
 const FormControlC = styled(FormControl)`
   min-width: 120px;
 `;
+
 const Suggested = styled(Typography)`
   margin-left: 2px;
   color: ${colors.mediumgray};
 `;
+
 const DialogTextField = styled(TextField)`
   background: ${colors.lightgray};
   padding: 5px 5px;
   border-radius: 5px;
 `;
+
 const TextFieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -45,6 +52,7 @@ const TextFieldWrapper = styled.div`
   min-width: 450px;
   margin-top: 20px;
 `;
+
 const PostBtn = styled(Button)`
   color: ${colors.black};
   font-size: 16px;
@@ -56,9 +64,33 @@ const PostBtn = styled(Button)`
 
 const NewPost = ({ open, handleClose }) => {
   const [industry, setIndustry] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  // Redux
+  const dispatch = useDispatch();
+
   const handleIndustry = (e) => {
     setIndustry(e.target.value);
   };
+
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handleSubmit = async () => {
+    const post = {
+      title,
+      body: description,
+      tags: [industry],
+    };
+    dispatch(newPost(post));
+    handleClose();
+  };
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>
@@ -74,11 +106,13 @@ const NewPost = ({ open, handleClose }) => {
               <InputLabel>Industry</InputLabel>
               <Select value={industry} onChange={handleIndustry}>
                 <Suggested>Suggested</Suggested>
-                <MenuItem value={1}>Product Design</MenuItem>
-                <MenuItem value={2}>Product Management</MenuItem>
-                <Divider></Divider>
-                <MenuItem value={3}>Business</MenuItem>
-                <MenuItem value={4}>Computer Science</MenuItem>
+                <MenuItem value={"Product Design"}>Product Design</MenuItem>
+                <MenuItem value={"Product Management"}>
+                  Product Management
+                </MenuItem>
+                <Divider />
+                <MenuItem value={"Business"}>Business</MenuItem>
+                <MenuItem value={"Computer Science"}>Computer Science</MenuItem>
               </Select>
             </FormControlC>
           </NewPostUser>
@@ -98,6 +132,7 @@ const NewPost = ({ open, handleClose }) => {
                 fontWeight: 600,
               },
             }}
+            onChange={handleTitle}
           />
           <DialogTextField
             placeholder="Description"
@@ -110,11 +145,12 @@ const NewPost = ({ open, handleClose }) => {
                 fontSize: 16,
               },
             }}
+            onChange={handleDescription}
           />
         </TextFieldWrapper>
       </DialogContent>
       <DialogActions>
-        <PostBtn onClick={handleClose} color="primary">
+        <PostBtn onClick={handleSubmit} color="primary">
           Post
         </PostBtn>
       </DialogActions>

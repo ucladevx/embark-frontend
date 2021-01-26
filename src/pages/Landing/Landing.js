@@ -35,6 +35,7 @@ import {
   PreviousCommentItem,
   CommentWrapper,
   CommentIcon,
+  CommentTextField,
   PreviousCommentTitle,
   PreviousCommentAvatar,
   PreviousCommentContent,
@@ -74,6 +75,7 @@ const Landing = () => {
   // Redux
   const posts = useSelector((state) => state.data.posts);
   const dispatch = useDispatch();
+  // States
   const [question, setQuestion] = useState("");
 
   const handleQuestionChange = (e) => {
@@ -197,7 +199,7 @@ const Landing = () => {
             </ViewPreviousCommentWrapper>
             <CommentWrapper>
               <CommentAvatar></CommentAvatar>
-              <TextField
+              <CommentTextField
                 placeholder="Write a comment..."
                 fullWidth
                 InputProps={{
@@ -206,7 +208,7 @@ const Landing = () => {
                     fontSize: 12,
                   },
                 }}
-              ></TextField>
+              ></CommentTextField>
             </CommentWrapper>
           </ViewPost>
         </MiddleWrapper>
