@@ -67,7 +67,7 @@ import { colors } from "../../shared/config";
 import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../redux/actions/dataActions";
-
+// Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
@@ -110,7 +110,7 @@ const Landing = () => {
 
           <FilterWrapper>
             <FilterTitle>Filters:</FilterTitle>
-            <FilterObj bgcolor={colors.lightred}>Product Management</FilterObj>
+            <FilterObj bgcolor={colors.red1}>Product Management</FilterObj>
             <FilterObj bgcolor={colors.darkyellow}>Product Deisign</FilterObj>
             <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
             <AddFilter>+ Add Filter</AddFilter>
@@ -145,8 +145,8 @@ const Landing = () => {
                 <PostTime>{dayjs("2020-12-01").fromNow()}</PostTime>
               </PostNameTime>
               <PostTagWrapper>
-                <PostTag bgcolor={colors.lightred}>Product Management</PostTag>
-                <PostTag bgcolor={colors.mediumblue}>Computer Science</PostTag>
+                <PostTag bgcolor={colors.red1}>Product Management</PostTag>
+                <PostTag bgcolor={colors.blue3}>Computer Science</PostTag>
               </PostTagWrapper>
             </PostHeader>
 
@@ -182,7 +182,7 @@ const Landing = () => {
               <PreviousCommentItem>
                 <PreviousCommentAvatar></PreviousCommentAvatar>
                 <div>
-                  <PreviousCommentContent bgcolor={colors.lightgray}>
+                  <PreviousCommentContent bgcolor={colors.gray1}>
                     <PreviousCommentTitle>Justin Chen</PreviousCommentTitle>
                     <PreviousCommentText>
                       Same!! The CS30 series killed my GPA.
@@ -231,7 +231,7 @@ const Landing = () => {
                     {dayjs().format("MMM DD HH:mm a")}
                   </TimeTypography>
                 </EventDescription>
-                <GoingBtn bgcolor={colors.lightgreen} fcolor={colors.darkgreen}>
+                <GoingBtn bgcolor={colors.green1} fcolor={colors.darkgreen}>
                   Going
                 </GoingBtn>
               </EventItem>
@@ -245,7 +245,7 @@ const Landing = () => {
                     {dayjs().format("MMM DD HH:mm a")}
                   </TimeTypography>
                 </EventDescription>
-                <GoingBtn bgcolor={colors.lightgray} fcolor={colors.mediumgray}>
+                <GoingBtn bgcolor={colors.gray1} fcolor={colors.gray2}>
                   Going
                 </GoingBtn>
               </EventItem>

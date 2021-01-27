@@ -36,11 +36,11 @@ const FormControlC = styled(FormControl)`
 
 const Suggested = styled(Typography)`
   margin-left: 2px;
-  color: ${colors.mediumgray};
+  color: ${colors.gray2};
 `;
 
 const DialogTextField = styled(TextField)`
-  background: ${colors.lightgray};
+  background: ${colors.gray1};
   padding: 5px 5px;
   border-radius: 5px;
 `;
@@ -59,7 +59,7 @@ const PostBtn = styled(Button)`
   font-weight: 600;
   width: 122px;
   height: 43px;
-  background-color: ${colors.mediumgray};
+  background-color: ${colors.gray2};
 `;
 
 const NewPost = ({ open, handleClose }) => {

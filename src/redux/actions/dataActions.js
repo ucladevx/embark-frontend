@@ -6,6 +6,7 @@ import {
   NEW_POST,
   SET_POST,
   SUBMIT_COMMENT,
+  NEXT_REGISTER_STEP,
 } from "../types";
 
 import axios from "axios";
@@ -91,4 +92,8 @@ export const getUserPage = (userHandle) => async (dispatch) => {
   } catch (err) {
     dispatch({ type: SET_POSTS, payload: null });
   }
+};
+
+export const registerNextStep = (values) => (dispatch) => {
+  dispatch({ type: NEXT_REGISTER_STEP, payload: values });
 };

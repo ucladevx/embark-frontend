@@ -1,35 +1,20 @@
 import React from "react";
-import FormUserDetails from '../components/FormUserDetails.js';
-import FormPersonalDetails from '../components/FormPersonalDetails.js';
-
-import { useForm, useStep } from "react-hooks-helper";
-
-
-const steps =[
-  {id: "userSignUp"},
-  {id: "userPersonalInfo"}
-]
-
-const defaultData = {
-  firstName: "fname",
-  lastName: "lname",
-
-}
+import FormUserDetails from "../components/FormUserDetails.js";
+import FormPersonalDetails from "../components/FormPersonalDetails.js";
+import { useSelector } from "react-redux";
 
 const OnBoarding = () => {
-  const [formData, setForm] = useForm(defaultData);
-  const { step, navigation } = useStep({ initialStep: 0, steps });
-  const { id } = step;
-  const props = { formData, setForm, navigation };
+  const {
+    register: { register_step },
+  } = useSelector((state) => state.data);
 
-  switch(id) {
-    case "userSignUp":
-      return <FormUserDetails {...props}/>
-    case "userPersonalInfo":
-      return<FormPersonalDetails {...props}/>
+  switch (register_step) {
+    case 0:
+      return <FormUserDetails />;
+    case 1:
+      return <FormPersonalDetails />;
     default:
       return null;
   }
-}
+};
 export default OnBoarding;
-

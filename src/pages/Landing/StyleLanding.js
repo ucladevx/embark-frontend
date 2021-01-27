@@ -4,7 +4,7 @@ import { Avatar, Button, TextField, Typography } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 
 export const LandingPage = styled.div`
-  background: ${colors.skyblue};
+  background: ${colors.blue2};
 `;
 
 export const LandingPageWrapper = styled.div`
@@ -58,7 +58,7 @@ export const InfoSeperator = styled.div`
   width: 90%;
   height: 0;
   align-self: center;
-  border: 1px solid ${colors.lightgray};
+  border: 1px solid ${colors.gray1};
 `;
 
 export const InfoImage = styled.img`
@@ -96,7 +96,7 @@ export const FilterTitle = styled(BoldTypography)`
 export const AddFilter = styled(Typography)`
   text-transform: none;
   align-self: flex-end;
-  color: ${colors.darkgray};
+  color: ${colors.gray3};
   text-decoration: none;
   &:hover {
     cursor: pointer;
@@ -120,7 +120,7 @@ export const QuestionBox = styled.div`
 export const AskaQuestion = styled(TextField)`
   width: 70%;
   height: 38px;
-  background-color: ${colors.lightgray};
+  background-color: ${colors.gray1};
   justify-content: center;
   padding-left: 13px;
   border-radius: 5px;
@@ -138,7 +138,7 @@ export const PostButton = styled(Button)`
   right: 1vw;
   bottom: 70px;
   text-transform: none;
-  background: ${colors.lightgray};
+  background: ${colors.gray1};
 `;
 
 export const MakePostWrapper = styled.div`
@@ -230,7 +230,7 @@ export const PostNameTime = styled.div`
 `;
 
 export const PostTime = styled(Typography)`
-  color: ${colors.mediumgray};
+  color: ${colors.gray2};
   font-size: 12px;
 `;
 
@@ -268,7 +268,7 @@ export const ViewCommentLink = styled(Typography)`
   background: none;
   margin: 10px 0 0 10px;
   font-size: 11px;
-  color: ${colors.darkgray};
+  color: ${colors.gray3};
   &:hover {
     opacity: 0.8;
     cursor: pointer;
@@ -276,7 +276,7 @@ export const ViewCommentLink = styled(Typography)`
 `;
 
 export const CommentTextField = styled(TextField)`
-  background: ${colors.lightgray};
+  background: ${colors.gray1};
   border-radius: 10px;
   padding-left: 5px;
   justify-content: center;
@@ -325,7 +325,7 @@ export const LikeReply = styled.div`
 
 export const LikeReplyText = styled(BoldTypography)`
   font-size: 11px;
-  color: ${colors.mediumgray};
+  color: ${colors.gray2};
 `;
 
 export const EventTypography = styled(Typography)`
@@ -333,7 +333,7 @@ export const EventTypography = styled(Typography)`
 `;
 
 export const TimeTypography = styled(EventTypography)`
-  color: ${colors.mediumgray};
+  color: ${colors.gray2};
 `;
 
 export const GoingBtn = styled(Button)`

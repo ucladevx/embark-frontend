@@ -1,53 +1,128 @@
 import { Grid, TextField, Button } from "@material-ui/core";
-import theme from "../utils/theme.js";
-import { MuiThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import MenuItem from '@material-ui/core/MenuItem';
 
+import MenuItem from "@material-ui/core/MenuItem";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import {
+  LeftFormContainer,
+  RightFormContainer,
+  FormWrapper,
+  FormContainer,
+} from "../shared/Form";
+import styled from "styled-components";
+import { colors } from "../shared/config.js";
+import { Formik, Field } from "formik";
+import * as Yup from "yup";
 
-const FormPersonalDetails = ({ setForm, formData, navigation }) => {
-    const { firstName, lastName, nickName } = formData;
+const HeyTitle = styled.div`
+  font-weight: 700;
+  font-size: 24px;
+`;
 
-    const { next } = navigation;
+const HeySubtitile = styled.div`
+  color: ${colors.gray3};
+  font-size: 12px;
+  margin: 20px 0;
+  padding-right: 150px;
+  line-height: 16px;
+`;
 
-    return (
-        <MuiThemeProvider theme={theme}>
-            <CssBaseline />
-            <Grid container style={{ minHeight: "100vh" }}>
-                <Grid item xs={12} sm={6}>
-                </Grid>
-                <Grid container item xs={12} sm={6} alignItems="center" justify="space-between" direction="column">
-                    <div />
-                    <div>
-                        <div style={{ display: "flex", flexDirection: "column", maxWidth: 400, minWidth: 300 }}>
-                            <TextField id="select" label="Year" value="2020" select>
-                                <MenuItem value="2021">2021</MenuItem>
-                                <MenuItem value="2022">2022</MenuItem>
-                                <MenuItem value="2023">2023</MenuItem>
-                                <MenuItem value="2024">2024</MenuItem>
-                            </TextField>
-                            <TextField label="Major" margin="normal" />
-                            <TextField id="select" label="Interested Industries:" value="Industry" select>
-                                <MenuItem value="Developer">Developer</MenuItem>
-                                <MenuItem value="Design">Design</MenuItem>
-                                <MenuItem value="Marketing">Marketing</MenuItem>
-                                <MenuItem value="Product Management">Product Management</MenuItem>
-                            </TextField>
-                            <TextField label="LinkedIn Profile: (Optional)" margin="normal" />
-                        </div>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="secondary"
-                            onClick={() => console.log("TODO: create account")}
-                        >
-                            Done
-                        </Button>
-                    </div>
-                    <div />
-                </Grid>
-            </Grid>
-        </MuiThemeProvider>
-    );
-}
+const DoneBtn = styled(Button)`
+  width: 120px;
+  height: 40px;
+  background: ${colors.blue1};
+  font-weight: 700;
+  font-size: 16px;
+`;
+
+const validateSchema = Yup.object({
+  major: Yup.string().required("Major is required").max(20),
+  industry: Yup.string().required(),
+  year: Yup.string().required(),
+});
+
+const FormPersonalDetails = () => {
+  const {
+    register: { register_user },
+  } = useSelector((state) => state.data);
+  const history = useHistory();
+
+  const years = ["2021", "2022", "2023", "2024"];
+  const industry = ["Developer", "Design", "Marketing", "Product Mangement"];
+
+  return (
+    <FormWrapper>
+      <LeftFormContainer />
+      <RightFormContainer>
+        <HeyTitle>
+          Hey {register_user.firstName} {register_user.lastName}! <br /> Welcome
+          to Embark
+        </HeyTitle>
+        <HeySubtitile>
+          Before we begin, fill in your graduating year, area of study, and the
+          industries or career paths you are interested in pursuing.
+        </HeySubtitile>
+        <Formik
+          initialValues={{
+            year: "",
+            major: "",
+            industry: "",
+            linkedIn: "",
+          }}
+          validationSchema={validateSchema}
+          validateOnBlur={false}
+          validateOnChange={false}
+          onSubmit={() => history.push("/landing")}
+        >
+          {({ errors }) => (
+            <FormContainer>
+              <Field
+                as={TextField}
+                select
+                name="year"
+                label="Year"
+                helperText={errors.year}
+                error={!!errors.year}
+              >
+                {years.map((y, i) => (
+                  <MenuItem key={i} value={y} name="year">
+                    {y}
+                  </MenuItem>
+                ))}
+              </Field>
+              <Field
+                as={TextField}
+                name="major"
+                label="Major"
+                helperText={errors.major}
+                error={!!errors.major}
+              ></Field>
+              <Field
+                as={TextField}
+                name="industry"
+                label="Interested Industries:"
+                select
+                error={!!errors.industry}
+                helperText={errors.industry}
+              >
+                {industry.map((ind, i) => (
+                  <MenuItem key={i} value={ind} name="industry">
+                    {ind}
+                  </MenuItem>
+                ))}
+              </Field>
+              <Field
+                as={TextField}
+                label="LinkedIn Profile: (Optional)"
+                margin="normal"
+                name="linkedIn"
+              ></Field>
+              <DoneBtn type="submit">Done</DoneBtn>
+            </FormContainer>
+          )}
+        </Formik>
+      </RightFormContainer>
+    </FormWrapper>
+  );
+};
 export default FormPersonalDetails;
