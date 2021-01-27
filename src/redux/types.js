@@ -4,6 +4,7 @@ export const SET_UNAUTHENTICATED = "SET_UNAUTHENTICATED";
 export const SET_USER = "SET_USER";
 export const LOADING_USER = "LOADING_USER";
 export const MARK_NOTIFICATIONS_READ = "MARK_NOTIFICATIONS_READ";
+export const NEXT_REGISTER_STEP = "NEXT_REGISTER_STEP";
 
 // Data reducer types
 export const SET_POSTS = "SET_POSTS";

@@ -15,7 +15,7 @@ const NavBarWrapper = styled.div`
   padding: 4px 0;
   align-items: center;
   gap: 30px;
-  color: ${colors.mediumgray};
+  color: ${colors.gray2};
   width: 100%;
   background: ${colors.white};
 `;

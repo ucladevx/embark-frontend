@@ -16,7 +16,7 @@ export const ProfileAvatar = styled(Avatar)`
 `;
 
 export const ProfileWrapper = styled.div`
-  background: ${colors.skyblue};
+  background: ${colors.blue2};
   display: flex;
   flex-direction: column;
   align-items: center;
