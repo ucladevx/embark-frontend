@@ -6,17 +6,12 @@ import {
   NEW_POST,
   SET_POST,
   SUBMIT_COMMENT,
-  NEXT_REGISTER_STEP,
 } from "../types";
 
 const initialState = {
   posts: [],
   post: {},
   filter: [],
-  register: {
-    register_step: 0,
-    register_user: { first_name: "", last_name: "", email: "", password: "" },
-  },
 };
 
 export default function dataReducer(state = initialState, action) {
@@ -63,17 +58,7 @@ export default function dataReducer(state = initialState, action) {
           comments: [action.payload, ...state.post.comments],
         },
       };
-    case NEXT_REGISTER_STEP: {
-      const nextStep = state["register"].register_step + 1;
-      const newRegister = {
-        register_step: nextStep,
-        register_user: action.payload,
-      };
-      return {
-        ...state,
-        register: newRegister,
-      };
-    }
+
     default:
       return state;
   }

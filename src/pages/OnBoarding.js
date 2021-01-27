@@ -1,18 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import FormUserDetails from "../components/FormUserDetails.js";
 import FormPersonalDetails from "../components/FormPersonalDetails.js";
-import { useSelector } from "react-redux";
 
 const OnBoarding = () => {
-  const {
-    register: { register_step },
-  } = useSelector((state) => state.data);
+  const [user, setUser] = useState({});
+  const [step, setStep] = useState(0);
 
-  switch (register_step) {
+  switch (step) {
     case 0:
-      return <FormUserDetails />;
+      return <FormUserDetails handleUser={setUser} handleStep={setStep} />;
     case 1:
-      return <FormPersonalDetails />;
+      return <FormPersonalDetails user={user} />;
     default:
       return null;
   }

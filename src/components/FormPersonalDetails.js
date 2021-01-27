@@ -1,8 +1,8 @@
-import { Grid, TextField, Button } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 
 import MenuItem from "@material-ui/core/MenuItem";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 import {
   LeftFormContainer,
   RightFormContainer,
@@ -41,12 +41,8 @@ const validateSchema = Yup.object({
   year: Yup.string().required(),
 });
 
-const FormPersonalDetails = () => {
-  const {
-    register: { register_user },
-  } = useSelector((state) => state.data);
+const FormPersonalDetails = ({ user }) => {
   const history = useHistory();
-
   const years = ["2021", "2022", "2023", "2024"];
   const industry = ["Developer", "Design", "Marketing", "Product Mangement"];
 
@@ -55,8 +51,7 @@ const FormPersonalDetails = () => {
       <LeftFormContainer />
       <RightFormContainer>
         <HeyTitle>
-          Hey {register_user.firstName} {register_user.lastName}! <br /> Welcome
-          to Embark
+          Hey {user.firstName} {user.lastName}! <br /> Welcome to Embark
         </HeyTitle>
         <HeySubtitile>
           Before we begin, fill in your graduating year, area of study, and the

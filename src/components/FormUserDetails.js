@@ -49,9 +49,7 @@ const SignupSchema = Yup.object().shape({
     .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
 });
 
-const FormUserDetails = () => {
-  const dispatch = useDispatch();
-
+const FormUserDetails = ({ handleUser, handleStep }) => {
   return (
     <FormWrapper>
       <LeftFormContainer />
@@ -74,7 +72,8 @@ const FormUserDetails = () => {
           }}
           validationSchema={SignupSchema}
           onSubmit={(values, actions) => {
-            dispatch(registerNextStep(values));
+            handleUser(values);
+            handleStep(1);
             actions.setSubmitting(false);
           }}
           validateOnBlur={false}
