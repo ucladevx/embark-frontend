@@ -12,14 +12,14 @@ export const RightFormContainer = styled.div`
   padding: 110px 0 0 120px;
 `;
 
-export const FormWrapper = styled.div`
+export const FormContainer = styled.div`
   font-family: Open Sans, helvetica, arial, verdana, sans-serif;
   display: flex;
   width: 100vw;
   height: 100vh;
 `;
 
-export const FormContainer = styled(Form)`
+export const FormWrapper = styled(Form)`
   display: flex;
   flex-direction: column;
   width: 400px;

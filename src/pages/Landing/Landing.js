@@ -8,8 +8,8 @@ import LinkIcon from "@material-ui/icons/Link";
 import {
   LandingPage,
   LandingPageWrapper,
-  LeftWrapper,
-  RightWrapper,
+  LeftContainer,
+  RightContainer,
   FilterTitle,
   FilterObj,
   FilterWrapper,
@@ -46,7 +46,7 @@ import {
   InfoImage,
   InfoSeperator,
   InfoEntryText,
-  MiddleWrapper,
+  MiddleContainer,
   AskaQuestion,
   AskAvatar,
   PostNameTime,
@@ -88,7 +88,7 @@ const Landing = () => {
     <LandingPage>
       <NavBar></NavBar>
       <LandingPageWrapper>
-        <LeftWrapper>
+        <LeftContainer>
           <InfoBoxes>
             <InfoEntryWrapper>
               <InfoImage src={avatarImg} alt="user"></InfoImage>
@@ -113,9 +113,9 @@ const Landing = () => {
             <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
             <AddFilter>+ Add Filter</AddFilter>
           </FilterWrapper>
-        </LeftWrapper>
+        </LeftContainer>
 
-        <MiddleWrapper>
+        <MiddleContainer>
           <QuestionBox>
             <AskAvatar></AskAvatar>
             <AskaQuestion
@@ -209,9 +209,9 @@ const Landing = () => {
               ></CommentTextField>
             </CommentWrapper>
           </ViewPost>
-        </MiddleWrapper>
+        </MiddleContainer>
 
-        <RightWrapper>
+        <RightContainer>
           <CalanderWrapper>
             <TitleTypography>My Events</TitleTypography>
             <Calendar></Calendar>
@@ -249,7 +249,7 @@ const Landing = () => {
               </EventItem>
             </EventItems>
           </EventsWrapper>
-        </RightWrapper>
+        </RightContainer>
       </LandingPageWrapper>
     </LandingPage>
   );

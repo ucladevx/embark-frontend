@@ -8,8 +8,8 @@ import { registerNextStep } from "../redux/actions/dataActions";
 import {
   LeftFormContainer,
   RightFormContainer,
-  FormWrapper,
   FormContainer,
+  FormWrapper,
 } from "../shared/Form";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
@@ -51,7 +51,7 @@ const SignupSchema = Yup.object().shape({
 
 const FormUserDetails = ({ handleUser, handleStep }) => {
   return (
-    <FormWrapper>
+    <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
         <SignUpTitle>Sign up to Embark</SignUpTitle>
@@ -79,7 +79,7 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
           validateOnChange={false}
         >
           {({ errors }) => (
-            <FormContainer>
+            <FormWrapper>
               <NameContainer>
                 <Field
                   name="firstName"
@@ -116,11 +116,11 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                 type="password"
               ></Field>
               <AccountBtn type="submit">Create Account</AccountBtn>
-            </FormContainer>
+            </FormWrapper>
           )}
         </Formik>
       </RightFormContainer>
-    </FormWrapper>
+    </FormContainer>
   );
 };
 export default FormUserDetails;

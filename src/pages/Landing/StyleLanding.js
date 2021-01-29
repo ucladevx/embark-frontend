@@ -4,7 +4,7 @@ import { Avatar, Button, TextField, Typography } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 
 export const LandingPage = styled.div`
-  background: ${colors.blue1};
+  background: ${colors.blue2};
 `;
 
 export const LandingPageWrapper = styled.div`
@@ -16,16 +16,16 @@ export const LandingPageWrapper = styled.div`
   gap: 30px;
 `;
 
-export const LeftWrapper = styled.div`
+export const LeftContainer = styled.div`
   flex: 1 1 auto;
   white-space: nowrap;
 `;
 
-export const MiddleWrapper = styled.div`
+export const MiddleContainer = styled.div`
   flex: 2 1 auto;
 `;
 
-export const RightWrapper = styled.div`
+export const RightContainer = styled.div`
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
