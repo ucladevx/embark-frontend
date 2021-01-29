@@ -14,8 +14,8 @@ import theme from "./utils/theme";
 
 // Pages
 import OnBoarding from "./pages/OnBoarding";
-import Landing from "./pages/Landing/Landing";
-import Profile from "./pages/Profile/Profile";
+import Landing from "./pages/Landing";
+import Profile from "./pages/Profile";
 
 axios.defaults.baseURL = "http://localhost:9000/";
 

@@ -71,15 +71,14 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
             password: "",
           }}
           validationSchema={SignupSchema}
-          onSubmit={(values, actions) => {
+          onSubmit={(values) => {
             handleUser(values);
             handleStep(1);
-            actions.setSubmitting(false);
           }}
           validateOnBlur={false}
           validateOnChange={false}
         >
-          {({ errors, isSubmitting }) => (
+          {({ errors }) => (
             <FormContainer>
               <NameContainer>
                 <Field
@@ -116,9 +115,7 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                 error={!!errors.password}
                 type="password"
               ></Field>
-              <AccountBtn type="submit" disabled={isSubmitting}>
-                Create Account
-              </AccountBtn>
+              <AccountBtn type="submit">Create Account</AccountBtn>
             </FormContainer>
           )}
         </Formik>

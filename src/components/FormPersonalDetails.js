@@ -79,8 +79,8 @@ const FormPersonalDetails = ({ user }) => {
                 helperText={errors.year}
                 error={!!errors.year}
               >
-                {years.map((y, i) => (
-                  <MenuItem key={i} value={y} name="year">
+                {years.map((y) => (
+                  <MenuItem key={y} value={y} name="year">
                     {y}
                   </MenuItem>
                 ))}
@@ -100,8 +100,8 @@ const FormPersonalDetails = ({ user }) => {
                 error={!!errors.industry}
                 helperText={errors.industry}
               >
-                {industry.map((ind, i) => (
-                  <MenuItem key={i} value={ind} name="industry">
+                {industry.map((ind) => (
+                  <MenuItem key={ind} value={ind} name="industry">
                     {ind}
                   </MenuItem>
                 ))}

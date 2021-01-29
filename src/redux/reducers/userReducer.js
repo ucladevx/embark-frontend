@@ -13,6 +13,7 @@ const intialState = {
   notifications: [],
   likedPosts: [],
   clubs: [],
+  industry: "",
 };
 
 export default function userReducer(state = intialState, action) {

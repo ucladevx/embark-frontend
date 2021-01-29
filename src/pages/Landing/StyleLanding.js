@@ -4,7 +4,7 @@ import { Avatar, Button, TextField, Typography } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 
 export const LandingPage = styled.div`
-  background: ${colors.blue2};
+  background: ${colors.blue1};
 `;
 
 export const LandingPageWrapper = styled.div`
