@@ -1,13 +1,12 @@
 ## Embark Frontend
 ## To Run:
-```
-# To install all the dependencies for the first time
-npm install 
-```
+
+To install all the dependencies for the first time:
+`npm install` 
+
 Then, 
-```
-npm start
-```
+`npm start`
+
 
 ## Useful resources
 ### 1. Formik: https://formik.org/
