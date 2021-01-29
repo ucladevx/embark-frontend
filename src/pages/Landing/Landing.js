@@ -3,7 +3,6 @@ import NavBar from "../../components/NavBar";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 // Styles
-import { Typography, TextField } from "@material-ui/core";
 import ImageIcon from "@material-ui/icons/Image";
 import LinkIcon from "@material-ui/icons/Link";
 import {
@@ -34,7 +33,6 @@ import {
   PostTitle,
   PreviousCommentItem,
   CommentWrapper,
-  CommentIcon,
   CommentTextField,
   PreviousCommentTitle,
   PreviousCommentAvatar,
