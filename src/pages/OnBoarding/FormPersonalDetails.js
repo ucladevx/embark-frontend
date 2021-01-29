@@ -7,10 +7,10 @@ import {
   RightFormContainer,
   FormWrapper,
   FormContainer,
-} from "../shared/Form";
+} from "../../shared/Form";
 
 import styled from "styled-components";
-import { colors } from "../shared/config.js";
+import { colors } from "../../shared/config.js";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
 

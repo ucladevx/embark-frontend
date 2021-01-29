@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import FormUserDetails from "../components/FormUserDetails.js";
-import FormPersonalDetails from "../components/FormPersonalDetails.js";
+import FormUserDetails from "./FormUserDetails.js";
+import FormPersonalDetails from "./FormPersonalDetails.js";
 
 const OnBoarding = () => {
   const [user, setUser] = useState({});

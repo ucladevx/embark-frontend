@@ -1,16 +1,14 @@
 import { TextField, Button } from "@material-ui/core";
 import GoogleButton from "react-google-button";
 import styled from "styled-components";
-import { colors } from "../shared/config";
+import { colors } from "../../shared/config";
 import OrSeperator from "./OrSeperator";
-import { useDispatch } from "react-redux";
-import { registerNextStep } from "../redux/actions/dataActions";
 import {
   LeftFormContainer,
   RightFormContainer,
   FormContainer,
   FormWrapper,
-} from "../shared/Form";
+} from "../../shared/Form";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
 
