@@ -1,5 +1,4 @@
 import { TextField, Button } from "@material-ui/core";
-
 import MenuItem from "@material-ui/core/MenuItem";
 import { useHistory } from "react-router-dom";
 
@@ -9,6 +8,7 @@ import {
   FormWrapper,
   FormContainer,
 } from "../shared/Form";
+
 import styled from "styled-components";
 import { colors } from "../shared/config.js";
 import { Formik, Field } from "formik";
@@ -47,7 +47,7 @@ const FormPersonalDetails = ({ user }) => {
   const industry = ["Developer", "Design", "Marketing", "Product Mangement"];
 
   return (
-    <FormWrapper>
+    <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
         <HeyTitle>
@@ -70,7 +70,7 @@ const FormPersonalDetails = ({ user }) => {
           onSubmit={() => history.push("/landing")}
         >
           {({ errors }) => (
-            <FormContainer>
+            <FormWrapper>
               <Field
                 as={TextField}
                 select
@@ -113,11 +113,11 @@ const FormPersonalDetails = ({ user }) => {
                 name="linkedIn"
               ></Field>
               <DoneBtn type="submit">Done</DoneBtn>
-            </FormContainer>
+            </FormWrapper>
           )}
         </Formik>
       </RightFormContainer>
-    </FormWrapper>
+    </FormContainer>
   );
 };
 export default FormPersonalDetails;
