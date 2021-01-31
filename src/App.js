@@ -14,8 +14,10 @@ import theme from "./utils/theme";
 
 // Pages
 import OnBoarding from "./pages/OnBoarding";
-import Landing from "./pages/Landing";
-import Profile from "./pages/Profile";
+
+import Landing from "./pages/Landing/Landing";
+import Profile from "./pages/Profile/Profile";
+import Explore from "./pages/Explore/Explore";
 
 axios.defaults.baseURL = "http://localhost:9000/";
 
@@ -38,6 +40,7 @@ function App() {
               <Route exact path="/" component={OnBoarding}></Route>
               <Route exact path="/landing" component={Landing}></Route>
               <Route exact path="/user/:userid" component={Profile}></Route>
+              <Route exact path="/explore" component={Explore}></Route>
             </Switch>
           </Router>
         </Provider>

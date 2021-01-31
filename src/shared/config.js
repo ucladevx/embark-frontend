@@ -5,6 +5,7 @@ export const mediaQueries = {
 export const colors = {
   white: "#FFFFFF",
   lightpurple: "#E6EFFF",
+  purple: "#A278F1",
   silver: "#ADAFB0",
   blue1: "#C3DAFE",
   blue2: "#F3F6F9",
