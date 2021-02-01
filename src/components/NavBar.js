@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
-import AddIcon from "@material-ui/icons/Add";
-
 import { colors } from "../shared/config";
-import { TipButton } from "../shared/Buttons";
-import { useDispatch } from "react-redux";
-import NewPost from "./NewPost";
 
 const NavBarWrapper = styled.div`
   display: flex;
@@ -54,33 +48,18 @@ const UserLogo = styled.div`
 
 const NavBar = () => {
   const [search, setSearch] = useState("");
-  const [newPost, setNewPost] = useState(false);
-
-  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
-  const handlePostClose = () => {
-    setNewPost(false);
-  };
-
-  const handlePostOpen = () => {
-    setNewPost(true);
-  };
 
   return (
     <>
-      <NewPost open={newPost} handleClose={handlePostClose}></NewPost>
-
       <NavBarWrapper>
         <NavBarLogo></NavBarLogo>
         <div style={{ display: "flex", flexGrow: 2, justifyContent: "center" }}>
           <SearchBar placeholder="Search Embark" onChange={handleChange} />
         </div>
-        <TipButton tip="Create a post" onClick={handlePostOpen}>
-          <AddIcon></AddIcon>
-        </TipButton>
         <UserLogo></UserLogo>
       </NavBarWrapper>
     </>

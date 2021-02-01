@@ -17,11 +17,12 @@ const initialState = {
 export default function dataReducer(state = initialState, action) {
   let index;
   switch (action.type) {
-    case SET_POSTS:
+    case SET_POSTS: {
       return {
         ...state,
         posts: action.payload,
       };
+    }
     case LIKE_POST:
     case UNLIKE_POST:
       index = state.posts.findIndex(

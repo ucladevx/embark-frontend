@@ -11,6 +11,8 @@ import {
 } from "../../shared/Form";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
+import { signupStudent } from "../../redux/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const SignUpTitle = styled.div`
   font-weight: bold;
@@ -48,6 +50,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 const FormUserDetails = ({ handleUser, handleStep }) => {
+  const dispatch = useDispatch();
   return (
     <FormContainer>
       <LeftFormContainer />
@@ -70,6 +73,15 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
+            const name = values.firstName + " " + values.lastName;
+            const { email, password } = values;
+            const postUser = {
+              name,
+              email,
+              password,
+              userType: "student",
+            };
+            dispatch(signupStudent(postUser));
             handleUser(values);
             handleStep(1);
           }}

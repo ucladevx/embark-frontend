@@ -14,7 +14,7 @@ import axios from "axios";
 export const getPosts = () => async (dispatch) => {
   try {
     const res = await axios.get("/posts");
-    dispatch({ type: SET_POSTS, payload: res.data.posts });
+    dispatch({ type: SET_POSTS, payload: res.data.paginatedPosts.results });
   } catch (err) {
     console.error(err);
   }

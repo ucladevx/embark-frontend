@@ -13,6 +13,8 @@ import styled from "styled-components";
 import { colors } from "../../shared/config.js";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { editStudentDetails } from "../../redux/actions/userActions";
 
 const HeyTitle = styled.div`
   font-weight: 700;
@@ -45,6 +47,7 @@ const FormPersonalDetails = ({ user }) => {
   const history = useHistory();
   const years = ["2021", "2022", "2023", "2024"];
   const industry = ["Developer", "Design", "Marketing", "Product Mangement"];
+  const dispatch = useDispatch();
 
   return (
     <FormContainer>
@@ -67,7 +70,17 @@ const FormPersonalDetails = ({ user }) => {
           validationSchema={validateSchema}
           validateOnBlur={false}
           validateOnChange={false}
-          onSubmit={() => history.push("/landing")}
+          onSubmit={(values) => {
+            const { year, major, linkedIn, industry } = values;
+            const profile = {
+              year,
+              major,
+              linkedIn,
+              tags: [industry],
+            };
+            dispatch(editStudentDetails(profile));
+            history.push("/landing");
+          }}
         >
           {({ errors }) => (
             <FormWrapper>

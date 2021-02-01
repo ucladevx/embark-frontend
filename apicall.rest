@@ -1,2 +1,53 @@
-GET http://localhost:9000/posts
+#################### Test ##############################
+GET http://localhost:9000/health
 Content-Type: application/json
+
+#################### User ##############################
+###
+POST http://localhost:9000/auth/signin
+Content-Type: application/json
+
+{
+    "email": "john1@email.com",
+    "password": "12345qQ!",
+    "userType": "student"
+}
+
+###
+POST http://localhost:9000/auth/signup
+Content-Type: application/json
+
+{
+    "name": "john smallberg1",
+    "email": "john1@email.com",
+    "password": "12345qQ!",
+    "userType": "student"
+}
+
+############ Authorization Needed #################################
+############ Posts ################################################
+### Fixing in the backend
+GET http://localhost:9000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzOTA3NzQ4MzJmMjEzYjNmYyIsIm5hbWUiOiJqb2huIHNtYWxsYmVyZzEiLCJlbWFpbCI6ImpvaG4xQGVtYWlsLmNvbSIsImlhdCI6MTYxMjIwNDA4NiwiZXhwIjoxNjIwODQ0MDg2fQ.kT3fUNe433ue1SG89ngnRjk5CErTMBZsH4X3xAeG_Pk
+Content-Type: application/json
+
+### 
+GET http://localhost:9000/isha/pagination
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzOTA3NzQ4MzJmMjEzYjNmYyIsIm5hbWUiOiJqb2huIHNtYWxsYmVyZzEiLCJlbWFpbCI6ImpvaG4xQGVtYWlsLmNvbSIsImlhdCI6MTYxMjIwNDA4NiwiZXhwIjoxNjIwODQ0MDg2fQ.kT3fUNe433ue1SG89ngnRjk5CErTMBZsH4X3xAeG_Pk
+Content-Type: application/json
+############ Users ################################################
+###
+GET http://localhost:9000/student/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzOTA3NzQ4MzJmMjEzYjNmYyIsIm5hbWUiOiJqb2huIHNtYWxsYmVyZzEiLCJlbWFpbCI6ImpvaG4xQGVtYWlsLmNvbSIsImlhdCI6MTYxMjE2OTgxMSwiZXhwIjoxNjIwODA5ODExfQ.TBqDaIcaXDvkSUyGTpGY3Bz_XdgmtDHPtWogOTBtmc4
+Content-Type: application/json
+###
+POST http://localhost:9000/student/profile 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzOTA3NzQ4MzJmMjEzYjNmYyIsIm5hbWUiOiJqb2huIHNtYWxsYmVyZzEiLCJlbWFpbCI6ImpvaG4xQGVtYWlsLmNvbSIsImlhdCI6MTYxMjE2OTgxMSwiZXhwIjoxNjIwODA5ODExfQ.TBqDaIcaXDvkSUyGTpGY3Bz_XdgmtDHPtWogOTBtmc4
+Content-Type: application/json
+
+{
+    "year": "2023",
+    "major": "Computer Science",
+    "tags": "Developer",
+    "linkedIn": "johnsmallberg"
+}

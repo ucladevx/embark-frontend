@@ -13,3 +13,9 @@ export const UNLIKE_POST = "UNLIKE_POST";
 export const DELETE_POST = "DELETE_POST";
 export const NEW_POST = "NEW_POST";
 export const SUBMIT_COMMENT = "SUBMIT_COMMENT";
+
+// Ui reducer types
+export const SET_ERRORS = "SET_ERRORS";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const LOADING_UI = "LOADING_UI";
+export const STOP_LOADING_UI = "STOP_LOADING_UI";
