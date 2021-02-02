@@ -58,9 +58,9 @@ import {
 } from "./StyleLanding";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 // Images
-import avatarImg from "../../images/avatar.png";
-import bookImg from "../../images/book.png";
-import compassImg from "../../images/compass.png";
+import avatarImg from "../../images/avatar.svg";
+import bookImg from "../../images/book.svg";
+import compassImg from "../../images/compass.svg";
 // Utils
 import { colors } from "../../shared/config";
 import dayjs from "dayjs";
