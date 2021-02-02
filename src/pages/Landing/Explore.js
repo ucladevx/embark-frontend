@@ -27,7 +27,7 @@ import {
 } from "./StyleExplore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 // Images
-import avatarImg from "../../images/avatar.png";
+import avatarImg from "../../images/avatar.svg";
 import devxImg from "../../images/devx.jpeg";
 import dbImg from "../../images/dailyBruin.png";
 import consultingImg from "../../images/bruinConsulting.png";
