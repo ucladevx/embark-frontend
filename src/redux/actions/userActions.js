@@ -18,7 +18,7 @@ export const loginUser = (userData, history) => (dispatch) => {
     .post("/login", userData)
     .then((res) => {
       setAuthorizationHeader(res.data.token);
-      dispatch(getUserData());
+      dispatch(getStudentData());
       history.push("/");
     })
     .catch((err) => {
@@ -27,30 +27,27 @@ export const loginUser = (userData, history) => (dispatch) => {
 };
 
 // Get all users data
-export const getUserData = () => (dispatch) => {
-  axios
-    .get("/user")
-    .then((res) => {
-      dispatch({
-        type: SET_USER,
-        payload: res.data,
-      });
-    })
-    .catch((err) => console.error(err));
+export const getStudentData = () => async (dispatch) => {
+  try {
+    const res = await axios.get("/student/profile");
+    dispatch({
+      type: SET_USER,
+      payload: res.data.student,
+    });
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 // Sign Up a user
-export const signupUser = (newUserData, history) => (dispatch) => {
-  axios
-    .post("/signup", newUserData)
-    .then((res) => {
-      setAuthorizationHeader(res.data.token);
-      dispatch(getUserData());
-      history.push("/");
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+export const signupStudent = (newUserData) => async (dispatch) => {
+  try {
+    const res = await axios.post("/auth/signup", newUserData);
+    setAuthorizationHeader(res.data.token);
+    dispatch(getStudentData());
+  } catch (err) {
+    console.error(err.data);
+  }
 };
 
 // Log out a user
@@ -66,20 +63,19 @@ export const uploadImage = (formData) => (dispatch) => {
   axios
     .post("/user/image", formData)
     .then((res) => {
-      dispatch(getUserData());
+      dispatch(getStudentData());
     })
     .catch((err) => console.error(err));
 };
 
 // Edit a specific user's setting
-export const editUserDetails = (userDetails) => (dispatch) => {
-  dispatch({ type: LOADING_USER });
-  axios
-    .post("/user", userDetails)
-    .then(() => {
-      dispatch(getUserData());
-    })
-    .catch((err) => console.error(err));
+export const editStudentDetails = (userDetails) => async (dispatch) => {
+  try {
+    const res = await axios.post("/student/profile", userDetails);
+    dispatch({ type: "SET_USER", payload: res.data.updatedStudent });
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 // Mark notification read on user's end

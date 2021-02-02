@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../shared/config";
 import { Avatar, Button, TextField, Typography } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
+import LinkEffect from "../../shared/LinkEffect";
 
 export const LandingPage = styled.div`
   background: ${colors.blue2};
@@ -9,16 +10,17 @@ export const LandingPage = styled.div`
 
 export const LandingPageWrapper = styled.div`
   margin: 0 auto;
-  padding-top: 20px;
   display: flex;
-  width: 80vw;
+  width: 100vw;
   min-height: 100vh;
-  gap: 30px;
+  padding: 10px 100px 0 100px;
+  gap: 35px;
 `;
 
 export const LeftContainer = styled.div`
-  flex: 1 1 auto;
+  flex: 1 1 630px;
   white-space: nowrap;
+  margin-left: -20px;
 `;
 
 export const MiddleContainer = styled.div`
@@ -26,7 +28,7 @@ export const MiddleContainer = styled.div`
 `;
 
 export const RightContainer = styled.div`
-  flex: 1 1 auto;
+  flex: 1 2 auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -42,6 +44,7 @@ export const InfoBoxes = styled.div`
 `;
 
 export const InfoEntryWrapper = styled.div`
+  ${LinkEffect}
   display: flex;
   align-items: center;
   gap: 15px;
@@ -70,7 +73,7 @@ export const FilterWrapper = styled.div`
   box-sizing: border-box;
   margin-top: 20px;
   padding: 20px;
-  height: 260px;
+  height: 225px;
   background: ${colors.white};
   display: flex;
   gap: 20px;
@@ -162,7 +165,7 @@ export const EventItems = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  min-height: 250px;
+  min-height: 170px;
   position: relative;
 `;
 
@@ -182,12 +185,17 @@ export const EventAvatar = styled(Avatar)`
 `;
 
 export const ViewPost = styled.div`
-  background: ${colors.white};
   margin-top: 20px;
-  padding: 20px;
   border-radius: 5px;
 `;
-
+export const PostWrapper = styled.div`
+  margin-top: 30px;
+  padding: 20px 20px 0 20px;
+  background: ${colors.white};
+  &:first-child {
+    margin-top: 0;
+  }
+`;
 export const PostHeader = styled.div`
   display: flex;
   height: 50px;
@@ -254,7 +262,7 @@ export const CommentWrapper = styled.div`
   display: flex;
   width: 100%;
   gap: 20px;
-  padding: 5px;
+  padding: 25px;
   background: ${colors.white};
 `;
 
@@ -264,15 +272,12 @@ export const CommentIcon = styled.img`
 `;
 
 export const ViewCommentLink = styled(Typography)`
+  ${LinkEffect}
   text-decoration: underline;
   background: none;
   margin: 10px 0 0 10px;
   font-size: 11px;
   color: ${colors.gray3};
-  &:hover {
-    opacity: 0.8;
-    cursor: pointer;
-  }
 `;
 
 export const CommentTextField = styled(TextField)`
@@ -295,7 +300,7 @@ export const ViewPreviousCommentWrapper = styled.div`
   display: flex;
   gap: 10px;
   flex-direction: column;
-  padding: 5px;
+  padding: 5px 25px 5px 25px;
   background: ${colors.white};
 `;
 
@@ -313,7 +318,7 @@ export const PreviousCommentContent = styled.div`
   border-radius: 15px;
   padding: 10px 10px;
   display: flex;
-  margin-left: 20px;
+  margin-left: 10px;
   flex-direction: column;
 `;
 
@@ -324,6 +329,7 @@ export const LikeReply = styled.div`
 `;
 
 export const LikeReplyText = styled(BoldTypography)`
+  ${(props) => (props.disabled ? null : LinkEffect)}
   font-size: 11px;
   color: ${colors.gray2};
 `;
