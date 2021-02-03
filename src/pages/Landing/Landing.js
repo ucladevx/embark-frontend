@@ -81,11 +81,11 @@ const Landing = () => {
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
-  const tags = [{key: "Product Management"},{key: "Computer Science"}];//Replace with call to backend for tags
+  const tags = [{key: "Product Management"},{key: "Computer Science"}];//Replace with call to backend for tags, or more extensive hard coding
   const renderedTags = tags.map((each) => {
     return (
         <div key = {each.key}>
-          <PostTag bgcolor = {each.key}>
+          <PostTag tag = {each.key}>
           {each.key}
         </PostTag>
         </div>
@@ -123,8 +123,8 @@ const Landing = () => {
             {page === "main" && (
               <FilterWrapper>
                 <FilterTitle>Filters:</FilterTitle>
-                <FilterObj bgcolor="Product Management">Product Management</FilterObj>
-                <FilterObj bgcolor="Product Design">
+                <FilterObj tag="Product Management">Product Management</FilterObj>
+                <FilterObj tag="Product Design">
                   Product Design
                 </FilterObj>
                 <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>

@@ -27,3 +27,16 @@ export const colors = {
 export const font = {
   text: "Arial",
 };
+
+export const handleTagColor = tag => {
+  switch (tag) {
+    case "Product Management":
+      return colors.red1;
+    case "Computer Science":
+      return colors.blue3;
+    case "Product Design":
+      return colors.darkyellow;
+    default:
+      return "#fff";
+  }
+};
