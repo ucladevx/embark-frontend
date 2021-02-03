@@ -81,7 +81,7 @@ const Landing = () => {
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
-  const tags = [{key: "Product Management"},{key: "Computer Science"}];//Replace with call to backend for tags, or more extensive hard coding
+  const tags = [{key: "Product Management"},{key: "Computer Science"}];
   const renderedTags = tags.map((each) => {
     return (
         <div key = {each.key}>
@@ -245,7 +245,7 @@ const Landing = () => {
                           </PostNameTime>
                           <PostTagWrapper>
                             {p.tags.map((t) => (
-                              <PostTag bgcolor={colors.red1} key={t}>
+                              <PostTag tag={t} key={t}>
                                 {t}
                               </PostTag>
                             ))}
