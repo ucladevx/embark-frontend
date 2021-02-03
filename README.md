@@ -17,5 +17,3 @@ Then,
 ### 3. React Redux: https://react-redux.js.org/
 
 ### 4. Material UI: https://material-ui.com/
-
-Test text

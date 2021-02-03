@@ -68,9 +68,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
 import Explore from "./Explore";
+//InnerText
+import innerText from "react-innertext";
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
+
 
 const Landing = () => {
   // Redux
@@ -80,6 +83,14 @@ const Landing = () => {
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
+  const tags = [{tag: "Product Management"},{tag: "Computer Science"}];
+  const renderedTags = tags.map((each) => {
+    return (
+        <PostTag bgcolor = {each.tag}>
+          {each.tag}
+        </PostTag>
+    );
+  });
 
   useEffect(() => {
     dispatch(getPosts());
@@ -153,12 +164,7 @@ const Landing = () => {
                         <PostTime>{dayjs("2020-12-01").fromNow()}</PostTime>
                       </PostNameTime>
                       <PostTagWrapper>
-                        <PostTag bgcolor={colors.red1}>
-                          Product Management
-                        </PostTag>
-                        <PostTag bgcolor={colors.blue3}>
-                          Computer Science
-                        </PostTag>
+                        {renderedTags}
                       </PostTagWrapper>
                     </PostHeader>
 

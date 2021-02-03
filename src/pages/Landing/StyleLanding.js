@@ -217,8 +217,20 @@ export const PostTagWrapper = styled.div`
   margin-right: 10px;
 `;
 
+const handleTagColor = tag => {
+  switch (tag) {
+    case "Product Management":
+      return "#03a9f3";
+    case "Computer Science":
+      return "#f56342";
+    default:
+      return "#fff";
+  }
+};
+
 export const PostTag = styled(Button)`
-  background-color: ${(props) => props.bgcolor};
+  background-color: ${(props) => 
+    handleTagColor(props.bgcolor)};
   text-transform: none;
   width: fit-content;
   height: 18px;
@@ -226,7 +238,8 @@ export const PostTag = styled(Button)`
   border-radius: 5px;
   padding: 10px;
   &:hover {
-    background-color: ${(props) => props.bgcolor};
+    background-color: ${(props) => 
+      handleTagColor(props.bgcolor)};
     opacity: 0.8;
   }
 `;
