@@ -81,12 +81,14 @@ const Landing = () => {
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
-  const tags = [{key: "Product Management"},{key: "Computer Science"}];
+  const tags = [{key: "Product Management"},{key: "Computer Science"}];//Replace with call to backend for tags
   const renderedTags = tags.map((each) => {
     return (
-        <PostTag bgcolor = {each.key}>
+        <div key = {each.key}>
+          <PostTag bgcolor = {each.key}>
           {each.key}
         </PostTag>
+        </div>
     );
   });
 
