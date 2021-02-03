@@ -68,8 +68,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
 import Explore from "./Explore";
-//InnerText
-import innerText from "react-innertext";
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -83,11 +81,11 @@ const Landing = () => {
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
-  const tags = [{tag: "Product Management"},{tag: "Computer Science"}];
+  const tags = [{key: "Product Management"},{key: "Computer Science"}];
   const renderedTags = tags.map((each) => {
     return (
-        <PostTag bgcolor = {each.tag}>
-          {each.tag}
+        <PostTag bgcolor = {each.key}>
+          {each.key}
         </PostTag>
     );
   });
@@ -123,9 +121,9 @@ const Landing = () => {
             {page === "main" && (
               <FilterWrapper>
                 <FilterTitle>Filters:</FilterTitle>
-                <FilterObj bgcolor={colors.red1}>Product Management</FilterObj>
-                <FilterObj bgcolor={colors.darkyellow}>
-                  Product Deisign
+                <FilterObj bgcolor="Product Management">Product Management</FilterObj>
+                <FilterObj bgcolor="Product Design">
+                  Product Design
                 </FilterObj>
                 <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
                 <AddFilter>+ Add Filter</AddFilter>

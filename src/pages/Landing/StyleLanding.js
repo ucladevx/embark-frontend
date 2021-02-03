@@ -83,7 +83,8 @@ export const FilterWrapper = styled.div`
 
 export const FilterObj = styled(Typography)`
   height: 26px;
-  background-color: ${(props) => props.bgcolor};
+  background-color: ${(props) => 
+    handleTagColor(props.bgcolor)};
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -220,9 +221,11 @@ export const PostTagWrapper = styled.div`
 const handleTagColor = tag => {
   switch (tag) {
     case "Product Management":
-      return "#03a9f3";
+      return colors.red1;
     case "Computer Science":
-      return "#f56342";
+      return colors.blue3;
+    case "Product Design":
+      return colors.darkyellow;
     default:
       return "#fff";
   }
