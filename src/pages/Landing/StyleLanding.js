@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../shared/config";
+import { colors, handleTagColor } from "../../shared/config";
 import { Avatar, Button, TextField, Typography } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import LinkEffect from "../../shared/LinkEffect";
@@ -83,7 +83,8 @@ export const FilterWrapper = styled.div`
 
 export const FilterObj = styled(Typography)`
   height: 26px;
-  background-color: ${(props) => props.bgcolor};
+  background-color: ${(props) => 
+    handleTagColor(props.tag)};
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -218,7 +219,8 @@ export const PostTagWrapper = styled.div`
 `;
 
 export const PostTag = styled(Button)`
-  background-color: ${(props) => props.bgcolor};
+  background-color: ${(props) => 
+    handleTagColor(props.tag)};
   text-transform: none;
   width: fit-content;
   height: 18px;
@@ -226,7 +228,8 @@ export const PostTag = styled(Button)`
   border-radius: 5px;
   padding: 10px;
   &:hover {
-    background-color: ${(props) => props.bgcolor};
+    background-color: ${(props) => 
+      handleTagColor(props.tag)};
     opacity: 0.8;
   }
 `;

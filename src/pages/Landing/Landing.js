@@ -72,6 +72,7 @@ import Explore from "./Explore";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
+
 const Landing = () => {
   // Redux
   const posts = useSelector((state) => state.data.posts);
@@ -80,6 +81,16 @@ const Landing = () => {
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
+  const tags = [{key: "Product Management"},{key: "Computer Science"}];
+  const renderedTags = tags.map((each) => {
+    return (
+        <div key = {each.key}>
+          <PostTag tag = {each.key}>
+          {each.key}
+        </PostTag>
+        </div>
+    );
+  });
 
   useEffect(() => {
     dispatch(getPosts());
@@ -112,9 +123,9 @@ const Landing = () => {
             {page === "main" && (
               <FilterWrapper>
                 <FilterTitle>Filters:</FilterTitle>
-                <FilterObj bgcolor={colors.red1}>Product Management</FilterObj>
-                <FilterObj bgcolor={colors.darkyellow}>
-                  Product Deisign
+                <FilterObj tag="Product Management">Product Management</FilterObj>
+                <FilterObj tag="Product Design">
+                  Product Design
                 </FilterObj>
                 <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
                 <AddFilter>+ Add Filter</AddFilter>
@@ -153,12 +164,7 @@ const Landing = () => {
                         <PostTime>{dayjs("2020-12-01").fromNow()}</PostTime>
                       </PostNameTime>
                       <PostTagWrapper>
-                        <PostTag bgcolor={colors.red1}>
-                          Product Management
-                        </PostTag>
-                        <PostTag bgcolor={colors.blue3}>
-                          Computer Science
-                        </PostTag>
+                        {renderedTags}
                       </PostTagWrapper>
                     </PostHeader>
 
@@ -239,7 +245,7 @@ const Landing = () => {
                           </PostNameTime>
                           <PostTagWrapper>
                             {p.tags.map((t) => (
-                              <PostTag bgcolor={colors.red1} key={t}>
+                              <PostTag tag={t} key={t}>
                                 {t}
                               </PostTag>
                             ))}
