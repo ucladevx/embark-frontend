@@ -36,7 +36,13 @@ export const handleTagColor = tag => {
       return colors.blue3;
     case "Product Design":
       return colors.darkyellow;
+    case "law":
+      return colors.gray2;
+    case "medicine":
+      return colors.pink;
+    case "tech":
+      return colors.blue2;
     default:
-      return "#fff";
+      return "#222";
   }
 };
