@@ -3,6 +3,7 @@ import GoogleButton from "react-google-button";
 import styled from "styled-components";
 import { colors } from "../../shared/config";
 import OrSeperator from "./OrSeperator";
+import { useHistory } from "react-router-dom";
 import {
   LeftFormContainer,
   RightFormContainer,
@@ -51,10 +52,14 @@ const SignupSchema = Yup.object().shape({
 
 const FormUserDetails = ({ handleUser, handleStep }) => {
   const dispatch = useDispatch();
+  let history = useHistory();
   return (
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
+      <button onClick = {()=>{
+        history.push('/login')
+      }}>Login</button>
         <SignUpTitle>Sign up to Embark</SignUpTitle>
         <div style={{ marginBottom: "40px" }}>
           <GoogleButton
