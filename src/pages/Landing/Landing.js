@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
-import "react-calendar/dist/Calendar.css";
+import "./calendar.css"
 import Calendar from "react-calendar";
 // Styles
 import ImageIcon from "@material-ui/icons/Image";
