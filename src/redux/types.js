@@ -15,6 +15,8 @@ export const UNLIKE_POST = "UNLIKE_POST";
 export const DELETE_POST = "DELETE_POST";
 export const NEW_POST = "NEW_POST";
 export const SUBMIT_COMMENT = "SUBMIT_COMMENT";
+export const FILTER_POSTS = "FILTER_POSTS";
+
 
 // Ui reducer types
 export const SET_ERRORS = "SET_ERRORS";

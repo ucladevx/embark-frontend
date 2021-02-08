@@ -65,8 +65,7 @@ import compassImg from "../../images/compass.svg";
 import { colors } from "../../shared/config";
 import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
-import { getPosts } from "../../redux/actions/dataActions";
-import { addFilter,removeFilter } from "../../redux/actions/userActions";
+import { getPosts, filterPosts,addFilter,removeFilter  } from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
 import Explore from "./Explore";
 // Dayjs
@@ -76,9 +75,9 @@ dayjs.extend(relativeTime);
 
 const Landing = () => {
   // Redux
+  const filters = useSelector((state) => state.data.filter);
   const posts = useSelector((state) => state.data.posts);
   const user = useSelector((state) => state.user);
-  const filters = useSelector((state) => state.user.filters);
   const dispatch = useDispatch();
 
   // States
@@ -99,6 +98,15 @@ const Landing = () => {
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(addFilter("Product Design"));
+  }, [dispatch]);
+
+  const updateFilters = (t) => {
+    dispatch(removeFilter(t));
+  }
+
 
   return (
     <>
@@ -128,7 +136,7 @@ const Landing = () => {
               <FilterWrapper>
                 <FilterTitle>Filters:</FilterTitle>
                 {filters.map((t) => (
-                     <FilterObj tag={t} key={t} onClick ={()=>dispatch(removeFilter(t))}>
+                     <FilterObj tag={t} key={t} onClick ={()=>updateFilters(t)}>
                         {t}
                     </FilterObj>
                 ))}

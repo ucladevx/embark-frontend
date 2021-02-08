@@ -6,6 +6,9 @@ import {
   NEW_POST,
   SET_POST,
   SUBMIT_COMMENT,
+  FILTER_POSTS,
+  ADD_FILTER,
+  REMOVE_FILTER,
 } from "../types";
 
 import axios from "axios";
@@ -91,4 +94,28 @@ export const getUserPage = (userHandle) => async (dispatch) => {
   } catch (err) {
     dispatch({ type: SET_POSTS, payload: null });
   }
+};
+
+//Sort(filter) posts by relevance to filters
+export const filterPosts = (filters) => (dispatch) => {
+  dispatch({
+    type: FILTER_POSTS,
+    payload: filters,
+  })
+}
+
+// Add a filter on the landing page
+export const addFilter = (filterToAdd) => (dispatch) => {
+  dispatch({
+    type: ADD_FILTER,
+    payload: filterToAdd
+  });
+};
+
+// Remove a filter on the landing page
+export const removeFilter = (filterToTake) => (dispatch) => {
+  dispatch({
+    type: REMOVE_FILTER,
+    payload: filterToTake
+  });
 };

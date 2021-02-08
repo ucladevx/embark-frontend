@@ -16,7 +16,6 @@ const intialState = {
   likedPosts: [],
   clubs: [],
   industry: "",
-  filters: []
 };
 
 export default function userReducer(state = intialState, action) {
@@ -56,21 +55,7 @@ export default function userReducer(state = intialState, action) {
       return {
         ...state,
       };
-    case ADD_FILTER:
-      return {
-        ...state,
-        filters: [
-          ...state.filters,
-          action.payload
-        ],
-      };
-    case REMOVE_FILTER:
-      return {
-        ...state,
-        filters: state.filters.filter(
-          (eachfilter) => eachfilter !== action.payload
-        ),
-      };
+    
     default:
       return state;
   }
