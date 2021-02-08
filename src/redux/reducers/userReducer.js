@@ -5,6 +5,8 @@ import {
   LIKE_POST,
   UNLIKE_POST,
   MARK_NOTIFICATIONS_READ,
+  ADD_FILTER,
+  REMOVE_FILTER
 } from "../types";
 
 const intialState = {
@@ -14,6 +16,7 @@ const intialState = {
   likedPosts: [],
   clubs: [],
   industry: "",
+  filters: []
 };
 
 export default function userReducer(state = intialState, action) {
@@ -52,6 +55,23 @@ export default function userReducer(state = intialState, action) {
       state.notifications.forEach((noti) => (noti.read = true));
       return {
         ...state,
+      };
+    case ADD_FILTER:
+      console.log("add");
+      return {
+        ...state,
+        filters: [
+          ...state.filters,
+          action.payload
+        ],
+      };
+    case REMOVE_FILTER:
+      console.log("remove");
+      return {
+        ...state,
+        filters: state.filters.filter(
+          (eachfilter) => eachfilter !== action.payload
+        ),
       };
     default:
       return state;

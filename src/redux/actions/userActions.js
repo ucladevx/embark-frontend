@@ -3,6 +3,8 @@ import {
   SET_UNAUTHENTICATED,
   LOADING_USER,
   MARK_NOTIFICATIONS_READ,
+  ADD_FILTER,
+  REMOVE_FILTER
 } from "../types";
 import axios from "axios";
 
@@ -86,4 +88,21 @@ export const markNotificationsRead = (notificationIds) => (dispatch) => {
       dispatch({ type: MARK_NOTIFICATIONS_READ });
     })
     .catch((err) => console.error(err));
+};
+
+// Add a filter on the landing page
+export const addFilter = (filterToAdd) => (dispatch) => {
+  dispatch({
+    type: ADD_FILTER,
+    payload: filterToAdd
+  });
+  console.log("action");
+};
+
+// Remove a filter on the landing page
+export const removeFilter = (filterToTake) => (dispatch) => {
+  dispatch({
+    type: REMOVE_FILTER,
+    payload: filterToTake
+  });
 };

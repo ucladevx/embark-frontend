@@ -66,6 +66,7 @@ import { colors } from "../../shared/config";
 import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../redux/actions/dataActions";
+import { addFilter,removeFilter } from "../../redux/actions/userActions";
 import NewPost from "../../components/NewPost";
 import Explore from "./Explore";
 // Dayjs
@@ -77,10 +78,13 @@ const Landing = () => {
   // Redux
   const posts = useSelector((state) => state.data.posts);
   const user = useSelector((state) => state.user);
+  const filters = useSelector((state) => state.user.filters);
   const dispatch = useDispatch();
+
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
+
   const tags = [{key: "Product Management"},{key: "Computer Science"}];
   const renderedTags = tags.map((each) => {
     return (
@@ -127,15 +131,20 @@ const Landing = () => {
                 <FilterObj tag="Product Design">
                   Product Design
                 </FilterObj>
+                {filters.map((t) => (
+                     <FilterObj tag={t} key={t}>
+                        {t}
+                    </FilterObj>
+                ))}
                 <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
-                <AddFilter>+ Add Filter</AddFilter>
+                <AddFilter onClick ={()=>dispatch(addFilter("law"))}>+ Add Filter</AddFilter>
               </FilterWrapper>
             )}
           </LeftContainer>
 
           <MiddleContainer>
             {page === "main" ? (
-              <>
+              <>s
                 <QuestionBox>
                   <AskAvatar></AskAvatar>
                   <AskaQuestion
