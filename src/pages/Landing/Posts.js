@@ -29,6 +29,8 @@ import {
   PostUserName,
   PostTag,
 } from "./StyleLanding";
+import { CircularProgress } from "@material-ui/core";
+import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { colors } from "../../shared/config";
 // Infinite Scroll
@@ -40,10 +42,24 @@ import { getNextPosts } from "../../redux/actions/dataActions";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
+const Circle = styled(CircularProgress)`
+  margin: 10px;
+  color: ${colors.blue1};
+`;
+
+const Loader = () => {
+  return (
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <Circle></Circle>
+    </div>
+  );
+};
+
 const Posts = ({ setNewPost }) => {
   const posts = useSelector((state) => state.data.posts);
   const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
   const dispatch = useDispatch();
+  const hasNext = useSelector((state) => state.data.hasNext);
   const renderedTags = tags.map((each) => {
     return (
       <div key={each.key}>
@@ -52,7 +68,7 @@ const Posts = ({ setNewPost }) => {
     );
   });
   const getMorePosts = () => {
-    dispatch(getNextPosts());
+    if (hasNext) dispatch(getNextPosts());
   };
   return (
     <>
@@ -150,8 +166,8 @@ const Posts = ({ setNewPost }) => {
         <InfiniteScroll
           dataLength={posts.length}
           next={getMorePosts}
-          hasMore={true}
-          loader={<h4>Loading...</h4>}
+          hasMore={hasNext}
+          loader={<Loader></Loader>}
         >
           {posts.map((p) => {
             return (

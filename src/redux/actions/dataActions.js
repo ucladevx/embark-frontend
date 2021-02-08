@@ -7,6 +7,7 @@ import {
   SET_POST,
   SUBMIT_COMMENT,
   SET_NEXT_STRING,
+  SET_HAS_NEXT,
 } from "../types";
 
 import axios from "axios";
@@ -29,7 +30,6 @@ export const getPosts = () => async (dispatch) => {
 export const getNextPosts = () => async (dispatch, getState) => {
   try {
     const { nextString } = getState().data;
-
     const res = await axios.get("/posts", {
       params: {
         limit: 8,
@@ -37,10 +37,11 @@ export const getNextPosts = () => async (dispatch, getState) => {
       },
     });
     const { posts } = getState().data;
-    const { results, next } = res.data.paginatedPosts;
+    const { results, next, hasNext } = res.data.paginatedPosts;
     const newPosts = [...posts, ...results];
     dispatch({ type: SET_POSTS, payload: newPosts });
-    dispatch({ type: SET_NEXT_STRING, paylaod: next });
+    dispatch({ type: SET_NEXT_STRING, payload: next });
+    dispatch({ type: SET_HAS_NEXT, payload: hasNext });
   } catch (err) {
     console.error(err);
   }
