@@ -13,7 +13,11 @@ import axios from "axios";
 // Get All Posts
 export const getPosts = () => async (dispatch) => {
   try {
-    const res = await axios.get("/posts");
+    const res = await axios.get("/posts", {
+      params: {
+        limit: 8,
+      },
+    });
     dispatch({ type: SET_POSTS, payload: res.data.paginatedPosts.results });
   } catch (err) {
     console.error(err);

@@ -6,12 +6,14 @@ import {
   NEW_POST,
   SET_POST,
   SUBMIT_COMMENT,
+  SET_NEXT_STRING,
 } from "../types";
 
 const initialState = {
   posts: [],
   post: {},
   filter: [],
+  nextString: "",
 };
 
 export default function dataReducer(state = initialState, action) {
@@ -21,6 +23,12 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         posts: action.payload,
+      };
+    }
+    case SET_NEXT_STRING: {
+      return {
+        ...state,
+        nextString: action.payload,
       };
     }
     case LIKE_POST:
