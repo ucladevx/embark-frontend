@@ -127,12 +127,14 @@ const Landing = () => {
             {page === "main" && (
               <FilterWrapper>
                 <FilterTitle>Filters:</FilterTitle>
-                <FilterObj tag="Product Management">Product Management</FilterObj>
-                <FilterObj tag="Product Design">
+                <FilterObj tag="Product Management" onClick ={()=>dispatch(removeFilter("Product Management"))}>
+                  Product Management
+                </FilterObj>
+                <FilterObj tag="Product Design" onClick ={()=>dispatch(removeFilter("Product Design"))}>
                   Product Design
                 </FilterObj>
                 {filters.map((t) => (
-                     <FilterObj tag={t} key={t}>
+                     <FilterObj tag={t} key={t} onClick ={()=>dispatch(removeFilter(t))}>
                         {t}
                     </FilterObj>
                 ))}
