@@ -42,7 +42,11 @@ export const handleTagColor = tag => {
       return colors.pink;
     case "tech":
       return colors.blue2;
+    case "Business":
+      return colors.green1;
+    case "Marketing":
+      return colors.lightpurple;
     default:
-      return "#222";
+      return "#EEE";
   }
 };
