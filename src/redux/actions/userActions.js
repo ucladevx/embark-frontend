@@ -96,7 +96,6 @@ export const addFilter = (filterToAdd) => (dispatch) => {
     type: ADD_FILTER,
     payload: filterToAdd
   });
-  console.log("action");
 };
 
 // Remove a filter on the landing page

@@ -57,7 +57,6 @@ export default function userReducer(state = intialState, action) {
         ...state,
       };
     case ADD_FILTER:
-      console.log("add");
       return {
         ...state,
         filters: [
@@ -66,7 +65,6 @@ export default function userReducer(state = intialState, action) {
         ],
       };
     case REMOVE_FILTER:
-      console.log("remove");
       return {
         ...state,
         filters: state.filters.filter(
