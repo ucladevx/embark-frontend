@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
-import "./calendar.css"
+import "./calendar.css";
 import Calendar from "react-calendar";
 // Styles
-import ImageIcon from "@material-ui/icons/Image";
-import LinkIcon from "@material-ui/icons/Link";
 import {
   LandingPage,
   LandingPageWrapper,
@@ -13,10 +11,6 @@ import {
   FilterTitle,
   FilterObj,
   FilterWrapper,
-  QuestionBox,
-  PostAvatar,
-  PostContent,
-  PostTag,
   AddFilter,
   EventAvatar,
   EventDescription,
@@ -25,34 +19,12 @@ import {
   EventsWrapper,
   TimeTypography,
   CalanderWrapper,
-  ViewPost,
-  ViewCommentLink,
-  ViewPreviousCommentWrapper,
-  PostWrapper,
-  PostHeader,
-  PostTagWrapper,
-  PostTitle,
-  PreviousCommentItem,
-  CommentWrapper,
-  CommentTextField,
-  PreviousCommentTitle,
-  PreviousCommentAvatar,
-  PreviousCommentContent,
-  PreviousCommentText,
-  CommentAvatar,
-  LikeReply,
-  LikeReplyText,
   InfoBoxes,
   InfoEntryWrapper,
   InfoImage,
   InfoSeperator,
   InfoEntryText,
   MiddleContainer,
-  AskaQuestion,
-  AskAvatar,
-  PostNameTime,
-  PostTime,
-  PostUserName,
   EventTypography,
   GoingBtn,
 } from "./StyleLanding";
@@ -63,38 +35,35 @@ import bookImg from "../../images/book.svg";
 import compassImg from "../../images/compass.svg";
 // Utils
 import { colors } from "../../shared/config";
-import dayjs from "dayjs";
+
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
 import Explore from "./Explore";
+import Posts from "./Posts";
+
 // Dayjs
+import dayjs from "dayjs";
+import { useHistory } from "react-router-dom";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
-
 const Landing = () => {
   // Redux
-  const posts = useSelector((state) => state.data.posts);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
-  const tags = [{key: "Product Management"},{key: "Computer Science"}];
-  const renderedTags = tags.map((each) => {
-    return (
-        <div key = {each.key}>
-          <PostTag tag = {each.key}>
-          {each.key}
-        </PostTag>
-        </div>
-    );
-  });
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!window.localStorage.getItem("AuthToken")) history.push("/");
+  }, [history]);
 
   return (
     <>
@@ -123,10 +92,10 @@ const Landing = () => {
             {page === "main" && (
               <FilterWrapper>
                 <FilterTitle>Filters:</FilterTitle>
-                <FilterObj tag="Product Management">Product Management</FilterObj>
-                <FilterObj tag="Product Design">
-                  Product Design
+                <FilterObj tag="Product Management">
+                  Product Management
                 </FilterObj>
+                <FilterObj tag="Product Design">Product Design</FilterObj>
                 <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
                 <AddFilter>+ Add Filter</AddFilter>
               </FilterWrapper>
@@ -135,129 +104,7 @@ const Landing = () => {
 
           <MiddleContainer>
             {page === "main" ? (
-              <>
-                <QuestionBox>
-                  <AskAvatar></AskAvatar>
-                  <AskaQuestion
-                    InputProps={{
-                      disableUnderline: true,
-                      style: {
-                        fontSize: 12,
-                      },
-                    }}
-                    placeholder="Ask a question or start a conversation..."
-                    onClick={() => setNewPost(true)}
-                  />
-                  {/* TODO: add two Icon buttons here */}
-
-                  <ImageIcon />
-                  <LinkIcon />
-                </QuestionBox>
-
-                <ViewPost>
-                  <PostWrapper>
-                    <PostHeader>
-                      {/* TODO: add two Icon buttons here */}
-                      <PostAvatar />
-                      <PostNameTime>
-                        <PostUserName>Christie Smith</PostUserName>
-                        <PostTime>{dayjs("2020-12-01").fromNow()}</PostTime>
-                      </PostNameTime>
-                      <PostTagWrapper>
-                        {renderedTags}
-                      </PostTagWrapper>
-                    </PostHeader>
-
-                    <PostTitle>
-                      How do I improve my product knowledge?
-                    </PostTitle>
-                    <PostContent>
-                      After taking the CS30 series, I realized I could not see
-                      myself coding for the rest of my life lol so I’m thinking
-                      of going into Product! Do any of you have any
-                      resources/tips on where to get started? Thanks :)
-                    </PostContent>
-                  </PostWrapper>
-
-                  <ViewPreviousCommentWrapper>
-                    <ViewCommentLink>View previous comments</ViewCommentLink>
-                    <PreviousCommentItem>
-                      <PreviousCommentAvatar></PreviousCommentAvatar>
-                      <div>
-                        <PreviousCommentContent bgcolor={colors.lightpurple}>
-                          <PreviousCommentTitle>UCLA DevX</PreviousCommentTitle>
-                          <PreviousCommentText>
-                            Hey Christie! We have a slidedeck all about product
-                            thinking on our profile. You should totally apply to
-                            be on one of our teams this quarter to gain some
-                            more experience with the product development
-                            process!!
-                          </PreviousCommentText>
-                        </PreviousCommentContent>
-                        <LikeReply>
-                          <LikeReplyText>Like</LikeReplyText>
-                          <LikeReplyText disabled>·</LikeReplyText>
-                          <LikeReplyText>Reply</LikeReplyText>
-                        </LikeReply>
-                      </div>
-                    </PreviousCommentItem>
-                    <PreviousCommentItem>
-                      <PreviousCommentAvatar></PreviousCommentAvatar>
-                      <div>
-                        <PreviousCommentContent bgcolor={colors.gray1}>
-                          <PreviousCommentTitle>
-                            Justin Chen
-                          </PreviousCommentTitle>
-                          <PreviousCommentText>
-                            Same!! The CS30 series killed my GPA.
-                          </PreviousCommentText>
-                        </PreviousCommentContent>
-                        <LikeReply>
-                          <LikeReplyText>Like</LikeReplyText>
-                          <LikeReplyText disabled>·</LikeReplyText>
-                          <LikeReplyText>Reply</LikeReplyText>
-                        </LikeReply>
-                      </div>
-                    </PreviousCommentItem>
-                    <ViewCommentLink>View More comments</ViewCommentLink>
-                  </ViewPreviousCommentWrapper>
-                  <CommentWrapper>
-                    <CommentAvatar></CommentAvatar>
-                    <CommentTextField
-                      placeholder="Write a comment..."
-                      fullWidth
-                      InputProps={{
-                        disableUnderline: true,
-                        style: {
-                          fontSize: 12,
-                        },
-                      }}
-                    ></CommentTextField>
-                  </CommentWrapper>
-                  {posts.map((p) => {
-                    return (
-                      <PostWrapper key={p._id}>
-                        <PostHeader>
-                          <PostAvatar />
-                          <PostNameTime>
-                            <PostUserName>{p.authorEmail}</PostUserName>
-                            <PostTime>{dayjs(p.timestamp).fromNow()}</PostTime>
-                          </PostNameTime>
-                          <PostTagWrapper>
-                            {p.tags.map((t) => (
-                              <PostTag tag={t} key={t}>
-                                {t}
-                              </PostTag>
-                            ))}
-                          </PostTagWrapper>
-                        </PostHeader>
-                        <PostTitle>{p.title}</PostTitle>
-                        <PostContent>{p.body}</PostContent>
-                      </PostWrapper>
-                    );
-                  })}
-                </ViewPost>
-              </>
+              <Posts setNewPost={setNewPost}></Posts>
             ) : page === "explore" ? (
               <Explore></Explore>
             ) : (
