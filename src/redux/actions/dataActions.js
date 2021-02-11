@@ -50,8 +50,8 @@ export const getNextPosts = () => async (dispatch, getState) => {
 // Create A New Post
 export const newPost = (newP) => async (dispatch) => {
   try {
-    await axios.post("/posts", newP);
-    dispatch({ type: SET_POST, payload: newP });
+    const res = await axios.post("/posts", newP);
+    dispatch({ type: NEW_POST, payload: res.data });
   } catch (err) {
     console.error(err);
   }

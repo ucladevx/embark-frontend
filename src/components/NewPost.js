@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import { BoldTypography } from "../shared/Typography";
 import { colors } from "../shared/config";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { newPost } from "../redux/actions/dataActions";
 import styled from "styled-components";
 
@@ -68,6 +68,7 @@ const NewPost = ({ open, handleClose }) => {
   const [description, setDescription] = useState("");
   // Redux
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const handleIndustry = (e) => {
     setIndustry(e.target.value);
@@ -101,7 +102,7 @@ const NewPost = ({ open, handleClose }) => {
         <NewPostInfo>
           <Avatar></Avatar>
           <NewPostUser>
-            <BoldTypography sz={"16px"}>Claire Guo</BoldTypography>
+            <BoldTypography sz={"16px"}>{user.name}</BoldTypography>
             <FormControlC>
               <InputLabel>Industry</InputLabel>
               <Select value={industry} onChange={handleIndustry}>
