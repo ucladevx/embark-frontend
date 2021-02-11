@@ -8,6 +8,7 @@ import {
   SUBMIT_COMMENT,
   ADD_FILTER,
   REMOVE_FILTER,
+  FILTER_POSTS,
 } from "../types";
 
 const initialState = {
@@ -68,22 +69,6 @@ export default function dataReducer(state = initialState, action) {
           ...state.filter,
           action.payload
         ],
-        /**posts: {
-          ...state.posts.sort(
-            function(post1,post2){
-              for(var i = 0; i < action.payload.length;i++){
-                if(post1.tags.includes(action.payload[i])){
-                  if(!post2.tags.includes(action.payload[i])){
-                    return 1;
-                  }
-                } else if (post2.tags.includes(action.payload[i])){
-                  return -1;
-                }
-              }
-              return 0;
-            }
-          ),
-        },*/
       };
     case REMOVE_FILTER:
       return {
@@ -91,22 +76,26 @@ export default function dataReducer(state = initialState, action) {
         filter: state.filter.filter(
           (eachfilter) => eachfilter !== action.payload
         ),
-        /**posts: {
-          ...state.posts.sort(
-            function(post1,post2){
-              for(var i = 0; i < action.payload.length;i++){
-                if(post1.tags.includes(action.payload[i])){
-                  if(!post2.tags.includes(action.payload[i])){
-                    return 1;
-                  }
-                } else if (post2.tags.includes(action.payload[i])){
-                  return -1;
-                }
+      };
+    case FILTER_POSTS:
+      var postsCopy = state.posts;
+      postsCopy = postsCopy.sort(
+        function(post1,post2){
+          for(var i = 0; i < state.filter.length;i++){
+            if(post1.tags.includes(state.filter[i])){
+              if(!post2.tags.includes(state.filter[i])){
+                return -1;
               }
-              return 0;
+            } else if (post2.tags.includes(state.filter[i])){
+              return 1;
             }
-          ),
-        },*/
+          }
+          return 0;
+        }
+      );
+      return {
+        ...state,
+        posts: postsCopy,
       };
     default:
       return state;

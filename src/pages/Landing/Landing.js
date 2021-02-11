@@ -99,13 +99,14 @@ const Landing = () => {
     dispatch(getPosts());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(addFilter("Product Design"));
-  }, [dispatch]);
-
-  const updateFilters = (t) => {
+  const removeUpdateFilters = (t) => {
     dispatch(removeFilter(t));
-  }
+    dispatch(filterPosts());
+  };
+  const addUpdateFilter = (t) => {
+    dispatch(addFilter(t));
+    dispatch(filterPosts());
+  };
 
 
   return (
@@ -136,12 +137,12 @@ const Landing = () => {
               <FilterWrapper>
                 <FilterTitle>Filters:</FilterTitle>
                 {filters.map((t) => (
-                     <FilterObj tag={t} key={t} onClick ={()=>updateFilters(t)}>
+                     <FilterObj tag={t} key={t} onClick ={()=>removeUpdateFilters(t)}>
                         {t}
                     </FilterObj>
                 ))}
                 <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
-                <AddFilter onClick ={()=>dispatch(addFilter("law"))}>+ Add Filter</AddFilter>
+                <AddFilter onClick ={()=>addUpdateFilter("law")}>+ Add Filter</AddFilter>
               </FilterWrapper>
             )}
           </LeftContainer>
