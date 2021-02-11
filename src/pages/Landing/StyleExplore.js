@@ -17,6 +17,7 @@ export const ClubCard = styled.div`
 `;
 export const ClubCardImage = styled.img`
   width: 160px;
+  max-width: 160px;
   height: 150px;
   border: none;
   border-top-left-radius: 10px;
@@ -25,6 +26,7 @@ export const ClubCardImage = styled.img`
 `;
 export const ClubCardCaption = styled(Typography)`
   width: 160px;
+  max-width: 160px;
   height: 30px;
   background-color: ${colors.gray1};
   text-align: center;
