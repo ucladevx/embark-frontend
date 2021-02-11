@@ -149,7 +149,7 @@ const Landing = () => {
 
           <MiddleContainer>
             {page === "main" ? (
-              <>s
+              <>
                 <QuestionBox>
                   <AskAvatar></AskAvatar>
                   <AskaQuestion
