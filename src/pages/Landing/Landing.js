@@ -5,6 +5,7 @@ import Calendar from "react-calendar";
 // Styles
 import ImageIcon from "@material-ui/icons/Image";
 import LinkIcon from "@material-ui/icons/Link";
+
 import {
   LandingPage,
   LandingPageWrapper,
