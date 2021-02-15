@@ -12,9 +12,13 @@ import {
 import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
 import { TitleTypography } from "../../shared/Typography";
+import {Button} from "@material-ui/core";
+import Modal from "./Modal"
+
 
 const Profile = (props) => {
   const { userid } = useParams();
+
 
   return (
     <>
@@ -29,7 +33,9 @@ const Profile = (props) => {
               <Typography>Economics Major</Typography>
             </NameDescription>
           </NameDescriptionWrapper>
+          <Modal/>
         </ProfileInfo>
+
       </ProfileWrapper>
     </>
   );

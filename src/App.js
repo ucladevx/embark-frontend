@@ -40,7 +40,8 @@ function App() {
               <Route exact path="/" component={OnBoarding}></Route>
               <Route exact path='/login' component = {Login}></Route>
               <Route exact path="/landing" component={Landing}></Route>
-              <Route exact path="/user/:userid" component={Profile}></Route>
+              {/* <Route exact path="/user/:userid" component={Profile}></Route> */}
+              <Route exact path="/profile" component={Profile}></Route>
             </Switch>
           </Router>
         </Provider>
