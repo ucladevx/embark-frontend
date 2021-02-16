@@ -154,7 +154,6 @@ const EditProfile = ({ open, handleClose }) => {
             id="name"
             placeholder="Copy your Profile Link"
             type="email"
-            endAdornment={<InputAdornment position="start"><LinkedInIcon/></InputAdornment>}
             fullWidth
             InputProps={{
               disableUnderline: true,
