@@ -82,14 +82,6 @@ export const EditProfileButton = styled(Button)`
   border-radius: 5px;
 `;
 
-export const EditProfileAvatar = styled(Avatar)`
-  width: 8vw;
-  height: 8vw;
-  border: 1px solid ${colors.gray1};
-  margin: auto;
-  position: relative;
-`;
-
 export const ChangeAvatarLink = styled(Typography)`
   ${LinkEffect}
   background: none;

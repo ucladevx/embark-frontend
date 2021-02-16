@@ -11,11 +11,12 @@ import {
   InputLabel,
   FormControl,
   Divider,
+  Avatar,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import styled from "styled-components";
-
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 export const EditProfileContainer = styled(Dialog)`
   box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
@@ -25,13 +26,23 @@ export const EditProfileContainer = styled(Dialog)`
 `;
 
 export const TitleContainer = styled(DialogTitle)`
-  border-bottom: 1px solid ${colors.gray1}
+  border-bottom: 1px solid ${colors.gray2}
 `;
 export const EditProfileTitle = styled(BoldTypography)`
   font-size: 24px
   font-weight: normal;
 `;
 
+export const EditProfileAvatar = styled(Avatar)`
+  variant:"rounded";
+  width: 8vw;
+  height: 8vw;
+  border: 1px solid ${colors.grey3};
+  ${'' /* outline: solid 2px grey;
+  outline-offset: -2px; */}
+  margin: auto;
+  position: relative;
+`;
 export const EditProfileContent = styled(DialogContent)`
   margin: 5px 30px ;
 `;

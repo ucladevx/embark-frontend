@@ -24,10 +24,11 @@ import{
   HeaderImage,
   ExploreObj,
   ExploreFilter,
-  EditProfileAvatar,
+  
 } from "./StyleProfile";
 import {
   EditProfileContainer,
+  EditProfileAvatar,
   TitleContainer,
   EditProfileTitle,
   EditProfileContent,
@@ -42,6 +43,7 @@ import {
 } from "./StyleEditProfile"
 import lawn from "../../images/lawn.png";
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const EditProfile = ({ open, handleClose }) => {
   const [industry, setIndustry] = useState("");
@@ -81,11 +83,10 @@ const EditProfile = ({ open, handleClose }) => {
 
       <EditProfileContent>
       <TextFieldWrapper>
-          <EditProfileAvatar></EditProfileAvatar>
+          <EditProfileAvatar rounded></EditProfileAvatar>
       </TextFieldWrapper>
 
       <ChangeAvatarLink fontColor="red" align="center">Change Profile Picture</ChangeAvatarLink>
-      {/* <HeaderImage src={lawn}></HeaderImage> */}
       <TextFieldWrapper>
       <CoverImage src={lawn}></CoverImage>        
       </TextFieldWrapper>
