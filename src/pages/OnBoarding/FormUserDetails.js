@@ -2,7 +2,7 @@ import { TextField, Button } from "@material-ui/core";
 import GoogleButton from "react-google-button";
 import styled from "styled-components";
 import { colors } from "../../shared/config";
-import OrSeperator from "./OrSeperator";
+import { OrSeperator } from "../../shared/Separators";
 import { useHistory } from "react-router-dom";
 import {
   LeftFormContainer,
@@ -57,9 +57,13 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
-      <button onClick = {()=>{
-        history.push('/login')
-      }}>Login</button>
+        <button
+          onClick={() => {
+            history.push("/login");
+          }}
+        >
+          Login
+        </button>
         <SignUpTitle>Sign up to Embark</SignUpTitle>
         <div style={{ marginBottom: "40px" }}>
           <GoogleButton

@@ -7,7 +7,7 @@ import { TextField, Button } from "@material-ui/core";
 import styled from "styled-components";
 import { colors } from "../../shared/config";
 import GoogleButton from "react-google-button";
-import OrSeperator from "../OnBoarding/OrSeperator";
+import { OrSeperator } from "../../shared/Separators";
 import {
   LeftFormContainer,
   RightFormContainer,

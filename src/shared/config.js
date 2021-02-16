@@ -18,6 +18,7 @@ export const colors = {
   gray3: "#5F6368",
   gray4: "#DCDCDC",
   gray5: "#6E6D79",
+  gray6: "#7E7A7A",
   red1: "#EBAFAF",
   darkyellow: "#EFD69A",
   green1: "rgba(89, 193, 122, 0.4);",
@@ -28,7 +29,7 @@ export const font = {
   text: "Arial",
 };
 
-export const handleTagColor = tag => {
+export const handleTagColor = (tag) => {
   switch (tag) {
     case "Product Management":
       return colors.red1;

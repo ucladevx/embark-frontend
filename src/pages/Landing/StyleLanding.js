@@ -83,8 +83,7 @@ export const FilterWrapper = styled.div`
 
 export const FilterObj = styled(Typography)`
   height: 26px;
-  background-color: ${(props) => 
-    handleTagColor(props.tag)};
+  background-color: ${(props) => handleTagColor(props.tag)};
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -219,8 +218,7 @@ export const PostTagWrapper = styled.div`
 `;
 
 export const PostTag = styled(Button)`
-  background-color: ${(props) => 
-    handleTagColor(props.tag)};
+  background-color: ${(props) => handleTagColor(props.tag)};
   text-transform: none;
   width: fit-content;
   height: 18px;
@@ -228,8 +226,7 @@ export const PostTag = styled(Button)`
   border-radius: 5px;
   padding: 10px;
   &:hover {
-    background-color: ${(props) => 
-      handleTagColor(props.tag)};
+    background-color: ${(props) => handleTagColor(props.tag)};
     opacity: 0.8;
   }
 `;
@@ -265,7 +262,7 @@ export const CommentWrapper = styled.div`
   display: flex;
   width: 100%;
   gap: 20px;
-  padding: 25px;
+  padding: 25px 0;
   background: ${colors.white};
 `;
 

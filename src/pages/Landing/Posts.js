@@ -15,13 +15,10 @@ import {
   PostHeader,
   PostTagWrapper,
   PreviousCommentItem,
-  CommentWrapper,
-  CommentTextField,
   PreviousCommentTitle,
   PreviousCommentAvatar,
   PreviousCommentContent,
   PreviousCommentText,
-  CommentAvatar,
   LikeReply,
   LikeReplyText,
   PostNameTime,
@@ -33,12 +30,15 @@ import { CircularProgress } from "@material-ui/core";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { colors } from "../../shared/config";
+
 // Infinite Scroll
 import InfiniteScroll from "react-infinite-scroll-component";
 
 // Dayjs
 import dayjs from "dayjs";
 import { getNextPosts } from "../../redux/actions/dataActions";
+import Interactive from "./Interactive";
+import WriteComment from "./WriteComment";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
@@ -84,8 +84,6 @@ const Posts = ({ setNewPost }) => {
           placeholder="Ask a question or start a conversation..."
           onClick={() => setNewPost(true)}
         />
-        {/* TODO: add two Icon buttons here */}
-
         <ImageIcon />
         <LinkIcon />
       </QuestionBox>
@@ -93,7 +91,6 @@ const Posts = ({ setNewPost }) => {
       <ViewPost>
         <PostWrapper>
           <PostHeader>
-            {/* TODO: add two Icon buttons here */}
             <PostAvatar />
             <PostNameTime>
               <PostUserName>Christie Smith</PostUserName>
@@ -148,21 +145,10 @@ const Posts = ({ setNewPost }) => {
               </LikeReply>
             </div>
           </PreviousCommentItem>
+          <Interactive></Interactive>
           <ViewCommentLink>View More comments</ViewCommentLink>
+          <WriteComment></WriteComment>
         </ViewPreviousCommentWrapper>
-        <CommentWrapper>
-          <CommentAvatar></CommentAvatar>
-          <CommentTextField
-            placeholder="Write a comment..."
-            fullWidth
-            InputProps={{
-              disableUnderline: true,
-              style: {
-                fontSize: 12,
-              },
-            }}
-          ></CommentTextField>
-        </CommentWrapper>
         <InfiniteScroll
           dataLength={posts.length}
           next={getMorePosts}
@@ -188,6 +174,8 @@ const Posts = ({ setNewPost }) => {
                 </PostHeader>
                 <PostTitle>{p.title}</PostTitle>
                 <PostContent>{p.body}</PostContent>
+                <Interactive></Interactive>
+                <WriteComment></WriteComment>
               </PostWrapper>
             );
           })}

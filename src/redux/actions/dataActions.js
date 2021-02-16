@@ -20,7 +20,7 @@ export const getPosts = () => async (dispatch) => {
         limit: 8,
       },
     });
-    dispatch({ type: SET_POSTS, payload: res.data.paginatedPosts.results });
+    dispatch({ type: SET_POSTS, payload: res.data.posts });
     dispatch({ type: SET_NEXT_STRING, payload: res.data.paginatedPosts.next });
   } catch (err) {
     console.error(err);
