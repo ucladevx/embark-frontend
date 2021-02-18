@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar';
 import './calendar.css';
 import Calendar from 'react-calendar';
@@ -28,23 +28,23 @@ import {
   EventTypography,
   GoingBtn,
 } from './StyleLanding';
-import {BoldTypography, TitleTypography} from '../../shared/Typography';
+import { BoldTypography, TitleTypography } from '../../shared/Typography';
 // Images
 import avatarImg from '../../images/avatar.svg';
 import bookImg from '../../images/book.svg';
 import compassImg from '../../images/compass.svg';
 // Utils
-import {colors} from '../../shared/config';
+import { colors } from '../../shared/config';
 
-import {useSelector, useDispatch} from 'react-redux';
-import {getPosts} from '../../redux/actions/dataActions';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPosts } from '../../redux/actions/dataActions';
 import NewPost from '../../components/NewPost';
 import Explore from './Explore';
 import Posts from './Posts';
 
 // Dayjs
 import dayjs from 'dayjs';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 const relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
@@ -96,7 +96,7 @@ const Landing = () => {
                   Product Management
                 </FilterObj>
                 <FilterObj tag="Product Design">Product Design</FilterObj>
-                <InfoSeperator style={{marginTop: '7px'}}></InfoSeperator>
+                <InfoSeperator style={{ marginTop: '7px' }}></InfoSeperator>
                 <AddFilter>+ Add Filter</AddFilter>
               </FilterWrapper>
             )}

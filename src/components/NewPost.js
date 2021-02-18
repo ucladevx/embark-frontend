@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -14,10 +14,10 @@ import {
   FormControl,
   Divider,
 } from '@material-ui/core';
-import {BoldTypography} from '../shared/Typography';
-import {colors} from '../shared/config';
-import {useDispatch, useSelector} from 'react-redux';
-import {newPost} from '../redux/actions/dataActions';
+import { BoldTypography } from '../shared/Typography';
+import { colors } from '../shared/config';
+import { useDispatch, useSelector } from 'react-redux';
+import { newPost } from '../redux/actions/dataActions';
 import styled from 'styled-components';
 
 const NewPostInfo = styled.div`
@@ -62,7 +62,7 @@ const PostBtn = styled(Button)`
   background-color: ${colors.gray2};
 `;
 
-const NewPost = ({open, handleClose}) => {
+const NewPost = ({ open, handleClose }) => {
   const [industry, setIndustry] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');

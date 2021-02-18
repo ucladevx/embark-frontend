@@ -31,7 +31,7 @@ import avatarImg from '../../images/avatar.svg';
 import devxImg from '../../images/devx.jpeg';
 import dbImg from '../../images/dailyBruin.png';
 import consultingImg from '../../images/bruinConsulting.png';
-import {colors} from '../../shared/config';
+import { colors } from '../../shared/config';
 
 const Explore = () => {
   return (
@@ -65,13 +65,13 @@ const Explore = () => {
         </ClubCard>
         <ClubCardNextButton>
           {' '}
-          <ChevronRightIcon style={{fontSize: '30px'}} />{' '}
+          <ChevronRightIcon style={{ fontSize: '30px' }} />{' '}
         </ClubCardNextButton>
       </ClubCardsContainer>
 
       <ExploreInfoSeperator></ExploreInfoSeperator>
 
-      <ExploreTitle style={{'margin-top': 20}}>Discover Events</ExploreTitle>
+      <ExploreTitle style={{ 'margin-top': 20 }}>Discover Events</ExploreTitle>
       <ExploreSubtitle>Events happening soon</ExploreSubtitle>
 
       <UpcomingItemBox>

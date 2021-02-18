@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import FormUserDetails from './FormUserDetails.js';
 import FormPersonalDetails from './FormPersonalDetails.js';
 

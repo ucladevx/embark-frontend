@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import {colors} from './config';
+import { colors } from './config';
 
 const OrContainer = styled.div`
   display: flex;

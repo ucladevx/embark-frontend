@@ -26,17 +26,17 @@ import {
   PostUserName,
   PostTag,
 } from './StyleLanding';
-import {CircularProgress} from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import styled from 'styled-components';
-import {useSelector, useDispatch} from 'react-redux';
-import {colors} from '../../shared/config';
+import { useSelector, useDispatch } from 'react-redux';
+import { colors } from '../../shared/config';
 
 // Infinite Scroll
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 // Dayjs
 import dayjs from 'dayjs';
-import {getNextPosts} from '../../redux/actions/dataActions';
+import { getNextPosts } from '../../redux/actions/dataActions';
 import Interactive from './Interactive';
 import WriteComment from './WriteComment';
 const relativeTime = require('dayjs/plugin/relativeTime');
@@ -49,15 +49,15 @@ const Circle = styled(CircularProgress)`
 
 const Loader = () => {
   return (
-    <div style={{display: 'flex', justifyContent: 'center'}}>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Circle></Circle>
     </div>
   );
 };
 
-const Posts = ({setNewPost}) => {
+const Posts = ({ setNewPost }) => {
   const posts = useSelector((state) => state.data.posts);
-  const tags = [{key: 'Product Management'}, {key: 'Computer Science'}];
+  const tags = [{ key: 'Product Management' }, { key: 'Computer Science' }];
   const dispatch = useDispatch();
   const hasNext = useSelector((state) => state.data.hasNext);
   const renderedTags = tags.map((each) => {

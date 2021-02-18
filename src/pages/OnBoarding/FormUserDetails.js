@@ -1,19 +1,21 @@
-import {TextField, Button} from '@material-ui/core';
-import GoogleButton from 'react-google-button';
-import styled from 'styled-components';
-import {colors} from '../../shared/config';
-import {OrSeperator} from '../../shared/Separators';
-import {useHistory} from 'react-router-dom';
+import { TextField } from "@material-ui/core";
+import GoogleButton from "react-google-button";
+import styled from "styled-components";
+import { colors } from "../../shared/config";
+import { OrSeperator } from "../../shared/Separators";
+import { useHistory } from "react-router-dom";
 import {
   LeftFormContainer,
   RightFormContainer,
   FormContainer,
   FormWrapper,
-} from '../../shared/Form';
-import {Field, Formik} from 'formik';
-import * as Yup from 'yup';
-import {signupStudent} from '../../redux/actions/userActions';
-import {useDispatch} from 'react-redux';
+  Prompt,
+} from "../../shared/Form";
+import { ActionButton } from "../../shared/Buttons";
+import { Field, Formik } from "formik";
+import * as Yup from "yup";
+import { signupStudent } from "../../redux/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const SignUpTitle = styled.div`
   font-weight: bold;
@@ -26,69 +28,61 @@ const NameContainer = styled.div`
   gap: 20px;
 `;
 
-const AccountBtn = styled(Button)`
+const AccountBtn = styled(ActionButton)`
   width: 200px;
   height: 38px;
-  background: ${colors.blue1};
-  font-weight: 700;
   margin-top: 15px;
 `;
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
   lastName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  email: Yup.string().email('Invalid email').required('Required'),
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
-    .required('No password provided.')
-    .min(8, 'Password is too short - should be 8 chars minimum.')
-    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+    .required("No password provided.")
+    .min(8, "Password is too short - should be 8 chars minimum.")
+    .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
 });
 
-const FormUserDetails = ({handleUser, handleStep}) => {
+const FormUserDetails = ({ handleUser, handleStep }) => {
   const dispatch = useDispatch();
   let history = useHistory();
   return (
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
-        <button
-          onClick={() => {
-            history.push('/login');
-          }}
-        >
-          Login
-        </button>
+        <Prompt link={"login"}></Prompt>
         <SignUpTitle>Sign up to Embark</SignUpTitle>
-        <div style={{marginBottom: '40px'}}>
+        <div style={{ marginBottom: "40px" }}>
           <GoogleButton
             onClick={() => {
-              console.log('Google button clicked');
+              console.log("Google button clicked");
             }}
           />
         </div>
         <OrSeperator />
         <Formik
           initialValues={{
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: '',
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            const name = values.firstName + ' ' + values.lastName;
-            const {email, password} = values;
+            const name = values.firstName + " " + values.lastName;
+            const { email, password } = values;
             const postUser = {
               name,
               email,
               password,
-              userType: 'student',
+              userType: "student",
             };
             dispatch(signupStudent(postUser));
             handleUser(values);
@@ -97,7 +91,7 @@ const FormUserDetails = ({handleUser, handleStep}) => {
           validateOnBlur={false}
           validateOnChange={false}
         >
-          {({errors}) => (
+          {({ errors }) => (
             <FormWrapper>
               <NameContainer>
                 <Field

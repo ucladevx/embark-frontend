@@ -52,12 +52,12 @@ export const signupStudent = (newUserData) => async (dispatch) => {
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem('FBIdToken');
   delete axios.defaults.headers.common['Authorization'];
-  dispatch({type: SET_UNAUTHENTICATED});
+  dispatch({ type: SET_UNAUTHENTICATED });
 };
 
 // Upload the Avatar
 export const uploadImage = (formData) => (dispatch) => {
-  dispatch({type: LOADING_USER});
+  dispatch({ type: LOADING_USER });
   axios
     .post('/user/image', formData)
     .then((res) => {
@@ -70,7 +70,7 @@ export const uploadImage = (formData) => (dispatch) => {
 export const editStudentDetails = (userDetails) => async (dispatch) => {
   try {
     const res = await axios.post('/student/profile', userDetails);
-    dispatch({type: 'SET_USER', payload: res.data.updatedStudent});
+    dispatch({ type: 'SET_USER', payload: res.data.updatedStudent });
   } catch (err) {
     console.error(err);
   }
@@ -81,7 +81,7 @@ export const markNotificationsRead = (notificationIds) => (dispatch) => {
   axios
     .post('/notifications', notificationIds)
     .then((res) => {
-      dispatch({type: MARK_NOTIFICATIONS_READ});
+      dispatch({ type: MARK_NOTIFICATIONS_READ });
     })
     .catch((err) => console.error(err));
 };
