@@ -11,10 +11,11 @@ export const LandingPage = styled.div`
 
 export const LandingPageWrapper = styled.div`
   margin: 0 auto;
-  display: flex;
-  width: 100vw;
+  display: grid;
+  grid-template-columns: minmax(250px, 280px) minmax(500px, 700px) auto;
+  width: 100%;
   min-height: 100vh;
-  padding: 10px 100px 0 100px;
+  padding: 10px 8vw 0 8vw;
   gap: 35px;
 `;
 
@@ -48,7 +49,7 @@ export const InfoEntryWrapper = styled.div`
   ${LinkEffect}
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   padding: 20px 10px;
 `;
 

@@ -12,6 +12,8 @@ export const colors = {
   blue1: "#E5EFFF",
   blue2: "#F3F6F9",
   blue3: "#8DC5D7",
+  blue4: "#5187ed",
+  blue5: "#2867B2",
   pink: "#FFC6FF",
   red: "#FFADAD",
   orange: "#FFD6A5",
@@ -37,7 +39,7 @@ export const colors = {
 export const header1 = css`
   font-family: Open Sans;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 24px;
   line-height: 33px;
 `;
