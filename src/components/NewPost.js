@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FileUpload from "./FileUpload.js"
 import FilePreviewer from 'react-file-previewer';
+import FileViewer from 'react-file-viewer';
 import {
   Dialog,
   DialogContent,
@@ -68,7 +69,7 @@ const NewPost = ({ open, handleClose }) => {
   const [industry, setIndustry] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
+  var form = null;
   // Redux
   const dispatch = useDispatch();
 
@@ -84,20 +85,34 @@ const NewPost = ({ open, handleClose }) => {
     setDescription(e.target.value);
   };
 
-  const handleFileInput = (e) => {
-    setSelectedFile(e.target.files[0]);
-    console.log(selectedFile);
-  };
-
   const handleSubmit = async () => {
     const post = {
-      title,
+      title: title,
       body: description,
       tags: [industry],
-      files: [selectedFile],
+      files: [form],
     };
     dispatch(newPost(post));
     handleClose();
+  };
+
+  //
+  const PDF1_URL =
+  'https://cors-anywhere.herokuapp.com/http://africau.edu/images/default/sample.pdf';
+  const [file, setFile] = useState({ url: PDF1_URL });
+    
+  const onFileChange = event => {
+      const fileReader = new window.FileReader();
+      const file = event.target.files[0];
+      form = event.target.files[0];
+      
+      fileReader.onload = fileLoad => {
+          const { result } = fileLoad.target;
+          setFile({ url: result });
+      };
+      
+      fileReader.readAsDataURL(file);
+      console.log(file);
   };
 
   return (
@@ -157,13 +172,25 @@ const NewPost = ({ open, handleClose }) => {
             onChange={handleDescription}
           />
         </TextFieldWrapper>
+        {
+          file.url !== PDF1_URL ? 
+          (
+            <>
+            <FilePreviewer 
+              file={file}
+              />
+            </>
+          )
+          : 
+          (
+            <></>
+          )
+        }
+        
       </DialogContent>
       <DialogActions>
-        
-        <FilePreviewer file={{
-            url: "https://cors-anywhere.herokuapp.com/http://africau.edu/images/default/sample.pdf"}}/>
         <FileUpload
-          handleFileInput = {handleFileInput}
+          handleFileInput = {onFileChange}
         />
         <PostBtn onClick={handleSubmit} color="primary">
           Post

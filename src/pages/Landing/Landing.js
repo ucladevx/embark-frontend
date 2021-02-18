@@ -69,6 +69,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getPosts, filterPosts,addFilter,removeFilter  } from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
 import Explore from "./Explore";
+import FilePreviewer from 'react-file-previewer';
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -268,6 +269,15 @@ const Landing = () => {
                         </PostHeader>
                         <PostTitle>{p.title}</PostTitle>
                         <PostContent>{p.body}</PostContent>
+                        {p.files.map((f) => (
+                            <FilePreviewer
+                              tag = {f}
+                              file = {{
+                                url: f
+                              }}
+                            />
+                          )
+                        )}
                       </PostWrapper>
                     );
                   })}

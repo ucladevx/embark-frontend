@@ -5,8 +5,6 @@ import {
   LIKE_POST,
   UNLIKE_POST,
   MARK_NOTIFICATIONS_READ,
-  ADD_FILTER,
-  REMOVE_FILTER
 } from "../types";
 
 const intialState = {
