@@ -15,11 +15,12 @@ import axios from "axios";
 // Get All Posts
 export const getPosts = () => async (dispatch) => {
   try {
-    const res = await axios.get("/posts", {
+    const res = await axios.get("/post/postsPage", {
       params: {
-        limit: 8,
+        limitNum: 8,
       },
     });
+    console.log(res.data);
     dispatch({ type: SET_POSTS, payload: res.data.posts });
     dispatch({ type: SET_NEXT_STRING, payload: res.data.paginatedPosts.next });
   } catch (err) {

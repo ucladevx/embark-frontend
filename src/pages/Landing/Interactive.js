@@ -1,6 +1,6 @@
 import React from "react";
 import { LineSeparator } from "../../shared/Separators";
-import Like from "../../images/like.svg";
+import Like from "../../images/heart-gray.svg";
 import Comment from "../../images/comment.svg";
 import Share from "../../images/share.svg";
 import styled from "styled-components";
