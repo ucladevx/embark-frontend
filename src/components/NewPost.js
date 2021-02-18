@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import FileUpload from "./FileUpload.js"
+import FilePreviewer from 'react-file-previewer';
 import {
   Dialog,
   DialogContent,
@@ -66,6 +68,7 @@ const NewPost = ({ open, handleClose }) => {
   const [industry, setIndustry] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
   // Redux
   const dispatch = useDispatch();
 
@@ -81,11 +84,17 @@ const NewPost = ({ open, handleClose }) => {
     setDescription(e.target.value);
   };
 
+  const handleFileInput = (e) => {
+    setSelectedFile(e.target.files[0]);
+    console.log(selectedFile);
+  };
+
   const handleSubmit = async () => {
     const post = {
       title,
       body: description,
       tags: [industry],
+      files: [selectedFile],
     };
     dispatch(newPost(post));
     handleClose();
@@ -150,6 +159,12 @@ const NewPost = ({ open, handleClose }) => {
         </TextFieldWrapper>
       </DialogContent>
       <DialogActions>
+        
+        <FilePreviewer file={{
+            url: "https://cors-anywhere.herokuapp.com/http://africau.edu/images/default/sample.pdf"}}/>
+        <FileUpload
+          handleFileInput = {handleFileInput}
+        />
         <PostBtn onClick={handleSubmit} color="primary">
           Post
         </PostBtn>
