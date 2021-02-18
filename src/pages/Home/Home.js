@@ -35,6 +35,7 @@ import bookImg from "../../images/book.svg";
 import compassImg from "../../images/compass.svg";
 // Utils
 import { colors } from "../../shared/config";
+import { styleCalendar } from "./calendar";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../redux/actions/dataActions";
@@ -60,6 +61,10 @@ const Home = () => {
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
+
+  useEffect(() => {
+    styleCalendar();
+  }, []);
 
   useEffect(() => {
     if (!window.localStorage.getItem("AuthToken")) history.push("/");
@@ -114,8 +119,7 @@ const Home = () => {
 
           <RightContainer>
             <CalanderWrapper>
-              <TitleTypography>My Events</TitleTypography>
-              <Calendar></Calendar>
+              <Calendar calendarType={"US"}></Calendar>
             </CalanderWrapper>
 
             <EventsWrapper>

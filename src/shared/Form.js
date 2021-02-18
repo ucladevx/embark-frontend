@@ -9,7 +9,7 @@ export const LeftFormContainer = styled.div`
 
 export const RightFormContainer = styled.div`
   width: 57%;
-  padding: 6.5rem 0 0 11rem;
+  padding: 13vh 0 0 12vw;
   position: relative;
 `;
 

@@ -1,4 +1,3 @@
-import { TextField } from "@material-ui/core";
 import styled from "styled-components";
 import TypeBox from "../../shared/TypeBox";
 import { OrSeperator } from "../../shared/Separators";
@@ -27,7 +26,7 @@ const SignUpTitle = styled.div`
 const NameContainer = styled.div`
   display: flex;
   gap: 20px;
-  width: 22em;
+  width: 380px;
 `;
 
 const FieldName = styled.p`
@@ -38,7 +37,7 @@ const FieldContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3px;
-  width: 22em;
+  width: 380px;
 `;
 
 const AuthBtnWrapper = styled.div`
