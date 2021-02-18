@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { colors, handleTagColor } from "../../shared/config";
-import { Avatar, Button, TextField, Typography } from "@material-ui/core";
-import { BoldTypography } from "../../shared/Typography";
-import LinkEffect from "../../shared/LinkEffect";
+import styled from 'styled-components';
+import {colors, handleTagColor} from '../../shared/config';
+import {Avatar, Button, TextField, Typography} from '@material-ui/core';
+import {BoldTypography} from '../../shared/Typography';
+import LinkEffect from '../../shared/LinkEffect';
 
 export const LandingPage = styled.div`
   background: ${colors.blue2};

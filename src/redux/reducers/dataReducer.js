@@ -8,13 +8,13 @@ import {
   SUBMIT_COMMENT,
   SET_NEXT_STRING,
   SET_HAS_NEXT,
-} from "../types";
+} from '../types';
 
 const initialState = {
   posts: [],
   post: {},
   filter: [],
-  nextString: "",
+  nextString: '',
   hasNext: true,
 };
 
@@ -42,7 +42,7 @@ export default function dataReducer(state = initialState, action) {
     case LIKE_POST:
     case UNLIKE_POST:
       index = state.posts.findIndex(
-        (post) => post.postId === action.payload.postId
+        (post) => post.postId === action.payload.postId,
       );
       state.posts[index] = action.payload;
       if (state.post.postId === action.payload.postId) {

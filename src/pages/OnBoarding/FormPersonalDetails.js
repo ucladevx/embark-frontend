@@ -1,20 +1,20 @@
-import { TextField, Button } from "@material-ui/core";
-import MenuItem from "@material-ui/core/MenuItem";
-import { useHistory } from "react-router-dom";
+import {TextField, Button} from '@material-ui/core';
+import MenuItem from '@material-ui/core/MenuItem';
+import {useHistory} from 'react-router-dom';
 
 import {
   LeftFormContainer,
   RightFormContainer,
   FormWrapper,
   FormContainer,
-} from "../../shared/Form";
+} from '../../shared/Form';
 
-import styled from "styled-components";
-import { colors } from "../../shared/config.js";
-import { Formik, Field } from "formik";
-import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { editStudentDetails } from "../../redux/actions/userActions";
+import styled from 'styled-components';
+import {colors} from '../../shared/config.js';
+import {Formik, Field} from 'formik';
+import * as Yup from 'yup';
+import {useDispatch} from 'react-redux';
+import {editStudentDetails} from '../../redux/actions/userActions';
 
 const HeyTitle = styled.div`
   font-weight: 700;
@@ -38,15 +38,15 @@ const DoneBtn = styled(Button)`
 `;
 
 const validateSchema = Yup.object({
-  major: Yup.string().required("Major is required").max(20),
+  major: Yup.string().required('Major is required').max(20),
   industry: Yup.string().required(),
   year: Yup.string().required(),
 });
 
-const FormPersonalDetails = ({ user }) => {
+const FormPersonalDetails = ({user}) => {
   const history = useHistory();
-  const years = ["2021", "2022", "2023", "2024"];
-  const industry = ["Developer", "Design", "Marketing", "Product Mangement"];
+  const years = ['2021', '2022', '2023', '2024'];
+  const industry = ['Developer', 'Design', 'Marketing', 'Product Mangement'];
   const dispatch = useDispatch();
 
   return (
@@ -62,16 +62,16 @@ const FormPersonalDetails = ({ user }) => {
         </HeySubtitile>
         <Formik
           initialValues={{
-            year: "",
-            major: "",
-            industry: "",
-            linkedIn: "",
+            year: '',
+            major: '',
+            industry: '',
+            linkedIn: '',
           }}
           validationSchema={validateSchema}
           validateOnBlur={false}
           validateOnChange={false}
           onSubmit={(values) => {
-            const { year, major, linkedIn, industry } = values;
+            const {year, major, linkedIn, industry} = values;
             const profile = {
               year,
               major,
@@ -79,10 +79,10 @@ const FormPersonalDetails = ({ user }) => {
               tags: [industry],
             };
             dispatch(editStudentDetails(profile));
-            history.push("/landing");
+            history.push('/landing');
           }}
         >
-          {({ errors }) => (
+          {({errors}) => (
             <FormWrapper>
               <Field
                 as={TextField}

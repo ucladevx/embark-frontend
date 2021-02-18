@@ -1,9 +1,5 @@
-import React from "react";
-import {
-  CommentWrapper,
-  CommentTextField,
-  CommentAvatar,
-} from "./StyleLanding";
+import React from 'react';
+import {CommentWrapper, CommentTextField, CommentAvatar} from './StyleLanding';
 
 const WriteComment = () => {
   return (

@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { colors } from "../shared/config";
-import { Form } from "formik";
+import styled from 'styled-components';
+import {colors} from '../shared/config';
+import {Form} from 'formik';
 
 export const LeftFormContainer = styled.div`
   background: ${colors.blue1};

@@ -1,6 +1,6 @@
-import React from "react";
-import ImageIcon from "@material-ui/icons/Image";
-import LinkIcon from "@material-ui/icons/Link";
+import React from 'react';
+import ImageIcon from '@material-ui/icons/Image';
+import LinkIcon from '@material-ui/icons/Link';
 import {
   QuestionBox,
   AskAvatar,
@@ -25,21 +25,21 @@ import {
   PostTime,
   PostUserName,
   PostTag,
-} from "./StyleLanding";
-import { CircularProgress } from "@material-ui/core";
-import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { colors } from "../../shared/config";
+} from './StyleLanding';
+import {CircularProgress} from '@material-ui/core';
+import styled from 'styled-components';
+import {useSelector, useDispatch} from 'react-redux';
+import {colors} from '../../shared/config';
 
 // Infinite Scroll
-import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 // Dayjs
-import dayjs from "dayjs";
-import { getNextPosts } from "../../redux/actions/dataActions";
-import Interactive from "./Interactive";
-import WriteComment from "./WriteComment";
-const relativeTime = require("dayjs/plugin/relativeTime");
+import dayjs from 'dayjs';
+import {getNextPosts} from '../../redux/actions/dataActions';
+import Interactive from './Interactive';
+import WriteComment from './WriteComment';
+const relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
 const Circle = styled(CircularProgress)`
@@ -49,15 +49,15 @@ const Circle = styled(CircularProgress)`
 
 const Loader = () => {
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{display: 'flex', justifyContent: 'center'}}>
       <Circle></Circle>
     </div>
   );
 };
 
-const Posts = ({ setNewPost }) => {
+const Posts = ({setNewPost}) => {
   const posts = useSelector((state) => state.data.posts);
-  const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
+  const tags = [{key: 'Product Management'}, {key: 'Computer Science'}];
   const dispatch = useDispatch();
   const hasNext = useSelector((state) => state.data.hasNext);
   const renderedTags = tags.map((each) => {
@@ -94,7 +94,7 @@ const Posts = ({ setNewPost }) => {
             <PostAvatar />
             <PostNameTime>
               <PostUserName>Christie Smith</PostUserName>
-              <PostTime>{dayjs("2020-12-01").fromNow()}</PostTime>
+              <PostTime>{dayjs('2020-12-01').fromNow()}</PostTime>
             </PostNameTime>
             <PostTagWrapper>{renderedTags}</PostTagWrapper>
           </PostHeader>

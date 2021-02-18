@@ -1,19 +1,19 @@
-import { Field, Formik } from "formik";
-import { loginUser } from "../../redux/actions/userActions";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import * as Yup from "yup";
-import { TextField, Button } from "@material-ui/core";
-import styled from "styled-components";
-import { colors } from "../../shared/config";
-import GoogleButton from "react-google-button";
-import { OrSeperator } from "../../shared/Separators";
+import {Field, Formik} from 'formik';
+import {loginUser} from '../../redux/actions/userActions';
+import {useDispatch} from 'react-redux';
+import {useHistory} from 'react-router-dom';
+import * as Yup from 'yup';
+import {TextField, Button} from '@material-ui/core';
+import styled from 'styled-components';
+import {colors} from '../../shared/config';
+import GoogleButton from 'react-google-button';
+import {OrSeperator} from '../../shared/Separators';
 import {
   LeftFormContainer,
   RightFormContainer,
   FormContainer,
   FormWrapper,
-} from "../../shared/Form";
+} from '../../shared/Form';
 
 const SignUpTitle = styled.div`
   font-weight: bold;
@@ -29,11 +29,11 @@ const AccountBtn = styled(Button)`
   margin-top: 15px;
 `;
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
+  email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()
-    .required("No password provided.")
-    .min(8, "Password is too short - should be 8 chars minimum.")
-    .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+    .required('No password provided.')
+    .min(8, 'Password is too short - should be 8 chars minimum.')
+    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
 });
 
 const Login = () => {
@@ -45,28 +45,28 @@ const Login = () => {
       <RightFormContainer>
         <button
           onClick={() => {
-            history.push("/");
+            history.push('/');
           }}
         >
           Signup
         </button>
         <SignUpTitle>Log in to Embark</SignUpTitle>
-        <div style={{ marginBottom: "40px" }}>
+        <div style={{marginBottom: '40px'}}>
           <GoogleButton
             onClick={() => {
-              console.log("Google button clicked");
+              console.log('Google button clicked');
             }}
           />
         </div>
         <OrSeperator />
         <Formik
           initialValues={{
-            email: "",
-            password: "",
+            email: '',
+            password: '',
           }}
           validationSchema={LoginSchema}
           onSubmit={(values) => {
-            const { email, password } = values;
+            const {email, password} = values;
             const oldUser = {
               email,
               password,
@@ -76,7 +76,7 @@ const Login = () => {
           validateOnBlur={false}
           validateOnChange={false}
         >
-          {({ errors }) => (
+          {({errors}) => (
             <FormWrapper>
               <Field
                 name="email"
