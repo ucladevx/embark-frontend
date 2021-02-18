@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import React from 'react';
-import { colors } from './config';
+import styled from "styled-components";
+import React from "react";
+import { colors } from "./config";
 
 const OrContainer = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ const OrContainer = styled.div`
 `;
 
 const Line = styled.div`
-  width: 200px;
+  width: 150px;
   height: 1px;
   margin-top: 10px;
   border: 0.1px solid ${colors.gray4};

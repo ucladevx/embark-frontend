@@ -4,27 +4,29 @@ import { Form } from "formik";
 
 export const LeftFormContainer = styled.div`
   background: ${colors.blue1};
-  width: 45%;
+  width: 43%;
 `;
 
 export const RightFormContainer = styled.div`
-  width: 55%;
-  padding: 110px 0 0 120px;
+  width: 57%;
+  padding: 6.5rem 0 0 11rem;
   position: relative;
 `;
 
 export const FormContainer = styled.div`
   font-family: Open Sans, helvetica, arial, verdana, sans-serif;
   display: flex;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
 `;
 
 export const FormWrapper = styled(Form)`
   display: flex;
   flex-direction: column;
-  width: 400px;
-  gap: 20px;
+  width: 60%;
+  gap: 15px;
+  margin-top: 2rem;
+  padding-left: 5px;
 `;
 
 const PromptContainer = styled.div`
