@@ -1,15 +1,17 @@
-import { TextField, Button } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import GoogleButton from "react-google-button";
 import styled from "styled-components";
 import { colors } from "../../shared/config";
-import OrSeperator from "./OrSeperator";
+import { OrSeperator } from "../../shared/Separators";
 import { useHistory } from "react-router-dom";
 import {
   LeftFormContainer,
   RightFormContainer,
   FormContainer,
   FormWrapper,
+  Prompt,
 } from "../../shared/Form";
+import { ActionButton } from "../../shared/Buttons";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
 import { signupStudent } from "../../redux/actions/userActions";
@@ -26,11 +28,9 @@ const NameContainer = styled.div`
   gap: 20px;
 `;
 
-const AccountBtn = styled(Button)`
+const AccountBtn = styled(ActionButton)`
   width: 200px;
   height: 38px;
-  background: ${colors.blue1};
-  font-weight: 700;
   margin-top: 15px;
 `;
 
@@ -57,9 +57,7 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
-      <button onClick = {()=>{
-        history.push('/login')
-      }}>Login</button>
+        <Prompt link={"login"}></Prompt>
         <SignUpTitle>Sign up to Embark</SignUpTitle>
         <div style={{ marginBottom: "40px" }}>
           <GoogleButton

@@ -7,12 +7,13 @@ import { TextField, Button } from "@material-ui/core";
 import styled from "styled-components";
 import { colors } from "../../shared/config";
 import GoogleButton from "react-google-button";
-import OrSeperator from "../OnBoarding/OrSeperator";
+import { OrSeperator } from "../../shared/Separators";
 import {
   LeftFormContainer,
   RightFormContainer,
   FormContainer,
   FormWrapper,
+  Prompt,
 } from "../../shared/Form";
 
 const SignUpTitle = styled.div`
@@ -43,13 +44,7 @@ const Login = () => {
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
-        <button
-          onClick={() => {
-            history.push("/");
-          }}
-        >
-          Signup
-        </button>
+        <Prompt link={"signup"}></Prompt>
         <SignUpTitle>Log in to Embark</SignUpTitle>
         <div style={{ marginBottom: "40px" }}>
           <GoogleButton

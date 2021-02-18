@@ -13,10 +13,10 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./utils/theme";
 
 // Pages
-import Login from "./pages/Login/Login.js"
+import Login from "./pages/Login/Login.js";
 import OnBoarding from "./pages/OnBoarding";
 
-import Landing from "./pages/Landing/Landing";
+import Home from "./pages/Home";
 import Profile from "./pages/Profile/Profile";
 
 axios.defaults.baseURL = "http://localhost:9000/";
@@ -38,8 +38,8 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/" component={OnBoarding}></Route>
-              <Route exact path='/login' component = {Login}></Route>
-              <Route exact path="/landing" component={Landing}></Route>
+              <Route exact path="/login" component={Login}></Route>
+              <Route exact path="/landing" component={Home}></Route>
               <Route exact path="/user/:userid" component={Profile}></Route>
             </Switch>
           </Router>

@@ -32,7 +32,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMWI3YWUzM
 Content-Type: application/json
 
 ### 
-GET http://localhost:9000/isha/pagination
+GET http://localhost:9000/posts/postsPage
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzOTA3NzQ4MzJmMjEzYjNmYyIsIm5hbWUiOiJqb2huIHNtYWxsYmVyZzEiLCJlbWFpbCI6ImpvaG4xQGVtYWlsLmNvbSIsImlhdCI6MTYxMjIwNDA4NiwiZXhwIjoxNjIwODQ0MDg2fQ.kT3fUNe433ue1SG89ngnRjk5CErTMBZsH4X3xAeG_Pk
 Content-Type: application/json
 ############ Users ################################################

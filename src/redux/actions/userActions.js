@@ -3,22 +3,22 @@ import {
   SET_UNAUTHENTICATED,
   LOADING_USER,
   MARK_NOTIFICATIONS_READ,
-} from "../types";
-import axios from "axios";
+} from '../types';
+import axios from 'axios';
 
 const setAuthorizationHeader = (token) => {
   const AuthToken = `Bearer ${token}`;
-  localStorage.setItem("AuthToken", AuthToken);
-  axios.defaults.headers.common["Authorization"] = AuthToken;
+  localStorage.setItem('AuthToken', AuthToken);
+  axios.defaults.headers.common['Authorization'] = AuthToken;
 };
 
 // Login A User
 export const loginUser = (userData, history) => async (dispatch) => {
   try {
-    const res = await axios.post("/auth/signin", userData);
+    const res = await axios.post('/auth/signin', userData);
     setAuthorizationHeader(res.data.token);
     dispatch(getStudentData());
-    history.push("/landing");
+    history.push('/landing');
   } catch (err) {
     console.error(err);
   }
@@ -27,7 +27,7 @@ export const loginUser = (userData, history) => async (dispatch) => {
 // Get all users data
 export const getStudentData = () => async (dispatch) => {
   try {
-    const res = await axios.get("/student/profile");
+    const res = await axios.get('/student/profile');
     dispatch({
       type: SET_USER,
       payload: res.data.student,
@@ -40,7 +40,7 @@ export const getStudentData = () => async (dispatch) => {
 // Sign Up a user
 export const signupStudent = (newUserData) => async (dispatch) => {
   try {
-    const res = await axios.post("/auth/signup", newUserData);
+    const res = await axios.post('/auth/signup', newUserData);
     setAuthorizationHeader(res.data.token);
     dispatch(getStudentData());
   } catch (err) {
@@ -50,8 +50,8 @@ export const signupStudent = (newUserData) => async (dispatch) => {
 
 // Log out a user
 export const logoutUser = () => (dispatch) => {
-  localStorage.removeItem("FBIdToken");
-  delete axios.defaults.headers.common["Authorization"];
+  localStorage.removeItem('FBIdToken');
+  delete axios.defaults.headers.common['Authorization'];
   dispatch({ type: SET_UNAUTHENTICATED });
 };
 
@@ -59,7 +59,7 @@ export const logoutUser = () => (dispatch) => {
 export const uploadImage = (formData) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .post("/user/image", formData)
+    .post('/user/image', formData)
     .then((res) => {
       dispatch(getStudentData());
     })
@@ -69,8 +69,8 @@ export const uploadImage = (formData) => (dispatch) => {
 // Edit a specific user's setting
 export const editStudentDetails = (userDetails) => async (dispatch) => {
   try {
-    const res = await axios.post("/student/profile", userDetails);
-    dispatch({ type: "SET_USER", payload: res.data.updatedStudent });
+    const res = await axios.post('/student/profile', userDetails);
+    dispatch({ type: 'SET_USER', payload: res.data.updatedStudent });
   } catch (err) {
     console.error(err);
   }
@@ -79,7 +79,7 @@ export const editStudentDetails = (userDetails) => async (dispatch) => {
 // Mark notification read on user's end
 export const markNotificationsRead = (notificationIds) => (dispatch) => {
   axios
-    .post("/notifications", notificationIds)
+    .post('/notifications', notificationIds)
     .then((res) => {
       dispatch({ type: MARK_NOTIFICATIONS_READ });
     })

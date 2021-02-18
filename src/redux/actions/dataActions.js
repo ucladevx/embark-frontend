@@ -8,19 +8,20 @@ import {
   SUBMIT_COMMENT,
   SET_NEXT_STRING,
   SET_HAS_NEXT,
-} from "../types";
+} from '../types';
 
-import axios from "axios";
+import axios from 'axios';
 
 // Get All Posts
 export const getPosts = () => async (dispatch) => {
   try {
-    const res = await axios.get("/posts", {
+    const res = await axios.get('/post/postsPage', {
       params: {
-        limit: 8,
+        limitNum: 8,
       },
     });
-    dispatch({ type: SET_POSTS, payload: res.data.paginatedPosts.results });
+    console.log(res.data);
+    dispatch({ type: SET_POSTS, payload: res.data.posts });
     dispatch({ type: SET_NEXT_STRING, payload: res.data.paginatedPosts.next });
   } catch (err) {
     console.error(err);
@@ -30,7 +31,7 @@ export const getPosts = () => async (dispatch) => {
 export const getNextPosts = () => async (dispatch, getState) => {
   try {
     const { nextString } = getState().data;
-    const res = await axios.get("/posts", {
+    const res = await axios.get('/posts', {
       params: {
         limit: 8,
         nextPage: nextString,
@@ -50,7 +51,7 @@ export const getNextPosts = () => async (dispatch, getState) => {
 // Create A New Post
 export const newPost = (newP) => async (dispatch) => {
   try {
-    const res = await axios.post("/posts", newP);
+    const res = await axios.post('/posts', newP);
     dispatch({ type: NEW_POST, payload: res.data });
   } catch (err) {
     console.error(err);

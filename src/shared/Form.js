@@ -10,6 +10,7 @@ export const LeftFormContainer = styled.div`
 export const RightFormContainer = styled.div`
   width: 55%;
   padding: 110px 0 0 120px;
+  position: relative;
 `;
 
 export const FormContainer = styled.div`
@@ -25,3 +26,22 @@ export const FormWrapper = styled(Form)`
   width: 400px;
   gap: 20px;
 `;
+
+const PromptContainer = styled.div`
+  font-size: 14px;
+  position: absolute;
+  top: 5vh;
+  right: 4vw;
+`;
+
+export const Prompt = ({ link }) => {
+  return link === "login" ? (
+    <PromptContainer>
+      Already a member? <a href="/login">Sign in</a>
+    </PromptContainer>
+  ) : (
+    <PromptContainer>
+      New to Embark? <a href="/">Sign up</a>
+    </PromptContainer>
+  );
+};

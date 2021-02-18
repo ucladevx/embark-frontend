@@ -1,6 +1,7 @@
-import { TextField, Button } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useHistory } from "react-router-dom";
+import { ActionButton } from "../../shared/Buttons";
 
 import {
   LeftFormContainer,
@@ -29,12 +30,9 @@ const HeySubtitile = styled.div`
   line-height: 16px;
 `;
 
-const DoneBtn = styled(Button)`
+const DoneBtn = styled(ActionButton)`
   width: 120px;
   height: 40px;
-  background: ${colors.blue1};
-  font-weight: 700;
-  font-size: 16px;
 `;
 
 const validateSchema = Yup.object({

@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { colors } from "../../shared/config";
-import { Avatar } from "@material-ui/core";
+import styled from 'styled-components';
+import { colors } from '../../shared/config';
+import { Avatar } from '@material-ui/core';
 
 export const NameDescriptionWrapper = styled.div`
   display: flex;
