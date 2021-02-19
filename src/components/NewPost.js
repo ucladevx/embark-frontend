@@ -105,6 +105,7 @@ const NewPost = ({ open, handleClose }) => {
       const fileReader = new window.FileReader();
       const file = event.target.files[0];
       form = event.target.files[0];
+      console.log(form);
       
       fileReader.onload = fileLoad => {
           const { result } = fileLoad.target;

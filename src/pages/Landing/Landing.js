@@ -14,6 +14,7 @@ import {
   FilterTitle,
   FilterObj,
   FilterWrapper,
+  FilesWrapper,
   QuestionBox,
   PostAvatar,
   PostContent,
@@ -70,6 +71,7 @@ import { getPosts, filterPosts,addFilter,removeFilter  } from "../../redux/actio
 import NewPost from "../../components/NewPost";
 import Explore from "./Explore";
 import FilePreviewer from 'react-file-previewer';
+import FileViewer from 'react-file-viewer';
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -96,6 +98,9 @@ const Landing = () => {
         </div>
     );
   });
+
+  const testfiles = ["https://cors-anywhere.herokuapp.com/http://africau.edu/images/default/sample.pdf",
+"https://cors-anywhere.herokuapp.com/https://homepages.cae.wisc.edu/~ece533/images/airplane.png"];
 
   useEffect(() => {
     dispatch(getPosts());
@@ -193,6 +198,16 @@ const Landing = () => {
                       of going into Product! Do any of you have any
                       resources/tips on where to get started? Thanks :)
                     </PostContent>
+                    {testfiles.map((f) => (
+                          <FilesWrapper>
+                            <FileViewer
+                              tag = {f}
+                              fileType = {f.substring(f.lastIndexOf(".") + 1)}
+                              filePath = {f}
+                            />
+                            </FilesWrapper>
+                          )
+                            )}
                   </PostWrapper>
 
                   <ViewPreviousCommentWrapper>
@@ -270,14 +285,15 @@ const Landing = () => {
                         <PostTitle>{p.title}</PostTitle>
                         <PostContent>{p.body}</PostContent>
                         {p.files.map((f) => (
-                            <FilePreviewer
+                            <FilesWrapper>
+                            <FileViewer
                               tag = {f}
-                              file = {{
-                                url: f
-                              }}
+                              fileType = {f.substring(f.lastIndexOf(".") + 1)}
+                              filePath = {f}
                             />
+                            </FilesWrapper>
                           )
-                        )}
+                            )}
                       </PostWrapper>
                     );
                   })}

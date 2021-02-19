@@ -97,6 +97,11 @@ export const FilterTitle = styled(BoldTypography)`
   font-size: 18px;
 `;
 
+export const FilesWrapper = styled.div`
+  overflow: scroll;
+  height: 100px;
+`;
+
 export const AddFilter = styled(Typography)`
   text-transform: none;
   align-self: flex-end;
