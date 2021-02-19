@@ -99,7 +99,7 @@ export const FilterTitle = styled(BoldTypography)`
 
 export const FilesWrapper = styled.div`
   overflow: scroll;
-  height: 100px;
+  max-height: 200px;
 `;
 
 export const AddFilter = styled(Typography)`

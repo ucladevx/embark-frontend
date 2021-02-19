@@ -65,6 +65,11 @@ const PostBtn = styled(Button)`
   background-color: ${colors.gray2};
 `;
 
+export const FilesWrapper = styled.div`
+  overflow: scroll;
+  max-height: 500px;
+`;
+
 const NewPost = ({ open, handleClose }) => {
   const [industry, setIndustry] = useState("");
   const [title, setTitle] = useState("");
@@ -100,23 +105,20 @@ const NewPost = ({ open, handleClose }) => {
   const PDF1_URL =
   'https://cors-anywhere.herokuapp.com/http://africau.edu/images/default/sample.pdf';
   const [file, setFile] = useState({ url: PDF1_URL });
+  const [fileType, setFileType] = useState("pdf");
     
   const onFileChange = event => {
       const fileReader = new window.FileReader();
       const file = event.target.files[0];
-      form = event.target.files[0];
-      console.log(form);
+      setFileType(file.name.substring(file.type.lastIndexOf("/") + 1));    
       let myForm = document.getElementById('myForm');
       form = new FormData(myForm);
-      console.log("break");
-      console.log(form);
       fileReader.onload = fileLoad => {
           const { result } = fileLoad.target;
           setFile({ url: result });
       };
       
       fileReader.readAsDataURL(file);
-      console.log(file);
   };
 
   return (
@@ -180,9 +182,12 @@ const NewPost = ({ open, handleClose }) => {
           file.url !== PDF1_URL ? 
           (
             <>
-            <FilePreviewer 
-              file={file}
+            <FilesWrapper>
+              <FilePreviewer
+                file = {file}
+
               />
+            </FilesWrapper> 
             </>
           )
           : 
