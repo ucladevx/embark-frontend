@@ -106,7 +106,10 @@ const NewPost = ({ open, handleClose }) => {
       const file = event.target.files[0];
       form = event.target.files[0];
       console.log(form);
-      
+      let myForm = document.getElementById('myForm');
+      form = new FormData(myForm);
+      console.log("break");
+      console.log(form);
       fileReader.onload = fileLoad => {
           const { result } = fileLoad.target;
           setFile({ url: result });
