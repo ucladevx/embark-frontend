@@ -14,6 +14,7 @@ import {
   FilterTitle,
   FilterObj,
   FilterWrapper,
+  InteriorFilterWrapper,
   QuestionBox,
   PostAvatar,
   PostContent,
@@ -56,6 +57,7 @@ import {
   PostUserName,
   EventTypography,
   GoingBtn,
+  DialogTextField,
 } from "./StyleLanding";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 // Images
@@ -109,6 +111,11 @@ const Landing = () => {
     dispatch(filterPosts());
   };
 
+  const [tagToAdd, setTagToAdd] = useState("");
+  const handleChange= (e) => {
+    setTagToAdd(e.target.value)
+  }
+
 
   return (
     <>
@@ -137,13 +144,24 @@ const Landing = () => {
             {page === "main" && (
               <FilterWrapper>
                 <FilterTitle>Filters:</FilterTitle>
-                {filters.map((t) => (
-                     <FilterObj tag={t} key={t} onClick ={()=>removeUpdateFilters(t)}>
-                        {t}
-                    </FilterObj>
-                ))}
+                <InteriorFilterWrapper>
+                  {filters.map((t) => (
+                      <FilterObj tag={t} key={t} onClick ={()=>removeUpdateFilters(t)}>
+                          {t}
+                      </FilterObj>
+                  ))}
+                </InteriorFilterWrapper>
                 <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
-                <AddFilter onClick ={()=>addUpdateFilter("law")}>+ Add Filter</AddFilter>
+                <DialogTextField
+                    id="tag"
+                    placeholder="Enter tag..."
+                    type="text"
+                    InputProps={{
+                      disableUnderline: true,
+                    }}
+                    onChange={handleChange}
+                  />
+                <AddFilter onClick ={()=>addUpdateFilter(tagToAdd)}>+ Add Filter</AddFilter>
               </FilterWrapper>
             )}
           </LeftContainer>
