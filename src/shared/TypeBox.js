@@ -6,8 +6,9 @@ export default styled.input`
   padding-left: 10px;
   color: #9e9ea6;
   height: 38px;
-  border: 0;
+  border: ${(props) => (props.error ? "1px solid #FFADAD" : 0)};
   &:focus {
-    outline: none;
+    border: 1px solid #5473bb;
+    box-sizing: border-box;
   }
 `;
