@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import FormUserDetails from './FormUserDetails.js';
-import FormPersonalDetails from './FormPersonalDetails.js';
-
+import React, { useState } from "react";
+import FormUserDetails from "./FormUserDetails.js";
+import FormPersonalDetails from "./FormPersonalDetails.js";
 const OnBoarding = () => {
   const [user, setUser] = useState({});
   const [step, setStep] = useState(0);
