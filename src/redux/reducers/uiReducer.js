@@ -3,7 +3,7 @@ import {
   CLEAR_ERRORS,
   LOADING_UI,
   STOP_LOADING_UI,
-} from "../types";
+} from '../types';
 
 const initialState = {
   loading: false,

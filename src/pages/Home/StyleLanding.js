@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { colors, handleTagColor } from "../../shared/config";
+import { colors } from "../../shared/config";
 import { Avatar, Button, TextField, Typography } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
+import { handleTagColor } from "../../utils/handleTagColors";
 import LinkEffect from "../../shared/LinkEffect";
 
 export const LandingPage = styled.div`
@@ -10,10 +11,11 @@ export const LandingPage = styled.div`
 
 export const LandingPageWrapper = styled.div`
   margin: 0 auto;
-  display: flex;
-  width: 100vw;
+  display: grid;
+  grid-template-columns: minmax(250px, 280px) minmax(500px, 700px) auto;
+  width: 100%;
   min-height: 100vh;
-  padding: 10px 100px 0 100px;
+  padding: 10px 8vw 0 8vw;
   gap: 35px;
 `;
 
@@ -47,7 +49,7 @@ export const InfoEntryWrapper = styled.div`
   ${LinkEffect}
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   padding: 20px 10px;
 `;
 
@@ -83,8 +85,7 @@ export const FilterWrapper = styled.div`
 
 export const FilterObj = styled(Typography)`
   height: 26px;
-  background-color: ${(props) => 
-    handleTagColor(props.tag)};
+  background-color: ${(props) => handleTagColor(props.tag)};
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -219,8 +220,7 @@ export const PostTagWrapper = styled.div`
 `;
 
 export const PostTag = styled(Button)`
-  background-color: ${(props) => 
-    handleTagColor(props.tag)};
+  background-color: ${(props) => handleTagColor(props.tag)};
   text-transform: none;
   width: fit-content;
   height: 18px;
@@ -228,8 +228,7 @@ export const PostTag = styled(Button)`
   border-radius: 5px;
   padding: 10px;
   &:hover {
-    background-color: ${(props) => 
-      handleTagColor(props.tag)};
+    background-color: ${(props) => handleTagColor(props.tag)};
     opacity: 0.8;
   }
 `;
@@ -265,7 +264,7 @@ export const CommentWrapper = styled.div`
   display: flex;
   width: 100%;
   gap: 20px;
-  padding: 25px;
+  padding: 25px 0;
   background: ${colors.white};
 `;
 

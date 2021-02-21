@@ -15,9 +15,9 @@ const setAuthorizationHeader = (token) => {
 // Login A User
 export const loginUser = (userData, history) => async (dispatch) => {
   try {
-    //const res = await axios.post("/auth/signin", userData);
-    //setAuthorizationHeader(res.data.token);
-    //dispatch(getStudentData());
+    const res = await axios.post("/auth/signin", userData);
+    setAuthorizationHeader(res.data.token);
+    dispatch(getStudentData());
     history.push("/landing");
   } catch (err) {
     console.error(err);

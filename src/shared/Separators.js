@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { colors } from "../../shared/config";
+import { colors } from "./config";
 
 const OrContainer = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ const OrContainer = styled.div`
 `;
 
 const Line = styled.div`
-  width: 200px;
+  width: 150px;
   height: 1px;
   margin-top: 10px;
   border: 0.1px solid ${colors.gray4};
@@ -16,7 +16,11 @@ const Line = styled.div`
   margin-left: ${(props) => (props.ml ? `${props.ml}px` : 0)};
 `;
 
-const OrSeperator = () => {
+const LongLine = styled(Line)`
+  width: 506px;
+`;
+
+export const OrSeperator = () => {
   return (
     <OrContainer>
       <Line mr={30}></Line>
@@ -26,4 +30,6 @@ const OrSeperator = () => {
   );
 };
 
-export default OrSeperator;
+export const LineSeparator = () => {
+  return <LongLine></LongLine>;
+};

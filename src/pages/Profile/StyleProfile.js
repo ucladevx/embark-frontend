@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../shared/config";
-import { Avatar, Button, TextField, Typography} from "@material-ui/core";
+import { Avatar, Button, Typography } from "@material-ui/core";
 import LinkEffect from "../../shared/LinkEffect";
 
 export const LandingPageWrapper = styled.div`
@@ -27,7 +27,6 @@ export const QuestionBox = styled.div`
 export const MiddleContainer = styled.div`
   flex: 2 1 auto;
 `;
-
 
 export const NameDescriptionWrapper = styled.div`
   display: flex;
@@ -77,8 +76,8 @@ export const EditProfileButton = styled(Button)`
   right: 1vw;
   bottom: 70px;
   text-transform: none;
-  color: #FFFFFF;
-  background: #5473BB;
+  color: #ffffff;
+  background: #5473bb;
   border-radius: 5px;
 `;
 
@@ -99,27 +98,27 @@ export const CoverImage = styled.img`
 `;
 
 export const ExploreObj = styled(Typography)`
-    height: 26px;
-    background-color: ${(props) => props.bgcolor};
-    color: ${(props) => props.textColor ? props.textColor : colors.black};
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    padding: 0 8px;
-    font-size: 14px;
-    margin: 5px;
+  height: 26px;
+  background-color: ${(props) => props.bgcolor};
+  color: ${(props) => (props.textColor ? props.textColor : colors.black)};
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0 8px;
+  font-size: 14px;
+  margin: 5px;
 `;
 
 export const ExploreFilter = styled.div`
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 `;
 export const ExploreFilterTitle = styled(Typography)`
-    text-transform: none;
-    align-self: flex-end;
-    color: ${colors.gray3};
-    text-decoration: none;
-    margin-bottom: 7px;
-    margin-right: 2px;
+  text-transform: none;
+  align-self: flex-end;
+  color: ${colors.gray3};
+  text-decoration: none;
+  margin-bottom: 7px;
+  margin-right: 2px;
 `;

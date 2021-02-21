@@ -35,6 +35,7 @@ import bookImg from "../../images/book.svg";
 import compassImg from "../../images/compass.svg";
 // Utils
 import { colors } from "../../shared/config";
+import { styleCalendar } from "./calendar";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../redux/actions/dataActions";
@@ -48,7 +49,7 @@ import { useHistory } from "react-router-dom";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
-const Landing = () => {
+const Home = () => {
   // Redux
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -61,9 +62,13 @@ const Landing = () => {
     dispatch(getPosts());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (!window.localStorage.getItem("AuthToken")) history.push("/");
-  // }, [history]);
+  useEffect(() => {
+    styleCalendar();
+  }, []);
+
+  useEffect(() => {
+    if (!window.localStorage.getItem("AuthToken")) history.push("/");
+  }, [history]);
 
   return (
     <>
@@ -114,8 +119,7 @@ const Landing = () => {
 
           <RightContainer>
             <CalanderWrapper>
-              <TitleTypography>My Events</TitleTypography>
-              <Calendar></Calendar>
+              <Calendar calendarType={"US"}></Calendar>
             </CalanderWrapper>
 
             <EventsWrapper>
@@ -157,4 +161,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default Home;
