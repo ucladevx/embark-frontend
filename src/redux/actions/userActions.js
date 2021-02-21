@@ -3,6 +3,8 @@ import {
   SET_UNAUTHENTICATED,
   LOADING_USER,
   MARK_NOTIFICATIONS_READ,
+  AUTH_SIGNUP,
+  AUTH_SIGNIN,
 } from "../types";
 import axios from "axios";
 
@@ -84,4 +86,28 @@ export const markNotificationsRead = (notificationIds) => (dispatch) => {
       dispatch({ type: MARK_NOTIFICATIONS_READ });
     })
     .catch((err) => console.error(err));
+};
+
+export const studentGoogleSignUp = () => async (dispatch) => {
+  try {
+    const res = await axios.post("/auth/google", {
+      type: "signup",
+      user: "student",
+    });
+    dispatch({ type: AUTH_SIGNUP, payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const studentGoogleSignIn = () => async (dispatch) => {
+  try {
+    const res = await axios.post("/auth/google", {
+      type: "signin",
+      user: "student",
+    });
+    dispatch({ type: AUTH_SIGNIN, payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
 };

@@ -7,7 +7,7 @@ const OrContainer = styled.div`
   color: ${colors.gray5};
 `;
 
-const Line = styled.div`
+export const Line = styled.div`
   width: 150px;
   height: 1px;
   margin-top: 10px;
