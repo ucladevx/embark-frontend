@@ -16,7 +16,7 @@ to format all your code
 
 Hint: You could also set up git hooks to automate this process.
 
-## Source File Structure
+## Overview w/ comments
 ```javascript
 import "./App.css";
 // Redux
