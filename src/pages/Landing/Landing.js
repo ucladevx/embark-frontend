@@ -98,9 +98,7 @@ const Landing = () => {
     );
   });
 
-  const testfiles = ["https://cors-anywhere.herokuapp.com/http://africau.edu/images/default/sample.pdf",
-"https://cors-anywhere.herokuapp.com/https://homepages.cae.wisc.edu/~ece533/images/airplane.png"];
-
+  const testfiles = ["https://cors-anywhere.herokuapp.com/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx"];
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);

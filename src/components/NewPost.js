@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FileUpload from "./FileUpload.js"
+import ImageUpload from "./ImageUpload.js"
 import FileViewer from 'react-file-viewer';
 import {
   Dialog,
@@ -68,6 +69,7 @@ const PostBtn = styled(Button)`
 export const FilesWrapper = styled.div`
   overflow: scroll;
   max-height: 500px;
+  min-height: 50px;
 `;
 
 const NewPost = ({ open, handleClose }) => {
@@ -75,6 +77,7 @@ const NewPost = ({ open, handleClose }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   var form = null;
+  var imgForm = null;
   // Redux
   const dispatch = useDispatch();
 
@@ -95,13 +98,13 @@ const NewPost = ({ open, handleClose }) => {
       title: title,
       body: description,
       tags: [industry],
-      files: [form],
+      files: [form,imgForm],
     };
     dispatch(newPost(post));
     handleClose();
   };
 
-  //
+  //File handling
   const PDF1_URL =
   'https://cors-anywhere.herokuapp.com/http://africau.edu/images/default/sample.pdf';
   const [file, setFile] = useState({ url: PDF1_URL });
@@ -122,6 +125,22 @@ const NewPost = ({ open, handleClose }) => {
       
       fileReader.readAsDataURL(file);
   };
+
+  //Image handling
+  const [image, setImage] = useState({ url: PDF1_URL });
+  const onImageChange = event => {
+    const imgReader = new window.FileReader();
+      const img = event.target.files[0];
+      console.log(img);
+      let myForm = document.getElementById('myImgForm');
+      imgForm = new FormData(myForm);
+      imgReader.onload = fileLoad => {
+          const { result } = fileLoad.target;
+          setImage({ url: result });
+      };
+      
+      imgReader.readAsDataURL(img);
+};
 
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -197,11 +216,28 @@ const NewPost = ({ open, handleClose }) => {
             <></>
           )
         }
+        {
+          image.url !== PDF1_URL ? 
+          (
+            <>
+            <FilesWrapper>
+              <img src = {image.url} height="500px"/>
+            </FilesWrapper> 
+            </>
+          )
+          : 
+          (
+            <></>
+          )
+        }
         
       </DialogContent>
       <DialogActions>
         <FileUpload
           handleFileInput = {onFileChange}
+        />
+        <ImageUpload
+          handleImageInput = {onImageChange}
         />
         <PostBtn onClick={handleSubmit} color="primary">
           Post

@@ -1,8 +1,8 @@
 import React from "react";
-import LinkIcon from "@material-ui/icons/Link";
+import ImageIcon from "@material-ui/icons/Image";
 import styled from "styled-components";
 
-const FileUpload = ({handleFileInput}) => {
+const ImageUpload = ({handleImageInput}) => {
   const InputWrapper = styled.div`
     display: none;
   `;
@@ -13,17 +13,17 @@ const FileUpload = ({handleFileInput}) => {
 
     return (
       <div className="App">
-        <form id = "myForm">
-               <label htmlFor="my_file">
-                 <LinkIcon
+        <form id = "myImgForm">
+               <label htmlFor="my_image">
+                 <ImageIcon
                     onClick = {activate}
                  />
                  <InputWrapper>
                     <input
                       type="file"
-                      id="my_file"
-                      onChange={e => handleFileInput(e)}
-                      accept=".pdf,.docx,.svg,.xls"
+                      id="my_image"
+                      onChange={e => handleImageInput(e)}
+                      accept=".png,.jpeg,.gif,.bmp"
                     />
                   </InputWrapper>
               </label>
@@ -33,4 +33,4 @@ const FileUpload = ({handleFileInput}) => {
     );
 };
 
-export default FileUpload;
+export default ImageUpload;
