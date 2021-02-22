@@ -75,12 +75,19 @@ export const FilterWrapper = styled.div`
   box-sizing: border-box;
   margin-top: 20px;
   padding: 20px;
-  height: 225px;
+  max-height: 500px;
+  overflow: auto;
   background: ${colors.white};
   display: flex;
   gap: 20px;
   flex-direction: column;
   border-radius: 5px;
+`;
+
+export const InteriorFilterWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 export const FilterObj = styled(Typography)`
@@ -91,6 +98,8 @@ export const FilterObj = styled(Typography)`
   align-items: center;
   width: fit-content;
   padding: 0 8px;
+  margin-top: 5px;
+  margin-right: 5px;
   font-size: 14px;
 `;
 
@@ -154,6 +163,12 @@ export const MakePostWrapper = styled.div`
 
 export const CalanderWrapper = styled.div`
   width: 290px;
+`;
+
+export const DialogTextField = styled(TextField)`
+  background: ${colors.gray1};
+  padding: 5px 5px;
+  border-radius: 5px;
 `;
 
 export const EventsWrapper = styled.div`

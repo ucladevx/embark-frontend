@@ -6,15 +6,18 @@ import {
   NEW_POST,
   SET_POST,
   SUBMIT_COMMENT,
-  SET_NEXT_STRING,
+  ADD_FILTER,
+  REMOVE_FILTER,
+  FILTER_POSTS,
   SET_HAS_NEXT,
-} from '../types';
+  SET_NEXT_STRING,
+} from "../types";
 
 const initialState = {
   posts: [],
   post: {},
   filter: [],
-  nextString: '',
+  nextString: "",
   hasNext: true,
 };
 
@@ -42,7 +45,7 @@ export default function dataReducer(state = initialState, action) {
     case LIKE_POST:
     case UNLIKE_POST:
       index = state.posts.findIndex(
-        (post) => post.postId === action.payload.postId,
+        (post) => post.postId === action.payload.postId
       );
       state.posts[index] = action.payload;
       if (state.post.postId === action.payload.postId) {
@@ -75,7 +78,36 @@ export default function dataReducer(state = initialState, action) {
           comments: [action.payload, ...state.post.comments],
         },
       };
-
+    case ADD_FILTER:
+      return {
+        ...state,
+        filter: [...state.filter, action.payload],
+      };
+    case REMOVE_FILTER:
+      return {
+        ...state,
+        filter: state.filter.filter(
+          (eachfilter) => eachfilter !== action.payload
+        ),
+      };
+    case FILTER_POSTS:
+      var postsCopy = state.posts;
+      postsCopy = postsCopy.sort(function (post1, post2) {
+        for (var i = 0; i < state.filter.length; i++) {
+          if (post1.tags.includes(state.filter[i])) {
+            if (!post2.tags.includes(state.filter[i])) {
+              return -1;
+            }
+          } else if (post2.tags.includes(state.filter[i])) {
+            return 1;
+          }
+        }
+        return 0;
+      });
+      return {
+        ...state,
+        posts: postsCopy,
+      };
     default:
       return state;
   }
