@@ -13,17 +13,15 @@ const setAuthorizationHeader = (token) => {
 };
 
 // Login A User
-export const loginUser = (userData, history) => (dispatch) => {
-  axios
-    .post("/login", userData)
-    .then((res) => {
-      setAuthorizationHeader(res.data.token);
-      dispatch(getStudentData());
-      history.push("/");
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+export const loginUser = (userData, history) => async (dispatch) => {
+  try {
+    const res = await axios.post("/auth/signin", userData);
+    setAuthorizationHeader(res.data.token);
+    dispatch(getStudentData());
+    history.push("/landing");
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 // Get all users data

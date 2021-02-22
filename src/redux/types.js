@@ -16,7 +16,8 @@ export const DELETE_POST = "DELETE_POST";
 export const NEW_POST = "NEW_POST";
 export const SUBMIT_COMMENT = "SUBMIT_COMMENT";
 export const FILTER_POSTS = "FILTER_POSTS";
-
+export const SET_NEXT_STRING = "SET_NEXT_STRING";
+export const SET_HAS_NEXT = "SET_HAS_NEXT";
 
 // Ui reducer types
 export const SET_ERRORS = "SET_ERRORS";

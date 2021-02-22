@@ -9,6 +9,8 @@ import {
   FILTER_POSTS,
   ADD_FILTER,
   REMOVE_FILTER,
+  SET_NEXT_STRING,
+  SET_HAS_NEXT,
 } from "../types";
 
 import axios from "axios";
@@ -16,8 +18,34 @@ import axios from "axios";
 // Get All Posts
 export const getPosts = () => async (dispatch) => {
   try {
-    const res = await axios.get("/posts");
-    dispatch({ type: SET_POSTS, payload: res.data.paginatedPosts.results });
+    const res = await axios.get("/post/postsPage", {
+      params: {
+        limitNum: 8,
+      },
+    });
+    console.log(res.data);
+    dispatch({ type: SET_POSTS, payload: res.data.posts });
+    dispatch({ type: SET_NEXT_STRING, payload: res.data.paginatedPosts.next });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getNextPosts = () => async (dispatch, getState) => {
+  try {
+    const { nextString } = getState().data;
+    const res = await axios.get("/posts", {
+      params: {
+        limit: 8,
+        nextPage: nextString,
+      },
+    });
+    const { posts } = getState().data;
+    const { results, next, hasNext } = res.data.paginatedPosts;
+    const newPosts = [...posts, ...results];
+    dispatch({ type: SET_POSTS, payload: newPosts });
+    dispatch({ type: SET_NEXT_STRING, payload: next });
+    dispatch({ type: SET_HAS_NEXT, payload: hasNext });
   } catch (err) {
     console.error(err);
   }
@@ -26,8 +54,8 @@ export const getPosts = () => async (dispatch) => {
 // Create A New Post
 export const newPost = (newP) => async (dispatch) => {
   try {
-    await axios.post("/posts", newP);
-    dispatch({ type: SET_POST, payload: newP });
+    const res = await axios.post("/posts", newP);
+    dispatch({ type: NEW_POST, payload: res.data });
   } catch (err) {
     console.error(err);
   }
@@ -101,14 +129,14 @@ export const filterPosts = (filters) => (dispatch) => {
   dispatch({
     type: FILTER_POSTS,
     payload: filters,
-  })
-}
+  });
+};
 
 // Add a filter on the landing page
 export const addFilter = (filterToAdd) => (dispatch) => {
   dispatch({
     type: ADD_FILTER,
-    payload: filterToAdd
+    payload: filterToAdd,
   });
 };
 

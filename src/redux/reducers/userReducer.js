@@ -6,7 +6,7 @@ import {
   UNLIKE_POST,
   MARK_NOTIFICATIONS_READ,
   ADD_FILTER,
-  REMOVE_FILTER
+  REMOVE_FILTER,
 } from "../types";
 
 const intialState = {
@@ -55,7 +55,7 @@ export default function userReducer(state = intialState, action) {
       return {
         ...state,
       };
-    
+
     default:
       return state;
   }
