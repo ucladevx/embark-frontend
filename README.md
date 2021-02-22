@@ -78,6 +78,9 @@ export default App;
 - user/userid: a route for each user. This would include the flows for user view club, user view user, club view user, and club view club
 - profile: profile page for student/club to view their own profile
 
+## Redux
+- The WriteReduxDoc() action is ready to be dispatched except that no action is innitialized and no dispatch function is imported. It is the "nicest" event to be scheduled on the event queue (Quote modified from OSTEP: when redux is too nice, it just doesn't get as much attention, alas).
+
 ## Best Practices in this repo
 In src:
 - we use pages folder to organize all the pages. For each page, we create its own folder with its components storing in the same folder.
