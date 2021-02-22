@@ -12,8 +12,9 @@ export const LandingPage = styled.div`
 export const LandingPageWrapper = styled.div`
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(250px, 280px) minmax(500px, 700px) auto;
+  grid-template-columns: 250px 500px auto;
   width: 100%;
+  justify-content: center;
   min-height: 100vh;
   padding: 10px 8vw 0 8vw;
   gap: 35px;

@@ -18,6 +18,7 @@ export const FormContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100vh;
+  padding-left: 5px;
 `;
 
 export const FormWrapper = styled(Form)`
@@ -26,7 +27,6 @@ export const FormWrapper = styled(Form)`
   width: 60%;
   gap: 15px;
   margin-top: 2rem;
-  padding-left: 5px;
 `;
 
 const PromptContainer = styled.div`

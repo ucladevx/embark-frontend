@@ -14,9 +14,7 @@ import * as Yup from "yup";
 import { signupStudent } from "../../redux/actions/userActions";
 import { useDispatch } from "react-redux";
 import { header1, header4 } from "../../shared/config";
-import { GoogleBtn, LinkedInBtn } from "./AuthButtons";
-import GoogleIcon from "../../images/google.svg";
-import LinkedInIcon from "../../images/linkedin.svg";
+import AuthButtons from "../../shared/AuthButtons";
 
 const SignUpTitle = styled.div`
   ${header1};
@@ -38,13 +36,6 @@ const FieldContainer = styled.div`
   flex-direction: column;
   gap: 3px;
   width: 380px;
-`;
-
-const AuthBtnWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 13px;
-  margin-bottom: 30px;
 `;
 
 const AccountBtn = styled(ActionButton)`
@@ -77,15 +68,7 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
       <RightFormContainer>
         <Prompt link={"login"}></Prompt>
         <SignUpTitle>Sign up to Embark</SignUpTitle>
-        <AuthBtnWrapper>
-          <GoogleBtn>
-            <img src={GoogleIcon} alt="google"></img>
-            <span style={{ marginLeft: "5px" }}>Sign up with Google</span>
-          </GoogleBtn>
-          <LinkedInBtn>
-            <img src={LinkedInIcon} alt="linkedin"></img>Sign up with Linkedin
-          </LinkedInBtn>
-        </AuthBtnWrapper>
+        <AuthButtons />
         <OrSeperator />
         <Formik
           initialValues={{

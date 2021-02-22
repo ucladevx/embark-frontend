@@ -15,6 +15,8 @@ import {
   FormWrapper,
   Prompt,
 } from "../../shared/Form";
+import TypeBox from "../../shared/TypeBox";
+import AuthButtons from "../../shared/AuthButtons";
 
 const SignUpTitle = styled.div`
   font-weight: bold;
@@ -46,13 +48,7 @@ const Login = () => {
       <RightFormContainer>
         <Prompt link={"signup"}></Prompt>
         <SignUpTitle>Log in to Embark</SignUpTitle>
-        <div style={{ marginBottom: "40px" }}>
-          <GoogleButton
-            onClick={() => {
-              console.log("Google button clicked");
-            }}
-          />
-        </div>
+        <AuthButtons />
         <OrSeperator />
         <Formik
           initialValues={{
@@ -76,7 +72,7 @@ const Login = () => {
               <Field
                 name="email"
                 placeholder="Email"
-                as={TextField}
+                as={TypeBox}
                 margin="normal"
                 helperText={errors.email}
                 error={!!errors.email}
@@ -84,7 +80,7 @@ const Login = () => {
               <Field
                 name="password"
                 placeholder="Password"
-                as={TextField}
+                as={TypeBox}
                 margin="normal"
                 helperText={errors.password}
                 error={!!errors.password}

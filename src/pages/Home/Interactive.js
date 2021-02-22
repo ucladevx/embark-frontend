@@ -1,17 +1,17 @@
-import React from 'react';
-import { LineSeparator } from '../../shared/Separators';
-import Like from '../../images/heart-gray.svg';
-import Comment from '../../images/comment.svg';
-import Share from '../../images/share.svg';
-import styled from 'styled-components';
-import { colors } from '../../shared/config';
-import LinkEffect from '../../shared/LinkEffect';
+import React from "react";
+import { Line } from "../../shared/Separators";
+import Like from "../../images/heart-gray.svg";
+import Comment from "../../images/comment.svg";
+import Share from "../../images/share.svg";
+import styled from "styled-components";
+import { colors } from "../../shared/config";
+import LinkEffect from "../../shared/LinkEffect";
 
 const InteractiveContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 50px;
-  padding: 0;
+  width: 100%;
   margin-top: 3px;
 `;
 
@@ -25,6 +25,7 @@ const IconWrapper = styled.div`
   gap: 20px;
   margin: auto 0;
   padding-top: 10px;
+  padding-left: 10px;
 `;
 
 const IconText = styled.span`
@@ -41,7 +42,7 @@ const IconEntry = styled.div`
   }
 `;
 
-const InteractiveLine = styled(LineSeparator)`
+const InteractiveLine = styled(Line)`
   width: 100%;
 `;
 
@@ -63,7 +64,7 @@ const Interactive = () => {
           <IconText>Share</IconText>
         </IconEntry>
       </IconWrapper>
-      <LineSeparator></LineSeparator>
+      <InteractiveLine></InteractiveLine>
     </InteractiveContainer>
   );
 };
