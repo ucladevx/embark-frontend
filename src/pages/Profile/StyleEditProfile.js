@@ -17,31 +17,67 @@ import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import styled from "styled-components";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import LinkEffect from "../../shared/LinkEffect";
+
 
 export const EditProfileContainer = styled(Dialog)`
-  box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  margin: 30px;
-
+  margin: 1.5em auto;
+  height: fit-content;
+  width: fit-content;
+  ${'' /* height: 1032px; */}
+ 
+  ${'' /* box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  position: absolute;
+  width: 575px; 
+  left: 433px;
+  top: 72px; */}
 `;
 
 export const TitleContainer = styled(DialogTitle)`
-  border-bottom: 1px solid ${colors.gray2}
+  border-bottom: 1px solid ${colors.gray4};
+  height: 7vh;
+
 `;
 export const EditProfileTitle = styled(BoldTypography)`
-  font-size: 24px
-  font-weight: normal;
+  font-size: 1em;
+  font-weight: 700;
+  margin: auto;
 `;
 
 export const EditProfileAvatar = styled(Avatar)`
-  variant:"rounded";
+  width: 7vw;
+  height: 7vw;
+  border: 1px solid ${colors.grey3};
+  margin: 0 auto;
+  position: relative;
+  ${'' /* variant:"rounded";
+  border: 1px solid ${colors.grey3};
+  position: relative;
+  margin:auto;
   width: 8vw;
   height: 8vw;
-  border: 1px solid ${colors.grey3};
-  ${'' /* outline: solid 2px grey;
-  outline-offset: -2px; */}
-  margin: auto;
-  position: relative;
+  left: 662px;
+  top: 168px; */}
+`;
+
+export const ChangeAvatarLink = styled(Typography)`
+  ${LinkEffect}
+  background: none;
+  margin: 10px 0 0 10px;
+  font-size: 0.7em;
+  color: ${colors.blue4};
+`;
+
+export const EditCoverImage = styled.img`
+  max-height: 10vh;
+  ${'' /* width: 20em;
+  height: 10vh;
+  left: 542px;
+  top: 374px;
+  margin: 10px 0 0 10px; */}
+
 `;
 export const EditProfileContent = styled(DialogContent)`
   margin: 5px 30px ;
@@ -79,8 +115,9 @@ export const DialogTextField = styled(TextField)`
 export const TextFieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin: auto auto;
   gap: 10px;
-  min-width: 450px;
+  min-width: 4em;
   margin-top: 20px;
   position: relative;
 `;

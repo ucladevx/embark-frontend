@@ -61,9 +61,9 @@ const Landing = () => {
     dispatch(getPosts());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (!window.localStorage.getItem("AuthToken")) history.push("/");
-  // }, [history]);
+  useEffect(() => {
+    if (!window.localStorage.getItem("AuthToken")) history.push("/");
+  }, [history]);
 
   return (
     <>

@@ -19,9 +19,8 @@ import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import{
-  ChangeAvatarLink,
-  CoverImage,
   HeaderImage,
+  CoverImage,
   ExploreObj,
   ExploreFilter,
   
@@ -29,8 +28,10 @@ import{
 import {
   EditProfileContainer,
   EditProfileAvatar,
+  ChangeAvatarLink,
   TitleContainer,
   EditProfileTitle,
+  EditCoverImage,
   EditProfileContent,
   EditProfileDone,
   NewPostInfo,
@@ -82,13 +83,13 @@ const EditProfile = ({ open, handleClose }) => {
       </TitleContainer>
 
       <EditProfileContent>
-      <TextFieldWrapper>
+
           <EditProfileAvatar rounded></EditProfileAvatar>
-      </TextFieldWrapper>
+
 
       <ChangeAvatarLink fontColor="red" align="center">Change Profile Picture</ChangeAvatarLink>
       <TextFieldWrapper>
-      <CoverImage src={lawn}></CoverImage>        
+        <EditCoverImage src={lawn}></EditCoverImage>        
       </TextFieldWrapper>
 
       <ChangeAvatarLink align="center">Change Cover Photo</ChangeAvatarLink>
@@ -127,7 +128,6 @@ const EditProfile = ({ open, handleClose }) => {
 
         <NewPostInfo>
           <NewPostUser>
-            <BoldTypography sz={"16px"}>{user.name}</BoldTypography>
             <FormControlC>
               <InputLabel>Select all that apply</InputLabel>
               <Select value={industry} onChange={handleIndustry}>
@@ -148,7 +148,7 @@ const EditProfile = ({ open, handleClose }) => {
           
 
         <TextFieldWrapper>
-        <BoldTypography  sz={"18px"}>LinkedIn Profile: (Optional):</BoldTypography>
+        <BoldTypography  sz={"18px"}>LinkedIn Profile (Optional):</BoldTypography>
           <DialogTextField
             autoFocus
             margin="dense"

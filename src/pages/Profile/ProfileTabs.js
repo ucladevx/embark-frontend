@@ -64,7 +64,8 @@ const ProfileTabs = () => {
         <Tabs 
         value={value} 
         onChange={handleChange} 
-        centered>
+        // centered
+        >
           <Tab label="My Posts" {...a11yProps(0)} />
           <Tab label="Followed Clubs" {...a11yProps(1)} />
           <Tab label="Saved Posts" {...a11yProps(2)} />
