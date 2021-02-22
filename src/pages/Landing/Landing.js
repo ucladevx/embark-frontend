@@ -70,7 +70,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getPosts, filterPosts,addFilter,removeFilter  } from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
 import Explore from "./Explore";
-import FilePreviewer from 'react-file-previewer';
 import FileViewer from 'react-file-viewer';
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");

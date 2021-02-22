@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import FileUpload from "./FileUpload.js"
-import FilePreviewer from 'react-file-previewer';
 import FileViewer from 'react-file-viewer';
 import {
   Dialog,
@@ -17,6 +16,7 @@ import {
   FormControl,
   Divider,
 } from "@material-ui/core";
+
 import { BoldTypography } from "../shared/Typography";
 import { colors } from "../shared/config";
 import { useDispatch } from "react-redux";
@@ -110,7 +110,9 @@ const NewPost = ({ open, handleClose }) => {
   const onFileChange = event => {
       const fileReader = new window.FileReader();
       const file = event.target.files[0];
-      setFileType(file.name.substring(file.type.lastIndexOf("/") + 1));    
+      console.log(file);
+      setFileType(file.name.substring(file.name.lastIndexOf(".") + 1)); 
+      console.log(fileType);   
       let myForm = document.getElementById('myForm');
       form = new FormData(myForm);
       fileReader.onload = fileLoad => {
@@ -183,9 +185,9 @@ const NewPost = ({ open, handleClose }) => {
           (
             <>
             <FilesWrapper>
-              <FilePreviewer
-                file = {file}
-
+              <FileViewer
+                filePath = {file}
+                fileType = {fileType}
               />
             </FilesWrapper> 
             </>
