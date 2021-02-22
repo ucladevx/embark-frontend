@@ -79,7 +79,7 @@ export default App;
 - profile: profile page for student/club to view their own profile
 
 ## Redux
-- The WriteReduxDoc() action is ready to be dispatched except that no action is innitialized and no dispatch function is imported. It is the "nicest" event to be scheduled on the event queue (Quote modified from OSTEP: when redux is too nice, it just doesn't get as much attention, alas).
+- The WriteReduxDoc() action is ready to be dispatched except that no action is innitialized and no dispatch function is imported. It is the "nicest" event to be scheduled on the event queue (Quote modified from OSTEP: when your're too nice, you just don't get as much attention, alas).
 
 ## Best Practices in this repo
 In src:
