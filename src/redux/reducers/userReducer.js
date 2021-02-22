@@ -16,6 +16,7 @@ const intialState = {
   likedPosts: [],
   clubs: [],
   industry: "",
+  userType: "student",
 };
 
 export default function userReducer(state = intialState, action) {

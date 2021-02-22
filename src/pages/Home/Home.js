@@ -27,6 +27,8 @@ import {
   MiddleContainer,
   EventTypography,
   GoingBtn,
+  InteriorFilterWrapper,
+  DialogTextField,
 } from "./StyleLanding";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 // Images
@@ -36,12 +38,17 @@ import compassImg from "../../images/compass.svg";
 // Utils
 import { colors } from "../../shared/config";
 import { styleCalendar } from "./calendar";
-
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
+
 import Explore from "./Explore";
 import Posts from "./Posts";
+import {
+  removeFilter,
+  addFilter,
+  filterPosts,
+} from "../../redux/actions/dataActions";
 
 // Dayjs
 import dayjs from "dayjs";
@@ -52,6 +59,7 @@ dayjs.extend(relativeTime);
 const Home = () => {
   // Redux
   const user = useSelector((state) => state.user);
+  const filters = useSelector((state) => state.data.filter);
   const dispatch = useDispatch();
   // States
   const [page, setPage] = useState("main");
@@ -69,6 +77,21 @@ const Home = () => {
   useEffect(() => {
     if (!window.localStorage.getItem("AuthToken")) history.push("/");
   }, [history]);
+
+  const removeUpdateFilters = (t) => {
+    dispatch(removeFilter(t));
+    dispatch(filterPosts());
+  };
+
+  const addUpdateFilter = (t) => {
+    dispatch(addFilter(t));
+    dispatch(filterPosts());
+  };
+
+  const [tagToAdd, setTagToAdd] = useState("");
+  const handleChange = (e) => {
+    setTagToAdd(e.target.value);
+  };
 
   return (
     <>
@@ -97,12 +120,30 @@ const Home = () => {
             {page === "main" && (
               <FilterWrapper>
                 <FilterTitle>Filters:</FilterTitle>
-                <FilterObj tag="Product Management">
-                  Product Management
-                </FilterObj>
-                <FilterObj tag="Product Design">Product Design</FilterObj>
+                <InteriorFilterWrapper>
+                  {filters.map((t) => (
+                    <FilterObj
+                      tag={t}
+                      key={t}
+                      onClick={() => removeUpdateFilters(t)}
+                    >
+                      {t}
+                    </FilterObj>
+                  ))}
+                </InteriorFilterWrapper>
                 <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
-                <AddFilter>+ Add Filter</AddFilter>
+                <DialogTextField
+                  id="tag"
+                  placeholder="Enter tag..."
+                  type="text"
+                  InputProps={{
+                    disableUnderline: true,
+                  }}
+                  onChange={handleChange}
+                />
+                <AddFilter onClick={() => addUpdateFilter(tagToAdd)}>
+                  + Add Filter
+                </AddFilter>
               </FilterWrapper>
             )}
           </LeftContainer>

@@ -5,6 +5,7 @@ import {
   MARK_NOTIFICATIONS_READ,
   AUTH_SIGNUP,
   AUTH_SIGNIN,
+  SET_ERRORS,
 } from "../types";
 import axios from "axios";
 
@@ -40,13 +41,19 @@ export const getStudentData = () => async (dispatch) => {
 };
 
 // Sign Up a user
-export const signupStudent = (newUserData) => async (dispatch) => {
+export const signupStudent = (newUserData, handleUser, handleStep) => async (
+  dispatch
+) => {
   try {
     const res = await axios.post("/auth/signup", newUserData);
     setAuthorizationHeader(res.data.token);
     dispatch(getStudentData());
+    console.log("run");
+    handleUser(newUserData);
+    handleStep(1);
   } catch (err) {
-    console.error(err.data);
+    console.log(err);
+    dispatch({ type: SET_ERRORS, payload: err.response.data });
   }
 };
 
@@ -111,4 +118,3 @@ export const studentGoogleSignIn = () => async (dispatch) => {
     console.error(err);
   }
 };
-

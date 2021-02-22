@@ -3,7 +3,7 @@ import FormUserDetails from "./FormUserDetails.js";
 import FormPersonalDetails from "./FormPersonalDetails.js";
 const OnBoarding = () => {
   const [user, setUser] = useState({});
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
 
   switch (step) {
     case 0:
