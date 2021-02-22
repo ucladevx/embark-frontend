@@ -6,16 +6,19 @@ import {
   NEW_POST,
   SET_POST,
   SUBMIT_COMMENT,
+  FILTER_POSTS,
+  ADD_FILTER,
+  REMOVE_FILTER,
   SET_NEXT_STRING,
   SET_HAS_NEXT,
-} from '../types';
+} from "../types";
 
-import axios from 'axios';
+import axios from "axios";
 
 // Get All Posts
 export const getPosts = () => async (dispatch) => {
   try {
-    const res = await axios.get('/post/postsPage', {
+    const res = await axios.get("/post/postsPage", {
       params: {
         limitNum: 8,
       },
@@ -31,7 +34,7 @@ export const getPosts = () => async (dispatch) => {
 export const getNextPosts = () => async (dispatch, getState) => {
   try {
     const { nextString } = getState().data;
-    const res = await axios.get('/posts', {
+    const res = await axios.get("/posts", {
       params: {
         limit: 8,
         nextPage: nextString,
@@ -51,7 +54,7 @@ export const getNextPosts = () => async (dispatch, getState) => {
 // Create A New Post
 export const newPost = (newP) => async (dispatch) => {
   try {
-    const res = await axios.post('/posts', newP);
+    const res = await axios.post("/posts", newP);
     dispatch({ type: NEW_POST, payload: res.data });
   } catch (err) {
     console.error(err);
@@ -119,4 +122,27 @@ export const getUserPage = (userHandle) => async (dispatch) => {
   } catch (err) {
     dispatch({ type: SET_POSTS, payload: null });
   }
+};
+
+//Sort(filter) posts by relevance to filters
+export const filterPosts = (filters) => (dispatch) => {
+  dispatch({
+    type: FILTER_POSTS,
+    payload: filters,
+  });
+};
+
+// Add a filter on the landing page
+export const addFilter = (filterToAdd) => (dispatch) => {
+  dispatch({
+    type: ADD_FILTER,
+    payload: filterToAdd,
+  });
+};
+
+// Remove a filter on the landing page
+export const removeFilter = () => (dispatch) => {
+  dispatch({
+    type: REMOVE_FILTER,
+  });
 };

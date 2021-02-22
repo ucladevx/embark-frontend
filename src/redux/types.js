@@ -6,6 +6,9 @@ export const LOADING_USER = "LOADING_USER";
 export const MARK_NOTIFICATIONS_READ = "MARK_NOTIFICATIONS_READ";
 export const AUTH_SIGNUP = "GOOGLE_SIGNUP";
 export const AUTH_SIGNIN = "GOOGLE_SIGNIN";
+export const ADD_FILTER = "ADD_FILTER";
+export const REMOVE_FILTER = "REMOVE_FILTER";
+
 
 // Data reducer types
 export const SET_POSTS = "SET_POSTS";
@@ -15,6 +18,7 @@ export const UNLIKE_POST = "UNLIKE_POST";
 export const DELETE_POST = "DELETE_POST";
 export const NEW_POST = "NEW_POST";
 export const SUBMIT_COMMENT = "SUBMIT_COMMENT";
+export const FILTER_POSTS = "FILTER_POSTS";
 export const SET_NEXT_STRING = "SET_NEXT_STRING";
 export const SET_HAS_NEXT = "SET_HAS_NEXT";
 
