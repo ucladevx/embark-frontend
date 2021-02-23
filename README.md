@@ -110,7 +110,7 @@ In src:
 - VScode's postman. Really easy to use, and you could save the scripts for the api backend calls.
 
 ### 6. Makefile & Prettier
-- We use a prettier script to format the codebase before pushing. This script could be run on the root folder using commands `make` or `make format`.
+- We use a prettier script to format the codebase before pushing. This script could be run at the root folder using commands `make` or `make format`.
 
 ## Future thoughts
 - We'll probably change the folder structure a little bit since there definitely are redundancies and unclear purpose folders using this structures. But rn is still the early stage.
