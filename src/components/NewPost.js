@@ -94,13 +94,47 @@ const NewPost = ({ open, handleClose }) => {
   };
 
   const handleSubmit = async () => {
-    const post = {
-      title: title,
-      body: description,
-      tags: [industry],
-      files: [form,imgForm],
-    };
+    var post = null;
+    if(form===null){
+      if(imgForm===null){
+        post = {
+          title: title,
+          body: description,
+          tags: [industry],
+        };
+      }else{
+        post = {
+          title: title,
+          body: description,
+          tags: [industry],
+          files: [imgForm],
+        };
+      }
+    } else{
+      if(imgForm===null){
+        post = {
+          title: title,
+          body: description,
+          tags: [industry],
+          files: [form],
+        };
+      }else{
+        post = {
+          title: title,
+          body: description,
+          tags: [industry],
+          files: [form,imgForm],
+        };
+      }
+    }
+
     dispatch(newPost(post));
+    //Clean up component contents
+    form = null;
+    imgForm = null;
+    setFile({ url: PDF1_URL });
+    setFileType("pdf");
+    setImage({ url: PDF1_URL });
     handleClose();
   };
 
@@ -221,7 +255,7 @@ const NewPost = ({ open, handleClose }) => {
           (
             <>
             <FilesWrapper>
-              <img src = {image.url} height="500px"/>
+              <img src = {image.url} height="500px" alt = ""/>
             </FilesWrapper> 
             </>
           )
