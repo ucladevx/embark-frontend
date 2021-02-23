@@ -7,16 +7,11 @@ const ImageUpload = ({handleImageInput}) => {
     display: none;
   `;
 
-  const activate = () =>{
-
-  }
-
     return (
       <div className="App">
         <form id = "myImgForm">
                <label htmlFor="my_image">
                  <ImageIcon
-                    onClick = {activate}
                  />
                  <InputWrapper>
                     <input

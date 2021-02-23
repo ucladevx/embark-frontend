@@ -7,16 +7,11 @@ const FileUpload = ({handleFileInput}) => {
     display: none;
   `;
 
-  const activate = () =>{
-
-  }
-
     return (
       <div className="App">
         <form id = "myForm">
                <label htmlFor="my_file">
                  <LinkIcon
-                    onClick = {activate}
                  />
                  <InputWrapper>
                     <input

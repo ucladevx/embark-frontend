@@ -95,6 +95,7 @@ const NewPost = ({ open, handleClose }) => {
 
   const handleSubmit = async () => {
     var post = null;
+    //making sure not to send null objects in the post request
     if(form===null){
       if(imgForm===null){
         post = {
