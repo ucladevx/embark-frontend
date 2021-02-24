@@ -17,7 +17,6 @@ import { signupStudent } from "../../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { header1, header4 } from "../../shared/config";
 import AuthButtons from "../../shared/AuthButtons";
-import { useHistory } from "react-router-dom";
 import { CLEAR_ERRORS } from "../../redux/types";
 
 const SignUpTitle = styled.div`
@@ -60,7 +59,6 @@ const SignupSchema = Yup.object().shape({
 const FormUserDetails = ({ handleUser, handleStep }) => {
   const backend_errors = useSelector((state) => state.ui.errors);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   return (
     <FormContainer>
@@ -94,7 +92,17 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
         >
           {(props) => {
             const { errors, setErrors } = props;
-            console.log(props);
+            const hasError =
+              !!backend_errors ||
+              !!errors.password ||
+              !!errors.email ||
+              !!errors.firstName ||
+              !!errors.lastName;
+            const handleFocus = () => {
+              setErrors({});
+              dispatch({ type: CLEAR_ERRORS });
+            };
+
             return (
               <FormWrapper>
                 <NameContainer>
@@ -105,17 +113,8 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                       as={TypeBox}
                       margin="normal"
                       helperText={errors.firstName}
-                      error={
-                        !!backend_errors ||
-                        !!errors.password ||
-                        !!errors.email ||
-                        !!errors.firstName ||
-                        !!errors.lastName
-                      }
-                      onFocus={() => {
-                        setErrors({});
-                        dispatch({ type: CLEAR_ERRORS });
-                      }}
+                      error={hasError}
+                      onFocus={handleFocus}
                     ></Field>
                   </FieldContainer>
                   <FieldContainer>
@@ -124,17 +123,8 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                       name="lastName"
                       as={TypeBox}
                       margin="normal"
-                      error={
-                        !!backend_errors ||
-                        !!errors.password ||
-                        !!errors.email ||
-                        !!errors.firstName ||
-                        !!errors.lastName
-                      }
-                      onFocus={() => {
-                        setErrors({});
-                        dispatch({ type: CLEAR_ERRORS });
-                      }}
+                      error={hasError}
+                      onFocus={handleFocus}
                     ></Field>
                   </FieldContainer>
                 </NameContainer>
@@ -144,17 +134,8 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                     name="email"
                     as={TypeBox}
                     margin="normal"
-                    error={
-                      !!backend_errors ||
-                      !!errors.password ||
-                      !!errors.email ||
-                      !!errors.firstName ||
-                      !!errors.lastName
-                    }
-                    onFocus={() => {
-                      setErrors({});
-                      dispatch({ type: CLEAR_ERRORS });
-                    }}
+                    error={hasError}
+                    onFocus={handleFocus}
                   ></Field>
                 </FieldContainer>
                 <FieldContainer>
@@ -163,31 +144,14 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                     name="password"
                     as={TypeBox}
                     margin="normal"
-                    error={
-                      !!backend_errors ||
-                      !!errors.password ||
-                      !!errors.email ||
-                      !!errors.firstName ||
-                      !!errors.lastName
-                    }
+                    error={hasError}
                     type="password"
                     placeholder="8+ characters"
-                    onFocus={() => {
-                      setErrors({});
-                      dispatch({ type: CLEAR_ERRORS });
-                    }}
+                    onFocus={handleFocus}
                   ></Field>
                 </FieldContainer>
-                <ErrorPrompt
-                  error={
-                    !!backend_errors ||
-                    !!errors.password ||
-                    !!errors.email ||
-                    !!errors.firstName ||
-                    !!errors.lastName
-                  }
-                >
-                  Invliad name, email, or password
+                <ErrorPrompt error={hasError}>
+                  Invalid name, email, or password
                 </ErrorPrompt>
                 <AccountBtn type="submit">Create Account</AccountBtn>
               </FormWrapper>

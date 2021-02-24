@@ -41,7 +41,7 @@ const LoginSchema = Yup.object().shape({
 const Login = () => {
   const back_end_errors = useSelector((state) => state.ui.errors);
   const dispatch = useDispatch();
-  let history = useHistory();
+  const history = useHistory();
   return (
     <FormContainer>
       <LeftFormContainer />
@@ -99,7 +99,7 @@ const Login = () => {
               <ErrorPrompt
                 error={!!back_end_errors || !!errors.password || !!errors.email}
               >
-                Invliad email or password
+                Invalid email or password
               </ErrorPrompt>
               <AccountBtn type="submit">Log in</AccountBtn>
             </FormWrapper>

@@ -41,7 +41,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzJlMDlhO
 Content-Type: application/json
 
 ### 
-GET http://localhost:9000/posts?limitNum=8
+GET http://localhost:9000/posts?limit=2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzJlMDlhOGFlYmQ0MjI2ODkxMmZmYiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya2VtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTYxMzk1MDg4NiwiZXhwIjoxNjIyNTkwODg2fQ.-TZJmcfn1tro8kvAO_ThSAmhyDzhwuSicZlPk-i7Drc
 Content-Type: application/json
 

@@ -101,7 +101,7 @@ const Home = () => {
         <LandingPageWrapper>
           <LeftContainer>
             <InfoBoxes>
-              <InfoEntryWrapper onClick={() => setPage("main")}>
+              <InfoEntryWrapper onClick={() => history.push("/profile")}>
                 <InfoImage src={avatarImg} alt="user"></InfoImage>
                 <InfoEntryText>{user.name}</InfoEntryText>
               </InfoEntryWrapper>

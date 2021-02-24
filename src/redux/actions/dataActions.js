@@ -18,11 +18,23 @@ import axios from "axios";
 // Get All Posts
 export const getPosts = () => async (dispatch) => {
   try {
+    const nextString = localStorage.getItem("nextString");
+    let params;
+    if (nextString !== "undefined") {
+      params = {
+        limit: 6,
+        nextPage: nextString,
+      };
+    } else {
+      params = {
+        limit: 6,
+      };
+    }
     const res = await axios.get("/posts", {
-      params: {
-        limitNum: 8,
-      },
+      params,
     });
+
+    localStorage.setItem("nextString", res.data.paginatedPosts.next.toString());
     dispatch({ type: SET_POSTS, payload: res.data.paginatedPosts.results });
     dispatch({ type: SET_NEXT_STRING, payload: res.data.paginatedPosts.next });
   } catch (err) {
@@ -35,13 +47,15 @@ export const getNextPosts = () => async (dispatch, getState) => {
     const { nextString } = getState().data;
     const res = await axios.get("/posts", {
       params: {
-        limitNum: 8,
+        limit: 2,
         nextPage: nextString,
       },
     });
     const { posts } = getState().data;
     const { results, next, hasNext } = res.data.paginatedPosts;
     const newPosts = [...posts, ...results];
+    console.log(next === localStorage.getItem("nextString"));
+    localStorage.setItem("nextString", next.toString());
     dispatch({ type: SET_POSTS, payload: newPosts });
     dispatch({ type: SET_NEXT_STRING, payload: next });
     dispatch({ type: SET_HAS_NEXT, payload: hasNext });

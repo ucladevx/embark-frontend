@@ -23,7 +23,7 @@ export const loginUser = (userData, history) => async (dispatch) => {
     dispatch(getStudentData());
     history.push("/landing");
   } catch (err) {
-    console.error(err);
+    dispatch({ type: SET_ERRORS, payload: err.response.data });
   }
 };
 
@@ -31,9 +31,10 @@ export const loginUser = (userData, history) => async (dispatch) => {
 export const getStudentData = () => async (dispatch) => {
   try {
     const res = await axios.get("/student/profile");
+    const payload = { ...res.data.student, userType: "student" };
     dispatch({
       type: SET_USER,
-      payload: res.data.student,
+      payload,
     });
   } catch (err) {
     console.error(err);
@@ -97,10 +98,14 @@ export const markNotificationsRead = (notificationIds) => (dispatch) => {
 
 export const studentGoogleSignUp = () => async (dispatch) => {
   try {
-    const res = await axios.post("/auth/google", {
-      type: "signup",
-      user: "student",
-    });
+    const res = await axios.post(
+      "/auth/google",
+      {
+        type: "signup",
+        user: "student",
+      },
+      { headers: { "Access-Control-Allow-Origin": "*" } }
+    );
     dispatch({ type: AUTH_SIGNUP, payload: res.data });
   } catch (err) {
     console.error(err);
