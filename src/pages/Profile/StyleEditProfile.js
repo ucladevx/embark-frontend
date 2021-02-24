@@ -22,9 +22,10 @@ import LinkEffect from "../../shared/LinkEffect";
 
 export const EditProfileContainer = styled(Dialog)`
   border-radius: 20px;
-  margin: 1.5em auto;
+  margin:1.5em auto;
   height: fit-content;
   width: fit-content;
+  ${'' /* max-width: 50vw; */}
   ${'' /* height: 1032px; */}
  
   ${'' /* box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
@@ -37,13 +38,12 @@ export const EditProfileContainer = styled(Dialog)`
 
 export const TitleContainer = styled(DialogTitle)`
   border-bottom: 1px solid ${colors.gray4};
-  height: 7vh;
-
+  max-height: 6vh;
 `;
 export const EditProfileTitle = styled(BoldTypography)`
-  font-size: 1em;
+  font-size: 1.5em;
   font-weight: 700;
-  margin: auto;
+  margin: 1vh auto;
 `;
 
 export const EditProfileAvatar = styled(Avatar)`
@@ -66,7 +66,7 @@ export const ChangeAvatarLink = styled(Typography)`
   ${LinkEffect}
   background: none;
   margin: 10px 0 0 10px;
-  font-size: 0.7em;
+  font-size: 0.8em;
   color: ${colors.blue4};
 `;
 
@@ -84,7 +84,7 @@ export const EditProfileContent = styled(DialogContent)`
 `;
 
 export const EditProfileDone =styled(DialogActions)`
-  margin: 50px 30px;
+  margin: 30px 30px;
 `;
 
 export const NewPostInfo = styled.div`
@@ -99,6 +99,9 @@ export const NewPostUser = styled.div`
 
 export const FormControlC = styled(FormControl)`
   min-width: 200px;
+  max-height: 5vh;
+  background: ${colors.gray1};
+  border-radius: 10px;
 `;
 
 export const Suggested = styled(Typography)`
@@ -115,7 +118,7 @@ export const DialogTextField = styled(TextField)`
 export const TextFieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: auto auto;
+  margin: auto 2em;
   gap: 10px;
   min-width: 4em;
   margin-top: 20px;

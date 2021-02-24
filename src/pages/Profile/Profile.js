@@ -27,8 +27,9 @@ import {Button} from "@material-ui/core";
 import EditProfile from "./editUserProfile"
 import ProfileTabs from "./ProfileTabs"
 import { colors } from "../../shared/config";
-
+import { useDispatch, useSelector } from "react-redux";
 const Profile = (props) => {
+  const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
   const { userid } = useParams();
 
@@ -44,8 +45,8 @@ const Profile = (props) => {
           <NameDescriptionWrapper>
             <ProfileAvatar></ProfileAvatar>
             <NameDescription>
-              <NameTypography>Test user</NameTypography>
-              <Typography style={{fontSize: '18px'}}>2022 Cognitive Science</Typography>
+              <NameTypography>{user.name}</NameTypography>
+              <Typography style={{fontSize: '18px'}}>{user.year} {user.major}</Typography>
             </NameDescription>
           </NameDescriptionWrapper>
           <IndustryWrapper>

@@ -1,29 +1,19 @@
 import React, { useState } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogActions,
-  DialogTitle,
-  Button,
-  TextField,
   Select,
   MenuItem,
-  Typography,
   InputLabel,
-  FormControl,
-  Divider,
-  InputAdornment,
+  Checkbox,
+  ListItemText,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
+import { editStudentDetails } from "../../redux/actions/userActions";
 import styled from "styled-components";
 import{
-  HeaderImage,
-  CoverImage,
   ExploreObj,
   ExploreFilter,
-  
 } from "./StyleProfile";
 import {
   EditProfileContainer,
@@ -34,8 +24,6 @@ import {
   EditCoverImage,
   EditProfileContent,
   EditProfileDone,
-  NewPostInfo,
-  NewPostUser,
   FormControlC,
   Suggested,
   DialogTextField,
@@ -47,32 +35,51 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const EditProfile = ({ open, handleClose }) => {
-  const [industry, setIndustry] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const years = ["2021", "2022", "2023", "2024"];
+  const industry = ["Business", "Computer Science", "Marketing", "Product Design", "Product Management", "Other"];
+  const user = useSelector((state) => state.user);
+  const [name, setName] = useState(user.name)
+  const [email, setEmail] = useState(user.email)
+  const [major, setMajor] = useState(user.major)
+  const [year, setYear] = useState(user.year)
+  const [tags, setTags] = useState(user.tags);
+  const [industries, setIndustries] = useState([]);
+  const [bio, setBio] = useState(user.bio);
+  const [linkedin, setLinkedin] = useState(user.linkedIn); 
+
   // Redux
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-
-  const handleIndustry = (e) => {
-    setIndustry(e.target.value);
+  const handleYear = (e) => {
+    setYear(e.target.value);
+  };
+  const handleMajor = (e) => {
+    setMajor(e.target.value);
   };
 
-  const handleTitle = (e) => {
-    setTitle(e.target.value);
+  const handleTags = (e) => {
+    setTags([...tags, e.target.value]);
   };
 
-  const handleDescription = (e) => {
-    setDescription(e.target.value);
+  const handleIndustries = (e) => {
+    let curIndustries = industries.slice();
+    curIndustries.push(e.target.value)
+    setIndustries(curIndustries)
+  };
+
+  const handlelinkedIn = (e) => {
+    setLinkedin(e.target.value);
   };
 
   const handleSubmit = async () => {
-    const post = {
-      title,
-      body: description,
-      tags: [industry],
+    const updatedProfile = {
+      name, 
+      major, 
+      year, 
+      industries, 
+      bio, 
+      linkedin,
     };
-    //dispatch(newPost(post));
+    dispatch(editStudentDetails(updatedProfile));
     handleClose();
   };
 
@@ -93,6 +100,19 @@ const EditProfile = ({ open, handleClose }) => {
       </TextFieldWrapper>
 
       <ChangeAvatarLink align="center">Change Cover Photo</ChangeAvatarLink>
+      <TextFieldWrapper>
+        <BoldTypography  sz={"18px"}>Year:</BoldTypography>
+        <FormControlC>
+                <InputLabel>Year</InputLabel>
+                <Select value={year} onChange={handleYear}>
+                {years.map((y) => (
+                    <MenuItem key={y} value={y} name="year">
+                      {y}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControlC>        
+      </TextFieldWrapper>
 
         <TextFieldWrapper>
         <BoldTypography  sz={"18px"}>Major:</BoldTypography>
@@ -100,7 +120,7 @@ const EditProfile = ({ open, handleClose }) => {
             autoFocus
             margin="dense"
             id="name"
-            placeholder="Cognitive Science"
+            placeholder={user.major}
             type="email"
             fullWidth
             InputProps={{
@@ -110,7 +130,7 @@ const EditProfile = ({ open, handleClose }) => {
                 fontWeight: 600,
               },
             }}
-            onChange={handleTitle}
+            onChange={handleMajor}
           />          
         </TextFieldWrapper>
         
@@ -118,36 +138,41 @@ const EditProfile = ({ open, handleClose }) => {
         <BoldTypography  sz={"18px"}>Interested Industries:</BoldTypography>
 
         <ExploreFilter>
-        <ExploreObj bgcolor={colors.red1}>
-          &times; Product Management
-        </ExploreObj>
-        <ExploreObj bgcolor={colors.darkyellow}>
-          &times; Product Design
-        </ExploreObj>
+        {industries.map((name) => (
+          <ExploreObj bgcolor={colors.darkyellow}>
+              &times; {name}
+          </ExploreObj>           
+
+                ))}
       </ExploreFilter>
 
-        <NewPostInfo>
-          <NewPostUser>
+        {/* <NewPostInfo> */}
+          {/* <NewPostUser> */}
             <FormControlC>
               <InputLabel>Select all that apply</InputLabel>
-              <Select value={industry} onChange={handleIndustry}>
+              <Select 
+              multiple 
+              value={industries} 
+              onChange={handleIndustries}
+              >
                 <Suggested>Suggested</Suggested>
-                <MenuItem value={"Product Design"}>Product Design</MenuItem>
-                <MenuItem value={"Product Management"}>
-                  Product Management
-                </MenuItem>
-                <Divider />
-                <MenuItem value={"Business"}>Business</MenuItem>
-                <MenuItem value={"Computer Science"}>Computer Science</MenuItem>
+                {industry.map((name, index) => (
+                  <MenuItem key={name} value={name}>
+                    <Checkbox checked = {industries.includes(name)} color="default"/>
+                    <ListItemText primary={name} />
+                  </MenuItem>
+                ))}
+
               </Select>
             </FormControlC>
 
-          </NewPostUser>
-        </NewPostInfo>
+          {/* </NewPostUser> */}
+        {/* </NewPostInfo> */}
         </TextFieldWrapper>
           
 
         <TextFieldWrapper>
+        <BoldTypography>{linkedin}</BoldTypography>
         <BoldTypography  sz={"18px"}>LinkedIn Profile (Optional):</BoldTypography>
           <DialogTextField
             autoFocus
@@ -163,7 +188,7 @@ const EditProfile = ({ open, handleClose }) => {
                 fontWeight: 600,
               },
             }}
-            onChange={handleTitle}
+            onChange={handlelinkedIn}
           />          
         </TextFieldWrapper>
       </EditProfileContent>
