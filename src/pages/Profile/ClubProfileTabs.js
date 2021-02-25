@@ -51,7 +51,7 @@ function TabPanel(props) {
   }));
 
 
-const ProfileTabs = () => {
+const ClubProfileTabs = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const user = useSelector((state) => state.user);
@@ -67,9 +67,9 @@ const ProfileTabs = () => {
         onChange={handleChange} 
         // centered
         >
-          <Tab label="My Posts" {...a11yProps(0)} />
-          <Tab label="Followed Clubs" {...a11yProps(1)} />
-          <Tab label="Saved Posts" {...a11yProps(2)} />
+          <Tab label="Resources" {...a11yProps(0)} />
+          <Tab label="Events" {...a11yProps(1)} />
+          <Tab label="Board Members" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -87,4 +87,4 @@ const ProfileTabs = () => {
   );
 }
 
-export default ProfileTabs;
+export default ClubProfileTabs;

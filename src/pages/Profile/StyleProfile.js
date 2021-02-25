@@ -34,9 +34,10 @@ export const MiddleContainer = styled.div`
 //   margin-left: 15px;
 // `;
 export const ProfileAvatar = styled(Avatar)`
-  width: 8vw;
-  height: 8vw;
-  top: -3vw;
+  width: 5vw;
+  height: 5vw;
+  top: -1.8vw;
+  background-color: #838383;
   border: 5px solid ${colors.white};
 `;
 
@@ -49,14 +50,14 @@ export const ProfileWrapper = styled.div`
 `;
 
 export const HeaderImage = styled.img`
-  width: 54vw;
-  height: 12vh;
+  width: 30vw;
+  height: 14vh;
 `;
 
 export const ProfileInfo = styled.div`
   background-color: ${colors.white};
   height: fit-content;
-  width: 54vw;
+  width: 30vw;
   position: relative;
   padding: 15px;
   box-sizing: border-box;
@@ -65,18 +66,19 @@ export const ProfileInfo = styled.div`
 export const NameDescriptionWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-left: 15px;
+  margin-left: 1vh;
   padding-bottom: 0px;
 `;
 
 export const NameDescription = styled.div`
   display: flex 2 1 auto;
   flex-direction: column;
-  padding-left: 1em;
+  padding-left: 0.5em;
 `;
 export const IndustryWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 0vh;
   margin-left: 15px;
 `;
 export const EditProfileButton = styled(Button)`
@@ -84,8 +86,9 @@ export const EditProfileButton = styled(Button)`
   height: 30px;
   border-radius: 8px;
   position: absolute;
-  right: 1vw;
-  bottom: 1vw;
+  right: 0.5vw;
+  bottom: 0.5vw;
+  font-size: 12px;
   text-transform: none;
   color: #ffffff;
   background: #5473bb;
@@ -124,4 +127,19 @@ export const ExploreFilterTitle = styled(Typography)`
   text-decoration: none;
   margin-bottom: 7px;
   margin-right: 2px;
+`;
+
+
+//Club
+export const ClubWebsiteButton = styled(Button)`
+  width: 130px;
+  height: 30px;
+  border-radius: 8px;
+  position: absolute;
+  right: 0.5vw;
+  bottom: 15vh;
+  text-transform: none;
+  color: #5473bb;
+  background: #E5EFFF;
+  border-radius: 5px;
 `;

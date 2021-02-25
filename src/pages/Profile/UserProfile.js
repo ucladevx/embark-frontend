@@ -21,10 +21,10 @@ import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
 import {Button} from "@material-ui/core";
 import EditProfile from "./editUserProfile"
-import ProfileTabs from "./ProfileTabs"
+import UserProfileTabs from "./UserProfileTabs"
 import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
-const Profile = (props) => {
+const UserProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
   const { userid } = useParams();
@@ -61,14 +61,21 @@ const Profile = (props) => {
 
           <EditProfileButton onClick={() => {seteditProfile(true);}}>Edit Profile</EditProfileButton>         
         </ProfileInfo>
-        <QuestionBox>
-
-        </QuestionBox>
+        <QuestionBox></QuestionBox>
         
       </ProfileWrapper>
+      <ProfileWrapper>
+          <ProfileInfo>
+            <NameDescriptionWrapper>
+              <UserProfileTabs />
+            </NameDescriptionWrapper>
+          </ProfileInfo>
+          <QuestionBox></QuestionBox>
+        </ProfileWrapper>
       </MiddleContainer>
+
     </>
   );
 };
 
-export default Profile;
+export default UserProfile;

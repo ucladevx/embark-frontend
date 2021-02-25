@@ -17,7 +17,8 @@ import Login from "./pages/Login/Login.js";
 import OnBoarding from "./pages/OnBoarding";
 
 import Home from "./pages/Home";
-import Profile from "./pages/Profile/Profile";
+import UserProfile from "./pages/Profile/UserProfile";
+import ClubProfile from "./pages/Profile/ClubProfile";
 
 axios.defaults.baseURL = "http://localhost:9000/";
 
@@ -41,7 +42,8 @@ function App() {
               <Route exact path="/login" component={Login}></Route>
               <Route exact path="/landing" component={Home}></Route>
               {/* <Route exact path="/user/:userid" component={Profile}></Route> */}
-              <Route exact path="/profile" component={Profile}></Route>
+              <Route exact path="/user-profile" component={UserProfile}></Route>
+              <Route exact path="/club-profile" component={ClubProfile}></Route>
             </Switch>
           </Router>
         </Provider>

@@ -25,7 +25,7 @@ export const EditProfileContainer = styled(Dialog)`
   margin:1.5em auto;
   height: fit-content;
   width: fit-content;
-  ${'' /* max-width: 50vw; */}
+  max-width: 28vw;
   ${'' /* height: 1032px; */}
  
   ${'' /* box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
@@ -37,29 +37,23 @@ export const EditProfileContainer = styled(Dialog)`
 `;
 
 export const TitleContainer = styled(DialogTitle)`
-  border-bottom: 1px solid ${colors.gray4};
-  max-height: 6vh;
+  border-bottom: 3px solid ${colors.gray4};
+  height: 10vh;
+  max-height: 2vh;
+  padding-bottom: 5.5vh;
 `;
 export const EditProfileTitle = styled(BoldTypography)`
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: 700;
   margin: 1vh auto;
 `;
 
 export const EditProfileAvatar = styled(Avatar)`
-  width: 7vw;
-  height: 7vw;
+  width: 5vw;
+  height: 5vw;
   border: 1px solid ${colors.grey3};
   margin: 0 auto;
   position: relative;
-  ${'' /* variant:"rounded";
-  border: 1px solid ${colors.grey3};
-  position: relative;
-  margin:auto;
-  width: 8vw;
-  height: 8vw;
-  left: 662px;
-  top: 168px; */}
 `;
 
 export const ChangeAvatarLink = styled(Typography)`
@@ -113,12 +107,13 @@ export const DialogTextField = styled(TextField)`
   background: ${colors.gray1};
   padding: 5px 5px;
   border-radius: 5px;
+  padding: 1em 1em;
 `;
 
 export const TextFieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: auto 2em;
+  margin: auto 1em;
   gap: 10px;
   min-width: 4em;
   margin-top: 20px;
