@@ -149,6 +149,11 @@ const NewPost = ({ open, handleClose }) => {
       const fileReader = new window.FileReader();
       const file = event.target.files[0];
       console.log(file);
+
+      setFile({ url: PDF1_URL });
+      setFileType("pdf");
+
+
       setFileType(file.name.substring(file.name.lastIndexOf(".") + 1)); 
       console.log(fileType);   
       let myForm = document.getElementById('myForm');
@@ -239,10 +244,7 @@ const NewPost = ({ open, handleClose }) => {
           (
             <>
             <FilesWrapper>
-              <FileViewer
-                filePath = {file}
-                fileType = {fileType}
-              />
+              <FileViewer filePath = {file} fileType = {fileType}/>
             </FilesWrapper> 
             </>
           )
