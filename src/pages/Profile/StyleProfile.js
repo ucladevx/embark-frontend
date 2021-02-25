@@ -33,7 +33,6 @@ export const NameDescriptionWrapper = styled.div`
   flex-direction: row;
   margin-left: 15px;
 `;
-
 export const ProfileAvatar = styled(Avatar)`
   width: 8vw;
   height: 8vw;
@@ -46,47 +45,56 @@ export const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-left: 3vw;
+  ${'' /* padding-left: 3vw; */}
 `;
 
 export const HeaderImage = styled.img`
-  width: 49vw;
-  height: 15vh;
+  width: 54vw;
+  height: 12vh;
 `;
 
 export const ProfileInfo = styled.div`
   background-color: ${colors.white};
-  height: 200px;
-  width: 49vw;
+  height: fit-content;
+  width: 54vw;
   position: relative;
   padding: 15px;
   box-sizing: border-box;
 `;
 
-export const NameDescription = styled.div`
+export const NameDescriptionWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  margin-left: 15px;
+  padding-bottom: 0px;
 `;
 
+export const NameDescription = styled.div`
+  display: flex 2 1 auto;
+  flex-direction: column;
+  padding-left: 1em;
+`;
+export const IndustryWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+`;
 export const EditProfileButton = styled(Button)`
   width: 89px;
   height: 30px;
   border-radius: 8px;
   position: absolute;
   right: 1vw;
-  bottom: 70px;
+  bottom: 1vw;
   text-transform: none;
+<<<<<<< HEAD
   color: #ffffff;
   background: #5473bb;
+=======
+  color: #FFFFFF;
+  background: ${colors.blue5};
+>>>>>>> diana/signin
   border-radius: 5px;
-`;
-
-export const ChangeAvatarLink = styled(Typography)`
-  ${LinkEffect}
-  background: none;
-  margin: 10px 0 0 10px;
-  font-size: 16px;
-  color: ${colors.blue4};
 `;
 
 export const CoverImage = styled.img`

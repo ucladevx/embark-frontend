@@ -7,7 +7,9 @@ import {
   ProfileWrapper,
   ProfileAvatar,
   NameDescription,
+  NameTypography,
   NameDescriptionWrapper,
+  IndustryWrapper,
   EditProfileButton,
   MiddleContainer,
   QuestionBox,
@@ -17,11 +19,13 @@ import {
 import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
-import EditProfile from "./editProfile";
-import ProfileTabs from "./ProfileTabs";
+import {Button} from "@material-ui/core";
+import EditProfile from "./editUserProfile"
+import ProfileTabs from "./ProfileTabs"
 import { colors } from "../../shared/config";
-
+import { useDispatch, useSelector } from "react-redux";
 const Profile = (props) => {
+  const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
   const { userid } = useParams();
 
@@ -32,30 +36,38 @@ const Profile = (props) => {
         handleClose={() => seteditProfile(false)}
       ></EditProfile>
       <NavBar></NavBar>
-
       <MiddleContainer>
-        <ProfileWrapper>
-          <HeaderImage src={lawn}></HeaderImage>
-          <ProfileInfo>
-            <NameDescriptionWrapper>
-              <ProfileAvatar></ProfileAvatar>
-              <NameDescription>
-                <TitleTypography>Test user</TitleTypography>
-                <Typography>2022 Cognitive Science</Typography>
-              </NameDescription>
-            </NameDescriptionWrapper>
-            <BoldTypography sz={"18px"}>Interested Industries:</BoldTypography>
-
+      <ProfileWrapper>
+        <HeaderImage src={lawn}></HeaderImage>
+        <ProfileInfo>
+          <NameDescriptionWrapper>
+            <ProfileAvatar></ProfileAvatar>
+            <NameDescription>
+              <NameTypography>{user.name}</NameTypography>
+              <Typography style={{fontSize: '18px'}}>{user.year} {user.major}</Typography>
+            </NameDescription>
+          </NameDescriptionWrapper>
+          <IndustryWrapper>
+            <BoldTypography  sz={"14px"}>Interested Industries:</BoldTypography>
             <ExploreFilter>
-              <ExploreObj bgcolor={colors.red1}>
-                &times; Product Management
-              </ExploreObj>
-              <ExploreObj bgcolor={colors.darkyellow}>
-                &times; Product Design
-              </ExploreObj>
-            </ExploreFilter>
+            <ExploreObj bgcolor={colors.red1}>
+              Product Management
+            </ExploreObj>
+            <ExploreObj bgcolor={colors.darkyellow}>
+              Product Design
+            </ExploreObj>
+            </ExploreFilter>            
+          </IndustryWrapper>
 
-            <EditProfileButton
+          <EditProfileButton onClick={() => {seteditProfile(true);}}>Edit Profile</EditProfileButton>         
+        </ProfileInfo>
+        <QuestionBox>
+
+        </QuestionBox>
+        
+      </ProfileWrapper>
+
+            {/* <EditProfileButton
               onClick={() => {
                 seteditProfile(true);
               }}
@@ -73,7 +85,7 @@ const Profile = (props) => {
             </NameDescriptionWrapper>
           </ProfileInfo>
           <QuestionBox></QuestionBox>
-        </ProfileWrapper>
+        </ProfileWrapper> */}
       </MiddleContainer>
     </>
   );

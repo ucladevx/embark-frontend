@@ -6,7 +6,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-
+    import { useDispatch, useSelector } from "react-redux";
+import { BoldTypography } from '../../shared/Typography';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -53,7 +54,7 @@ function TabPanel(props) {
 const ProfileTabs = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
+  const user = useSelector((state) => state.user);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -64,14 +65,17 @@ const ProfileTabs = () => {
         <Tabs 
         value={value} 
         onChange={handleChange} 
-        centered>
+        // centered
+        >
           <Tab label="My Posts" {...a11yProps(0)} />
           <Tab label="Followed Clubs" {...a11yProps(1)} />
           <Tab label="Saved Posts" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        My Posts
+      {/* {user.posts.map((post) => (
+        <BoldTypography>{post}</BoldTypography>
+      ))} */}
       </TabPanel>
       <TabPanel value={value} index={1}>
         Followed Clubs

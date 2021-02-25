@@ -42,11 +42,12 @@ export const getStudentData = () => async (dispatch) => {
 // Sign Up a user
 export const signupStudent = (newUserData) => async (dispatch) => {
   try {
+    console.log(newUserData);
     const res = await axios.post("/auth/signup", newUserData);
     setAuthorizationHeader(res.data.token);
     dispatch(getStudentData());
   } catch (err) {
-    console.error(err.data);
+    console.error(err);
   }
 };
 
