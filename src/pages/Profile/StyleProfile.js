@@ -28,11 +28,11 @@ export const MiddleContainer = styled.div`
   flex: 2 1 auto;
 `;
 
-export const NameDescriptionWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-left: 15px;
-`;
+// export const NameDescriptionWrapper = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   margin-left: 15px;
+// `;
 export const ProfileAvatar = styled(Avatar)`
   width: 8vw;
   height: 8vw;
@@ -87,13 +87,8 @@ export const EditProfileButton = styled(Button)`
   right: 1vw;
   bottom: 1vw;
   text-transform: none;
-<<<<<<< HEAD
   color: #ffffff;
   background: #5473bb;
-=======
-  color: #FFFFFF;
-  background: ${colors.blue5};
->>>>>>> diana/signin
   border-radius: 5px;
 `;
 

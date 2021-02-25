@@ -43,7 +43,7 @@ const Profile = (props) => {
           <NameDescriptionWrapper>
             <ProfileAvatar></ProfileAvatar>
             <NameDescription>
-              <NameTypography>{user.name}</NameTypography>
+              <TitleTypography>{user.name}</TitleTypography>
               <Typography style={{fontSize: '18px'}}>{user.year} {user.major}</Typography>
             </NameDescription>
           </NameDescriptionWrapper>
@@ -66,26 +66,6 @@ const Profile = (props) => {
         </QuestionBox>
         
       </ProfileWrapper>
-
-            {/* <EditProfileButton
-              onClick={() => {
-                seteditProfile(true);
-              }}
-            >
-              Edit Profile
-            </EditProfileButton>
-          </ProfileInfo>
-          <QuestionBox></QuestionBox>
-        </ProfileWrapper>
-
-        <ProfileWrapper>
-          <ProfileInfo>
-            <NameDescriptionWrapper>
-              <ProfileTabs />
-            </NameDescriptionWrapper>
-          </ProfileInfo>
-          <QuestionBox></QuestionBox>
-        </ProfileWrapper> */}
       </MiddleContainer>
     </>
   );
