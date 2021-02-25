@@ -16,7 +16,7 @@ const NavBarWrapper = styled.div`
   display: flex;
   border-bottom: 1px solid ${colors.black};
   height: max(45px, 4%);
-  padding: 4px 0;
+  padding: 8px 0;
   align-items: center;
   gap: 30px;
   color: ${colors.gray2};
