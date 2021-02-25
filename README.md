@@ -79,7 +79,18 @@ export default App;
 - profile: profile page for student/club to view their own profile
 
 ## Redux
-- The WriteReduxDoc() action is ready to be dispatched except that no action is innitialized and no dispatch function is imported. It is the "nicest" event to be scheduled on the event queue (Quote modified from OSTEP: when your're too nice, you just don't get as much attention, alas).
+### Reducers:
+- uireducer: handle action types for display, including loading, popup, and errors...
+- datareducer: handle action types for any data flow in the app, including posts, events, and filters...
+- userreducer: handle action types for any user-specific actions, including authentication of users, users' industries...
+
+### Actiosn
+- UserActions.js: action creators to handle user-related actions (corresponds to the previous reducers)
+- DataActions.js: action creators to handle data-related actions
+Note: ui doesn't have action for itself, all ui-related handling is included in these two action js files.
+
+### Note for the future:
+since we are having inconsistency in our frontend, backend, and design, we'll finalize the initial states for these reducers in the future
 
 ## Best Practices in this repo
 In src:
