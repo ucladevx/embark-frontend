@@ -13,9 +13,11 @@ export const ClubCardsContainer = styled.div`
 export const ClubCard = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 40px;
 `;
 export const ClubCardImage = styled.img`
   width: 160px;
+  max-width: 160px;
   height: 150px;
   border: none;
   border-top-left-radius: 10px;

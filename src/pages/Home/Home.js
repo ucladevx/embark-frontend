@@ -66,9 +66,9 @@ const Home = () => {
     styleCalendar();
   }, []);
 
-  useEffect(() => {
-    if (!window.localStorage.getItem("AuthToken")) history.push("/");
-  }, [history]);
+  // useEffect(() => {
+  //   if (!window.localStorage.getItem("AuthToken")) history.push("/");
+  // }, [history]);
 
   return (
     <>
