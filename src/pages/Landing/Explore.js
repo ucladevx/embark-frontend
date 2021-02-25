@@ -55,39 +55,39 @@ const Explore = () => {
 
           <ClubCardsContainer>
               <OwlCarousel items={3} className="owl-theme">
-                <div>
-                  <ClubCard>
-                      <ClubCardImage src={devxImg} />
-                      <ClubCardCaption>UCLA DevX</ClubCardCaption>
-                  </ClubCard>
-                </div>
-                <div>
-                  <ClubCard>
-                      <ClubCardImage src={consultingImg} />
-                      <ClubCardCaption>Bruin Consulting</ClubCardCaption>
-                  </ClubCard>
-                </div>
-                <div>
-                  <ClubCard>
-                      <ClubCardImage src={devxImg} />
-                      <ClubCardCaption>UCLA DevX</ClubCardCaption>
-                  </ClubCard>
-                </div>
-                <div>
-                  <ClubCard>
-                      <ClubCardImage src={dbImg} />
-                      <ClubCardCaption>Daily Bruin</ClubCardCaption>
-                  </ClubCard>
-                </div>
-                <div>
-                  <ClubCard>
-                      <ClubCardImage src={devxImg} />
-                      <ClubCardCaption>UCLA DevX</ClubCardCaption>
-                  </ClubCard>
-                </div>
+                  <div>
+                      <ClubCard>
+                          <ClubCardImage src={devxImg} />
+                          <ClubCardCaption>UCLA DevX</ClubCardCaption>
+                      </ClubCard>
+                  </div>
+                  <div>
+                      <ClubCard>
+                          <ClubCardImage src={consultingImg} />
+                          <ClubCardCaption>Bruin Consulting</ClubCardCaption>
+                      </ClubCard>
+                  </div>
+                  <div>
+                      <ClubCard>
+                          <ClubCardImage src={devxImg} />
+                          <ClubCardCaption>UCLA DevX</ClubCardCaption>
+                      </ClubCard>
+                  </div>
+                  <div>
+                      <ClubCard>
+                          <ClubCardImage src={dbImg} />
+                          <ClubCardCaption>Daily Bruin</ClubCardCaption>
+                      </ClubCard>
+                  </div>
+                  <div>
+                      <ClubCard>
+                          <ClubCardImage src={devxImg} />
+                          <ClubCardCaption>UCLA DevX</ClubCardCaption>
+                      </ClubCard>
+                  </div>
               </OwlCarousel>
               <ClubCardNextButton>
-                      <ChevronRightIcon style={{ fontSize: "30px" }} />{" "}
+                  <ChevronRightIcon style={{ fontSize: "30px" }} />{" "}
               </ClubCardNextButton>
           </ClubCardsContainer>
 
