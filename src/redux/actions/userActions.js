@@ -104,7 +104,11 @@ export const studentGoogleSignUp = () => async (dispatch) => {
         type: "signup",
         user: "student",
       },
-      { headers: { "Access-Control-Allow-Origin": "*" } }
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
     );
     dispatch({ type: AUTH_SIGNUP, payload: res.data });
   } catch (err) {
