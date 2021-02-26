@@ -75,7 +75,7 @@ export default App;
 - OnBoarding: student OnBoarding pages for now. We'll create a different set of OnBoarding pages for clubs in near feature
 - Login: Login for both student and club. We'll enable club's login in near future
 - Home: Home page with all features, which has 3 columns. The left column is to navigate through different pages and resources. Middle column is for the main features of the page, and right column is related to event scheduling with a calendar to help visualize.
-- user/userid: a route for each user. This would include the flows for user view club, user view user, club view user, and club view club
+- user/userid: a route for each user. This would include the flows for user views club, user views user, club views user, and club views club
 - profile: profile page for student/club to view their own profile
 
 ## Redux
