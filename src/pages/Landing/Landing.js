@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
-import "./calendar.css"
+import "./calendar.css";
 import Calendar from "react-calendar";
 // Styles
 import ImageIcon from "@material-ui/icons/Image";
@@ -14,6 +14,7 @@ import {
   FilterTitle,
   FilterObj,
   FilterWrapper,
+  FilesWrapper,
   InteriorFilterWrapper,
   QuestionBox,
   PostAvatar,
@@ -68,13 +69,18 @@ import compassImg from "../../images/compass.svg";
 import { colors } from "../../shared/config";
 import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
-import { getPosts, filterPosts,addFilter,removeFilter  } from "../../redux/actions/dataActions";
+import {
+  getPosts,
+  filterPosts,
+  addFilter,
+  removeFilter,
+} from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
 import Explore from "./Explore";
+import FileViewer from "react-file-viewer";
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
-
 
 const Landing = () => {
   // Redux
@@ -87,17 +93,19 @@ const Landing = () => {
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
 
-  const tags = [{key: "Product Management"},{key: "Computer Science"}];
+  const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
   const renderedTags = tags.map((each) => {
     return (
-        <div key = {each.key}>
-          <PostTag tag = {each.key}>
-          {each.key}
-        </PostTag>
-        </div>
+      <div key={each.key}>
+        <PostTag tag={each.key}>{each.key}</PostTag>
+      </div>
     );
   });
 
+  //for test files, go to https://cors-anywhere.herokuapp.com to enable CORS on non-cors file links, see below for format
+  const testfiles = [
+    "https://cors-anywhere.herokuapp.com/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
+  ];
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
@@ -112,10 +120,9 @@ const Landing = () => {
   };
 
   const [tagToAdd, setTagToAdd] = useState("");
-  const handleChange= (e) => {
-    setTagToAdd(e.target.value)
-  }
-
+  const handleChange = (e) => {
+    setTagToAdd(e.target.value);
+  };
 
   return (
     <>
@@ -146,22 +153,28 @@ const Landing = () => {
                 <FilterTitle>Filters:</FilterTitle>
                 <InteriorFilterWrapper>
                   {filters.map((t) => (
-                      <FilterObj tag={t} key={t} onClick ={()=>removeUpdateFilters(t)}>
-                          {t}
-                      </FilterObj>
+                    <FilterObj
+                      tag={t}
+                      key={t}
+                      onClick={() => removeUpdateFilters(t)}
+                    >
+                      {t}
+                    </FilterObj>
                   ))}
                 </InteriorFilterWrapper>
                 <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
                 <DialogTextField
-                    id="tag"
-                    placeholder="Enter tag..."
-                    type="text"
-                    InputProps={{
-                      disableUnderline: true,
-                    }}
-                    onChange={handleChange}
-                  />
-                <AddFilter onClick ={()=>addUpdateFilter(tagToAdd)}>+ Add Filter</AddFilter>
+                  id="tag"
+                  placeholder="Enter tag..."
+                  type="text"
+                  InputProps={{
+                    disableUnderline: true,
+                  }}
+                  onChange={handleChange}
+                />
+                <AddFilter onClick={() => addUpdateFilter(tagToAdd)}>
+                  + Add Filter
+                </AddFilter>
               </FilterWrapper>
             )}
           </LeftContainer>
@@ -196,9 +209,7 @@ const Landing = () => {
                         <PostUserName>Christie Smith</PostUserName>
                         <PostTime>{dayjs("2020-12-01").fromNow()}</PostTime>
                       </PostNameTime>
-                      <PostTagWrapper>
-                        {renderedTags}
-                      </PostTagWrapper>
+                      <PostTagWrapper>{renderedTags}</PostTagWrapper>
                     </PostHeader>
 
                     <PostTitle>
@@ -210,6 +221,15 @@ const Landing = () => {
                       of going into Product! Do any of you have any
                       resources/tips on where to get started? Thanks :)
                     </PostContent>
+                    {testfiles.map((f) => (
+                      <FilesWrapper>
+                        <FileViewer
+                          tag={f}
+                          fileType={f.substring(f.lastIndexOf(".") + 1)}
+                          filePath={f}
+                        />
+                      </FilesWrapper>
+                    ))}
                   </PostWrapper>
 
                   <ViewPreviousCommentWrapper>
@@ -286,6 +306,15 @@ const Landing = () => {
                         </PostHeader>
                         <PostTitle>{p.title}</PostTitle>
                         <PostContent>{p.body}</PostContent>
+                        {p.files.map((f) => (
+                          <FilesWrapper>
+                            <FileViewer
+                              tag={f}
+                              fileType={f.substring(f.lastIndexOf(".") + 1)}
+                              filePath={f}
+                            />
+                          </FilesWrapper>
+                        ))}
                       </PostWrapper>
                     );
                   })}
