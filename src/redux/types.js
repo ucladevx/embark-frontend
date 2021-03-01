@@ -21,6 +21,7 @@ export const SUBMIT_COMMENT = "SUBMIT_COMMENT";
 export const FILTER_POSTS = "FILTER_POSTS";
 export const SET_NEXT_STRING = "SET_NEXT_STRING";
 export const SET_HAS_NEXT = "SET_HAS_NEXT";
+export const NEW_EVENT = "NEW_EVENT";
 
 // Ui reducer types
 export const SET_ERRORS = "SET_ERRORS";

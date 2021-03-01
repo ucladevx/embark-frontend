@@ -1,44 +1,18 @@
 import React, { useState } from "react";
-import FileUpload from "./FileUpload.js";
 import {
   Dialog,
   DialogContent,
   DialogActions,
-  DialogTitle,
   Button,
-  Avatar,
   TextField,
-  Select,
-  MenuItem,
   Typography,
-  InputLabel,
   FormControl,
-  Divider,
 } from "@material-ui/core";
 import { BoldTypography } from "../shared/Typography";
 import { colors } from "../shared/config";
 import { useDispatch, useSelector } from "react-redux";
-import { newPost } from "../redux/actions/dataActions";
+import { newEvent } from "../redux/actions/dataActions";
 import styled from "styled-components";
-
-const NewPostInfo = styled.div`
-  display: flex;
-`;
-
-const NewPostUser = styled.div`
-  display: flex;
-  margin-left: 12px;
-  flex-direction: column;
-`;
-
-const FormControlC = styled(FormControl)`
-  min-width: 120px;
-`;
-
-const Suggested = styled(Typography)`
-  margin-left: 2px;
-  color: ${colors.gray2};
-`;
 
 const DialogTextField = styled(TextField)`
   background: ${colors.gray1};
@@ -63,18 +37,11 @@ const PostBtn = styled(Button)`
   background-color: ${colors.gray2};
 `;
 
-const NewPost = ({ open, handleClose }) => {
-  const [industry, setIndustry] = useState("");
+const NewEvent = ({ open, handleClose }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
   // Redux
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-
-  const handleIndustry = (e) => {
-    setIndustry(e.target.value);
-  };
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
@@ -84,54 +51,25 @@ const NewPost = ({ open, handleClose }) => {
     setDescription(e.target.value);
   };
 
-  const handleFileInput = (e) => {
-    setSelectedFile(e.target.files[0]);
-    console.log(selectedFile);
-  };
-
   const handleSubmit = async () => {
-    const post = {
+    const event = {
       title,
       body: description,
-      tags: [industry],
-      files: [selectedFile],
     };
-    dispatch(newPost(post));
+    dispatch(newEvent(event));
     handleClose();
   };
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>
-        <BoldTypography sz={"18px"}>Create a Post</BoldTypography>
-      </DialogTitle>
-
       <DialogContent>
-        <NewPostInfo>
-          <Avatar></Avatar>
-          <NewPostUser>
-            <BoldTypography sz={"16px"}>{user.name}</BoldTypography>
-            <FormControlC>
-              <InputLabel>Industry</InputLabel>
-              <Select value={industry} onChange={handleIndustry}>
-                <Suggested>Suggested</Suggested>
-                <MenuItem value={"Product Design"}>Product Design</MenuItem>
-                <MenuItem value={"Product Management"}>
-                  Product Management
-                </MenuItem>
-                <Divider />
-                <MenuItem value={"Business"}>Business</MenuItem>
-                <MenuItem value={"Computer Science"}>Computer Science</MenuItem>
-              </Select>
-            </FormControlC>
-          </NewPostUser>
-        </NewPostInfo>
         <TextFieldWrapper>
+        <BoldTypography sz={"24px"}>Create an Event</BoldTypography>
           <DialogTextField
             autoFocus
             margin="dense"
             id="name"
-            placeholder="Question / Subject"
+            placeholder="Title"
             type="email"
             fullWidth
             InputProps={{
@@ -159,14 +97,12 @@ const NewPost = ({ open, handleClose }) => {
         </TextFieldWrapper>
       </DialogContent>
       <DialogActions>
-        {/*<FilePreviewer file={selectedFile}/>*/}
-        <FileUpload handleFileInput={handleFileInput} />
         <PostBtn onClick={handleSubmit} color="primary">
-          Post
+          Create
         </PostBtn>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default NewPost;
+export default NewEvent;

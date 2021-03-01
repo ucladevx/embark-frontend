@@ -40,6 +40,7 @@ import { styleCalendar } from "./calendar";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
+import NewEvent from "../../components/NewEvent"
 import Explore from "./Explore";
 import Posts from "./Posts";
 
@@ -56,6 +57,7 @@ const Home = () => {
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
+  const [newEvent, setNewEvent] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -73,6 +75,7 @@ const Home = () => {
   return (
     <>
       <NewPost open={newPost} handleClose={() => setNewPost(false)} />
+      <NewEvent open={newEvent} handleClose={() => setNewEvent(false)} />
       <LandingPage>
         <NavBar></NavBar>
         <LandingPageWrapper>
@@ -152,6 +155,7 @@ const Home = () => {
                     Going
                   </GoingBtn>
                 </EventItem>
+                <AddFilter onClick={()=>setNewEvent(true)}>+ Create</AddFilter>
               </EventItems>
             </EventsWrapper>
           </RightContainer>

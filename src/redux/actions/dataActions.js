@@ -11,6 +11,7 @@ import {
   REMOVE_FILTER,
   SET_NEXT_STRING,
   SET_HAS_NEXT,
+  NEW_EVENT,
 } from "../types";
 
 import axios from "axios";
@@ -145,4 +146,14 @@ export const removeFilter = () => (dispatch) => {
   dispatch({
     type: REMOVE_FILTER,
   });
+};
+
+// Create A New Event
+export const newEvent = (newE) => async (dispatch) => {
+  try {
+    const res = await axios.post("/events", newE);
+    dispatch({ type: NEW_EVENT, payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
 };

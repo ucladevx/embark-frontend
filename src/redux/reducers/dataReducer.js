@@ -11,6 +11,7 @@ import {
   FILTER_POSTS,
   SET_HAS_NEXT,
   SET_NEXT_STRING,
+  NEW_EVENT,
 } from "../types";
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   filter: [],
   nextString: "",
   hasNext: true,
+  events: [],
 };
 
 export default function dataReducer(state = initialState, action) {
@@ -107,6 +109,11 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         posts: postsCopy,
+      };
+    case NEW_EVENT:
+      return {
+        ...state,
+        events: [action.payload, ...state.events],
       };
     default:
       return state;
