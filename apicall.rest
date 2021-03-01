@@ -8,8 +8,8 @@ POST http://localhost:9000/auth/signin
 Content-Type: application/json
 
 {
-    "email": "john1@email.com",
-    "password": "12345qQ!",
+    "email": "embarkemail@gmail.com",
+    "password": "Emp!12345",
     "userType": "student"
 }
 
@@ -24,15 +24,29 @@ Content-Type: application/json
     "userType": "student"
 }
 
+###
+POST http://localhost:9000/auth/google
+Content-Type: application/json
+
+{
+    "type": "signin",
+    "user": "student"
+}
+
 ############ Authorization Needed #################################
 ############ Posts ################################################
 ### Fixing in the backend
 GET http://localhost:9000/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMWI3YWUzMDhmOTNhMWFlMTc0NWMyOSIsIm5hbWUiOiJUZXN0MTAgVGVzdDEwIiwiZW1haWwiOiJ0ZXN0MTBAZ21haWwuY29tIiwiaWF0IjoxNjEyNDEzNjY3LCJleHAiOjE2MjEwNTM2Njd9.3uzWdk0bWii2cYmwQq6xSZ-OpnQSuJTNWRru7dPzbF8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzJlMDlhOGFlYmQ0MjI2ODkxMmZmYiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya2VtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTYxMzk1MDg4NiwiZXhwIjoxNjIyNTkwODg2fQ.-TZJmcfn1tro8kvAO_ThSAmhyDzhwuSicZlPk-i7Drc
 Content-Type: application/json
 
 ### 
-GET http://localhost:9000/isha/pagination
+GET http://localhost:9000/posts?limit=8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzOTA3NzQ4MzJmMjEzYjNmYyIsIm5hbWUiOiJqb2huIHNtYWxsYmVyZzEiLCJlbWFpbCI6ImpvaG4xQGVtYWlsLmNvbSIsImlhdCI6MTYxMjIwNDA4NiwiZXhwIjoxNjIwODQ0MDg2fQ.kT3fUNe433ue1SG89ngnRjk5CErTMBZsH4X3xAeG_Pk
+Content-Type: application/json
+
+###
+GET http://localhost:9000/posts/comments
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzOTA3NzQ4MzJmMjEzYjNmYyIsIm5hbWUiOiJqb2huIHNtYWxsYmVyZzEiLCJlbWFpbCI6ImpvaG4xQGVtYWlsLmNvbSIsImlhdCI6MTYxMjIwNDA4NiwiZXhwIjoxNjIwODQ0MDg2fQ.kT3fUNe433ue1SG89ngnRjk5CErTMBZsH4X3xAeG_Pk
 Content-Type: application/json
 ############ Users ################################################
@@ -42,12 +56,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzO
 Content-Type: application/json
 ###
 POST http://localhost:9000/student/profile 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzOTA3NzQ4MzJmMjEzYjNmYyIsIm5hbWUiOiJqb2huIHNtYWxsYmVyZzEiLCJlbWFpbCI6ImpvaG4xQGVtYWlsLmNvbSIsImlhdCI6MTYxMjE2OTgxMSwiZXhwIjoxNjIwODA5ODExfQ.TBqDaIcaXDvkSUyGTpGY3Bz_XdgmtDHPtWogOTBtmc4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzOTA3NzQ4MzJmMjEzYjNmYyIsIm5hbWUiOiJqb2huIHNtYWxsYmVyZzEiLCJlbWFpbCI6ImpvaG4xQGVtYWlsLmNvbSIsImlhdCI6MTYxMjIwNDA4NiwiZXhwIjoxNjIwODQ0MDg2fQ.kT3fUNe433ue1SG89ngnRjk5CErTMBZsH4X3xAeG_Pk
 Content-Type: application/json
 
 {
     "year": "2023",
     "major": "Computer Science",
-    "tags": "Developer",
+    "tags": ["Developer", "Musician"],
     "linkedIn": "johnsmallberg"
 }

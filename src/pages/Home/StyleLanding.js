@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { colors, handleTagColor } from "../../shared/config";
+import { colors } from "../../shared/config";
 import { Avatar, Button, TextField, Typography } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
+import { handleTagColor } from "../../utils/handleTagColors";
 import LinkEffect from "../../shared/LinkEffect";
 
 export const LandingPage = styled.div`
@@ -10,10 +11,12 @@ export const LandingPage = styled.div`
 
 export const LandingPageWrapper = styled.div`
   margin: 0 auto;
-  display: flex;
-  width: 100vw;
+  display: grid;
+  grid-template-columns: 250px 500px auto;
+  width: 100%;
+  justify-content: center;
   min-height: 100vh;
-  padding: 10px 100px 0 100px;
+  padding: 10px 8vw 0 8vw;
   gap: 35px;
 `;
 
@@ -47,7 +50,7 @@ export const InfoEntryWrapper = styled.div`
   ${LinkEffect}
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   padding: 20px 10px;
 `;
 
@@ -73,7 +76,8 @@ export const FilterWrapper = styled.div`
   box-sizing: border-box;
   margin-top: 20px;
   padding: 20px;
-  height: 225px;
+  max-height: 500px;
+  overflow: auto;
   background: ${colors.white};
   display: flex;
   gap: 20px;
@@ -81,15 +85,22 @@ export const FilterWrapper = styled.div`
   border-radius: 5px;
 `;
 
+export const InteriorFilterWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
 export const FilterObj = styled(Typography)`
   height: 26px;
-  background-color: ${(props) => 
-    handleTagColor(props.tag)};
+  background-color: ${(props) => handleTagColor(props.tag)};
   border-radius: 5px;
   display: flex;
   align-items: center;
   width: fit-content;
   padding: 0 8px;
+  margin-top: 5px;
+  margin-right: 5px;
   font-size: 14px;
 `;
 
@@ -160,6 +171,12 @@ export const CalanderWrapper = styled.div`
   width: 290px;
 `;
 
+export const DialogTextField = styled(TextField)`
+  background: ${colors.gray1};
+  padding: 5px 5px;
+  border-radius: 5px;
+`;
+
 export const EventsWrapper = styled.div`
   background-color: ${colors.white};
   padding: 15px;
@@ -224,8 +241,7 @@ export const PostTagWrapper = styled.div`
 `;
 
 export const PostTag = styled(Button)`
-  background-color: ${(props) => 
-    handleTagColor(props.tag)};
+  background-color: ${(props) => handleTagColor(props.tag)};
   text-transform: none;
   width: fit-content;
   height: 18px;
@@ -233,8 +249,7 @@ export const PostTag = styled(Button)`
   border-radius: 5px;
   padding: 10px;
   &:hover {
-    background-color: ${(props) => 
-      handleTagColor(props.tag)};
+    background-color: ${(props) => handleTagColor(props.tag)};
     opacity: 0.8;
   }
 `;
@@ -270,7 +285,7 @@ export const CommentWrapper = styled.div`
   display: flex;
   width: 100%;
   gap: 20px;
-  padding: 25px;
+  padding: 25px 0;
   background: ${colors.white};
 `;
 

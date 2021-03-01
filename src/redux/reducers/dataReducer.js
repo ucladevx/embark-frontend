@@ -9,12 +9,16 @@ import {
   ADD_FILTER,
   REMOVE_FILTER,
   FILTER_POSTS,
+  SET_HAS_NEXT,
+  SET_NEXT_STRING,
 } from "../types";
 
 const initialState = {
   posts: [],
   post: {},
   filter: [],
+  nextString: "",
+  hasNext: true,
 };
 
 export default function dataReducer(state = initialState, action) {
@@ -24,6 +28,18 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         posts: action.payload,
+      };
+    }
+    case SET_NEXT_STRING: {
+      return {
+        ...state,
+        nextString: action.payload,
+      };
+    }
+    case SET_HAS_NEXT: {
+      return {
+        ...state,
+        hasNext: action.payload,
       };
     }
     case LIKE_POST:
@@ -65,10 +81,7 @@ export default function dataReducer(state = initialState, action) {
     case ADD_FILTER:
       return {
         ...state,
-        filter: [
-          ...state.filter,
-          action.payload
-        ],
+        filter: [...state.filter, action.payload],
       };
     case REMOVE_FILTER:
       return {
@@ -79,20 +92,18 @@ export default function dataReducer(state = initialState, action) {
       };
     case FILTER_POSTS:
       var postsCopy = state.posts;
-      postsCopy = postsCopy.sort(
-        function(post1,post2){
-          for(var i = 0; i < state.filter.length;i++){
-            if(post1.tags.includes(state.filter[i])){
-              if(!post2.tags.includes(state.filter[i])){
-                return -1;
-              }
-            } else if (post2.tags.includes(state.filter[i])){
-              return 1;
+      postsCopy = postsCopy.sort(function (post1, post2) {
+        for (var i = 0; i < state.filter.length; i++) {
+          if (post1.tags.includes(state.filter[i])) {
+            if (!post2.tags.includes(state.filter[i])) {
+              return -1;
             }
+          } else if (post2.tags.includes(state.filter[i])) {
+            return 1;
           }
-          return 0;
         }
-      );
+        return 0;
+      });
       return {
         ...state,
         posts: postsCopy,

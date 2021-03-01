@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { colors } from "../shared/config";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { colors } from '../shared/config';
 
 const NavBarWrapper = styled.div`
   display: flex;
@@ -47,7 +47,7 @@ const UserLogo = styled.div`
 `;
 
 const NavBar = () => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -57,7 +57,7 @@ const NavBar = () => {
     <>
       <NavBarWrapper>
         <NavBarLogo></NavBarLogo>
-        <div style={{ display: "flex", flexGrow: 2, justifyContent: "center" }}>
+        <div style={{ display: 'flex', flexGrow: 2, justifyContent: 'center' }}>
           <SearchBar placeholder="Search Embark" onChange={handleChange} />
         </div>
         <UserLogo></UserLogo>

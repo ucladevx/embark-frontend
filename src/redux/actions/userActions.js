@@ -3,6 +3,8 @@ import {
   SET_UNAUTHENTICATED,
   LOADING_USER,
   MARK_NOTIFICATIONS_READ,
+  AUTH_SIGNUP,
+  AUTH_SIGNIN,
 } from "../types";
 import axios from "axios";
 
@@ -13,17 +15,15 @@ const setAuthorizationHeader = (token) => {
 };
 
 // Login A User
-export const loginUser = (userData, history) => (dispatch) => {
-  axios
-    .post("/login", userData)
-    .then((res) => {
-      setAuthorizationHeader(res.data.token);
-      dispatch(getStudentData());
-      history.push("/");
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+export const loginUser = (userData, history) => async (dispatch) => {
+  try {
+    const res = await axios.post("/auth/signin", userData);
+    setAuthorizationHeader(res.data.token);
+    dispatch(getStudentData());
+    history.push("/landing");
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 // Get all users data
@@ -87,3 +87,28 @@ export const markNotificationsRead = (notificationIds) => (dispatch) => {
     })
     .catch((err) => console.error(err));
 };
+
+export const studentGoogleSignUp = () => async (dispatch) => {
+  try {
+    const res = await axios.post("/auth/google", {
+      type: "signup",
+      user: "student",
+    });
+    dispatch({ type: AUTH_SIGNUP, payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const studentGoogleSignIn = () => async (dispatch) => {
+  try {
+    const res = await axios.post("/auth/google", {
+      type: "signin",
+      user: "student",
+    });
+    dispatch({ type: AUTH_SIGNIN, payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
