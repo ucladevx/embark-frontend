@@ -41,7 +41,7 @@ import { getNextPosts } from "../../redux/actions/dataActions";
 import Interactive from "./Interactive";
 import WriteComment from "./Comment/WriteComment";
 import { CLOSE_COMMENT } from "../../redux/types";
-import { FileViewer } from "react-file-viewer";
+import FileViewer from "react-file-viewer";
 import CommentBox from "./Comment/CommentBox";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
@@ -78,6 +78,11 @@ const Posts = ({ setNewPost }) => {
   const getMorePosts = () => {
     if (hasNext) dispatch(getNextPosts());
   };
+  //for test files, go to https://cors-anywhere.herokuapp.com to enable CORS on non-cors file links, see below for format
+  const testfiles = [
+    "https://cors-anywhere.herokuapp.com/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
+  ];
+
   return (
     <>
       <Comment
@@ -109,13 +114,24 @@ const Posts = ({ setNewPost }) => {
           </PostNameTime>
           <PostTagWrapper>{renderedTags}</PostTagWrapper>
         </PostHeader>
-
         <PostTitle>How do I improve my product knowledge?</PostTitle>
         <PostContent>
           After taking the CS30 series, I realized I could not see myself coding
           for the rest of my life lol so I’m thinking of going into Product! Do
           any of you have any resources/tips on where to get started? Thanks :)
         </PostContent>
+        {testfiles &&
+          testfiles.map((f, i) => {
+            return (
+              <FilesWrapper key={i}>
+                <FileViewer
+                  tag={f}
+                  fileType={f.substring(f.lastIndexOf(".") + 1)}
+                  filePath={f}
+                />
+              </FilesWrapper>
+            );
+          })}
 
         <Interactive />
         <ViewPreviousCommentWrapper>

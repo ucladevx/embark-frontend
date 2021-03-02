@@ -66,17 +66,7 @@ const Home = () => {
   const [newPost, setNewPost] = useState(false);
 
   const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
-  const renderedTags = tags.map((each) => {
-    return (
-      <div key={each.key}>
-        <PostTag tag={each.key}>{each.key}</PostTag>
-      </div>
-    );
-  });
-  //for test files, go to https://cors-anywhere.herokuapp.com to enable CORS on non-cors file links, see below for format
-  const testfiles = [
-    "https://cors-anywhere.herokuapp.com/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
-  ];
+
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);

@@ -7,7 +7,6 @@ import {
   ClubCard,
   ClubCardImage,
   ClubCardCaption,
-  ClubCardNextButton,
   ExploreWrapper,
   ExploreTitle,
   ExploreInfoSeperator,
