@@ -39,9 +39,9 @@ function App() {
             <Switch>
               <Route exact path="/" component={OnBoarding}></Route>
               <Route exact path="/login" component={Login}></Route>
-              <Route exact path="/landing" component={Home}></Route>
+              <Route exact path="/home" component={Home}></Route>
               <Route exact path="/user/:userid" component={Profile}></Route>
-              {/* <Route exact path="/profile" component={Profile}></Route> */}
+              <Route exact path="/profile" component={Profile}></Route>
             </Switch>
           </Router>
         </Provider>

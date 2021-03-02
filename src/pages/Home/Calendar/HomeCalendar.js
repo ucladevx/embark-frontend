@@ -24,7 +24,8 @@ export const styleCalendar = () => {
   MyEvent.style.lineHeight = "25px";
   MyEvent.style.marginTop = "15px";
   MyEvent.style.marginLeft = "6px";
-  Calendar.prepend(MyEvent);
+  MyEvent.id = "MyEvent";
+  if (!document.getElementById("MyEvent")) Calendar.prepend(MyEvent);
   Calendar.style.padding = "10px";
 
   for (let day of [

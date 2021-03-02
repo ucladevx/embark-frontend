@@ -15,7 +15,6 @@ import {
 
 const initialState = {
   posts: [],
-  post: {},
   filter: [],
   nextString: "",
   hasNext: true,
@@ -70,14 +69,6 @@ export default function dataReducer(state = initialState, action) {
         ...state,
         posts: [action.payload, ...state.posts],
       };
-    case SUBMIT_COMMENT:
-      return {
-        ...state,
-        post: {
-          ...state.post,
-          comments: [action.payload, ...state.post.comments],
-        },
-      };
     case ADD_FILTER:
       return {
         ...state,
@@ -90,7 +81,7 @@ export default function dataReducer(state = initialState, action) {
           (eachfilter) => eachfilter !== action.payload
         ),
       };
-    case FILTER_POSTS:
+    case FILTER_POSTS: {
       var postsCopy = state.posts;
       postsCopy = postsCopy.sort(function (post1, post2) {
         for (var i = 0; i < state.filter.length; i++) {
@@ -108,6 +99,7 @@ export default function dataReducer(state = initialState, action) {
         ...state,
         posts: postsCopy,
       };
+    }
     default:
       return state;
   }
