@@ -79,7 +79,7 @@ const Home = () => {
           <LeftContainer>
             <InfoBoxes>
               <InfoEntryWrapper onClick={() => setPage("main")}>
-                <InfoImage src={avatarImg} alt="user"></InfoImage>
+                <InfoImage src={avatarImg} alt="user" onClick={() => history.push("/user/"+user.id)}></InfoImage>
                 <InfoEntryText>{user.name}</InfoEntryText>
               </InfoEntryWrapper>
               <InfoSeperator></InfoSeperator>
