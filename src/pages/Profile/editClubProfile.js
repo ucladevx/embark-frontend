@@ -130,20 +130,20 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescri
       </TextFieldWrapper>
       <TextFieldWrapper>
       <BoldTypography sz={"16px"}>Relevant Industries:</BoldTypography>
-            <ExploreFilter>
+            {/* <ExploreFilter>
             <ExploreObj bgcolor={colors.red1}>
               Product Management
             </ExploreObj>
             <ExploreObj bgcolor={colors.darkyellow}>
               Product Design
             </ExploreObj>
-            </ExploreFilter> 
+            </ExploreFilter>  */}
 
             {/* <TextField
           select
           value="Select all that apply"
           onChange={handleIndustries}
-          InputProps={{ disableUnderline: true }}
+          InputProps={{ disableUnderline: true }}q
           SelectProps={{
             native: true,
           }}
@@ -181,6 +181,7 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescri
         <TextFieldWrapper>
         <BoldTypography  sz={"16px"}>Website:</BoldTypography>
           <DialogTextField
+            value={currentWebsite}
             autoFocus
             margin="dense"
             id="name"

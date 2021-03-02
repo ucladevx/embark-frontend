@@ -5,6 +5,7 @@ import {
   MARK_NOTIFICATIONS_READ,
   AUTH_SIGNUP,
   AUTH_SIGNIN,
+  SET_ERRORS,
 } from "../types";
 import axios from "axios";
 
@@ -22,7 +23,7 @@ export const loginUser = (userData, history) => async (dispatch) => {
     dispatch(getStudentData());
     history.push("/landing");
   } catch (err) {
-    console.error(err);
+    dispatch({ type: SET_ERRORS, payload: err.response.data });
   }
 };
 
@@ -30,9 +31,10 @@ export const loginUser = (userData, history) => async (dispatch) => {
 export const getStudentData = () => async (dispatch) => {
   try {
     const res = await axios.get("/student/profile");
+    const payload = { ...res.data.student, userType: "student" };
     dispatch({
       type: SET_USER,
-      payload: res.data.student,
+      payload,
     });
   } catch (err) {
     console.error(err);
@@ -40,14 +42,20 @@ export const getStudentData = () => async (dispatch) => {
 };
 
 // Sign Up a user
-export const signupStudent = (newUserData) => async (dispatch) => {
+export const signupStudent = (newUserData, handleUser, handleStep) => async (
+  dispatch
+) => {
   try {
     console.log(newUserData);
     const res = await axios.post("/auth/signup", newUserData);
     setAuthorizationHeader(res.data.token);
     dispatch(getStudentData());
+    console.log("run");
+    handleUser(newUserData);
+    handleStep(1);
   } catch (err) {
-    console.error(err);
+    console.log(err);
+    dispatch({ type: SET_ERRORS, payload: err.response.data });
   }
 };
 
@@ -91,10 +99,18 @@ export const markNotificationsRead = (notificationIds) => (dispatch) => {
 
 export const studentGoogleSignUp = () => async (dispatch) => {
   try {
-    const res = await axios.post("/auth/google", {
-      type: "signup",
-      user: "student",
-    });
+    const res = await axios.post(
+      "/auth/google",
+      {
+        type: "signup",
+        user: "student",
+      },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    );
     dispatch({ type: AUTH_SIGNUP, payload: res.data });
   } catch (err) {
     console.error(err);
@@ -112,4 +128,3 @@ export const studentGoogleSignIn = () => async (dispatch) => {
     console.error(err);
   }
 };
-

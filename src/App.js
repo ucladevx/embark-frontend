@@ -40,9 +40,8 @@ function App() {
             <Switch>
               <Route exact path="/" component={OnBoarding}></Route>
               <Route exact path="/login" component={Login}></Route>
-              <Route exact path="/landing" component={Home}></Route>
-              {/* <Route exact path="/user/:userid" component={Profile}></Route> */}
-              <Route exact path="/user-profile" component={UserProfile}></Route>
+              <Route exact path="/home" component={Home}></Route>
+              <Route exact path="/user/:userid" component={UserProfile}></Route>
               <Route exact path="/club-profile" component={ClubProfile}></Route>
             </Switch>
           </Router>

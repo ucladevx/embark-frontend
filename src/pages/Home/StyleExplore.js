@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { colors } from '../../shared/config';
-import { Typography } from '@material-ui/core';
-import { BoldTypography } from '../../shared/Typography';
+import styled from "styled-components";
+import { colors } from "../../shared/config";
+import { Typography } from "@material-ui/core";
+import { BoldTypography } from "../../shared/Typography";
 
 export const ClubCardsContainer = styled.div`
   display: flex;
@@ -13,9 +13,11 @@ export const ClubCardsContainer = styled.div`
 export const ClubCard = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 40px;
 `;
 export const ClubCardImage = styled.img`
   width: 160px;
+  max-width: 160px;
   height: 150px;
   border: none;
   border-top-left-radius: 10px;

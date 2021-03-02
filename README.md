@@ -84,7 +84,7 @@ export default App;
 - datareducer: handle action types for any data flow in the app, including posts, events, and filters...
 - userreducer: handle action types for any user-specific actions, including authentication of users, users' industries...
 
-### Actiosn
+### Action
 - UserActions.js: action creators to handle user-related actions (corresponds to the previous reducers)
 - DataActions.js: action creators to handle data-related actions
 Note: ui doesn't have action for itself, all ui-related handling is included in these two action js files.

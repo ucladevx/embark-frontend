@@ -127,7 +127,11 @@ const ClubProfile = (props) => {
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>
-
+      <ProfileWrapper><QuestionBox></QuestionBox></ProfileWrapper>
+      <ProfileWrapper><QuestionBox></QuestionBox></ProfileWrapper>
+      <ProfileWrapper><QuestionBox></QuestionBox></ProfileWrapper>
+      <ProfileWrapper><QuestionBox></QuestionBox></ProfileWrapper>
+      <ProfileWrapper><QuestionBox></QuestionBox></ProfileWrapper>
       </MiddleContainer>
     </>
   );

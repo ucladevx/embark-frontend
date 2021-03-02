@@ -1,10 +1,12 @@
-import React from 'react';
+import React from "react";
+import OwlCarousel from "react-owl-carousel";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
 import {
   ClubCardsContainer,
   ClubCard,
   ClubCardImage,
   ClubCardCaption,
-  ClubCardNextButton,
   ExploreWrapper,
   ExploreTitle,
   ExploreInfoSeperator,
@@ -24,14 +26,13 @@ import {
   UpcomingItemDate,
   UpcomingItemGoingBtn,
   ViewMoreLink,
-} from './StyleExplore';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+} from "./StyleExplore";
 // Images
-import avatarImg from '../../images/avatar.svg';
-import devxImg from '../../images/devx.jpeg';
-import dbImg from '../../images/dailyBruin.png';
-import consultingImg from '../../images/bruinConsulting.png';
-import { colors } from '../../shared/config';
+import avatarImg from "../../images/avatar.svg";
+import devxImg from "../../images/devx.jpeg";
+import dbImg from "../../images/dailyBruin.png";
+import consultingImg from "../../images/bruinConsulting.png";
+import { colors } from "../../shared/config";
 
 const Explore = () => {
   return (
@@ -51,27 +52,57 @@ const Explore = () => {
 
       {/* CLUB CARDS CONTAINER: */}
       <ClubCardsContainer>
-        <ClubCard>
-          <ClubCardImage src={devxImg} />
-          <ClubCardCaption>UCLA DevX</ClubCardCaption>
-        </ClubCard>
-        <ClubCard>
-          <ClubCardImage src={consultingImg} />
-          <ClubCardCaption>Bruin Consulting</ClubCardCaption>
-        </ClubCard>
-        <ClubCard>
-          <ClubCardImage src={dbImg} />
-          <ClubCardCaption>Daily Bruin</ClubCardCaption>
-        </ClubCard>
-        <ClubCardNextButton>
-          {' '}
-          <ChevronRightIcon style={{ fontSize: '30px' }} />{' '}
-        </ClubCardNextButton>
+        <OwlCarousel
+          loop={true}
+          autoplay={true}
+          autoplaySpeed={1000}
+          autoplayTimeout={2500}
+          items={2}
+          dots={false}
+          className="owl-theme"
+        >
+          <div>
+            <ClubCard>
+              <ClubCardImage src={devxImg} />
+              <ClubCardCaption>UCLA DevX</ClubCardCaption>
+            </ClubCard>
+          </div>
+          <div>
+            <ClubCard>
+              <ClubCardImage src={consultingImg} />
+              <ClubCardCaption>Bruin Consulting</ClubCardCaption>
+            </ClubCard>
+          </div>
+          <div>
+            <ClubCard>
+              <ClubCardImage src={devxImg} />
+              <ClubCardCaption>UCLA DevX</ClubCardCaption>
+            </ClubCard>
+          </div>
+          <div>
+            <ClubCard>
+              <ClubCardImage src={dbImg} />
+              <ClubCardCaption>Daily Bruin</ClubCardCaption>
+            </ClubCard>
+          </div>
+          <div>
+            <ClubCard>
+              <ClubCardImage src={devxImg} />
+              <ClubCardCaption>UCLA DevX</ClubCardCaption>
+            </ClubCard>
+          </div>
+          <div>
+            <ClubCard>
+              <ClubCardImage src={dbImg} />
+              <ClubCardCaption>Daily Bruin</ClubCardCaption>
+            </ClubCard>
+          </div>
+        </OwlCarousel>
       </ClubCardsContainer>
 
       <ExploreInfoSeperator></ExploreInfoSeperator>
 
-      <ExploreTitle style={{ 'margin-top': 20 }}>Discover Events</ExploreTitle>
+      <ExploreTitle style={{ "margin-top": 20 }}>Discover Events</ExploreTitle>
       <ExploreSubtitle>Events happening soon</ExploreSubtitle>
 
       <UpcomingItemBox>

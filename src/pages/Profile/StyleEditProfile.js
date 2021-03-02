@@ -23,7 +23,7 @@ import LinkEffect from "../../shared/LinkEffect";
 
 export const EditProfileContainer = styled(Dialog)`
   border-radius: 20px;
-  margin:1.5em auto;
+  margin:0.5em auto;
   height: fit-content;
   width: fit-content;
   max-width: 28vw;
@@ -67,6 +67,7 @@ export const ChangeAvatarLink = styled(Typography)`
 
 export const EditCoverImage = styled.img`
   max-height: 10vh;
+  padding: 0 1em;
   ${'' /* width: 20em;
   height: 10vh;
   left: 542px;
@@ -114,7 +115,7 @@ export const DialogTextField = styled(TextField)`
 export const TextFieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: auto 1em;
+  margin: auto 0.5em;
   gap: 10px;
   min-width: 4em;
   margin-top: 20px;
