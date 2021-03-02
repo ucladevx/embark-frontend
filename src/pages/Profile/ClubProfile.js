@@ -16,6 +16,7 @@ import {
   ExploreFilter,
   ExploreObj,
   ClubWebsiteButton,
+  DescriptionTypography,
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
@@ -30,6 +31,7 @@ const ClubProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
   const { userid } = useParams();
+  const [description, SetDescription] = useState("Tech Club");
   const [About, SetAbout] = useState("Have you ever felt that all you were learning at UCLA was theory, with little opportunities to build out practical applications? DevX is a brand new program dedicated to solving that very problem! Build out real-world projects to help tackle pressing problems frustrating the UCLA community, grow your technical skills by pairing up with experienced students, and build a network that lasts beyond graduation.")
   const [website, SetWebsite] = useState("https://ucladevx.com/")
 
@@ -39,6 +41,10 @@ const ClubProfile = (props) => {
 
   function handleWebsite(newWebsite){
       SetWebsite(newWebsite);
+  }
+
+  function handleDescription(newDescription){
+    SetDescription(newDescription);
   }
 
   const AboutContent = () => {
@@ -68,7 +74,10 @@ const ClubProfile = (props) => {
         handleClose={() => seteditProfile(false)}
         EditAbout = {handleAbout}
         EditWebsite = {handleWebsite}
-        currentabout = {About}
+        EditDescription = {handleDescription}
+        currentAbout = {About}
+        currentWebsite = {website}
+        currentDescription = {description}
       ></EditClubProfile>
       <NavBar></NavBar>
       <MiddleContainer>
@@ -79,6 +88,7 @@ const ClubProfile = (props) => {
             <ProfileAvatar></ProfileAvatar>
             <NameDescription>
               <TitleTypography>UCLA DevX</TitleTypography>
+              <DescriptionTypography>{description}</DescriptionTypography>
             </NameDescription>
             {/* <NameDescription> */}
               <ClubWebsiteButton href={website}>Club Website</ClubWebsiteButton>

@@ -28,7 +28,7 @@ import {
   Suggested,
   DialogTextField,
   TextFieldWrapper,
-  PostBtn,
+  DoneBtn,
 } from "./StyleEditProfile"
 import lawn from "../../images/lawn.png";
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
@@ -194,9 +194,9 @@ const EditProfile = ({ open, handleClose }) => {
       </EditProfileContent>
 
       <EditProfileDone>
-        <PostBtn onClick={handleSubmit} >
+        <DoneBtn onClick={handleSubmit} >
           Done
-        </PostBtn>
+        </DoneBtn>
       </EditProfileDone>
 
     </EditProfileContainer>

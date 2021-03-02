@@ -28,11 +28,9 @@ export const MiddleContainer = styled.div`
   flex: 2 1 auto;
 `;
 
-// export const NameDescriptionWrapper = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   margin-left: 15px;
-// `;
+export const DescriptionTypography = styled(Typography)`
+  margin-top: -10px;
+`;
 export const ProfileAvatar = styled(Avatar)`
   width: 5vw;
   height: 5vw;

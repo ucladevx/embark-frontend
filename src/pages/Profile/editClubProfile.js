@@ -5,6 +5,7 @@ import {
   InputLabel,
   Checkbox,
   ListItemText,
+  TextField,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
@@ -28,13 +29,13 @@ import {
   Suggested,
   DialogTextField,
   TextFieldWrapper,
-  PostBtn,
+  DoneBtn,
 } from "./StyleEditProfile"
 import lawn from "../../images/lawn.png";
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, currentabout }) => {
+const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescription, currentAbout, currentWebsite, currentDescription }) => {
   const years = ["2021", "2022", "2023", "2024"];
   const industry = ["Business", "Computer Science", "Marketing", "Product Design", "Product Management", "Other"];
 
@@ -43,11 +44,11 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, currentabo
   const [tags, setTags] = useState("")
   const [profilePicURL, setProfilePicURL] = useState("")
   const [coverPicURL, setcoverPicURL] = useState("")
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(currentDescription);
   //const [tags, setTags] = useState(user.tags);
   const [industries, setIndustries] = useState([]);  
-  const [website, setWebsite] = useState("");
-  const [about, setAbout] = useState(currentabout)
+  const [website, setWebsite] = useState(currentWebsite);
+  const [about, setAbout] = useState(currentAbout)
 
 
   // Redux
@@ -74,6 +75,8 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, currentabo
   const handleSubmit = async () => {
     EditAbout(about);
     EditWebsite(website);
+    EditDescription(description);
+
     const updatedProfile = {
         name,
         tags,
@@ -106,6 +109,7 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, currentabo
       <TextFieldWrapper>
         <BoldTypography  sz={"16px"}>Description:</BoldTypography>
         <DialogTextField
+            value={description}
             autoFocus
             margin="dense"
             id="name"
@@ -134,14 +138,35 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, currentabo
               Product Design
             </ExploreObj>
             </ExploreFilter> 
+
+            {/* <TextField
+          select
+          value="Select all that apply"
+          onChange={handleIndustries}
+          InputProps={{ disableUnderline: true }}
+          SelectProps={{
+            native: true,
+          }}
+          variant="filled"
+        >
+          {industry.map((name) => (
+            <MenuItem key={name} value={name}>
+                <Checkbox checked = {industries.includes(name)} color="default"/>
+                <ListItemText primary={name} />
+            </MenuItem>
+          ))}
+        </TextField> */}
+
+
+
             <FormControlC>
-              <InputLabel>Select all that apply</InputLabel>
+              <InputLabel >Select all that apply</InputLabel>
               <Select 
-              multiple 
-              value={industries} 
+              disableUnderline
+              // defaultValue=""
               onChange={handleIndustries}
               >
-                <Suggested>Suggested</Suggested>
+                {/* <Suggested>Suggested</Suggested> */}
                 {industry.map((name, index) => (
                   <MenuItem key={name} value={name}>
                     <Checkbox checked = {industries.includes(name)} color="default"/>
@@ -199,9 +224,9 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, currentabo
       </EditProfileContent>
 
       <EditProfileDone>
-        <PostBtn onClick={handleSubmit} >
+        <DoneBtn onClick={handleSubmit} >
           Done
-        </PostBtn>
+        </DoneBtn>
       </EditProfileDone>
 
     </EditProfileContainer>

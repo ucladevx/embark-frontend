@@ -13,6 +13,7 @@ import {
   Divider,
   Avatar,
 } from "@material-ui/core";
+import { ActionButton } from "../../shared/Buttons";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import styled from "styled-components";
@@ -120,15 +121,20 @@ export const TextFieldWrapper = styled.div`
   position: relative;
 `;
 
-export const PostBtn = styled(Button)`
-  color: #FFFFFF;
-  font-size: 16px;
-  font-weight: bold;
-  width: 122px;
-  height: 43px;
-  background-color: #5473BB;
+// export const PostBtn = styled(Button)`
+//   color: #FFFFFF;
+//   font-size: 16px;
+//   font-weight: bold;
+//   width: 122px;
+//   height: 43px;
+//   background-color: #5473BB;
+//   margin: auto;
+//   border-radius: 8px;
+
+// `;
+
+export const DoneBtn = styled(ActionButton)`
+  width: 120px;
+  height: 40px;
   margin: auto;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
 `;
