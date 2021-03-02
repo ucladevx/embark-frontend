@@ -146,7 +146,7 @@ const Home = () => {
 
           <MiddleContainer>
             {page === "main" ? (
-              <Posts></Posts>
+              <Posts setNewPost={setNewPost}></Posts>
             ) : page === "explore" ? (
               <Explore></Explore>
             ) : (
