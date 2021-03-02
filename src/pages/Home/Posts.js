@@ -24,12 +24,13 @@ import {
   PostTime,
   PostUserName,
   PostTag,
+  FilesWrapper,
 } from "./StyleLanding";
 import { CircularProgress } from "@material-ui/core";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { colors } from "../../shared/config";
-import Comment from "./Comment";
+import Comment from "./Comment/Comment";
 
 // Infinite Scroll
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -38,15 +39,17 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import dayjs from "dayjs";
 import { getNextPosts } from "../../redux/actions/dataActions";
 import Interactive from "./Interactive";
-import WriteComment from "./WriteComment";
+import WriteComment from "./Comment/WriteComment";
 import { CLOSE_COMMENT } from "../../redux/types";
+import { FileViewer } from "react-file-viewer";
+import CommentBox from "./Comment/CommentBox";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 const Circle = styled(CircularProgress)`
   margin: 10px;
-  color: ${colors.blue1};
+  color: ${colors.blue3};
 `;
 
 const Loader = () => {
@@ -184,33 +187,17 @@ const Posts = ({ setNewPost }) => {
               <PostContent>{p.body}</PostContent>
 
               <Interactive post_id={p._id}></Interactive>
-              <ViewPreviousCommentWrapper>
-                {p.comments && p.comments.length > 0 && (
-                  <ViewCommentLink>View previous comments</ViewCommentLink>
-                )}
-                <>
-                  {p.comments &&
-                    p.comments.map((c) => (
-                      <PreviousCommentItem>
-                        <PreviousCommentAvatar></PreviousCommentAvatar>
-                        <div>
-                          <PreviousCommentContent bgcolor={colors.gray1}>
-                            <PreviousCommentTitle>
-                              {c.authorEmail}
-                            </PreviousCommentTitle>
-                            <PreviousCommentText>{c.body}</PreviousCommentText>
-                          </PreviousCommentContent>
-                          <LikeReply>
-                            <LikeReplyText>Like</LikeReplyText>
-                            <LikeReplyText disabled>·</LikeReplyText>
-                            <LikeReplyText>Reply</LikeReplyText>
-                          </LikeReply>
-                        </div>
-                      </PreviousCommentItem>
-                    ))}
-                </>
-                <ViewCommentLink>View More comments</ViewCommentLink>
-              </ViewPreviousCommentWrapper>
+              {p.files &&
+                p.files.map((f) => (
+                  <FilesWrapper>
+                    <FileViewer
+                      tag={f}
+                      fileType={f.substring(f.lastIndexOf(".") + 1)}
+                      filePath={f}
+                    />
+                  </FilesWrapper>
+                ))}
+              <CommentBox comments={p.comments}></CommentBox>
               <WriteComment post_id={p._id}></WriteComment>
             </PostWrapper>
           );

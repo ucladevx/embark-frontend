@@ -7,6 +7,7 @@ export const styleCalendar = () => {
   const Saturday = document.querySelector('[title="Saturday"]');
   const Sunday = document.querySelector('[title="Sunday"]');
   const Calendar = document.querySelector(".react-calendar");
+  const MyEvent = document.createElement("div");
   const month = document.querySelector(".react-calendar__navigation__label ");
   // handle Month
   const monthPlain = document.createElement("div");
@@ -17,17 +18,14 @@ export const styleCalendar = () => {
   monthPlain.className = "month-plain";
   Calendar.prepend(monthPlain);
 
-  if (!document.getElementById("MyEvent")) {
-    const MyEvent = document.createElement("div");
-    MyEvent.id = "MyEvent";
-    MyEvent.textContent = "My Events";
-    MyEvent.style.fontWeight = "Bold";
-    MyEvent.style.fontSize = "18px";
-    MyEvent.style.lineHeight = "25px";
-    MyEvent.style.marginTop = "15px";
-    MyEvent.style.marginLeft = "6px";
-    Calendar.prepend(MyEvent);
-  }
+  MyEvent.textContent = "My Events";
+  MyEvent.style.fontWeight = "Bold";
+  MyEvent.style.fontSize = "18px";
+  MyEvent.style.lineHeight = "25px";
+  MyEvent.style.marginTop = "15px";
+  MyEvent.style.marginLeft = "6px";
+  MyEvent.id = "MyEvent";
+  if (!document.getElementById("MyEvent")) Calendar.prepend(MyEvent);
   Calendar.style.padding = "10px";
 
   for (let day of [

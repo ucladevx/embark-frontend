@@ -108,6 +108,11 @@ export const FilterTitle = styled(BoldTypography)`
   font-size: 18px;
 `;
 
+export const FilesWrapper = styled.div`
+  overflow: scroll;
+  max-height: 200px;
+`;
+
 export const AddFilter = styled(Typography)`
   text-transform: none;
   align-self: flex-end;
@@ -341,4 +346,17 @@ export const GoingBtn = styled(Button)`
   color: ${(props) => props.fcolor};
   position: absolute;
   right: 1px;
+`;
+
+export const ViewPost = styled.div`
+  margin-top: 20px;
+  border-radius: 5px;
+`;
+
+export const CommentWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  padding: 25px 0;
+  background: ${colors.white};
 `;

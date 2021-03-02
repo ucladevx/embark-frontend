@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Dialog } from "@material-ui/core";
-import TypeBox from "../../shared/TypeBox";
+import TypeBox from "../../../shared/TypeBox";
 import styled from "styled-components";
-import { header4 } from "../../shared/config";
+import { header4 } from "../../../shared/config";
 import SendIcon from "@material-ui/icons/Send";
-import { TipButton } from "../../shared/Buttons";
+import { TipButton } from "../../../shared/Buttons";
 import { useDispatch, useSelector } from "react-redux";
-import { submitComment } from "../../redux/actions/dataActions";
+import { submitComment } from "../../../redux/actions/dataActions";
 
 const CommentTitle = styled.div`
   ${header4}

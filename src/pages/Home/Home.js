@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
-import "./calendar.css";
 import Calendar from "react-calendar";
 // Styles
+import "./Calendar/HomeCalendar.css";
+
 import {
   LandingPage,
   LandingPageWrapper,
@@ -11,6 +12,8 @@ import {
   FilterTitle,
   FilterObj,
   FilterWrapper,
+  InteriorFilterWrapper,
+  PostTag,
   AddFilter,
   EventAvatar,
   EventDescription,
@@ -27,7 +30,6 @@ import {
   MiddleContainer,
   EventTypography,
   GoingBtn,
-  InteriorFilterWrapper,
   DialogTextField,
 } from "./StyleLanding";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
@@ -37,35 +39,44 @@ import bookImg from "../../images/book.svg";
 import compassImg from "../../images/compass.svg";
 // Utils
 import { colors } from "../../shared/config";
-import { styleCalendar } from "./calendar";
-import { useSelector, useDispatch } from "react-redux";
-import { getPosts } from "../../redux/actions/dataActions";
-import NewPost from "../../components/NewPost";
-
-import Explore from "./Explore";
-import Posts from "./Posts";
-import {
-  removeFilter,
-  addFilter,
-  filterPosts,
-} from "../../redux/actions/dataActions";
-
-// Dayjs
 import dayjs from "dayjs";
-import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getPosts,
+  filterPosts,
+  addFilter,
+  removeFilter,
+} from "../../redux/actions/dataActions";
+import NewPost from "../../components/NewPost";
+import Explore from "./Explore";
+import { styleCalendar } from "./Calendar/HomeCalendar";
+import Posts from "./Posts";
+// Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 const Home = () => {
   // Redux
-  const user = useSelector((state) => state.user);
   const filters = useSelector((state) => state.data.filter);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
-  const history = useHistory();
 
+  const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
+  const renderedTags = tags.map((each) => {
+    return (
+      <div key={each.key}>
+        <PostTag tag={each.key}>{each.key}</PostTag>
+      </div>
+    );
+  });
+  //for test files, go to https://cors-anywhere.herokuapp.com to enable CORS on non-cors file links, see below for format
+  const testfiles = [
+    "https://cors-anywhere.herokuapp.com/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
+  ];
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
@@ -74,15 +85,10 @@ const Home = () => {
     styleCalendar();
   }, []);
 
-  useEffect(() => {
-    if (!window.localStorage.getItem("AuthToken")) history.push("/");
-  }, [history]);
-
   const removeUpdateFilters = (t) => {
     dispatch(removeFilter(t));
     dispatch(filterPosts());
   };
-
   const addUpdateFilter = (t) => {
     dispatch(addFilter(t));
     dispatch(filterPosts());
@@ -101,7 +107,7 @@ const Home = () => {
         <LandingPageWrapper>
           <LeftContainer>
             <InfoBoxes>
-              <InfoEntryWrapper onClick={() => history.push("/profile")}>
+              <InfoEntryWrapper onClick={() => setPage("main")}>
                 <InfoImage src={avatarImg} alt="user"></InfoImage>
                 <InfoEntryText>{user.name}</InfoEntryText>
               </InfoEntryWrapper>
@@ -150,7 +156,7 @@ const Home = () => {
 
           <MiddleContainer>
             {page === "main" ? (
-              <Posts setNewPost={setNewPost}></Posts>
+              <Posts></Posts>
             ) : page === "explore" ? (
               <Explore></Explore>
             ) : (
@@ -160,7 +166,7 @@ const Home = () => {
 
           <RightContainer>
             <CalanderWrapper>
-              <Calendar calendarType={"US"}></Calendar>
+              <Calendar></Calendar>
             </CalanderWrapper>
 
             <EventsWrapper>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FileUpload from "./FileUpload.js";
-import FilePreviewer from "react-file-previewer";
+import ImageUpload from "./ImageUpload.js";
+import FileViewer from "react-file-viewer";
 import {
   Dialog,
   DialogContent,
@@ -16,6 +17,7 @@ import {
   FormControl,
   Divider,
 } from "@material-ui/core";
+
 import { BoldTypography } from "../shared/Typography";
 import { colors } from "../shared/config";
 import { useDispatch, useSelector } from "react-redux";
@@ -64,10 +66,18 @@ const PostBtn = styled(Button)`
   background-color: ${colors.gray2};
 `;
 
+export const FilesWrapper = styled.div`
+  overflow: scroll;
+  max-height: 500px;
+  min-height: 50px;
+`;
+
 const NewPost = ({ open, handleClose }) => {
   const [industry, setIndustry] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  var form = null;
+  var imgForm = null;
   const [selectedFile, setSelectedFile] = useState(null);
   // Redux
   const dispatch = useDispatch();
@@ -87,18 +97,93 @@ const NewPost = ({ open, handleClose }) => {
 
   const handleFileInput = (e) => {
     setSelectedFile(e.target.files[0]);
-    console.log(selectedFile);
   };
 
   const handleSubmit = async () => {
-    const post = {
-      title,
-      body: description,
-      tags: [industry],
-      files: [selectedFile],
-    };
+    var post = null;
+    //making sure not to send null objects in the post request
+    if (form === null) {
+      if (imgForm === null) {
+        post = {
+          title: title,
+          body: description,
+          tags: [industry],
+        };
+      } else {
+        post = {
+          title: title,
+          body: description,
+          tags: [industry],
+          files: [imgForm],
+        };
+      }
+    } else {
+      if (imgForm === null) {
+        post = {
+          title: title,
+          body: description,
+          tags: [industry],
+          files: [form],
+        };
+      } else {
+        post = {
+          title: title,
+          body: description,
+          tags: [industry],
+          files: [form, imgForm],
+        };
+      }
+    }
+
     dispatch(newPost(post));
+    //Clean up component contents
+    form = null;
+    imgForm = null;
+    setFile({ url: PDF1_URL });
+    setFileType("pdf");
+    setImage({ url: PDF1_URL });
     handleClose();
+  };
+
+  //File handling
+  const PDF1_URL =
+    "https://cors-anywhere.herokuapp.com/http://africau.edu/images/default/sample.pdf";
+  const [file, setFile] = useState({ url: PDF1_URL });
+  const [fileType, setFileType] = useState("pdf");
+
+  const onFileChange = (event) => {
+    const fileReader = new window.FileReader();
+    const file = event.target.files[0];
+    console.log(file);
+
+    setFile({ url: PDF1_URL });
+    setFileType("pdf");
+
+    setFileType(file.name.substring(file.name.lastIndexOf(".") + 1));
+    console.log(fileType);
+    let myForm = document.getElementById("myForm");
+    form = new FormData(myForm);
+    fileReader.onload = (fileLoad) => {
+      const { result } = fileLoad.target;
+      setFile({ url: result });
+    };
+
+    fileReader.readAsDataURL(file);
+  };
+
+  //Image handling
+  const [image, setImage] = useState({ url: PDF1_URL });
+  const onImageChange = (event) => {
+    const imgReader = new window.FileReader();
+    const img = event.target.files[0];
+    let myForm = document.getElementById("myImgForm");
+    imgForm = new FormData(myForm);
+    imgReader.onload = (fileLoad) => {
+      const { result } = fileLoad.target;
+      setImage({ url: result });
+    };
+
+    imgReader.readAsDataURL(img);
   };
 
   return (
@@ -158,10 +243,28 @@ const NewPost = ({ open, handleClose }) => {
             onChange={handleDescription}
           />
         </TextFieldWrapper>
+        {file.url !== PDF1_URL ? (
+          <>
+            <FilesWrapper>
+              <FileViewer filePath={file} fileType={fileType} />
+            </FilesWrapper>
+          </>
+        ) : (
+          <></>
+        )}
+        {image.url !== PDF1_URL ? (
+          <>
+            <FilesWrapper>
+              <img src={image.url} height="500px" alt="" />
+            </FilesWrapper>
+          </>
+        ) : (
+          <></>
+        )}
       </DialogContent>
       <DialogActions>
-        {/*<FilePreviewer file={selectedFile}/>*/}
-        <FileUpload handleFileInput={handleFileInput} />
+        <FileUpload handleFileInput={onFileChange} />
+        <ImageUpload handleImageInput={onImageChange} />
         <PostBtn onClick={handleSubmit} color="primary">
           Post
         </PostBtn>
