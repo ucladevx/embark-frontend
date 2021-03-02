@@ -8,11 +8,14 @@ import {
   Typography,
   FormControl,
 } from "@material-ui/core";
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import { BoldTypography } from "../shared/Typography";
 import { colors } from "../shared/config";
 import { useDispatch, useSelector } from "react-redux";
 import { newEvent } from "../redux/actions/dataActions";
 import styled from "styled-components";
+import "react-datetime/css/react-datetime.css";
+import Datetime from "react-datetime";
 
 const DialogTextField = styled(TextField)`
   background: ${colors.gray1};
@@ -28,6 +31,13 @@ const TextFieldWrapper = styled.div`
   margin-top: 20px;
 `;
 
+const TimeWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 43px;
+  justify-content: center;
+`;
+
 const PostBtn = styled(Button)`
   color: ${colors.black};
   font-size: 16px;
@@ -40,6 +50,7 @@ const PostBtn = styled(Button)`
 const NewEvent = ({ open, handleClose }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [time, setTime] = useState("");
   // Redux
   const dispatch = useDispatch();
 
@@ -51,10 +62,16 @@ const NewEvent = ({ open, handleClose }) => {
     setDescription(e.target.value);
   };
 
+  const handleTime = (moment) => {
+    setTime(moment);
+    console.log(time);
+  };
+
   const handleSubmit = async () => {
     const event = {
       title,
       body: description,
+      datetime: time,
     };
     dispatch(newEvent(event));
     handleClose();
@@ -81,6 +98,13 @@ const NewEvent = ({ open, handleClose }) => {
             }}
             onChange={handleTitle}
           />
+          <TimeWrapper>
+            <AccessTimeIcon/>
+            <Datetime 
+              onChange = {handleTime}
+            />
+          </TimeWrapper>
+          
           <DialogTextField
             placeholder="Description"
             rows={4}
