@@ -14,15 +14,112 @@ import {
 } from "@material-ui/core";
 import { BoldTypography } from "../shared/Typography";
 import { colors } from "../shared/config";
-
-// imports from Profile Page
 import { ExploreFilter, ExploreObj } from "../pages/Profile/StyleProfile";
+
+// Import Google API
+import { gapi } from "gapi-script";
+
+// Client ID and API key from the Developer Console
+const CLIENT_ID = process.env.REACT_APP_GOOGLE_DRIVE_CLIENT_ID;
+const API_KEY = process.env.REACT_APP_GOOGLE_DRIVE_API_KEY;
+
+// Array of API discovery doc URLs for APIs used by the quickstart
+var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
+
+// Authorization scopes required by the API; multiple scopes can be
+// included, separated by spaces.
+var SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly';
 
 const a11yProps = (index) => {
   return {
     id: `full-width-tab-${index}`,
     "aria-controls": `full-width-tabpanel-${index}`,
   };
+};
+
+// Google Drive Upload Part
+const DriveUpload = () => {
+  const [listDocumentsVisible, setListDocumentsVisibility] = useState(false);
+  const [documents, setDocuments] = useState([]);
+  const [isLoadingGoogleDriveApi, setIsLoadingGoogleDriveApi] = useState(false);
+  const [isFetchingGoogleDriveFiles, setIsFetchingGoogleDriveFiles] = useState(false);
+  const [signedInUser, setSignedInUser] = useState();
+
+  const handleAuthClick = (event) => {
+    gapi.auth2.getAuthInstance().signIn();
+  };
+
+  const updateSigninStatus = (isSignedIn) => {
+    if (isSignedIn) {
+      // Set the signed in user
+      setSignedInUser(gapi.auth2.getAuthInstance().currentUser);
+      setIsLoadingGoogleDriveApi(false);
+      listFiles();
+    } else {
+      // prompt user to sign in
+      handleAuthClick();
+    }
+  };
+
+  const listFiles = (searchTerm = null) => {
+    setIsFetchingGoogleDriveFiles(true);
+    gapi.client.drive.files
+      .list({
+        pageSize: 10,
+        fields: 'nextPageToken, files(id, name, mimeType, modifiedTime)',
+        q: searchTerm,
+      })
+      .then(function (response) {
+        setIsFetchingGoogleDriveFiles(false);
+        setListDocumentsVisibility(true);
+        const res = JSON.parse(response.body);
+        setDocuments(res.files);
+        console.log(documents);
+      });
+  };
+
+  const initClient = () => {
+    setIsLoadingGoogleDriveApi(true);
+    gapi.client
+      .init({
+        apiKey: API_KEY,
+        clientId: CLIENT_ID,
+        discoveryDocs: DISCOVERY_DOCS,
+        scope: SCOPES,
+      })
+      .then(
+        function () {
+          // Listen for sign-in state changes.
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+          // Handle the initial sign-in state.
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+        },
+        function (error) {
+            console.log(error);
+        }
+      );
+  };
+
+  const handleDriveUpload = () => {
+      console.log('Drive Upload');
+      gapi.load('client:auth2', initClient);
+  }
+
+  const handleSignOutClick = (event) => {
+    setListDocumentsVisibility(false);
+    gapi.auth2.getAuthInstance().signOut();
+  };
+
+  return (
+    <Box
+      fontWeight="fontWeightMedium"
+      textAlign="center"
+      onClick={handleDriveUpload}
+    >
+      Upload from Drive
+    </Box>
+  );
 };
 
 const RenderFileUpload = () => {
@@ -69,9 +166,7 @@ const RenderFileUpload = () => {
               style={{ margin: 4, width: "auto", justifyContent: "center" }}
               bgcolor={colors.red1}
             >
-              <Box fontWeight="fontWeightMedium" textAlign="center">
-                Upload from Drive
-              </Box>
+              <DriveUpload />
             </ExploreObj>
           </Grid>
         </Grid>

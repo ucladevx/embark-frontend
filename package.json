@@ -13,6 +13,8 @@
     "dayjs": "^1.9.6",
     "file-saver": "^2.0.5",
     "formik": "^2.2.6",
+    "gapi-script": "^1.1.0",
+    "googleapis": "^67.1.1",
     "mdi-material-ui": "^6.22.0",
     "mime": "^2.4.7",
     "mime-types": "^2.1.28",
