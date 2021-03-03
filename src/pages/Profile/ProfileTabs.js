@@ -7,6 +7,10 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
+// Remember to Delete
+import NewPost from '../../components/ResourceUpload';
+import { Button } from '@material-ui/core';
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -58,8 +62,14 @@ const ProfileTabs = () => {
     setValue(newValue);
   };
 
+
+  // Remember to delete
+  const [newPost, setNewPost] = React.useState(false);
+  // and the NewPost component and upload button
+
   return (
     <div className={classes.root}>
+      <NewPost open={newPost} handleClose={() => setNewPost(false)} />
       <AppBar position="relative" color="white" elevation="0">
         <Tabs 
         value={value} 
@@ -72,6 +82,7 @@ const ProfileTabs = () => {
       </AppBar>
       <TabPanel value={value} index={0}>
         My Posts
+        <Button variant="contained" color="primary" size='large' onClick={()=>setNewPost(true)}>Upload Resource</Button>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Followed Clubs
