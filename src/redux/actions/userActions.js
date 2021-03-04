@@ -54,12 +54,8 @@ export const signupStudent = (newUserData, handleUser, handleStep) => async (
     handleUser(newUserData);
     handleStep(1);
   } catch (err) {
-<<<<<<< HEAD
-    console.error(err);
-=======
     console.log(err);
     dispatch({ type: SET_ERRORS, payload: err.response.data });
->>>>>>> 204d9d4390e098765090689985937260ca931556
   }
 };
 
