@@ -12,6 +12,7 @@ import {
   SET_HAS_NEXT,
   SET_NEXT_STRING,
   NEW_EVENT,
+  SET_EVENTS,
 } from "../types";
 
 const initialState = {
@@ -115,6 +116,11 @@ export default function dataReducer(state = initialState, action) {
         ...state,
         events: [action.payload, ...state.events],
       };
+    case SET_EVENTS:
+      return {
+        ...state,
+        events: action.payload,
+      }
     default:
       return state;
   }

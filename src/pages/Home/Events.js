@@ -1,0 +1,131 @@
+import React from 'react';
+import {
+    EventAvatar,
+    EventDescription,
+    EventItem,
+    EventItems,
+    EventTypography,
+    EventsWrapper,
+    TimeTypography,
+    GoingBtn,
+    AddFilter,
+    InfoSeperator,
+} from './StyleLanding';
+import { BoldTypography, TitleTypography } from "../../shared/Typography";
+import { useSelector, useDispatch } from 'react-redux';
+import { goingToEvent } from "../../redux/actions/userActions";
+
+// Dayjs
+import dayjs from 'dayjs';
+const relativeTime = require('dayjs/plugin/relativeTime');
+dayjs.extend(relativeTime);
+
+const makeDay = (moment) => {
+    let date = JSON.stringify(moment);
+    date = date.replace("T"," ");
+    date = date.replace("Z"," ");
+    return dayjs(date).format("MMM DD HH:mm a");
+};
+
+const test = (moment) => {
+    let date = moment.replace("T"," ");
+    date = date.replace("Z"," ");
+    return dayjs(date).format("MMM DD HH:mm a");
+};
+
+const testEvent = [{
+    _id : "123450",
+    title : "Embark Release",
+    authorEmail: "Embark",
+    datetime: "2021-03-03T08:00:00.000Z",
+}];
+
+
+
+const Events = ({setNewEvent}) => {
+    const dispatch = useDispatch();
+    const goingClick = (id) => {
+        dispatch(goingToEvent(id));
+    }
+    const events = useSelector((state) => state.data.events);
+    const attending = useSelector((state) => state.user.goingEvents);
+  return (
+    <>
+      <EventsWrapper>
+        <TitleTypography>Upcoming Events</TitleTypography>
+            <EventItems>
+                <EventItem>
+                  <EventAvatar></EventAvatar>
+                  <EventDescription>
+                    <BoldTypography sz={"16px"}>Demo Day</BoldTypography>
+                    <EventTypography>UCLA DevX</EventTypography>
+                    <TimeTypography>
+                      {test("2021-03-03T08:00:00.000Z")}
+                    </TimeTypography>
+                  </EventDescription>
+                  <GoingBtn bgcolor={true}>
+                    Going
+                  </GoingBtn>
+                </EventItem>
+                <InfoSeperator></InfoSeperator>
+                <EventItem>
+                  <EventAvatar></EventAvatar>
+                  <EventDescription>
+                    <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
+                    <EventTypography>Club1234</EventTypography>
+                    <TimeTypography>
+                      {dayjs().format("MMM DD HH:mm a")}
+                    </TimeTypography>
+                  </EventDescription>
+                  <GoingBtn bgcolor={false}>
+                    Going
+                  </GoingBtn>
+                </EventItem>
+                {testEvent.map((e) => {
+                    return (
+                    <>
+                        <InfoSeperator key = {e._id + "sep"}></InfoSeperator>
+                        <EventItem key = {e._id}>
+                            <EventAvatar></EventAvatar>
+                            <EventDescription>
+                                <BoldTypography sz={"16px"}>{e.title}</BoldTypography>
+                                <EventTypography>{e.authorEmail}</EventTypography>
+                                <TimeTypography>
+                                    {test(e.datetime)}
+                                </TimeTypography>
+                            </EventDescription>
+                            <GoingBtn bgcolor={false}>
+                                Going
+                            </GoingBtn>
+                        </EventItem>
+                    </>
+                    );
+                })}
+                {events.map((e) => {
+                    return (
+                    <>
+                        <InfoSeperator key = {e._id + "sep"}></InfoSeperator>
+                        <EventItem key = {e._id}>
+                            <EventAvatar></EventAvatar>
+                            <EventDescription>
+                                <BoldTypography sz={"16px"}>{e.title}</BoldTypography>
+                                <EventTypography>{e.authorEmail}</EventTypography>
+                                <TimeTypography>
+                                    {makeDay(e.datetime)}
+                                </TimeTypography>
+                            </EventDescription>
+                            <GoingBtn onClick = {goingClick(e._id)} bgcolor={attending.contains(e._id)}>
+                                Going
+                            </GoingBtn>
+                        </EventItem>
+                    </>
+                    );
+                })}
+                <AddFilter onClick={()=>setNewEvent(true)}>+ Create</AddFilter>
+              </EventItems>
+        </EventsWrapper>
+    </>
+  );
+};
+
+export default Events;

@@ -34,7 +34,6 @@ const TextFieldWrapper = styled.div`
 const TimeWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  height: 43px;
   justify-content: center;
 `;
 
@@ -64,7 +63,7 @@ const NewEvent = ({ open, handleClose }) => {
 
   const handleTime = (moment) => {
     setTime(moment);
-    console.log(time);
+    console.log(JSON.stringify(time));
   };
 
   const handleSubmit = async () => {

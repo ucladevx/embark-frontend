@@ -12,12 +12,6 @@ import {
   FilterObj,
   FilterWrapper,
   AddFilter,
-  EventAvatar,
-  EventDescription,
-  EventItem,
-  EventItems,
-  EventsWrapper,
-  TimeTypography,
   CalanderWrapper,
   InfoBoxes,
   InfoEntryWrapper,
@@ -25,10 +19,7 @@ import {
   InfoSeperator,
   InfoEntryText,
   MiddleContainer,
-  EventTypography,
-  GoingBtn,
 } from "./StyleLanding";
-import { BoldTypography, TitleTypography } from "../../shared/Typography";
 // Images
 import avatarImg from "../../images/avatar.svg";
 import bookImg from "../../images/book.svg";
@@ -38,11 +29,12 @@ import { colors } from "../../shared/config";
 import { styleCalendar } from "./calendar";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getPosts } from "../../redux/actions/dataActions";
+import { getPosts, getEvents } from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
 import NewEvent from "../../components/NewEvent"
 import Explore from "./Explore";
 import Posts from "./Posts";
+import Events from "./Events";
 
 // Dayjs
 import dayjs from "dayjs";
@@ -62,6 +54,10 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getPosts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getEvents());
   }, [dispatch]);
 
   useEffect(() => {
@@ -125,39 +121,7 @@ const Home = () => {
               <Calendar calendarType={"US"}></Calendar>
             </CalanderWrapper>
 
-            <EventsWrapper>
-              <TitleTypography>Upcoming Events</TitleTypography>
-              <EventItems>
-                <EventItem>
-                  <EventAvatar></EventAvatar>
-                  <EventDescription>
-                    <BoldTypography sz={"16px"}>Demo Day</BoldTypography>
-                    <EventTypography>UCLA DevX</EventTypography>
-                    <TimeTypography>
-                      {dayjs().format("MMM DD HH:mm a")}
-                    </TimeTypography>
-                  </EventDescription>
-                  <GoingBtn bgcolor={colors.green1} fcolor={colors.darkgreen}>
-                    Going
-                  </GoingBtn>
-                </EventItem>
-                <InfoSeperator></InfoSeperator>
-                <EventItem>
-                  <EventAvatar></EventAvatar>
-                  <EventDescription>
-                    <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
-                    <EventTypography>Club1234</EventTypography>
-                    <TimeTypography>
-                      {dayjs().format("MMM DD HH:mm a")}
-                    </TimeTypography>
-                  </EventDescription>
-                  <GoingBtn bgcolor={colors.gray1} fcolor={colors.gray2}>
-                    Going
-                  </GoingBtn>
-                </EventItem>
-                <AddFilter onClick={()=>setNewEvent(true)}>+ Create</AddFilter>
-              </EventItems>
-            </EventsWrapper>
+            <Events setNewEvent = {setNewEvent}/>
           </RightContainer>
         </LandingPageWrapper>
       </LandingPage>
