@@ -34,10 +34,25 @@ import {
   DoneBtn,
 } from "./StyleEditProfile"
 import lawn from "../../images/lawn.png";
+import { makeStyles } from "@material-ui/core/styles";
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
+const useStyles = makeStyles(theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2)
+  },
+  menuPaper: {
+    maxHeight: 300
+  }
+}));
+
 const EditProfile = ({ open, handleClose, handleIndustries }) => {
+  const classes = useStyles();
   const years = ["2021", "2022", "2023", "2024"];
   const industry = IndustryFilters;
   const user = useSelector((state) => state.user);
@@ -156,9 +171,18 @@ const EditProfile = ({ open, handleClose, handleIndustries }) => {
               <InputLabel>Select all that apply</InputLabel>
               <Select 
               multiple 
+              disableUnderline
               value={industries} 
               onChange={addIndustries}
-              >
+              MenuProps={{
+                getContentAnchorEl: null,
+                anchorOrigin: {
+                  vertical: "bottom",
+                  horizontal: "left",
+                },
+                classes: { paper: classes.menuPaper },
+              }}>
+              
                 <Suggested>Suggested</Suggested>
                 {industry && industry.map((name) => (
                   <MenuItem key={name} value={name}>
