@@ -16,6 +16,8 @@ import { BoldTypography } from "../shared/Typography";
 import { colors } from "../shared/config";
 import { ExploreFilter, ExploreObj } from "../pages/Profile/StyleProfile";
 
+import ListDocuments from './ListDocuments';
+
 // Import Google API
 import { gapi } from "gapi-script";
 
@@ -24,11 +26,13 @@ const CLIENT_ID = process.env.REACT_APP_GOOGLE_DRIVE_CLIENT_ID;
 const API_KEY = process.env.REACT_APP_GOOGLE_DRIVE_API_KEY;
 
 // Array of API discovery doc URLs for APIs used by the quickstart
-var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
+var DISCOVERY_DOCS = [
+  "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
+];
 
 // Authorization scopes required by the API; multiple scopes can be
 // included, separated by spaces.
-var SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly';
+var SCOPES = "https://www.googleapis.com/auth/drive.metadata.readonly";
 
 const a11yProps = (index) => {
   return {
@@ -38,12 +42,17 @@ const a11yProps = (index) => {
 };
 
 // Google Drive Upload Part
-const DriveUpload = () => {
+const DriveUpload = ({handleDrive}) => {
   const [listDocumentsVisible, setListDocumentsVisibility] = useState(false);
   const [documents, setDocuments] = useState([]);
   const [isLoadingGoogleDriveApi, setIsLoadingGoogleDriveApi] = useState(false);
-  const [isFetchingGoogleDriveFiles, setIsFetchingGoogleDriveFiles] = useState(false);
+  const [isFetchingGoogleDriveFiles, setIsFetchingGoogleDriveFiles] = useState(
+    false
+  );
   const [signedInUser, setSignedInUser] = useState();
+
+  const [searchFilter, setSearchFilter] = useState('');
+  const [openSearch, setOpenSearch] = useState(false);
 
   const handleAuthClick = (event) => {
     gapi.auth2.getAuthInstance().signIn();
@@ -65,8 +74,8 @@ const DriveUpload = () => {
     setIsFetchingGoogleDriveFiles(true);
     gapi.client.drive.files
       .list({
-        pageSize: 10,
-        fields: 'nextPageToken, files(id, name, mimeType, modifiedTime)',
+        pageSize: 20,
+        fields: "nextPageToken, files(id, name, mimeType, modifiedTime)",
         q: searchTerm,
       })
       .then(function (response) {
@@ -96,15 +105,15 @@ const DriveUpload = () => {
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
         },
         function (error) {
-            console.log(error);
+          console.log(error);
         }
       );
   };
 
   const handleDriveUpload = () => {
-      console.log('Drive Upload');
-      gapi.load('client:auth2', initClient);
-  }
+    console.log("Drive Upload");
+    gapi.load("client:auth2", initClient);
+  };
 
   const handleSignOutClick = (event) => {
     setListDocumentsVisibility(false);
@@ -112,13 +121,16 @@ const DriveUpload = () => {
   };
 
   return (
-    <Box
-      fontWeight="fontWeightMedium"
-      textAlign="center"
-      onClick={handleDriveUpload}
-    >
-      Upload from Drive
-    </Box>
+    <div>
+      <ListDocuments open={listDocumentsVisible} handleClose={() => setListDocumentsVisibility(false)} documents={documents} handleDrive={handleDrive} />
+      <Box
+        fontWeight="fontWeightMedium"
+        textAlign="center"
+        onClick={handleDriveUpload}
+      >
+        Upload from Drive
+      </Box>
+    </div>
   );
 };
 
@@ -131,6 +143,12 @@ const RenderFileUpload = () => {
     setUploaded(true);
     setSelectedFile(event.target.files[0]);
   };
+
+  const handleDrive = (file) => {
+    console.log(file);
+    setUploaded(true);
+    setSelectedFile(file);
+  }
 
   const handleChoose = () => {
     inputFile.current.click();
@@ -166,7 +184,7 @@ const RenderFileUpload = () => {
               style={{ margin: 4, width: "auto", justifyContent: "center" }}
               bgcolor={colors.red1}
             >
-              <DriveUpload />
+              <DriveUpload handleDrive={handleDrive} />
             </ExploreObj>
           </Grid>
         </Grid>
@@ -275,7 +293,6 @@ const ResourceUpload = ({ open, handleClose }) => {
   const classes = useStyles();
 
   const handleSwitchUpload = (event, newValue) => {
-    console.log(newValue);
     setValue(newValue);
   };
 
