@@ -12,7 +12,7 @@ export const LandingPage = styled.div`
 export const LandingPageWrapper = styled.div`
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 250px 500px auto;
+  grid-template-columns: 220px 540px 220px;
   width: 100%;
   justify-content: center;
   min-height: 100vh;
@@ -106,6 +106,11 @@ export const FilterObj = styled(Typography)`
 
 export const FilterTitle = styled(BoldTypography)`
   font-size: 18px;
+`;
+
+export const FilesWrapper = styled.div`
+  overflow: scroll;
+  max-height: 200px;
 `;
 
 export const AddFilter = styled(Typography)`
@@ -202,17 +207,11 @@ export const EventAvatar = styled(Avatar)`
   font-size: 15px;
 `;
 
-export const ViewPost = styled.div`
-  margin-top: 20px;
-  border-radius: 5px;
-`;
 export const PostWrapper = styled.div`
-  margin-top: 30px;
+  margin-top: 20px;
   padding: 20px 20px 0 20px;
+  border-radius: 5px;
   background: ${colors.white};
-  &:first-child {
-    margin-top: 0;
-  }
 `;
 export const PostHeader = styled.div`
   display: flex;
@@ -252,7 +251,7 @@ export const PostTag = styled(Button)`
 export const PostNameTime = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: 5px;
+  padding-left: 1px;
 `;
 
 export const PostTime = styled(Typography)`
@@ -262,7 +261,6 @@ export const PostTime = styled(Typography)`
 
 export const PostUserName = styled(BoldTypography)`
   font-size: 16px;
-  margin-left: -4px;
 `;
 
 export const PostTitle = styled(BoldTypography)`
@@ -276,33 +274,13 @@ export const PostContent = styled(Typography)`
   font-size: 12px;
 `;
 
-export const CommentWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 20px;
-  padding: 25px 0;
-  background: ${colors.white};
-`;
-
-export const CommentIcon = styled.img`
-  width: 25px;
-  height: 25px;
-`;
-
 export const ViewCommentLink = styled(Typography)`
   ${LinkEffect}
   text-decoration: underline;
   background: none;
-  margin: 10px 0 0 10px;
+  margin: 10px 0 0 0;
   font-size: 11px;
   color: ${colors.gray3};
-`;
-
-export const CommentTextField = styled(TextField)`
-  background: ${colors.gray1};
-  border-radius: 10px;
-  padding-left: 5px;
-  justify-content: center;
 `;
 
 export const PreviousCommentItem = styled.div`
@@ -318,7 +296,7 @@ export const ViewPreviousCommentWrapper = styled.div`
   display: flex;
   gap: 10px;
   flex-direction: column;
-  padding: 5px 25px 5px 25px;
+  padding: 5px 10px 5px 10px;
   background: ${colors.white};
 `;
 
@@ -370,4 +348,15 @@ export const GoingBtn = styled(Button)`
   right: 1px;
 `;
 
-export const CommentAvatar = styled(PreviousCommentAvatar)``;
+export const ViewPost = styled.div`
+  margin-top: 20px;
+  border-radius: 5px;
+`;
+
+export const CommentWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  padding: 25px 0;
+  background: ${colors.white};
+`;

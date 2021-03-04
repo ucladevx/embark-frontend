@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
-import "./calendar.css";
 import Calendar from "react-calendar";
 // Styles
+import "./Calendar/HomeCalendar.css";
+
 import {
   LandingPage,
   LandingPageWrapper,
@@ -11,6 +12,8 @@ import {
   FilterTitle,
   FilterObj,
   FilterWrapper,
+  InteriorFilterWrapper,
+  PostTag,
   AddFilter,
   EventAvatar,
   EventDescription,
@@ -27,6 +30,7 @@ import {
   MiddleContainer,
   EventTypography,
   GoingBtn,
+  DialogTextField,
 } from "./StyleLanding";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 // Images
@@ -35,28 +39,33 @@ import bookImg from "../../images/book.svg";
 import compassImg from "../../images/compass.svg";
 // Utils
 import { colors } from "../../shared/config";
-import { styleCalendar } from "./calendar";
-
+import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
-import { getPosts } from "../../redux/actions/dataActions";
+import {
+  getPosts,
+  filterPosts,
+  addFilter,
+  removeFilter,
+} from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
 import Explore from "./Explore";
+import { styleCalendar } from "./Calendar/HomeCalendar";
 import Posts from "./Posts";
-
 // Dayjs
-import dayjs from "dayjs";
-import { useHistory } from "react-router-dom";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 const Home = () => {
   // Redux
+  const filters = useSelector((state) => state.data.filter);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
-  const history = useHistory();
+
+  const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
 
   useEffect(() => {
     dispatch(getPosts());
@@ -66,9 +75,19 @@ const Home = () => {
     styleCalendar();
   }, []);
 
-  useEffect(() => {
-    if (!window.localStorage.getItem("AuthToken")) history.push("/");
-  }, [history]);
+  const removeUpdateFilters = (t) => {
+    dispatch(removeFilter(t));
+    dispatch(filterPosts());
+  };
+  const addUpdateFilter = (t) => {
+    dispatch(addFilter(t));
+    dispatch(filterPosts());
+  };
+
+  const [tagToAdd, setTagToAdd] = useState("");
+  const handleChange = (e) => {
+    setTagToAdd(e.target.value);
+  };
 
   return (
     <>
@@ -97,12 +116,30 @@ const Home = () => {
             {page === "main" && (
               <FilterWrapper>
                 <FilterTitle>Filters:</FilterTitle>
-                <FilterObj tag="Product Management">
-                  Product Management
-                </FilterObj>
-                <FilterObj tag="Product Design">Product Design</FilterObj>
+                <InteriorFilterWrapper>
+                  {filters.map((t) => (
+                    <FilterObj
+                      tag={t}
+                      key={t}
+                      onClick={() => removeUpdateFilters(t)}
+                    >
+                      {t}
+                    </FilterObj>
+                  ))}
+                </InteriorFilterWrapper>
                 <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
-                <AddFilter>+ Add Filter</AddFilter>
+                <DialogTextField
+                  id="tag"
+                  placeholder="Enter tag..."
+                  type="text"
+                  InputProps={{
+                    disableUnderline: true,
+                  }}
+                  onChange={handleChange}
+                />
+                <AddFilter onClick={() => addUpdateFilter(tagToAdd)}>
+                  + Add Filter
+                </AddFilter>
               </FilterWrapper>
             )}
           </LeftContainer>
@@ -119,7 +156,7 @@ const Home = () => {
 
           <RightContainer>
             <CalanderWrapper>
-              <Calendar calendarType={"US"}></Calendar>
+              <Calendar></Calendar>
             </CalanderWrapper>
 
             <EventsWrapper>

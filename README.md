@@ -75,11 +75,22 @@ export default App;
 - OnBoarding: student OnBoarding pages for now. We'll create a different set of OnBoarding pages for clubs in near feature
 - Login: Login for both student and club. We'll enable club's login in near future
 - Home: Home page with all features, which has 3 columns. The left column is to navigate through different pages and resources. Middle column is for the main features of the page, and right column is related to event scheduling with a calendar to help visualize.
-- user/userid: a route for each user. This would include the flows for user view club, user view user, club view user, and club view club
+- user/userid: a route for each user. This would include the flows for user views club, user views user, club views user, and club views club
 - profile: profile page for student/club to view their own profile
 
 ## Redux
-- The WriteReduxDoc() action is ready to be dispatched except that no action is innitialized and no dispatch function is imported. It is the "nicest" event to be scheduled on the event queue (Quote modified from OSTEP: when your're too nice, you just don't get as much attention, alas).
+### Reducers:
+- uireducer: handle action types for display, including loading, popup, and errors...
+- datareducer: handle action types for any data flow in the app, including posts, events, and filters...
+- userreducer: handle action types for any user-specific actions, including authentication of users, users' industries...
+
+### Action
+- UserActions.js: action creators to handle user-related actions (corresponds to the previous reducers)
+- DataActions.js: action creators to handle data-related actions
+Note: ui doesn't have action for itself, all ui-related handling is included in these two action js files.
+
+### Note for the future:
+since we are having inconsistency in our frontend, backend, and design, we'll finalize the initial states for these reducers in the future
 
 ## Best Practices in this repo
 In src:
