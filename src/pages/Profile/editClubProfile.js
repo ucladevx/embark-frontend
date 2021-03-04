@@ -15,6 +15,7 @@ import styled from "styled-components";
 import{
   ExploreObj,
   ExploreFilter,
+  NameDescription,
 } from "./StyleProfile";
 import {
   EditProfileContainer,
@@ -41,12 +42,11 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescri
 
   const club = useSelector((state) => state.club);
   const [name, setName] = useState("")
-  const [tags, setTags] = useState("")
+  const [tags, setTags] = useState([])
   const [profilePicURL, setProfilePicURL] = useState("")
   const [coverPicURL, setcoverPicURL] = useState("")
   const [description, setDescription] = useState(currentDescription);
-  //const [tags, setTags] = useState(user.tags);
-  const [industries, setIndustries] = useState([]);  
+  //const [tags, setTags] = useState(user.tags)
   const [website, setWebsite] = useState(currentWebsite);
   const [about, setAbout] = useState(currentAbout)
 
@@ -58,10 +58,10 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescri
     setDescription(e.target.value);
   };  
   
-  const handleIndustries = (e) => {
-    let curIndustries = industries.slice();
+  const handleTags = (e) => {
+    let curIndustries = tags.slice();
     curIndustries.push(e.target.value)
-    setIndustries(curIndustries)
+    setTags(curIndustries)
   };
 
   const handleWebsite = (e) => {
@@ -88,6 +88,21 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescri
     dispatch(editStudentDetails(updatedProfile));
     handleClose();
   };
+
+  // const checkOption = (props) =>{
+  //   return (
+  //     <Checkbox checked = {props.isChecked} color="default"/>
+
+  //   );}
+
+  //   }
+  // const Picture = (props) => {
+  //   return (
+  //     <div>
+  //       {props.children}
+  //     </div>
+  //   )
+  // }
 
   return (
     <EditProfileContainer open={open} onClose={handleClose}>
@@ -142,7 +157,7 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescri
             {/* <TextField
           select
           value="Select all that apply"
-          onChange={handleIndustries}
+          onChange={handleTags}
           InputProps={{ disableUnderline: true }}q
           SelectProps={{
             native: true,
@@ -151,31 +166,33 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescri
         >
           {industry.map((name) => (
             <MenuItem key={name} value={name}>
-                <Checkbox checked = {industries.includes(name)} color="default"/>
+                <Checkbox checked = {tags.includes(name)} color="default"/>
                 <ListItemText primary={name} />
             </MenuItem>
           ))}
         </TextField> */}
 
-
-
-            <FormControlC>
+            {/* <FormControlC>
               <InputLabel >Select all that apply</InputLabel>
               <Select 
               disableUnderline
+              multiple
+              value = {industry}
+
               // defaultValue=""
-              onChange={handleIndustries}
+              onChange={handleTags}
               >
-                {/* <Suggested>Suggested</Suggested> */}
+                <Suggested>Suggested</Suggested>
+
                 {industry.map((name, index) => (
                   <MenuItem key={name} value={name}>
-                    <Checkbox checked = {industries.includes(name)} color="default"/>
+                    <Checkbox checked = {false} color="default"/>
                     <ListItemText primary={name} />
                   </MenuItem>
                 ))}
 
               </Select>
-            </FormControlC>  
+            </FormControlC> */}
       </TextFieldWrapper>
 
         <TextFieldWrapper>

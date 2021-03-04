@@ -5,15 +5,18 @@ import {
   InputLabel,
   Checkbox,
   ListItemText,
+  Input,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
+import {IndustryFilters} from "../../shared/dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { editStudentDetails } from "../../redux/actions/userActions";
 import styled from "styled-components";
 import{
   ExploreObj,
   ExploreFilter,
+  LinkedInIconC,
 } from "./StyleProfile";
 import {
   EditProfileContainer,
@@ -34,16 +37,15 @@ import lawn from "../../images/lawn.png";
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-const EditProfile = ({ open, handleClose }) => {
+const EditProfile = ({ open, handleClose, handleIndustries }) => {
   const years = ["2021", "2022", "2023", "2024"];
-  const industry = ["Business", "Computer Science", "Marketing", "Product Design", "Product Management", "Other"];
+  const industry = IndustryFilters;
   const user = useSelector((state) => state.user);
   const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
   const [major, setMajor] = useState(user.major)
   const [year, setYear] = useState(user.year)
-  const [tags, setTags] = useState(user.tags);
-  const [industries, setIndustries] = useState([]);
+  const [industries, setIndustries] = useState(user.tags? user.tags : [] );
   const [bio, setBio] = useState(user.bio);
   const [linkedin, setLinkedin] = useState(user.linkedIn); 
 
@@ -56,14 +58,15 @@ const EditProfile = ({ open, handleClose }) => {
     setMajor(e.target.value);
   };
 
-  const handleTags = (e) => {
-    setTags([...tags, e.target.value]);
-  };
 
-  const handleIndustries = (e) => {
-    let curIndustries = industries.slice();
-    curIndustries.push(e.target.value)
-    setIndustries(curIndustries)
+  const addIndustries = (e) => {
+    // let curIndustries = industries.slice();
+    // curIndustries.push(e.target.value)
+    // setIndustries(curIndustries)
+    console.log(e.target);
+    setIndustries(e.target.value);
+    //setIndustries([...industries, ...e.target.value])
+
   };
 
   const handlelinkedIn = (e) => {
@@ -71,6 +74,7 @@ const EditProfile = ({ open, handleClose }) => {
   };
 
   const handleSubmit = async () => {
+    console.log(industries);
     const updatedProfile = {
       name, 
       major, 
@@ -138,7 +142,7 @@ const EditProfile = ({ open, handleClose }) => {
         <BoldTypography  sz={"18px"}>Interested Industries:</BoldTypography>
 
         <ExploreFilter>
-        {industries.map((name) => (
+        {industries && industries.map((name) => (
           <ExploreObj bgcolor={colors.darkyellow}>
               &times; {name}
           </ExploreObj>           
@@ -153,12 +157,12 @@ const EditProfile = ({ open, handleClose }) => {
               <Select 
               multiple 
               value={industries} 
-              onChange={handleIndustries}
+              onChange={addIndustries}
               >
                 <Suggested>Suggested</Suggested>
-                {industry.map((name, index) => (
+                {industry && industry.map((name) => (
                   <MenuItem key={name} value={name}>
-                    <Checkbox checked = {industries.includes(name)} color="default"/>
+                    <Checkbox checked = {industries.indexOf(name)>-1} color="default"/>
                     <ListItemText primary={name} />
                   </MenuItem>
                 ))}
@@ -172,13 +176,12 @@ const EditProfile = ({ open, handleClose }) => {
           
 
         <TextFieldWrapper>
-        <BoldTypography>{linkedin}</BoldTypography>
         <BoldTypography  sz={"18px"}>LinkedIn Profile (Optional):</BoldTypography>
           <DialogTextField
             autoFocus
             margin="dense"
             id="name"
-            placeholder="Copy your Profile Link"
+            placeholder= {linkedin? linkedin :"Copy your Profile Link"}
             type="email"
             fullWidth
             InputProps={{

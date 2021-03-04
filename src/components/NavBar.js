@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../shared/config";
+import { useHistory } from "react-router-dom";
 
 // icons for navbar icons
 import { ReactComponent as EmbarkIcon } from '../images/navbar_embark_logo.svg';
@@ -80,6 +81,7 @@ const sampleSuggestions = [
 const NavBar = () => {
   const [search, setSearch] = useState("");
   const [showList, setShowList] = useState(false);
+  const history = useHistory();
 
   const handleSearchChange = (e) => {
     // just show suggestions 
@@ -91,7 +93,8 @@ const NavBar = () => {
 
   const handleEmbarkIconClick = (e) => {
     // just console log for now
-    console.log('Embark Icon Clicked')
+    console.log('Embark Icon Clicked');
+    history.push("/home");
   }
 
   const handleUserIconClick = (e) => {

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../shared/config";
 import { Avatar, Button, Typography } from "@material-ui/core";
 import LinkEffect from "../../shared/LinkEffect";
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 export const LandingPageWrapper = styled.div`
   margin: 0 auto;
@@ -127,6 +128,14 @@ export const ExploreFilterTitle = styled(Typography)`
   margin-right: 2px;
 `;
 
+//User
+export const LinkedInIconC = styled(LinkedInIcon)`
+  position: absolute;
+  right: 0.5vw;
+  bottom: 15vh;
+  color: #0077B5;
+  font-size: 40px;
+`
 
 //Club
 export const ClubWebsiteButton = styled(Button)`

@@ -15,6 +15,7 @@ import {
   QuestionBox,
   ExploreFilter,
   ExploreObj,
+  LinkedInIconC
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
@@ -30,13 +31,13 @@ const UserProfile = (props) => {
   const { userid } = useParams();
 
   return (
-    <>
+    <div >
       <EditProfile
         open={editProfile}
         handleClose={() => seteditProfile(false)}
       ></EditProfile>
       <NavBar></NavBar>
-      <MiddleContainer>
+      <MiddleContainer styles={{minHeight:'100vh'}}>
       <ProfileWrapper>
         <HeaderImage src={lawn}></HeaderImage>
         <ProfileInfo>
@@ -45,17 +46,17 @@ const UserProfile = (props) => {
             <NameDescription>
               <TitleTypography>{user.name}</TitleTypography>
               <Typography style={{fontSize: '18px'}}>{user.year} {user.major}</Typography>
+              <LinkedInIconC />
             </NameDescription>
           </NameDescriptionWrapper>
           <IndustryWrapper>
             <BoldTypography  sz={"14px"}>Interested Industries:</BoldTypography>
             <ExploreFilter>
-            <ExploreObj bgcolor={colors.red1}>
-              Product Management
+            {user.tags && user.tags.map((name) =>{
+              return (
+                <ExploreObj bgcolor={colors.red1}>{name}
             </ExploreObj>
-            <ExploreObj bgcolor={colors.darkyellow}>
-              Product Design
-            </ExploreObj>
+              )})}
             </ExploreFilter>            
           </IndustryWrapper>
 
@@ -74,7 +75,7 @@ const UserProfile = (props) => {
         </ProfileWrapper>
       </MiddleContainer>
 
-    </>
+    </div>
   );
 };
 
