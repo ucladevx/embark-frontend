@@ -25,7 +25,7 @@ export const EditProfileContainer = styled(Dialog)`
   border-radius: 20px;
   margin:0.5em auto;
   height: fit-content;
-  width: fit-content;
+  min-width: 575px;
   max-width: 28vw;
   ${'' /* height: 1032px; */}
  

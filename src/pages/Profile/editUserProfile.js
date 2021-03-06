@@ -60,7 +60,7 @@ const EditProfile = ({ open, handleClose}) => {
   const [email, setEmail] = useState(user.email)
   const [major, setMajor] = useState(user.major)
   const [year, setYear] = useState(user.year)
-  const [industries, setIndustries] = useState(user.tags);
+  const [industries, setIndustries] = useState([user.tags]);
   const [bio, setBio] = useState(user.bio);
   const [linkedin, setLinkedin] = useState(user.linkedIn); 
 
@@ -123,8 +123,7 @@ const EditProfile = ({ open, handleClose}) => {
 
         <BoldTypography  sz={"18px"}>Year:</BoldTypography>
         <FormControlC>
-          <InputLabel>Year</InputLabel>
-          <Select value={year} onChange={handleYear}>
+          <Select disableUnderline value={year} onChange={handleYear}>
           {years.map((y) => (
               <MenuItem key={y} value={y} name="year">
                 {y}
@@ -159,7 +158,7 @@ const EditProfile = ({ open, handleClose}) => {
           <ExploreFilter>
           {console.log("print user tags", industries)}
           {industries && industries.map((name) => (
-            <ExploreObj key = {name} bgcolor={colors.darkyellow}>
+            <ExploreObj key = {name} bgcolor={colors.gray1}>
                 &times; {name}
             </ExploreObj>           
                   ))}
@@ -168,7 +167,7 @@ const EditProfile = ({ open, handleClose}) => {
               <Select 
               multiple 
               disableUnderline
-              value={industries} 
+              value={[...industries]} 
               onChange={addIndustries}
               MenuProps={{
                 getContentAnchorEl: null, 

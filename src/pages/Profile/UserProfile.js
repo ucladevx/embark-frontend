@@ -15,7 +15,6 @@ import {
   QuestionBox,
   ExploreFilter,
   ExploreObj,
-  LinkedInIconC
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
@@ -37,16 +36,15 @@ const UserProfile = (props) => {
         handleClose={() => seteditProfile(false)}
       ></EditProfile>
       <NavBar></NavBar>
-      <MiddleContainer styles={{minHeight:'100vh'}}>
+      <MiddleContainer>
       <ProfileWrapper>
         <HeaderImage src={lawn}></HeaderImage>
         <ProfileInfo>
           <NameDescriptionWrapper>
             <ProfileAvatar></ProfileAvatar>
             <NameDescription>
-              <TitleTypography>{user.name}</TitleTypography>
-              <Typography style={{fontSize: '18px'}}>{user.year} {user.major}</Typography>
-              <LinkedInIconC />
+              <TitleTypography style={{fontSize: '24px', paddingBottom: '0'}}>{user.name}</TitleTypography>
+              <Typography style={{fontSize: '18px'}}>{user.year} • {user.major}</Typography>
             </NameDescription>
           </NameDescriptionWrapper>
           <IndustryWrapper>

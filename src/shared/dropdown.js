@@ -1,5 +1,4 @@
 export const IndustryFilters = [
-    "Developer",
     "medical",
     "dentistry",
     "pharmacy",
