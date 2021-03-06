@@ -32,7 +32,7 @@ const UserProfile = (props) => {
 
   return (
     <div >
-      <EditProfile
+      <EditProfile 
         open={editProfile}
         handleClose={() => seteditProfile(false)}
       ></EditProfile>
@@ -54,7 +54,7 @@ const UserProfile = (props) => {
             <ExploreFilter>
             {user.tags && user.tags.map((name) =>{
               return (
-                <ExploreObj bgcolor={colors.red1}>{name}
+                <ExploreObj key={name} bgcolor={colors.red1}>{name}
             </ExploreObj>
               )})}
             </ExploreFilter>            

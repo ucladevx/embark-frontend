@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const EditProfile = ({ open, handleClose, handleIndustries }) => {
+const EditProfile = ({ open, handleClose}) => {
   const classes = useStyles();
   const years = ["2021", "2022", "2023", "2024"];
   const industry = IndustryFilters;
@@ -60,7 +60,7 @@ const EditProfile = ({ open, handleClose, handleIndustries }) => {
   const [email, setEmail] = useState(user.email)
   const [major, setMajor] = useState(user.major)
   const [year, setYear] = useState(user.year)
-  const [industries, setIndustries] = useState(user.tags? user.tags : [] );
+  const [industries, setIndustries] = useState(user.tags);
   const [bio, setBio] = useState(user.bio);
   const [linkedin, setLinkedin] = useState(user.linkedIn); 
 
@@ -75,13 +75,7 @@ const EditProfile = ({ open, handleClose, handleIndustries }) => {
 
 
   const addIndustries = (e) => {
-    // let curIndustries = industries.slice();
-    // curIndustries.push(e.target.value)
-    // setIndustries(curIndustries)
-    console.log(e.target);
     setIndustries(e.target.value);
-    //setIndustries([...industries, ...e.target.value])
-
   };
 
   const handlelinkedIn = (e) => {
@@ -89,12 +83,21 @@ const EditProfile = ({ open, handleClose, handleIndustries }) => {
   };
 
   const handleSubmit = async () => {
-    console.log(industries);
+    //create an array of tags (deleted ones have rm before it)
+    let updatedTags = [];
+    industry.forEach(function(ind){
+      if(industries.includes(ind)){
+        updatedTags.push(ind);
+      }else{
+        updatedTags.push("rm"+ind);
+      }
+    })
+    //console.log("updatedTags ", updatedTags);
     const updatedProfile = {
       name, 
       major, 
       year, 
-      industries, 
+      tags: updatedTags,
       bio, 
       linkedin,
     };
@@ -109,31 +112,29 @@ const EditProfile = ({ open, handleClose, handleIndustries }) => {
       </TitleContainer>
 
       <EditProfileContent>
-
-          <EditProfileAvatar rounded></EditProfileAvatar>
-
-
+          <EditProfileAvatar rounded="true"></EditProfileAvatar>
       <ChangeAvatarLink fontColor="red" align="center">Change Profile Picture</ChangeAvatarLink>
+
       <TextFieldWrapper>
         <EditCoverImage src={lawn}></EditCoverImage>        
       </TextFieldWrapper>
-
       <ChangeAvatarLink align="center">Change Cover Photo</ChangeAvatarLink>
       <TextFieldWrapper>
+
         <BoldTypography  sz={"18px"}>Year:</BoldTypography>
         <FormControlC>
-                <InputLabel>Year</InputLabel>
-                <Select value={year} onChange={handleYear}>
-                {years.map((y) => (
-                    <MenuItem key={y} value={y} name="year">
-                      {y}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControlC>        
+          <InputLabel>Year</InputLabel>
+          <Select value={year} onChange={handleYear}>
+          {years.map((y) => (
+              <MenuItem key={y} value={y} name="year">
+                {y}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControlC>        
       </TextFieldWrapper>
-
         <TextFieldWrapper>
+
         <BoldTypography  sz={"18px"}>Major:</BoldTypography>
           <DialogTextField
             autoFocus
@@ -155,47 +156,36 @@ const EditProfile = ({ open, handleClose, handleIndustries }) => {
         
         <TextFieldWrapper>
         <BoldTypography  sz={"18px"}>Interested Industries:</BoldTypography>
-
-        <ExploreFilter>
-        {industries && industries.map((name) => (
-          <ExploreObj bgcolor={colors.darkyellow}>
-              &times; {name}
-          </ExploreObj>           
-
-                ))}
-      </ExploreFilter>
-
-        {/* <NewPostInfo> */}
-          {/* <NewPostUser> */}
+          <ExploreFilter>
+          {console.log("print user tags", industries)}
+          {industries && industries.map((name) => (
+            <ExploreObj key = {name} bgcolor={colors.darkyellow}>
+                &times; {name}
+            </ExploreObj>           
+                  ))}
+          </ExploreFilter>
             <FormControlC>
-              <InputLabel>Select all that apply</InputLabel>
               <Select 
               multiple 
               disableUnderline
               value={industries} 
               onChange={addIndustries}
               MenuProps={{
-                getContentAnchorEl: null,
+                getContentAnchorEl: null, 
                 anchorOrigin: {
                   vertical: "bottom",
                   horizontal: "left",
                 },
                 classes: { paper: classes.menuPaper },
-              }}>
-              
-                <Suggested>Suggested</Suggested>
-                {industry && industry.map((name) => (
-                  <MenuItem key={name} value={name}>
-                    <Checkbox checked = {industries.indexOf(name)>-1} color="default"/>
-                    <ListItemText primary={name} />
-                  </MenuItem>
-                ))}
-
+              }}> 
+              {industry && industry.map((name) => (
+                <MenuItem key={name} value={name}>
+                  <Checkbox checked = {industries && industries.includes(name)} color="default"/>
+                  <ListItemText primary={name} />
+                </MenuItem>
+              ))}
               </Select>
             </FormControlC>
-
-          {/* </NewPostUser> */}
-        {/* </NewPostInfo> */}
         </TextFieldWrapper>
           
 
