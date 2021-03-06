@@ -15,6 +15,7 @@ import {
   QuestionBox,
   ExploreFilter,
   ExploreObj,
+  Footer,
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
@@ -71,6 +72,8 @@ const UserProfile = (props) => {
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>
+
+        <Footer></Footer>
       </MiddleContainer>
 
     </div>

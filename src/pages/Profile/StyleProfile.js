@@ -36,7 +36,7 @@ export const NameDescriptionWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 1vh;
-  height: 11vh;
+  max-height: 12vh;
 `;
 
 export const ProfileAvatar = styled(Avatar)`
@@ -82,7 +82,7 @@ export const EditProfileButton = styled(Button)`
   border-radius: 8px;
   position: absolute;
   right: 1vw;
-  bottom: 0.5vw;
+  bottom: 1vw;
   font-size: 14px;
   text-transform: none;
   color: #ffffff;
@@ -119,6 +119,7 @@ export const ExploreFilter = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-left: -5px;
+  width: 448px;
 `;
 export const ExploreFilterTitle = styled(Typography)`
   text-transform: none;
@@ -146,13 +147,32 @@ export const IndustryWrapper = styled.div`
 //Club
 export const ClubWebsiteButton = styled(Button)`
   width: 130px;
-  height: 30px;
-  border-radius: 8px;
+  height: 32px;
+  border-radius: 10px;
   position: absolute;
   right: 0.5vw;
-  bottom: 15vh;
   text-transform: none;
   color: #5473bb;
   background: #E5EFFF;
-  border-radius: 5px;
+`;
+
+export const AboutTitle = styled.div`
+  display: flex 2 1 auto;
+  margin-left: 15px;
+  padding-top: 1vh;
+  padding-bottom:1vh;
+`
+export const AboutWrapper = styled.div`
+  display: flex 2 1 auto;
+  width: 41vw;
+  margin-left: 15px;
+  padding-bottom:1vh;
+`
+
+export const Footer = styled.div`
+  background: ${colors.blue2};
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
 `;

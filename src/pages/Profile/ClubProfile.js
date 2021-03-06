@@ -7,7 +7,6 @@ import {
   ProfileWrapper,
   ProfileAvatar,
   NameDescription,
-  NameTypography,
   NameDescriptionWrapper,
   IndustryWrapper,
   EditProfileButton,
@@ -16,6 +15,9 @@ import {
   ExploreFilter,
   ExploreObj,
   ClubWebsiteButton,
+  AboutTitle,
+  AboutWrapper,
+  ExploreFilterTitle,
   DescriptionTypography,
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
@@ -52,12 +54,12 @@ const ClubProfile = (props) => {
           return (
             <ProfileWrapper>
             <ProfileInfo>
-                    <NameDescriptionWrapper>
-                      <BoldTypography>About</BoldTypography>
-                    </NameDescriptionWrapper>
-                    <NameDescriptionWrapper>
-                      <Typography>{About}</Typography>
-                    </NameDescriptionWrapper>
+                    <AboutTitle>
+                      <BoldTypography sz={"16px"}>About</BoldTypography>
+                    </AboutTitle>
+                    <AboutWrapper>
+                      <Typography sz={"14px"} style={{fontWeight:"400"}}>{About}</Typography>
+                    </AboutWrapper>
             </ProfileInfo>
                   <QuestionBox></QuestionBox>
             </ProfileWrapper>
@@ -87,8 +89,8 @@ const ClubProfile = (props) => {
           <NameDescriptionWrapper>
             <ProfileAvatar></ProfileAvatar>
             <NameDescription>
-              <TitleTypography>UCLA DevX</TitleTypography>
-              <DescriptionTypography>{description}</DescriptionTypography>
+              <TitleTypography style={{fontSize: '24px', paddingBottom: '0'}}>UCLA DevX</TitleTypography>
+              <Typography style={{fontSize: '18px'}}>{description}</Typography>
             </NameDescription>
             {/* <NameDescription> */}
               <ClubWebsiteButton href={website}>Club Website</ClubWebsiteButton>
@@ -113,12 +115,7 @@ const ClubProfile = (props) => {
         <QuestionBox></QuestionBox>
         
       </ProfileWrapper>
-    {/* <ProfileWrapper>
-
-          <QuestionBox></QuestionBox>
-    </ProfileWrapper> */}
         <AboutContent/>
-
       <ProfileWrapper>
           <ProfileInfo>
             <NameDescriptionWrapper>

@@ -46,7 +46,6 @@ export const signupStudent = (newUserData, handleUser, handleStep) => async (
   dispatch
 ) => {
   try {
-    console.log(newUserData);
     const res = await axios.post("/auth/signup", newUserData);
     setAuthorizationHeader(res.data.token);
     dispatch(getStudentData());
@@ -82,7 +81,6 @@ export const editStudentDetails = (userDetails) => async (dispatch) => {
   try {
     const res = await axios.post("/student/profile", userDetails);
     dispatch({ type: "SET_USER", payload: res.data.updatedStudent });
-    console.log(res);
   } catch (err) {
     console.error(err);
   }

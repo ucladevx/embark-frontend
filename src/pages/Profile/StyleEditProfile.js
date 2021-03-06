@@ -23,18 +23,9 @@ import LinkEffect from "../../shared/LinkEffect";
 
 export const EditProfileContainer = styled(Dialog)`
   border-radius: 20px;
-  margin:0.5em auto;
+  margin: 2em auto;
   height: fit-content;
-  min-width: 575px;
-  max-width: 28vw;
-  ${'' /* height: 1032px; */}
- 
-  ${'' /* box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-  position: absolute;
-  width: 575px; 
-  left: 433px;
-  top: 72px; */}
+  max-width: 575px;
 `;
 
 export const TitleContainer = styled(DialogTitle)`
@@ -44,14 +35,14 @@ export const TitleContainer = styled(DialogTitle)`
   padding-bottom: 5.5vh;
 `;
 export const EditProfileTitle = styled(BoldTypography)`
-  font-size: 1.2em;
+  font-size: 24px;
   font-weight: 700;
   margin: 1vh auto;
 `;
 
 export const EditProfileAvatar = styled(Avatar)`
-  width: 5vw;
-  height: 5vw;
+  width: 7vw;
+  height: 7vw;
   border: 1px solid ${colors.grey3};
   margin: 0 auto;
   position: relative;
@@ -68,12 +59,6 @@ export const ChangeAvatarLink = styled(Typography)`
 export const EditCoverImage = styled.img`
   max-height: 10vh;
   padding: 0 1em;
-  ${'' /* width: 20em;
-  height: 10vh;
-  left: 542px;
-  top: 374px;
-  margin: 10px 0 0 10px; */}
-
 `;
 export const EditProfileContent = styled(DialogContent)`
   margin: 5px 30px ;
@@ -121,18 +106,6 @@ export const TextFieldWrapper = styled.div`
   margin-top: 20px;
   position: relative;
 `;
-
-// export const PostBtn = styled(Button)`
-//   color: #FFFFFF;
-//   font-size: 16px;
-//   font-weight: bold;
-//   width: 122px;
-//   height: 43px;
-//   background-color: #5473BB;
-//   margin: auto;
-//   border-radius: 8px;
-
-// `;
 
 export const DoneBtn = styled(ActionButton)`
   width: 120px;
