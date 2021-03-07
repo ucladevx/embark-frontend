@@ -159,7 +159,7 @@ const EditProfile = ({ open, handleClose}) => {
         <BoldTypography  sz={"18px"}>Interested Industries:</BoldTypography>
           <ExploreFilter>
           {console.log("print user tags", user.tags)}
-          {industries.length>0 && industries.map((name) => (
+          {industries && industries.map((name) => (
             <ExploreObj key = {name} bgcolor={colors.gray1}>
                 &times; {name}
             </ExploreObj>           
