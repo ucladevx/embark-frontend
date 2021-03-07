@@ -8,6 +8,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
+import {IndustryFilters} from "../../shared/dropdown";
 import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
 import { editStudentDetails } from "../../redux/actions/userActions";
@@ -33,21 +34,34 @@ import {
   DoneBtn,
 } from "./StyleEditProfile"
 import lawn from "../../images/lawn.png";
+import { makeStyles } from "@material-ui/core/styles";
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescription, currentAbout, currentWebsite, currentDescription }) => {
-  const years = ["2021", "2022", "2023", "2024"];
-  const industry = ["Business", "Computer Science", "Marketing", "Product Design", "Product Management", "Other"];
+const useStyles = makeStyles(theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2)
+  },
+  menuPaper: {
+    maxHeight: 300
+  }
+}));
 
-  const club = useSelector((state) => state.club);
+const EditClubProfile = ({ open, handleClose, currentAbout}) => {
+  const classes = useStyles();
+  const years = ["2021", "2022", "2023", "2024"];
+  const industry = IndustryFilters;
+  const user = useSelector((state) => state.user);
   const [name, setName] = useState("")
-  const [tags, setTags] = useState([])
   const [profilePicURL, setProfilePicURL] = useState("")
   const [coverPicURL, setcoverPicURL] = useState("")
-  const [description, setDescription] = useState(currentDescription);
-  //const [tags, setTags] = useState(user.tags)
-  const [website, setWebsite] = useState(currentWebsite);
+  const [description, setDescription] = useState(user.description);
+  const [industries, setIndustries] = useState(user.tags)
+  const [website, setWebsite] = useState(user.website);
   const [about, setAbout] = useState(currentAbout)
 
 
@@ -58,10 +72,8 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescri
     setDescription(e.target.value);
   };  
   
-  const handleTags = (e) => {
-    let curIndustries = tags.slice();
-    curIndustries.push(e.target.value)
-    setTags(curIndustries)
+  const handleIndustries = (e) => {
+    setIndustries(e.target.value);
   };
 
   const handleWebsite = (e) => {
@@ -73,13 +85,9 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescri
   };
 
   const handleSubmit = async () => {
-    EditAbout(about);
-    EditWebsite(website);
-    EditDescription(description);
-
     const updatedProfile = {
         name,
-        tags,
+        industries,
         description,
         profilePicURL,
         coverPicURL,
@@ -89,32 +97,19 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescri
     handleClose();
   };
 
-  // const checkOption = (props) =>{
-  //   return (
-  //     <Checkbox checked = {props.isChecked} color="default"/>
-
-  //   );}
-
-  //   }
-  // const Picture = (props) => {
-  //   return (
-  //     <div>
-  //       {props.children}
-  //     </div>
-  //   )
-  // }
 
   return (
-    <EditProfileContainer open={open} onClose={handleClose}>
+    <EditProfileContainer 
+    open={open} 
+    onClose={handleClose} 
+    scroll='body'
+    aria-labelledby="scroll-dialog-title"
+    aria-describedby="scroll-dialog-description">
       <TitleContainer>
         <EditProfileTitle align="center" sz={"18px"}>Edit Profile</EditProfileTitle>
       </TitleContainer>
-
       <EditProfileContent>
-
           <EditProfileAvatar rounded></EditProfileAvatar>
-
-
       <ChangeAvatarLink fontColor="red" align="center">Change Profile Photo</ChangeAvatarLink>
       <TextFieldWrapper>
         <EditCoverImage src={lawn}></EditCoverImage>        
@@ -143,17 +138,39 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescri
             onChange={handleDescription}
           />  
       </TextFieldWrapper>
+      
       <TextFieldWrapper>
       <BoldTypography sz={"16px"}>Relevant Industries:</BoldTypography>
-            {/* <ExploreFilter>
+            <ExploreFilter>
             <ExploreObj bgcolor={colors.red1}>
               Product Management
             </ExploreObj>
             <ExploreObj bgcolor={colors.darkyellow}>
               Product Design
             </ExploreObj>
-            </ExploreFilter>  */}
-
+            </ExploreFilter> 
+            <FormControlC>
+              <Select 
+              multiple 
+              disableUnderline
+              value={industry} 
+              onChange={handleIndustries}
+              MenuProps={{
+                getContentAnchorEl: null, 
+                anchorOrigin: {
+                  vertical: "bottom",
+                  horizontal: "left",
+                },
+                classes: { paper: classes.menuPaper },
+              }}> 
+              {industry && industry.map((name) => (
+                <MenuItem key={name} value={name}>
+                  <Checkbox checked = {industries && industries.includes(name)} color="default"/>
+                  <ListItemText primary={name} />
+                </MenuItem>
+              ))}
+              </Select>
+            </FormControlC>
             {/* <TextField
           select
           value="Select all that apply"
@@ -198,7 +215,7 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescri
         <TextFieldWrapper>
         <BoldTypography  sz={"16px"}>Website:</BoldTypography>
           <DialogTextField
-            value={currentWebsite}
+            value={website}
             autoFocus
             margin="dense"
             id="name"
@@ -239,13 +256,14 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, EditDescri
             onChange={handleAbout}
           />          
         </TextFieldWrapper>
-      </EditProfileContent>
-
+      
       <EditProfileDone>
         <DoneBtn onClick={handleSubmit} >
           Done
         </DoneBtn>
       </EditProfileDone>
+      </EditProfileContent>
+
 
     </EditProfileContainer>
   );

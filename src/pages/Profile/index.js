@@ -1,3 +1,4 @@
-import Profile from './Profile';
+import UserProfile from './UserProfile';
+import ClubProfile from "./ClubProfile"
 
-export default Profile;
+export default {UserProfile, ClubProfile};

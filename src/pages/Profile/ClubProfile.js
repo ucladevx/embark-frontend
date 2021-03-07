@@ -17,6 +17,7 @@ import {
   ClubWebsiteButton,
   AboutTitle,
   AboutWrapper,
+  Footer,
   ExploreFilterTitle,
   DescriptionTypography,
 } from "./StyleProfile";
@@ -124,11 +125,7 @@ const ClubProfile = (props) => {
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>
-      <ProfileWrapper><QuestionBox></QuestionBox></ProfileWrapper>
-      <ProfileWrapper><QuestionBox></QuestionBox></ProfileWrapper>
-      <ProfileWrapper><QuestionBox></QuestionBox></ProfileWrapper>
-      <ProfileWrapper><QuestionBox></QuestionBox></ProfileWrapper>
-      <ProfileWrapper><QuestionBox></QuestionBox></ProfileWrapper>
+        <Footer></Footer>
       </MiddleContainer>
     </>
   );

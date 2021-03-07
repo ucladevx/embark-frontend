@@ -172,7 +172,7 @@ export const AboutWrapper = styled.div`
 export const Footer = styled.div`
   background: ${colors.blue2};
   display: flex;
-  height: 100vh;
+  height: 100%;
   flex-direction: column;
   align-items: center;
 `;

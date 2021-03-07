@@ -106,12 +106,15 @@ const EditProfile = ({ open, handleClose}) => {
   };
 
   return (
-    <EditProfileContainer open={open} onClose={handleClose}>
-      <TitleContainer>
+    <EditProfileContainer 
+    scroll={'body'} 
+    open={open} 
+    onClose={handleClose}>
+      <TitleContainer id="scroll-dialog-title">
         <EditProfileTitle align="center" sz={"18px"}>Edit Profile</EditProfileTitle>
       </TitleContainer>
 
-      <EditProfileContent>
+      <EditProfileContent id="scroll-dialog-description">
           <EditProfileAvatar rounded="true"></EditProfileAvatar>
       <ChangeAvatarLink fontColor="red" align="center">Change Profile Picture</ChangeAvatarLink>
 
@@ -167,7 +170,7 @@ const EditProfile = ({ open, handleClose}) => {
               <Select 
               multiple 
               disableUnderline
-              value={[...industries]} 
+              value={industries} 
               onChange={addIndustries}
               MenuProps={{
                 getContentAnchorEl: null, 
@@ -207,13 +210,15 @@ const EditProfile = ({ open, handleClose}) => {
             onChange={handlelinkedIn}
           />          
         </TextFieldWrapper>
-      </EditProfileContent>
 
       <EditProfileDone>
         <DoneBtn onClick={handleSubmit} >
           Done
         </DoneBtn>
       </EditProfileDone>
+
+      </EditProfileContent>
+
 
     </EditProfileContainer>
   );
