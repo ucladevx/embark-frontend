@@ -153,7 +153,7 @@ const EditClubProfile = ({ open, handleClose, currentAbout}) => {
               <Select 
               multiple 
               disableUnderline
-              value={industry} 
+              value={user.tags} 
               onChange={handleIndustries}
               MenuProps={{
                 getContentAnchorEl: null, 

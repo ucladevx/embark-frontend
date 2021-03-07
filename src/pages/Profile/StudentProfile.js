@@ -21,11 +21,11 @@ import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
 import {Button} from "@material-ui/core";
-import EditProfile from "./editUserProfile"
-import UserProfileTabs from "./UserProfileTabs"
+import EditProfile from "./editStudentProfile"
+import UserProfileTabs from "./StudentProfileTabs"
 import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
-const UserProfile = (props) => {
+const StudentProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
   const { userid } = useParams();
@@ -35,6 +35,7 @@ const UserProfile = (props) => {
       <EditProfile 
         open={editProfile}
         handleClose={() => seteditProfile(false)}
+        allTags = {user.tags}
       ></EditProfile>
       <NavBar></NavBar>
       <MiddleContainer>
@@ -80,4 +81,4 @@ const UserProfile = (props) => {
   );
 };
 
-export default UserProfile;
+export default StudentProfile;

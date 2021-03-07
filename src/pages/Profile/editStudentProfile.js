@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const EditProfile = ({ open, handleClose}) => {
+const EditProfile = ({ open, handleClose, allTags}) => {
   const classes = useStyles();
   const years = ["2021", "2022", "2023", "2024"];
   const industry = IndustryFilters;
@@ -60,7 +60,7 @@ const EditProfile = ({ open, handleClose}) => {
   const [email, setEmail] = useState(user.email)
   const [major, setMajor] = useState(user.major)
   const [year, setYear] = useState(user.year)
-  const [industries, setIndustries] = useState([user.tags]);
+  const [industries, setIndustries] = useState(allTags);
   const [bio, setBio] = useState(user.bio);
   const [linkedin, setLinkedin] = useState(user.linkedIn); 
 
@@ -159,7 +159,7 @@ const EditProfile = ({ open, handleClose}) => {
         <BoldTypography  sz={"18px"}>Interested Industries:</BoldTypography>
           <ExploreFilter>
           {console.log("print user tags", user.tags)}
-          {industries.length>0 && industries.map((name) => (
+          {industries && industries.map((name) => (
             <ExploreObj key = {name} bgcolor={colors.gray1}>
                 &times; {name}
             </ExploreObj>           
@@ -169,16 +169,16 @@ const EditProfile = ({ open, handleClose}) => {
               <Select 
               multiple 
               disableUnderline
-              value={industries} 
+              value={industries? industries: allTags} 
               onChange={addIndustries}
               MenuProps={{
-                getContentAnchorEl: null, 
-                anchorOrigin: {
-                  vertical: "bottom",
-                  horizontal: "left",
-                },
-                classes: { paper: classes.menuPaper },
-              }}> 
+                getContentAnchorEl: null, 
+                anchorOrigin: {
+                  vertical: "bottom",
+                  horizontal: "left",
+                },
+                classes: { paper: classes.menuPaper },
+              }}> 
               {industry && industry.map((name) => (
                 <MenuItem key={name} value={name}>
                   <Checkbox checked = {industries && industries.includes(name)} color="default"/>

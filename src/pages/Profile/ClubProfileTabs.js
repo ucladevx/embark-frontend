@@ -61,7 +61,7 @@ const ClubProfileTabs = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="relative" color="white" elevation="0">
+      <AppBar position="relative" color="transparent" elevation={0}>
         <Tabs 
         value={value} 
         onChange={handleChange} 
