@@ -79,7 +79,7 @@ const FormPersonalDetails = ({ user }) => {
               tags: [industry],
             };
             dispatch(editStudentDetails(profile));
-            history.push("/landing");
+            history.push("/home");
           }}
         >
           {({ errors }) => (

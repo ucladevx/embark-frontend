@@ -92,7 +92,6 @@ const EditProfile = ({ open, handleClose}) => {
         updatedTags.push("rm"+ind);
       }
     })
-    //console.log("updatedTags ", updatedTags);
     const updatedProfile = {
       name, 
       major, 
@@ -159,8 +158,8 @@ const EditProfile = ({ open, handleClose}) => {
         <TextFieldWrapper>
         <BoldTypography  sz={"18px"}>Interested Industries:</BoldTypography>
           <ExploreFilter>
-          {console.log("print user tags", industries)}
-          {industries && industries.map((name) => (
+          {console.log("print user tags", user.tags)}
+          {industries.length>0 && industries.map((name) => (
             <ExploreObj key = {name} bgcolor={colors.gray1}>
                 &times; {name}
             </ExploreObj>           
