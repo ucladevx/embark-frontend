@@ -5,7 +5,6 @@ import {
   DELETE_POST,
   NEW_POST,
   SET_POST,
-  SUBMIT_COMMENT,
   ADD_FILTER,
   REMOVE_FILTER,
   FILTER_POSTS,
@@ -44,14 +43,17 @@ export default function dataReducer(state = initialState, action) {
     case LIKE_POST:
     case UNLIKE_POST:
       index = state.posts.findIndex(
+<<<<<<< HEAD
         (post) => post.postId === action.payload.postId,
+=======
+        (post) => post.post_id === action.payload.post.post_id
+>>>>>>> master
       );
-      state.posts[index] = action.payload;
-      if (state.post.postId === action.payload.postId) {
-        state.post = action.payload;
-      }
+      const newPosts = [...state.posts];
+      newPosts[index] = action.payload.post;
       return {
         ...state,
+        posts: newPosts,
       };
     case SET_POST:
       return {

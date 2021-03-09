@@ -67,43 +67,45 @@ const Login = () => {
           validateOnBlur={false}
           validateOnChange={false}
         >
-          {({ errors, setErrors }) => (
-            <FormWrapper>
-              <FieldContainer>
-                <Field
-                  name="email"
-                  placeholder="Email"
-                  as={TypeBox}
-                  margin="normal"
-                  error={!!errors.password || !!errors.email}
-                  onFocus={() => {
-                    setErrors({});
-                    dispatch({ type: CLEAR_ERRORS });
-                  }}
-                ></Field>
-              </FieldContainer>
-              <FieldContainer>
-                <Field
-                  name="password"
-                  placeholder="Password"
-                  as={TypeBox}
-                  margin="normal"
-                  error={!!errors.password || !!errors.email}
-                  type="password"
-                  onFocus={() => {
-                    setErrors({});
-                    dispatch({ type: CLEAR_ERRORS });
-                  }}
-                ></Field>
-              </FieldContainer>
-              <ErrorPrompt
-                error={!!back_end_errors || !!errors.password || !!errors.email}
-              >
-                Invalid email or password
-              </ErrorPrompt>
-              <AccountBtn type="submit">Log in</AccountBtn>
-            </FormWrapper>
-          )}
+          {({ errors, setErrors }) => {
+            const hasError =
+              !!back_end_errors || !!errors.password || !!errors.email;
+            return (
+              <FormWrapper>
+                <FieldContainer>
+                  <Field
+                    name="email"
+                    placeholder="Email"
+                    as={TypeBox}
+                    margin="normal"
+                    error={hasError}
+                    onFocus={() => {
+                      setErrors({});
+                      dispatch({ type: CLEAR_ERRORS });
+                    }}
+                  ></Field>
+                </FieldContainer>
+                <FieldContainer>
+                  <Field
+                    name="password"
+                    placeholder="Password"
+                    as={TypeBox}
+                    margin="normal"
+                    error={hasError}
+                    type="password"
+                    onFocus={() => {
+                      setErrors({});
+                      dispatch({ type: CLEAR_ERRORS });
+                    }}
+                  ></Field>
+                </FieldContainer>
+                <ErrorPrompt error={hasError}>
+                  Invalid email or password
+                </ErrorPrompt>
+                <AccountBtn type="submit">Log in</AccountBtn>
+              </FormWrapper>
+            );
+          }}
         </Formik>
       </RightFormContainer>
     </FormContainer>

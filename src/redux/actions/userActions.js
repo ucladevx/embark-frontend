@@ -21,7 +21,11 @@ export const loginUser = (userData, history) => async (dispatch) => {
     const res = await axios.post('/auth/signin', userData);
     setAuthorizationHeader(res.data.token);
     dispatch(getStudentData());
+<<<<<<< HEAD
     history.push('/home');
+=======
+    history.push("/home");
+>>>>>>> master
   } catch (err) {
     dispatch({ type: SET_ERRORS, payload: err.response.data });
   }

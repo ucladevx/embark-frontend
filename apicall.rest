@@ -45,10 +45,33 @@ GET http://localhost:9000/posts?limit=2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzJlMDlhOGFlYmQ0MjI2ODkxMmZmYiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya2VtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTYxMzk1MDg4NiwiZXhwIjoxNjIyNTkwODg2fQ.-TZJmcfn1tro8kvAO_ThSAmhyDzhwuSicZlPk-i7Drc
 Content-Type: application/json
 
+
+###
+POST http://localhost:9000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzJlMDlhOGFlYmQ0MjI2ODkxMmZmYiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya2VtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTYxMzk1MDg4NiwiZXhwIjoxNjIyNTkwODg2fQ.-TZJmcfn1tro8kvAO_ThSAmhyDzhwuSicZlPk-i7Drc
+Content-Type: application/json
+
+{
+    "title": "test title",
+    "body": "test frontend",
+    "accountType": "student"
+}
+
+###
+POST http://localhost:9000/posts/likes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzJlMDlhOGFlYmQ0MjI2ODkxMmZmYiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya2VtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTYxMzk1MDg4NiwiZXhwIjoxNjIyNTkwODg2fQ.-TZJmcfn1tro8kvAO_ThSAmhyDzhwuSicZlPk-i7Drc
+Content-Type: application/json
+
+{
+    "authorEmail": "embarkemail@gmail.com",
+    "post_id": "6046b8a11a39630050538c35"
+}
+
 ###
 GET http://localhost:9000/posts/comments
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzOTA3NzQ4MzJmMjEzYjNmYyIsIm5hbWUiOiJqb2huIHNtYWxsYmVyZzEiLCJlbWFpbCI6ImpvaG4xQGVtYWlsLmNvbSIsImlhdCI6MTYxMjIwNDA4NiwiZXhwIjoxNjIwODQ0MDg2fQ.kT3fUNe433ue1SG89ngnRjk5CErTMBZsH4X3xAeG_Pk
 Content-Type: application/json
+
 
 ###
 POST http://localhost:9000/posts/comments
@@ -60,6 +83,7 @@ Content-Type: application/json
     "post_id": "6012dce8eb36de011c96c7e4",
     "comment": "nothing"
 }
+
 
 ###
 POST http://localhost:9000/posts/likes

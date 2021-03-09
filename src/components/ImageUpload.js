@@ -6,12 +6,10 @@ import LinkEffect from '../shared/LinkEffect';
 const ImageIcon = styled(Image)`
   ${LinkEffect}
 `;
-
+const InputWrapper = styled.div`
+  display: none;
+`;
 const ImageUpload = ({ handleImageInput }) => {
-  const InputWrapper = styled.div`
-    display: none;
-  `;
-
   return (
     <div className="App">
       <form id="myImgForm">

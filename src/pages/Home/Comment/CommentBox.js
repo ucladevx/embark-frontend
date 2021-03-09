@@ -14,6 +14,7 @@ import { colors } from '../../../shared/config';
 
 const CommentBox = ({ comments }) => {
   const [start, setStart] = useState(0);
+
   return (
     <ViewPreviousCommentWrapper>
       {start > 0 ? (
@@ -27,7 +28,7 @@ const CommentBox = ({ comments }) => {
         comments.map((c, i) => {
           if (i >= start && i < start + 4)
             return (
-              <PreviousCommentItem key={c._id}>
+              <PreviousCommentItem key={c._id + i}>
                 <PreviousCommentAvatar></PreviousCommentAvatar>
                 <div>
                   <PreviousCommentContent bgcolor={colors.gray1}>
@@ -42,7 +43,7 @@ const CommentBox = ({ comments }) => {
                 </div>
               </PreviousCommentItem>
             );
-          else return <></>;
+          else return <React.Fragment key={i}></React.Fragment>;
         })}
       {comments && comments.length > start + 4 && (
         <ViewCommentLink onClick={() => setStart(start + 4)}>

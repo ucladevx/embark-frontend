@@ -33,8 +33,16 @@ export const getPosts = () => async (dispatch) => {
     const res = await axios.get('/posts', {
       params,
     });
+<<<<<<< HEAD
 
     localStorage.setItem('nextString', res.data.paginatedPosts.next.toString());
+=======
+    if (res.data.paginatedPosts.next)
+      localStorage.setItem(
+        "nextString",
+        res.data.paginatedPosts.next.toString()
+      );
+>>>>>>> master
     dispatch({ type: SET_POSTS, payload: res.data.paginatedPosts.results });
     dispatch({ type: SET_NEXT_STRING, payload: res.data.paginatedPosts.next });
   } catch (err) {
@@ -54,8 +62,12 @@ export const getNextPosts = () => async (dispatch, getState) => {
     const { posts } = getState().data;
     const { results, next, hasNext } = res.data.paginatedPosts;
     const newPosts = [...posts, ...results];
+<<<<<<< HEAD
     console.log(next === localStorage.getItem('nextString'));
     localStorage.setItem('nextString', next.toString());
+=======
+    if (next) localStorage.setItem("nextString", next.toString());
+>>>>>>> master
     dispatch({ type: SET_POSTS, payload: newPosts });
     dispatch({ type: SET_NEXT_STRING, payload: next });
     dispatch({ type: SET_HAS_NEXT, payload: hasNext });
@@ -67,8 +79,13 @@ export const getNextPosts = () => async (dispatch, getState) => {
 // Create A New Post
 export const newPost = (newP) => async (dispatch) => {
   try {
+<<<<<<< HEAD
     const res = await axios.post('/posts', newP);
     dispatch({ type: NEW_POST, payload: res.data });
+=======
+    const res = await axios.post("/posts", newP);
+    dispatch({ type: NEW_POST, payload: res.data.post });
+>>>>>>> master
   } catch (err) {
     console.error(err);
   }
@@ -82,7 +99,7 @@ export const likePost = (post_id) => async (dispatch, getState) => {
       post_id,
       authorEmail: email,
     };
-    const res = await axios.get(`/posts/likes`, body);
+    const res = await axios.post(`/posts/likes`, body);
     dispatch({ type: LIKE_POST, payload: res.data });
   } catch (err) {
     console.error(err);
@@ -92,7 +109,7 @@ export const likePost = (post_id) => async (dispatch, getState) => {
 // Unlike a Post
 export const unlikePost = (postId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/posts/${postId}/unlike`);
+    const res = await axios.get(`/posts/`);
     dispatch({ type: UNLIKE_POST, payload: res.data });
   } catch (err) {
     console.error(err);
