@@ -48,6 +48,7 @@ const PostBtn = styled(Button)`
 
 const NewEvent = ({ open, handleClose }) => {
   const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   const [time, setTime] = useState("");
   // Redux
@@ -55,6 +56,9 @@ const NewEvent = ({ open, handleClose }) => {
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
+  };
+  const handleLocation = (e) => {
+    setLocation(e.target.value);
   };
 
   const handleDescription = (e) => {
@@ -71,6 +75,7 @@ const NewEvent = ({ open, handleClose }) => {
       title,
       body: description,
       datetime: time,
+      location: location,
     };
     dispatch(newEvent(event));
     handleClose();
@@ -103,7 +108,21 @@ const NewEvent = ({ open, handleClose }) => {
               onChange = {handleTime}
             />
           </TimeWrapper>
-          
+          <DialogTextField
+            autoFocus
+            margin="dense"
+            id="location"
+            placeholder="Location"
+            fullWidth
+            InputProps={{
+              disableUnderline: true,
+              style: {
+                fontSize: 16,
+                fontWeight: 600,
+              },
+            }}
+            onChange={handleLocation}
+          />
           <DialogTextField
             placeholder="Description"
             rows={4}

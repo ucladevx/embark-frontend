@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import {
     EventAvatar,
     EventDescription,
@@ -14,6 +14,7 @@ import {
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { useSelector, useDispatch } from 'react-redux';
 import { goingToEvent } from "../../redux/actions/userActions";
+import ExpandedEvent from "./ExpandedEvent.js"
 
 // Dayjs
 import dayjs from 'dayjs';
@@ -38,9 +39,9 @@ const testEvent = [{
     title : "Embark Release",
     authorEmail: "Embark",
     datetime: "2021-03-03T08:00:00.000Z",
+    description: "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
+    location: "here what do you think",
 }];
-
-
 
 const Events = ({setNewEvent}) => {
     const dispatch = useDispatch();
@@ -49,8 +50,17 @@ const Events = ({setNewEvent}) => {
     }
     const events = useSelector((state) => state.data.events);
     const attending = useSelector((state) => state.user.goingEvents);
+    const [expanded, setExpanded] = useState(false);
+    const [event, setEvent] = useState({});
+    const loadExpanded = (e) => {
+      console.log(e);
+      setEvent(e);
+      console.log(event);
+      setExpanded(true);
+    }
   return (
     <>
+      <ExpandedEvent open={expanded} handleClose={() => setExpanded(false)} e = {event} />
       <EventsWrapper>
         <TitleTypography>Upcoming Events</TitleTypography>
             <EventItems>
@@ -81,17 +91,17 @@ const Events = ({setNewEvent}) => {
                     Going
                   </GoingBtn>
                 </EventItem>
-                {testEvent.map((e) => {
+                {testEvent.map((p) => {
                     return (
                     <>
-                        <InfoSeperator key = {e._id + "sep"}></InfoSeperator>
-                        <EventItem key = {e._id}>
-                            <EventAvatar></EventAvatar>
-                            <EventDescription>
-                                <BoldTypography sz={"16px"}>{e.title}</BoldTypography>
-                                <EventTypography>{e.authorEmail}</EventTypography>
+                        <InfoSeperator key = {p._id + "sep"}></InfoSeperator>
+                        <EventItem key = {p._id} >
+                            <EventAvatar onClick= {() => loadExpanded(p)}></EventAvatar>
+                            <EventDescription onClick= {() => loadExpanded(p)}>
+                                <BoldTypography sz={"16px"}>{p.title}</BoldTypography>
+                                <EventTypography>{p.authorEmail}</EventTypography>
                                 <TimeTypography>
-                                    {test(e.datetime)}
+                                    {test(p.datetime)}
                                 </TimeTypography>
                             </EventDescription>
                             <GoingBtn bgcolor={false}>
@@ -106,8 +116,8 @@ const Events = ({setNewEvent}) => {
                     <>
                         <InfoSeperator key = {e._id + "sep"}></InfoSeperator>
                         <EventItem key = {e._id}>
-                            <EventAvatar></EventAvatar>
-                            <EventDescription>
+                            <EventAvatar onClick= {() => loadExpanded(e)}></EventAvatar>
+                            <EventDescription onClick= {() => loadExpanded(e)}>
                                 <BoldTypography sz={"16px"}>{e.title}</BoldTypography>
                                 <EventTypography>{e.authorEmail}</EventTypography>
                                 <TimeTypography>
