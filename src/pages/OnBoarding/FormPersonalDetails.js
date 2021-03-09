@@ -1,7 +1,7 @@
-import { TextField } from "@material-ui/core";
-import MenuItem from "@material-ui/core/MenuItem";
-import { useHistory } from "react-router-dom";
-import { ActionButton } from "../../shared/Buttons";
+import { TextField } from '@material-ui/core';
+import MenuItem from '@material-ui/core/MenuItem';
+import { useHistory } from 'react-router-dom';
+import { ActionButton } from '../../shared/Buttons';
 
 import {
   LeftFormContainer,
@@ -9,14 +9,14 @@ import {
   FormWrapper,
   FormContainer,
   Prompt,
-} from "../../shared/Form";
+} from '../../shared/Form';
 
-import styled from "styled-components";
-import { colors } from "../../shared/config.js";
-import { Formik, Field } from "formik";
-import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { editStudentDetails } from "../../redux/actions/userActions";
+import styled from 'styled-components';
+import { colors } from '../../shared/config.js';
+import { Formik, Field } from 'formik';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { editStudentDetails } from '../../redux/actions/userActions';
 
 const HeyTitle = styled.div`
   font-weight: 700;
@@ -37,22 +37,22 @@ const DoneBtn = styled(ActionButton)`
 `;
 
 const validateSchema = Yup.object({
-  major: Yup.string().required("Major is required").max(20),
+  major: Yup.string().required('Major is required').max(20),
   industry: Yup.string().required(),
   year: Yup.string().required(),
 });
 
 const FormPersonalDetails = ({ user }) => {
   const history = useHistory();
-  const years = ["2021", "2022", "2023", "2024"];
-  const industry = ["Developer", "Design", "Marketing", "Product Mangement"];
+  const years = ['2021', '2022', '2023', '2024'];
+  const industry = ['Developer', 'Design', 'Marketing', 'Product Mangement'];
   const dispatch = useDispatch();
 
   return (
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
-        <Prompt link={"login"}></Prompt>
+        <Prompt link={'login'}></Prompt>
         <HeyTitle>
           Hey {user.firstName} {user.lastName}! <br /> Welcome to Embark
         </HeyTitle>
@@ -62,10 +62,10 @@ const FormPersonalDetails = ({ user }) => {
         </HeySubtitile>
         <Formik
           initialValues={{
-            year: "",
-            major: "",
-            industry: "",
-            linkedIn: "",
+            year: '',
+            major: '',
+            industry: '',
+            linkedIn: '',
           }}
           validationSchema={validateSchema}
           validateOnBlur={false}
@@ -79,7 +79,7 @@ const FormPersonalDetails = ({ user }) => {
               tags: [industry],
             };
             dispatch(editStudentDetails(profile));
-            history.push("/landing");
+            history.push('/home');
           }}
         >
           {({ errors }) => (

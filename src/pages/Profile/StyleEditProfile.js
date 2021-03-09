@@ -12,43 +12,59 @@ import {
   FormControl,
   Divider,
   Avatar,
-} from "@material-ui/core";
-import { BoldTypography } from "../../shared/Typography";
-import { colors } from "../../shared/config";
-import styled from "styled-components";
+} from '@material-ui/core';
+import { ActionButton } from '../../shared/Buttons';
+import { BoldTypography } from '../../shared/Typography';
+import { colors } from '../../shared/config';
+import styled from 'styled-components';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import LinkEffect from '../../shared/LinkEffect';
 
 export const EditProfileContainer = styled(Dialog)`
   box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  margin: 30px;
-
+  width: 100vw;
+  height: 100vh;
 `;
 
 export const TitleContainer = styled(DialogTitle)`
-  border-bottom: 1px solid ${colors.gray2}
+  border-bottom: 3px solid ${colors.gray4};
+  height: 10vh;
+  max-height: 2vh;
+  padding-bottom: 5.5vh;
 `;
 export const EditProfileTitle = styled(BoldTypography)`
-  font-size: 24px
-  font-weight: normal;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 1vh auto;
 `;
 
 export const EditProfileAvatar = styled(Avatar)`
-  variant:"rounded";
-  width: 8vw;
-  height: 8vw;
+  width: 7vw;
+  height: 7vw;
   border: 1px solid ${colors.grey3};
-  ${'' /* outline: solid 2px grey;
-  outline-offset: -2px; */}
-  margin: auto;
+  margin: 0 auto;
   position: relative;
 `;
-export const EditProfileContent = styled(DialogContent)`
-  margin: 5px 30px ;
+
+export const ChangeAvatarLink = styled(Typography)`
+  ${LinkEffect}
+  background: none;
+  margin: 10px 0 0 10px;
+  font-size: 0.8em;
+  color: ${colors.blue4};
 `;
 
-export const EditProfileDone =styled(DialogActions)`
-  margin: 50px 30px;
+export const EditCoverImage = styled.img`
+  max-height: 10vh;
+  padding: 0 1em;
+`;
+export const EditProfileContent = styled(DialogContent)`
+  margin: 5px 30px;
+`;
+
+export const EditProfileDone = styled(DialogActions)`
+  margin: 30px 30px;
 `;
 
 export const NewPostInfo = styled.div`
@@ -63,6 +79,9 @@ export const NewPostUser = styled.div`
 
 export const FormControlC = styled(FormControl)`
   min-width: 200px;
+  max-height: 5vh;
+  background: ${colors.gray1};
+  border-radius: 10px;
 `;
 
 export const Suggested = styled(Typography)`
@@ -74,26 +93,21 @@ export const DialogTextField = styled(TextField)`
   background: ${colors.gray1};
   padding: 5px 5px;
   border-radius: 5px;
+  padding: 1em 1em;
 `;
 
 export const TextFieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin: auto 0.5em;
   gap: 10px;
-  min-width: 450px;
+  min-width: 4em;
   margin-top: 20px;
   position: relative;
 `;
 
-export const PostBtn = styled(Button)`
-  color: #FFFFFF;
-  font-size: 16px;
-  font-weight: bold;
-  width: 122px;
-  height: 43px;
-  background-color: #5473BB;
+export const DoneBtn = styled(ActionButton)`
+  width: 120px;
+  height: 40px;
   margin: auto;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
 `;

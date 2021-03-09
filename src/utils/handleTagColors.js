@@ -1,20 +1,20 @@
-import { colors } from "../shared/config";
+import { colors } from '../shared/config';
 
 export const handleTagColor = (tag) => {
   switch (tag) {
-    case "Product Management":
+    case 'Product Management':
       return colors.red1;
-    case "Computer Science":
+    case 'Computer Science':
       return colors.blue3;
-    case "Product Design":
+    case 'Product Design':
       return colors.darkyellow;
-    case "law":
+    case 'law':
       return colors.gray2;
-    case "medicine":
+    case 'medicine':
       return colors.pink;
-    case "tech":
+    case 'tech':
       return colors.blue2;
     default:
-      return "#222";
+      return '#222';
   }
 };

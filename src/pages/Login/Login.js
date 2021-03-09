@@ -1,10 +1,10 @@
-import { Field, Formik } from "formik";
-import { loginUser } from "../../redux/actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import * as Yup from "yup";
-import styled from "styled-components";
-import { OrSeperator } from "../../shared/Separators";
+import { Field, Formik } from 'formik';
+import { loginUser } from '../../redux/actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import * as Yup from 'yup';
+import styled from 'styled-components';
+import { OrSeperator } from '../../shared/Separators';
 import {
   LeftFormContainer,
   RightFormContainer,
@@ -13,11 +13,11 @@ import {
   Prompt,
   FieldContainer,
   ErrorPrompt,
-} from "../../shared/Form";
-import TypeBox from "../../shared/TypeBox";
-import AuthButtons from "../../shared/AuthButtons";
-import { ActionButton } from "../../shared/Buttons";
-import { CLEAR_ERRORS } from "../../redux/types";
+} from '../../shared/Form';
+import TypeBox from '../../shared/TypeBox';
+import AuthButtons from '../../shared/AuthButtons';
+import { ActionButton } from '../../shared/Buttons';
+import { CLEAR_ERRORS } from '../../redux/types';
 
 const SignUpTitle = styled.div`
   font-weight: bold;
@@ -31,11 +31,11 @@ const AccountBtn = styled(ActionButton)`
   margin-top: 15px;
 `;
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
+  email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()
-    .required("No password provided.")
-    .min(8, "Password is too short - should be 8 chars minimum.")
-    .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+    .required('No password provided.')
+    .min(8, 'Password is too short - should be 8 chars minimum.')
+    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
 });
 
 const Login = () => {
@@ -46,14 +46,14 @@ const Login = () => {
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
-        <Prompt link={"signup"}></Prompt>
+        <Prompt link={'signup'}></Prompt>
         <SignUpTitle>Log in to Embark</SignUpTitle>
         <AuthButtons />
         <OrSeperator />
         <Formik
           initialValues={{
-            email: "",
-            password: "",
+            email: '',
+            password: '',
           }}
           validationSchema={LoginSchema}
           onSubmit={(values) => {

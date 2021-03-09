@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+import React, { useState, useEffect } from 'react';
+import { Line } from '../../shared/Separators';
+import Like from '../../images/heart-gray.svg';
+import Comment from '../../images/comment.svg';
+import Share from '../../images/share.svg';
+import styled from 'styled-components';
+import { colors } from '../../shared/config';
+import LinkEffect from '../../shared/LinkEffect';
+import { useDispatch } from 'react-redux';
+import { likePost } from '../../redux/actions/dataActions';
+import { OPEN_COMMENT } from '../../redux/types';
+=======
 import React, { useState, useEffect } from "react";
 import { Line } from "../../shared/Separators";
 import Like from "../../images/heart-gray.svg";
@@ -10,6 +23,7 @@ import LinkEffect from "../../shared/LinkEffect";
 import { useDispatch } from "react-redux";
 import { likePost } from "../../redux/actions/dataActions";
 import { OPEN_COMMENT } from "../../redux/types";
+>>>>>>> master
 
 const InteractiveContainer = styled.div`
   display: flex;

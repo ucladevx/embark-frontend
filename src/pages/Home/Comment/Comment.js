@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Dialog } from "@material-ui/core";
-import TypeBox from "../../../shared/TypeBox";
-import styled from "styled-components";
-import { header4 } from "../../../shared/config";
-import SendIcon from "@material-ui/icons/Send";
-import { TipButton } from "../../../shared/Buttons";
-import { useDispatch, useSelector } from "react-redux";
-import { submitComment } from "../../../redux/actions/dataActions";
+import React, { useState } from 'react';
+import { Dialog } from '@material-ui/core';
+import TypeBox from '../../../shared/TypeBox';
+import styled from 'styled-components';
+import { header4 } from '../../../shared/config';
+import SendIcon from '@material-ui/icons/Send';
+import { TipButton } from '../../../shared/Buttons';
+import { useDispatch, useSelector } from 'react-redux';
+import { submitComment } from '../../../redux/actions/dataActions';
 
 const CommentTitle = styled.div`
   ${header4}
@@ -30,7 +30,7 @@ const CommentTypeBox = styled(TypeBox)`
 const Comment = ({ open, handleClose }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.ui.newComment);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
   return (
     <Dialog open={open} onClose={handleClose}>
       <CommentContainer>

@@ -18,8 +18,8 @@ POST http://localhost:9000/auth/signup
 Content-Type: application/json
 
 {
-    "name": "john smallberg1",
-    "email": "john1@email.com",
+    "name": "hellobruin",
+    "email": "bruin131!!@email.com",
     "password": "12345qQ!",
     "userType": "student"
 }

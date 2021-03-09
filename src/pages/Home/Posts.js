@@ -1,6 +1,6 @@
-import React from "react";
-import ImageIcon from "@material-ui/icons/Image";
-import LinkIcon from "@material-ui/icons/Link";
+import React from 'react';
+import ImageIcon from '@material-ui/icons/Image';
+import LinkIcon from '@material-ui/icons/Link';
 import {
   QuestionBox,
   AskAvatar,
@@ -25,16 +25,34 @@ import {
   PostUserName,
   PostTag,
   FilesWrapper,
+<<<<<<< HEAD
+} from './StyleLanding';
+import { CircularProgress } from '@material-ui/core';
+import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { colors } from '../../shared/config';
+import Comment from './Comment/Comment';
+=======
 } from "./StyleLanding";
 import { CircularProgress } from "@material-ui/core";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { colors } from "../../shared/config";
+>>>>>>> master
 
 // Infinite Scroll
-import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 // Dayjs
+<<<<<<< HEAD
+import dayjs from 'dayjs';
+import { getNextPosts } from '../../redux/actions/dataActions';
+import Interactive from './Interactive';
+import WriteComment from './Comment/WriteComment';
+import { CLOSE_COMMENT } from '../../redux/types';
+import FileViewer from 'react-file-viewer';
+import CommentBox from './Comment/CommentBox';
+=======
 import dayjs from "dayjs";
 import { getNextPosts } from "../../redux/actions/dataActions";
 import Interactive from "./Interactive";
@@ -42,8 +60,9 @@ import WriteComment from "./Comment/WriteComment";
 import FileViewer from "react-file-viewer";
 import CommentBox from "./Comment/CommentBox";
 import thumbup from "../../images/thumbup.svg";
+>>>>>>> master
 
-const relativeTime = require("dayjs/plugin/relativeTime");
+const relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
 const Circle = styled(CircularProgress)`
@@ -64,7 +83,7 @@ const LikeCommentCount = styled.div`
 
 const Loader = () => {
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Circle></Circle>
     </div>
   );
@@ -76,7 +95,7 @@ const Posts = ({ setNewPost }) => {
   const hasNext = useSelector((state) => state.data.hasNext);
   const dispatch = useDispatch();
 
-  const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
+  const tags = [{ key: 'Product Management' }, { key: 'Computer Science' }];
   const renderedTags = tags.map((each) => {
     return (
       <div key={each.key}>
@@ -89,7 +108,7 @@ const Posts = ({ setNewPost }) => {
   };
   //for test files, go to https://cors-anywhere.herokuapp.com to enable CORS on non-cors file links, see below for format
   const testfiles = [
-    "https://cors-anywhere.herokuapp.com/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
+    'https://cors-anywhere.herokuapp.com/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx',
   ];
 
   return (
@@ -115,7 +134,7 @@ const Posts = ({ setNewPost }) => {
           <PostAvatar />
           <PostNameTime>
             <PostUserName>Christie Smith</PostUserName>
-            <PostTime>{dayjs("2020-12-01").fromNow()}</PostTime>
+            <PostTime>{dayjs('2020-12-01').fromNow()}</PostTime>
           </PostNameTime>
           <PostTagWrapper>{renderedTags}</PostTagWrapper>
         </PostHeader>
@@ -131,7 +150,7 @@ const Posts = ({ setNewPost }) => {
               <FilesWrapper key={i}>
                 <FileViewer
                   tag={f}
-                  fileType={f.substring(f.lastIndexOf(".") + 1)}
+                  fileType={f.substring(f.lastIndexOf('.') + 1)}
                   filePath={f}
                 />
               </FilesWrapper>
@@ -242,11 +261,35 @@ const Posts = ({ setNewPost }) => {
                       />
                     </FilesWrapper>
                   ))}
+<<<<<<< HEAD
+                </PostTagWrapper>
+              </PostHeader>
+              <PostTitle>{p.title}</PostTitle>
+              <PostContent>{p.body}</PostContent>
+
+              <Interactive post_id={p._id}></Interactive>
+              {p.files &&
+                p.files.map((f) => (
+                  <FilesWrapper>
+                    <FileViewer
+                      tag={f}
+                      fileType={f.substring(f.lastIndexOf('.') + 1)}
+                      filePath={f}
+                    />
+                  </FilesWrapper>
+                ))}
+              <CommentBox comments={p.comments}></CommentBox>
+              <WriteComment post_id={p._id}></WriteComment>
+            </PostWrapper>
+          );
+        })}
+=======
                 <CommentBox comments={p.comments}></CommentBox>
                 <WriteComment post_id={p._id}></WriteComment>
               </PostWrapper>
             );
           })}
+>>>>>>> master
       </InfiniteScroll>
     </>
   );

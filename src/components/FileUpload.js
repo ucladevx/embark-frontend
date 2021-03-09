@@ -1,7 +1,7 @@
-import React from "react";
-import Link from "@material-ui/icons/Link";
-import styled from "styled-components";
-import LinkEffect from "../shared/LinkEffect";
+import React from 'react';
+import Link from '@material-ui/icons/Link';
+import styled from 'styled-components';
+import LinkEffect from '../shared/LinkEffect';
 
 const LinkIcon = styled(Link)`
   ${LinkEffect}
