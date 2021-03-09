@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import FileUpload from "./FileUpload.js";
-import ImageUpload from "./ImageUpload.js";
-import FileViewer from "react-file-viewer";
+import React, { useState } from 'react';
+import FileUpload from './FileUpload.js';
+import ImageUpload from './ImageUpload.js';
+import FileViewer from 'react-file-viewer';
 import {
   Dialog,
   DialogContent,
@@ -16,13 +16,13 @@ import {
   InputLabel,
   FormControl,
   Divider,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import { BoldTypography } from "../shared/Typography";
-import { colors } from "../shared/config";
-import { useDispatch, useSelector } from "react-redux";
-import { newPost } from "../redux/actions/dataActions";
-import styled from "styled-components";
+import { BoldTypography } from '../shared/Typography';
+import { colors } from '../shared/config';
+import { useDispatch, useSelector } from 'react-redux';
+import { newPost } from '../redux/actions/dataActions';
+import styled from 'styled-components';
 
 const NewPostInfo = styled.div`
   display: flex;
@@ -73,9 +73,9 @@ export const FilesWrapper = styled.div`
 `;
 
 const NewPost = ({ open, handleClose }) => {
-  const [industry, setIndustry] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [industry, setIndustry] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   var form = null;
   var imgForm = null;
   const [selectedFile, setSelectedFile] = useState(null);
@@ -140,16 +140,16 @@ const NewPost = ({ open, handleClose }) => {
     form = null;
     imgForm = null;
     setFile({ url: PDF1_URL });
-    setFileType("pdf");
+    setFileType('pdf');
     setImage({ url: PDF1_URL });
     handleClose();
   };
 
   //File handling
   const PDF1_URL =
-    "https://cors-anywhere.herokuapp.com/http://africau.edu/images/default/sample.pdf";
+    'https://cors-anywhere.herokuapp.com/http://africau.edu/images/default/sample.pdf';
   const [file, setFile] = useState({ url: PDF1_URL });
-  const [fileType, setFileType] = useState("pdf");
+  const [fileType, setFileType] = useState('pdf');
 
   const onFileChange = (event) => {
     const fileReader = new window.FileReader();
@@ -157,11 +157,11 @@ const NewPost = ({ open, handleClose }) => {
     console.log(file);
 
     setFile({ url: PDF1_URL });
-    setFileType("pdf");
+    setFileType('pdf');
 
-    setFileType(file.name.substring(file.name.lastIndexOf(".") + 1));
+    setFileType(file.name.substring(file.name.lastIndexOf('.') + 1));
     console.log(fileType);
-    let myForm = document.getElementById("myForm");
+    let myForm = document.getElementById('myForm');
     form = new FormData(myForm);
     fileReader.onload = (fileLoad) => {
       const { result } = fileLoad.target;
@@ -176,7 +176,7 @@ const NewPost = ({ open, handleClose }) => {
   const onImageChange = (event) => {
     const imgReader = new window.FileReader();
     const img = event.target.files[0];
-    let myForm = document.getElementById("myImgForm");
+    let myForm = document.getElementById('myImgForm');
     imgForm = new FormData(myForm);
     imgReader.onload = (fileLoad) => {
       const { result } = fileLoad.target;
@@ -189,25 +189,25 @@ const NewPost = ({ open, handleClose }) => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>
-        <BoldTypography sz={"18px"}>Create a Post</BoldTypography>
+        <BoldTypography sz={'18px'}>Create a Post</BoldTypography>
       </DialogTitle>
 
       <DialogContent>
         <NewPostInfo>
           <Avatar></Avatar>
           <NewPostUser>
-            <BoldTypography sz={"16px"}>{user.name}</BoldTypography>
+            <BoldTypography sz={'16px'}>{user.name}</BoldTypography>
             <FormControlC>
               <InputLabel>Industry</InputLabel>
               <Select value={industry} onChange={handleIndustry}>
                 <Suggested>Suggested</Suggested>
-                <MenuItem value={"Product Design"}>Product Design</MenuItem>
-                <MenuItem value={"Product Management"}>
+                <MenuItem value={'Product Design'}>Product Design</MenuItem>
+                <MenuItem value={'Product Management'}>
                   Product Management
                 </MenuItem>
                 <Divider />
-                <MenuItem value={"Business"}>Business</MenuItem>
-                <MenuItem value={"Computer Science"}>Computer Science</MenuItem>
+                <MenuItem value={'Business'}>Business</MenuItem>
+                <MenuItem value={'Computer Science'}>Computer Science</MenuItem>
               </Select>
             </FormControlC>
           </NewPostUser>

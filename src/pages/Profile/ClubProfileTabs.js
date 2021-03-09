@@ -6,50 +6,49 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-    import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { BoldTypography } from '../../shared/Typography';
 
 function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+  const { children, value, index, ...other } = props;
 
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`full-width-tabpanel-${index}`}
-        aria-labelledby={`full-width-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box p={3}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  }
-  
-  TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
   };
-  
-  function a11yProps(index) {
-    return {
-      id: `full-width-tab-${index}`,
-      'aria-controls': `full-width-tabpanel-${index}`,
-    };
-  }
-  
-  const useStyles = makeStyles((theme) => ({
-    root: {
-        elevation:0,
-      backgroundColor: theme.palette.background.paper,
-      width: 500,
-    },
-  }));
+}
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    elevation: 0,
+    backgroundColor: theme.palette.background.paper,
+    width: 500,
+  },
+}));
 
 const ClubProfileTabs = () => {
   const classes = useStyles();
@@ -62,10 +61,10 @@ const ClubProfileTabs = () => {
   return (
     <div className={classes.root}>
       <AppBar position="relative" color="transparent" elevation={0}>
-        <Tabs 
-        value={value} 
-        onChange={handleChange} 
-        // centered
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          // centered
         >
           <Tab label="Resources" {...a11yProps(0)} />
           <Tab label="Events" {...a11yProps(1)} />
@@ -73,7 +72,7 @@ const ClubProfileTabs = () => {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-      {/* {user.posts.map((post) => (
+        {/* {user.posts.map((post) => (
         <BoldTypography>{post}</BoldTypography>
       ))} */}
       </TabPanel>
@@ -85,6 +84,6 @@ const ClubProfileTabs = () => {
       </TabPanel>
     </div>
   );
-}
+};
 
 export default ClubProfileTabs;

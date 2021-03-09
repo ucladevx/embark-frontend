@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import TypeBox from "../../shared/TypeBox";
-import { OrSeperator } from "../../shared/Separators";
+import styled from 'styled-components';
+import TypeBox from '../../shared/TypeBox';
+import { OrSeperator } from '../../shared/Separators';
 import {
   LeftFormContainer,
   RightFormContainer,
@@ -9,15 +9,15 @@ import {
   Prompt,
   FieldContainer,
   ErrorPrompt,
-} from "../../shared/Form";
-import { ActionButton } from "../../shared/Buttons";
-import { Field, Formik } from "formik";
-import * as Yup from "yup";
-import { signupStudent } from "../../redux/actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
-import { header1, header4 } from "../../shared/config";
-import AuthButtons from "../../shared/AuthButtons";
-import { CLEAR_ERRORS } from "../../redux/types";
+} from '../../shared/Form';
+import { ActionButton } from '../../shared/Buttons';
+import { Field, Formik } from 'formik';
+import * as Yup from 'yup';
+import { signupStudent } from '../../redux/actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { header1, header4 } from '../../shared/config';
+import AuthButtons from '../../shared/AuthButtons';
+import { CLEAR_ERRORS } from '../../redux/types';
 
 const SignUpTitle = styled.div`
   ${header1};
@@ -42,18 +42,18 @@ const AccountBtn = styled(ActionButton)`
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
   lastName: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()
-    .required("No password provided.")
-    .min(8, "Password is too short - should be 8 chars minimum.")
-    .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+    .required('No password provided.')
+    .min(8, 'Password is too short - should be 8 chars minimum.')
+    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
 });
 
 const FormUserDetails = ({ handleUser, handleStep }) => {
@@ -64,26 +64,26 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
-        <Prompt link={"login"}></Prompt>
+        <Prompt link={'login'}></Prompt>
         <SignUpTitle>Sign up to Embark</SignUpTitle>
         <AuthButtons />
         <OrSeperator />
         <Formik
           initialValues={{
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            const name = values.firstName + " " + values.lastName;
+            const name = values.firstName + ' ' + values.lastName;
             const { email, password } = values;
             const postUser = {
               name,
               email,
               password,
-              userType: "student",
+              userType: 'student',
             };
             dispatch(signupStudent(postUser, handleUser, handleStep));
           }}

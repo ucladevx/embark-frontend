@@ -12,19 +12,18 @@ import {
   FormControl,
   Divider,
   Avatar,
-} from "@material-ui/core";
-import { ActionButton } from "../../shared/Buttons";
-import { BoldTypography } from "../../shared/Typography";
-import { colors } from "../../shared/config";
-import styled from "styled-components";
+} from '@material-ui/core';
+import { ActionButton } from '../../shared/Buttons';
+import { BoldTypography } from '../../shared/Typography';
+import { colors } from '../../shared/config';
+import styled from 'styled-components';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import LinkEffect from "../../shared/LinkEffect";
-
+import LinkEffect from '../../shared/LinkEffect';
 
 export const EditProfileContainer = styled(Dialog)`
-  box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25); 
+  box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  width:100vw;
+  width: 100vw;
   height: 100vh;
 `;
 
@@ -61,10 +60,10 @@ export const EditCoverImage = styled.img`
   padding: 0 1em;
 `;
 export const EditProfileContent = styled(DialogContent)`
-  margin: 5px 30px ;
+  margin: 5px 30px;
 `;
 
-export const EditProfileDone =styled(DialogActions)`
+export const EditProfileDone = styled(DialogActions)`
   margin: 30px 30px;
 `;
 

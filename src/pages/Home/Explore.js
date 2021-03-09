@@ -1,7 +1,7 @@
-import React from "react";
-import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
+import React from 'react';
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 import {
   ClubCardsContainer,
   ClubCard,
@@ -26,13 +26,13 @@ import {
   UpcomingItemDate,
   UpcomingItemGoingBtn,
   ViewMoreLink,
-} from "./StyleExplore";
+} from './StyleExplore';
 // Images
-import avatarImg from "../../images/avatar.svg";
-import devxImg from "../../images/devx.jpeg";
-import dbImg from "../../images/dailyBruin.png";
-import consultingImg from "../../images/bruinConsulting.png";
-import { colors } from "../../shared/config";
+import avatarImg from '../../images/avatar.svg';
+import devxImg from '../../images/devx.jpeg';
+import dbImg from '../../images/dailyBruin.png';
+import consultingImg from '../../images/bruinConsulting.png';
+import { colors } from '../../shared/config';
 
 const Explore = () => {
   return (
@@ -102,7 +102,7 @@ const Explore = () => {
 
       <ExploreInfoSeperator></ExploreInfoSeperator>
 
-      <ExploreTitle style={{ "margin-top": 20 }}>Discover Events</ExploreTitle>
+      <ExploreTitle style={{ 'margin-top': 20 }}>Discover Events</ExploreTitle>
       <ExploreSubtitle>Events happening soon</ExploreSubtitle>
 
       <UpcomingItemBox>

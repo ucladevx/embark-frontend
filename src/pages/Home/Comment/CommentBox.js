@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   PreviousCommentItem,
   PreviousCommentTitle,
@@ -9,8 +9,8 @@ import {
   ViewCommentLink,
   LikeReply,
   LikeReplyText,
-} from "../StyleLanding";
-import { colors } from "../../../shared/config";
+} from '../StyleLanding';
+import { colors } from '../../../shared/config';
 
 const CommentBox = ({ comments }) => {
   const [start, setStart] = useState(0);

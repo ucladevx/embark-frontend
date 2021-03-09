@@ -11,16 +11,16 @@ import {
   REMOVE_FILTER,
   SET_NEXT_STRING,
   SET_HAS_NEXT,
-} from "../types";
+} from '../types';
 
-import axios from "axios";
+import axios from 'axios';
 
 // Get All Posts
 export const getPosts = () => async (dispatch) => {
   try {
-    const nextString = localStorage.getItem("nextString");
+    const nextString = localStorage.getItem('nextString');
     let params;
-    if (nextString !== "undefined") {
+    if (nextString !== 'undefined') {
       params = {
         limit: 6,
         nextPage: nextString,
@@ -30,11 +30,11 @@ export const getPosts = () => async (dispatch) => {
         limit: 6,
       };
     }
-    const res = await axios.get("/posts", {
+    const res = await axios.get('/posts', {
       params,
     });
 
-    localStorage.setItem("nextString", res.data.paginatedPosts.next.toString());
+    localStorage.setItem('nextString', res.data.paginatedPosts.next.toString());
     dispatch({ type: SET_POSTS, payload: res.data.paginatedPosts.results });
     dispatch({ type: SET_NEXT_STRING, payload: res.data.paginatedPosts.next });
   } catch (err) {
@@ -45,7 +45,7 @@ export const getPosts = () => async (dispatch) => {
 export const getNextPosts = () => async (dispatch, getState) => {
   try {
     const { nextString } = getState().data;
-    const res = await axios.get("/posts", {
+    const res = await axios.get('/posts', {
       params: {
         limit: 2,
         nextPage: nextString,
@@ -54,8 +54,8 @@ export const getNextPosts = () => async (dispatch, getState) => {
     const { posts } = getState().data;
     const { results, next, hasNext } = res.data.paginatedPosts;
     const newPosts = [...posts, ...results];
-    console.log(next === localStorage.getItem("nextString"));
-    localStorage.setItem("nextString", next.toString());
+    console.log(next === localStorage.getItem('nextString'));
+    localStorage.setItem('nextString', next.toString());
     dispatch({ type: SET_POSTS, payload: newPosts });
     dispatch({ type: SET_NEXT_STRING, payload: next });
     dispatch({ type: SET_HAS_NEXT, payload: hasNext });
@@ -67,7 +67,7 @@ export const getNextPosts = () => async (dispatch, getState) => {
 // Create A New Post
 export const newPost = (newP) => async (dispatch) => {
   try {
-    const res = await axios.post("/posts", newP);
+    const res = await axios.post('/posts', newP);
     dispatch({ type: NEW_POST, payload: res.data });
   } catch (err) {
     console.error(err);
@@ -112,7 +112,7 @@ export const deletePost = (postId) => async (dispatch) => {
 // Get a Specific Post
 export const getPost = (post_id) => async (dispatch) => {
   try {
-    const res = await axios.get("/posts");
+    const res = await axios.get('/posts');
     dispatch({ type: SET_POST, payload: res.data });
   } catch (err) {
     console.error(err);
@@ -122,11 +122,11 @@ export const getPost = (post_id) => async (dispatch) => {
 // Submit a comment
 export const submitComment = (post_id, commentData) => async (
   dispatch,
-  getState
+  getState,
 ) => {
   try {
     const { email } = getState().user;
-    if (commentData.trim().length === 0) throw Error("comment cannot be empty");
+    if (commentData.trim().length === 0) throw Error('comment cannot be empty');
     const res = await axios.post(`/posts/comments`, {
       post_id,
       authorEmail: email,

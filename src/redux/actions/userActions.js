@@ -6,22 +6,22 @@ import {
   AUTH_SIGNUP,
   AUTH_SIGNIN,
   SET_ERRORS,
-} from "../types";
-import axios from "axios";
+} from '../types';
+import axios from 'axios';
 
 const setAuthorizationHeader = (token) => {
   const AuthToken = `Bearer ${token}`;
-  localStorage.setItem("AuthToken", AuthToken);
-  axios.defaults.headers.common["Authorization"] = AuthToken;
+  localStorage.setItem('AuthToken', AuthToken);
+  axios.defaults.headers.common['Authorization'] = AuthToken;
 };
 
 // Login A User
 export const loginUser = (userData, history) => async (dispatch) => {
   try {
-    const res = await axios.post("/auth/signin", userData);
+    const res = await axios.post('/auth/signin', userData);
     setAuthorizationHeader(res.data.token);
     dispatch(getStudentData());
-    history.push("/home");
+    history.push('/home');
   } catch (err) {
     dispatch({ type: SET_ERRORS, payload: err.response.data });
   }
@@ -30,8 +30,8 @@ export const loginUser = (userData, history) => async (dispatch) => {
 // Get all users data
 export const getStudentData = () => async (dispatch) => {
   try {
-    const res = await axios.get("/student/profile");
-    const payload = { ...res.data.student, userType: "student" };
+    const res = await axios.get('/student/profile');
+    const payload = { ...res.data.student, userType: 'student' };
     dispatch({
       type: SET_USER,
       payload,
@@ -43,13 +43,13 @@ export const getStudentData = () => async (dispatch) => {
 
 // Sign Up a user
 export const signupStudent = (newUserData, handleUser, handleStep) => async (
-  dispatch
+  dispatch,
 ) => {
   try {
-    const res = await axios.post("/auth/signup", newUserData);
+    const res = await axios.post('/auth/signup', newUserData);
     setAuthorizationHeader(res.data.token);
     dispatch(getStudentData());
-    console.log("run");
+    console.log('run');
     handleUser(newUserData);
     handleStep(1);
   } catch (err) {
@@ -60,8 +60,8 @@ export const signupStudent = (newUserData, handleUser, handleStep) => async (
 
 // Log out a user
 export const logoutUser = () => (dispatch) => {
-  localStorage.removeItem("FBIdToken");
-  delete axios.defaults.headers.common["Authorization"];
+  localStorage.removeItem('FBIdToken');
+  delete axios.defaults.headers.common['Authorization'];
   dispatch({ type: SET_UNAUTHENTICATED });
 };
 
@@ -69,7 +69,7 @@ export const logoutUser = () => (dispatch) => {
 export const uploadImage = (formData) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .post("/user/image", formData)
+    .post('/user/image', formData)
     .then((res) => {
       dispatch(getStudentData());
     })
@@ -79,8 +79,8 @@ export const uploadImage = (formData) => (dispatch) => {
 // Edit a specific user's setting
 export const editStudentDetails = (userDetails) => async (dispatch) => {
   try {
-    const res = await axios.post("/student/profile", userDetails);
-    dispatch({ type: "SET_USER", payload: res.data.updatedStudent });
+    const res = await axios.post('/student/profile', userDetails);
+    dispatch({ type: 'SET_USER', payload: res.data.updatedStudent });
   } catch (err) {
     console.error(err);
   }
@@ -89,7 +89,7 @@ export const editStudentDetails = (userDetails) => async (dispatch) => {
 // Mark notification read on user's end
 export const markNotificationsRead = (notificationIds) => (dispatch) => {
   axios
-    .post("/notifications", notificationIds)
+    .post('/notifications', notificationIds)
     .then((res) => {
       dispatch({ type: MARK_NOTIFICATIONS_READ });
     })
@@ -99,16 +99,16 @@ export const markNotificationsRead = (notificationIds) => (dispatch) => {
 export const studentGoogleSignUp = () => async (dispatch) => {
   try {
     const res = await axios.post(
-      "/auth/google",
+      '/auth/google',
       {
-        type: "signup",
-        user: "student",
+        type: 'signup',
+        user: 'student',
       },
       {
         headers: {
-          "Access-Control-Allow-Origin": "*",
+          'Access-Control-Allow-Origin': '*',
         },
-      }
+      },
     );
     dispatch({ type: AUTH_SIGNUP, payload: res.data });
   } catch (err) {
@@ -118,9 +118,9 @@ export const studentGoogleSignUp = () => async (dispatch) => {
 
 export const studentGoogleSignIn = () => async (dispatch) => {
   try {
-    const res = await axios.post("/auth/google", {
-      type: "signin",
-      user: "student",
+    const res = await axios.post('/auth/google', {
+      type: 'signin',
+      user: 'student',
     });
     dispatch({ type: AUTH_SIGNIN, payload: res.data });
   } catch (err) {

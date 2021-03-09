@@ -7,7 +7,7 @@ import {
   MARK_NOTIFICATIONS_READ,
   ADD_FILTER,
   REMOVE_FILTER,
-} from "../types";
+} from '../types';
 
 const intialState = {
   authenticated: false,
@@ -15,8 +15,8 @@ const intialState = {
   notifications: [],
   likedPosts: [],
   clubs: [],
-  industry: "",
-  userType: "student",
+  industry: '',
+  userType: 'student',
 };
 
 export default function userReducer(state = intialState, action) {
@@ -48,7 +48,7 @@ export default function userReducer(state = intialState, action) {
       return {
         ...state,
         likedPosts: state.likedPosts.filter(
-          (post) => post.postId !== action.payload.postId
+          (post) => post.postId !== action.payload.postId,
         ),
       };
     case MARK_NOTIFICATIONS_READ:

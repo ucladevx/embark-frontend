@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { colors } from "../shared/config";
-import { Form } from "formik";
+import styled from 'styled-components';
+import { colors } from '../shared/config';
+import { Form } from 'formik';
 
 export const LeftFormContainer = styled.div`
   background: ${colors.blue1};
@@ -37,7 +37,7 @@ export const FieldContainer = styled.div`
 `;
 
 export const ErrorPrompt = styled.div`
-  color: ${(props) => (props.error ? "#ffadad" : "transparent")};
+  color: ${(props) => (props.error ? '#ffadad' : 'transparent')};
   height: 20px;
 `;
 
@@ -49,7 +49,7 @@ const PromptContainer = styled.div`
 `;
 
 export const Prompt = ({ link }) => {
-  return link === "login" ? (
+  return link === 'login' ? (
     <PromptContainer>
       Already a member? <a href="/login">Sign in</a>
     </PromptContainer>

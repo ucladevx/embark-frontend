@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { colors } from "../../shared/config";
-import { Avatar, Button, Typography } from "@material-ui/core";
-import LinkEffect from "../../shared/LinkEffect";
+import styled from 'styled-components';
+import { colors } from '../../shared/config';
+import { Avatar, Button, Typography } from '@material-ui/core';
+import LinkEffect from '../../shared/LinkEffect';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 export const LandingPageWrapper = styled.div`
@@ -30,6 +30,8 @@ export const QuestionBox = styled.div`
 
 export const MiddleContainer = styled.div`
   flex: 2 1 auto;
+  height: 100vh;
+  background: ${colors.blue2};
 `;
 
 export const NameDescriptionWrapper = styled.div`
@@ -56,7 +58,7 @@ export const ProfileWrapper = styled.div`
 
 export const HeaderImage = styled.img`
   width: 46vw;
-  height:21vh;
+  height: 21vh;
   display: flex;
 `;
 
@@ -130,7 +132,6 @@ export const ExploreFilterTitle = styled(Typography)`
   margin-right: 2px;
 `;
 
-
 export const IndustryWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -139,10 +140,7 @@ export const IndustryWrapper = styled.div`
   margin-left: 15px;
 `;
 
-
-
 //User
-
 
 //Club
 export const ClubWebsiteButton = styled(Button)`
@@ -153,21 +151,21 @@ export const ClubWebsiteButton = styled(Button)`
   right: 0.5vw;
   text-transform: none;
   color: #5473bb;
-  background: #E5EFFF;
+  background: #e5efff;
 `;
 
 export const AboutTitle = styled.div`
   display: flex 2 1 auto;
   margin-left: 15px;
   padding-top: 1vh;
-  padding-bottom:1vh;
-`
+  padding-bottom: 1vh;
+`;
 export const AboutWrapper = styled.div`
   display: flex 2 1 auto;
   width: 41vw;
   margin-left: 15px;
-  padding-bottom:1vh;
-`
+  padding-bottom: 1vh;
+`;
 
 export const Footer = styled.div`
   background: ${colors.blue2};

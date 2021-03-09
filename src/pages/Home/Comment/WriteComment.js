@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { colors } from "../../../shared/config";
-import { TextField } from "@material-ui/core";
-import { PreviousCommentAvatar } from "../StyleLanding";
-import { OPEN_COMMENT } from "../../../redux/types";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import styled from 'styled-components';
+import { colors } from '../../../shared/config';
+import { TextField } from '@material-ui/core';
+import { PreviousCommentAvatar } from '../StyleLanding';
+import { OPEN_COMMENT } from '../../../redux/types';
+import { useDispatch } from 'react-redux';
 
 const CommentWrapper = styled.div`
   display: flex;

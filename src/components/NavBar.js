@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { colors } from "../shared/config";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { colors } from '../shared/config';
+import { useHistory } from 'react-router-dom';
 
 // icons for navbar icons
 import { ReactComponent as EmbarkIcon } from '../images/navbar_embark_logo.svg';
@@ -66,25 +66,25 @@ const CollapseLogo = styled.div`
 const sampleSuggestions = [
   {
     title: 'DevX',
-    value: 'DevX'
+    value: 'DevX',
   },
   {
     title: 'Computer Science',
-    value: 'Computer Science'
+    value: 'Computer Science',
   },
   {
     title: 'Embark',
-    value: 'Embark'
-  }
+    value: 'Embark',
+  },
 ];
 
 const NavBar = () => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [showList, setShowList] = useState(false);
   const history = useHistory();
 
   const handleSearchChange = (e) => {
-    // just show suggestions 
+    // just show suggestions
     // and console log for now
     setSearch(e.target.value);
     console.log(search);
@@ -94,40 +94,56 @@ const NavBar = () => {
   const handleEmbarkIconClick = (e) => {
     // just console log for now
     console.log('Embark Icon Clicked');
-    history.push("/home");
-  }
+    history.push('/home');
+  };
 
   const handleUserIconClick = (e) => {
     // just console log for now
-    console.log('User Icon Clicked')
-    history.push("/user/:userid");
-  }
+    console.log('User Icon Clicked');
+    history.push('/user/:userid');
+  };
 
   const handleCollapseIconClick = (e) => {
     // just console log for now
-    console.log('Collapse Icon Clicked')
-  }
+    console.log('Collapse Icon Clicked');
+  };
 
   return (
     <>
       <NavBarWrapper>
-        <NavBarLogo onClick={handleEmbarkIconClick}><EmbarkIcon /></NavBarLogo>
-        <section style={{ display: "flex", flexGrow: 2, justifyContent: "left" }}>
+        <NavBarLogo onClick={handleEmbarkIconClick}>
+          <EmbarkIcon />
+        </NavBarLogo>
+        <section
+          style={{ display: 'flex', flexGrow: 2, justifyContent: 'left' }}
+        >
           <div>
             <Autocomplete
               id="Search"
               options={showList ? sampleSuggestions : []}
-              placeholder='Search'
+              placeholder="Search"
               freeSolo
               getOptionLabel={(option) => option.title}
               style={{ width: 610, backgroundColor: '#EDEDED' }}
               onInputChange={handleSearchChange}
-              renderInput={(params) => <TextField {...params} placeholder='Search' size='small' onBlur={()=>setShowList(false)} variant="outlined" />}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  placeholder="Search"
+                  size="small"
+                  onBlur={() => setShowList(false)}
+                  variant="outlined"
+                />
+              )}
             />
           </div>
         </section>
-        <UserLogo onClick={handleUserIconClick}><UserIcon /></UserLogo>
-        <CollapseLogo onClick={handleCollapseIconClick}><CollapseIcon /></CollapseLogo>
+        <UserLogo onClick={handleUserIconClick}>
+          <UserIcon />
+        </UserLogo>
+        <CollapseLogo onClick={handleCollapseIconClick}>
+          <CollapseIcon />
+        </CollapseLogo>
       </NavBarWrapper>
     </>
   );
