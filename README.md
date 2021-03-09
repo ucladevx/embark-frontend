@@ -8,14 +8,6 @@ To install all the dependencies for the first time:
 Then,
 `npm start`
 
-## Before Push:
-
-Go to the top level of the repo, run
-`make`
-to format all your code
-
-Hint: You could also set up git hooks to automate this process.
-
 ## Overview w/ comments
 ```javascript
 import "./App.css";
@@ -120,8 +112,6 @@ In src:
 ### 5. REST CLIENT: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
 - VScode's postman. Really easy to use, and you could save the scripts for the api backend calls.
 
-### 6. Makefile & Prettier
-- We use a prettier script to format the codebase before pushing. This script could be run at the root folder using commands `make` or `make format`.
 
 ## Future thoughts
 - We'll probably change the folder structure a little bit since there definitely are redundancies and unclear purpose folders using this structures. But rn is still the early stage.
