@@ -7,11 +7,11 @@ const LinkIcon = styled(Link)`
   ${LinkEffect}
 `;
 
-const FileUpload = ({ handleFileInput }) => {
-  const InputWrapper = styled.div`
-    display: none;
-  `;
+const InputWrapper = styled.div`
+  display: none;
+`;
 
+const FileUpload = ({ handleFileInput }) => {
   return (
     <div className="App">
       <form id="myForm">

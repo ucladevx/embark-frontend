@@ -135,6 +135,8 @@ const NewPost = ({ open, handleClose }) => {
       }
     }
 
+    post.accountType = user.userType;
+
     dispatch(newPost(post));
     //Clean up component contents
     form = null;
