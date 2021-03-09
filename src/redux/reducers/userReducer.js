@@ -7,7 +7,7 @@ import {
   MARK_NOTIFICATIONS_READ,
   ADD_FILTER,
   REMOVE_FILTER,
-} from '../types';
+} from "../types";
 
 const intialState = {
   authenticated: false,
@@ -15,8 +15,8 @@ const intialState = {
   notifications: [],
   likedPosts: [],
   clubs: [],
-  industry: '',
-  userType: 'student',
+  industry: "",
+  userType: "student",
 };
 
 export default function userReducer(state = intialState, action) {
@@ -33,26 +33,6 @@ export default function userReducer(state = intialState, action) {
         authenticated: true,
         ...action.payload,
       };
-<<<<<<< HEAD
-    case LIKE_POST:
-      return {
-        ...state,
-        likedPosts: [
-          ...state.likedPosts,
-          {
-            likeBy: state.info.name,
-            postId: action.payload.postId,
-          },
-        ],
-      };
-    case UNLIKE_POST:
-      return {
-        ...state,
-        likedPosts: state.likedPosts.filter(
-          (post) => post.postId !== action.payload.postId,
-        ),
-      };
-=======
     // TODO: uncomment this after the like endpoint is updated
     // case LIKE_POST:
     //   return {
@@ -72,7 +52,6 @@ export default function userReducer(state = intialState, action) {
     //       (post) => post.postId !== action.payload.postId
     //     ),
     //   };
->>>>>>> master
     case MARK_NOTIFICATIONS_READ:
       state.notifications.forEach((noti) => (noti.read = true));
       return {

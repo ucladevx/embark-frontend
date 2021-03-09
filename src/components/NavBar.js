@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { colors } from '../shared/config';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { colors } from "../shared/config";
+import { useHistory } from "react-router-dom";
 
 // icons for navbar icons
-import { ReactComponent as EmbarkIcon } from '../images/navbar_embark_logo.svg';
-import { ReactComponent as UserIcon } from '../images/navbar_user_logo.svg';
-import { ReactComponent as DevXIcon } from '../images/navbar_club_logo.svg';
-import { ReactComponent as CollapseIcon } from '../images/navbar_collapse_icon.svg';
+import { ReactComponent as EmbarkIcon } from "../images/navbar_embark_logo.svg";
+import { ReactComponent as UserIcon } from "../images/navbar_user_logo.svg";
+import { ReactComponent as DevXIcon } from "../images/navbar_club_logo.svg";
+import { ReactComponent as CollapseIcon } from "../images/navbar_collapse_icon.svg";
 
 // imports for search bar
-import { Autocomplete } from '@material-ui/lab';
-import { TextField } from '@material-ui/core';
+import { Autocomplete } from "@material-ui/lab";
+import { TextField } from "@material-ui/core";
+import LinkEffect from "../shared/LinkEffect";
 
 const NavBarWrapper = styled.div`
   display: flex;
@@ -31,6 +32,7 @@ const NavBarLogo = styled.div`
   display: grid;
   place-items: center;
   margin: auto 0px auto 85px;
+  ${LinkEffect};
 `;
 const SearchBar = styled.input`
   background-color: ${colors.gray};
@@ -53,6 +55,7 @@ const UserLogo = styled.div`
   width: 38px;
   height: 38px;
   margin: auto 0px auto 0px;
+  ${LinkEffect};
 `;
 const CollapseLogo = styled.div`
   border-radius: 50%;
@@ -61,25 +64,26 @@ const CollapseLogo = styled.div`
   display: grid;
   place-items: center;
   margin: auto 80px auto 0px;
+  ${LinkEffect};
 `;
 
 const sampleSuggestions = [
   {
-    title: 'DevX',
-    value: 'DevX',
+    title: "DevX",
+    value: "DevX",
   },
   {
-    title: 'Computer Science',
-    value: 'Computer Science',
+    title: "Computer Science",
+    value: "Computer Science",
   },
   {
-    title: 'Embark',
-    value: 'Embark',
+    title: "Embark",
+    value: "Embark",
   },
 ];
 
 const NavBar = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [showList, setShowList] = useState(false);
   const history = useHistory();
 
@@ -93,19 +97,19 @@ const NavBar = () => {
 
   const handleEmbarkIconClick = (e) => {
     // just console log for now
-    console.log('Embark Icon Clicked');
-    history.push('/home');
+    console.log("Embark Icon Clicked");
+    history.push("/home");
   };
 
   const handleUserIconClick = (e) => {
     // just console log for now
-    console.log('User Icon Clicked');
-    history.push('/user/:userid');
+    console.log("User Icon Clicked");
+    history.push("/user/:userid");
   };
 
   const handleCollapseIconClick = (e) => {
     // just console log for now
-    console.log('Collapse Icon Clicked');
+    console.log("Collapse Icon Clicked");
   };
 
   return (
@@ -115,7 +119,7 @@ const NavBar = () => {
           <EmbarkIcon />
         </NavBarLogo>
         <section
-          style={{ display: 'flex', flexGrow: 2, justifyContent: 'left' }}
+          style={{ display: "flex", flexGrow: 2, justifyContent: "left" }}
         >
           <div>
             <Autocomplete
@@ -124,7 +128,7 @@ const NavBar = () => {
               placeholder="Search"
               freeSolo
               getOptionLabel={(option) => option.title}
-              style={{ width: 610, backgroundColor: '#EDEDED' }}
+              style={{ width: 610, backgroundColor: "#EDEDED" }}
               onInputChange={handleSearchChange}
               renderInput={(params) => (
                 <TextField
