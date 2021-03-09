@@ -13,7 +13,6 @@ import {
   FilterObj,
   FilterWrapper,
   InteriorFilterWrapper,
-  PostTag,
   AddFilter,
   EventAvatar,
   EventDescription,

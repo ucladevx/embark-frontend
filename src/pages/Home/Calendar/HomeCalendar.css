@@ -43,6 +43,7 @@
   margin: 0;
   border: 0;
   outline: none;
+  font-weight: bold;
 }
 .react-calendar button:enabled:hover {
   cursor: pointer;
