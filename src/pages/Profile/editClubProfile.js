@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Select,
   MenuItem,
@@ -6,14 +6,14 @@ import {
   Checkbox,
   ListItemText,
   TextField,
-} from '@material-ui/core';
-import { BoldTypography } from '../../shared/Typography';
-import { IndustryFilters } from '../../shared/dropdown';
-import { colors } from '../../shared/config';
-import { useDispatch, useSelector } from 'react-redux';
-import { editStudentDetails } from '../../redux/actions/userActions';
-import styled from 'styled-components';
-import { ExploreObj, ExploreFilter, NameDescription } from './StyleProfile';
+} from "@material-ui/core";
+import { BoldTypography } from "../../shared/Typography";
+import { IndustryFilters } from "../../shared/dropdown";
+import { colors } from "../../shared/config";
+import { useDispatch, useSelector } from "react-redux";
+import { editStudentDetails } from "../../redux/actions/userActions";
+import styled from "styled-components";
+import { ExploreObj, ExploreFilter, NameDescription } from "./StyleProfile";
 import {
   EditProfileContainer,
   EditProfileAvatar,
@@ -28,11 +28,11 @@ import {
   DialogTextField,
   TextFieldWrapper,
   DoneBtn,
-} from './StyleEditProfile';
-import lawn from '../../images/lawn.png';
-import { makeStyles } from '@material-ui/core/styles';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+} from "./StyleEditProfile";
+import lawn from "../../images/lawn.png";
+import { makeStyles } from "@material-ui/core/styles";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -49,12 +49,12 @@ const useStyles = makeStyles((theme) => ({
 
 const EditClubProfile = ({ open, handleClose, currentAbout }) => {
   const classes = useStyles();
-  const years = ['2021', '2022', '2023', '2024'];
+  const years = ["2021", "2022", "2023", "2024"];
   const industry = IndustryFilters;
   const user = useSelector((state) => state.user);
-  const [name, setName] = useState('');
-  const [profilePicURL, setProfilePicURL] = useState('');
-  const [coverPicURL, setcoverPicURL] = useState('');
+  const [name, setName] = useState("");
+  const [profilePicURL, setProfilePicURL] = useState("");
+  const [coverPicURL, setcoverPicURL] = useState("");
   const [description, setDescription] = useState(user.description);
   const [industries, setIndustries] = useState(user.tags);
   const [website, setWebsite] = useState(user.website);
@@ -101,7 +101,7 @@ const EditClubProfile = ({ open, handleClose, currentAbout }) => {
       aria-describedby="scroll-dialog-description"
     >
       <TitleContainer>
-        <EditProfileTitle align="center" sz={'18px'}>
+        <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
         </EditProfileTitle>
       </TitleContainer>
@@ -116,7 +116,7 @@ const EditClubProfile = ({ open, handleClose, currentAbout }) => {
 
         <ChangeAvatarLink align="center">Change Cover Photo</ChangeAvatarLink>
         <TextFieldWrapper>
-          <BoldTypography sz={'16px'}>Description:</BoldTypography>
+          <BoldTypography sz={"16px"}>Description:</BoldTypography>
           <DialogTextField
             value={description}
             autoFocus
@@ -139,7 +139,7 @@ const EditClubProfile = ({ open, handleClose, currentAbout }) => {
         </TextFieldWrapper>
 
         <TextFieldWrapper>
-          <BoldTypography sz={'16px'}>Relevant Industries:</BoldTypography>
+          <BoldTypography sz={"16px"}>Relevant Industries:</BoldTypography>
           <ExploreFilter>
             <ExploreObj bgcolor={colors.red1}>Product Management</ExploreObj>
             <ExploreObj bgcolor={colors.darkyellow}>Product Design</ExploreObj>
@@ -153,8 +153,8 @@ const EditClubProfile = ({ open, handleClose, currentAbout }) => {
               MenuProps={{
                 getContentAnchorEl: null,
                 anchorOrigin: {
-                  vertical: 'bottom',
-                  horizontal: 'left',
+                  vertical: "bottom",
+                  horizontal: "left",
                 },
                 classes: { paper: classes.menuPaper },
               }}
@@ -213,7 +213,7 @@ const EditClubProfile = ({ open, handleClose, currentAbout }) => {
         </TextFieldWrapper>
 
         <TextFieldWrapper>
-          <BoldTypography sz={'16px'}>Website:</BoldTypography>
+          <BoldTypography sz={"16px"}>Website:</BoldTypography>
           <DialogTextField
             value={website}
             autoFocus
@@ -234,7 +234,7 @@ const EditClubProfile = ({ open, handleClose, currentAbout }) => {
         </TextFieldWrapper>
 
         <TextFieldWrapper>
-          <BoldTypography sz={'16px'}>About:</BoldTypography>
+          <BoldTypography sz={"16px"}>About:</BoldTypography>
           <DialogTextField
             value={about}
             autoFocus

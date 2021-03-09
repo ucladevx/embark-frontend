@@ -43,7 +43,7 @@ export const getStudentData = () => async (dispatch) => {
 
 // Sign Up a user
 export const signupStudent = (newUserData, handleUser, handleStep) => async (
-  dispatch
+  dispatch,
 ) => {
   try {
     const res = await axios.post("/auth/signup", newUserData);
@@ -108,7 +108,7 @@ export const studentGoogleSignUp = () => async (dispatch) => {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
-      }
+      },
     );
     dispatch({ type: AUTH_SIGNUP, payload: res.data });
   } catch (err) {

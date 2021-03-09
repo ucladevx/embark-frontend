@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { colors } from '../../shared/config';
-import { Typography } from '@material-ui/core';
-import { BoldTypography } from '../../shared/Typography';
+import styled from "styled-components";
+import { colors } from "../../shared/config";
+import { Typography } from "@material-ui/core";
+import { BoldTypography } from "../../shared/Typography";
 
 export const ClubCardsContainer = styled.div`
   display: flex;

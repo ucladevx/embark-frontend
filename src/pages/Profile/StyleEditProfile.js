@@ -12,13 +12,13 @@ import {
   FormControl,
   Divider,
   Avatar,
-} from '@material-ui/core';
-import { ActionButton } from '../../shared/Buttons';
-import { BoldTypography } from '../../shared/Typography';
-import { colors } from '../../shared/config';
-import styled from 'styled-components';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import LinkEffect from '../../shared/LinkEffect';
+} from "@material-ui/core";
+import { ActionButton } from "../../shared/Buttons";
+import { BoldTypography } from "../../shared/Typography";
+import { colors } from "../../shared/config";
+import styled from "styled-components";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import LinkEffect from "../../shared/LinkEffect";
 
 export const EditProfileContainer = styled(Dialog)`
   box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);

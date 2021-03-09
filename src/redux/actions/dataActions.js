@@ -36,7 +36,7 @@ export const getPosts = () => async (dispatch) => {
     if (res.data.paginatedPosts.next)
       localStorage.setItem(
         "nextString",
-        res.data.paginatedPosts.next.toString()
+        res.data.paginatedPosts.next.toString(),
       );
     dispatch({ type: SET_POSTS, payload: res.data.paginatedPosts.results });
     dispatch({ type: SET_NEXT_STRING, payload: res.data.paginatedPosts.next });
@@ -124,7 +124,7 @@ export const getPost = (post_id) => async (dispatch) => {
 // Submit a comment
 export const submitComment = (post_id, commentData) => async (
   dispatch,
-  getState
+  getState,
 ) => {
   try {
     const { email } = getState().user;
