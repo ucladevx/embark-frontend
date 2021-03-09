@@ -6,27 +6,27 @@ export const styleCalendar = () => {
   const Friday = document.querySelector('[title="Friday"]');
   const Saturday = document.querySelector('[title="Saturday"]');
   const Sunday = document.querySelector('[title="Sunday"]');
-  const Calendar = document.querySelector('.react-calendar');
-  const MyEvent = document.createElement('div');
-  const month = document.querySelector('.react-calendar__navigation__label ');
+  const Calendar = document.querySelector(".react-calendar");
+  const MyEvent = document.createElement("div");
+  const month = document.querySelector(".react-calendar__navigation__label ");
   // handle Month
-  const monthPlain = document.createElement('div');
-  let monthText = month.textContent.split(' ');
+  const monthPlain = document.createElement("div");
+  let monthText = month.textContent.split(" ");
   monthText[0] = monthText[0].slice(0, 3);
   monthPlain.textContent = `${monthText[0]} ${monthText[1]}`;
 
-  monthPlain.className = 'month-plain';
+  monthPlain.className = "month-plain";
   Calendar.prepend(monthPlain);
 
-  MyEvent.textContent = 'My Events';
-  MyEvent.style.fontWeight = 'Bold';
-  MyEvent.style.fontSize = '18px';
-  MyEvent.style.lineHeight = '25px';
-  MyEvent.style.marginTop = '15px';
-  MyEvent.style.marginLeft = '6px';
-  MyEvent.id = 'MyEvent';
-  if (!document.getElementById('MyEvent')) Calendar.prepend(MyEvent);
-  Calendar.style.padding = '10px';
+  MyEvent.textContent = "My Events";
+  MyEvent.style.fontWeight = "Bold";
+  MyEvent.style.fontSize = "18px";
+  MyEvent.style.lineHeight = "25px";
+  MyEvent.style.marginTop = "15px";
+  MyEvent.style.marginLeft = "6px";
+  MyEvent.id = "MyEvent";
+  if (!document.getElementById("MyEvent")) Calendar.prepend(MyEvent);
+  Calendar.style.padding = "10px";
 
   for (let day of [
     Monday,
@@ -38,10 +38,10 @@ export const styleCalendar = () => {
     Sunday,
   ]) {
     day.innerText = day.innerText.slice(0, 1);
-    day.style.textDecoration = 'none';
+    day.style.textDecoration = "none";
   }
   const nodesContainer = document.querySelector(
-    '.react-calendar__month-view__days',
+    ".react-calendar__month-view__days",
   );
-  nodesContainer.style = '';
+  nodesContainer.style = "";
 };

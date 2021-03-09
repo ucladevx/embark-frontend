@@ -10,12 +10,12 @@ import {
   FILTER_POSTS,
   SET_HAS_NEXT,
   SET_NEXT_STRING,
-} from '../types';
+} from "../types";
 
 const initialState = {
   posts: [],
   filter: [],
-  nextString: '',
+  nextString: "",
   hasNext: true,
 };
 

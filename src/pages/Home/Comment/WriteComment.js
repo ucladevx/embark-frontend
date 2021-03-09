@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
-import { colors } from '../../../shared/config';
-import TypeBox from '../../../shared/TypeBox';
-import { PreviousCommentAvatar } from '../StyleLanding';
-import { submitComment } from '../../../redux/actions/dataActions';
-import { useDispatch, useSelector } from 'react-redux';
-import { OPEN_COMMENT, CLOSE_COMMENT } from '../../../redux/types';
+import React, { useState, useRef, useEffect } from "react";
+import styled from "styled-components";
+import { colors } from "../../../shared/config";
+import TypeBox from "../../../shared/TypeBox";
+import { PreviousCommentAvatar } from "../StyleLanding";
+import { submitComment } from "../../../redux/actions/dataActions";
+import { useDispatch, useSelector } from "react-redux";
+import { OPEN_COMMENT, CLOSE_COMMENT } from "../../../redux/types";
 
 const CommentWrapper = styled.div`
   display: flex;
@@ -27,7 +27,7 @@ const CommentTextField = styled(TypeBox)`
 `;
 
 const WriteComment = ({ post_id }) => {
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const onComment = useSelector((state) => state.ui.newComment);
   const commentRef = useRef();
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ const WriteComment = ({ post_id }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(submitComment(post_id, comment));
-    setComment('');
+    setComment("");
     dispatch({ type: CLOSE_COMMENT });
     commentRef.current.blur();
   };
@@ -49,8 +49,8 @@ const WriteComment = ({ post_id }) => {
   return (
     <CommentWrapper>
       <CommentAvatar></CommentAvatar>
-      <form style={{ width: '100%' }} onSubmit={handleSubmit}>
-        <input type="submit" style={{ display: 'none' }} />
+      <form style={{ width: "100%" }} onSubmit={handleSubmit}>
+        <input type="submit" style={{ display: "none" }} />
         <CommentTextField
           ref={commentRef}
           value={comment}

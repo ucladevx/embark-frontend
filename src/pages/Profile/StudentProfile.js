@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import NavBar from '../../components/NavBar';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import NavBar from "../../components/NavBar";
 import {
   HeaderImage,
   ProfileInfo,
@@ -16,15 +16,15 @@ import {
   ExploreFilter,
   ExploreObj,
   Footer,
-} from './StyleProfile';
-import lawn from '../../images/lawn.png';
-import { Typography } from '@material-ui/core';
-import { TitleTypography, BoldTypography } from '../../shared/Typography';
-import { Button } from '@material-ui/core';
-import EditProfile from './editStudentProfile';
-import UserProfileTabs from './StudentProfileTabs';
-import { colors } from '../../shared/config';
-import { useDispatch, useSelector } from 'react-redux';
+} from "./StyleProfile";
+import lawn from "../../images/lawn.png";
+import { Typography } from "@material-ui/core";
+import { TitleTypography, BoldTypography } from "../../shared/Typography";
+import { Button } from "@material-ui/core";
+import EditProfile from "./editStudentProfile";
+import UserProfileTabs from "./StudentProfileTabs";
+import { colors } from "../../shared/config";
+import { useDispatch, useSelector } from "react-redux";
 const StudentProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
@@ -45,17 +45,17 @@ const StudentProfile = (props) => {
               <ProfileAvatar></ProfileAvatar>
               <NameDescription>
                 <TitleTypography
-                  style={{ fontSize: '24px', paddingBottom: '0' }}
+                  style={{ fontSize: "24px", paddingBottom: "0" }}
                 >
                   {user.name}
                 </TitleTypography>
-                <Typography style={{ fontSize: '18px' }}>
+                <Typography style={{ fontSize: "18px" }}>
                   {user.year} • {user.major}
                 </Typography>
               </NameDescription>
             </NameDescriptionWrapper>
             <IndustryWrapper>
-              <BoldTypography sz={'14px'}>
+              <BoldTypography sz={"14px"}>
                 Interested Industries:
               </BoldTypography>
               <ExploreFilter>
