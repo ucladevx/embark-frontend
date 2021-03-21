@@ -156,7 +156,7 @@ const NewPost = ({ open, handleClose }) => {
   const onFileChange = (event) => {
     const fileReader = new window.FileReader();
     const file = event.target.files[0];
-    if(file.size>3145728){
+    if (file.size > 3145728) {
       alert("File is too big! Please limit to 3MB");
       return;
     }
@@ -181,14 +181,14 @@ const NewPost = ({ open, handleClose }) => {
     setFile({ url: PDF1_URL });
     setFileType("pdf");
     form = null;
-  }
+  };
 
   //Image handling
   const [image, setImage] = useState({ url: PDF1_URL });
   const onImageChange = (event) => {
     const imgReader = new window.FileReader();
     const img = event.target.files[0];
-    if(img.size>3145728){
+    if (img.size > 3145728) {
       alert("Image is too big! Please limit to 3MB");
       return;
     }
@@ -205,13 +205,13 @@ const NewPost = ({ open, handleClose }) => {
   const clearImage = () => {
     setImage({ url: PDF1_URL });
     imgForm = null;
-  }
+  };
 
   const clearAll = () => {
     clearFile();
     clearImage();
     handleClose();
-  }
+  };
 
   return (
     <Dialog open={open} onClose={clearAll}>
@@ -272,9 +272,9 @@ const NewPost = ({ open, handleClose }) => {
         </TextFieldWrapper>
         {file.url !== PDF1_URL ? (
           <>
-            <button onClick = {clearFile}>X | Clear File</button>
+            <button onClick={clearFile}>X | Clear File</button>
             <FilesWrapper>
-              <FileViewer filePath={file} fileType={fileType}/>
+              <FileViewer filePath={file} fileType={fileType} />
             </FilesWrapper>
           </>
         ) : (
@@ -282,7 +282,7 @@ const NewPost = ({ open, handleClose }) => {
         )}
         {image.url !== PDF1_URL ? (
           <>
-            <button onClick = {clearImage}>X | Clear Image</button>
+            <button onClick={clearImage}>X | Clear Image</button>
             <FilesWrapper>
               <img src={image.url} height="500px" alt="" />
             </FilesWrapper>
