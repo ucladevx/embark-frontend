@@ -1,8 +1,8 @@
 import React from "react";
 import ImageIcon from "@material-ui/icons/Image";
 import LinkIcon from "@material-ui/icons/Link";
-import { ReactTinyLink } from 'react-tiny-link';//uses https://cors-anywhere.herokuapp.com by default.
-import Linkify from 'react-linkify';
+import { ReactTinyLink } from "react-tiny-link"; //uses https://cors-anywhere.herokuapp.com by default.
+import Linkify from "react-linkify";
 import {
   QuestionBox,
   AskAvatar,
@@ -94,11 +94,10 @@ const Posts = ({ setNewPost }) => {
     "https://cors-anywhere.herokuapp.com/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
   ];
 
-
-  const getUrls = require('get-urls');//url finder
+  const getUrls = require("get-urls"); //url finder
   const getURL = (body) => {
     const urlSet = getUrls(body);
-    if(urlSet.size<=0)return "";
+    if (urlSet.size <= 0) return "";
     const iterator = urlSet[Symbol.iterator]();
     return iterator.next().value;
   };
@@ -133,9 +132,10 @@ const Posts = ({ setNewPost }) => {
         <PostTitle>How do I improve my product knowledge?</PostTitle>
         <Linkify>
           <PostContent>
-            After taking the CS30 series, I realized I could not see myself coding
-            for the rest of my life lol so I’m thinking of going into Product! Do
-            any of you have any resources/tips on where to get started? Thanks :)
+            After taking the CS30 series, I realized I could not see myself
+            coding for the rest of my life lol so I’m thinking of going into
+            Product! Do any of you have any resources/tips on where to get
+            started? Thanks :)
           </PostContent>
         </Linkify>
         {testfiles &&
@@ -184,7 +184,9 @@ const Posts = ({ setNewPost }) => {
                   showGraphic={true}
                   maxLine={2}
                   minLine={1}
-                  url={getURL("Hey Christie! We have a slidedeck all about product thinking on our profile. You should totally apply to be on one of our teams this quarter to gain some more experience with the product development process!! https://ucladevx.com/")}
+                  url={getURL(
+                    "Hey Christie! We have a slidedeck all about product thinking on our profile. You should totally apply to be on one of our teams this quarter to gain some more experience with the product development process!! https://ucladevx.com/",
+                  )}
                 />
               </PreviousCommentContent>
               <LikeReply>
@@ -243,17 +245,20 @@ const Posts = ({ setNewPost }) => {
                   </PostTagWrapper>
                 </PostHeader>
                 <PostTitle>{p.title}</PostTitle>
-                <Linkify><PostContent>{p.body}</PostContent></Linkify>
-                {getURL(p.body)!=="" ? 
-                  (<ReactTinyLink
+                <Linkify>
+                  <PostContent>{p.body}</PostContent>
+                </Linkify>
+                {getURL(p.body) !== "" ? (
+                  <ReactTinyLink
                     cardSize="small"
                     showGraphic={true}
                     maxLine={2}
                     minLine={1}
                     url={getURL(p.body)}
-                  />) :
+                  />
+                ) : (
                   <></>
-                }
+                )}
                 <LikeCommentCount>
                   <div style={{ display: "flex", gap: "3px" }}>
                     <img

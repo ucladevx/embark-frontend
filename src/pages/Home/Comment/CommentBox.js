@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { ReactTinyLink } from 'react-tiny-link';//uses https://cors-anywhere.herokuapp.com by default.
-import Linkify from 'react-linkify';
+import { ReactTinyLink } from "react-tiny-link"; //uses https://cors-anywhere.herokuapp.com by default.
+import Linkify from "react-linkify";
 import {
   PreviousCommentItem,
   PreviousCommentTitle,
@@ -16,10 +16,10 @@ import { colors } from "../../../shared/config";
 
 const CommentBox = ({ comments }) => {
   const [start, setStart] = useState(0);
-  const getUrls = require('get-urls');//url finder
+  const getUrls = require("get-urls"); //url finder
   const getURL = (body) => {
     const urlSet = getUrls(body);
-    if(urlSet.size<=0)return "";
+    if (urlSet.size <= 0) return "";
     const iterator = urlSet[Symbol.iterator]();
     return iterator.next().value;
   };
@@ -42,17 +42,20 @@ const CommentBox = ({ comments }) => {
                 <div>
                   <PreviousCommentContent bgcolor={colors.gray1}>
                     <PreviousCommentTitle>{c.authorEmail}</PreviousCommentTitle>
-                    <Linkify><PreviousCommentText>{c.body}</PreviousCommentText></Linkify>
-                    {getURL(c.body)!=="" ? 
-                      (<ReactTinyLink
+                    <Linkify>
+                      <PreviousCommentText>{c.body}</PreviousCommentText>
+                    </Linkify>
+                    {getURL(c.body) !== "" ? (
+                      <ReactTinyLink
                         cardSize="small"
                         showGraphic={true}
                         maxLine={2}
                         minLine={1}
                         url={getURL(c.body)}
-                      />) :
+                      />
+                    ) : (
                       <></>
-                    }
+                    )}
                   </PreviousCommentContent>
                   <LikeReply>
                     <LikeReplyText>Like</LikeReplyText>
