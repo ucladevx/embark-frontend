@@ -72,6 +72,16 @@ export const FilesWrapper = styled.div`
   min-height: 50px;
 `;
 
+export const CloseButton = styled(Button)`
+  width: 89px;
+  height: 30px;
+  border-radius: 8px;
+  text-transform: none;
+  background: ${colors.pink};
+  display: flex;
+  flex-direction: column;
+`;
+
 const NewPost = ({ open, handleClose }) => {
   const [industry, setIndustry] = useState("");
   const [title, setTitle] = useState("");
@@ -272,7 +282,7 @@ const NewPost = ({ open, handleClose }) => {
         </TextFieldWrapper>
         {file.url !== PDF1_URL ? (
           <>
-            <button onClick={clearFile}>X | Clear File</button>
+            <CloseButton onClick={clearFile}>X | Clear File</CloseButton>
             <FilesWrapper>
               <FileViewer filePath={file} fileType={fileType} />
             </FilesWrapper>
@@ -282,7 +292,7 @@ const NewPost = ({ open, handleClose }) => {
         )}
         {image.url !== PDF1_URL ? (
           <>
-            <button onClick={clearImage}>X | Clear Image</button>
+            <CloseButton onClick={clearImage}>X | Clear Image</CloseButton>
             <FilesWrapper>
               <img src={image.url} height="500px" alt="" />
             </FilesWrapper>
