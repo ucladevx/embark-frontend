@@ -8,9 +8,11 @@ import {
     EventsWrapper,
     TimeTypography,
     GoingBtn,
-    AddFilter,
     InfoSeperator,
 } from './StyleLanding';
+import styled from "styled-components";
+import { colors } from "../../shared/config";
+import { Typography } from "@material-ui/core";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { useSelector, useDispatch } from 'react-redux';
 import { goingToEvent } from "../../redux/actions/userActions";
@@ -20,6 +22,28 @@ import ExpandedEvent from "./ExpandedEvent.js"
 import dayjs from 'dayjs';
 const relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
+
+export const CreateButton = styled(Typography)`
+  height: 26px;
+  background-color: ${colors.green1};
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0 8px;
+  margin-top: 5px;
+  margin-right: 5px;
+  font-size: 14px;
+  
+  text-transform: none;
+  align-self: flex-end;
+  color: ${colors.gray3};
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`;
 
 const makeDay = (moment) => {
     let date = JSON.stringify(moment);
@@ -45,9 +69,13 @@ const testEvent = [{
 
 const Events = ({setNewEvent}) => {
     const dispatch = useDispatch();
+    const club = true;//use backend call to test if it is a club
+
+
     const goingClick = (id) => {
         dispatch(goingToEvent(id));
     }
+
     const events = useSelector((state) => state.data.events);
     const attending = useSelector((state) => state.user.goingEvents);
     const [expanded, setExpanded] = useState(false);
@@ -131,11 +159,15 @@ const Events = ({setNewEvent}) => {
                     </>
                     );
                 })}
-                <AddFilter onClick={()=>setNewEvent(true)}>+ Create</AddFilter>
+                {club === true ? 
+                  (<CreateButton onClick={()=>setNewEvent(true)}>+ Create</CreateButton>)
+                  :
+                  <></>
+                }
               </EventItems>
         </EventsWrapper>
     </>
   );
 };
 
-export default Events;
+export default Events;  

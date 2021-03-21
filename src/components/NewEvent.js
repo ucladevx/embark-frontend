@@ -5,8 +5,6 @@ import {
   DialogActions,
   Button,
   TextField,
-  Typography,
-  FormControl,
 } from "@material-ui/core";
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import { BoldTypography } from "../shared/Typography";
@@ -46,6 +44,7 @@ const PostBtn = styled(Button)`
   background-color: ${colors.gray2};
 `;
 
+
 const NewEvent = ({ open, handleClose }) => {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
@@ -81,6 +80,17 @@ const NewEvent = ({ open, handleClose }) => {
     handleClose();
   };
 
+  const renderInput = ( props, openCalendar, closeCalendar ) => {
+    return (
+        <TimeWrapper>
+            <BoldTypography sz={"16px"}>{props.value} </BoldTypography>
+            <button onClick={openCalendar}>open</button>
+            <button onClick={closeCalendar}>close</button>
+        </TimeWrapper>
+    );
+  }; 
+
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogContent>
@@ -102,12 +112,15 @@ const NewEvent = ({ open, handleClose }) => {
             }}
             onChange={handleTitle}
           />
-          <TimeWrapper>
-            <AccessTimeIcon/>
-            <Datetime 
-              onChange = {handleTime}
-            />
-          </TimeWrapper>
+            <TimeWrapper>
+                <AccessTimeIcon/>
+                  <Datetime 
+                    onChange = {handleTime}
+                    locale = {''}
+                    renderInput = {renderInput}
+                    onClose = {handleTime}
+                  />
+            </TimeWrapper>
           <DialogTextField
             autoFocus
             margin="dense"
@@ -145,6 +158,8 @@ const NewEvent = ({ open, handleClose }) => {
       </DialogActions>
     </Dialog>
   );
+
+
 };
 
 export default NewEvent;
