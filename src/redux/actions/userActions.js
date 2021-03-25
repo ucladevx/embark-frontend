@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 
 const maintenanceErrorCheck = (err) => {
-  if(err.message.includes(' 503')){
+  if (err.message.includes(" 503")) {
     console.log("here");
     alert("ERROR 503: " + "Embark is on maintenance, please check later");
   }
