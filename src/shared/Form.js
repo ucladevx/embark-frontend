@@ -29,6 +29,18 @@ export const FormWrapper = styled(Form)`
   margin-top: 2rem;
 `;
 
+export const FieldContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 380px;
+`;
+
+export const ErrorPrompt = styled.div`
+  color: ${(props) => (props.error ? "#ffadad" : "transparent")};
+  height: 20px;
+`;
+
 const PromptContainer = styled.div`
   font-size: 14px;
   position: absolute;

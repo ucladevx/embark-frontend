@@ -1,11 +1,10 @@
-import React from 'react';
-import ImageIcon from '@material-ui/icons/Image';
-import LinkIcon from '@material-ui/icons/Link';
+import React from "react";
+import ImageIcon from "@material-ui/icons/Image";
+import LinkIcon from "@material-ui/icons/Link";
 import {
   QuestionBox,
   AskAvatar,
   AskaQuestion,
-  ViewPost,
   PostAvatar,
   PostTitle,
   PostContent,
@@ -25,41 +24,59 @@ import {
   PostTime,
   PostUserName,
   PostTag,
-} from './StyleLanding';
-import { CircularProgress } from '@material-ui/core';
-import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import { colors } from '../../shared/config';
+  FilesWrapper,
+} from "./StyleLanding";
+import { CircularProgress } from "@material-ui/core";
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { colors } from "../../shared/config";
 
 // Infinite Scroll
-import InfiniteScroll from 'react-infinite-scroll-component';
+import InfiniteScroll from "react-infinite-scroll-component";
 
 // Dayjs
-import dayjs from 'dayjs';
-import { getNextPosts } from '../../redux/actions/dataActions';
-import Interactive from './Interactive';
-import WriteComment from './WriteComment';
-const relativeTime = require('dayjs/plugin/relativeTime');
+import dayjs from "dayjs";
+import { getNextPosts } from "../../redux/actions/dataActions";
+import Interactive from "./Interactive";
+import WriteComment from "./Comment/WriteComment";
+import FileViewer from "react-file-viewer";
+import CommentBox from "./Comment/CommentBox";
+import thumbup from "../../images/thumbup.svg";
+
+const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 const Circle = styled(CircularProgress)`
   margin: 10px;
-  color: ${colors.blue1};
+  color: ${colors.blue3};
+`;
+
+const LikeCommentCount = styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+  color: ${colors.gray6};
+  font-size: 12px;
+  p:last-child {
+    margin-left: auto;
+  }
 `;
 
 const Loader = () => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <Circle></Circle>
     </div>
   );
 };
 
 const Posts = ({ setNewPost }) => {
+  // Redux
   const posts = useSelector((state) => state.data.posts);
-  const tags = [{ key: 'Product Management' }, { key: 'Computer Science' }];
-  const dispatch = useDispatch();
   const hasNext = useSelector((state) => state.data.hasNext);
+  const dispatch = useDispatch();
+
+  const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
   const renderedTags = tags.map((each) => {
     return (
       <div key={each.key}>
@@ -70,6 +87,11 @@ const Posts = ({ setNewPost }) => {
   const getMorePosts = () => {
     if (hasNext) dispatch(getNextPosts());
   };
+  //for test files, go to https://cors-anywhere.herokuapp.com to enable CORS on non-cors file links, see below for format
+  const testfiles = [
+    "https://cors-anywhere.herokuapp.com/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
+  ];
+
   return (
     <>
       <QuestionBox>
@@ -88,26 +110,47 @@ const Posts = ({ setNewPost }) => {
         <LinkIcon />
       </QuestionBox>
 
-      <ViewPost>
-        <PostWrapper>
-          <PostHeader>
-            <PostAvatar />
-            <PostNameTime>
-              <PostUserName>Christie Smith</PostUserName>
-              <PostTime>{dayjs('2020-12-01').fromNow()}</PostTime>
-            </PostNameTime>
-            <PostTagWrapper>{renderedTags}</PostTagWrapper>
-          </PostHeader>
+      <PostWrapper>
+        <PostHeader>
+          <PostAvatar />
+          <PostNameTime>
+            <PostUserName>Christie Smith</PostUserName>
+            <PostTime>{dayjs("2020-12-01").fromNow()}</PostTime>
+          </PostNameTime>
+          <PostTagWrapper>{renderedTags}</PostTagWrapper>
+        </PostHeader>
+        <PostTitle>How do I improve my product knowledge?</PostTitle>
+        <PostContent>
+          After taking the CS30 series, I realized I could not see myself coding
+          for the rest of my life lol so I’m thinking of going into Product! Do
+          any of you have any resources/tips on where to get started? Thanks :)
+        </PostContent>
+        {testfiles &&
+          testfiles.map((f, i) => {
+            return (
+              <FilesWrapper key={i}>
+                <FileViewer
+                  tag={f}
+                  fileType={f.substring(f.lastIndexOf(".") + 1)}
+                  filePath={f}
+                />
+              </FilesWrapper>
+            );
+          })}
 
-          <PostTitle>How do I improve my product knowledge?</PostTitle>
-          <PostContent>
-            After taking the CS30 series, I realized I could not see myself
-            coding for the rest of my life lol so I’m thinking of going into
-            Product! Do any of you have any resources/tips on where to get
-            started? Thanks :)
-          </PostContent>
-        </PostWrapper>
+        <LikeCommentCount>
+          <div style={{ display: "flex", gap: "3px" }}>
+            <img
+              src={thumbup}
+              alt="thumbup"
+              style={{ marginTop: "-3px" }}
+            ></img>
+            <p>11</p>
+          </div>
+          <p>5 Comments</p>
+        </LikeCommentCount>
 
+        <Interactive />
         <ViewPreviousCommentWrapper>
           <ViewCommentLink>View previous comments</ViewCommentLink>
           <PreviousCommentItem>
@@ -145,19 +188,21 @@ const Posts = ({ setNewPost }) => {
               </LikeReply>
             </div>
           </PreviousCommentItem>
-          <Interactive></Interactive>
           <ViewCommentLink>View More comments</ViewCommentLink>
           <WriteComment></WriteComment>
         </ViewPreviousCommentWrapper>
-        <InfiniteScroll
-          dataLength={posts.length}
-          next={getMorePosts}
-          hasMore={hasNext}
-          loader={<Loader></Loader>}
-        >
-          {posts.map((p) => {
+      </PostWrapper>
+
+      <InfiniteScroll
+        dataLength={posts.length}
+        next={getMorePosts}
+        hasMore={hasNext}
+        loader={<Loader></Loader>}
+      >
+        {posts &&
+          posts.map((p, i) => {
             return (
-              <PostWrapper key={p._id}>
+              <PostWrapper key={p._id + i}>
                 <PostHeader>
                   <PostAvatar />
                   <PostNameTime>
@@ -165,22 +210,44 @@ const Posts = ({ setNewPost }) => {
                     <PostTime>{dayjs(p.timestamp).fromNow()}</PostTime>
                   </PostNameTime>
                   <PostTagWrapper>
-                    {p.tags.map((t) => (
-                      <PostTag tag={t} key={t}>
-                        {t}
-                      </PostTag>
-                    ))}
+                    {p.tags &&
+                      p.tags.map((t) => (
+                        <PostTag tag={t} key={t}>
+                          {t}
+                        </PostTag>
+                      ))}
                   </PostTagWrapper>
                 </PostHeader>
                 <PostTitle>{p.title}</PostTitle>
                 <PostContent>{p.body}</PostContent>
-                <Interactive></Interactive>
-                <WriteComment></WriteComment>
+                <LikeCommentCount>
+                  <div style={{ display: "flex", gap: "3px" }}>
+                    <img
+                      src={thumbup}
+                      alt="thumbup"
+                      style={{ marginTop: "-3px" }}
+                    ></img>
+                    <p>{p.likes}</p>
+                  </div>
+                  <p>{p.comments ? p.comments.length : "0"} Comments</p>
+                </LikeCommentCount>
+                <Interactive post_id={p._id}></Interactive>
+                {p.files &&
+                  p.files.map((f) => (
+                    <FilesWrapper>
+                      <FileViewer
+                        tag={f}
+                        fileType={f.substring(f.lastIndexOf(".") + 1)}
+                        filePath={f}
+                      />
+                    </FilesWrapper>
+                  ))}
+                <CommentBox comments={p.comments}></CommentBox>
+                <WriteComment post_id={p._id}></WriteComment>
               </PostWrapper>
             );
           })}
-        </InfiniteScroll>
-      </ViewPost>
+      </InfiniteScroll>
     </>
   );
 };

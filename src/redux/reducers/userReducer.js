@@ -16,6 +16,7 @@ const intialState = {
   goingEvents: [],
   clubs: [],
   industry: "",
+  userType: "student",
 };
 
 export default function userReducer(state = intialState, action) {
@@ -32,24 +33,25 @@ export default function userReducer(state = intialState, action) {
         authenticated: true,
         ...action.payload,
       };
-    case LIKE_POST:
-      return {
-        ...state,
-        likedPosts: [
-          ...state.likedPosts,
-          {
-            likeBy: state.info.name,
-            postId: action.payload.postId,
-          },
-        ],
-      };
-    case UNLIKE_POST:
-      return {
-        ...state,
-        likedPosts: state.likedPosts.filter(
-          (post) => post.postId !== action.payload.postId
-        ),
-      };
+    // TODO: uncomment this after the like endpoint is updated
+    // case LIKE_POST:
+    //   return {
+    //     ...state,
+    //     likedPosts: [
+    //       ...state.likedPosts,
+    //       {
+    //         likeBy: state.info.name,
+    //         postId: action.payload.postId,
+    //       },
+    //     ],
+    //   };
+    // case UNLIKE_POST:
+    //   return {
+    //     ...state,
+    //     likedPosts: state.likedPosts.filter(
+    //       (post) => post.postId !== action.payload.postId
+    //     ),
+    //   };
     case MARK_NOTIFICATIONS_READ:
       state.notifications.forEach((noti) => (noti.read = true));
       return {

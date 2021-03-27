@@ -1,12 +1,9 @@
 import { Field, Formik } from "formik";
 import { loginUser } from "../../redux/actions/userActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
-import { TextField, Button } from "@material-ui/core";
 import styled from "styled-components";
-import { colors } from "../../shared/config";
-import GoogleButton from "react-google-button";
 import { OrSeperator } from "../../shared/Separators";
 import {
   LeftFormContainer,
@@ -14,9 +11,13 @@ import {
   FormContainer,
   FormWrapper,
   Prompt,
+  FieldContainer,
+  ErrorPrompt,
 } from "../../shared/Form";
 import TypeBox from "../../shared/TypeBox";
 import AuthButtons from "../../shared/AuthButtons";
+import { ActionButton } from "../../shared/Buttons";
+import { CLEAR_ERRORS } from "../../redux/types";
 
 const SignUpTitle = styled.div`
   font-weight: bold;
@@ -24,11 +25,9 @@ const SignUpTitle = styled.div`
   margin-bottom: 15px;
 `;
 
-const AccountBtn = styled(Button)`
+const AccountBtn = styled(ActionButton)`
   width: 200px;
   height: 38px;
-  background: ${colors.blue1};
-  font-weight: 700;
   margin-top: 15px;
 `;
 const LoginSchema = Yup.object().shape({
@@ -40,8 +39,9 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login = () => {
+  const back_end_errors = useSelector((state) => state.ui.errors);
   const dispatch = useDispatch();
-  let history = useHistory();
+  const history = useHistory();
   return (
     <FormContainer>
       <LeftFormContainer />
@@ -67,28 +67,45 @@ const Login = () => {
           validateOnBlur={false}
           validateOnChange={false}
         >
-          {({ errors }) => (
-            <FormWrapper>
-              <Field
-                name="email"
-                placeholder="Email"
-                as={TypeBox}
-                margin="normal"
-                helperText={errors.email}
-                error={!!errors.email}
-              ></Field>
-              <Field
-                name="password"
-                placeholder="Password"
-                as={TypeBox}
-                margin="normal"
-                helperText={errors.password}
-                error={!!errors.password}
-                type="password"
-              ></Field>
-              <AccountBtn type="submit">Log in</AccountBtn>
-            </FormWrapper>
-          )}
+          {({ errors, setErrors }) => {
+            const hasError =
+              !!back_end_errors || !!errors.password || !!errors.email;
+            return (
+              <FormWrapper>
+                <FieldContainer>
+                  <Field
+                    name="email"
+                    placeholder="Email"
+                    as={TypeBox}
+                    margin="normal"
+                    error={hasError}
+                    onFocus={() => {
+                      setErrors({});
+                      dispatch({ type: CLEAR_ERRORS });
+                    }}
+                  ></Field>
+                </FieldContainer>
+                <FieldContainer>
+                  <Field
+                    name="password"
+                    placeholder="Password"
+                    as={TypeBox}
+                    margin="normal"
+                    error={hasError}
+                    type="password"
+                    onFocus={() => {
+                      setErrors({});
+                      dispatch({ type: CLEAR_ERRORS });
+                    }}
+                  ></Field>
+                </FieldContainer>
+                <ErrorPrompt error={hasError}>
+                  Invalid email or password
+                </ErrorPrompt>
+                <AccountBtn type="submit">Log in</AccountBtn>
+              </FormWrapper>
+            );
+          }}
         </Formik>
       </RightFormContainer>
     </FormContainer>

@@ -7,32 +7,36 @@ import {
   ProfileWrapper,
   ProfileAvatar,
   NameDescription,
+  NameTypography,
   NameDescriptionWrapper,
+  IndustryWrapper,
   EditProfileButton,
   MiddleContainer,
   QuestionBox,
   ExploreFilter,
   ExploreObj,
+  Footer,
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
-import EditProfile from "./editProfile";
-import ProfileTabs from "./ProfileTabs";
+import { Button } from "@material-ui/core";
+import EditProfile from "./editStudentProfile";
+import UserProfileTabs from "./StudentProfileTabs";
 import { colors } from "../../shared/config";
-
-const Profile = (props) => {
+import { useDispatch, useSelector } from "react-redux";
+const StudentProfile = (props) => {
+  const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
-  const { userid } = useParams();
 
   return (
-    <>
+    <div>
       <EditProfile
         open={editProfile}
         handleClose={() => seteditProfile(false)}
+        allTags={user.tags}
       ></EditProfile>
       <NavBar></NavBar>
-
       <MiddleContainer>
         <ProfileWrapper>
           <HeaderImage src={lawn}></HeaderImage>
@@ -40,20 +44,31 @@ const Profile = (props) => {
             <NameDescriptionWrapper>
               <ProfileAvatar></ProfileAvatar>
               <NameDescription>
-                <TitleTypography>Test user</TitleTypography>
-                <Typography>2022 Cognitive Science</Typography>
+                <TitleTypography
+                  style={{ fontSize: "24px", paddingBottom: "0" }}
+                >
+                  {user.name}
+                </TitleTypography>
+                <Typography style={{ fontSize: "18px" }}>
+                  {user.year} • {user.major}
+                </Typography>
               </NameDescription>
             </NameDescriptionWrapper>
-            <BoldTypography sz={"18px"}>Interested Industries:</BoldTypography>
-
-            <ExploreFilter>
-              <ExploreObj bgcolor={colors.red1}>
-                &times; Product Management
-              </ExploreObj>
-              <ExploreObj bgcolor={colors.darkyellow}>
-                &times; Product Design
-              </ExploreObj>
-            </ExploreFilter>
+            <IndustryWrapper>
+              <BoldTypography sz={"14px"}>
+                Interested Industries:
+              </BoldTypography>
+              <ExploreFilter>
+                {user.tags &&
+                  user.tags.map((name) => {
+                    return (
+                      <ExploreObj key={name} bgcolor={colors.red1}>
+                        {name}
+                      </ExploreObj>
+                    );
+                  })}
+              </ExploreFilter>
+            </IndustryWrapper>
 
             <EditProfileButton
               onClick={() => {
@@ -65,18 +80,19 @@ const Profile = (props) => {
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>
-
         <ProfileWrapper>
           <ProfileInfo>
             <NameDescriptionWrapper>
-              <ProfileTabs />
+              <UserProfileTabs />
             </NameDescriptionWrapper>
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>
+
+        <Footer></Footer>
       </MiddleContainer>
-    </>
+    </div>
   );
 };
 
-export default Profile;
+export default StudentProfile;

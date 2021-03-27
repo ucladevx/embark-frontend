@@ -6,6 +6,7 @@ import {
   AUTH_SIGNUP,
   AUTH_SIGNIN,
   GOING_EVENT,
+  SET_ERRORS,
 } from "../types";
 import axios from "axios";
 
@@ -21,9 +22,9 @@ export const loginUser = (userData, history) => async (dispatch) => {
     const res = await axios.post("/auth/signin", userData);
     setAuthorizationHeader(res.data.token);
     dispatch(getStudentData());
-    history.push("/landing");
+    history.push("/home");
   } catch (err) {
-    console.error(err);
+    dispatch({ type: SET_ERRORS, payload: err.response.data });
   }
 };
 
@@ -31,9 +32,10 @@ export const loginUser = (userData, history) => async (dispatch) => {
 export const getStudentData = () => async (dispatch) => {
   try {
     const res = await axios.get("/student/profile");
+    const payload = { ...res.data.student, userType: "student" };
     dispatch({
       type: SET_USER,
-      payload: res.data.student,
+      payload,
     });
   } catch (err) {
     console.error(err);
@@ -41,13 +43,19 @@ export const getStudentData = () => async (dispatch) => {
 };
 
 // Sign Up a user
-export const signupStudent = (newUserData) => async (dispatch) => {
+export const signupStudent = (newUserData, handleUser, handleStep) => async (
+  dispatch,
+) => {
   try {
     const res = await axios.post("/auth/signup", newUserData);
     setAuthorizationHeader(res.data.token);
     dispatch(getStudentData());
+    console.log("run");
+    handleUser(newUserData);
+    handleStep(1);
   } catch (err) {
-    console.error(err.data);
+    console.log(err);
+    dispatch({ type: SET_ERRORS, payload: err.response.data });
   }
 };
 
@@ -91,10 +99,18 @@ export const markNotificationsRead = (notificationIds) => (dispatch) => {
 
 export const studentGoogleSignUp = () => async (dispatch) => {
   try {
-    const res = await axios.post("/auth/google", {
-      type: "signup",
-      user: "student",
-    });
+    const res = await axios.post(
+      "/auth/google",
+      {
+        type: "signup",
+        user: "student",
+      },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      },
+    );
     dispatch({ type: AUTH_SIGNUP, payload: res.data });
   } catch (err) {
     console.error(err);
@@ -122,3 +138,4 @@ export const goingToEvent = (eventId) => async (dispatch) => {
     console.error(err);
   }
 };
+

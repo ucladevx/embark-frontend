@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
-import "./calendar.css";
 import Calendar from "react-calendar";
 // Styles
+import "./Calendar/HomeCalendar.css";
+
 import {
   LandingPage,
   LandingPageWrapper,
@@ -11,6 +12,7 @@ import {
   FilterTitle,
   FilterObj,
   FilterWrapper,
+  InteriorFilterWrapper,
   AddFilter,
   CalanderWrapper,
   InfoBoxes,
@@ -19,6 +21,9 @@ import {
   InfoSeperator,
   InfoEntryText,
   MiddleContainer,
+  EventTypography,
+  GoingBtn,
+  DialogTextField
 } from "./StyleLanding";
 // Images
 import avatarImg from "../../images/avatar.svg";
@@ -26,31 +31,45 @@ import bookImg from "../../images/book.svg";
 import compassImg from "../../images/compass.svg";
 // Utils
 import { colors } from "../../shared/config";
-import { styleCalendar } from "./calendar";
-
+import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
-import { getPosts, getEvents } from "../../redux/actions/dataActions";
+import {
+  getPosts,
+  filterPosts,
+  getEvents,
+  addFilter,
+  removeFilter,
+} from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
 import NewEvent from "../../components/NewEvent"
 import Explore from "./Explore";
+import { styleCalendar } from "./Calendar/HomeCalendar";
 import Posts from "./Posts";
+
 import Events from "./Events";
 
 // Dayjs
 import dayjs from "dayjs";
 import { useHistory } from "react-router-dom";
+// Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 const Home = () => {
   // Redux
+  const filters = useSelector((state) => state.data.filter);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const history = useHistory();
+
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
   const [newEvent, setNewEvent] = useState(false);
   const history = useHistory();
+
+  const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
+
 
   useEffect(() => {
     dispatch(getPosts());
@@ -64,9 +83,19 @@ const Home = () => {
     styleCalendar();
   }, []);
 
-  useEffect(() => {
-    if (!window.localStorage.getItem("AuthToken")) history.push("/");
-  }, [history]);
+  const removeUpdateFilters = (t) => {
+    dispatch(removeFilter(t));
+    dispatch(filterPosts());
+  };
+  const addUpdateFilter = (t) => {
+    dispatch(addFilter(t));
+    dispatch(filterPosts());
+  };
+
+  const [tagToAdd, setTagToAdd] = useState("");
+  const handleChange = (e) => {
+    setTagToAdd(e.target.value);
+  };
 
   return (
     <>
@@ -77,7 +106,9 @@ const Home = () => {
         <LandingPageWrapper>
           <LeftContainer>
             <InfoBoxes>
-              <InfoEntryWrapper onClick={() => setPage("main")}>
+              <InfoEntryWrapper
+                onClick={() => history.push(`/user/${user._id}`)}
+              >
                 <InfoImage src={avatarImg} alt="user"></InfoImage>
                 <InfoEntryText>{user.name}</InfoEntryText>
               </InfoEntryWrapper>
@@ -96,12 +127,30 @@ const Home = () => {
             {page === "main" && (
               <FilterWrapper>
                 <FilterTitle>Filters:</FilterTitle>
-                <FilterObj tag="Product Management">
-                  Product Management
-                </FilterObj>
-                <FilterObj tag="Product Design">Product Design</FilterObj>
+                <InteriorFilterWrapper>
+                  {filters.map((t) => (
+                    <FilterObj
+                      tag={t}
+                      key={t}
+                      onClick={() => removeUpdateFilters(t)}
+                    >
+                      {t}
+                    </FilterObj>
+                  ))}
+                </InteriorFilterWrapper>
                 <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
-                <AddFilter>+ Add Filter</AddFilter>
+                <DialogTextField
+                  id="tag"
+                  placeholder="Enter tag..."
+                  type="text"
+                  InputProps={{
+                    disableUnderline: true,
+                  }}
+                  onChange={handleChange}
+                />
+                <AddFilter onClick={() => addUpdateFilter(tagToAdd)}>
+                  + Add Filter
+                </AddFilter>
               </FilterWrapper>
             )}
           </LeftContainer>
@@ -118,7 +167,7 @@ const Home = () => {
 
           <RightContainer>
             <CalanderWrapper>
-              <Calendar calendarType={"US"}></Calendar>
+              <Calendar></Calendar>
             </CalanderWrapper>
 
             <Events setNewEvent = {setNewEvent}/>

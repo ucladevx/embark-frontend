@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Line } from "../../shared/Separators";
 import Like from "../../images/heart-gray.svg";
 import Comment from "../../images/comment.svg";
+import thumbup from "../../images/thumbup.svg";
 import Share from "../../images/share.svg";
 import styled from "styled-components";
 import { colors } from "../../shared/config";
 import LinkEffect from "../../shared/LinkEffect";
+import { useDispatch } from "react-redux";
+import { likePost } from "../../redux/actions/dataActions";
+import { OPEN_COMMENT } from "../../redux/types";
 
 const InteractiveContainer = styled.div`
   display: flex;
@@ -46,16 +50,27 @@ const InteractiveLine = styled(Line)`
   width: 100%;
 `;
 
-const Interactive = () => {
+const Interactive = ({ post_id }) => {
+  const dispatch = useDispatch();
+  const [liked, setLiked] = useState(false);
+
+  const handleLike = () => {
+    if (!liked) dispatch(likePost(post_id));
+    // else dispatch(unlikePost(post_id));
+    setLiked(!liked);
+  };
+
   return (
     <InteractiveContainer>
       <InteractiveLine></InteractiveLine>
       <IconWrapper>
-        <IconEntry>
-          <InteractiveIcon src={Like}></InteractiveIcon>
+        <IconEntry onClick={handleLike}>
+          <InteractiveIcon src={liked ? thumbup : Like}></InteractiveIcon>
           <IconText>Like</IconText>
         </IconEntry>
-        <IconEntry>
+        <IconEntry
+          onClick={() => dispatch({ type: OPEN_COMMENT, payload: post_id })}
+        >
           <InteractiveIcon src={Comment}></InteractiveIcon>
           <IconText>Comment</IconText>
         </IconEntry>

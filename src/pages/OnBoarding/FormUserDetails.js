@@ -7,14 +7,17 @@ import {
   FormContainer,
   FormWrapper,
   Prompt,
+  FieldContainer,
+  ErrorPrompt,
 } from "../../shared/Form";
 import { ActionButton } from "../../shared/Buttons";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
 import { signupStudent } from "../../redux/actions/userActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { header1, header4 } from "../../shared/config";
 import AuthButtons from "../../shared/AuthButtons";
+import { CLEAR_ERRORS } from "../../redux/types";
 
 const SignUpTitle = styled.div`
   ${header1};
@@ -29,13 +32,6 @@ const NameContainer = styled.div`
 
 const FieldName = styled.p`
   ${header4}
-`;
-
-const FieldContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  width: 380px;
 `;
 
 const AccountBtn = styled(ActionButton)`
@@ -61,7 +57,9 @@ const SignupSchema = Yup.object().shape({
 });
 
 const FormUserDetails = ({ handleUser, handleStep }) => {
+  const backend_errors = useSelector((state) => state.ui.errors);
   const dispatch = useDispatch();
+
   return (
     <FormContainer>
       <LeftFormContainer />
@@ -87,62 +85,78 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
               password,
               userType: "student",
             };
-            dispatch(signupStudent(postUser));
-            handleUser(values);
-            handleStep(1);
+            dispatch(signupStudent(postUser, handleUser, handleStep));
           }}
           validateOnBlur={false}
           validateOnChange={false}
         >
-          {({ errors }) => (
-            <FormWrapper>
-              <NameContainer>
+          {(props) => {
+            const { errors, setErrors } = props;
+            const hasError =
+              !!backend_errors ||
+              !!errors.password ||
+              !!errors.email ||
+              !!errors.firstName ||
+              !!errors.lastName;
+            const handleFocus = () => {
+              setErrors({});
+              dispatch({ type: CLEAR_ERRORS });
+            };
+
+            return (
+              <FormWrapper>
+                <NameContainer>
+                  <FieldContainer>
+                    <FieldName>First Name</FieldName>
+                    <Field
+                      name="firstName"
+                      as={TypeBox}
+                      margin="normal"
+                      helperText={errors.firstName}
+                      error={hasError}
+                      onFocus={handleFocus}
+                    ></Field>
+                  </FieldContainer>
+                  <FieldContainer>
+                    <FieldName>Last Name</FieldName>
+                    <Field
+                      name="lastName"
+                      as={TypeBox}
+                      margin="normal"
+                      error={hasError}
+                      onFocus={handleFocus}
+                    ></Field>
+                  </FieldContainer>
+                </NameContainer>
                 <FieldContainer>
-                  <FieldName>First Name</FieldName>
+                  <FieldName>Email</FieldName>
                   <Field
-                    name="firstName"
+                    name="email"
                     as={TypeBox}
                     margin="normal"
-                    helperText={errors.firstName}
-                    error={!!errors.firstName}
+                    error={hasError}
+                    onFocus={handleFocus}
                   ></Field>
                 </FieldContainer>
                 <FieldContainer>
-                  <FieldName>Last Name</FieldName>
+                  <FieldName>Password</FieldName>
                   <Field
-                    name="lastName"
+                    name="password"
                     as={TypeBox}
                     margin="normal"
-                    helperText={errors.lastName}
-                    error={!!errors.lastName}
+                    error={hasError}
+                    type="password"
+                    placeholder="8+ characters"
+                    onFocus={handleFocus}
                   ></Field>
                 </FieldContainer>
-              </NameContainer>
-              <FieldContainer>
-                <FieldName>Email</FieldName>
-                <Field
-                  name="email"
-                  as={TypeBox}
-                  margin="normal"
-                  helperText={errors.email}
-                  error={!!errors.email}
-                ></Field>
-              </FieldContainer>
-              <FieldContainer>
-                <FieldName>Password</FieldName>
-                <Field
-                  name="password"
-                  as={TypeBox}
-                  margin="normal"
-                  helperText={errors.password}
-                  error={!!errors.password}
-                  type="password"
-                  placeholder="8+ characters"
-                ></Field>
-              </FieldContainer>
-              <AccountBtn type="submit">Create Account</AccountBtn>
-            </FormWrapper>
-          )}
+                <ErrorPrompt error={hasError}>
+                  Invalid name, email, or password
+                </ErrorPrompt>
+                <AccountBtn type="submit">Create Account</AccountBtn>
+              </FormWrapper>
+            );
+          }}
         </Formik>
       </RightFormContainer>
     </FormContainer>

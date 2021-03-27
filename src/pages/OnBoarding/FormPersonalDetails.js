@@ -8,6 +8,7 @@ import {
   RightFormContainer,
   FormWrapper,
   FormContainer,
+  Prompt,
 } from "../../shared/Form";
 
 import styled from "styled-components";
@@ -51,6 +52,7 @@ const FormPersonalDetails = ({ user }) => {
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
+        <Prompt link={"login"}></Prompt>
         <HeyTitle>
           Hey {user.firstName} {user.lastName}! <br /> Welcome to Embark
         </HeyTitle>
@@ -77,7 +79,7 @@ const FormPersonalDetails = ({ user }) => {
               tags: [industry],
             };
             dispatch(editStudentDetails(profile));
-            history.push("/landing");
+            history.push("/home");
           }}
         >
           {({ errors }) => (

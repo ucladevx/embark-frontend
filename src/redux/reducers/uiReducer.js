@@ -3,11 +3,14 @@ import {
   CLEAR_ERRORS,
   LOADING_UI,
   STOP_LOADING_UI,
-} from '../types';
+  OPEN_COMMENT,
+  CLOSE_COMMENT,
+} from "../types";
 
 const initialState = {
   loading: false,
   errors: null,
+  newComment: "",
 };
 
 export default function uiReducer(state = initialState, action) {
@@ -33,6 +36,16 @@ export default function uiReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
+      };
+    case OPEN_COMMENT:
+      return {
+        ...state,
+        newComment: action.payload,
+      };
+    case CLOSE_COMMENT:
+      return {
+        ...state,
+        newComment: "",
       };
     default:
       return state;

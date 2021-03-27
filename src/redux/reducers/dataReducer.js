@@ -5,7 +5,6 @@ import {
   DELETE_POST,
   NEW_POST,
   SET_POST,
-  SUBMIT_COMMENT,
   ADD_FILTER,
   REMOVE_FILTER,
   FILTER_POSTS,
@@ -17,7 +16,6 @@ import {
 
 const initialState = {
   posts: [],
-  post: {},
   filter: [],
   nextString: "",
   hasNext: true,
@@ -48,14 +46,13 @@ export default function dataReducer(state = initialState, action) {
     case LIKE_POST:
     case UNLIKE_POST:
       index = state.posts.findIndex(
-        (post) => post.postId === action.payload.postId
+        (post) => post.post_id === action.payload.post.post_id,
       );
-      state.posts[index] = action.payload;
-      if (state.post.postId === action.payload.postId) {
-        state.post = action.payload;
-      }
+      const newPosts = [...state.posts];
+      newPosts[index] = action.payload.post;
       return {
         ...state,
+        posts: newPosts,
       };
     case SET_POST:
       return {
@@ -73,14 +70,6 @@ export default function dataReducer(state = initialState, action) {
         ...state,
         posts: [action.payload, ...state.posts],
       };
-    case SUBMIT_COMMENT:
-      return {
-        ...state,
-        post: {
-          ...state.post,
-          comments: [action.payload, ...state.post.comments],
-        },
-      };
     case ADD_FILTER:
       return {
         ...state,
@@ -90,10 +79,10 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         filter: state.filter.filter(
-          (eachfilter) => eachfilter !== action.payload
+          (eachfilter) => eachfilter !== action.payload,
         ),
       };
-    case FILTER_POSTS:
+    case FILTER_POSTS: {
       var postsCopy = state.posts;
       postsCopy = postsCopy.sort(function (post1, post2) {
         for (var i = 0; i < state.filter.length; i++) {

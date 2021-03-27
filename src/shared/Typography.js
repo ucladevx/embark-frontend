@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Typography } from '@material-ui/core';
+import styled from "styled-components";
+import { Typography } from "@material-ui/core";
 
 export const BoldTypography = styled(Typography)`
   font-weight: 600;
