@@ -87,7 +87,7 @@ since we are having inconsistency in our frontend, backend, and design, we'll fi
 ## Best Practices in this repo
 In src:
 - we use pages folder to organize all the pages. For each page, we create its own folder with its components storing in the same folder.
-- If there are functional components being used across differnet pages, or the component is very important, we put the components into components folder
+- If there are functional components being used across different pages, or the component is very important, we put the components into components folder
 - For each smaller component, we could write the styles in the same file. However, we should put the styles for the entire page to the StylexxPage.js because usually the styles for a page is a lot
 - shared: used for shared UI components and CSS resources, mediaQueries. You should put the components you used in more than one page to the shared folder
 - utils: utility functions and components
