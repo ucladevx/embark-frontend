@@ -1,6 +1,8 @@
 import React from "react";
 import ImageIcon from "@material-ui/icons/Image";
 import LinkIcon from "@material-ui/icons/Link";
+import { ReactTinyLink } from "react-tiny-link"; //uses https://cors-anywhere.herokuapp.com by default.
+import Linkify from "react-linkify";
 import {
   QuestionBox,
   AskAvatar,
@@ -92,6 +94,14 @@ const Posts = ({ setNewPost }) => {
     "https://cors-anywhere.herokuapp.com/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
   ];
 
+  const getUrls = require("get-urls"); //url finder
+  const getURL = (body) => {
+    const urlSet = getUrls(body);
+    if (urlSet.size <= 0) return "";
+    const iterator = urlSet[Symbol.iterator]();
+    return iterator.next().value;
+  };
+
   return (
     <>
       <QuestionBox>
@@ -120,11 +130,14 @@ const Posts = ({ setNewPost }) => {
           <PostTagWrapper>{renderedTags}</PostTagWrapper>
         </PostHeader>
         <PostTitle>How do I improve my product knowledge?</PostTitle>
-        <PostContent>
-          After taking the CS30 series, I realized I could not see myself coding
-          for the rest of my life lol so I’m thinking of going into Product! Do
-          any of you have any resources/tips on where to get started? Thanks :)
-        </PostContent>
+        <Linkify>
+          <PostContent>
+            After taking the CS30 series, I realized I could not see myself
+            coding for the rest of my life lol so I’m thinking of going into
+            Product! Do any of you have any resources/tips on where to get
+            started? Thanks :)
+          </PostContent>
+        </Linkify>
         {testfiles &&
           testfiles.map((f, i) => {
             return (
@@ -158,12 +171,23 @@ const Posts = ({ setNewPost }) => {
             <div>
               <PreviousCommentContent bgcolor={colors.lightpurple}>
                 <PreviousCommentTitle>UCLA DevX</PreviousCommentTitle>
-                <PreviousCommentText>
-                  Hey Christie! We have a slidedeck all about product thinking
-                  on our profile. You should totally apply to be on one of our
-                  teams this quarter to gain some more experience with the
-                  product development process!!
-                </PreviousCommentText>
+                <Linkify>
+                  <PreviousCommentText>
+                    Hey Christie! We have a slidedeck all about product thinking
+                    on our profile. You should totally apply to be on one of our
+                    teams this quarter to gain some more experience with the
+                    product development process!! https://ucladevx.com/
+                  </PreviousCommentText>
+                </Linkify>
+                <ReactTinyLink
+                  cardSize="small"
+                  showGraphic={true}
+                  maxLine={2}
+                  minLine={1}
+                  url={getURL(
+                    "Hey Christie! We have a slidedeck all about product thinking on our profile. You should totally apply to be on one of our teams this quarter to gain some more experience with the product development process!! https://ucladevx.com/",
+                  )}
+                />
               </PreviousCommentContent>
               <LikeReply>
                 <LikeReplyText>Like</LikeReplyText>
@@ -177,9 +201,11 @@ const Posts = ({ setNewPost }) => {
             <div>
               <PreviousCommentContent bgcolor={colors.gray1}>
                 <PreviousCommentTitle>Justin Chen</PreviousCommentTitle>
-                <PreviousCommentText>
-                  Same!! The CS30 series killed my GPA.
-                </PreviousCommentText>
+                <Linkify>
+                  <PreviousCommentText>
+                    Same!! The CS30 series killed my GPA.
+                  </PreviousCommentText>
+                </Linkify>
               </PreviousCommentContent>
               <LikeReply>
                 <LikeReplyText>Like</LikeReplyText>
@@ -219,7 +245,20 @@ const Posts = ({ setNewPost }) => {
                   </PostTagWrapper>
                 </PostHeader>
                 <PostTitle>{p.title}</PostTitle>
-                <PostContent>{p.body}</PostContent>
+                <Linkify>
+                  <PostContent>{p.body}</PostContent>
+                </Linkify>
+                {getURL(p.body) !== "" ? (
+                  <ReactTinyLink
+                    cardSize="small"
+                    showGraphic={true}
+                    maxLine={2}
+                    minLine={1}
+                    url={getURL(p.body)}
+                  />
+                ) : (
+                  <></>
+                )}
                 <LikeCommentCount>
                   <div style={{ display: "flex", gap: "3px" }}>
                     <img
