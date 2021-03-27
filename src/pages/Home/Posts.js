@@ -41,7 +41,7 @@ import dayjs from "dayjs";
 import { getNextPosts } from "../../redux/actions/dataActions";
 import Interactive from "./Interactive";
 import WriteComment from "./Comment/WriteComment";
-import FileViewer from "react-file-viewer";
+import FileViewer from "@studyworld/react-file-viewer";
 import CommentBox from "./Comment/CommentBox";
 import thumbup from "../../images/thumbup.svg";
 

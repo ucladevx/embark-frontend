@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FileUpload from "./FileUpload.js";
 import ImageUpload from "./ImageUpload.js";
-import FileViewer from "react-file-viewer";
+import FileViewer from "@studyworld/react-file-viewer";
 import {
   Dialog,
   DialogContent,

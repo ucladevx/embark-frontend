@@ -17,6 +17,13 @@ import {
 
 import axios from "axios";
 
+const maintenanceErrorCheck = (err) => {
+  if (err.message.includes(" 503")) {
+    console.log("here");
+    alert("ERROR 503: " + "Embark is on maintenance, please check later");
+  }
+};
+
 // Get All Posts
 export const getPosts = () => async (dispatch) => {
   try {
@@ -44,6 +51,7 @@ export const getPosts = () => async (dispatch) => {
     dispatch({ type: SET_NEXT_STRING, payload: res.data.paginatedPosts.next });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -65,6 +73,7 @@ export const getNextPosts = () => async (dispatch, getState) => {
     dispatch({ type: SET_HAS_NEXT, payload: hasNext });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -75,6 +84,7 @@ export const newPost = (newP) => async (dispatch) => {
     dispatch({ type: NEW_POST, payload: res.data.post });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -90,6 +100,7 @@ export const likePost = (post_id) => async (dispatch, getState) => {
     dispatch({ type: LIKE_POST, payload: res.data });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -100,6 +111,7 @@ export const unlikePost = (postId) => async (dispatch) => {
     dispatch({ type: UNLIKE_POST, payload: res.data });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -110,6 +122,7 @@ export const deletePost = (postId) => async (dispatch) => {
     dispatch({ type: DELETE_POST, payload: postId });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -120,6 +133,7 @@ export const getPost = (post_id) => async (dispatch) => {
     dispatch({ type: SET_POST, payload: res.data });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -152,6 +166,7 @@ export const submitComment = (post_id, commentData) => async (
     });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -162,6 +177,7 @@ export const getUserPage = (userHandle) => async (dispatch) => {
     dispatch({ type: SET_POSTS, payload: res.data.posts });
   } catch (err) {
     dispatch({ type: SET_POSTS, payload: null });
+    maintenanceErrorCheck(err);
   }
 };
 

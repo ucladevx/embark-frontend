@@ -10,6 +10,13 @@ import {
 } from "../types";
 import axios from "axios";
 
+const maintenanceErrorCheck = (err) => {
+  if (err.message.includes(" 503")) {
+    console.log("here");
+    alert("ERROR 503: " + "Embark is on maintenance, please check later");
+  }
+};
+
 const setAuthorizationHeader = (token) => {
   const AuthToken = `Bearer ${token}`;
   localStorage.setItem("AuthToken", AuthToken);
@@ -25,6 +32,7 @@ export const loginUser = (userData, history) => async (dispatch) => {
     history.push("/home");
   } catch (err) {
     dispatch({ type: SET_ERRORS, payload: err.response.data });
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -39,6 +47,7 @@ export const getStudentData = () => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -56,6 +65,7 @@ export const signupStudent = (newUserData, handleUser, handleStep) => async (
   } catch (err) {
     console.log(err);
     dispatch({ type: SET_ERRORS, payload: err.response.data });
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -84,6 +94,7 @@ export const editStudentDetails = (userDetails) => async (dispatch) => {
     dispatch({ type: "SET_USER", payload: res.data.updatedStudent });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -114,6 +125,7 @@ export const studentGoogleSignUp = () => async (dispatch) => {
     dispatch({ type: AUTH_SIGNUP, payload: res.data });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -126,6 +138,7 @@ export const studentGoogleSignIn = () => async (dispatch) => {
     dispatch({ type: AUTH_SIGNIN, payload: res.data });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
