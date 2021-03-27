@@ -72,6 +72,16 @@ export const FilesWrapper = styled.div`
   min-height: 50px;
 `;
 
+export const CloseButton = styled(Button)`
+  width: 89px;
+  height: 30px;
+  border-radius: 8px;
+  text-transform: none;
+  background: ${colors.pink};
+  display: flex;
+  flex-direction: column;
+`;
+
 const NewPost = ({ open, handleClose }) => {
   const [industry, setIndustry] = useState("");
   const [title, setTitle] = useState("");
@@ -156,6 +166,10 @@ const NewPost = ({ open, handleClose }) => {
   const onFileChange = (event) => {
     const fileReader = new window.FileReader();
     const file = event.target.files[0];
+    if (file.size > 3145728) {
+      alert("File is too big! Please limit to 3MB");
+      return;
+    }
     console.log(file);
 
     setFile({ url: PDF1_URL });
@@ -173,11 +187,21 @@ const NewPost = ({ open, handleClose }) => {
     fileReader.readAsDataURL(file);
   };
 
+  const clearFile = () => {
+    setFile({ url: PDF1_URL });
+    setFileType("pdf");
+    form = null;
+  };
+
   //Image handling
   const [image, setImage] = useState({ url: PDF1_URL });
   const onImageChange = (event) => {
     const imgReader = new window.FileReader();
     const img = event.target.files[0];
+    if (img.size > 3145728) {
+      alert("Image is too big! Please limit to 3MB");
+      return;
+    }
     let myForm = document.getElementById("myImgForm");
     imgForm = new FormData(myForm);
     imgReader.onload = (fileLoad) => {
@@ -188,8 +212,19 @@ const NewPost = ({ open, handleClose }) => {
     imgReader.readAsDataURL(img);
   };
 
+  const clearImage = () => {
+    setImage({ url: PDF1_URL });
+    imgForm = null;
+  };
+
+  const clearAll = () => {
+    clearFile();
+    clearImage();
+    handleClose();
+  };
+
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={open} onClose={clearAll}>
       <DialogTitle>
         <BoldTypography sz={"18px"}>Create a Post</BoldTypography>
       </DialogTitle>
@@ -247,6 +282,7 @@ const NewPost = ({ open, handleClose }) => {
         </TextFieldWrapper>
         {file.url !== PDF1_URL ? (
           <>
+            <CloseButton onClick={clearFile}>X | Clear File</CloseButton>
             <FilesWrapper>
               <FileViewer filePath={file} fileType={fileType} />
             </FilesWrapper>
@@ -256,6 +292,7 @@ const NewPost = ({ open, handleClose }) => {
         )}
         {image.url !== PDF1_URL ? (
           <>
+            <CloseButton onClick={clearImage}>X | Clear Image</CloseButton>
             <FilesWrapper>
               <img src={image.url} height="500px" alt="" />
             </FilesWrapper>
