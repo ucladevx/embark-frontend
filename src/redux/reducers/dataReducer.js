@@ -10,6 +10,8 @@ import {
   FILTER_POSTS,
   SET_HAS_NEXT,
   SET_NEXT_STRING,
+  NEW_EVENT,
+  SET_EVENTS,
 } from "../types";
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
   filter: [],
   nextString: "",
   hasNext: true,
+  events: [],
 };
 
 export default function dataReducer(state = initialState, action) {
@@ -43,7 +46,7 @@ export default function dataReducer(state = initialState, action) {
     case LIKE_POST:
     case UNLIKE_POST:
       index = state.posts.findIndex(
-        (post) => post.post_id === action.payload.post.post_id,
+        (post) => post.post_id === action.payload.post.post_id
       );
       const newPosts = [...state.posts];
       newPosts[index] = action.payload.post;
@@ -76,7 +79,7 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         filter: state.filter.filter(
-          (eachfilter) => eachfilter !== action.payload,
+          (eachfilter) => eachfilter !== action.payload
         ),
       };
     case FILTER_POSTS: {
@@ -98,6 +101,16 @@ export default function dataReducer(state = initialState, action) {
         posts: postsCopy,
       };
     }
+    case NEW_EVENT:
+      return {
+        ...state,
+        events: [action.payload, ...state.events],
+      };
+    case SET_EVENTS:
+      return {
+        ...state,
+        events: action.payload,
+      };
     default:
       return state;
   }

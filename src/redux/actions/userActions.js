@@ -5,6 +5,7 @@ import {
   MARK_NOTIFICATIONS_READ,
   AUTH_SIGNUP,
   AUTH_SIGNIN,
+  GOING_EVENT,
   SET_ERRORS,
 } from "../types";
 import axios from "axios";
@@ -140,3 +141,14 @@ export const studentGoogleSignIn = () => async (dispatch) => {
     maintenanceErrorCheck(err);
   }
 };
+
+//Mark going to an event
+export const goingToEvent = (eventId) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/student/events`, eventId);
+    dispatch({ type: GOING_EVENT, payload: eventId });
+  } catch (err) {
+    console.error(err);
+  }
+};
+

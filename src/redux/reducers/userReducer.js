@@ -5,8 +5,7 @@ import {
   LIKE_POST,
   UNLIKE_POST,
   MARK_NOTIFICATIONS_READ,
-  ADD_FILTER,
-  REMOVE_FILTER,
+  GOING_EVENT,
 } from "../types";
 
 const intialState = {
@@ -14,6 +13,7 @@ const intialState = {
   info: {},
   notifications: [],
   likedPosts: [],
+  goingEvents: [],
   clubs: [],
   industry: "",
   userType: "student",
@@ -57,7 +57,11 @@ export default function userReducer(state = intialState, action) {
       return {
         ...state,
       };
-
+    case GOING_EVENT:
+      return {
+        ...state,
+        goingEvents: [...state.goingEvents, action.payload],
+      };
     default:
       return state;
   }
