@@ -14,12 +14,6 @@ import {
   FilterWrapper,
   InteriorFilterWrapper,
   AddFilter,
-  EventAvatar,
-  EventDescription,
-  EventItem,
-  EventItems,
-  EventsWrapper,
-  TimeTypography,
   CalanderWrapper,
   InfoBoxes,
   InfoEntryWrapper,
@@ -31,7 +25,6 @@ import {
   GoingBtn,
   DialogTextField,
 } from "./StyleLanding";
-import { BoldTypography, TitleTypography } from "../../shared/Typography";
 // Images
 import avatarImg from "../../images/avatar.svg";
 import bookImg from "../../images/book.svg";
@@ -43,13 +36,19 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getPosts,
   filterPosts,
+  getEvents,
   addFilter,
   removeFilter,
 } from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
+import NewEvent from "../../components/NewEvent";
 import Explore from "./Explore";
 import { styleCalendar } from "./Calendar/HomeCalendar";
 import Posts from "./Posts";
+
+import Events from "./Events";
+
+// Dayjs
 import { useHistory } from "react-router-dom";
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
@@ -65,11 +64,16 @@ const Home = () => {
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
+  const [newEvent, setNewEvent] = useState(false);
 
   const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
 
   useEffect(() => {
     dispatch(getPosts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getEvents());
   }, [dispatch]);
 
   useEffect(() => {
@@ -93,6 +97,7 @@ const Home = () => {
   return (
     <>
       <NewPost open={newPost} handleClose={() => setNewPost(false)} />
+      <NewEvent open={newEvent} handleClose={() => setNewEvent(false)} />
       <LandingPage>
         <NavBar></NavBar>
         <LandingPageWrapper>
@@ -162,38 +167,7 @@ const Home = () => {
               <Calendar></Calendar>
             </CalanderWrapper>
 
-            <EventsWrapper>
-              <TitleTypography>Upcoming Events</TitleTypography>
-              <EventItems>
-                <EventItem>
-                  <EventAvatar></EventAvatar>
-                  <EventDescription>
-                    <BoldTypography sz={"16px"}>Demo Day</BoldTypography>
-                    <EventTypography>UCLA DevX</EventTypography>
-                    <TimeTypography>
-                      {dayjs().format("MMM DD HH:mm a")}
-                    </TimeTypography>
-                  </EventDescription>
-                  <GoingBtn bgcolor={colors.green1} fcolor={colors.darkgreen}>
-                    Going
-                  </GoingBtn>
-                </EventItem>
-                <InfoSeperator></InfoSeperator>
-                <EventItem>
-                  <EventAvatar></EventAvatar>
-                  <EventDescription>
-                    <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
-                    <EventTypography>Club1234</EventTypography>
-                    <TimeTypography>
-                      {dayjs().format("MMM DD HH:mm a")}
-                    </TimeTypography>
-                  </EventDescription>
-                  <GoingBtn bgcolor={colors.gray1} fcolor={colors.gray2}>
-                    Going
-                  </GoingBtn>
-                </EventItem>
-              </EventItems>
-            </EventsWrapper>
+            <Events setNewEvent={setNewEvent} />
           </RightContainer>
         </LandingPageWrapper>
       </LandingPage>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../shared/config";
 import { Avatar, Button, TextField, Typography } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
-import { handleTagColor } from "../../utils/handleTagColors";
+import { handleTagColor, handleGoingBColor, handleGoingFColor } from "../../utils/handleTagColors";
 import LinkEffect from "../../shared/LinkEffect";
 
 export const LandingPage = styled.div`
@@ -340,10 +340,10 @@ export const TimeTypography = styled(EventTypography)`
 
 export const GoingBtn = styled(Button)`
   text-transform: none;
-  background-color: ${(props) => props.bgcolor};
+  background-color: ${(props) => handleGoingBColor(props.bgcolor)};
   height: 25px;
   align-self: center;
-  color: ${(props) => props.fcolor};
+  color: ${(props) => handleGoingFColor(props.bgcolor)};
   position: absolute;
   right: 1px;
 `;

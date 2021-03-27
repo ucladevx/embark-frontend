@@ -11,6 +11,8 @@ import {
   REMOVE_FILTER,
   SET_NEXT_STRING,
   SET_HAS_NEXT,
+  NEW_EVENT,
+  SET_EVENTS,
 } from "../types";
 
 import axios from "axios";
@@ -184,4 +186,29 @@ export const removeFilter = () => (dispatch) => {
   dispatch({
     type: REMOVE_FILTER,
   });
+};
+
+// Create A New Event
+export const newEvent = (newE) => async (dispatch) => {
+  try {
+    const res = await axios.post("/events", newE);
+    dispatch({ type: NEW_EVENT, payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+// Get All Events - unsure how the backend will handle event storage(is it paginated?)
+export const getEvents = () => async (dispatch) => {
+  try {
+    const res = await axios.get("/events", {
+      params: {
+        limitNum: 8,
+      },
+    });
+    console.log(res.data);
+    dispatch({ type: SET_EVENTS, payload: res.data.events });
+  } catch (err) {
+    console.error(err);
+  }
 };
