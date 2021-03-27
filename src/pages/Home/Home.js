@@ -23,7 +23,7 @@ import {
   MiddleContainer,
   EventTypography,
   GoingBtn,
-  DialogTextField
+  DialogTextField,
 } from "./StyleLanding";
 // Images
 import avatarImg from "../../images/avatar.svg";
@@ -41,7 +41,7 @@ import {
   removeFilter,
 } from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
-import NewEvent from "../../components/NewEvent"
+import NewEvent from "../../components/NewEvent";
 import Explore from "./Explore";
 import { styleCalendar } from "./Calendar/HomeCalendar";
 import Posts from "./Posts";
@@ -49,7 +49,6 @@ import Posts from "./Posts";
 import Events from "./Events";
 
 // Dayjs
-import dayjs from "dayjs";
 import { useHistory } from "react-router-dom";
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
@@ -66,10 +65,8 @@ const Home = () => {
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
   const [newEvent, setNewEvent] = useState(false);
-  const history = useHistory();
 
   const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
-
 
   useEffect(() => {
     dispatch(getPosts());
@@ -170,7 +167,7 @@ const Home = () => {
               <Calendar></Calendar>
             </CalanderWrapper>
 
-            <Events setNewEvent = {setNewEvent}/>
+            <Events setNewEvent={setNewEvent} />
           </RightContainer>
         </LandingPageWrapper>
       </LandingPage>

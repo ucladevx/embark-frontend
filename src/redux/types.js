@@ -9,10 +9,6 @@ export const AUTH_SIGNIN = "GOOGLE_SIGNIN";
 
 export const GOING_EVENT = "GOING_EVENTS";
 
-export const ADD_FILTER = "ADD_FILTER";
-export const REMOVE_FILTER = "REMOVE_FILTER";
-
-
 // Data reducer types
 export const SET_POSTS = "SET_POSTS";
 export const SET_POST = "SET_POST";
