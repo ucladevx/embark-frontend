@@ -6,7 +6,7 @@ import thumbup from "../../images/thumbup.svg";
 import Share from "../../images/share.svg";
 import styled from "styled-components";
 import { colors } from "../../shared/config";
-import LinkEffect from "../../shared/LinkEffect";
+import LinkEffect from "../../shared/Effect/LinkEffect";
 import { useDispatch } from "react-redux";
 import { likePost } from "../../redux/actions/dataActions";
 import { OPEN_COMMENT } from "../../redux/types";

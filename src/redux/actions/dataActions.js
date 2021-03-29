@@ -45,7 +45,7 @@ export const getPosts = () => async (dispatch) => {
     if (res.data.paginatedPosts.next)
       localStorage.setItem(
         "nextString",
-        res.data.paginatedPosts.next.toString(),
+        res.data.paginatedPosts.next.toString()
       );
     dispatch({ type: SET_POSTS, payload: res.data.paginatedPosts.results });
     dispatch({ type: SET_NEXT_STRING, payload: res.data.paginatedPosts.next });
@@ -65,9 +65,10 @@ export const getNextPosts = () => async (dispatch, getState) => {
       },
     });
     const { posts } = getState().data;
+    console.log(res.data);
     const { results, next, hasNext } = res.data.paginatedPosts;
     const newPosts = [...posts, ...results];
-    if (next) localStorage.setItem("nextString", next.toString());
+    if (!!next) localStorage.setItem("nextString", next.toString());
     dispatch({ type: SET_POSTS, payload: newPosts });
     dispatch({ type: SET_NEXT_STRING, payload: next });
     dispatch({ type: SET_HAS_NEXT, payload: hasNext });
@@ -140,7 +141,7 @@ export const getPost = (post_id) => async (dispatch) => {
 // Submit a comment
 export const submitComment = (post_id, commentData) => async (
   dispatch,
-  getState,
+  getState
 ) => {
   try {
     const { email } = getState().user;
