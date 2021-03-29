@@ -65,7 +65,6 @@ export const getNextPosts = () => async (dispatch, getState) => {
       },
     });
     const { posts } = getState().data;
-    console.log(res.data);
     const { results, next, hasNext } = res.data.paginatedPosts;
     const newPosts = [...posts, ...results];
     if (!!next) localStorage.setItem("nextString", next.toString());
