@@ -4,6 +4,8 @@ import Like from "../../images/heart-gray.svg";
 import Comment from "../../images/comment.svg";
 import thumbup from "../../images/thumbup.svg";
 import Share from "../../images/share.svg";
+import Save from "../../images/save.svg";
+import Saved from "../../images/saved.svg";
 import styled from "styled-components";
 import { colors } from "../../shared/config";
 import LinkEffect from "../../shared/LinkEffect";
@@ -53,11 +55,18 @@ const InteractiveLine = styled(Line)`
 const Interactive = ({ post_id }) => {
   const dispatch = useDispatch();
   const [liked, setLiked] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   const handleLike = () => {
     if (!liked) dispatch(likePost(post_id));
     // else dispatch(unlikePost(post_id));
     setLiked(!liked);
+  };
+
+  const handleSaved = () => {
+    // if (!liked) dispatch(savePost(post_id));
+    // else dispatch(unlikePost(post_id));
+    setSaved(!saved);
   };
 
   return (
@@ -77,6 +86,10 @@ const Interactive = ({ post_id }) => {
         <IconEntry>
           <InteractiveIcon src={Share}></InteractiveIcon>
           <IconText>Share</IconText>
+        </IconEntry>
+        <IconEntry onClick={handleSaved}>
+          <InteractiveIcon src={saved ? Saved : Save}></InteractiveIcon>
+          <IconText>Save</IconText>
         </IconEntry>
       </IconWrapper>
       <InteractiveLine></InteractiveLine>
