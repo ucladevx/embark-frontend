@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar";
 import {
   HeaderImage,
@@ -18,6 +18,7 @@ import {
   Footer,
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
+import linkedin from "../../images/linkedin.png";
 import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
 import { Button } from "@material-ui/core";
@@ -41,8 +42,9 @@ const StudentProfile = (props) => {
         <ProfileWrapper>
           <HeaderImage src={lawn}></HeaderImage>
           <ProfileInfo>
+          <img src={linkedin} style={{backgroundColor:"blue",  float: "right"}} onClick={()=>window.open(user.linkedIn)}></img>
             <NameDescriptionWrapper>
-              <ProfileAvatar></ProfileAvatar>
+              <ProfileAvatar src={user.profilePicURL}></ProfileAvatar>
               <NameDescription>
                 <TitleTypography
                   style={{ fontSize: "24px", paddingBottom: "0" }}
@@ -52,6 +54,7 @@ const StudentProfile = (props) => {
                 <Typography style={{ fontSize: "18px" }}>
                   {user.year} • {user.major}
                 </Typography>
+                
               </NameDescription>
             </NameDescriptionWrapper>
             <IndustryWrapper>

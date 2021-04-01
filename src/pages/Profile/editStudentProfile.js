@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Select,
   MenuItem,
@@ -11,7 +11,7 @@ import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import { IndustryFilters } from "../../shared/dropdown";
 import { useDispatch, useSelector } from "react-redux";
-import { editStudentDetails } from "../../redux/actions/userActions";
+import { editStudentDetails, uploadImage } from "../../redux/actions/userActions";
 import styled from "styled-components";
 import { ExploreObj, ExploreFilter, LinkedInIconC } from "./StyleProfile";
 import {
@@ -31,8 +31,8 @@ import {
 } from "./StyleEditProfile";
 import lawn from "../../images/lawn.png";
 import { makeStyles } from "@material-ui/core/styles";
-import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+// import ImageUploader from 'react-images-upload';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -56,10 +56,15 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const [email, setEmail] = useState(user.email);
   const [major, setMajor] = useState(user.major);
   const [year, setYear] = useState(user.year);
-  const [industries, setIndustries] = useState(allTags);
+  const [industries, setIndustries] = useState(user.tags);
   const [bio, setBio] = useState(user.bio);
   const [linkedin, setLinkedin] = useState(user.linkedIn);
+  const [profileURL, setProfileURL] = useState(user.profilePicURL);
+  const [coverURL, setCoverURL] = useState(user.coverPicURL);
 
+  useEffect(() => {
+    console.log(user)
+  })
   // Redux
   const dispatch = useDispatch();
   const handleYear = (e) => {
@@ -68,14 +73,25 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const handleMajor = (e) => {
     setMajor(e.target.value);
   };
-
+ 
   const addIndustries = (e) => {
     setIndustries(e.target.value);
   };
 
   const handlelinkedIn = (e) => {
     setLinkedin(e.target.value);
+    console.log(linkedin)
   };
+
+  const handleProfileURL = (e) =>{
+    console.log("change ProfileURL")
+    setProfileURL(URL.createObjectURL(e.target.files[0]))
+    console.log("changed profileURL=", URL.createObjectURL(e.target.files[0]))
+  }
+
+  const handleCoverURL = (e)=>{
+    setCoverURL(URL.createObjectURL(e.target.files[0]))
+  }
 
   const handleSubmit = async () => {
     //create an array of tags (deleted ones have rm before it)
@@ -93,9 +109,14 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       year,
       tags: updatedTags,
       bio,
-      linkedin,
+      linkedIn:linkedin,
     };
     dispatch(editStudentDetails(updatedProfile));
+    dispatch(uploadImage(
+      {
+        image:profileURL,
+      }
+    ))
     handleClose();
   };
 
@@ -108,15 +129,26 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       </TitleContainer>
 
       <EditProfileContent id="scroll-dialog-description">
-        <EditProfileAvatar rounded="true"></EditProfileAvatar>
-        <ChangeAvatarLink fontColor="red" align="center">
+        <EditProfileAvatar 
+        src= {profileURL}
+        rounded="true"></EditProfileAvatar>
+        <ChangeAvatarLink fontColor="red" align="center" onClick = {() =>console.log("change avatar!!")}>
           Change Profile Picture
         </ChangeAvatarLink>
-
+        <input type="file" onChange={handleProfileURL} />
+        {console.log("profileURL=", user.profilePicURL)}
+        {/* <ImageUploader
+          buttonText="Change Profile Picture"
+          onChange = {handleProfileURL}
+          imgExtension={['.jpg', '.png']}
+          maxFileSize={5242880}
+        ></ImageUploader> */}
+ 
         <TextFieldWrapper>
-          <EditCoverImage src={lawn}></EditCoverImage>
+          <EditCoverImage src={coverURL}></EditCoverImage>
         </TextFieldWrapper>
         <ChangeAvatarLink align="center">Change Cover Photo</ChangeAvatarLink>
+        <input type="file" onChange={handleCoverURL} />
         <TextFieldWrapper>
           <BoldTypography sz={"18px"}>Year:</BoldTypography>
           <FormControlC>

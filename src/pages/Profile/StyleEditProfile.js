@@ -40,7 +40,7 @@ export const EditProfileTitle = styled(BoldTypography)`
 `;
 
 export const EditProfileAvatar = styled(Avatar)`
-  width: 7vw;
+  width: 7vw;  
   height: 7vw;
   border: 1px solid ${colors.grey3};
   margin: 0 auto;

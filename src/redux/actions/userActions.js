@@ -75,12 +75,13 @@ export const logoutUser = () => (dispatch) => {
   delete axios.defaults.headers.common["Authorization"];
   dispatch({ type: SET_UNAUTHENTICATED });
 };
-
+ 
 // Upload the Avatar
 export const uploadImage = (formData) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .post("/user/image", formData)
+  //i changed it here,
+    .post("/profile/image?pictureType=cover", formData)
     .then((res) => {
       dispatch(getStudentData());
     })
