@@ -11,12 +11,11 @@ import {
   InfoSeperator,
 } from "./StyleLanding";
 import styled from "styled-components";
-import { colors } from "../../shared/config";
-import { Typography } from "@material-ui/core";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import { goingToEvent } from "../../redux/actions/userActions";
 import ExpandedEvent from "./ExpandedEvent.js";
+import Event from "./Event.js";
 
 // Dayjs
 import dayjs from "dayjs";
@@ -42,13 +41,6 @@ export const CreateButton = styled(ActionButton)`
     text-decoration: underline;
   }
 `;
-
-const makeDay = (moment) => {
-  let date = JSON.stringify(moment);
-  date = date.replace("T", " ");
-  date = date.replace("Z", " ");
-  return dayjs(date).format("MMM DD HH:mm a");
-};
 
 const test = (moment) => {
   let date = moment.replace("T", " ");
@@ -77,7 +69,6 @@ const Events = ({ setNewEvent }) => {
   };
 
   const events = useSelector((state) => state.data.events);
-  const attending = useSelector((state) => state.user.goingEvents);
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});
   const loadExpanded = (e) => {
@@ -122,37 +113,14 @@ const Events = ({ setNewEvent }) => {
           {testEvent.map((p) => {
             return (
               <>
-                <InfoSeperator key={p._id + "sep"}></InfoSeperator>
-                <EventItem key={p._id}>
-                  <EventAvatar onClick={() => loadExpanded(p)}></EventAvatar>
-                  <EventDescription onClick={() => loadExpanded(p)}>
-                    <BoldTypography sz={"16px"}>{p.title}</BoldTypography>
-                    <EventTypography>{p.authorEmail}</EventTypography>
-                    <TimeTypography>{test(p.datetime)}</TimeTypography>
-                  </EventDescription>
-                  <GoingBtn bgcolor={false}>Going</GoingBtn>
-                </EventItem>
+                <Event loadExpanded = {loadExpanded} e = {p} test = {true}/>
               </>
             );
           })}
           {events.map((e) => {
             return (
               <>
-                <InfoSeperator key={e._id + "sep"}></InfoSeperator>
-                <EventItem key={e._id}>
-                  <EventAvatar onClick={() => loadExpanded(e)}></EventAvatar>
-                  <EventDescription onClick={() => loadExpanded(e)}>
-                    <BoldTypography sz={"16px"}>{e.title}</BoldTypography>
-                    <EventTypography>{e.authorEmail}</EventTypography>
-                    <TimeTypography>{makeDay(e.datetime)}</TimeTypography>
-                  </EventDescription>
-                  <GoingBtn
-                    onClick={goingClick(e._id)}
-                    bgcolor={attending.contains(e._id)}
-                  >
-                    Going
-                  </GoingBtn>
-                </EventItem>
+                <Event loadExpanded = {loadExpanded} e = {e} test = {false}/>
               </>
             );
           })}

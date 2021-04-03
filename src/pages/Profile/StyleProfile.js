@@ -41,6 +41,13 @@ export const NameDescriptionWrapper = styled.div`
   max-height: 12vh;
 `;
 
+export const ProfileTabsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 1vh;
+  max-height: 100vh;
+`;
+
 export const ProfileAvatar = styled(Avatar)`
   width: 7vw;
   height: 7vw;
