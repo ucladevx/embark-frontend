@@ -113,14 +113,14 @@ const Events = ({ setNewEvent }) => {
           {testEvent.map((p) => {
             return (
               <>
-                <Event loadExpanded = {loadExpanded} e = {p} test = {true}/>
+                <Event loadExpanded={loadExpanded} e={p} test={true} />
               </>
             );
           })}
           {events.map((e) => {
             return (
               <>
-                <Event loadExpanded = {loadExpanded} e = {e} test = {false}/>
+                <Event loadExpanded={loadExpanded} e={e} test={false} />
               </>
             );
           })}

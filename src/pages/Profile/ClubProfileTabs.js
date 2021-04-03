@@ -78,7 +78,7 @@ const ClubProfileTabs = () => {
       ))} */}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ClubEventsTab/>
+        <ClubEventsTab />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Saved Posts
