@@ -46,7 +46,7 @@ export const getStudentData = () => async (dispatch) => {
       type: SET_USER,
       payload,
     });
-    const eventres = await axios.get("/events/going",{ userType: "student"});
+    const eventres = await axios.get("/events/going", { userType: "student" });
     dispatch({
       type: GOING_EVENT,
       payload: eventres,
@@ -152,7 +152,7 @@ export const studentGoogleSignIn = () => async (dispatch) => {
 export const goingToEvent = (eventId) => async (dispatch) => {
   try {
     const res = await axios.post(`/events/:${eventId}/attend`, {
-      userType: "student"
+      userType: "student",
     });
     dispatch({ type: GOING_EVENT, payload: eventId });
   } catch (err) {
@@ -164,7 +164,7 @@ export const goingToEvent = (eventId) => async (dispatch) => {
 export const getOwnEvents = () => async (dispatch) => {
   try {
     const res = await axios.get(`/events/me`, {
-      userType: "club"
+      userType: "club",
     });
     dispatch({ type: OWN_EVENTS, payload: res });
   } catch (err) {

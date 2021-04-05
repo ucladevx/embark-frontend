@@ -88,20 +88,31 @@ const ClubEventsTab = () => {
   }, []);
 
   useEffect(() => {
-    console.log(viewDate.getUTCFullYear()+"-"+viewDate.getUTCMonth()+"-"+viewDate.getUTCDate());
+    console.log(
+      viewDate.getUTCFullYear() +
+        "-" +
+        viewDate.getUTCMonth() +
+        "-" +
+        viewDate.getUTCDate(),
+    );
     var eventFound = false;
-    for(var i = 0; i<hostedEvents.length;i++){
-      if(parseInt(hostedEvents[i].date.substring(0,4))===viewDate.getUTCFullYear()&&
-      parseInt(hostedEvents[i].date.substring(5,7))===viewDate.getUTCMonth()&&
-      parseInt(hostedEvents[i].date.substring(8,10))===viewDate.getUTCDate()){
-          setEvent(hostedEvents[i]);
-          eventFound = true;
-        }
+    for (var i = 0; i < hostedEvents.length; i++) {
+      if (
+        parseInt(hostedEvents[i].date.substring(0, 4)) ===
+          viewDate.getUTCFullYear() &&
+        parseInt(hostedEvents[i].date.substring(5, 7)) ===
+          viewDate.getUTCMonth() &&
+        parseInt(hostedEvents[i].date.substring(8, 10)) ===
+          viewDate.getUTCDate()
+      ) {
+        setEvent(hostedEvents[i]);
+        eventFound = true;
+      }
     }
-    if(!eventFound){
+    if (!eventFound) {
       setEvent({});
     }
-  },[viewDate]);
+  }, [viewDate]);
   return (
     <OuterWrapper>
       <ExpandedEvent
@@ -119,17 +130,15 @@ const ClubEventsTab = () => {
             </>
           );
         })}
-        {
-          event == null ? (<ClubEvent loadExpanded={loadExpanded} e={event} test={false} />) :
-          (<></>)
-        }
+        {event == null ? (
+          <ClubEvent loadExpanded={loadExpanded} e={event} test={false} />
+        ) : (
+          <></>
+        )}
         <CreateButton onClick={() => setNewEvent(true)}>+</CreateButton>
       </InnerWrapper>
       <div>
-        <Calendar
-          onChange={setViewDate}
-          value={viewDate}
-        />
+        <Calendar onChange={setViewDate} value={viewDate} />
       </div>
     </OuterWrapper>
   );

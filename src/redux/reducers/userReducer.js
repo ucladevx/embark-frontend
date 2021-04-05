@@ -67,7 +67,7 @@ export default function userReducer(state = intialState, action) {
     case OWN_EVENTS:
       return {
         ...state,
-        ownEvents: [action.payload]
+        ownEvents: [action.payload],
       };
     default:
       return state;

@@ -123,7 +123,7 @@ const NewEvent = ({ open, handleClose }) => {
 
   const handleSubmit = async () => {
     const event = {
-      userType:"club",
+      userType: "club",
       name: title,
       tags: [],
       organizerName: user.name,

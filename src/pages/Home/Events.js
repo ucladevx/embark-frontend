@@ -69,7 +69,7 @@ const Events = ({ setNewEvent }) => {
   };
 
   const events = useSelector((state) => state.data.events);
-  
+
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});
   const loadExpanded = (e) => {
