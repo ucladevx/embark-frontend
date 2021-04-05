@@ -66,9 +66,10 @@ export const getNextPosts = () => async (dispatch, getState) => {
       },
     });
     const { posts } = getState().data;
+    console.log(res.data);
     const { results, next, hasNext } = res.data.paginatedPosts;
     const newPosts = [...posts, ...results];
-    if (next) localStorage.setItem("nextString", next.toString());
+    if (!!next) localStorage.setItem("nextString", next.toString());
     dispatch({ type: SET_POSTS, payload: newPosts });
     dispatch({ type: SET_NEXT_STRING, payload: next });
     dispatch({ type: SET_HAS_NEXT, payload: hasNext });

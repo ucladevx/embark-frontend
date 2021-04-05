@@ -8,7 +8,7 @@ import Save from "../../images/save.svg";
 import Saved from "../../images/saved.svg";
 import styled from "styled-components";
 import { colors } from "../../shared/config";
-import LinkEffect from "../../shared/LinkEffect";
+import LinkEffect from "../../shared/Effect/LinkEffect";
 import { useDispatch } from "react-redux";
 import { likePost, savePost } from "../../redux/actions/dataActions";
 import { OPEN_COMMENT } from "../../redux/types";

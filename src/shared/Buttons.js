@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { IconButton, Tooltip } from "@material-ui/core";
-import LinkEffect from "./LinkEffect";
+import LinkEffect from "./Effect/LinkEffect";
 
 export const TipButton = ({ tip, children, onClick }) => {
   return (
