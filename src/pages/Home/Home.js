@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import Calendar from "react-calendar";
 // Styles
@@ -158,7 +158,7 @@ const Home = () => {
             ) : page === "explore" ? (
               <Explore></Explore>
             ) : (
-              <></>
+              <Fragment></Fragment>
             )}
           </MiddleContainer>
 

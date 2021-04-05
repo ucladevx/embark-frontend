@@ -18,7 +18,7 @@ import Datetime from "react-datetime";
 import moment from "moment";
 import { ActionButton } from "../shared/Buttons";
 import { StyleEventCalendar } from "../pages/Home/Calendar/EventCalender";
-import LinkEffect from "../shared/LinkEffect";
+import LinkEffect from "../shared/Effect/LinkEffect";
 
 const DialogTextField = styled(TextField)`
   background: ${colors.gray1};
@@ -56,7 +56,6 @@ const NameDiv = styled.div`
 const SelectDate = styled.div`
   ${LinkEffect}
 `;
-
 
 const useStyles = makeStyles((theme) => ({
   menuPaper: {
@@ -97,7 +96,6 @@ export const DropdownOption = styled.option`
   color: #838383;
 `;
 
-
 const NewEvent = ({ open, handleClose }) => {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
@@ -134,8 +132,6 @@ const NewEvent = ({ open, handleClose }) => {
   };
 
   const renderInput = (props, openCalendar, closeCalendar) => {
-
-
     // ref: https://stackoverflow.com/questions/36125038/generate-array-of-times-as-strings-for-every-x-minutes-in-javascript
     const generateTimeIntervals = () => {
       let x = 5; //minutes interval
@@ -188,8 +184,6 @@ const NewEvent = ({ open, handleClose }) => {
             </DropdownOption>
           ))}
         </SingleSelect>
-
-
       </TimeWrapper>
     );
   };
