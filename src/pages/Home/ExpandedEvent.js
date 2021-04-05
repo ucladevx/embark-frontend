@@ -65,7 +65,7 @@ const ExpandedEvent = ({ open, handleClose, e }) => {
           <TimeWrapper>
             <NameTypography>{e.authorEmail}@</NameTypography>
             <AccessTimeIcon />
-            <TimeTypography sz={"24px"}>{makeDay(e.datetime)}</TimeTypography>
+            <TimeTypography sz={"24px"}>{makeDay(e.date)}</TimeTypography>
           </TimeWrapper>
           <BoldTypography sz={"16px"}>Description:</BoldTypography>
           <EventContent>{e.description}</EventContent>

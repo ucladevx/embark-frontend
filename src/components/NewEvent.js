@@ -10,7 +10,7 @@ import {
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import { BoldTypography } from "../shared/Typography";
 import { colors } from "../shared/config";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { newEvent } from "../redux/actions/dataActions";
 import styled from "styled-components";
 import "../pages/Home/Calendar/EventCalendar.css";
@@ -97,6 +97,7 @@ export const DropdownOption = styled.option`
 `;
 
 const NewEvent = ({ open, handleClose }) => {
+  const user = useSelector((state) => state.user);
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
@@ -122,10 +123,14 @@ const NewEvent = ({ open, handleClose }) => {
 
   const handleSubmit = async () => {
     const event = {
-      title,
-      body: description,
-      datetime: time,
-      location: location,
+      userType:"club",
+      name: title,
+      tags: [],
+      organizerName: user.name,
+      organizerEmail: user.email,
+      date: JSON.stringify(time),
+      venue: location,
+      desc: description,
     };
     dispatch(newEvent(event));
     handleClose();

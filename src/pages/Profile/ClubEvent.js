@@ -27,7 +27,7 @@ const ClubEvent = (props) => {
     if (props.test) {
       return test(moment);
     }
-    let date = JSON.stringify(moment);
+    let date = moment;
     date = date.replace("T", " ");
     date = date.replace("Z", " ");
     return dayjs(date).format("MMM DD HH:mm a");
@@ -48,7 +48,7 @@ const ClubEvent = (props) => {
         >
           <BoldTypography sz={"16px"}>{props.e.title}</BoldTypography>
           <EventTypography>{props.e.authorEmail}</EventTypography>
-          <TimeTypography>{makeDay(props.e.datetime)}</TimeTypography>
+          <TimeTypography>{makeDay(props.e.date)}</TimeTypography>
         </EventDescription>
       </EventItem>
     </>

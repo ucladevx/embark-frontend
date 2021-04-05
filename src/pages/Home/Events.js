@@ -53,7 +53,7 @@ const testEvent = [
     _id: "123450",
     title: "Embark Release",
     authorEmail: "Embark",
-    datetime: "2021-03-03T08:00:00.000Z",
+    date: "2021-03-03T08:00:00.000Z",
     description:
       "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
     location: "here what do you think",
@@ -69,6 +69,7 @@ const Events = ({ setNewEvent }) => {
   };
 
   const events = useSelector((state) => state.data.events);
+  
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});
   const loadExpanded = (e) => {

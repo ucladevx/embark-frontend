@@ -7,6 +7,7 @@ import {
   AUTH_SIGNIN,
   GOING_EVENT,
   SET_ERRORS,
+  OWN_EVENTS,
 } from "../types";
 import axios from "axios";
 
@@ -44,6 +45,11 @@ export const getStudentData = () => async (dispatch) => {
     dispatch({
       type: SET_USER,
       payload,
+    });
+    const eventres = await axios.get("/events/going",{ userType: "student"});
+    dispatch({
+      type: GOING_EVENT,
+      payload: eventres,
     });
   } catch (err) {
     console.error(err);
@@ -145,8 +151,22 @@ export const studentGoogleSignIn = () => async (dispatch) => {
 //Mark going to an event
 export const goingToEvent = (eventId) => async (dispatch) => {
   try {
-    const res = await axios.post(`/student/events`, eventId);
+    const res = await axios.post(`/events/:${eventId}/attend`, {
+      userType: "student"
+    });
     dispatch({ type: GOING_EVENT, payload: eventId });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+//get own Club events
+export const getOwnEvents = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`/events/me`, {
+      userType: "club"
+    });
+    dispatch({ type: OWN_EVENTS, payload: res });
   } catch (err) {
     console.error(err);
   }

@@ -28,7 +28,7 @@ const Event = (props) => {
     if (props.test) {
       return test(moment);
     }
-    let date = JSON.stringify(moment);
+    let date = moment;
     date = date.replace("T", " ");
     date = date.replace("Z", " ");
     return dayjs(date).format("MMM DD HH:mm a");

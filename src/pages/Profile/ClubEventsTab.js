@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
 import { styleCalendar } from "../Home/Calendar/HomeCalendar";
 import { StyleEventCalendar } from "../Home/Calendar/EventCalender";
@@ -11,6 +12,7 @@ import ClubEvent from "./ClubEvent";
 import NewEvent from "../../components/NewEvent";
 import ExpandedEvent from "../Home/ExpandedEvent";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
+import { getOwnEvents } from "../../redux/actions/userActions";
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -55,7 +57,7 @@ const testEvent = [
     _id: "123450",
     title: "Embark Release",
     authorEmail: "Embark",
-    datetime: "2021-03-03T08:00:00.000Z",
+    date: "2021-04-03T08:00:00.000Z",
     description:
       "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
     location: "here what do you think",
@@ -63,6 +65,14 @@ const testEvent = [
 ];
 
 const ClubEventsTab = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getOwnEvents());
+  }, []);
+
+  const hostedEvents = useSelector((state) => state.user.ownEvents);
+  const [viewDate, setViewDate] = useState(new Date());
+
   const [newEvent, setNewEvent] = useState(false);
 
   const [expanded, setExpanded] = useState(false);
@@ -76,6 +86,22 @@ const ClubEventsTab = () => {
   useEffect(() => {
     styleCalendar();
   }, []);
+
+  useEffect(() => {
+    console.log(viewDate.getUTCFullYear()+"-"+viewDate.getUTCMonth()+"-"+viewDate.getUTCDate());
+    var eventFound = false;
+    for(var i = 0; i<hostedEvents.length;i++){
+      if(parseInt(hostedEvents[i].date.substring(0,4))===viewDate.getUTCFullYear()&&
+      parseInt(hostedEvents[i].date.substring(5,7))===viewDate.getUTCMonth()&&
+      parseInt(hostedEvents[i].date.substring(8,10))===viewDate.getUTCDate()){
+          setEvent(hostedEvents[i]);
+          eventFound = true;
+        }
+    }
+    if(!eventFound){
+      setEvent({});
+    }
+  },[viewDate]);
   return (
     <OuterWrapper>
       <ExpandedEvent
@@ -93,10 +119,17 @@ const ClubEventsTab = () => {
             </>
           );
         })}
+        {
+          event == null ? (<ClubEvent loadExpanded={loadExpanded} e={event} test={false} />) :
+          (<></>)
+        }
         <CreateButton onClick={() => setNewEvent(true)}>+</CreateButton>
       </InnerWrapper>
       <div>
-        <Calendar></Calendar>
+        <Calendar
+          onChange={setViewDate}
+          value={viewDate}
+        />
       </div>
     </OuterWrapper>
   );
