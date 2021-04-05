@@ -97,6 +97,7 @@ export const DropdownOption = styled.option`
   color: #838383;
 `;
 
+
 const NewEvent = ({ open, handleClose }) => {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
@@ -133,6 +134,7 @@ const NewEvent = ({ open, handleClose }) => {
   };
 
   const renderInput = (props, openCalendar, closeCalendar) => {
+
 
     // ref: https://stackoverflow.com/questions/36125038/generate-array-of-times-as-strings-for-every-x-minutes-in-javascript
     const generateTimeIntervals = () => {
@@ -187,6 +189,7 @@ const NewEvent = ({ open, handleClose }) => {
           ))}
         </SingleSelect>
 
+
       </TimeWrapper>
     );
   };
@@ -196,7 +199,6 @@ const NewEvent = ({ open, handleClose }) => {
       <DialogContent>
         <TextFieldWrapper>
           <BoldTypography sz={"24px"}>Create an Event</BoldTypography>
-
           <NameDiv>Add Title:</NameDiv>
           <DialogTextField
             autoFocus
@@ -224,6 +226,7 @@ const NewEvent = ({ open, handleClose }) => {
             />
           </TimeWrapper>
           <NameDiv>Location:</NameDiv>
+
           <DialogTextField
             autoFocus
             margin="dense"
