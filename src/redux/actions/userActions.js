@@ -151,4 +151,3 @@ export const goingToEvent = (eventId) => async (dispatch) => {
     console.error(err);
   }
 };
-

@@ -20,7 +20,9 @@ import ExpandedEvent from "./ExpandedEvent.js";
 
 // Dayjs
 import dayjs from "dayjs";
+
 import { ActionButton } from "../../shared/Buttons";
+
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
@@ -68,6 +70,7 @@ const testEvent = [
   },
 ];
 
+
 const Events = ({ setNewEvent }) => {
   const dispatch = useDispatch();
   const club = true; //use backend call to test if it is a club
@@ -75,6 +78,7 @@ const Events = ({ setNewEvent }) => {
   const goingClick = (id) => {
     dispatch(goingToEvent(id));
   };
+
 
   const events = useSelector((state) => state.data.events);
   const attending = useSelector((state) => state.user.goingEvents);

@@ -13,6 +13,7 @@ import {
   SET_HAS_NEXT,
   NEW_EVENT,
   SET_EVENTS,
+  SAVE_POST,
 } from "../types";
 
 import axios from "axios";
@@ -45,7 +46,7 @@ export const getPosts = () => async (dispatch) => {
     if (res.data.paginatedPosts.next)
       localStorage.setItem(
         "nextString",
-        res.data.paginatedPosts.next.toString(),
+        res.data.paginatedPosts.next.toString()
       );
     dispatch({ type: SET_POSTS, payload: res.data.paginatedPosts.results });
     dispatch({ type: SET_NEXT_STRING, payload: res.data.paginatedPosts.next });
@@ -87,7 +88,19 @@ export const newPost = (newP) => async (dispatch) => {
     maintenanceErrorCheck(err);
   }
 };
-
+// Save a Post
+export const savePost = (post_id) => async (dispatch, getState) => {
+  try {
+    const { userType } = getState().user;
+    // TODO: Include accountType to default header once club flow is set up
+    const res = await axios.post("/posts/saved", { accountType: userType });
+    // TODO: check the documentation of save endpoint
+    console.log(res.data);
+    dispatch({ type: SAVE_POST, payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
 // Like a Post
 export const likePost = (post_id) => async (dispatch, getState) => {
   try {
@@ -140,10 +153,11 @@ export const getPost = (post_id) => async (dispatch) => {
 // Submit a comment
 export const submitComment = (post_id, commentData) => async (
   dispatch,
-  getState,
+  getState
 ) => {
   try {
     const { email } = getState().user;
+    // TODO: Add error display for comment
     if (commentData.trim().length === 0) throw Error("comment cannot be empty");
     const res = await axios.post(`/posts/comments`, {
       post_id,

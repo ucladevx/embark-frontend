@@ -57,6 +57,7 @@ const SelectDate = styled.div`
   ${LinkEffect}
 `;
 
+
 const useStyles = makeStyles((theme) => ({
   menuPaper: {
     maxHeight: 300,
@@ -132,6 +133,7 @@ const NewEvent = ({ open, handleClose }) => {
   };
 
   const renderInput = (props, openCalendar, closeCalendar) => {
+
     // ref: https://stackoverflow.com/questions/36125038/generate-array-of-times-as-strings-for-every-x-minutes-in-javascript
     const generateTimeIntervals = () => {
       let x = 5; //minutes interval
@@ -184,6 +186,7 @@ const NewEvent = ({ open, handleClose }) => {
             </DropdownOption>
           ))}
         </SingleSelect>
+
       </TimeWrapper>
     );
   };
@@ -193,6 +196,7 @@ const NewEvent = ({ open, handleClose }) => {
       <DialogContent>
         <TextFieldWrapper>
           <BoldTypography sz={"24px"}>Create an Event</BoldTypography>
+
           <NameDiv>Add Title:</NameDiv>
           <DialogTextField
             autoFocus
