@@ -20,24 +20,24 @@ import ExpandedEvent from "./ExpandedEvent.js";
 
 // Dayjs
 import dayjs from "dayjs";
+
+import { ActionButton } from "../../shared/Buttons";
+
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
-export const CreateButton = styled(Typography)`
+export const CreateButton = styled(ActionButton)`
   height: 26px;
-  background-color: ${colors.green1};
   border-radius: 5px;
   display: flex;
   align-items: center;
   width: fit-content;
-  padding: 0 8px;
+  padding: 15px;
   margin-top: 5px;
   margin-right: 5px;
   font-size: 14px;
-
   text-transform: none;
   align-self: flex-end;
-  color: ${colors.gray3};
   text-decoration: none;
   &:hover {
     cursor: pointer;
@@ -70,6 +70,7 @@ const testEvent = [
   },
 ];
 
+
 const Events = ({ setNewEvent }) => {
   const dispatch = useDispatch();
   const club = true; //use backend call to test if it is a club
@@ -77,6 +78,7 @@ const Events = ({ setNewEvent }) => {
   const goingClick = (id) => {
     dispatch(goingToEvent(id));
   };
+
 
   const events = useSelector((state) => state.data.events);
   const attending = useSelector((state) => state.user.goingEvents);
