@@ -11,7 +11,6 @@ import {
 import LinkEffect from "../../shared/Effect/LinkEffect";
 import StickyEffect from "../../shared/Effect/StickyEffect";
 
-
 export const LandingPage = styled.div`
   background: ${colors.blue2};
 `;

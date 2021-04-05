@@ -1,5 +1,7 @@
 import { css } from "styled-components";
 
+export const HomeAddress = "http://localhost:3000/home";
+
 export const mediaQueries = {
   mobile: "@media screen and (max-width: 700px)",
 };
