@@ -19,18 +19,18 @@ export const handleTagColor = (tag) => {
   }
 };
 
-export const handleGoingBColor = (flag) =>{
-  if(flag){
+export const handleGoingBColor = (flag) => {
+  if (flag) {
     return colors.green1;
-  }else{
+  } else {
     return colors.gray1;
   }
-}
+};
 
-export const handleGoingFColor = (flag) =>{
-  if(flag){
+export const handleGoingFColor = (flag) => {
+  if (flag) {
     return colors.darkgreen;
-  }else{
+  } else {
     return colors.gray2;
   }
-}
+};

@@ -11,6 +11,7 @@ import {
   studentGoogleSignUp,
 } from "../redux/actions/userActions";
 import { useLocation } from "react-router-dom";
+import GoogleLogin from "react-google-login";
 
 const GoogleBtn = styled(ActionButton)`
   background: ${colors.blue4};
@@ -45,12 +46,25 @@ const AuthButtons = () => {
       dispatch(studentGoogleSignIn());
     }
   };
+  const responseGoogle = (response) => {
+    console.log(response);
+  };
+
+  console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID);
   return (
     <AuthBtnWrapper>
-      <GoogleBtn onClick={handleGoogleClick}>
+      <GoogleLogin
+        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+        buttonText="Login"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        cookiePolicy={"single_host_origin"}
+      />
+      ,
+      {/* <GoogleBtn onClick={handleGoogleClick}>
         <img src={GoogleIcon} alt="google"></img>
         <span style={{ marginLeft: "5px" }}>Sign up with Google</span>
-      </GoogleBtn>
+      </GoogleBtn> */}
       <LinkedInBtn>
         <img src={LinkedInIcon} alt="linkedin"></img>Sign up with Linkedin
       </LinkedInBtn>

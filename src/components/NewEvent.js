@@ -6,7 +6,7 @@ import {
   Button,
   TextField,
 } from "@material-ui/core";
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import { BoldTypography } from "../shared/Typography";
 import { colors } from "../shared/config";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,7 +44,6 @@ const PostBtn = styled(Button)`
   background-color: ${colors.gray2};
 `;
 
-
 const NewEvent = ({ open, handleClose }) => {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
@@ -80,22 +79,21 @@ const NewEvent = ({ open, handleClose }) => {
     handleClose();
   };
 
-  const renderInput = ( props, openCalendar, closeCalendar ) => {
+  const renderInput = (props, openCalendar, closeCalendar) => {
     return (
-        <TimeWrapper>
-            <BoldTypography sz={"16px"}>{props.value} </BoldTypography>
-            <button onClick={openCalendar}>open</button>
-            <button onClick={closeCalendar}>close</button>
-        </TimeWrapper>
+      <TimeWrapper>
+        <BoldTypography sz={"16px"}>{props.value} </BoldTypography>
+        <button onClick={openCalendar}>open</button>
+        <button onClick={closeCalendar}>close</button>
+      </TimeWrapper>
     );
-  }; 
-
+  };
 
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogContent>
         <TextFieldWrapper>
-        <BoldTypography sz={"24px"}>Create an Event</BoldTypography>
+          <BoldTypography sz={"24px"}>Create an Event</BoldTypography>
           <DialogTextField
             autoFocus
             margin="dense"
@@ -112,15 +110,15 @@ const NewEvent = ({ open, handleClose }) => {
             }}
             onChange={handleTitle}
           />
-            <TimeWrapper>
-                <AccessTimeIcon/>
-                  <Datetime 
-                    onChange = {handleTime}
-                    locale = {''}
-                    renderInput = {renderInput}
-                    onClose = {handleTime}
-                  />
-            </TimeWrapper>
+          <TimeWrapper>
+            <AccessTimeIcon />
+            <Datetime
+              onChange={handleTime}
+              locale={""}
+              renderInput={renderInput}
+              onClose={handleTime}
+            />
+          </TimeWrapper>
           <DialogTextField
             autoFocus
             margin="dense"
@@ -158,8 +156,6 @@ const NewEvent = ({ open, handleClose }) => {
       </DialogActions>
     </Dialog>
   );
-
-
 };
 
 export default NewEvent;

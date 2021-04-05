@@ -10,7 +10,7 @@ import styled from "styled-components";
 import { colors } from "../../shared/config";
 import LinkEffect from "../../shared/LinkEffect";
 import { useDispatch } from "react-redux";
-import { likePost } from "../../redux/actions/dataActions";
+import { likePost, savePost } from "../../redux/actions/dataActions";
 import { OPEN_COMMENT } from "../../redux/types";
 
 const InteractiveContainer = styled.div`
@@ -64,8 +64,7 @@ const Interactive = ({ post_id }) => {
   };
 
   const handleSaved = () => {
-    // if (!liked) dispatch(savePost(post_id));
-    // else dispatch(unlikePost(post_id));
+    if (!saved) dispatch(savePost(post_id));
     setSaved(!saved);
   };
 
