@@ -16,6 +16,7 @@ import { colors } from "../../../shared/config";
 
 const CommentBox = ({ comments }) => {
   const [start, setStart] = useState(0);
+
   const getUrls = require("get-urls"); //url finder
   const getURL = (body) => {
     const urlSet = getUrls(body);
@@ -45,7 +46,7 @@ const CommentBox = ({ comments }) => {
                     <Linkify>
                       <PreviousCommentText>{c.body}</PreviousCommentText>
                     </Linkify>
-                    {getURL(c.body) !== "" ? (
+                    {c.body !== undefined && getURL(c.body) !== "" ? (
                       <ReactTinyLink
                         cardSize="small"
                         showGraphic={true}
