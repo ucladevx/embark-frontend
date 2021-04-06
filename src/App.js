@@ -45,8 +45,8 @@ function App() {
                 exact
                 path="/user/:userid"
                 component={StudentProfile}
-              ></Route>
-              <Route exact path="/club-profile" component={ClubProfile}></Route>
+              ></Route> 
+              <Route exact path="/club/:clubid" component={ClubProfile}></Route>
             </Switch>
           </Router>
         </Provider>

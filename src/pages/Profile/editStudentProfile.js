@@ -97,7 +97,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     //create an array of tags (deleted ones have rm before it)
     let updatedTags = [];
     industry.forEach(function (ind) {
-      if (industries.includes(ind)) {
+      if (industries && industries.includes(ind)) {
         updatedTags.push(ind);
       } else {
         updatedTags.push("rm" + ind);
@@ -229,7 +229,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             autoFocus
             margin="dense"
             id="name"
-            placeholder={linkedin ? linkedin : "Copy your Profile Link"}
+            placeholder={user.linkedIn}
             type="email"
             fullWidth
             InputProps={{

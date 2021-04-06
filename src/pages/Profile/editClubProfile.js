@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: 300,
   },
 }));
-
+ 
 const EditClubProfile = ({ open, handleClose, currentAbout }) => {
   const classes = useStyles();
   const years = ["2021", "2022", "2023", "2024"];
