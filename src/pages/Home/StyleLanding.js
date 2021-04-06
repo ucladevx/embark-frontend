@@ -2,8 +2,14 @@ import styled from "styled-components";
 import { colors } from "../../shared/config";
 import { Avatar, Button, TextField, Typography } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
-import { handleTagColor, handleGoingBColor, handleGoingFColor } from "../../utils/handleTagColors";
-import LinkEffect from "../../shared/LinkEffect";
+import {
+  handleTagColor,
+  handleGoingBColor,
+  handleGoingFColor,
+} from "../../utils/handleTagColors";
+
+import LinkEffect from "../../shared/Effect/LinkEffect";
+import StickyEffect from "../../shared/Effect/StickyEffect";
 
 export const LandingPage = styled.div`
   background: ${colors.blue2};
@@ -21,6 +27,7 @@ export const LandingPageWrapper = styled.div`
 `;
 
 export const LeftContainer = styled.div`
+  ${StickyEffect};
   flex: 1 1 630px;
   white-space: nowrap;
   margin-left: -20px;
@@ -31,6 +38,7 @@ export const MiddleContainer = styled.div`
 `;
 
 export const RightContainer = styled.div`
+  ${StickyEffect};
   flex: 1 2 auto;
   display: flex;
   flex-direction: column;
@@ -38,6 +46,7 @@ export const RightContainer = styled.div`
 `;
 
 export const InfoBoxes = styled.div`
+  ${StickyEffect}
   height: 235px;
   background-color: ${colors.white};
   border-radius: 5px;
@@ -73,6 +82,7 @@ export const InfoImage = styled.img`
 `;
 
 export const FilterWrapper = styled.div`
+  ${StickyEffect}
   box-sizing: border-box;
   margin-top: 20px;
   padding: 20px;

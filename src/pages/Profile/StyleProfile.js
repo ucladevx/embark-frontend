@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../shared/config";
 import { Avatar, Button, Typography } from "@material-ui/core";
-import LinkEffect from "../../shared/LinkEffect";
+import LinkEffect from "../../shared/Effect/LinkEffect";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 
 export const LandingPageWrapper = styled.div`
