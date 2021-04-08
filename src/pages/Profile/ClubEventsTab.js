@@ -81,9 +81,7 @@ const ClubEventsTab = () => {
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});
   const loadExpanded = (e) => {
-    console.log(e);
     setEvent(e);
-    console.log(event);
     setExpanded(true);
   };
   useEffect(() => {
@@ -99,7 +97,7 @@ const ClubEventsTab = () => {
     var eventFound = false;
     for (var i = 0; i < hostedEvents.length; i++) {
       if (
-        hostedEvents[i].date.substring(0, 10) === selectedDate.substring(0, 10)
+        hostedEvents[i].date.substring(0, 10) === selectedDate.substring(1, 11)
       ) {
         setEvent(hostedEvents[i]);
         eventFound = true;
@@ -149,7 +147,7 @@ const ClubEventsTab = () => {
           open={true}
           dateFormat="dddd, MMMM DD"
           timeFormat={false}
-          displayTimeZone={Intl.DateTimeFormat().resolvedOptions().locale}
+          displayTimeZone={Intl.DateTimeFormat().resolvedOptions().timeZone}
         />
       </div>
     </OuterWrapper>

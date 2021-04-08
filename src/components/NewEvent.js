@@ -218,7 +218,7 @@ const NewEvent = ({ open, handleClose }) => {
             <AccessTimeIcon />
             <Datetime
               onChange={handleTime}
-              displayTimeZone={Intl.DateTimeFormat().resolvedOptions().locale}
+              displayTimeZone={Intl.DateTimeFormat().resolvedOptions().timeZone}
               renderInput={renderInput}
               onClose={handleTime}
               value={time}

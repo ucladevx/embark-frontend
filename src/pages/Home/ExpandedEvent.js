@@ -5,6 +5,7 @@ import { BoldTypography } from "../../shared/Typography";
 import styled from "styled-components";
 import { PostContent, EventAvatar, EventTypography } from "./StyleLanding";
 import { colors } from "../../shared/config";
+import Linkify from "react-linkify";
 
 // Dayjs
 import dayjs from "dayjs";
@@ -63,14 +64,14 @@ const ExpandedEvent = ({ open, handleClose, e }) => {
       <DialogContent>
         <TextFieldWrapper>
           <BoldTypography sz={"24px"}>{e.title}</BoldTypography>
-          <EventContent>Location: {e.location}</EventContent>
+          <Linkify><EventContent>Location: {e.location}</EventContent></Linkify>
           <TimeWrapper>
             <NameTypography>{e.authorEmail}@</NameTypography>
             <AccessTimeIcon />
             <TimeTypography sz={"24px"}>{makeDay(e.date)}</TimeTypography>
           </TimeWrapper>
           <BoldTypography sz={"16px"}>Description:</BoldTypography>
-          <EventContent>{e.description}</EventContent>
+          <Linkify><EventContent>{e.description}</EventContent></Linkify>
         </TextFieldWrapper>
       </DialogContent>
     </Dialog>
