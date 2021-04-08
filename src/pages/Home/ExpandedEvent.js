@@ -64,14 +64,18 @@ const ExpandedEvent = ({ open, handleClose, e }) => {
       <DialogContent>
         <TextFieldWrapper>
           <BoldTypography sz={"24px"}>{e.title}</BoldTypography>
-          <Linkify><EventContent>Location: {e.location}</EventContent></Linkify>
+          <Linkify>
+            <EventContent>Location: {e.location}</EventContent>
+          </Linkify>
           <TimeWrapper>
             <NameTypography>{e.authorEmail}@</NameTypography>
             <AccessTimeIcon />
             <TimeTypography sz={"24px"}>{makeDay(e.date)}</TimeTypography>
           </TimeWrapper>
           <BoldTypography sz={"16px"}>Description:</BoldTypography>
-          <Linkify><EventContent>{e.description}</EventContent></Linkify>
+          <Linkify>
+            <EventContent>{e.description}</EventContent>
+          </Linkify>
         </TextFieldWrapper>
       </DialogContent>
     </Dialog>
