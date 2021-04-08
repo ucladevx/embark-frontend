@@ -43,12 +43,14 @@ const makeDay = (moment) => {
   if (typeof moment === "string") {
     let date = moment.replace("T", " ");
     date = date.replace("Z", " ");
+    date = date.concat(" GMT");
     return dayjs(date).format("MMM DD HH:mm a");
   }
   let date = JSON.stringify(moment);
   if (date) {
     date = date.replace("T", " ");
     date = date.replace("Z", " ");
+    date = date.concat(" GMT");
     return dayjs(date).format("MMM DD HH:mm a");
   } else {
     return "";

@@ -19,6 +19,7 @@ dayjs.extend(relativeTime);
 const test = (moment) => {
   let date = moment.replace("T", " ");
   date = date.replace("Z", " ");
+  date = date.concat(" UTC");
   return dayjs(date).format("MMM DD HH:mm a");
 };
 
@@ -30,6 +31,7 @@ const ClubEvent = (props) => {
     let date = moment;
     date = date.replace("T", " ");
     date = date.replace("Z", " ");
+    date = date.concat(" GMT");
     return dayjs(date).format("MMM DD HH:mm a");
   };
   return (

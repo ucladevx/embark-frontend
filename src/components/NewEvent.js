@@ -118,6 +118,8 @@ const NewEvent = ({ open, handleClose }) => {
 
   const handleTime = (moment) => {
     setTime(moment);
+    console.log(moment);
+    console.log(moment instanceof Date);
     console.log(JSON.stringify(time));
   };
 
@@ -216,7 +218,7 @@ const NewEvent = ({ open, handleClose }) => {
             <AccessTimeIcon />
             <Datetime
               onChange={handleTime}
-              locale={""}
+              displayTimeZone={Intl.DateTimeFormat().resolvedOptions().locale}
               renderInput={renderInput}
               onClose={handleTime}
               value={time}

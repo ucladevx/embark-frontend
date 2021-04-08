@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { styleCalendar } from "../Home/Calendar/HomeCalendar";
 import { StyleEventCalendar } from "../Home/Calendar/EventCalender";
 import "../Home/Calendar/EventCalendar.css";
-import Calendar from "react-calendar";
+import Datetime from "react-datetime";
 import { CalanderWrapper } from "../Home/StyleLanding";
 import { ActionButton } from "../../shared/Buttons";
 import styled from "styled-components";
@@ -13,6 +13,8 @@ import NewEvent from "../../components/NewEvent";
 import ExpandedEvent from "../Home/ExpandedEvent";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { getOwnEvents } from "../../redux/actions/userActions";
+import moment from 'moment';
+import 'moment-timezone';
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -42,7 +44,8 @@ const CreateButton = styled(ActionButton)`
 const OuterWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
+  width: 40vw;
 `;
 
 const InnerWrapper = styled.div`
@@ -64,6 +67,8 @@ const testEvent = [
   },
 ];
 
+
+
 const ClubEventsTab = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -84,26 +89,20 @@ const ClubEventsTab = () => {
     setExpanded(true);
   };
   useEffect(() => {
-    styleCalendar();
+    StyleEventCalendar();
   }, []);
 
+  const handleTime = (time) =>{
+    setViewDate(time);
+  }
+
   useEffect(() => {
-    console.log(
-      viewDate.getUTCFullYear() +
-        "-" +
-        viewDate.getUTCMonth() +
-        "-" +
-        viewDate.getUTCDate(),
-    );
+    const selectedDate = JSON.stringify(viewDate);
     var eventFound = false;
     for (var i = 0; i < hostedEvents.length; i++) {
       if (
-        parseInt(hostedEvents[i].date.substring(0, 4)) ===
-          viewDate.getUTCFullYear() &&
-        parseInt(hostedEvents[i].date.substring(5, 7)) ===
-          viewDate.getUTCMonth() &&
-        parseInt(hostedEvents[i].date.substring(8, 10)) ===
-          viewDate.getUTCDate()
+        hostedEvents[i].date.substring(0, 10) ===
+        selectedDate.substring(0, 10)
       ) {
         setEvent(hostedEvents[i]);
         eventFound = true;
@@ -113,6 +112,20 @@ const ClubEventsTab = () => {
       setEvent({});
     }
   }, [viewDate]);
+
+  const [showTest, setShowTest] = useState(false);
+  useEffect(() => {
+    const selectedDate = JSON.stringify(viewDate);
+    if (
+      testEvent[0].date.substring(0, 10) ==
+      selectedDate.substring(1, 11)
+      ){
+        setShowTest(true);
+      }
+    else setShowTest(false);
+  }, [viewDate]);
+
+
   return (
     <OuterWrapper>
       <ExpandedEvent
@@ -123,13 +136,10 @@ const ClubEventsTab = () => {
       <NewEvent open={newEvent} handleClose={() => setNewEvent(false)} />
       <InnerWrapper>
         <BoldTypography sz={"24px"}>My Events</BoldTypography>
-        {testEvent.map((p) => {
-          return (
-            <>
-              <ClubEvent loadExpanded={loadExpanded} e={p} test={true} />
-            </>
-          );
-        })}
+        {showTest ? (
+              <ClubEvent loadExpanded={loadExpanded} e={testEvent[0]} test={true} />
+          )
+        :<></>}
         {event == null ? (
           <ClubEvent loadExpanded={loadExpanded} e={event} test={false} />
         ) : (
@@ -138,7 +148,16 @@ const ClubEventsTab = () => {
         <CreateButton onClick={() => setNewEvent(true)}>+</CreateButton>
       </InnerWrapper>
       <div>
-        <Calendar onChange={setViewDate} value={viewDate} />
+        <Datetime        
+          input = {false}     
+          onChange={handleTime}
+          onClose={handleTime}
+          value={viewDate}
+          open={true}
+          dateFormat="dddd, MMMM DD"
+          timeFormat={false}
+          displayTimeZone={Intl.DateTimeFormat().resolvedOptions().locale}
+        />
       </div>
     </OuterWrapper>
   );

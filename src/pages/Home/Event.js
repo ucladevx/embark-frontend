@@ -20,6 +20,7 @@ dayjs.extend(relativeTime);
 const test = (moment) => {
   let date = moment.replace("T", " ");
   date = date.replace("Z", " ");
+  date = date.concat(" GMT");
   return dayjs(date).format("MMM DD HH:mm a");
 };
 
@@ -31,6 +32,7 @@ const Event = (props) => {
     let date = moment;
     date = date.replace("T", " ");
     date = date.replace("Z", " ");
+    date = date.concat(" GMT");
     return dayjs(date).format("MMM DD HH:mm a");
   };
   const dispatch = useDispatch();
@@ -54,7 +56,7 @@ const Event = (props) => {
         >
           <BoldTypography sz={"16px"}>{props.e.title}</BoldTypography>
           <EventTypography>{props.e.authorEmail}</EventTypography>
-          <TimeTypography>{makeDay(props.e.datetime)}</TimeTypography>
+          <TimeTypography>{makeDay(props.e.date)}</TimeTypography>
         </EventDescription>
         <GoingBtn
           onClick={goingClick(props.e._id)}
