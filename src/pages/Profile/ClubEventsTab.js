@@ -13,8 +13,8 @@ import NewEvent from "../../components/NewEvent";
 import ExpandedEvent from "../Home/ExpandedEvent";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { getOwnEvents } from "../../redux/actions/userActions";
-import moment from 'moment';
-import 'moment-timezone';
+import moment from "moment";
+import "moment-timezone";
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -67,8 +67,6 @@ const testEvent = [
   },
 ];
 
-
-
 const ClubEventsTab = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -92,17 +90,16 @@ const ClubEventsTab = () => {
     StyleEventCalendar();
   }, []);
 
-  const handleTime = (time) =>{
+  const handleTime = (time) => {
     setViewDate(time);
-  }
+  };
 
   useEffect(() => {
     const selectedDate = JSON.stringify(viewDate);
     var eventFound = false;
     for (var i = 0; i < hostedEvents.length; i++) {
       if (
-        hostedEvents[i].date.substring(0, 10) ===
-        selectedDate.substring(0, 10)
+        hostedEvents[i].date.substring(0, 10) === selectedDate.substring(0, 10)
       ) {
         setEvent(hostedEvents[i]);
         eventFound = true;
@@ -116,15 +113,10 @@ const ClubEventsTab = () => {
   const [showTest, setShowTest] = useState(false);
   useEffect(() => {
     const selectedDate = JSON.stringify(viewDate);
-    if (
-      testEvent[0].date.substring(0, 10) ==
-      selectedDate.substring(1, 11)
-      ){
-        setShowTest(true);
-      }
-    else setShowTest(false);
+    if (testEvent[0].date.substring(0, 10) == selectedDate.substring(1, 11)) {
+      setShowTest(true);
+    } else setShowTest(false);
   }, [viewDate]);
-
 
   return (
     <OuterWrapper>
@@ -137,9 +129,10 @@ const ClubEventsTab = () => {
       <InnerWrapper>
         <BoldTypography sz={"24px"}>My Events</BoldTypography>
         {showTest ? (
-              <ClubEvent loadExpanded={loadExpanded} e={testEvent[0]} test={true} />
-          )
-        :<></>}
+          <ClubEvent loadExpanded={loadExpanded} e={testEvent[0]} test={true} />
+        ) : (
+          <></>
+        )}
         {event == null ? (
           <ClubEvent loadExpanded={loadExpanded} e={event} test={false} />
         ) : (
@@ -148,8 +141,8 @@ const ClubEventsTab = () => {
         <CreateButton onClick={() => setNewEvent(true)}>+</CreateButton>
       </InnerWrapper>
       <div>
-        <Datetime        
-          input = {false}     
+        <Datetime
+          input={false}
           onChange={handleTime}
           onClose={handleTime}
           value={viewDate}
