@@ -22,6 +22,7 @@ import ClubProfile from "./pages/Profile/ClubProfile";
 
 axios.defaults.baseURL = "http://localhost:9000/";
 
+localStorage.setItem('AuthToken', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzJlMDlhOGFlYmQ0MjI2ODkxMmZmYiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya2VtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTYxNzMxODgwMCwiZXhwIjoxNjI1OTU4ODAwfQ.YdEBvHBjaTqaQYZ70kPdwlpkkCTOFfrAkqTNFzodGYg')
 const token = localStorage.getItem("AuthToken");
 
 // Check log in at first
