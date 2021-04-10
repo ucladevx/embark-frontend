@@ -285,7 +285,7 @@ const NewPost = ({ open, handleClose }) => {
           <>
             <CloseButton onClick={clearFile}>X | Clear File</CloseButton>
             <FilesWrapper>
-              <FileViewer filePath={file} fileType={fileType} /> 
+              <FileViewer filePath={file} fileType={fileType} />
             </FilesWrapper>
           </>
         ) : (

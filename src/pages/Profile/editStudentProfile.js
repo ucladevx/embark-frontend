@@ -11,7 +11,10 @@ import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import { IndustryFilters } from "../../shared/dropdown";
 import { useDispatch, useSelector } from "react-redux";
-import { editStudentDetails, uploadImage } from "../../redux/actions/userActions";
+import {
+  editStudentDetails,
+  uploadImage,
+} from "../../redux/actions/userActions";
 import styled from "styled-components";
 import { ExploreObj, ExploreFilter, LinkedInIconC } from "./StyleProfile";
 import {
@@ -34,6 +37,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 // import ImageUploader from 'react-images-upload';
 
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -59,12 +63,16 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const [industries, setIndustries] = useState(user.tags);
   const [bio, setBio] = useState(user.bio);
   const [linkedin, setLinkedin] = useState(user.linkedIn);
-  const [profileURL, setProfileURL] = useState(user.profilePicURL);
-  const [coverURL, setCoverURL] = useState(user.coverPicURL);
-
+  const [profileURL, setProfileURL] = useState({url: user.profilePicURL});
+  const [coverURL, setCoverURL] = useState({url: user.coverPicURL});
+  const hiddenProfileInput = React.useRef(null);
+  const hiddenCoverInput = React.useRef(null);
   useEffect(() => {
-    console.log(user)
-  })
+    console.log(user);
+    setProfileURL({url:user.profilePicURL});
+    setCoverURL({url: user.coverPicURL});
+  });
+
   // Redux
   const dispatch = useDispatch();
   const handleYear = (e) => {
@@ -73,25 +81,33 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const handleMajor = (e) => {
     setMajor(e.target.value);
   };
- 
+
   const addIndustries = (e) => {
     setIndustries(e.target.value);
   };
 
   const handlelinkedIn = (e) => {
     setLinkedin(e.target.value);
-    console.log(linkedin)
+    console.log(linkedin);
   };
 
-  const handleProfileURL = (e) =>{
-    console.log("change ProfileURL")
-    setProfileURL(URL.createObjectURL(e.target.files[0]))
-    console.log("changed profileURL=", URL.createObjectURL(e.target.files[0]))
-  }
+  const handleProfileURL = (e) => {
+    setProfileURL({url: URL.createObjectURL(e.target.files[0])});
+    console.log("changed profileURL=", URL.createObjectURL(e.target.files[0]));
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]); // appending file
+    axios.post('http://localhost:9000/student/profile/image?pictureType=profile',formData)
+  };
 
-  const handleCoverURL = (e)=>{
-    setCoverURL(URL.createObjectURL(e.target.files[0]))
-  }
+  const handleCoverURL = (e) => {
+    console.log("handle cover")
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]); // appending file
+    console.log(formData)
+    setCoverURL({url: URL.createObjectURL(e.target.files[0])});
+    // dispatch(uploadImage(formData))
+    axios.post('http://localhost:9000/student/profile/image?pictureType=cover', formData)
+  };
 
   const handleSubmit = async () => {
     //create an array of tags (deleted ones have rm before it)
@@ -109,14 +125,9 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       year,
       tags: updatedTags,
       bio,
-      linkedIn:linkedin,
+      linkedIn: linkedin,
     };
     dispatch(editStudentDetails(updatedProfile));
-    dispatch(uploadImage(
-      {
-        image:profileURL,
-      }
-    ))
     handleClose();
   };
 
@@ -129,27 +140,28 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       </TitleContainer>
 
       <EditProfileContent id="scroll-dialog-description">
-        <EditProfileAvatar 
-        src= {profileURL}
-        rounded="true"></EditProfileAvatar>
-        <ChangeAvatarLink fontColor="red" align="center" onClick = {() =>console.log("change avatar!!")}>
+        {/* Avatar */}
+        <EditProfileAvatar src={user.profilePicURL} rounded="true"></EditProfileAvatar>
+        <ChangeAvatarLink
+          fontColor="red"
+          align="center"
+          onClick={() => {hiddenProfileInput.current.click()}}
+        >
           Change Profile Picture
         </ChangeAvatarLink>
-        <input type="file" onChange={handleProfileURL} />
+        <input type="file" ref={hiddenProfileInput} style={{display:'none'}} onChange={handleProfileURL} />
         {console.log("profileURL=", user.profilePicURL)}
-        {/* <ImageUploader
-          buttonText="Change Profile Picture"
-          onChange = {handleProfileURL}
-          imgExtension={['.jpg', '.png']}
-          maxFileSize={5242880}
-        ></ImageUploader> */}
- 
+        {/* Cover Picture */}
         <TextFieldWrapper>
-          <EditCoverImage src={coverURL}></EditCoverImage>
+          <EditCoverImage src={user.coverPicURL}></EditCoverImage>
         </TextFieldWrapper>
-        <ChangeAvatarLink align="center">Change Cover Photo</ChangeAvatarLink>
-        <input type="file" onChange={handleCoverURL} />
+        <ChangeAvatarLink 
+        align="center"
+        onClick={() => {hiddenCoverInput.current.click()}}
+        >Change Cover Photo</ChangeAvatarLink>
+        <input type="file" ref={hiddenCoverInput} style={{display:'none'}} onChange={handleCoverURL} />
         <TextFieldWrapper>
+
           <BoldTypography sz={"18px"}>Year:</BoldTypography>
           <FormControlC>
             <Select disableUnderline value={year} onChange={handleYear}>

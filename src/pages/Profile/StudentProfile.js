@@ -29,6 +29,7 @@ import { useDispatch, useSelector } from "react-redux";
 const StudentProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
+  const tags = user.tags;
 
   return (
     <div>
@@ -40,9 +41,13 @@ const StudentProfile = (props) => {
       <NavBar></NavBar>
       <MiddleContainer>
         <ProfileWrapper>
-          <HeaderImage src={lawn}></HeaderImage>
+          <HeaderImage src={user.coverPicURL}></HeaderImage>
           <ProfileInfo>
-          <img src={linkedin} style={{backgroundColor:"blue",  float: "right"}} onClick={()=>window.open(user.linkedIn)}></img>
+            <img
+              src={linkedin}
+              style={{ backgroundColor: "blue", float: "right" }}
+              onClick={() => window.open(user.linkedIn)}
+            ></img>
             <NameDescriptionWrapper>
               <ProfileAvatar src={user.profilePicURL}></ProfileAvatar>
               <NameDescription>
@@ -54,7 +59,6 @@ const StudentProfile = (props) => {
                 <Typography style={{ fontSize: "18px" }}>
                   {user.year} • {user.major}
                 </Typography>
-                
               </NameDescription>
             </NameDescriptionWrapper>
             <IndustryWrapper>
@@ -62,8 +66,8 @@ const StudentProfile = (props) => {
                 Interested Industries:
               </BoldTypography>
               <ExploreFilter>
-                {user.tags &&
-                  user.tags.map((name) => {
+                {tags &&
+                  tags.map((name) => {
                     return (
                       <ExploreObj key={name} bgcolor={colors.red1}>
                         {name}
