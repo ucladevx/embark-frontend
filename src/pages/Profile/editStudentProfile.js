@@ -51,30 +51,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EditProfile = ({ open, handleClose, allTags }) => {
+const EditProfile = ({ open, user, handleClose, allTags }) => {
   const classes = useStyles();
   const years = ["2021", "2022", "2023", "2024"];
   const industry = IndustryFilters;
-  const user = useSelector((state) => state.user);
+  //const user = useSelector((state) => state.user);
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [major, setMajor] = useState(user.major);
   const [year, setYear] = useState(user.year);
-  const [industries, setIndustries] = useState(user.tags);
+  const [industries, setIndustries] = useState(allTags);
   const [bio, setBio] = useState(user.bio);
   const [linkedin, setLinkedin] = useState(user.linkedIn);
-  const [profileURL, setProfileURL] = useState({url: user.profilePicURL});
-  const [coverURL, setCoverURL] = useState({url: user.coverPicURL});
+  const [profileURL, setProfileURL] = useState({ url: user.profilePicURL });
+  const [coverURL, setCoverURL] = useState({ url: user.coverPicURL });
   const hiddenProfileInput = React.useRef(null);
   const hiddenCoverInput = React.useRef(null);
-  useEffect(() => {
-    console.log(user);
-    setProfileURL({url:user.profilePicURL});
-    setCoverURL({url: user.coverPicURL});
-  });
 
+  useEffect(()=>{
+    console.log("useEffect")
+    setYear(user.year)
+    setMajor(user.major)
+    setIndustries(user.tags)
+
+    return function cleanUp(){
+      console.log("clean it up")
+    }
+  }, [])
   // Redux
   const dispatch = useDispatch();
+
   const handleYear = (e) => {
     setYear(e.target.value);
   };
@@ -83,6 +89,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   };
 
   const addIndustries = (e) => {
+    console.log("change industries to ", e.target.value)
     setIndustries(e.target.value);
   };
 
@@ -92,21 +99,27 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   };
 
   const handleProfileURL = (e) => {
-    setProfileURL({url: URL.createObjectURL(e.target.files[0])});
+    setProfileURL({ url: URL.createObjectURL(e.target.files[0]) });
     console.log("changed profileURL=", URL.createObjectURL(e.target.files[0]));
     const formData = new FormData();
     formData.append("image", e.target.files[0]); // appending file
-    axios.post('http://localhost:9000/student/profile/image?pictureType=profile',formData)
+    axios.post(
+      "http://localhost:9000/student/profile/image?pictureType=profile",
+      formData,
+    );
   };
 
   const handleCoverURL = (e) => {
-    console.log("handle cover")
+    console.log("handle cover");
     const formData = new FormData();
     formData.append("image", e.target.files[0]); // appending file
-    console.log(formData)
-    setCoverURL({url: URL.createObjectURL(e.target.files[0])});
+    console.log(formData);
+    setCoverURL({ url: URL.createObjectURL(e.target.files[0]) });
     // dispatch(uploadImage(formData))
-    axios.post('http://localhost:9000/student/profile/image?pictureType=cover', formData)
+    axios.post(
+      "http://localhost:9000/student/profile/image?pictureType=cover",
+      formData,
+    );
   };
 
   const handleSubmit = async () => {
@@ -131,37 +144,68 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     handleClose();
   };
 
+  const onClose = () =>{
+    setYear(user.year)
+    setMajor(user.major)
+    setIndustries(user.tags)
+    setLinkedin(user.linkedIn)
+    setProfileURL(user.profilePicURL)
+    setCoverURL(user.coverPicURL)
+    handleClose();
+  }
+
   return (
-    <EditProfileContainer scroll={"body"} open={open} onClose={handleClose}>
+    <EditProfileContainer scroll={"body"} open={open} onClose={onClose}>
       <TitleContainer id="scroll-dialog-title">
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
         </EditProfileTitle>
       </TitleContainer>
-
+      {console.log(user)}
+      {console.log("industries=",industries)}
       <EditProfileContent id="scroll-dialog-description">
         {/* Avatar */}
-        <EditProfileAvatar src={user.profilePicURL} rounded="true"></EditProfileAvatar>
+        <EditProfileAvatar
+          src={profileURL.url}
+          rounded="true"
+        ></EditProfileAvatar>
         <ChangeAvatarLink
           fontColor="red"
           align="center"
-          onClick={() => {hiddenProfileInput.current.click()}}
+          onClick={() => {
+            hiddenProfileInput.current.click();
+          }}
         >
           Change Profile Picture
         </ChangeAvatarLink>
-        <input type="file" ref={hiddenProfileInput} style={{display:'none'}} onChange={handleProfileURL} />
+        <input
+          type="file"
+          ref={hiddenProfileInput}
+          style={{ display: "none" }}
+          onChange={handleProfileURL}
+        />
         {console.log("profileURL=", user.profilePicURL)}
+
         {/* Cover Picture */}
         <TextFieldWrapper>
-          <EditCoverImage src={user.coverPicURL}></EditCoverImage>
+          <EditCoverImage src={coverURL.url}></EditCoverImage>
         </TextFieldWrapper>
-        <ChangeAvatarLink 
-        align="center"
-        onClick={() => {hiddenCoverInput.current.click()}}
-        >Change Cover Photo</ChangeAvatarLink>
-        <input type="file" ref={hiddenCoverInput} style={{display:'none'}} onChange={handleCoverURL} />
+        <ChangeAvatarLink
+          align="center"
+          onClick={() => {
+            hiddenCoverInput.current.click();
+          }}
+        >
+          Change Cover Photo
+        </ChangeAvatarLink>
+        <input
+          type="file"
+          ref={hiddenCoverInput}
+          style={{ display: "none" }}
+          onChange={handleCoverURL}
+        />
+        {/* year */}
         <TextFieldWrapper>
-
           <BoldTypography sz={"18px"}>Year:</BoldTypography>
           <FormControlC>
             <Select disableUnderline value={year} onChange={handleYear}>
@@ -173,6 +217,8 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             </Select>
           </FormControlC>
         </TextFieldWrapper>
+
+        {/* major */}
         <TextFieldWrapper>
           <BoldTypography sz={"18px"}>Major:</BoldTypography>
           <DialogTextField
@@ -193,6 +239,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           />
         </TextFieldWrapper>
 
+        {/* interested industries */}
         <TextFieldWrapper>
           <BoldTypography sz={"18px"}>Interested Industries:</BoldTypography>
           <ExploreFilter>
@@ -233,6 +280,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           </FormControlC>
         </TextFieldWrapper>
 
+        {/* linkedIn */}
         <TextFieldWrapper>
           <BoldTypography sz={"18px"}>
             LinkedIn Profile (Optional):
@@ -255,6 +303,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           />
         </TextFieldWrapper>
 
+        {/* Done button */}
         <EditProfileDone>
           <DoneBtn onClick={handleSubmit}>Done</DoneBtn>
         </EditProfileDone>
