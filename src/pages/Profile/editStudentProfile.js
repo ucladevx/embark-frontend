@@ -51,33 +51,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EditProfile = ({ open, user, handleClose, allTags }) => {
+const EditProfile = ({ open, handleClose, allTags }) => {
   const classes = useStyles();
   const years = ["2021", "2022", "2023", "2024"];
   const industry = IndustryFilters;
-  //const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
   const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [major, setMajor] = useState(user.major);
+  const [major, setMajor] = useState(" ");
   const [year, setYear] = useState(user.year);
-  const [industries, setIndustries] = useState(allTags);
+  const [industries, setIndustries] = useState(user.tags);
   const [bio, setBio] = useState(user.bio);
-  const [linkedin, setLinkedin] = useState(user.linkedIn);
+  const [linkedin, setLinkedin] = useState(" ");
   const [profileURL, setProfileURL] = useState({ url: user.profilePicURL });
   const [coverURL, setCoverURL] = useState({ url: user.coverPicURL });
+  const [profileData, setProfileData] = useState(new FormData())
+  const [coverData, setCoverData] = useState(new FormData())
   const hiddenProfileInput = React.useRef(null);
   const hiddenCoverInput = React.useRef(null);
+  const tags = user.tags
 
-  useEffect(()=>{
-    console.log("useEffect")
-    setYear(user.year)
-    setMajor(user.major)
+  useEffect(() => {
+    // console.log("useEffect");
+    // console.log("after render print user.tags",user.tags)
+    setYear(user.year);
+    setMajor(user.major);
+    setLinkedin(user.linkedIn)
     setIndustries(user.tags)
 
-    return function cleanUp(){
-      console.log("clean it up")
-    }
-  }, [])
+    return function cleanUp() {
+      console.log("clean it up");
+    };
+  }, []);
   // Redux
   const dispatch = useDispatch();
 
@@ -89,7 +93,7 @@ const EditProfile = ({ open, user, handleClose, allTags }) => {
   };
 
   const addIndustries = (e) => {
-    console.log("change industries to ", e.target.value)
+    // console.log("change industries to ", e.target.value);
     setIndustries(e.target.value);
   };
 
@@ -99,10 +103,12 @@ const EditProfile = ({ open, user, handleClose, allTags }) => {
   };
 
   const handleProfileURL = (e) => {
+    console.log(e.target.files[0])
     setProfileURL({ url: URL.createObjectURL(e.target.files[0]) });
-    console.log("changed profileURL=", URL.createObjectURL(e.target.files[0]));
     const formData = new FormData();
     formData.append("image", e.target.files[0]); // appending file
+    setProfileData(formData)
+    console.log(formData)
     axios.post(
       "http://localhost:9000/student/profile/image?pictureType=profile",
       formData,
@@ -110,12 +116,13 @@ const EditProfile = ({ open, user, handleClose, allTags }) => {
   };
 
   const handleCoverURL = (e) => {
-    console.log("handle cover");
+    setCoverURL({ url: URL.createObjectURL(e.target.files[0]) });
     const formData = new FormData();
     formData.append("image", e.target.files[0]); // appending file
-    console.log(formData);
-    setCoverURL({ url: URL.createObjectURL(e.target.files[0]) });
-    // dispatch(uploadImage(formData))
+    setCoverData(formData)
+    console.log(formData)
+
+    dispatch(uploadImage(formData))
     axios.post(
       "http://localhost:9000/student/profile/image?pictureType=cover",
       formData,
@@ -141,32 +148,45 @@ const EditProfile = ({ open, user, handleClose, allTags }) => {
       linkedIn: linkedin,
     };
     dispatch(editStudentDetails(updatedProfile));
+    // if(profileData!=={}){
+    //   axios.post(
+    //     "http://localhost:9000/student/profile/image?pictureType=profile",
+    //     profileData,
+    //   );      
+    // }
+    // if(coverData!=={}){
+    //   axios.post(
+    //     "http://localhost:9000/student/profile/image?pictureType=cover",
+    //     coverData,
+    //   );
+    // }
+
     handleClose();
   };
 
-  const onClose = () =>{
-    setYear(user.year)
-    setMajor(user.major)
-    setIndustries(user.tags)
-    setLinkedin(user.linkedIn)
-    setProfileURL(user.profilePicURL)
-    setCoverURL(user.coverPicURL)
+  const onClose = () => {
+    setYear(user.year);
+    setMajor(user.major);
+    setIndustries(user.tags);
+    setLinkedin(user.linkedIn);
+    setProfileURL(user.profilePicURL);
+    setCoverURL(user.coverPicURL);
     handleClose();
-  }
+  };
 
   return (
     <EditProfileContainer scroll={"body"} open={open} onClose={onClose}>
+    {console.log("dialog user", user)}
       <TitleContainer id="scroll-dialog-title">
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
         </EditProfileTitle>
       </TitleContainer>
-      {console.log(user)}
-      {console.log("industries=",industries)}
       <EditProfileContent id="scroll-dialog-description">
         {/* Avatar */}
+        {console.log("profileURL.url=", profileURL.url)}
         <EditProfileAvatar
-          src={profileURL.url}
+          src={(profileURL.url)? profileURL.url: user.profilePicURL}
           rounded="true"
         ></EditProfileAvatar>
         <ChangeAvatarLink
@@ -184,11 +204,11 @@ const EditProfile = ({ open, user, handleClose, allTags }) => {
           style={{ display: "none" }}
           onChange={handleProfileURL}
         />
-        {console.log("profileURL=", user.profilePicURL)}
+        {/* {console.log("profileURL=", user.profilePicURL)} */}
 
         {/* Cover Picture */}
         <TextFieldWrapper>
-          <EditCoverImage src={coverURL.url}></EditCoverImage>
+          <EditCoverImage src={(coverURL.url)? coverURL.url: user.coverPicURL}></EditCoverImage>
         </TextFieldWrapper>
         <ChangeAvatarLink
           align="center"
@@ -243,7 +263,7 @@ const EditProfile = ({ open, user, handleClose, allTags }) => {
         <TextFieldWrapper>
           <BoldTypography sz={"18px"}>Interested Industries:</BoldTypography>
           <ExploreFilter>
-            {console.log("print user tags", user.tags)}
+            {/* {console.log("print user tags", user.tags)} */}
             {industries &&
               industries.map((name) => (
                 <ExploreObj key={name} bgcolor={colors.gray1}>

@@ -33,9 +33,9 @@ const StudentProfile = (props) => {
 
   return (
     <div>
+      {console.log(user)}
       <EditProfile
         open={editProfile}
-        user = {user}
         handleClose={() => seteditProfile(false)}
         allTags={user.tags}
       ></EditProfile>
