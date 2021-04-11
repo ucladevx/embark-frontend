@@ -29,28 +29,25 @@ import EditClubProfile from "./editClubProfile";
 import ClubProfileTabs from "./ClubProfileTabs";
 import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
-
+ 
 const ClubProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
-  const { userid } = useParams();
-  const [description, SetDescription] = useState("Tech Club");
   const [About, SetAbout] = useState(
     "Have you ever felt that all you were learning at UCLA was theory, with little opportunities to build out practical applications? DevX is a brand new program dedicated to solving that very problem! Build out real-world projects to help tackle pressing problems frustrating the UCLA community, grow your technical skills by pairing up with experienced students, and build a network that lasts beyond graduation.",
   );
-  const [website, SetWebsite] = useState("https://ucladevx.com/");
 
-  function handleAbout(newAbout) {
-    SetAbout(newAbout);
-  }
+  // function handleAbout(newAbout) {
+  //   SetAbout(newAbout);
+  // }
 
-  function handleWebsite(newWebsite) {
-    SetWebsite(newWebsite);
-  }
+  // function handleWebsite(newWebsite) {
+  //   SetWebsite(newWebsite);
+  // }
 
-  function handleDescription(newDescription) {
-    SetDescription(newDescription);
-  }
+  // function handleDescription(newDescription) {
+  //   SetDescription(newDescription);
+  // }
 
   const AboutContent = () => {
     if (About.length > 0) {
@@ -79,45 +76,45 @@ const ClubProfile = (props) => {
       <EditClubProfile
         open={editProfile}
         handleClose={() => seteditProfile(false)}
-        EditAbout={handleAbout}
-        EditWebsite={handleWebsite}
-        EditDescription={handleDescription}
-        currentAbout={About}
-        currentWebsite={website}
-        currentDescription={description}
+        // EditAbout={handleAbout}
+        // EditWebsite={handleWebsite}
+        // EditDescription={handleDescription}
+        // currentAbout={About}
+        // currentWebsite={website}
+        // currentDescription={description}
       ></EditClubProfile>
       <NavBar></NavBar>
       <MiddleContainer>
         <ProfileWrapper>
-          <HeaderImage src={lawn}></HeaderImage>
+          <HeaderImage src={user.coverPicURL}></HeaderImage>
           <ProfileInfo>
             <NameDescriptionWrapper>
-              <ProfileAvatar></ProfileAvatar>
+              <ProfileAvatar src={user.profilePicURL}></ProfileAvatar>
               <NameDescription>
                 <TitleTypography
                   style={{ fontSize: "24px", paddingBottom: "0" }}
                 >
-                  UCLA DevX
+                  {user.name}
                 </TitleTypography>
                 <Typography style={{ fontSize: "18px" }}>
-                  {description}
+                  {user.description? user.description: "Tech Club"}
                 </Typography>
               </NameDescription>
               {/* <NameDescription> */}
-              <ClubWebsiteButton href={website}>Club Website</ClubWebsiteButton>
+              <ClubWebsiteButton href={user.website}>Club Website</ClubWebsiteButton>
               {/* </NameDescription> */}
             </NameDescriptionWrapper>
 
             <IndustryWrapper>
               <BoldTypography sz={"14px"}>Relevant Industries:</BoldTypography>
-              <ExploreFilter>
-                <ExploreObj bgcolor={colors.red1}>
-                  Product Management
-                </ExploreObj>
-                <ExploreObj bgcolor={colors.darkyellow}>
-                  Product Design
-                </ExploreObj>
-              </ExploreFilter>
+              {user.tags &&
+                  user.tags.map((name) => {
+                    return (
+                      <ExploreObj key={name} bgcolor={colors.red1}>
+                        {name}
+                      </ExploreObj>
+                    );
+                  })}
             </IndustryWrapper>
 
             <EditProfileButton

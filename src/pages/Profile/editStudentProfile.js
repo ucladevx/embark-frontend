@@ -64,19 +64,17 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const [linkedin, setLinkedin] = useState(" ");
   const [profileURL, setProfileURL] = useState({ url: user.profilePicURL });
   const [coverURL, setCoverURL] = useState({ url: user.coverPicURL });
-  const [profileData, setProfileData] = useState(new FormData())
-  const [coverData, setCoverData] = useState(new FormData())
   const hiddenProfileInput = React.useRef(null);
   const hiddenCoverInput = React.useRef(null);
-  const tags = user.tags
+  const tags = user.tags;
 
   useEffect(() => {
     // console.log("useEffect");
     // console.log("after render print user.tags",user.tags)
     setYear(user.year);
     setMajor(user.major);
-    setLinkedin(user.linkedIn)
-    setIndustries(user.tags)
+    setLinkedin(user.linkedIn);
+    setIndustries(user.tags);
 
     return function cleanUp() {
       console.log("clean it up");
@@ -103,12 +101,11 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   };
 
   const handleProfileURL = (e) => {
-    console.log(e.target.files[0])
+    console.log(e.target.files[0]);
     setProfileURL({ url: URL.createObjectURL(e.target.files[0]) });
     const formData = new FormData();
     formData.append("image", e.target.files[0]); // appending file
-    setProfileData(formData)
-    console.log(formData)
+    console.log(formData);
     axios.post(
       "http://localhost:9000/student/profile/image?pictureType=profile",
       formData,
@@ -119,10 +116,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     setCoverURL({ url: URL.createObjectURL(e.target.files[0]) });
     const formData = new FormData();
     formData.append("image", e.target.files[0]); // appending file
-    setCoverData(formData)
-    console.log(formData)
-
-    dispatch(uploadImage(formData))
+    console.log(formData);
     axios.post(
       "http://localhost:9000/student/profile/image?pictureType=cover",
       formData,
@@ -152,7 +146,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     //   axios.post(
     //     "http://localhost:9000/student/profile/image?pictureType=profile",
     //     profileData,
-    //   );      
+    //   );
     // }
     // if(coverData!=={}){
     //   axios.post(
@@ -176,7 +170,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
   return (
     <EditProfileContainer scroll={"body"} open={open} onClose={onClose}>
-    {console.log("dialog user", user)}
+      {console.log("dialog user", user)}
       <TitleContainer id="scroll-dialog-title">
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
@@ -186,7 +180,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
         {/* Avatar */}
         {console.log("profileURL.url=", profileURL.url)}
         <EditProfileAvatar
-          src={(profileURL.url)? profileURL.url: user.profilePicURL}
+          src={profileURL.url ? profileURL.url : user.profilePicURL}
           rounded="true"
         ></EditProfileAvatar>
         <ChangeAvatarLink
@@ -208,7 +202,9 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
         {/* Cover Picture */}
         <TextFieldWrapper>
-          <EditCoverImage src={(coverURL.url)? coverURL.url: user.coverPicURL}></EditCoverImage>
+          <EditCoverImage
+            src={coverURL.url ? coverURL.url : user.coverPicURL}
+          ></EditCoverImage>
         </TextFieldWrapper>
         <ChangeAvatarLink
           align="center"
@@ -264,12 +260,15 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           <BoldTypography sz={"18px"}>Interested Industries:</BoldTypography>
           <ExploreFilter>
             {/* {console.log("print user tags", user.tags)} */}
-            {industries &&
+            {
+              (industries) &&
               industries.map((name) => (
                 <ExploreObj key={name} bgcolor={colors.gray1}>
                   &times; {name}
                 </ExploreObj>
-              ))}
+              ))
+
+              }
           </ExploreFilter>
           <FormControlC>
             <Select
