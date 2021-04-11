@@ -260,15 +260,12 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           <BoldTypography sz={"18px"}>Interested Industries:</BoldTypography>
           <ExploreFilter>
             {/* {console.log("print user tags", user.tags)} */}
-            {
-              (industries) &&
+            {industries &&
               industries.map((name) => (
                 <ExploreObj key={name} bgcolor={colors.gray1}>
                   &times; {name}
                 </ExploreObj>
-              ))
-
-              }
+              ))}
           </ExploreFilter>
           <FormControlC>
             <Select

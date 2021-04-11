@@ -130,9 +130,8 @@ const EditClubProfile = ({ open, handleClose }) => {
         </EditProfileTitle>
       </TitleContainer>
       <EditProfileContent>
-
-      {/* Avatar */}
-      <EditProfileAvatar
+        {/* Avatar */}
+        <EditProfileAvatar
           src={profileURL.url ? profileURL.url : user.profilePicURL}
           rounded="true"
         ></EditProfileAvatar>
@@ -232,8 +231,8 @@ const EditClubProfile = ({ open, handleClose }) => {
             </Select>
           </FormControlC>
         </TextFieldWrapper>
-          
-          {/* Website */}
+
+        {/* Website */}
         <TextFieldWrapper>
           <BoldTypography sz={"16px"}>Website:</BoldTypography>
           <DialogTextField
@@ -255,7 +254,7 @@ const EditClubProfile = ({ open, handleClose }) => {
           />
         </TextFieldWrapper>
 
-          {/* About */}
+        {/* About */}
         <TextFieldWrapper>
           <BoldTypography sz={"16px"}>About:</BoldTypography>
           <DialogTextField
@@ -279,7 +278,7 @@ const EditClubProfile = ({ open, handleClose }) => {
           />
         </TextFieldWrapper>
 
-            {/* Done Button */}
+        {/* Done Button */}
         <EditProfileDone>
           <DoneBtn onClick={handleSubmit}>Done</DoneBtn>
         </EditProfileDone>

@@ -29,7 +29,7 @@ import EditClubProfile from "./editClubProfile";
 import ClubProfileTabs from "./ClubProfileTabs";
 import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
- 
+
 const ClubProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
@@ -97,24 +97,26 @@ const ClubProfile = (props) => {
                   {user.name}
                 </TitleTypography>
                 <Typography style={{ fontSize: "18px" }}>
-                  {user.description? user.description: "Tech Club"}
+                  {user.description ? user.description : "Tech Club"}
                 </Typography>
               </NameDescription>
               {/* <NameDescription> */}
-              <ClubWebsiteButton href={user.website}>Club Website</ClubWebsiteButton>
+              <ClubWebsiteButton href={user.website}>
+                Club Website
+              </ClubWebsiteButton>
               {/* </NameDescription> */}
             </NameDescriptionWrapper>
 
             <IndustryWrapper>
               <BoldTypography sz={"14px"}>Relevant Industries:</BoldTypography>
               {user.tags &&
-                  user.tags.map((name) => {
-                    return (
-                      <ExploreObj key={name} bgcolor={colors.red1}>
-                        {name}
-                      </ExploreObj>
-                    );
-                  })}
+                user.tags.map((name) => {
+                  return (
+                    <ExploreObj key={name} bgcolor={colors.red1}>
+                      {name}
+                    </ExploreObj>
+                  );
+                })}
             </IndustryWrapper>
 
             <EditProfileButton
