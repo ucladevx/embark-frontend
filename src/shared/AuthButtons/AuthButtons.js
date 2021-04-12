@@ -57,7 +57,7 @@ const AuthButtons = () => {
       linkedinRef,
       "linkedinbtn",
       LinkedInIcon,
-      "Sign up with linkedin"
+      "Sign up with linkedin",
     );
   }, []);
   return (
