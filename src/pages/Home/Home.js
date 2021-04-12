@@ -107,7 +107,9 @@ const Home = () => {
                 onClick={() => history.push(`/user/${user._id}`)}
               >
                 <InfoImage src={avatarImg} alt="user"></InfoImage>
-                <InfoEntryText>{user.name}</InfoEntryText>
+                <InfoEntryText>
+                  {user.firstName} {user.lastName}
+                </InfoEntryText>
               </InfoEntryWrapper>
               <InfoSeperator></InfoSeperator>
               <InfoEntryWrapper>
