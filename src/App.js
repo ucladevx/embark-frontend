@@ -38,9 +38,9 @@ function App() {
         <Provider store={store}>
           <Router>
             <Switch>
+              <Route exact path="/home" component={Home}></Route>
               <Route exact path="/" component={OnBoarding}></Route>
               <Route exact path="/login" component={Login}></Route>
-              <Route exact path="/home" component={Home}></Route>
               <Route
                 exact
                 path="/user/:userid"

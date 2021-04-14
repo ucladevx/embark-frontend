@@ -9,6 +9,7 @@ import {
   TimeTypography,
   GoingBtn,
   InfoSeperator,
+  EventBadge,
 } from "./StyleLanding";
 import styled from "styled-components";
 import { colors } from "../../shared/config";
@@ -22,6 +23,9 @@ import ExpandedEvent from "./ExpandedEvent.js";
 import dayjs from "dayjs";
 
 import { ActionButton } from "../../shared/Buttons";
+
+import calendar from '../../images/calendar.png';
+
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -99,7 +103,25 @@ const Events = ({ setNewEvent }) => {
         <TitleTypography>Upcoming Events</TitleTypography>
         <EventItems>
           <EventItem>
-            <EventAvatar></EventAvatar>
+          <EventBadge
+            anchorOrigin =
+              {{
+                vertical:'bottom',
+                horizontal:'right',
+              }}
+              overlap='circle'
+              badgeContent={<p>{dayjs().format("DD")}</p>}>
+            <EventBadge
+              anchorOrigin =
+              {{
+                vertical:'bottom',
+                horizontal:'right',
+              }}
+              overlap='circle'
+              badgeContent={<img src={calendar} alt="" ></img>} >
+                <EventAvatar/>
+              </EventBadge>
+            </EventBadge>
             <EventDescription>
               <BoldTypography sz={"16px"}>Demo Day</BoldTypography>
               <EventTypography>UCLA DevX</EventTypography>
@@ -111,7 +133,25 @@ const Events = ({ setNewEvent }) => {
           </EventItem>
           <InfoSeperator></InfoSeperator>
           <EventItem>
-            <EventAvatar></EventAvatar>
+          <EventBadge
+            anchorOrigin =
+              {{
+                vertical:'bottom',
+                horizontal:'right',
+              }}
+              overlap='circle'
+              badgeContent={<p>{dayjs().format("DD")}</p>}>
+            <EventBadge
+              anchorOrigin =
+              {{
+                vertical:'bottom',
+                horizontal:'right',
+              }}
+              overlap='circle'
+              badgeContent={<img src={calendar} alt="" ></img>} >
+                <EventAvatar/>
+              </EventBadge>
+            </EventBadge>
             <EventDescription>
               <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
               <EventTypography>Club1234</EventTypography>
@@ -126,7 +166,25 @@ const Events = ({ setNewEvent }) => {
               <>
                 <InfoSeperator key={p._id + "sep"}></InfoSeperator>
                 <EventItem key={p._id}>
-                  <EventAvatar onClick={() => loadExpanded(p)}></EventAvatar>
+                <EventBadge
+                  anchorOrigin =
+                  {{
+                    vertical:'bottom',
+                    horizontal:'right',
+                  }}
+                  overlap='circle'
+                  badgeContent={<p>{dayjs().format("DD")}</p>}>
+                  <EventBadge
+                    anchorOrigin =
+                    {{
+                      vertical:'bottom',
+                      horizontal:'right',
+                    }}
+                    overlap='circle'
+                    badgeContent={<img src={calendar} alt="" ></img>} >
+                    <EventAvatar onClick={() => loadExpanded(p)}></EventAvatar>
+                  </EventBadge>
+                </EventBadge>
                   <EventDescription onClick={() => loadExpanded(p)}>
                     <BoldTypography sz={"16px"}>{p.title}</BoldTypography>
                     <EventTypography>{p.authorEmail}</EventTypography>
