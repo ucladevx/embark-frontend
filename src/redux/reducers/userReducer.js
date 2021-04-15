@@ -12,6 +12,7 @@ import {
 
 const intialState = {
   authenticated: false,
+  _id: null,
   info: {},
   notifications: [],
   likedPosts: [],

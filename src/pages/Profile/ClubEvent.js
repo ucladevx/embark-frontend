@@ -5,11 +5,11 @@ import {
   EventItem,
   EventTypography,
   TimeTypography,
-  GoingBtn,
   InfoSeperator,
 } from "../Home/StyleLanding";
 import { BoldTypography } from "../../shared/Typography";
-import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+
 
 // Dayjs
 import dayjs from "dayjs";
@@ -22,6 +22,22 @@ const test = (time) => {
   date = date.concat(" GMT");
   return dayjs(date).format("MMM DD HH:mm a");
 };
+
+const TopBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const AttendeesWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+`;
+
+const GoingTypography = styled(TimeTypography)`
+  font-size: 16px;
+`;
 
 const ClubEvent = (props) => {
   const makeDay = (moment) => {
@@ -51,11 +67,17 @@ const ClubEvent = (props) => {
             props.loadExpanded(props.e);
           }}
         >
-          <BoldTypography sz={"16px"}>{props.e.title}</BoldTypography>
+          <TopBar>
+            <BoldTypography sz={"16px"}>{props.e.title}</BoldTypography>
+            <AttendeesWrapper>
+              <GoingTypography>{props.e.attendees.length}{" going"}</GoingTypography>
+            </AttendeesWrapper>
+          </TopBar>
           <EventTypography>{props.e.authorEmail}</EventTypography>
           <TimeTypography>{makeDay(props.e.startDate)}</TimeTypography>
         </EventDescription>
       </EventItem>
+      <InfoSeperator key={props.e._id + "sep2"}></InfoSeperator>
     </>
   );
 };

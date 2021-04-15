@@ -12,7 +12,7 @@ import {
 } from "./StyleLanding";
 import styled from "styled-components";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { goingToEvent } from "../../redux/actions/userActions";
 import ExpandedEvent from "./ExpandedEvent.js";
 import Event from "./Event.js";
@@ -57,19 +57,13 @@ const testEvent = [
     endDate: "2021-04-25T06:13:32.000Z",
     description:
       "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
-    location: "here what do you think",
+    venue: "here what do you think",
   },
 ];
 
 const Events = ({ setNewEvent }) => {
-  const dispatch = useDispatch();
-  const club = true; //use backend call to test if it is a club
-
-  const goingClick = (id) => {
-    dispatch(goingToEvent(id));
-  };
-
   const events = useSelector((state) => state.data.events);
+  const usertype = useSelector((state) => state.user.userType);
 
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});
@@ -126,7 +120,7 @@ const Events = ({ setNewEvent }) => {
               </>
             );
           })}
-          {club === true ? (
+          {usertype === "club" ? (
             <CreateButton onClick={() => setNewEvent(true)}>
               + Create
             </CreateButton>

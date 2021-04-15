@@ -65,7 +65,7 @@ const ExpandedEvent = ({ open, handleClose, e }) => {
         <TextFieldWrapper>
           <BoldTypography sz={"24px"}>{e.title}</BoldTypography>
           <Linkify>
-            <EventContent>Location: {e.location}</EventContent>
+            <EventContent>Location: {e.venue}</EventContent>
           </Linkify>
           <TimeWrapper>
             <NameTypography>{e.authorEmail}@</NameTypography>

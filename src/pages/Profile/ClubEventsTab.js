@@ -52,6 +52,7 @@ const InnerWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-evenly;
+  min-width: 20vw;
 `;
 
 const testEvent = [
@@ -63,7 +64,8 @@ const testEvent = [
     endDate: "2021-04-03T09:00:00.000Z",
     description:
       "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
-    location: "here what do you think",
+    venue: "here what do you think",
+    attendees: [123,147,1492,10238],
   },
 ];
 
@@ -95,6 +97,10 @@ const ClubEventsTab = () => {
 
   useEffect(() => {
     var eventFound = false;
+    if(!viewDate){
+      setEvent({});
+      return;
+    }
     for (var i = 0; i < hostedEvents.length; i++) {
       const myDate = hostedEvents[i].startDate;
       if (
@@ -114,7 +120,7 @@ const ClubEventsTab = () => {
   const [showTest, setShowTest] = useState(false);
   useEffect(() => {
     const myDate = new Date(testEvent[0].startDate);
-    if (
+    if ( viewDate && myDate && viewDate._d &&
       myDate.getDate() === viewDate._d.getDate() &&
       myDate.getMonth() === viewDate._d.getMonth() &&
       myDate.getFullYear() === viewDate._d.getFullYear()
@@ -147,7 +153,7 @@ const ClubEventsTab = () => {
       </InnerWrapper>
       <div>
         <Datetime
-          input={true}
+          input={false}
           onChange={handleTime}
           onClose={handleTime}
           value={viewDate}
