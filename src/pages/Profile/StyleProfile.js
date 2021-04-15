@@ -79,7 +79,7 @@ export const NameDescription = styled.div`
 `;
 
 export const EditProfileButton = styled(Button)`
-  width: 89px;
+  width: fit-content;
   height: 30px;
   border-radius: 8px;
   position: absolute;
@@ -87,8 +87,8 @@ export const EditProfileButton = styled(Button)`
   bottom: 1vw;
   font-size: 14px;
   text-transform: none;
-  color: #ffffff;
-  background: #5473bb;
+  color: #5A5A5A;
+  background: ${colors.gray2};
   border-radius: 5px;
 `;
 

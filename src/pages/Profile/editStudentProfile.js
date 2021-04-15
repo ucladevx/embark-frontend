@@ -6,6 +6,7 @@ import {
   Checkbox,
   ListItemText,
   Input,
+  InputAdornment,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
@@ -32,9 +33,8 @@ import {
   TextFieldWrapper,
   DoneBtn,
 } from "./StyleEditProfile";
-import lawn from "../../images/lawn.png";
+import Linkedin from "../../images/linkedin.png";
 import { makeStyles } from "@material-ui/core/styles";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 // import ImageUploader from 'react-images-upload';
 
 import axios from "axios";
@@ -309,11 +309,18 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             type="email"
             fullWidth
             InputProps={{
+              startAdornment:(
+                <InputAdornment position="start">
+              <img src={Linkedin}></img>
+            </InputAdornment>                
+              )
+              ,        
               disableUnderline: true,
               style: {
                 fontSize: 16,
                 fontWeight: 600,
               },
+
             }}
             onChange={handlelinkedIn}
           />

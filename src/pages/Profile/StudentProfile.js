@@ -19,6 +19,7 @@ import {
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
 import linkedin from "../../images/linkedin.png";
+import pencil from "../../images/pencil.png"
 import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
 import { Button } from "@material-ui/core";
@@ -46,7 +47,7 @@ const StudentProfile = (props) => {
           <ProfileInfo>
             <img
               src={linkedin}
-              style={{ backgroundColor: "blue", float: "right" }}
+              style={{ float: "right" }}
               onClick={() => window.open(user.linkedIn)}
             ></img>
             <NameDescriptionWrapper>
@@ -83,6 +84,7 @@ const StudentProfile = (props) => {
                 seteditProfile(true);
               }}
             >
+            <img style={{ marginRight: "2px" }} src={pencil}></img>
               Edit Profile
             </EditProfileButton>
           </ProfileInfo>
