@@ -74,7 +74,7 @@ export default function userReducer(state = intialState, action) {
       return {
         ...state,
         goingEvents: state.goingEvents.filter(
-          (event) => event.eventId !== action.payload
+          (event) => event.eventId !== action.payload,
         ),
       };
     default:

@@ -10,7 +10,10 @@ import {
 } from "./StyleLanding";
 import { BoldTypography } from "../../shared/Typography";
 import { useSelector, useDispatch } from "react-redux";
-import { goingToEvent, cancelAttendingEvent } from "../../redux/actions/userActions";
+import {
+  goingToEvent,
+  cancelAttendingEvent,
+} from "../../redux/actions/userActions";
 
 // Dayjs
 import dayjs from "dayjs";
@@ -38,15 +41,15 @@ const Event = (props) => {
   const dispatch = useDispatch();
   const attending = useSelector((state) => state.user.goingEvents);
   const hasID = (id) => {
-    for(var i = 0; i < attending.length; i++){
-      if(attending[i]._id === id){
+    for (var i = 0; i < attending.length; i++) {
+      if (attending[i]._id === id) {
         return true;
       }
     }
     return false;
-  }
+  };
   const goingClick = (id) => {
-    if(hasID(id)){
+    if (hasID(id)) {
       dispatch(goingToEvent(id));
     } else {
       dispatch(cancelAttendingEvent(id));

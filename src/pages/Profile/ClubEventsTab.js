@@ -98,8 +98,9 @@ const ClubEventsTab = () => {
     for (var i = 0; i < hostedEvents.length; i++) {
       const myDate = hostedEvents[i].startDate;
       if (
-        myDate.getDate()===viewDate._d.getDate()
-        &&myDate.getMonth()===viewDate._d.getMonth()&&myDate.getFullYear()===viewDate._d.getFullYear()
+        myDate.getDate() === viewDate._d.getDate() &&
+        myDate.getMonth() === viewDate._d.getMonth() &&
+        myDate.getFullYear() === viewDate._d.getFullYear()
       ) {
         setEvent(hostedEvents[i]);
         eventFound = true;
@@ -113,8 +114,11 @@ const ClubEventsTab = () => {
   const [showTest, setShowTest] = useState(false);
   useEffect(() => {
     const myDate = new Date(testEvent[0].startDate);
-    if (myDate.getDate()===viewDate._d.getDate()
-    &&myDate.getMonth()===viewDate._d.getMonth()&&myDate.getFullYear()===viewDate._d.getFullYear()) {
+    if (
+      myDate.getDate() === viewDate._d.getDate() &&
+      myDate.getMonth() === viewDate._d.getMonth() &&
+      myDate.getFullYear() === viewDate._d.getFullYear()
+    ) {
       setShowTest(true);
     } else setShowTest(false);
   }, [viewDate]);
@@ -150,7 +154,6 @@ const ClubEventsTab = () => {
           open={true}
           dateFormat="dddd, MMMM DD"
           timeFormat={false}
-          
         />
       </div>
     </OuterWrapper>

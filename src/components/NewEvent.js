@@ -125,7 +125,6 @@ const NewEvent = ({ open, handleClose }) => {
     console.log(JSON.stringify(time.toDate()));
   };
 
-
   const handleSubmit = async () => {
     const event = {
       userType: "club",

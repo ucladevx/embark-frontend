@@ -32,8 +32,10 @@ const ClubEvent = (props) => {
     date = date.replace("T", " ");
     date = date.replace("Z", " ");
     date = date.concat(" GMT");
-    
-    return dayjs(date).format("MMM DD HH:mm a").tz(Intl.DateTimeFormat().resolvedOptions().timeZone);
+
+    return dayjs(date)
+      .format("MMM DD HH:mm a")
+      .tz(Intl.DateTimeFormat().resolvedOptions().timeZone);
   };
   return (
     <>

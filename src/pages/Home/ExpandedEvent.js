@@ -70,7 +70,9 @@ const ExpandedEvent = ({ open, handleClose, e }) => {
           <TimeWrapper>
             <NameTypography>{e.authorEmail}@</NameTypography>
             <AccessTimeIcon />
-            <TimeTypography sz={"24px"}>{makeDay(e.startDate)} - {makeDay(e.endDate)}</TimeTypography>
+            <TimeTypography sz={"24px"}>
+              {makeDay(e.startDate)} - {makeDay(e.endDate)}
+            </TimeTypography>
           </TimeWrapper>
           <BoldTypography sz={"16px"}>Description:</BoldTypography>
           <Linkify>
