@@ -33,8 +33,8 @@ import {
   DialogTextField,
   TextFieldWrapper,
   DoneBtn,
-  DropDownTitle, 
-  DropDownContent
+  DropDownTitle,
+  DropDownContent,
 } from "./StyleEditProfile";
 import DropDown from "./dropdown";
 import Linkedin from "../../images/linkedin.png";
@@ -78,11 +78,11 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const [openYear, setOpenYear] = useState(false);
   const [openInd, setOpenInd] = useState(false);
   const toggleOpenYear = () => {
-      setOpenYear(!openYear);
-  }
+    setOpenYear(!openYear);
+  };
   const toggleOpenInd = () => {
     setOpenInd(!openInd);
-}
+  };
 
   useEffect(() => {
     // console.log("useEffect");
@@ -111,16 +111,16 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const handleMajor = (e) => {
     setMajor(e.target.value);
   };
-  
-  const handleIndustries = (name) =>{
-    if (industries.includes(name)){
-        const newIndustries = industries.filter((ind) => ind !== name);
-        setIndustries(newIndustries);
-    }else{
-      const newIndustries =[...industries, name];
+
+  const handleIndustries = (name) => {
+    if (industries.includes(name)) {
+      const newIndustries = industries.filter((ind) => ind !== name);
+      setIndustries(newIndustries);
+    } else {
+      const newIndustries = [...industries, name];
       setIndustries(newIndustries);
     }
-  }
+  };
   // const addIndustries = (e) => {
   //   // console.log("change industries to ", e.target.value);
   //   setIndustries(e.target.value);
@@ -271,20 +271,26 @@ const EditProfile = ({ open, handleClose, allTags }) => {
         </TextFieldWrapper> */}
         <TextFieldWrapper>
           <BoldTypography sz={"18px"}>Year:</BoldTypography>
-          <div >
-        <DropDownTitle wd={"128px"} onClick = {toggleOpenYear}>{year}</DropDownTitle>  
-            {openYear && 
-            <DropDownContent  wd={"128px"} hg = {"169px"} overflow={"hidden"}>
-                {years.map((year, index)=>(
-                    <MenuItem onClick = {()=>{changeYear(year)}} key = {index}>{year}</MenuItem>
+          <div>
+            <DropDownTitle wd={"128px"} onClick={toggleOpenYear}>
+              {year}
+            </DropDownTitle>
+            {openYear && (
+              <DropDownContent wd={"128px"} hg={"169px"} overflow={"hidden"}>
+                {years.map((year, index) => (
+                  <MenuItem
+                    onClick={() => {
+                      changeYear(year);
+                    }}
+                    key={index}
+                  >
+                    {year}
+                  </MenuItem>
                 ))}
-            </DropDownContent>
-
-            }    
-        </div>
+              </DropDownContent>
+            )}
+          </div>
         </TextFieldWrapper>
-        
-
 
         {/* major */}
         <TextFieldWrapper>
@@ -352,32 +358,50 @@ const EditProfile = ({ open, handleClose, allTags }) => {
                 ))}
             </Select>
           </FormControlC> */}
-          <div >
-        <DropDownTitle  wd={"312px"} onClick = {toggleOpenInd}>Select All that Apply</DropDownTitle>  
-            {openInd && 
-            <div>
-
-            <DropDownContent  wd={"312px"}  hg = {"248px"} overflow={"scroll"}>
-                {industry.map((name, index)=>(
-                  
-                  <MenuItem key={name} value={name}>
-                  <img onClick = {()=>{handleIndustries(name)}} src={industries && industries.includes(name)? checked:unchecked} style={{border:"1px solid #ADAFB0", borderRadius:"2px"}}></img>
-                    {/* <Checkbox
+          <div>
+            <DropDownTitle wd={"312px"} onClick={toggleOpenInd}>
+              Select All that Apply
+            </DropDownTitle>
+            {openInd && (
+              <div>
+                <DropDownContent wd={"312px"} hg={"248px"} overflow={"scroll"}>
+                  {industry.map((name, index) => (
+                    <MenuItem key={name} value={name}>
+                      <img
+                        onClick={() => {
+                          handleIndustries(name);
+                        }}
+                        src={
+                          industries && industries.includes(name)
+                            ? checked
+                            : unchecked
+                        }
+                        style={{
+                          border: "1px solid #ADAFB0",
+                          borderRadius: "2px",
+                        }}
+                      ></img>
+                      {/* <Checkbox
                       checked={industries && industries.includes(name)}
                       color="default"
                       onClick = {()=>{handleIndustries(name)}}
                     /> */}
-                    <Typography style={{fontSize:"18px", margin:"5.5px"}}>{name}</Typography>
-                  </MenuItem>
-                ))
-                }
-            </DropDownContent>   
-              <DropDownTitle style={{borderRadius:"0px", justifyContent:"center"}} wd={"312px"} onClick = {toggleOpenInd}>Finished</DropDownTitle>  
-            </div>
-
-            
-            }    
-        </div>
+                      <Typography style={{ fontSize: "18px", margin: "5.5px" }}>
+                        {name}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </DropDownContent>
+                <DropDownTitle
+                  style={{ borderRadius: "0px", justifyContent: "center" }}
+                  wd={"312px"}
+                  onClick={toggleOpenInd}
+                >
+                  Finished
+                </DropDownTitle>
+              </div>
+            )}
+          </div>
         </TextFieldWrapper>
 
         {/* linkedIn */}
