@@ -21,7 +21,7 @@ import { TitleTypography, BoldTypography } from "../../shared/Typography";
 import EditProfile from "./editStudentProfile";
 import UserProfileTabs from "./StudentProfileTabs";
 import { colors } from "../../shared/config";
-import {handleTagColor} from "../../utils/handleTagColors.js"
+import { handleTagColor } from "../../utils/handleTagColors.js";
 //image
 import linkedin from "../../images/linkedin.png";
 import pencil from "../../images/pencil.png";

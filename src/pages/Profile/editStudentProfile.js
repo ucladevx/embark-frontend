@@ -95,10 +95,10 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     setIndustries(e.target.value);
   };
 
-  const removeIndustries = (name) =>{
-    const newIndustries = industries.filter((ind)=> ind !== name);
+  const removeIndustries = (name) => {
+    const newIndustries = industries.filter((ind) => ind !== name);
     setIndustries(newIndustries);
-  }
+  };
 
   const handlelinkedIn = (e) => {
     setLinkedin(e.target.value);
@@ -267,7 +267,13 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             {/* {console.log("print user tags", user.tags)} */}
             {industries &&
               industries.map((name) => (
-                <ExploreObj key={name} bgcolor={colors.gray1} onClick={()=>{removeIndustries(name)}}>
+                <ExploreObj
+                  key={name}
+                  bgcolor={colors.silver}
+                  onClick={() => {
+                    removeIndustries(name);
+                  }}
+                >
                   &times; {name}
                 </ExploreObj>
               ))}
