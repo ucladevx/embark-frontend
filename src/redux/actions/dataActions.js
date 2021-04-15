@@ -13,6 +13,10 @@ import {
   SET_HAS_NEXT,
   NEW_EVENT,
   SET_EVENTS,
+  SET_CLUB_RESOURCES,
+  SET_CLUB_LINKS,
+  UPLOAD_CLUB_RESOURCES,
+  UPLOAD_CLUB_LINKS,
 } from "../types";
 
 import axios from "axios";
@@ -228,3 +232,35 @@ export const getEvents = () => async (dispatch) => {
     console.error(err);
   }
 };
+
+// Get club resources
+export const getResources = () => async (dispatch) => {
+  // Get request not implemented yet
+};
+
+// Club upload one resource
+export const uploadResource = (newResource) => async (dispatch) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", newResource);
+    const res = await axios.post('/club/resources?linkFile=file', formData);
+    console.log(res);
+    dispatch({ type: UPLOAD_CLUB_RESOURCES, payload: res.data });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const uploadLink = (newLink) => async (dispatch) => {
+  try {
+    console.log(newLink);
+    const res = await axios.post('/club/resources?linkFile=link', {
+      link: newLink,
+    });
+    console.log(res);
+    dispatch({ type: UPLOAD_CLUB_LINKS, payload: res.data });
+  } catch (err) {
+    console.log(err);
+  }
+};
+

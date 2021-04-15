@@ -12,6 +12,10 @@ import {
   SET_NEXT_STRING,
   NEW_EVENT,
   SET_EVENTS,
+  SET_CLUB_RESOURCES,
+  SET_CLUB_LINKS,
+  UPLOAD_CLUB_RESOURCES,
+  UPLOAD_CLUB_LINKS,
 } from "../types";
 
 const initialState = {
@@ -20,6 +24,8 @@ const initialState = {
   nextString: "",
   hasNext: true,
   events: [],
+  resources: [],
+  links: [],
 };
 
 export default function dataReducer(state = initialState, action) {
@@ -46,7 +52,7 @@ export default function dataReducer(state = initialState, action) {
     case LIKE_POST:
     case UNLIKE_POST:
       index = state.posts.findIndex(
-        (post) => post.post_id === action.payload.post.post_id
+        (post) => post.post_id === action.payload.post.post_id,
       );
       const newPosts = [...state.posts];
       newPosts[index] = action.payload.post;
@@ -79,7 +85,7 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         filter: state.filter.filter(
-          (eachfilter) => eachfilter !== action.payload
+          (eachfilter) => eachfilter !== action.payload,
         ),
       };
     case FILTER_POSTS: {
@@ -111,6 +117,21 @@ export default function dataReducer(state = initialState, action) {
         ...state,
         events: action.payload,
       };
+    case SET_CLUB_RESOURCES:
+      return {
+        ...state,
+        resources: action.payload,
+      };
+    case UPLOAD_CLUB_RESOURCES:
+      return {
+        ...state,
+        resources: [action.payload, ...state.resources],
+      };
+    case UPLOAD_CLUB_LINKS:
+      return {
+        ...state,
+        links: [action.payload, ...state.links],
+      }
     default:
       return state;
   }

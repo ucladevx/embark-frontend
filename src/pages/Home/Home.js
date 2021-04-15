@@ -77,7 +77,7 @@ const Home = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    styleCalendar();
+    // styleCalendar();
   }, []);
 
   const removeUpdateFilters = (t) => {

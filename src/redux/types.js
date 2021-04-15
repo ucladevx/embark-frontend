@@ -24,6 +24,10 @@ export const NEW_EVENT = "NEW_EVENT";
 export const SET_EVENTS = "SET_EVENTS";
 export const ADD_FILTER = "ADD_FILTER";
 export const REMOVE_FILTER = "REMOVE_FILTER";
+export const SET_CLUB_RESOURCES = "SET_CLUB_RESOURCES";
+export const SET_CLUB_LINKS = "SET_CLUB_LINKS";
+export const UPLOAD_CLUB_RESOURCES = "UPLOAD_CLUB_RESOURCES";
+export const UPLOAD_CLUB_LINKS = "UPLOAD_CLUB_LINKS";
 
 // Ui reducer types
 export const SET_ERRORS = "SET_ERRORS";
