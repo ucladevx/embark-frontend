@@ -65,7 +65,7 @@ const testEvent = [
     description:
       "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
     venue: "here what do you think",
-    attendees: [123,147,1492,10238],
+    attendees: [123, 147, 1492, 10238],
   },
 ];
 
@@ -97,7 +97,7 @@ const ClubEventsTab = () => {
 
   useEffect(() => {
     var eventFound = false;
-    if(!viewDate){
+    if (!viewDate) {
       setEvent({});
       return;
     }
@@ -120,7 +120,10 @@ const ClubEventsTab = () => {
   const [showTest, setShowTest] = useState(false);
   useEffect(() => {
     const myDate = new Date(testEvent[0].startDate);
-    if ( viewDate && myDate && viewDate._d &&
+    if (
+      viewDate &&
+      myDate &&
+      viewDate._d &&
       myDate.getDate() === viewDate._d.getDate() &&
       myDate.getMonth() === viewDate._d.getMonth() &&
       myDate.getFullYear() === viewDate._d.getFullYear()

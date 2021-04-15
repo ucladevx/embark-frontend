@@ -10,7 +10,6 @@ import {
 import { BoldTypography } from "../../shared/Typography";
 import styled from "styled-components";
 
-
 // Dayjs
 import dayjs from "dayjs";
 const relativeTime = require("dayjs/plugin/relativeTime");
@@ -70,7 +69,10 @@ const ClubEvent = (props) => {
           <TopBar>
             <BoldTypography sz={"16px"}>{props.e.title}</BoldTypography>
             <AttendeesWrapper>
-              <GoingTypography>{props.e.attendees.length}{" going"}</GoingTypography>
+              <GoingTypography>
+                {props.e.attendees.length}
+                {" going"}
+              </GoingTypography>
             </AttendeesWrapper>
           </TopBar>
           <EventTypography>{props.e.authorEmail}</EventTypography>
