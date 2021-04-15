@@ -243,7 +243,7 @@ export const uploadResource = (newResource) => async (dispatch) => {
   try {
     const formData = new FormData();
     formData.append("file", newResource);
-    const res = await axios.post('/club/resources?linkFile=file', formData);
+    const res = await axios.post("/club/resources?linkFile=file", formData);
     console.log(res);
     dispatch({ type: UPLOAD_CLUB_RESOURCES, payload: res.data });
   } catch (err) {
@@ -254,7 +254,7 @@ export const uploadResource = (newResource) => async (dispatch) => {
 export const uploadLink = (newLink) => async (dispatch) => {
   try {
     console.log(newLink);
-    const res = await axios.post('/club/resources?linkFile=link', {
+    const res = await axios.post("/club/resources?linkFile=link", {
       link: newLink,
     });
     console.log(res);
@@ -263,4 +263,3 @@ export const uploadLink = (newLink) => async (dispatch) => {
     console.log(err);
   }
 };
-

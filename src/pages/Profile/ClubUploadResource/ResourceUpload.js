@@ -12,7 +12,7 @@ import {
   Button,
   makeStyles,
 } from "@material-ui/core";
-import './resource-css.css';
+import "./resource-css.css";
 import { BoldTypography } from "../../../shared/Typography";
 import { colors, mediaQueries } from "../../../shared/config";
 import { ExploreFilter, ExploreObj } from "../StyleProfile";
@@ -55,7 +55,7 @@ const DriveUpload = ({ handleDrive, handleName, handleUploaded }) => {
   const [documents, setDocuments] = useState([]);
   const [isLoadingGoogleDriveApi, setIsLoadingGoogleDriveApi] = useState(false);
   const [isFetchingGoogleDriveFiles, setIsFetchingGoogleDriveFiles] = useState(
-    false
+    false,
   );
   const [oauthToken, setAuthToken] = useState("");
   const [signedInUser, setSignedInUser] = useState();
@@ -113,7 +113,7 @@ const DriveUpload = ({ handleDrive, handleName, handleUploaded }) => {
         },
         function (error) {
           console.log(error);
-        }
+        },
       );
   };
 
@@ -177,7 +177,7 @@ const RenderFileUpload = ({ handleTabClose }) => {
   const inputFile = useRef(null);
   const [uploaded, setUploaded] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedDriveLink, setSelectedDriveLink] = useState('');
+  const [selectedDriveLink, setSelectedDriveLink] = useState("");
   const [selectedFileName, setFileName] = useState("");
   const dispatch = useDispatch();
 
@@ -238,7 +238,11 @@ const RenderFileUpload = ({ handleTabClose }) => {
               style={{ margin: 4, width: "auto", justifyContent: "center" }}
               bgcolor={colors.red1}
             >
-              <DriveUpload handleDrive={handleDrive} handleName={setFileName} handleUploaded={setUploaded} />
+              <DriveUpload
+                handleDrive={handleDrive}
+                handleName={setFileName}
+                handleUploaded={setUploaded}
+              />
             </ExploreObj>
           </Grid>
         </Grid>
@@ -292,22 +296,28 @@ const RenderFileUpload = ({ handleTabClose }) => {
 };
 
 const RenderEmbedLink = ({ handleTabClose }) => {
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState("");
   const dispatch = useDispatch();
 
   const handleUrl = (e) => {
     setUrl(e.target.value);
-  }
+  };
 
   const handleEmbed = () => {
     dispatch(uploadLink(url));
-  }
+  };
 
   return (
     <Grid>
       <Grid container style={{ marginTop: 20 }}>
         <Grid item xs={12}>
-          <TextField fullWidth id="filled-basic" variant="filled" label="Link" onChange={handleUrl} />
+          <TextField
+            fullWidth
+            id="filled-basic"
+            variant="filled"
+            label="Link"
+            onChange={handleUrl}
+          />
         </Grid>
       </Grid>
 
@@ -328,7 +338,9 @@ const RenderEmbedLink = ({ handleTabClose }) => {
 
       <Grid container style={{ marginTop: 20, justifyContent: "center" }}>
         <Button variant="contained" color="primary" size="large">
-          <Box fontWeight="fontWeightBold" onClick={handleEmbed}>Embed</Box>
+          <Box fontWeight="fontWeightBold" onClick={handleEmbed}>
+            Embed
+          </Box>
         </Button>
       </Grid>
     </Grid>

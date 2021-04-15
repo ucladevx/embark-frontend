@@ -131,7 +131,7 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         links: [action.payload, ...state.links],
-      }
+      };
     default:
       return state;
   }
