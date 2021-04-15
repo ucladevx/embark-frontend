@@ -105,7 +105,7 @@ const NavBar = () => {
   const handleUserIconClick = (e) => {
     // just console log for now
     console.log("User Icon Clicked");
-    history.push("/user/"+ user._id);
+    history.push("/user/" + user._id);
   };
 
   const handleCollapseIconClick = (e) => {

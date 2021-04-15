@@ -87,7 +87,7 @@ export const EditProfileButton = styled(Button)`
   bottom: 1vw;
   font-size: 14px;
   text-transform: none;
-  color: #5A5A5A;
+  color: #5a5a5a;
   background: ${colors.gray2};
   border-radius: 5px;
 `;

@@ -111,5 +111,5 @@ export const DoneBtn = styled(ActionButton)`
   height: 40px;
   margin: auto;
   color: ${colors.black};
-  background-color: #C3DAFE;
+  background-color: #c3dafe;
 `;

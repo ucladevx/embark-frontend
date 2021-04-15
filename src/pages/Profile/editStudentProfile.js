@@ -95,6 +95,11 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     setIndustries(e.target.value);
   };
 
+  const removeIndustries = (name) =>{
+    const newIndustries = industries.filter((ind)=> ind !== name);
+    setIndustries(newIndustries);
+  }
+
   const handlelinkedIn = (e) => {
     setLinkedin(e.target.value);
     console.log(linkedin);
@@ -262,7 +267,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             {/* {console.log("print user tags", user.tags)} */}
             {industries &&
               industries.map((name) => (
-                <ExploreObj key={name} bgcolor={colors.gray1}>
+                <ExploreObj key={name} bgcolor={colors.gray1} onClick={()=>{removeIndustries(name)}}>
                   &times; {name}
                 </ExploreObj>
               ))}
@@ -309,18 +314,16 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             type="email"
             fullWidth
             InputProps={{
-              startAdornment:(
+              startAdornment: (
                 <InputAdornment position="start">
-              <img src={Linkedin}></img>
-            </InputAdornment>                
-              )
-              ,        
+                  <img src={Linkedin}></img>
+                </InputAdornment>
+              ),
               disableUnderline: true,
               style: {
                 fontSize: 16,
                 fontWeight: 600,
               },
-
             }}
             onChange={handlelinkedIn}
           />

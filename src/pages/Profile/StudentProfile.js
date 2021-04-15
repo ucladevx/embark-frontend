@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import React, { useState } from "react";
 import NavBar from "../../components/NavBar";
 import {
   HeaderImage,
@@ -17,15 +16,17 @@ import {
   ExploreObj,
   Footer,
 } from "./StyleProfile";
-import lawn from "../../images/lawn.png";
-import linkedin from "../../images/linkedin.png";
-import pencil from "../../images/pencil.png"
 import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
-import { Button } from "@material-ui/core";
 import EditProfile from "./editStudentProfile";
 import UserProfileTabs from "./StudentProfileTabs";
 import { colors } from "../../shared/config";
+import {handleTagColor} from "../../utils/handleTagColors.js"
+//image
+import linkedin from "../../images/linkedin.png";
+import pencil from "../../images/pencil.png";
+
+//redux
 import { useDispatch, useSelector } from "react-redux";
 const StudentProfile = (props) => {
   const user = useSelector((state) => state.user);
@@ -71,7 +72,7 @@ const StudentProfile = (props) => {
                 {tags &&
                   tags.map((name) => {
                     return (
-                      <ExploreObj key={name} bgcolor={colors.red1}>
+                      <ExploreObj key={name} bgcolor={handleTagColor(name)}>
                         {name}
                       </ExploreObj>
                     );
@@ -84,7 +85,7 @@ const StudentProfile = (props) => {
                 seteditProfile(true);
               }}
             >
-            <img style={{ marginRight: "2px" }} src={pencil}></img>
+              <img style={{ marginRight: "2px" }} src={pencil}></img>
               Edit Profile
             </EditProfileButton>
           </ProfileInfo>
