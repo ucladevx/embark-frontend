@@ -7,6 +7,7 @@ import {
   ListItemText,
   Input,
   InputAdornment,
+  Typography,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
@@ -32,8 +33,13 @@ import {
   DialogTextField,
   TextFieldWrapper,
   DoneBtn,
+  DropDownTitle, 
+  DropDownContent
 } from "./StyleEditProfile";
+import DropDown from "./dropdown";
 import Linkedin from "../../images/linkedin.png";
+import checked from "../../images/checked_24px.png";
+import unchecked from "../../images/unchecked_24px.png";
 import { makeStyles } from "@material-ui/core/styles";
 // import ImageUploader from 'react-images-upload';
 
@@ -68,6 +74,16 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const hiddenCoverInput = React.useRef(null);
   const tags = user.tags;
 
+  //dropdown year
+  const [openYear, setOpenYear] = useState(false);
+  const [openInd, setOpenInd] = useState(false);
+  const toggleOpenYear = () => {
+      setOpenYear(!openYear);
+  }
+  const toggleOpenInd = () => {
+    setOpenInd(!openInd);
+}
+
   useEffect(() => {
     // console.log("useEffect");
     // console.log("after render print user.tags",user.tags)
@@ -86,14 +102,29 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const handleYear = (e) => {
     setYear(e.target.value);
   };
+
+  const changeYear = (e) => {
+    setYear(e);
+    toggleOpenYear();
+  };
+
   const handleMajor = (e) => {
     setMajor(e.target.value);
   };
-
-  const addIndustries = (e) => {
-    // console.log("change industries to ", e.target.value);
-    setIndustries(e.target.value);
-  };
+  
+  const handleIndustries = (name) =>{
+    if (industries.includes(name)){
+        const newIndustries = industries.filter((ind) => ind !== name);
+        setIndustries(newIndustries);
+    }else{
+      const newIndustries =[...industries, name];
+      setIndustries(newIndustries);
+    }
+  }
+  // const addIndustries = (e) => {
+  //   // console.log("change industries to ", e.target.value);
+  //   setIndustries(e.target.value);
+  // };
 
   const removeIndustries = (name) => {
     const newIndustries = industries.filter((ind) => ind !== name);
@@ -226,7 +257,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           onChange={handleCoverURL}
         />
         {/* year */}
-        <TextFieldWrapper>
+        {/* <TextFieldWrapper>
           <BoldTypography sz={"18px"}>Year:</BoldTypography>
           <FormControlC>
             <Select disableUnderline value={year} onChange={handleYear}>
@@ -237,7 +268,23 @@ const EditProfile = ({ open, handleClose, allTags }) => {
               ))}
             </Select>
           </FormControlC>
+        </TextFieldWrapper> */}
+        <TextFieldWrapper>
+          <BoldTypography sz={"18px"}>Year:</BoldTypography>
+          <div >
+        <DropDownTitle wd={"128px"} onClick = {toggleOpenYear}>{year}</DropDownTitle>  
+            {openYear && 
+            <DropDownContent  wd={"128px"} hg = {"169px"} overflow={"hidden"}>
+                {years.map((year, index)=>(
+                    <MenuItem onClick = {()=>{changeYear(year)}} key = {index}>{year}</MenuItem>
+                ))}
+            </DropDownContent>
+
+            }    
+        </div>
         </TextFieldWrapper>
+        
+
 
         {/* major */}
         <TextFieldWrapper>
@@ -278,7 +325,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
                 </ExploreObj>
               ))}
           </ExploreFilter>
-          <FormControlC>
+          {/* <FormControlC>
             <Select
               multiple
               disableUnderline
@@ -304,7 +351,33 @@ const EditProfile = ({ open, handleClose, allTags }) => {
                   </MenuItem>
                 ))}
             </Select>
-          </FormControlC>
+          </FormControlC> */}
+          <div >
+        <DropDownTitle  wd={"312px"} onClick = {toggleOpenInd}>Select All that Apply</DropDownTitle>  
+            {openInd && 
+            <div>
+
+            <DropDownContent  wd={"312px"}  hg = {"248px"} overflow={"scroll"}>
+                {industry.map((name, index)=>(
+                  
+                  <MenuItem key={name} value={name}>
+                  <img onClick = {()=>{handleIndustries(name)}} src={industries && industries.includes(name)? checked:unchecked} style={{border:"1px solid #ADAFB0", borderRadius:"2px"}}></img>
+                    {/* <Checkbox
+                      checked={industries && industries.includes(name)}
+                      color="default"
+                      onClick = {()=>{handleIndustries(name)}}
+                    /> */}
+                    <Typography style={{fontSize:"18px", margin:"5.5px"}}>{name}</Typography>
+                  </MenuItem>
+                ))
+                }
+            </DropDownContent>   
+              <DropDownTitle style={{borderRadius:"0px", justifyContent:"center"}} wd={"312px"} onClick = {toggleOpenInd}>Finished</DropDownTitle>  
+            </div>
+
+            
+            }    
+        </div>
         </TextFieldWrapper>
 
         {/* linkedIn */}

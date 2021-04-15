@@ -113,3 +113,27 @@ export const DoneBtn = styled(ActionButton)`
   color: ${colors.black};
   background-color: #c3dafe;
 `;
+
+export const DropDownTitle = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 7px 15px;
+  width: ${(props) => props.wd};
+  height: 35px;
+  top: 551px;
+  left: 503px;
+  border-radius: 10px;
+  background-color: ${colors.gray1};
+  color: ${colors.gray3};
+
+`
+
+export const DropDownContent = styled.div`
+  background-color: ${colors.white};
+  width: ${(props) => props.wd};
+  height: ${(props) => props.hg};
+  overflow-y: ${(props) => props.overflow};
+  ${'' /* box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25); */}
+  margin-top: 10px;
+
+`
