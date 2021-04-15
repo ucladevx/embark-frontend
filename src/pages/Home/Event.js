@@ -10,7 +10,7 @@ import {
 } from "./StyleLanding";
 import { BoldTypography } from "../../shared/Typography";
 import { useSelector, useDispatch } from "react-redux";
-import { goingToEvent } from "../../redux/actions/userActions";
+import { goingToEvent, cancelAttendingEvent } from "../../redux/actions/userActions";
 
 // Dayjs
 import dayjs from "dayjs";
@@ -29,7 +29,7 @@ const Event = (props) => {
     if (props.test) {
       return test(moment);
     }
-    let date = moment;
+    let date = JSON.stringify(moment);
     date = date.replace("T", " ");
     date = date.replace("Z", " ");
     date = date.concat(" GMT");
@@ -37,8 +37,20 @@ const Event = (props) => {
   };
   const dispatch = useDispatch();
   const attending = useSelector((state) => state.user.goingEvents);
+  const hasID = (id) => {
+    for(var i = 0; i < attending.length; i++){
+      if(attending[i]._id === id){
+        return true;
+      }
+    }
+    return false;
+  }
   const goingClick = (id) => {
-    dispatch(goingToEvent(id));
+    if(hasID(id)){
+      dispatch(goingToEvent(id));
+    } else {
+      dispatch(cancelAttendingEvent(id));
+    }
   };
   return (
     <>
@@ -56,11 +68,11 @@ const Event = (props) => {
         >
           <BoldTypography sz={"16px"}>{props.e.title}</BoldTypography>
           <EventTypography>{props.e.authorEmail}</EventTypography>
-          <TimeTypography>{makeDay(props.e.date)}</TimeTypography>
+          <TimeTypography>{makeDay(props.e.startDate)}</TimeTypography>
         </EventDescription>
         <GoingBtn
           onClick={goingClick(props.e._id)}
-          bgcolor={attending.includes(props.e._id)}
+          bgcolor={hasID(props.e._id)}
         >
           Going
         </GoingBtn>

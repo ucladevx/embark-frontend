@@ -7,6 +7,7 @@ import {
   MARK_NOTIFICATIONS_READ,
   GOING_EVENT,
   OWN_EVENTS,
+  CANCEL_ATTENDANCE_EVENT,
 } from "../types";
 
 const intialState = {
@@ -68,6 +69,13 @@ export default function userReducer(state = intialState, action) {
       return {
         ...state,
         ownEvents: [action.payload],
+      };
+    case CANCEL_ATTENDANCE_EVENT:
+      return {
+        ...state,
+        goingEvents: state.goingEvents.filter(
+          (event) => event.eventId !== action.payload
+        ),
       };
     default:
       return state;

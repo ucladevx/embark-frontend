@@ -13,7 +13,6 @@ import NewEvent from "../../components/NewEvent";
 import ExpandedEvent from "../Home/ExpandedEvent";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { getOwnEvents } from "../../redux/actions/userActions";
-import moment from "moment";
 import "moment-timezone";
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
@@ -60,7 +59,8 @@ const testEvent = [
     _id: "123450",
     title: "Embark Release",
     authorEmail: "Embark",
-    date: "2021-04-03T08:00:00.000Z",
+    startDate: "2021-04-03T08:00:00.000Z",
+    endDate: "2021-04-03T09:00:00.000Z",
     description:
       "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
     location: "here what do you think",
@@ -89,15 +89,17 @@ const ClubEventsTab = () => {
   }, []);
 
   const handleTime = (time) => {
+    console.log(time);
     setViewDate(time);
   };
 
   useEffect(() => {
-    const selectedDate = JSON.stringify(viewDate);
     var eventFound = false;
     for (var i = 0; i < hostedEvents.length; i++) {
+      const myDate = hostedEvents[i].startDate;
       if (
-        hostedEvents[i].date.substring(0, 10) === selectedDate.substring(1, 11)
+        myDate.getDate()===viewDate._d.getDate()
+        &&myDate.getMonth()===viewDate._d.getMonth()&&myDate.getFullYear()===viewDate._d.getFullYear()
       ) {
         setEvent(hostedEvents[i]);
         eventFound = true;
@@ -110,8 +112,9 @@ const ClubEventsTab = () => {
 
   const [showTest, setShowTest] = useState(false);
   useEffect(() => {
-    const selectedDate = JSON.stringify(viewDate);
-    if (testEvent[0].date.substring(0, 10) == selectedDate.substring(1, 11)) {
+    const myDate = new Date(testEvent[0].startDate);
+    if (myDate.getDate()===viewDate._d.getDate()
+    &&myDate.getMonth()===viewDate._d.getMonth()&&myDate.getFullYear()===viewDate._d.getFullYear()) {
       setShowTest(true);
     } else setShowTest(false);
   }, [viewDate]);
@@ -140,14 +143,14 @@ const ClubEventsTab = () => {
       </InnerWrapper>
       <div>
         <Datetime
-          input={false}
+          input={true}
           onChange={handleTime}
           onClose={handleTime}
           value={viewDate}
           open={true}
           dateFormat="dddd, MMMM DD"
           timeFormat={false}
-          displayTimeZone={Intl.DateTimeFormat().resolvedOptions().timeZone}
+          
         />
       </div>
     </OuterWrapper>

@@ -16,10 +16,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { goingToEvent } from "../../redux/actions/userActions";
 import ExpandedEvent from "./ExpandedEvent.js";
 import Event from "./Event.js";
+import { ActionButton } from "../../shared/Buttons";
 
 // Dayjs
 import dayjs from "dayjs";
-import { ActionButton } from "../../shared/Buttons";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
@@ -53,7 +53,8 @@ const testEvent = [
     _id: "123450",
     title: "Embark Release",
     authorEmail: "Embark",
-    date: /*"2021-03-03T08:00:00.000Z"*/ "2021-04-25T04:13:32.000Z",
+    startDate: /*"2021-03-03T08:00:00.000Z"*/ "2021-04-25T04:13:32.000Z",
+    endDate: "2021-04-25T06:13:32.000Z",
     description:
       "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
     location: "here what do you think",

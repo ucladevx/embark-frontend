@@ -8,8 +8,10 @@ import {
   GOING_EVENT,
   SET_ERRORS,
   OWN_EVENTS,
+  CANCEL_ATTENDANCE_EVENT,
 } from "../types";
 import axios from "axios";
+import { AccessibilityNewSharp } from "@material-ui/icons";
 
 const maintenanceErrorCheck = (err) => {
   if (err.message.includes(" 503")) {
@@ -155,6 +157,18 @@ export const goingToEvent = (eventId) => async (dispatch) => {
       userType: "student",
     });
     dispatch({ type: GOING_EVENT, payload: eventId });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+//Cancel attending an event
+export const cancelAttendingEvent = (eventId) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/events/:${eventId}/cancel`, {
+      userType: "student",
+    });
+    dispatch({ type: CANCEL_ATTENDANCE_EVENT, payload: eventId });
   } catch (err) {
     console.error(err);
   }

@@ -16,10 +16,10 @@ import dayjs from "dayjs";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
-const test = (moment) => {
-  let date = moment.replace("T", " ");
+const test = (time) => {
+  let date = time.replace("T", " ");
   date = date.replace("Z", " ");
-  date = date.concat(" UTC");
+  date = date.concat(" GMT");
   return dayjs(date).format("MMM DD HH:mm a");
 };
 
@@ -28,11 +28,12 @@ const ClubEvent = (props) => {
     if (props.test) {
       return test(moment);
     }
-    let date = moment;
+    let date = JSON.stringify(moment);
     date = date.replace("T", " ");
     date = date.replace("Z", " ");
     date = date.concat(" GMT");
-    return dayjs(date).format("MMM DD HH:mm a");
+    
+    return dayjs(date).format("MMM DD HH:mm a").tz(Intl.DateTimeFormat().resolvedOptions().timeZone);
   };
   return (
     <>
@@ -50,7 +51,7 @@ const ClubEvent = (props) => {
         >
           <BoldTypography sz={"16px"}>{props.e.title}</BoldTypography>
           <EventTypography>{props.e.authorEmail}</EventTypography>
-          <TimeTypography>{makeDay(props.e.date)}</TimeTypography>
+          <TimeTypography>{makeDay(props.e.startDate)}</TimeTypography>
         </EventDescription>
       </EventItem>
     </>

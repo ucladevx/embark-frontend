@@ -121,7 +121,10 @@ const NewEvent = ({ open, handleClose }) => {
     console.log(moment);
     console.log(moment instanceof Date);
     console.log(JSON.stringify(time));
+    console.log(moment.toDate());
+    console.log(JSON.stringify(time.toDate()));
   };
+
 
   const handleSubmit = async () => {
     const event = {
@@ -130,7 +133,8 @@ const NewEvent = ({ open, handleClose }) => {
       tags: [],
       organizerName: user.name,
       organizerEmail: user.email,
-      date: JSON.stringify(time),
+      startDate: time.toDate(),
+      endDate: time.toDate(),
       venue: location,
       desc: description,
     };
