@@ -48,7 +48,7 @@ export const ProfileAvatar = styled(Avatar)`
   background-color: #838383;
   border: 5px solid ${colors.white};
 `;
-
+ 
 export const ProfileWrapper = styled.div`
   background: ${colors.blue2};
   display: flex;

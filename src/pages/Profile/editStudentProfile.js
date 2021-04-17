@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  Select,
   MenuItem,
-  InputLabel,
-  Checkbox,
-  ListItemText,
-  Input,
   InputAdornment,
   Typography,
 } from "@material-ui/core";
@@ -28,15 +23,15 @@ import {
   EditCoverImage,
   EditProfileContent,
   EditProfileDone,
-  FormControlC,
-  Suggested,
   DialogTextField,
   TextFieldWrapper,
   DoneBtn,
+  DropDownBox,
   DropDownTitle,
   DropDownContent,
+  DropDownCheckBox,
+  Finished,
 } from "./StyleEditProfile";
-import DropDown from "./dropdown";
 import Linkedin from "../../images/linkedin.png";
 import checked from "../../images/checked_24px.png";
 import unchecked from "../../images/unchecked_24px.png";
@@ -59,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 const EditProfile = ({ open, handleClose, allTags }) => {
   const classes = useStyles();
-  const years = ["2021", "2022", "2023", "2024"];
+  const years = ["2024","2023", "2022","2021"];
   const industry = IndustryFilters;
   const user = useSelector((state) => state.user);
   const [name, setName] = useState(user.name);
@@ -100,10 +95,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const dispatch = useDispatch();
 
   const handleYear = (e) => {
-    setYear(e.target.value);
-  };
-
-  const changeYear = (e) => {
     setYear(e);
     toggleOpenYear();
   };
@@ -113,7 +104,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   };
 
   const handleIndustries = (name) => {
-    if (industries.includes(name)) {
+    if (industries && industries.includes(name)) {
       const newIndustries = industries.filter((ind) => ind !== name);
       setIndustries(newIndustries);
     } else {
@@ -190,17 +181,19 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     //     coverData,
     //   );
     // }
-
-    handleClose();
+    onClose();
   };
 
   const onClose = () => {
+    //reset everything
     setYear(user.year);
     setMajor(user.major);
     setIndustries(user.tags);
     setLinkedin(user.linkedIn);
     setProfileURL(user.profilePicURL);
     setCoverURL(user.coverPicURL);
+    setOpenInd(false);
+    setOpenYear(false);
     handleClose();
   };
 
@@ -213,6 +206,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
         </EditProfileTitle>
       </TitleContainer>
       <EditProfileContent id="scroll-dialog-description">
+
         {/* Avatar */}
         {console.log("profileURL.url=", profileURL.url)}
         <EditProfileAvatar
@@ -234,7 +228,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           style={{ display: "none" }}
           onChange={handleProfileURL}
         />
-        {/* {console.log("profileURL=", user.profilePicURL)} */}
 
         {/* Cover Picture */}
         <TextFieldWrapper>
@@ -257,37 +250,29 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           onChange={handleCoverURL}
         />
         {/* year */}
-        {/* <TextFieldWrapper>
-          <BoldTypography sz={"18px"}>Year:</BoldTypography>
-          <FormControlC>
-            <Select disableUnderline value={year} onChange={handleYear}>
-              {years.map((y) => (
-                <MenuItem key={y} value={y} name="year">
-                  {y}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControlC>
-        </TextFieldWrapper> */}
         <TextFieldWrapper>
           <BoldTypography sz={"18px"}>Year:</BoldTypography>
           <div>
             <DropDownTitle wd={"128px"} onClick={toggleOpenYear}>
-              {year}
+              {year} 
             </DropDownTitle>
             {openYear && (
-              <DropDownContent wd={"128px"} hg={"169px"} overflow={"hidden"}>
-                {years.map((year, index) => (
-                  <MenuItem
-                    onClick={() => {
-                      changeYear(year);
-                    }}
-                    key={index}
-                  >
-                    {year}
-                  </MenuItem>
-                ))}
-              </DropDownContent>
+              <DropDownBox wd={"97px"} hg={"149px"} style={{width:"97px", height:"149px"}}>
+                <DropDownContent wd={"97px"} hg={"149px"} overflow={"hidden"} style={{width:"97px", height:"149px"}}>
+                  {years.map((year, index) => (
+                    <MenuItem
+                      onClick={() => {
+                        handleYear(year);
+                      }}
+                      key={index}
+                    >
+                      {year}
+                    </MenuItem>
+                  ))}
+                </DropDownContent>
+
+              </DropDownBox>
+
             )}
           </div>
         </TextFieldWrapper>
@@ -316,13 +301,14 @@ const EditProfile = ({ open, handleClose, allTags }) => {
         {/* interested industries */}
         <TextFieldWrapper>
           <BoldTypography sz={"18px"}>Interested Industries:</BoldTypography>
+
+          {/* industries filters */}
           <ExploreFilter>
-            {/* {console.log("print user tags", user.tags)} */}
             {industries &&
               industries.map((name) => (
                 <ExploreObj
                   key={name}
-                  bgcolor={colors.silver}
+                  bgcolor={colors.gray}
                   onClick={() => {
                     removeIndustries(name);
                   }}
@@ -331,43 +317,21 @@ const EditProfile = ({ open, handleClose, allTags }) => {
                 </ExploreObj>
               ))}
           </ExploreFilter>
-          {/* <FormControlC>
-            <Select
-              multiple
-              disableUnderline
-              value={industries ? industries : allTags}
-              onChange={addIndustries}
-              MenuProps={{
-                getContentAnchorEl: null,
-                anchorOrigin: {
-                  vertical: "bottom",
-                  horizontal: "left",
-                },
-                classes: { paper: classes.menuPaper },
-              }}
-            >
-              {industry &&
-                industry.map((name) => (
-                  <MenuItem key={name} value={name}>
-                    <Checkbox
-                      checked={industries && industries.includes(name)}
-                      color="default"
-                    />
-                    <ListItemText primary={name} />
-                  </MenuItem>
-                ))}
-            </Select>
-          </FormControlC> */}
-          <div>
-            <DropDownTitle wd={"312px"} onClick={toggleOpenInd}>
-              Select All that Apply
+          
+          {/* dropdown menu */}
+
+            <DropDownTitle wd={"312px"} hg={"35px"} onClick={toggleOpenInd}>
+            <Typography style={{display:"inline"}}>Select all that apply</Typography>
+            <Typography style={{display:"inline", position:"absolute", right:"150px"}}>^</Typography>
             </DropDownTitle>
-            {openInd && (
-              <div>
+            {openInd && ( 
+              <DropDownBox
+                wd= {"314px"}
+                hg= {"202px"}>
                 <DropDownContent wd={"312px"} hg={"248px"} overflow={"scroll"}>
                   {industry.map((name, index) => (
-                    <MenuItem key={name} value={name}>
-                      <img
+                    <div key={name} style={{paddingLeft:"19px", height:"25px", marginTop:"14px", marginBottom:"14px"}}>
+                      <DropDownCheckBox
                         onClick={() => {
                           handleIndustries(name);
                         }}
@@ -376,32 +340,23 @@ const EditProfile = ({ open, handleClose, allTags }) => {
                             ? checked
                             : unchecked
                         }
-                        style={{
-                          border: "1px solid #ADAFB0",
-                          borderRadius: "2px",
-                        }}
-                      ></img>
-                      {/* <Checkbox
-                      checked={industries && industries.includes(name)}
-                      color="default"
-                      onClick = {()=>{handleIndustries(name)}}
-                    /> */}
-                      <Typography style={{ fontSize: "18px", margin: "5.5px" }}>
+                      ></DropDownCheckBox>
+                      <Typography style={{ fontSize: "18px", marginLeft: "3px", padding:"0px", display:"inline" }}>
                         {name}
                       </Typography>
-                    </MenuItem>
+                    </div>
                   ))}
                 </DropDownContent>
-                <DropDownTitle
-                  style={{ borderRadius: "0px", justifyContent: "center" }}
-                  wd={"312px"}
+
+                <Finished
+                  wd={"314px"}
+                  hg={"46px"}
                   onClick={toggleOpenInd}
                 >
                   Finished
-                </DropDownTitle>
-              </div>
+                </Finished>
+              </DropDownBox>
             )}
-          </div>
         </TextFieldWrapper>
 
         {/* linkedIn */}

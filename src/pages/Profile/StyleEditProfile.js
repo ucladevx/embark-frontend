@@ -25,6 +25,7 @@ export const EditProfileContainer = styled(Dialog)`
   border-radius: 20px;
   width: 100vw;
   height: 100vh;
+
 `;
 
 export const TitleContainer = styled(DialogTitle)`
@@ -114,26 +115,62 @@ export const DoneBtn = styled(ActionButton)`
   background-color: #c3dafe;
 `;
 
+
 export const DropDownTitle = styled.div`
-  display: flex;
   align-items: center;
   padding: 7px 15px;
   width: ${(props) => props.wd};
-  height: 35px;
-  top: 551px;
-  left: 503px;
+  height: ${(props) => props.hg};
   border-radius: 10px;
-  background-color: ${colors.gray1};
+  background-color:#E1DFDF;
   color: ${colors.gray3};
+`;
 
-`
+export const DropDownBox = styled.div`
+  width: ${(props) => props.wd};
+  height: ${(props) => props.hg};
+  top: 122px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  z-index: 10;
+  position:absolute;
+`;
 
 export const DropDownContent = styled.div`
   background-color: ${colors.white};
   width: ${(props) => props.wd};
   height: ${(props) => props.hg};
+  max-height:202px;
   overflow-y: ${(props) => props.overflow};
-  ${'' /* box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25); */}
-  margin-top: 10px;
+  
+  ::-webkit-scrollbar {
+  width: 7px;
+  height: 76px;
+  margin-right:100px;
+  };
+  ::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background: ${colors.silver};
+  }
+`;
 
-`
+export const DropDownCheckBox = styled.img`
+  display: inline;
+  border: 1px solid #ADAFB0;
+  border-radius: 2px;
+  margin-right: 11px;
+`;
+export const Finished = styled.div`
+  display:flex;
+  justify-content: "center";
+  align-items: center;
+  padding-top: 10px;
+  padding-left: 122px;
+  width: ${(props) => props.wd};
+  height: ${(props) => props.hg};
+  background-color:#E1DFDF;
+  color: ${colors.gray3};  
+  box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.25);
+`;
