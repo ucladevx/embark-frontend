@@ -196,11 +196,13 @@ const RenderFileUpload = ({ handleTabClose }) => {
     inputFile.current.click();
   };
 
-  const handleFileChangeName = (e) => {};
+  const handleFileChangeName = (e) => {
+    setFileName(e.target.value);
+  };
 
   const handleFinalUpload = async () => {
     if (selectedFile !== null) {
-      dispatch(uploadResource(selectedFile));
+      dispatch(uploadResource(selectedFile, selectedFileName));
     } else {
       dispatch(uploadLink(selectedDriveLink));
     }
@@ -297,6 +299,7 @@ const RenderFileUpload = ({ handleTabClose }) => {
 
 const RenderEmbedLink = ({ handleTabClose }) => {
   const [url, setUrl] = useState("");
+  const [urlName, setUrlName] = useState('');
   const dispatch = useDispatch();
 
   const handleUrl = (e) => {
@@ -304,8 +307,13 @@ const RenderEmbedLink = ({ handleTabClose }) => {
   };
 
   const handleEmbed = () => {
-    dispatch(uploadLink(url));
+    dispatch(uploadLink(url, urlName));
+    handleTabClose();
   };
+
+  const handleUrlChangeName = (e) => {
+    setUrlName(e.target.value);
+  }
 
   return (
     <Grid>
@@ -333,6 +341,7 @@ const RenderEmbedLink = ({ handleTabClose }) => {
           id="filled-basic"
           label="Name Your Resource"
           variant="filled"
+          onChange={handleUrlChangeName}
         />
       </Grid>
 

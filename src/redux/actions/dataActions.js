@@ -239,8 +239,9 @@ export const getResources = () => async (dispatch) => {
 };
 
 // Club upload one resource
-export const uploadResource = (newResource) => async (dispatch) => {
+export const uploadResource = (newResource, resourceName) => async (dispatch) => {
   try {
+    console.log(resourceName);
     const formData = new FormData();
     formData.append("file", newResource);
     const res = await axios.post("/club/resources?linkFile=file", formData);
@@ -251,8 +252,9 @@ export const uploadResource = (newResource) => async (dispatch) => {
   }
 };
 
-export const uploadLink = (newLink) => async (dispatch) => {
+export const uploadLink = (newLink, linkName) => async (dispatch) => {
   try {
+    console.log(linkName);
     console.log(newLink);
     const res = await axios.post("/club/resources?linkFile=link", {
       link: newLink,
