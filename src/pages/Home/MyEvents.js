@@ -8,39 +8,16 @@ import {
   EventsWrapper,
   TimeTypography,
   GoingBtn,
-  InfoSeperator,
-  AddFilter,
 } from "./StyleLanding";
-import styled from "styled-components";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { useSelector } from "react-redux";
 import ExpandedEvent from "./ExpandedEvent.js";
 import Event from "./Event.js";
-import { ActionButton } from "../../shared/Buttons";
 
 // Dayjs
 import dayjs from "dayjs";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
-
-export const CreateButton = styled(ActionButton)`
-  height: 26px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  padding: 15px;
-  margin-top: 5px;
-  margin-right: 5px;
-  font-size: 14px;
-  text-transform: none;
-  align-self: flex-end;
-  text-decoration: none;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`;
 
 const test = (moment) => {
   let date = moment.replace("T", " ");

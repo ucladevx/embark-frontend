@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
-import { styleCalendar } from "../Home/Calendar/HomeCalendar";
 import { Button } from "@material-ui/core";
 
 import { StyleEventCalendar } from "../Home/Calendar/EventCalender";
 import "../Home/Calendar/EventCalendar.css";
 import Datetime from "react-datetime";
-import { CalanderWrapper } from "../Home/StyleLanding";
-import { EditProfileButton } from "./StyleProfile";
 import { ActionButton } from "../../shared/Buttons";
 import styled from "styled-components";
 import ClubEvent from "./ClubEvent";
 import NewEvent from "../../components/NewEvent";
 import ExpandedEvent from "../Home/ExpandedEvent";
-import { BoldTypography, TitleTypography } from "../../shared/Typography";
+import { BoldTypography } from "../../shared/Typography";
 import { getOwnEvents } from "../../redux/actions/userActions";
 import "moment-timezone";
 // Dayjs
