@@ -121,9 +121,7 @@ const Events = ({ setNewEvent, openEvents }) => {
               </>
             );
           })}
-          <AddFilter onClick={openEvents}>
-            View More
-          </AddFilter>
+          <AddFilter onClick={openEvents}>View More</AddFilter>
           {usertype === "club" ? (
             <CreateButton onClick={() => setNewEvent(true)}>
               + Create

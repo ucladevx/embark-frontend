@@ -8,7 +8,7 @@ import { StyleEventCalendar } from "../Home/Calendar/EventCalender";
 import "../Home/Calendar/EventCalendar.css";
 import Datetime from "react-datetime";
 import { CalanderWrapper } from "../Home/StyleLanding";
-import {EditProfileButton} from "./StyleProfile";
+import { EditProfileButton } from "./StyleProfile";
 import { ActionButton } from "../../shared/Buttons";
 import styled from "styled-components";
 import ClubEvent from "./ClubEvent";
@@ -156,14 +156,14 @@ const ClubEventsTab = () => {
   }, [viewDate]);
 
   const [viewButton, setViewButton] = useState("View All");
-  const changeView = () =>{
+  const changeView = () => {
     setViewAll(!viewAll);
-    if(viewButton === "View All"){
+    if (viewButton === "View All") {
       setViewButton("View Date");
-    } else{
+    } else {
       setViewButton("View All");
     }
-  }
+  };
 
   return (
     <OuterWrapper>
@@ -180,21 +180,21 @@ const ClubEventsTab = () => {
         ) : (
           <></>
         )}
-        { viewAll ? 
-            hostedEvents.map((e) => {
-              return (
-                <>
-                  <ClubEvent loadExpanded={loadExpanded} e={e} test={false} />
-                </>
-              );
-            }) 
-          : event === null ? (
+        {viewAll ? (
+          hostedEvents.map((e) => {
+            return (
+              <>
+                <ClubEvent loadExpanded={loadExpanded} e={e} test={false} />
+              </>
+            );
+          })
+        ) : event === null ? (
           <ClubEvent loadExpanded={loadExpanded} e={event} test={false} />
         ) : (
           <></>
         )}
         <ButtonWrapper>
-          <ChangeViewButton onClick = {changeView}>{viewButton}</ChangeViewButton>
+          <ChangeViewButton onClick={changeView}>{viewButton}</ChangeViewButton>
           <CreateButton onClick={() => setNewEvent(true)}>+</CreateButton>
         </ButtonWrapper>
       </InnerWrapper>

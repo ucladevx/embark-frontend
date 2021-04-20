@@ -50,7 +50,7 @@ const testEvent = [
   },
 ];
 
-const DiscoverEvents = ({closeEvents}) => {
+const DiscoverEvents = ({ closeEvents }) => {
   const events = useSelector((state) => state.data.events);
 
   const [expanded, setExpanded] = useState(false);
@@ -110,10 +110,8 @@ const DiscoverEvents = ({closeEvents}) => {
             );
           })}
         </EventItems>
-        <AddFilter onClick={closeEvents}>
-            Close View
-        </AddFilter>
-    </DiscoverEventsWrapper>
+        <AddFilter onClick={closeEvents}>Close View</AddFilter>
+      </DiscoverEventsWrapper>
     </>
   );
 };

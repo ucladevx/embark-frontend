@@ -77,7 +77,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getEvents(numEvents));
-  }, [dispatch,numEvents]);
+  }, [dispatch, numEvents]);
 
   useEffect(() => {
     styleCalendar();
@@ -170,9 +170,9 @@ const Home = () => {
               <Posts setNewPost={setNewPost}></Posts>
             ) : page === "explore" ? (
               <Explore></Explore>
-            ) : page === "events" ?
-              (<DiscoverEvents closeEvents={closeEvents}></DiscoverEvents>)
-            : (
+            ) : page === "events" ? (
+              <DiscoverEvents closeEvents={closeEvents}></DiscoverEvents>
+            ) : (
               <></>
             )}
           </MiddleContainer>
@@ -181,12 +181,11 @@ const Home = () => {
             <CalanderWrapper>
               <Calendar></Calendar>
             </CalanderWrapper>
-            {
-              page === "events"? (
-                <MyEvents></MyEvents>
-              ) :
-              (<Events setNewEvent={setNewEvent} openEvents={openEvents}/>)
-            }
+            {page === "events" ? (
+              <MyEvents></MyEvents>
+            ) : (
+              <Events setNewEvent={setNewEvent} openEvents={openEvents} />
+            )}
           </RightContainer>
         </LandingPageWrapper>
       </LandingPage>
