@@ -61,9 +61,8 @@ const testEvent = [
   },
 ];
 
-const Events = ({ setNewEvent, openEvents }) => {
-  const events = useSelector((state) => state.data.events);
-  const usertype = useSelector((state) => state.user.userType);
+const MyEvents = () => {
+  const events = useSelector((state) => state.user.goingEvents);
 
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});
@@ -82,7 +81,7 @@ const Events = ({ setNewEvent, openEvents }) => {
         e={event}
       />
       <EventsWrapper>
-        <TitleTypography>Upcoming Events</TitleTypography>
+        <TitleTypography>My Events</TitleTypography>
         <EventItems>
           <EventItem>
             <EventAvatar></EventAvatar>
@@ -95,25 +94,6 @@ const Events = ({ setNewEvent, openEvents }) => {
             </EventDescription>
             <GoingBtn bgcolor={true}>Going</GoingBtn>
           </EventItem>
-          <InfoSeperator></InfoSeperator>
-          <EventItem>
-            <EventAvatar></EventAvatar>
-            <EventDescription>
-              <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
-              <EventTypography>Club1234</EventTypography>
-              <TimeTypography>
-                {dayjs().format("MMM DD HH:mm a")}
-              </TimeTypography>
-            </EventDescription>
-            <GoingBtn bgcolor={false}>Going</GoingBtn>
-          </EventItem>
-          {testEvent.map((p) => {
-            return (
-              <>
-                <Event loadExpanded={loadExpanded} e={p} test={true} />
-              </>
-            );
-          })}
           {events.map((e) => {
             return (
               <>
@@ -121,20 +101,10 @@ const Events = ({ setNewEvent, openEvents }) => {
               </>
             );
           })}
-          <AddFilter onClick={openEvents}>
-            View More
-          </AddFilter>
-          {usertype === "club" ? (
-            <CreateButton onClick={() => setNewEvent(true)}>
-              + Create
-            </CreateButton>
-          ) : (
-            <></>
-          )}
         </EventItems>
       </EventsWrapper>
     </>
   );
 };
 
-export default Events;
+export default MyEvents;

@@ -215,11 +215,11 @@ export const newEvent = (newE) => async (dispatch) => {
 };
 
 // Get All Events - unsure how the backend will handle event storage(is it paginated?)
-export const getEvents = () => async (dispatch) => {
+export const getEvents = (amount) => async (dispatch) => {
   try {
     const res = await axios.get("/events/discover", {
       params: {
-        limitNum: 8,
+        limitNum: amount,
       },
       userType: "student",
     });

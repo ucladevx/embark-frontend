@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
 import { styleCalendar } from "../Home/Calendar/HomeCalendar";
+import { Button } from "@material-ui/core";
+
 import { StyleEventCalendar } from "../Home/Calendar/EventCalender";
 import "../Home/Calendar/EventCalendar.css";
 import Datetime from "react-datetime";
 import { CalanderWrapper } from "../Home/StyleLanding";
+import {EditProfileButton} from "./StyleProfile";
 import { ActionButton } from "../../shared/Buttons";
 import styled from "styled-components";
 import ClubEvent from "./ClubEvent";
@@ -55,6 +58,25 @@ const InnerWrapper = styled.div`
   min-width: 20vw;
 `;
 
+export const ChangeViewButton = styled(Button)`
+  width: 89px;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-transform: none;
+  color: #ffffff;
+  background: #5473bb;
+  border-radius: 5px;
+  display: flex;
+  align-self: flex-start;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+`;
+
 const testEvent = [
   {
     _id: "123450",
@@ -77,6 +99,7 @@ const ClubEventsTab = () => {
 
   const hostedEvents = useSelector((state) => state.user.ownEvents);
   const [viewDate, setViewDate] = useState(new Date());
+  const [viewAll, setViewAll] = useState(false);
 
   const [newEvent, setNewEvent] = useState(false);
 
@@ -132,6 +155,16 @@ const ClubEventsTab = () => {
     } else setShowTest(false);
   }, [viewDate]);
 
+  const [viewButton, setViewButton] = useState("View All");
+  const changeView = () =>{
+    setViewAll(!viewAll);
+    if(viewButton === "View All"){
+      setViewButton("View Date");
+    } else{
+      setViewButton("View All");
+    }
+  }
+
   return (
     <OuterWrapper>
       <ExpandedEvent
@@ -142,17 +175,28 @@ const ClubEventsTab = () => {
       <NewEvent open={newEvent} handleClose={() => setNewEvent(false)} />
       <InnerWrapper>
         <BoldTypography sz={"24px"}>My Events</BoldTypography>
-        {showTest ? (
+        {showTest & !viewAll ? (
           <ClubEvent loadExpanded={loadExpanded} e={testEvent[0]} test={true} />
         ) : (
           <></>
         )}
-        {event == null ? (
+        { viewAll ? 
+            hostedEvents.map((e) => {
+              return (
+                <>
+                  <ClubEvent loadExpanded={loadExpanded} e={e} test={false} />
+                </>
+              );
+            }) 
+          : event === null ? (
           <ClubEvent loadExpanded={loadExpanded} e={event} test={false} />
         ) : (
           <></>
         )}
-        <CreateButton onClick={() => setNewEvent(true)}>+</CreateButton>
+        <ButtonWrapper>
+          <ChangeViewButton onClick = {changeView}>{viewButton}</ChangeViewButton>
+          <CreateButton onClick={() => setNewEvent(true)}>+</CreateButton>
+        </ButtonWrapper>
       </InnerWrapper>
       <div>
         <Datetime
