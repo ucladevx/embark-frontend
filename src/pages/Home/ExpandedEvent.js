@@ -5,6 +5,7 @@ import { BoldTypography } from "../../shared/Typography";
 import styled from "styled-components";
 import { PostContent, EventAvatar, EventTypography } from "./StyleLanding";
 import { colors } from "../../shared/config";
+import Linkify from "react-linkify";
 
 // Dayjs
 import dayjs from "dayjs";
@@ -43,12 +44,14 @@ const makeDay = (moment) => {
   if (typeof moment === "string") {
     let date = moment.replace("T", " ");
     date = date.replace("Z", " ");
+    date = date.concat(" GMT");
     return dayjs(date).format("MMM DD HH:mm a");
   }
   let date = JSON.stringify(moment);
   if (date) {
     date = date.replace("T", " ");
     date = date.replace("Z", " ");
+    date = date.concat(" GMT");
     return dayjs(date).format("MMM DD HH:mm a");
   } else {
     return "";
@@ -61,14 +64,20 @@ const ExpandedEvent = ({ open, handleClose, e }) => {
       <DialogContent>
         <TextFieldWrapper>
           <BoldTypography sz={"24px"}>{e.title}</BoldTypography>
-          <EventContent>Location: {e.location}</EventContent>
+          <Linkify>
+            <EventContent>Location: {e.venue}</EventContent>
+          </Linkify>
           <TimeWrapper>
             <NameTypography>{e.authorEmail}@</NameTypography>
             <AccessTimeIcon />
-            <TimeTypography sz={"24px"}>{makeDay(e.datetime)}</TimeTypography>
+            <TimeTypography sz={"24px"}>
+              {makeDay(e.startDate)} - {makeDay(e.endDate)}
+            </TimeTypography>
           </TimeWrapper>
           <BoldTypography sz={"16px"}>Description:</BoldTypography>
-          <EventContent>{e.description}</EventContent>
+          <Linkify>
+            <EventContent>{e.description}</EventContent>
+          </Linkify>
         </TextFieldWrapper>
       </DialogContent>
     </Dialog>

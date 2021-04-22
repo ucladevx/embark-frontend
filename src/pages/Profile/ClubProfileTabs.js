@@ -7,7 +7,7 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { useDispatch, useSelector } from "react-redux";
-import { BoldTypography } from "../../shared/Typography";
+import ClubEventsTab from "./ClubEventsTab.js";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -77,7 +77,7 @@ const ClubProfileTabs = () => {
       ))} */}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Followed Clubs
+        <ClubEventsTab />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Saved Posts
