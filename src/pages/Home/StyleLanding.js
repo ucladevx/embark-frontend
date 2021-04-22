@@ -360,6 +360,14 @@ export const GoingBtn = styled(Button)`
   right: 1px;
 `;
 
+export const GoingBtnExpand = styled(Button)`
+  text-transform: none;
+  background-color: ${(props) => handleGoingBColor(props.bgcolor)};
+  height: 25px;
+  align-self: center;
+  color: ${(props) => handleGoingFColor(props.bgcolor)};
+`;
+
 export const ViewPost = styled.div`
   margin-top: 20px;
   border-radius: 5px;

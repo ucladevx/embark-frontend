@@ -58,11 +58,12 @@ const testEvent = [
     endDate: "2021-04-25T06:13:32.000Z",
     description:
       "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
-    venue: "here what do you think",
+    venue: "here what do you think, https://ucla.zoom.us/",
+    attendees: 4,
   },
 ];
 
-const Events = ({ setNewEvent, openEvents }) => {
+const Events = ({ setNewEvent, openEvents, setExpandedEventPage}) => {
   const events = useSelector((state) => state.data.events);
   const usertype = useSelector((state) => state.user.userType);
 
@@ -73,6 +74,7 @@ const Events = ({ setNewEvent, openEvents }) => {
     setEvent(e);
     console.log(event);
     setExpanded(true);
+    setExpandedEventPage(e);
   };
 
   return (

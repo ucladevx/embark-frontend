@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import Calendar from "react-calendar";
+import ExpandedEventPage from "./ExpandedEventPage"
 // Styles
 import "../../components/Calendar/HomeCalendar.css";
 
@@ -68,6 +69,15 @@ const Home = () => {
   const [newPost, setNewPost] = useState(false);
   const [newEvent, setNewEvent] = useState(false);
   const [numEvents, setNumEvents] = useState(3);
+  const [selectedEvent, setSelectedEvent] = useState({});
+
+
+  const openExpandedEventPage = (e) => {
+    setPage("expandEvent");
+    setSelectedEvent(e);
+    console.log(e);
+  }
+
 
   const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
 
@@ -174,6 +184,8 @@ const Home = () => {
               <Explore></Explore>
             ) : page === "events" ? (
               <DiscoverEvents closeEvents={closeEvents}></DiscoverEvents>
+            ) : page === "expandEvent" ? (
+              <ExpandedEventPage e={selectedEvent}></ExpandedEventPage>
             ) : (
               <Fragment></Fragment>
             )}
@@ -186,7 +198,7 @@ const Home = () => {
             {page === "events" ? (
               <MyEvents></MyEvents>
             ) : (
-              <Events setNewEvent={setNewEvent} openEvents={openEvents} />
+              <Events setNewEvent={setNewEvent} openEvents={openEvents} setExpandedEventPage={openExpandedEventPage}/>
             )}
           </RightContainer>
         </LandingPageWrapper>
