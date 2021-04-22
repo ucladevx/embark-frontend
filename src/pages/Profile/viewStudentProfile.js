@@ -28,7 +28,7 @@ import pencil from "../../images/pencil.png";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
-const StudentProfile = (props) => {
+const ViewStudentProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
   const tags = user.tags;
@@ -36,11 +36,6 @@ const StudentProfile = (props) => {
   return (
     <div>
       {console.log(user)}
-      <EditProfile
-        open={editProfile}
-        handleClose={() => seteditProfile(false)}
-        allTags={user.tags}
-      ></EditProfile>
       <NavBar></NavBar>
       <MiddleContainer>
         <ProfileWrapper>
@@ -79,15 +74,6 @@ const StudentProfile = (props) => {
                   })}
               </ExploreFilter>
             </IndustryWrapper>
-
-            <EditProfileButton
-              onClick={() => {
-                seteditProfile(true);
-              }}
-            >
-              <img style={{ marginRight: "2px" }} src={pencil}></img>
-              Edit Profile
-            </EditProfileButton>
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>
@@ -106,4 +92,4 @@ const StudentProfile = (props) => {
   );
 };
 
-export default StudentProfile;
+export default ViewStudentProfile;

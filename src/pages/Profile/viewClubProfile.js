@@ -14,7 +14,9 @@ import {
   QuestionBox,
   ExploreFilter,
   ExploreObj,
+  ButtonBox,
   ClubWebsiteButton,
+  FollowButton,
   AboutTitle,
   AboutWrapper,
   Footer,
@@ -25,30 +27,18 @@ import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
 import { ActionButton } from "../../shared/Buttons";
-import website_arrow from "../../images/website_arrow.png"
-import EditClubProfile from "./editClubProfile";
 import ClubProfileTabs from "./ClubProfileTabs";
+import { handleTagColor } from "../../utils/handleTagColors.js";
+import website_arrow from "../../images/website_arrow.png"
 import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
 
-const ClubProfile = (props) => {
+const ViewClubProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
   const [About, SetAbout] = useState(
     "Have you ever felt that all you were learning at UCLA was theory, with little opportunities to build out practical applications? DevX is a brand new program dedicated to solving that very problem! Build out real-world projects to help tackle pressing problems frustrating the UCLA community, grow your technical skills by pairing up with experienced students, and build a network that lasts beyond graduation.",
   );
-
-  // function handleAbout(newAbout) {
-  //   SetAbout(newAbout);
-  // }
-
-  // function handleWebsite(newWebsite) {
-  //   SetWebsite(newWebsite);
-  // }
-
-  // function handleDescription(newDescription) {
-  //   SetDescription(newDescription);
-  // }
 
   const AboutContent = () => {
     if (About.length > 0) {
@@ -71,19 +61,9 @@ const ClubProfile = (props) => {
       return <ProfileWrapper></ProfileWrapper>;
     }
   };
- 
+
   return (
     <>
-      <EditClubProfile
-        open={editProfile}
-        handleClose={() => seteditProfile(false)}
-        // EditAbout={handleAbout}
-        // EditWebsite={handleWebsite}
-        // EditDescription={handleDescription}
-        // currentAbout={About}
-        // currentWebsite={website}
-        // currentDescription={description}
-      ></EditClubProfile>
       <NavBar></NavBar>
       <MiddleContainer>
         <ProfileWrapper>
@@ -100,34 +80,39 @@ const ClubProfile = (props) => {
                 <Typography style={{ fontSize: "18px" }}>
                   {user.description ? user.description : "Tech Club"}
                 </Typography>
+
               </NameDescription>
-              {/* <NameDescription> */}
+              
+              <ButtonBox>
+              <FollowButton
+                bgcolor={"#FFFFFF"}
+              >Follow</FollowButton>
               <ClubWebsiteButton href={user.website}>
               <img src={website_arrow} style={{marginRight:"4px"}}></img>
                 Club Website
-              </ClubWebsiteButton>
-              {/* </NameDescription> */}
+              </ClubWebsiteButton>                  
+              </ButtonBox>
+
+
+              {/* <NameDescription> */}
+
             </NameDescriptionWrapper>
 
             <IndustryWrapper>
-              <BoldTypography sz={"14px"}>Relevant Industries:</BoldTypography>
-              {user.tags &&
-                user.tags.map((name) => {
-                  return (
-                    <ExploreObj key={name} bgcolor={colors.red1}>
-                      {name}
-                    </ExploreObj>
-                  );
-                })}
+              <BoldTypography sz={"14px"}>
+                Relevant Industries:
+              </BoldTypography>
+              <ExploreFilter>
+                {user.tags &&
+                  user.tags.map((name) => {
+                    return (
+                      <ExploreObj key={name} bgcolor={handleTagColor(name)}>
+                        {name}
+                      </ExploreObj>
+                    );
+                  })}
+              </ExploreFilter>
             </IndustryWrapper>
-
-            <EditProfileButton
-              onClick={() => {
-                seteditProfile(true);
-              }}
-            >
-              Edit Profile
-            </EditProfileButton>
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>
@@ -146,4 +131,4 @@ const ClubProfile = (props) => {
   );
 };
 
-export default ClubProfile;
+export default ViewClubProfile;

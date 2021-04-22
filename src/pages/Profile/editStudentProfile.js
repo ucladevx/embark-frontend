@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-  MenuItem,
-  InputAdornment,
-  Typography,
-} from "@material-ui/core";
+import { MenuItem, InputAdornment, Typography } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import { IndustryFilters } from "../../shared/dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getStudentData,
   editStudentDetails,
   uploadImage,
 } from "../../redux/actions/userActions";
@@ -26,15 +23,20 @@ import {
   DialogTextField,
   TextFieldWrapper,
   DoneBtn,
+
+} from "./StyleEditProfile";
+import {
   DropDownBox,
   DropDownTitle,
   DropDownContent,
   DropDownCheckBox,
-  Finished,
-} from "./StyleEditProfile";
+  Finished,  
+} from "../../shared/dropdown"
 import Linkedin from "../../images/linkedin.png";
 import checked from "../../images/checked_24px.png";
 import unchecked from "../../images/unchecked_24px.png";
+import DropdownArrow from "../../images/DropdownArrow.png"
+import linkedinStart from "../../images/linkedinStart.png"
 import { makeStyles } from "@material-ui/core/styles";
 // import ImageUploader from 'react-images-upload';
 
@@ -54,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 
 const EditProfile = ({ open, handleClose, allTags }) => {
   const classes = useStyles();
-  const years = ["2024","2023", "2022","2021"];
+  const years = ["2024", "2023", "2022", "2021"];
   const industry = IndustryFilters;
   const user = useSelector((state) => state.user);
   const [name, setName] = useState(user.name);
@@ -69,6 +71,9 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const hiddenCoverInput = React.useRef(null);
   const tags = user.tags;
 
+  // Redux
+  const dispatch = useDispatch();
+  
   //dropdown year
   const [openYear, setOpenYear] = useState(false);
   const [openInd, setOpenInd] = useState(false);
@@ -81,7 +86,8 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
   useEffect(() => {
     // console.log("useEffect");
-    // console.log("after render print user.tags",user.tags)
+    dispatch(getStudentData)
+    console.log("after render print user.tags",user.tags)
     setYear(user.year);
     setMajor(user.major);
     setLinkedin(user.linkedIn);
@@ -91,8 +97,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       console.log("clean it up");
     };
   }, []);
-  // Redux
-  const dispatch = useDispatch();
 
   const handleYear = (e) => {
     setYear(e);
@@ -206,7 +210,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
         </EditProfileTitle>
       </TitleContainer>
       <EditProfileContent id="scroll-dialog-description">
-
         {/* Avatar */}
         {console.log("profileURL.url=", profileURL.url)}
         <EditProfileAvatar
@@ -254,11 +257,20 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           <BoldTypography sz={"18px"}>Year:</BoldTypography>
           <div>
             <DropDownTitle wd={"128px"} onClick={toggleOpenYear}>
-              {year} 
+              {year}
+              <img src={DropdownArrow} style={{float:"right"}}></img>
             </DropDownTitle>
             {openYear && (
-              <DropDownBox wd={"97px"} hg={"149px"} style={{width:"97px", height:"149px"}}>
-                <DropDownContent wd={"97px"} hg={"149px"} overflow={"hidden"} style={{width:"97px", height:"149px"}}>
+              <DropDownBox
+                wd={"97px"}
+                hg={"149px"}
+                top={"75px"}
+                style={{marginLeft:"10px"}}
+              >
+                <DropDownContent
+                  wd={"97px"}
+                  hg={"149px"}
+                >
                   {years.map((year, index) => (
                     <MenuItem
                       onClick={() => {
@@ -266,13 +278,20 @@ const EditProfile = ({ open, handleClose, allTags }) => {
                       }}
                       key={index}
                     >
-                      {year}
+                      <Typography
+                      style={{
+                        fontSize: "16px",
+                        marginLeft: "3px",
+                        padding: "0px",
+                        align:"center",
+                        display:"inline"
+                      }}>
+                        {year}
+                      </Typography>
                     </MenuItem>
                   ))}
                 </DropDownContent>
-
               </DropDownBox>
-
             )}
           </div>
         </TextFieldWrapper>
@@ -292,7 +311,14 @@ const EditProfile = ({ open, handleClose, allTags }) => {
               style: {
                 fontSize: 16,
                 fontWeight: 600,
+                padding:"8px 16px",
               },
+            }}
+            style={{
+              padding: "0px",
+              marginTop:"0px",
+              borderRadius:"10px",
+              backgroundColor:"#EDEDED"
             }}
             onChange={handleMajor}
           />
@@ -317,53 +343,63 @@ const EditProfile = ({ open, handleClose, allTags }) => {
                 </ExploreObj>
               ))}
           </ExploreFilter>
-          
+
           {/* dropdown menu */}
 
-            <DropDownTitle wd={"312px"} hg={"35px"} onClick={toggleOpenInd}>
-            <Typography style={{display:"inline"}}>Select all that apply</Typography>
-            <Typography style={{display:"inline", position:"absolute", right:"150px"}}>^</Typography>
-            </DropDownTitle>
-            {openInd && ( 
-              <DropDownBox
-                wd= {"314px"}
-                hg= {"202px"}>
-                <DropDownContent wd={"312px"} hg={"248px"} overflow={"scroll"}>
-                  {industry.map((name, index) => (
-                    <div key={name} style={{paddingLeft:"19px", height:"25px", marginTop:"14px", marginBottom:"14px"}}>
-                      <DropDownCheckBox
-                        onClick={() => {
-                          handleIndustries(name);
-                        }}
-                        src={
-                          industries && industries.includes(name)
-                            ? checked
-                            : unchecked
-                        }
-                      ></DropDownCheckBox>
-                      <Typography style={{ fontSize: "18px", marginLeft: "3px", padding:"0px", display:"inline" }}>
-                        {name}
-                      </Typography>
-                    </div>
-                  ))}
-                </DropDownContent>
+          <DropDownTitle wd={"312px"} hg={"35px"} onClick={toggleOpenInd}>
+            <Typography style={{ display: "inline" }}>
+              Select all that apply
+            </Typography>
+            <img src={DropdownArrow} style={{float:"right"}}></img>
+          </DropDownTitle>
+          {openInd && (
+            <DropDownBox wd={"314px"} hg={"202px"} top={"122px"}>
+              <DropDownContent wd={"312px"} hg={"248px"} overflow={"scroll"}>
+                {industry.map((name, index) => (
+                  <div
+                    key={name}
+                    style={{
+                      paddingLeft: "19px",
+                      height: "25px",
+                      marginTop: "14px",
+                      marginBottom: "14px",
+                    }}
+                  >
+                    <DropDownCheckBox
+                      onClick={() => {
+                        handleIndustries(name);
+                      }}
+                      src={
+                        industries && industries.includes(name)
+                          ? checked
+                          : unchecked
+                      }
+                    ></DropDownCheckBox>
+                    <Typography
+                      style={{
+                        fontSize: "18px",
+                        marginLeft: "3px",
+                        padding: "0px",
+                        display: "inline",
+                      }}
+                    >
+                      {name}
+                    </Typography>
+                  </div>
+                ))}
+              </DropDownContent>
 
-                <Finished
-                  wd={"314px"}
-                  hg={"46px"}
-                  onClick={toggleOpenInd}
-                >
-                  Finished
-                </Finished>
-              </DropDownBox>
-            )}
+              <Finished wd={"314px"} hg={"46px"} onClick={toggleOpenInd}>
+                Finished
+              </Finished>
+            </DropDownBox>
+          )}
         </TextFieldWrapper>
 
         {/* linkedIn */}
-        <TextFieldWrapper>
-          <BoldTypography sz={"18px"}>
-            LinkedIn Profile (Optional):
-          </BoldTypography>
+        <TextFieldWrapper style={{marginTop:"50px"}}>
+          <BoldTypography sz={"18px"}>LinkedIn Profile (Optional):</BoldTypography>
+          {/* <img src={linkedinStart} style={{width: "46px", height: "40px"}}></img> */}
           <DialogTextField
             autoFocus
             margin="dense"
@@ -381,7 +417,14 @@ const EditProfile = ({ open, handleClose, allTags }) => {
               style: {
                 fontSize: 16,
                 fontWeight: 600,
+                padding:"8px 16px",
               },
+            }}
+            style={{
+              padding: "0px",
+              marginTop:"0px",
+              borderRadius:"10px",
+              backgroundColor:"#EDEDED"
             }}
             onChange={handlelinkedIn}
           />

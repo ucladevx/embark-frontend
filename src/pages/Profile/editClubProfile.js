@@ -29,6 +29,13 @@ import {
   TextFieldWrapper,
   DoneBtn,
 } from "./StyleEditProfile";
+import {
+  DropDownBox,
+  DropDownTitle,
+  DropDownContent,
+  DropDownCheckBox,
+  Finished,  
+} from "../../shared/dropdown"
 import lawn from "../../images/lawn.png";
 import { makeStyles } from "@material-ui/core/styles";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
