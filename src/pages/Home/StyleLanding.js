@@ -18,7 +18,7 @@ export const LandingPage = styled.div`
 export const LandingPageWrapper = styled.div`
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 220px 540px 220px;
+  grid-template-columns: 290px 558px 290px;
   width: 100%;
   justify-content: center;
   min-height: 100vh;
@@ -30,7 +30,6 @@ export const LeftContainer = styled.div`
   ${StickyEffect};
   flex: 1 1 630px;
   white-space: nowrap;
-  margin-left: -20px;
 `;
 
 export const MiddleContainer = styled.div`

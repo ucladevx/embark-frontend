@@ -18,8 +18,9 @@ POST http://localhost:9000/auth/signup
 Content-Type: application/json
 
 {
-    "name": "hellobruin",
-    "email": "bruin131!!@email.com",
+    "firstName": "helloa",
+    "lastName": "bruin",
+    "email": "bruin151!!@email.com",
     "password": "12345qQ!",
     "userType": "student"
 }
@@ -33,16 +34,26 @@ Content-Type: application/json
     "user": "student"
 }
 
+###
+POST http://localhost:9000/auth/linkedin
+Content-Type: application/json
+
+{
+    "type": "signin",
+    "user": "student"
+}
+
+
 ############ Authorization Needed #################################
 ############ Posts ################################################
 ### Fixing in the backend
 GET http://localhost:9000/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzJlMDlhOGFlYmQ0MjI2ODkxMmZmYiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya2VtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTYxMzk1MDg4NiwiZXhwIjoxNjIyNTkwODg2fQ.-TZJmcfn1tro8kvAO_ThSAmhyDzhwuSicZlPk-i7Drc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzdjN2YzYTk4YjdjMDAxZmJlZmNkOCIsIm5hbWUiOiJoZWxsb2EiLCJlbWFpbCI6ImJydWluMTUxISFAZW1haWwuY29tIiwiaWF0IjoxNjE4NDYyNzA3LCJleHAiOjE2MjcxMDI3MDd9.sJLdWdm3mLlGyGvs5xGKz8_JLGIT79G-zfPUaCy-57Q
 Content-Type: application/json
 
 ### 
 GET http://localhost:9000/posts?limit=2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzJlMDlhOGFlYmQ0MjI2ODkxMmZmYiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya2VtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTYxMzk1MDg4NiwiZXhwIjoxNjIyNTkwODg2fQ.-TZJmcfn1tro8kvAO_ThSAmhyDzhwuSicZlPk-i7Drc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzdjN2YzYTk4YjdjMDAxZmJlZmNkOCIsIm5hbWUiOiJoZWxsb2EiLCJlbWFpbCI6ImJydWluMTUxISFAZW1haWwuY29tIiwiaWF0IjoxNjE4NDYyNzA3LCJleHAiOjE2MjcxMDI3MDd9.sJLdWdm3mLlGyGvs5xGKz8_JLGIT79G-zfPUaCy-57Q
 Content-Type: application/json
 
 
@@ -69,17 +80,17 @@ Content-Type: application/json
 
 ###
 GET http://localhost:9000/posts/comments
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzOTA3NzQ4MzJmMjEzYjNmYyIsIm5hbWUiOiJqb2huIHNtYWxsYmVyZzEiLCJlbWFpbCI6ImpvaG4xQGVtYWlsLmNvbSIsImlhdCI6MTYxMjIwNDA4NiwiZXhwIjoxNjIwODQ0MDg2fQ.kT3fUNe433ue1SG89ngnRjk5CErTMBZsH4X3xAeG_Pk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzdjN2YzYTk4YjdjMDAxZmJlZmNkOCIsIm5hbWUiOiJoZWxsb2EiLCJlbWFpbCI6ImJydWluMTUxISFAZW1haWwuY29tIiwiaWF0IjoxNjE4NDYyNzA3LCJleHAiOjE2MjcxMDI3MDd9.sJLdWdm3mLlGyGvs5xGKz8_JLGIT79G-zfPUaCy-57Q
 Content-Type: application/json
 
 
 ###
 POST http://localhost:9000/posts/comments
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzJlMDlhOGFlYmQ0MjI2ODkxMmZmYiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya2VtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTYxMzk1MDg4NiwiZXhwIjoxNjIyNTkwODg2fQ.-TZJmcfn1tro8kvAO_ThSAmhyDzhwuSicZlPk-i7Drc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzdjN2YzYTk4YjdjMDAxZmJlZmNkOCIsIm5hbWUiOiJoZWxsb2EiLCJlbWFpbCI6ImJydWluMTUxISFAZW1haWwuY29tIiwiaWF0IjoxNjE4NDYyNzA3LCJleHAiOjE2MjcxMDI3MDd9.sJLdWdm3mLlGyGvs5xGKz8_JLGIT79G-zfPUaCy-57Q
 Content-Type: application/json
 
 {
-    "authorEmail": "embarkemail@gmail.com",
+    "authorEmail": "bruin151!!@email.com",
     "post_id": "6012dce8eb36de011c96c7e4",
     "comment": "nothing"
 }
@@ -98,7 +109,7 @@ Content-Type: application/json
 ############ Users ################################################
 ###
 GET http://localhost:9000/student/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzOTA3NzQ4MzJmMjEzYjNmYyIsIm5hbWUiOiJqb2huIHNtYWxsYmVyZzEiLCJlbWFpbCI6ImpvaG4xQGVtYWlsLmNvbSIsImlhdCI6MTYxMjE2OTgxMSwiZXhwIjoxNjIwODA5ODExfQ.TBqDaIcaXDvkSUyGTpGY3Bz_XdgmtDHPtWogOTBtmc4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNmE0YmJhY2UwMjU1MDAyZGQxMWI0OCIsIm5hbWUiOiJvdXRkYXRlZCBBUEkiLCJlbWFpbCI6InNoYWl2aXMxODIzQGdtYWlsLmNvbSIsImlhdCI6MTYxNzU3ODkzOCwiZXhwIjoxNjI2MjE4OTM4fQ.m4j6dFSyYFiOeFWUsnFVvbUIjKjpMlfEz5__8I6lIg8
 Content-Type: application/json
 ###
 POST http://localhost:9000/student/profile 
@@ -111,3 +122,7 @@ Content-Type: application/json
     "tags": ["Developer", "Musician"],
     "linkedIn": "johnsmallberg"
 }
+###
+############# Clubs #################################################
+GET http://localhost:9000/club/discover
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNmE0YmJhY2UwMjU1MDAyZGQxMWI0OCIsIm5hbWUiOiJvdXRkYXRlZCBBUEkiLCJlbWFpbCI6InNoYWl2aXMxODIzQGdtYWlsLmNvbSIsImlhdCI6MTYxNzU3ODkzOCwiZXhwIjoxNjI2MjE4OTM4fQ.m4j6dFSyYFiOeFWUsnFVvbUIjKjpMlfEz5__8I6lIg8

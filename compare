@@ -1,0 +1,2 @@
+https://www.linkedin.com/oauth/v2/authorization?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fauth%2Flinkedin%2Fredirect&scope=r_emailaddress%20r_liteprofile&client_id=86q9nsrr1qvzhu
+https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=86q9nsrr1qvzhu&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fauth%2Flinkedin%2Fredirect&scope=r_emailaddress&state=Y5TRXhtGTBkebpMIvhpR
