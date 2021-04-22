@@ -52,7 +52,7 @@ const AuthButtons = () => {
         linkedinRef,
         "linkedinbtn",
         LinkedInIcon,
-        "Sign up with linkedin"
+        "Sign up with linkedin",
       );
     } else {
       // login
@@ -60,13 +60,13 @@ const AuthButtons = () => {
         googleRef,
         "googlebtn",
         GoogleIcon,
-        "Login in with Google"
+        "Login in with Google",
       );
       RenderBtnStyle(
         linkedinRef,
         "linkedinbtn",
         LinkedInIcon,
-        "Log in with linkedin"
+        "Log in with linkedin",
       );
     }
   }, [page, RenderBtnStyle]);
