@@ -24,12 +24,8 @@
     "moment-timezone": "^0.5.33",
     "ramda": "^0.27.1",
     "react": "^17.0.2",
-    "react-datetime": "^3.0.4",
-
     "mime": "^2.5.2",
     "mime-types": "^2.1.29",
-    "moment": "^2.29.1",
-    "moment-timezone": "^0.5.33",
     "pdfjs-dist": "^2.6.347",
     "prop-types": "^15.7.2",
     "react-app-rewired": "^2.1.8",
