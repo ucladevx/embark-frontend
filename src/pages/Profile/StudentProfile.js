@@ -19,6 +19,7 @@ import {
 import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
 import EditProfile from "./editStudentProfile";
+import { ActionButton } from "../../shared/Buttons";
 import UserProfileTabs from "./StudentProfileTabs";
 import { colors } from "../../shared/config";
 import { handleTagColor } from "../../utils/handleTagColors.js";
@@ -32,7 +33,7 @@ const StudentProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
   const tags = user.tags;
- 
+
   return (
     <div>
       {console.log(user)}
@@ -84,7 +85,7 @@ const StudentProfile = (props) => {
               onClick={() => {
                 seteditProfile(true);
               }}
-            >
+            > 
               <img style={{ marginRight: "2px" }} src={pencil}></img>
               Edit Profile
             </EditProfileButton>

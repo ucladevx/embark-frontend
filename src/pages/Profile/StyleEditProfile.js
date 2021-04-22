@@ -25,8 +25,8 @@ export const EditProfileContainer = styled(Dialog)`
   border-radius: 20px;
   width: 100vw;
   height: 100vh;
-  margin:0px;
-  overflow:hidden;
+  margin: 0px;
+  overflow: hidden;
 `;
 
 export const TitleContainer = styled(DialogTitle)`
@@ -113,12 +113,12 @@ export const DoneBtn = styled(ActionButton)`
   width: 120px;
   height: 40px;
   margin: 10px auto 20px auto;
-  color: ${colors.black};
-  background-color: #c3dafe;
+  color: #FFFFFF;
+  background-color: #5473bb;
 `;
 
 export const DropDownTitle = styled.div`
-  align-items: center;
+  align-items: center; 
   padding: 7px 15px;
   width: ${(props) => props.wd};
   height: ${(props) => props.hg};

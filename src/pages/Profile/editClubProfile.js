@@ -6,10 +6,12 @@ import {
   Checkbox,
   ListItemText,
   TextField,
+  Typography,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { IndustryFilters } from "../../shared/dropdown";
 import { colors } from "../../shared/config";
+import close_window_x from "../../images/close_window_x.png";
 import { useDispatch, useSelector } from "react-redux";
 import { editStudentDetails } from "../../redux/actions/userActions";
 import styled from "styled-components";
@@ -29,17 +31,19 @@ import {
   TextFieldWrapper,
   DoneBtn,
 } from "./StyleEditProfile";
-import {
+import { 
   DropDownBox,
   DropDownTitle,
   DropDownContent,
   DropDownCheckBox,
-  Finished,  
-} from "../../shared/dropdown"
+  Finished,
+} from "../../shared/dropdown";
+import DropdownArrow from "../../images/DropdownArrow.png";
 import lawn from "../../images/lawn.png";
 import { makeStyles } from "@material-ui/core/styles";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { ActionButton } from "../../shared/Buttons";          
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -66,9 +70,16 @@ const EditClubProfile = ({ open, handleClose }) => {
   const [industries, setIndustries] = useState(user.tags);
   const [website, setWebsite] = useState(user.website);
   const [about, setAbout] = useState(user.about);
+  const [done, setDone] = useState("Cancel");
   const hiddenProfileInput = React.useRef(null);
   const hiddenCoverInput = React.useRef(null);
 
+  //dropdown toggle
+  const [openInd, setOpenInd] = useState(false);
+  const toggleOpenInd = () => {
+    setOpenInd(!openInd);
+  };
+    
   // Redux
   const dispatch = useDispatch();
 
@@ -134,6 +145,7 @@ const EditClubProfile = ({ open, handleClose }) => {
       <TitleContainer>
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
+          <img src={close_window_x} style={{float:"right"}} onClick={handleClose}></img>
         </EditProfileTitle>
       </TitleContainer>
       <EditProfileContent>
@@ -181,7 +193,7 @@ const EditClubProfile = ({ open, handleClose }) => {
 
         {/* Description */}
         <TextFieldWrapper>
-          <BoldTypography sz={"16px"}>Description:</BoldTypography>
+          {/* <BoldTypography sz={"16px"}>Description:</BoldTypography>
           <DialogTextField
             value={description}
             autoFocus
@@ -200,43 +212,104 @@ const EditClubProfile = ({ open, handleClose }) => {
               },
             }}
             onChange={handleDescription}
+          /> */}
+          <BoldTypography sz={"16px"}>Major:</BoldTypography>
+          <DialogTextField
+            autoFocus
+            margin="dense"
+            id="name"
+            placeholder={"Add your description"}
+            type="email"
+            fullWidth
+            multiline
+            rows={3}           
+            InputProps={{
+              disableUnderline: true,
+              style: {
+                fontSize: 16,
+                fontWeight: 600,
+                padding: "8px 16px",
+              },
+            }}
+            style={{
+              padding: "10px 2px",
+              marginTop: "0px",
+              borderRadius: "10px",
+              backgroundColor: "#EDEDED",
+            }}
+            onChange={handleDescription}
           />
         </TextFieldWrapper>
 
         {/* Relevant Industries */}
         <TextFieldWrapper>
           <BoldTypography sz={"16px"}>Relevant Industries:</BoldTypography>
+
+        {/* Industry filters */}
           <ExploreFilter>
-            <ExploreObj bgcolor={colors.red1}>Product Management</ExploreObj>
-            <ExploreObj bgcolor={colors.darkyellow}>Product Design</ExploreObj>
+            {industry &&
+              industry.map((name) => (
+                <ExploreObj
+                  key={name}
+                  bgcolor={colors.gray}
+                  // onClick={() => {
+                  //   removeIndustries(name);
+                  // }}
+                >
+                  &times; {name}
+                </ExploreObj>
+              ))}
           </ExploreFilter>
-          <FormControlC>
-            <Select
-              multiple
-              disableUnderline
-              value={user.tags}
-              onChange={handleIndustries}
-              MenuProps={{
-                getContentAnchorEl: null,
-                anchorOrigin: {
-                  vertical: "bottom",
-                  horizontal: "left",
-                },
-                classes: { paper: classes.menuPaper },
-              }}
-            >
-              {industry &&
-                industry.map((name) => (
-                  <MenuItem key={name} value={name}>
-                    <Checkbox
-                      checked={industries && industries.includes(name)}
-                      color="default"
-                    />
-                    <ListItemText primary={name} />
-                  </MenuItem>
+
+          {/* dropdown menu */}
+          <DropDownTitle wd={"312px"} hg={"35px"} onClick={toggleOpenInd}>
+            <Typography style={{ display: "inline" }}>
+              Select all that apply
+            </Typography>
+            <img src={DropdownArrow} style={{ float: "right" }}></img>
+          </DropDownTitle>
+          {openInd && (
+            <DropDownBox wd={"314px"} hg={"202px"} top={"122px"}>
+              <DropDownContent wd={"312px"} hg={"248px"} overflow={"scroll"}>
+                {industry.map((name, index) => (
+                  <div
+                    key={name}
+                    style={{
+                      paddingLeft: "19px",
+                      height: "25px",
+                      marginTop: "14px",
+                      marginBottom: "14px",
+                    }}
+                  >
+                    <DropDownCheckBox
+                      // onClick={() => {
+                      //   handleIndustries(name);
+                      // }}
+                      // src={
+                      //   industries && industries.includes(name)
+                      //     ? checked
+                      //     : unchecked
+                      // }
+                    ></DropDownCheckBox>
+                    <Typography
+                      style={{
+                        fontSize: "18px",
+                        marginLeft: "3px",
+                        padding: "0px",
+                        display: "inline",
+                      }}
+                    >
+                      {name}
+                    </Typography>
+                  </div>
                 ))}
-            </Select>
-          </FormControlC>
+              </DropDownContent>
+
+              <Finished wd={"314px"} hg={"46px"} onClick={toggleOpenInd}>
+                Finished
+              </Finished>
+            </DropDownBox>
+          )}
         </TextFieldWrapper>
 
         {/* Website */}
@@ -255,7 +328,14 @@ const EditClubProfile = ({ open, handleClose }) => {
               style: {
                 fontSize: 16,
                 fontWeight: 600,
+                padding: "8px 16px",
               },
+            }}
+            style={{
+              padding: "0px",
+              marginTop: "0px",
+              borderRadius: "10px",
+              backgroundColor: "#EDEDED",
             }}
             onChange={handleWebsite}
           />
@@ -264,22 +344,30 @@ const EditClubProfile = ({ open, handleClose }) => {
         {/* About */}
         <TextFieldWrapper>
           <BoldTypography sz={"16px"}>About:</BoldTypography>
+
           <DialogTextField
             value={about}
             autoFocus
             margin="dense"
             id="name"
-            placeholder="Add an About Section to your Page"
+            placeholder={"Add an About Section to your Page"}
             type="email"
             fullWidth
             multiline
-            rows={2}
+            rows={3}           
             InputProps={{
               disableUnderline: true,
               style: {
                 fontSize: 16,
                 fontWeight: 600,
+                padding: "8px 16px",
               },
+            }}
+            style={{
+              padding: "10px 2px",
+              marginTop: "0px",
+              borderRadius: "10px",
+              backgroundColor: "#EDEDED",
             }}
             onChange={handleAbout}
           />
@@ -287,7 +375,9 @@ const EditClubProfile = ({ open, handleClose }) => {
 
         {/* Done Button */}
         <EditProfileDone>
-          <DoneBtn onClick={handleSubmit}>Done</DoneBtn>
+          <DoneBtn 
+          
+          onClick={handleSubmit}>{done}</DoneBtn>
         </EditProfileDone>
       </EditProfileContent>
     </EditProfileContainer>

@@ -87,8 +87,8 @@ export const EditProfileButton = styled(Button)`
   bottom: 1vw;
   font-size: 14px;
   text-transform: none;
-  color: #5a5a5a;
-  background: ${colors.gray2};
+  color: #FFFFFF;
+  background: #5473bb;
   border-radius: 5px;
 `;
 
@@ -144,15 +144,15 @@ export const IndustryWrapper = styled.div`
 
 //Club
 export const ButtonBox = styled.div`
-  positon:absolute;
+  positon: absolute;
   width: fit-content;
-  float:right;
-  align-items: "right";
-  padding:8px;
-`
+  float: right;
+  align-items: "right"; 
+  padding: 8px;
+`;
 
 export const ClubWebsiteButton = styled(Button)`
-  width:130px;
+  width: 130px;
   height: 32px;
   font-size: 13px;
   padding: 7px 16px 7px 6px;
@@ -167,21 +167,21 @@ export const ClubWebsiteButton = styled(Button)`
 export const FollowButton = styled(Button)`
   width: 96px;
   height: 29px;
-  variant:contained;
+  variant: contained;
   position: absolute;
   right: 9vw;
   padding: 4px 24px;
   margin-top: 2px;
-  margin-right:10px;
+  margin-right: 10px;
   font-size: 16px;
-  color:#5473BB;
-  background-color:${(props) => props.bgcolor};;
+  color: #5473bb;
+  background-color: ${(props) => props.bgcolor};
   /* action button */
 
-  border: 1px solid #5473BB;
+  border: 1px solid #5473bb;
   box-sizing: border-box;
   border-radius: 10px;
-`
+`;
 export const AboutTitle = styled.div`
   display: flex 2 1 auto;
   margin-left: 15px;

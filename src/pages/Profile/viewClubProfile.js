@@ -29,7 +29,7 @@ import { TitleTypography, BoldTypography } from "../../shared/Typography";
 import { ActionButton } from "../../shared/Buttons";
 import ClubProfileTabs from "./ClubProfileTabs";
 import { handleTagColor } from "../../utils/handleTagColors.js";
-import website_arrow from "../../images/website_arrow.png"
+import website_arrow from "../../images/website_arrow.png";
 import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -80,28 +80,21 @@ const ViewClubProfile = (props) => {
                 <Typography style={{ fontSize: "18px" }}>
                   {user.description ? user.description : "Tech Club"}
                 </Typography>
-
               </NameDescription>
-              
+
               <ButtonBox>
-              <FollowButton
-                bgcolor={"#FFFFFF"}
-              >Follow</FollowButton>
-              <ClubWebsiteButton href={user.website}>
-              <img src={website_arrow} style={{marginRight:"4px"}}></img>
-                Club Website
-              </ClubWebsiteButton>                  
+                <FollowButton bgcolor={"#FFFFFF"}>Follow</FollowButton>
+                <ClubWebsiteButton href={user.website}>
+                  <img src={website_arrow} style={{ marginRight: "4px" }}></img>
+                  Club Website
+                </ClubWebsiteButton>
               </ButtonBox>
 
-
               {/* <NameDescription> */}
-
             </NameDescriptionWrapper>
 
             <IndustryWrapper>
-              <BoldTypography sz={"14px"}>
-                Relevant Industries:
-              </BoldTypography>
+              <BoldTypography sz={"14px"}>Relevant Industries:</BoldTypography>
               <ExploreFilter>
                 {user.tags &&
                   user.tags.map((name) => {

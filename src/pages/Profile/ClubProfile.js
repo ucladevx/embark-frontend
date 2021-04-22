@@ -25,10 +25,12 @@ import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
 import { ActionButton } from "../../shared/Buttons";
-import website_arrow from "../../images/website_arrow.png"
+import website_arrow from "../../images/website_arrow.png";
+import pencil from "../../images/pencil.png";
 import EditClubProfile from "./editClubProfile";
 import ClubProfileTabs from "./ClubProfileTabs";
 import { colors } from "../../shared/config";
+import { handleTagColor } from "../../utils/handleTagColors.js";
 import { useDispatch, useSelector } from "react-redux";
 
 const ClubProfile = (props) => {
@@ -71,7 +73,7 @@ const ClubProfile = (props) => {
       return <ProfileWrapper></ProfileWrapper>;
     }
   };
- 
+
   return (
     <>
       <EditClubProfile
@@ -103,7 +105,7 @@ const ClubProfile = (props) => {
               </NameDescription>
               {/* <NameDescription> */}
               <ClubWebsiteButton href={user.website}>
-              <img src={website_arrow} style={{marginRight:"4px"}}></img>
+                <img src={website_arrow} style={{ marginRight: "4px" }}></img>
                 Club Website
               </ClubWebsiteButton>
               {/* </NameDescription> */}
@@ -111,14 +113,16 @@ const ClubProfile = (props) => {
 
             <IndustryWrapper>
               <BoldTypography sz={"14px"}>Relevant Industries:</BoldTypography>
-              {user.tags &&
-                user.tags.map((name) => {
-                  return (
-                    <ExploreObj key={name} bgcolor={colors.red1}>
-                      {name}
-                    </ExploreObj>
-                  );
-                })}
+              <ExploreFilter>
+                {user.tags &&
+                  user.tags.map((name) => {
+                    return (
+                      <ExploreObj key={name} bgcolor={handleTagColor(name)}>
+                        {name}
+                      </ExploreObj>
+                    );
+                  })}
+              </ExploreFilter>
             </IndustryWrapper>
 
             <EditProfileButton
@@ -126,6 +130,7 @@ const ClubProfile = (props) => {
                 seteditProfile(true);
               }}
             >
+            <img style={{ marginRight: "2px" }} src={pencil}></img>
               Edit Profile
             </EditProfileButton>
           </ProfileInfo>

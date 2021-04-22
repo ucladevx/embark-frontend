@@ -6,7 +6,7 @@ export const LeftFormContainer = styled.div`
   background: ${colors.blue1};
   width: 43%;
 `;
- 
+
 export const RightFormContainer = styled.div`
   width: 57%;
   padding: 13vh 0 0 12vw;

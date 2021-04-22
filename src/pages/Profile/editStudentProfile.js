@@ -23,20 +23,21 @@ import {
   DialogTextField,
   TextFieldWrapper,
   DoneBtn,
-
 } from "./StyleEditProfile";
 import {
   DropDownBox,
   DropDownTitle,
   DropDownContent,
   DropDownCheckBox,
-  Finished,  
-} from "../../shared/dropdown"
+  Finished,
+} from "../../shared/dropdown";
 import Linkedin from "../../images/linkedin.png";
 import checked from "../../images/checked_24px.png";
 import unchecked from "../../images/unchecked_24px.png";
-import DropdownArrow from "../../images/DropdownArrow.png"
-import linkedinStart from "../../images/linkedinStart.png"
+import DropdownArrow from "../../images/DropdownArrow.png";
+import close_window_x from "../../images/close_window_x.png";
+import { ActionButton } from "../../shared/Buttons";  
+import linkedinStart from "../../images/linkedinStart.png";
 import { makeStyles } from "@material-ui/core/styles";
 // import ImageUploader from 'react-images-upload';
 
@@ -69,12 +70,13 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const [coverURL, setCoverURL] = useState({ url: user.coverPicURL });
   const hiddenProfileInput = React.useRef(null);
   const hiddenCoverInput = React.useRef(null);
+
   const tags = user.tags;
 
   // Redux
   const dispatch = useDispatch();
-  
-  //dropdown year
+
+  //dropdown toggle
   const [openYear, setOpenYear] = useState(false);
   const [openInd, setOpenInd] = useState(false);
   const toggleOpenYear = () => {
@@ -86,8 +88,8 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
   useEffect(() => {
     // console.log("useEffect");
-    dispatch(getStudentData)
-    console.log("after render print user.tags",user.tags)
+    dispatch(getStudentData);
+    console.log("after render print user.tags", user.tags);
     setYear(user.year);
     setMajor(user.major);
     setLinkedin(user.linkedIn);
@@ -101,10 +103,12 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const handleYear = (e) => {
     setYear(e);
     toggleOpenYear();
+
   };
 
   const handleMajor = (e) => {
     setMajor(e.target.value);
+
   };
 
   const handleIndustries = (name) => {
@@ -116,6 +120,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       setIndustries(newIndustries);
     }
   };
+
   // const addIndustries = (e) => {
   //   // console.log("change industries to ", e.target.value);
   //   setIndustries(e.target.value);
@@ -124,11 +129,13 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const removeIndustries = (name) => {
     const newIndustries = industries.filter((ind) => ind !== name);
     setIndustries(newIndustries);
+
   };
 
   const handlelinkedIn = (e) => {
     setLinkedin(e.target.value);
     console.log(linkedin);
+
   };
 
   const handleProfileURL = (e) => {
@@ -141,6 +148,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       "http://localhost:9000/student/profile/image?pictureType=profile",
       formData,
     );
+
   };
 
   const handleCoverURL = (e) => {
@@ -152,6 +160,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       "http://localhost:9000/student/profile/image?pictureType=cover",
       formData,
     );
+
   };
 
   const handleSubmit = async () => {
@@ -173,18 +182,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       linkedIn: linkedin,
     };
     dispatch(editStudentDetails(updatedProfile));
-    // if(profileData!=={}){
-    //   axios.post(
-    //     "http://localhost:9000/student/profile/image?pictureType=profile",
-    //     profileData,
-    //   );
-    // }
-    // if(coverData!=={}){
-    //   axios.post(
-    //     "http://localhost:9000/student/profile/image?pictureType=cover",
-    //     coverData,
-    //   );
-    // }
     onClose();
   };
 
@@ -207,6 +204,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       <TitleContainer id="scroll-dialog-title">
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
+          <img src={close_window_x} style={{float:"right"}} onClick={handleClose}></img>
         </EditProfileTitle>
       </TitleContainer>
       <EditProfileContent id="scroll-dialog-description">
@@ -258,19 +256,16 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           <div>
             <DropDownTitle wd={"128px"} onClick={toggleOpenYear}>
               {year}
-              <img src={DropdownArrow} style={{float:"right"}}></img>
+              <img src={DropdownArrow} style={{ float: "right" }}></img>
             </DropDownTitle>
             {openYear && (
               <DropDownBox
                 wd={"97px"}
                 hg={"149px"}
                 top={"75px"}
-                style={{marginLeft:"10px"}}
+                style={{ marginLeft: "10px" }}
               >
-                <DropDownContent
-                  wd={"97px"}
-                  hg={"149px"}
-                >
+                <DropDownContent wd={"97px"} hg={"149px"}>
                   {years.map((year, index) => (
                     <MenuItem
                       onClick={() => {
@@ -279,13 +274,14 @@ const EditProfile = ({ open, handleClose, allTags }) => {
                       key={index}
                     >
                       <Typography
-                      style={{
-                        fontSize: "16px",
-                        marginLeft: "3px",
-                        padding: "0px",
-                        align:"center",
-                        display:"inline"
-                      }}>
+                        style={{
+                          fontSize: "16px",
+                          marginLeft: "3px",
+                          padding: "0px",
+                          align: "center",
+                          display: "inline",
+                        }}
+                      >
                         {year}
                       </Typography>
                     </MenuItem>
@@ -311,14 +307,14 @@ const EditProfile = ({ open, handleClose, allTags }) => {
               style: {
                 fontSize: 16,
                 fontWeight: 600,
-                padding:"8px 16px",
+                padding: "8px 16px",
               },
             }}
             style={{
               padding: "0px",
-              marginTop:"0px",
-              borderRadius:"10px",
-              backgroundColor:"#EDEDED"
+              marginTop: "0px",
+              borderRadius: "10px",
+              backgroundColor: "#EDEDED",
             }}
             onChange={handleMajor}
           />
@@ -350,7 +346,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             <Typography style={{ display: "inline" }}>
               Select all that apply
             </Typography>
-            <img src={DropdownArrow} style={{float:"right"}}></img>
+            <img src={DropdownArrow} style={{ float: "right" }}></img>
           </DropDownTitle>
           {openInd && (
             <DropDownBox wd={"314px"} hg={"202px"} top={"122px"}>
@@ -396,9 +392,11 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           )}
         </TextFieldWrapper>
 
-        {/* linkedIn */}
-        <TextFieldWrapper style={{marginTop:"50px"}}>
-          <BoldTypography sz={"18px"}>LinkedIn Profile (Optional):</BoldTypography>
+        {/* linkedIn */} 
+        <TextFieldWrapper style={{ marginTop: "50px" }}>
+          <BoldTypography sz={"18px"}>
+            LinkedIn Profile (Optional):
+          </BoldTypography>
           {/* <img src={linkedinStart} style={{width: "46px", height: "40px"}}></img> */}
           <DialogTextField
             autoFocus
@@ -417,14 +415,14 @@ const EditProfile = ({ open, handleClose, allTags }) => {
               style: {
                 fontSize: 16,
                 fontWeight: 600,
-                padding:"8px 16px",
+                padding: "8px 16px",
               },
             }}
             style={{
               padding: "0px",
-              marginTop:"0px",
-              borderRadius:"10px",
-              backgroundColor:"#EDEDED"
+              marginTop: "0px",
+              borderRadius: "10px",
+              backgroundColor: "#EDEDED",
             }}
             onChange={handlelinkedIn}
           />
@@ -432,7 +430,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
         {/* Done button */}
         <EditProfileDone>
-          <DoneBtn onClick={handleSubmit}>Done</DoneBtn>
+          <DoneBtn onClick={handleSubmit}>Save</DoneBtn>
         </EditProfileDone>
       </EditProfileContent>
     </EditProfileContainer>

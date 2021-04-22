@@ -32,7 +32,7 @@ const ViewStudentProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
   const tags = user.tags;
- 
+
   return (
     <div>
       {console.log(user)}
