@@ -14,11 +14,11 @@ import { colors } from "../shared/config";
 import { useDispatch, useSelector } from "react-redux";
 import { newEvent } from "../redux/actions/dataActions";
 import styled from "styled-components";
-import "../pages/Home/Calendar/EventCalendar.css";
+import "../components/Calendar/EventCalendar.css";
 import Datetime from "react-datetime";
 import moment from "moment";
 import { ActionButton } from "../shared/Buttons";
-import { StyleEventCalendar } from "../pages/Home/Calendar/EventCalender";
+import { StyleEventCalendar } from "../components/Calendar/EventCalender";
 import LinkEffect from "../shared/Effect/LinkEffect";
 
 const DialogTextField = styled(TextField)`
@@ -99,7 +99,6 @@ export const DropdownOption = styled(MenuItem)`
 `;
 
 const NewEvent = ({ open, handleClose }) => {
-
   const user = useSelector((state) => state.user);
 
   // ref: https://stackoverflow.com/questions/36125038/generate-array-of-times-as-strings-for-every-x-minutes-in-javascript
@@ -153,7 +152,6 @@ const NewEvent = ({ open, handleClose }) => {
     const updateTimeString = `${timeString} ${startTime}`;
     handleEventTime(updateTimeString);
   };
-
 
   const handleStartTime = (startTime) => {
     const updateTimeString = `${time.format("YYYY-MM-DD")} ${startTime}`;

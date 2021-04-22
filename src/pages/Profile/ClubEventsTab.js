@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
 import { Button } from "@material-ui/core";
 
-import { StyleEventCalendar } from "../Home/Calendar/EventCalender";
-import "../Home/Calendar/EventCalendar.css";
+import { StyleEventCalendar } from "../../components/Calendar/EventCalender";
+import "../../components/Calendar/EventCalendar.css";
 import Datetime from "react-datetime";
 import { ActionButton } from "../../shared/Buttons";
 import styled from "styled-components";

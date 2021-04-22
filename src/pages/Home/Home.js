@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import Calendar from "react-calendar";
 // Styles
-import "./Calendar/HomeCalendar.css";
+import "../../components/Calendar/HomeCalendar.css";
 
 import {
   LandingPage,
@@ -43,7 +43,7 @@ import {
 import NewPost from "../../components/NewPost";
 import NewEvent from "../../components/NewEvent";
 import Explore from "./Explore";
-import { styleCalendar } from "./Calendar/HomeCalendar";
+import { styleCalendar } from "../../components/Calendar/HomeCalendar";
 import Posts from "./Posts";
 
 import Events from "./Events";
