@@ -13,7 +13,7 @@ import { ReactComponent as CollapseIcon } from "../images/navbar_collapse_icon.s
 // imports for search bar
 import { Autocomplete } from "@material-ui/lab";
 import { TextField } from "@material-ui/core";
-import LinkEffect from "../shared/LinkEffect";
+import LinkEffect from "../shared/Effect/LinkEffect";
 
 const NavBarWrapper = styled.div`
   display: flex;
