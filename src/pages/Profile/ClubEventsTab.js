@@ -121,7 +121,7 @@ const ClubEventsTab = () => {
       setEvent({});
       return;
     }
-    for (var i = 0; i < hostedEvents.length; i++) {
+    for (let i = 0; i < hostedEvents.length; i++) {
       const myDate = hostedEvents[i].startDate;
       if (
         myDate.getDate() === viewDate._d.getDate() &&
@@ -135,7 +135,7 @@ const ClubEventsTab = () => {
     if (!eventFound) {
       setEvent({});
     }
-  }, [viewDate]);
+  }, [viewDate, hostedEvents]);
 
   const [showTest, setShowTest] = useState(false);
   useEffect(() => {
