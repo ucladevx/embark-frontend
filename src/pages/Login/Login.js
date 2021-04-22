@@ -18,18 +18,14 @@ import TypeBox from "../../shared/TypeBox";
 import AuthButtons from "../../shared/AuthButtons";
 import { ActionButton } from "../../shared/Buttons";
 import { CLEAR_ERRORS } from "../../redux/types";
-
-const SignUpTitle = styled.div`
-  font-weight: bold;
-  font-size: 24px;
-  margin-bottom: 15px;
-`;
+import { TitleText } from "../../shared/Text/TitleText";
 
 const AccountBtn = styled(ActionButton)`
   width: 200px;
   height: 38px;
   margin-top: 15px;
 `;
+
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
@@ -47,7 +43,7 @@ const Login = () => {
       <LeftFormContainer />
       <RightFormContainer>
         <Prompt link={"signup"}></Prompt>
-        <SignUpTitle>Log in to Embark</SignUpTitle>
+        <TitleText>Log in to Embark</TitleText>
         <AuthButtons />
         <OrSeperator />
         <Formik

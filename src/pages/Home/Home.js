@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import Calendar from "react-calendar";
 // Styles
@@ -120,7 +120,9 @@ const Home = () => {
                 onClick={() => history.push(`/user/${user._id}`)}
               >
                 <InfoImage src={avatarImg} alt="user"></InfoImage>
-                <InfoEntryText>{user.name}</InfoEntryText>
+                <InfoEntryText>
+                  {user.firstName} {user.lastName}
+                </InfoEntryText>
               </InfoEntryWrapper>
               <InfoSeperator></InfoSeperator>
               <InfoEntryWrapper>
@@ -173,7 +175,7 @@ const Home = () => {
             ) : page === "events" ? (
               <DiscoverEvents closeEvents={closeEvents}></DiscoverEvents>
             ) : (
-              <></>
+              <Fragment></Fragment>
             )}
           </MiddleContainer>
 
