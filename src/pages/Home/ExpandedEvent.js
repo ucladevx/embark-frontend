@@ -45,8 +45,6 @@ const DescWrapper = styled.div`
   max-height: 200px;
 `;
 
-
-
 const makeDay = (moment) => {
   if (typeof moment === "string") {
     let date = moment.replace("T", " ");

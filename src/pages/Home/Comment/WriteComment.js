@@ -39,7 +39,7 @@ const WriteComment = ({ post_id }) => {
   }, [commentRef, onComment, post_id]);
 
   const handleSubmit = (e) => {
-    if(comment && comment.length>1500){
+    if (comment && comment.length > 1500) {
       alert("Comment is too long! Please limit to <1500 characters");
       return;
     }
