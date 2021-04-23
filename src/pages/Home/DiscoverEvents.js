@@ -50,16 +50,17 @@ const testEvent = [
   },
 ];
 
-const DiscoverEvents = ({ closeEvents }) => {
+const DiscoverEvents = ({ closeEvents, setExpandedEventPage }) => {
   const events = useSelector((state) => state.data.events);
 
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});
   const loadExpanded = (e) => {
-    console.log(e);
+    //console.log(e);
     setEvent(e);
-    console.log(event);
-    setExpanded(true);
+    //console.log(event);
+    //setExpanded(true);
+    setExpandedEventPage(e);
   };
 
   return (

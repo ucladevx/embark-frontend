@@ -194,7 +194,7 @@ const Home = () => {
             ) : page === "explore" ? (
               <Explore></Explore>
             ) : page === "events" ? (
-              <DiscoverEvents closeEvents={closeEvents}></DiscoverEvents>
+              <DiscoverEvents closeEvents={closeEvents} setExpandedEventPage={openExpandedEventPage}></DiscoverEvents>
             ) : page === "expandEvent" ? (
               <>
                 <ExpandedEventPage
