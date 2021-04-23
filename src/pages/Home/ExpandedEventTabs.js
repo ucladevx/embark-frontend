@@ -8,12 +8,11 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import styled from "styled-components";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import FlagIcon from '@material-ui/icons/Flag';
-import PeopleIcon from '@material-ui/icons/People';
-import { Avatar } from "@material-ui/core";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+import FlagIcon from "@material-ui/icons/Flag";
+import PeopleIcon from "@material-ui/icons/People";
 import { BoldTypography } from "../../shared/Typography";
-import { EventTypography, InfoSeperator, PostContent } from "./StyleLanding";
+import { EventTypography, PostContent } from "./StyleLanding";
 import Linkify from "react-linkify";
 import { colors } from "../../shared/config";
 
@@ -111,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tabs: {
     fontSize: 16,
-  }
+  },
 }));
 
 const ExpandedEventTabs = ({ e }) => {
@@ -139,19 +138,19 @@ const ExpandedEventTabs = ({ e }) => {
         <BoldTypography sz={"18px"}>Details</BoldTypography>
         <RowWrapper>
           <IconWrapper>
-            <FlagIcon fontSize='inherit'></FlagIcon>
+            <FlagIcon fontSize="inherit"></FlagIcon>
           </IconWrapper>
           <EventContent>Event hosted by {e.authorEmail}</EventContent>
         </RowWrapper>
         <RowWrapper>
           <IconWrapper>
-            <PeopleIcon fontSize='inherit'></PeopleIcon>
+            <PeopleIcon fontSize="inherit"></PeopleIcon>
           </IconWrapper>
           <EventContent>{e.attendees} people going</EventContent>
         </RowWrapper>
         <RowWrapper>
           <IconWrapper>
-            <AccessTimeIcon fontSize='inherit'></AccessTimeIcon>
+            <AccessTimeIcon fontSize="inherit"></AccessTimeIcon>
           </IconWrapper>
           <TimeWrapper>
             <TimeTypography sz={"24px"}>
@@ -161,7 +160,7 @@ const ExpandedEventTabs = ({ e }) => {
         </RowWrapper>
         <RowWrapper>
           <IconWrapper>
-            <LocationOnIcon fontSize='inherit'></LocationOnIcon>
+            <LocationOnIcon fontSize="inherit"></LocationOnIcon>
           </IconWrapper>
           <Linkify>
             <EventContent>Location: {e.venue}</EventContent>

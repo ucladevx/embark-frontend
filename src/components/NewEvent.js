@@ -153,23 +153,22 @@ const NewEvent = ({ open, handleClose, editId }) => {
     const updateTimeString = `${timeString} ${startTime}`;
     handleEventTime(updateTimeString);
   };
-  const handleStartTime = (startTime) => {   
+  const handleStartTime = (startTime) => {
     const updateTimeString = `${time.format("YYYY-MM-DD")} ${startTime}`;
     handleEventTime(updateTimeString);
     setStartTime(startTime);
-    
   };
 
   const handleSubmit = async () => {
     console.log(startTime);
     console.log(endTime);
     var temp = new Date();
-    const end = Object.assign(temp,time._d);
-    const endp1 = parseInt(endTime.substring(0,2));
-    const endp2 = parseInt(endTime.substring(3,5));
-    end.setHours(endp1,endp2,0);
+    const end = Object.assign(temp, time._d);
+    const endp1 = parseInt(endTime.substring(0, 2));
+    const endp2 = parseInt(endTime.substring(3, 5));
+    end.setHours(endp1, endp2, 0);
     var event;
-    if(editId){
+    if (editId) {
       event = {
         _id: editId,
         userType: "club",
@@ -182,8 +181,7 @@ const NewEvent = ({ open, handleClose, editId }) => {
         venue: location,
         desc: description,
       };
-    }
-    else {
+    } else {
       event = {
         userType: "club",
         name: title,
@@ -247,9 +245,8 @@ const NewEvent = ({ open, handleClose, editId }) => {
       <DialogContent>
         <TextFieldWrapper>
           <BoldTypography sz={"24px"}>
-            {editId ? (<>Edit Event</>)
-            : (<>Create an Event</>)}
-            </BoldTypography>
+            {editId ? <>Edit Event</> : <>Create an Event</>}
+          </BoldTypography>
           <NameDiv>Add Title:</NameDiv>
           <DialogTextField
             autoFocus
@@ -309,8 +306,7 @@ const NewEvent = ({ open, handleClose, editId }) => {
       </DialogContent>
       <DialogActions>
         <PostBtn onClick={handleSubmit} color="primary">
-          {editId ? (<>Edit</>)
-            : (<>Create</>)}
+          {editId ? <>Edit</> : <>Create</>}
         </PostBtn>
       </DialogActions>
     </Dialog>

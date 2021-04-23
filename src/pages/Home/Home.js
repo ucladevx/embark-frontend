@@ -82,7 +82,7 @@ const Home = () => {
     dispatch({ type: "CLUB_EVENT_EXPANSION", payload: {} });
     setPage("main");
     setSelectedEvent({});
-  }
+  };
 
   const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
 
@@ -99,7 +99,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if(clubExpansionCase._id){
+    if (clubExpansionCase._id) {
       openExpandedEventPage(clubExpansionCase);
     }
   }, []);
@@ -131,7 +131,7 @@ const Home = () => {
   return (
     <>
       <NewPost open={newPost} handleClose={() => setNewPost(false)} />
-      <NewEvent open={newEvent} handleClose={() => setNewEvent(false)}/>
+      <NewEvent open={newEvent} handleClose={() => setNewEvent(false)} />
       <LandingPage>
         <NavBar></NavBar>
         <LandingPageWrapper>
@@ -197,7 +197,10 @@ const Home = () => {
               <DiscoverEvents closeEvents={closeEvents}></DiscoverEvents>
             ) : page === "expandEvent" ? (
               <>
-              <ExpandedEventPage e={selectedEvent} close={closeExpandedEventPage}></ExpandedEventPage>
+                <ExpandedEventPage
+                  e={selectedEvent}
+                  close={closeExpandedEventPage}
+                ></ExpandedEventPage>
               </>
             ) : (
               <Fragment></Fragment>

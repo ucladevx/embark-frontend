@@ -1,7 +1,7 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import styled from "styled-components";
-import NewEvent from "../../components/NewEvent"
+import NewEvent from "../../components/NewEvent";
 import {
   EventAvatar,
   EventDescription,
@@ -120,7 +120,7 @@ const ExpandedEventPage = ({ e, close }) => {
   };
   const closePage = () => {
     close();
-  }
+  };
   const goingClick = (id) => {
     if (hasID(id)) {
       dispatch(goingToEvent(id));
@@ -130,12 +130,16 @@ const ExpandedEventPage = ({ e, close }) => {
   };
 
   useEffect(() => {
-    dispatch({ type: "CLUB_EVENT_EXPANSION", payload: {} })
-   } ,[]);
+    dispatch({ type: "CLUB_EVENT_EXPANSION", payload: {} });
+  }, []);
 
   return (
     <TextFieldWrapper>
-      <NewEvent open={newEvent} handleClose={() => setNewEvent(false)} editId={e._id}/>
+      <NewEvent
+        open={newEvent}
+        handleClose={() => setNewEvent(false)}
+        editId={e._id}
+      />
       <ProfileWrapper>
         <HeaderImage src={lawn}></HeaderImage>
         <ProfileInfo>
@@ -148,20 +152,18 @@ const ExpandedEventPage = ({ e, close }) => {
                 </TimeTypography>
                 <HeaderWrapper>
                   <BoldTypography sz={"24px"}>{e.title}</BoldTypography>
-                  { usertype!=="student" ? (                  
-                      <GoingBtnExpand
-                        onClick={goingClick(e._id)}
-                        bgcolor={hasID(e._id)}
-                      >
-                        Going
-                      </GoingBtnExpand>
-                    ) : (
-                      <CreateButton onClick={() => setNewEvent(true)}>
-                        Edit Event
-                      </CreateButton>
-                    )
-                  }
-
+                  {usertype === "student" ? (
+                    <GoingBtnExpand
+                      onClick={goingClick(e._id)}
+                      bgcolor={hasID(e._id)}
+                    >
+                      Going
+                    </GoingBtnExpand>
+                  ) : (
+                    <CreateButton onClick={() => setNewEvent(true)}>
+                      Edit Event
+                    </CreateButton>
+                  )}
                 </HeaderWrapper>
               </ColumnWrapper>
             </HeaderWrapper>
@@ -173,7 +175,7 @@ const ExpandedEventPage = ({ e, close }) => {
             <ExpandedEventTabs e={e} />
           </ProfileTabsWrapper>
           <RightWrapper>
-            <CreateButton onClick = {closePage}>Return Home</CreateButton>
+            <CreateButton onClick={closePage}>Return Home</CreateButton>
           </RightWrapper>
         </ProfileInfo>
       </ProfileWrapper>
