@@ -284,6 +284,8 @@ export const PostTitle = styled(BoldTypography)`
 export const PostContent = styled(Typography)`
   margin-top: 5px;
   font-size: 12px;
+  overflow: scroll;
+  max-height: 500px;
 `;
 
 export const ViewCommentLink = styled(Typography)`
@@ -319,6 +321,8 @@ export const PreviousCommentTitle = styled(BoldTypography)`
 
 export const PreviousCommentText = styled(Typography)`
   font-size: 12px;
+  overflow: scroll;
+  max-height: 150px;
 `;
 
 export const PreviousCommentContent = styled.div`

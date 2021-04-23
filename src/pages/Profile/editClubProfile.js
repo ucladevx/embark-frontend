@@ -80,6 +80,18 @@ const EditClubProfile = ({ open, handleClose, currentAbout }) => {
   };
 
   const handleSubmit = async () => {
+    if(name && name.length>100){
+      alert("Name is too long! Please limit to <100 characters");
+      return;
+    }
+    if(description && description.length>10000){
+      alert("Description is too long! Please limit to <10000 characters");
+      return;
+    }
+    if(website && website.length>200){
+      alert("Website link is too long! Please limit to <200 characters");
+      return;
+    }
     const updatedProfile = {
       name,
       industries,

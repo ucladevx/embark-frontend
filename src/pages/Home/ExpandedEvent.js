@@ -40,6 +40,13 @@ const TimeWrapper = styled.div`
   justify-content: left;
 `;
 
+const DescWrapper = styled.div`
+  overflow: scroll;
+  max-height: 200px;
+`;
+
+
+
 const makeDay = (moment) => {
   if (typeof moment === "string") {
     let date = moment.replace("T", " ");
@@ -63,7 +70,7 @@ const ExpandedEvent = ({ open, handleClose, e }) => {
     <Dialog open={open} onClose={handleClose}>
       <DialogContent>
         <TextFieldWrapper>
-          <BoldTypography sz={"24px"}>{e.title}</BoldTypography>
+          <BoldTypography sz={"24px"}>{e.name}</BoldTypography>
           <Linkify>
             <EventContent>Location: {e.venue}</EventContent>
           </Linkify>
@@ -74,9 +81,11 @@ const ExpandedEvent = ({ open, handleClose, e }) => {
               {makeDay(e.startDate)} - {makeDay(e.endDate)}
             </TimeTypography>
           </TimeWrapper>
-          <BoldTypography sz={"16px"}>Description:</BoldTypography>
+          <DescWrapper>
+            <BoldTypography sz={"16px"}>Description:</BoldTypography>
+          </DescWrapper>
           <Linkify>
-            <EventContent>{e.description}</EventContent>
+            <EventContent>{e.desc}</EventContent>
           </Linkify>
         </TextFieldWrapper>
       </DialogContent>
