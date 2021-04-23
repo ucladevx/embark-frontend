@@ -41,6 +41,12 @@ export const NameDescriptionWrapper = styled.div`
   max-height: 12vh;
 `;
 
+export const TabsDescriptionWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 1vh;
+`;
+
 export const ProfileTabsWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -180,4 +186,35 @@ export const Footer = styled.div`
   height: 100%;
   flex-direction: column;
   align-items: center;
+`;
+
+export const NoFollowedClubsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  width: 40vw;
+  height: 20vh;
+  justify-content: space-evenly;
+`;
+
+export const FollowedClubsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  width: 40vw;
+  min-height: 40vh;
+  justify-content: space-evenly;
+`;
+
+export const ExploreClubsButton = styled(Button)`
+  width: 150px;
+  height: 50px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-transform: none;
+  color: #ffffff;
+  background: #5473bb;
+  border-radius: 5px;
 `;

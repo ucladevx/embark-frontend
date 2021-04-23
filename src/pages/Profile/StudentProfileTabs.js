@@ -8,6 +8,13 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { useDispatch, useSelector } from "react-redux";
 import { BoldTypography } from "../../shared/Typography";
+import {
+  ExploreClubsButton,
+  NoFollowedClubsWrapper,
+  FollowedClubsWrapper,
+} from "./StyleProfile";
+import FollowedClubs from "./FollowedClubs";
+import { useHistory } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,8 +61,15 @@ const UserProfileTabs = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const history = useHistory();
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const exploreClubs = () => {
+    dispatch({ type: "OPEN_EXPLORE" });
+    history.push("/home");
   };
 
   return (
@@ -77,7 +91,23 @@ const UserProfileTabs = () => {
       ))} */}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Followed Clubs
+        {user.clubs.length === 0 ? (
+          <FollowedClubsWrapper>
+            <FollowedClubs></FollowedClubs>
+            <ExploreClubsButton onClick={exploreClubs}>
+              Explore More Clubs
+            </ExploreClubsButton>
+          </FollowedClubsWrapper>
+        ) : (
+          <NoFollowedClubsWrapper>
+            <BoldTypography sz={"18px"}>
+              You are not following any clubs yet.
+            </BoldTypography>
+            <ExploreClubsButton onClick={exploreClubs}>
+              Explore Clubs
+            </ExploreClubsButton>
+          </NoFollowedClubsWrapper>
+        )}
       </TabPanel>
       <TabPanel value={value} index={2}>
         Saved Posts

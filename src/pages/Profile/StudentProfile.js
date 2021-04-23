@@ -16,6 +16,7 @@ import {
   ExploreFilter,
   ExploreObj,
   Footer,
+  TabsDescriptionWrapper,
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
@@ -82,9 +83,9 @@ const StudentProfile = (props) => {
         </ProfileWrapper>
         <ProfileWrapper>
           <ProfileInfo>
-            <NameDescriptionWrapper>
+            <TabsDescriptionWrapper>
               <UserProfileTabs />
-            </NameDescriptionWrapper>
+            </TabsDescriptionWrapper>
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>

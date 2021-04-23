@@ -36,3 +36,5 @@ export const LOADING_UI = "LOADING_UI";
 export const STOP_LOADING_UI = "STOP_LOADING_UI";
 export const OPEN_COMMENT = "OPEN_COMMENT";
 export const CLOSE_COMMENT = "CLOSE_COMMENT";
+export const OPEN_EXPLORE = "OPEN_EXPLORE";
+export const CLOSE_EXPLORE = "CLOSE_EXPLORE";
