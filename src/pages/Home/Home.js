@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import Calendar from "react-calendar";
-import ExpandedEventPage from "./ExpandedEventPage"
+import ExpandedEventPage from "./ExpandedEventPage";
 // Styles
 import "../../components/Calendar/HomeCalendar.css";
 
@@ -61,6 +61,7 @@ const Home = () => {
   // Redux
   const filters = useSelector((state) => state.data.filter);
   const user = useSelector((state) => state.user);
+  const clubExpansionCase = useSelector((state) => state.ui.clubeventexpand);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -71,13 +72,17 @@ const Home = () => {
   const [numEvents, setNumEvents] = useState(3);
   const [selectedEvent, setSelectedEvent] = useState({});
 
-
   const openExpandedEventPage = (e) => {
     setPage("expandEvent");
     setSelectedEvent(e);
     console.log(e);
-  }
+  };
 
+  const closeExpandedEventPage = () => {
+    dispatch({ type: "CLUB_EVENT_EXPANSION", payload: {} });
+    setPage("main");
+    setSelectedEvent({});
+  }
 
   const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
 
@@ -91,6 +96,12 @@ const Home = () => {
 
   useEffect(() => {
     styleCalendar();
+  }, []);
+
+  useEffect(() => {
+    if(clubExpansionCase._id){
+      openExpandedEventPage(clubExpansionCase);
+    }
   }, []);
 
   const removeUpdateFilters = (t) => {
@@ -120,7 +131,7 @@ const Home = () => {
   return (
     <>
       <NewPost open={newPost} handleClose={() => setNewPost(false)} />
-      <NewEvent open={newEvent} handleClose={() => setNewEvent(false)} />
+      <NewEvent open={newEvent} handleClose={() => setNewEvent(false)}/>
       <LandingPage>
         <NavBar></NavBar>
         <LandingPageWrapper>
@@ -185,7 +196,9 @@ const Home = () => {
             ) : page === "events" ? (
               <DiscoverEvents closeEvents={closeEvents}></DiscoverEvents>
             ) : page === "expandEvent" ? (
-              <ExpandedEventPage e={selectedEvent}></ExpandedEventPage>
+              <>
+              <ExpandedEventPage e={selectedEvent} close={closeExpandedEventPage}></ExpandedEventPage>
+              </>
             ) : (
               <Fragment></Fragment>
             )}
@@ -198,7 +211,11 @@ const Home = () => {
             {page === "events" ? (
               <MyEvents></MyEvents>
             ) : (
-              <Events setNewEvent={setNewEvent} openEvents={openEvents} setExpandedEventPage={openExpandedEventPage}/>
+              <Events
+                setNewEvent={setNewEvent}
+                openEvents={openEvents}
+                setExpandedEventPage={openExpandedEventPage}
+              />
             )}
           </RightContainer>
         </LandingPageWrapper>

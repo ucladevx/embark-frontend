@@ -1,17 +1,19 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import styled from "styled-components";
+import NewEvent from "../../components/NewEvent"
 import {
-    EventAvatar,
-    EventDescription,
-    EventItem,
-    EventItems,
-    EventTypography,
-    EventsWrapper,
-    GoingBtnExpand,
-    InfoSeperator,
-    PostContent
-  } from "./StyleLanding";
+  EventAvatar,
+  EventDescription,
+  EventItem,
+  EventItems,
+  EventTypography,
+  EventsWrapper,
+  GoingBtnExpand,
+  InfoSeperator,
+  PostContent,
+  CreateButton,
+} from "./StyleLanding";
 import { useSelector, useDispatch } from "react-redux";
 import {
   goingToEvent,
@@ -41,8 +43,8 @@ const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 const TimeTypography = styled(EventTypography)`
-  color: ${colors.gray2};
-  font-size: 16px;
+  color: ${colors.blue4};
+  font-size: 14px;
 `;
 
 const UnderAvatar = styled.div`
@@ -79,10 +81,10 @@ const TextFieldWrapper = styled.div`
   margin-bottom: 20px;
 `;
 
-const TimeWrapper = styled.div`
+const RightWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: left;
+  flex-direction: column;
+  position: relative;
 `;
 
 const makeDay = (moment) => {
@@ -90,22 +92,24 @@ const makeDay = (moment) => {
     let date = moment.replace("T", " ");
     date = date.replace("Z", " ");
     date = date.concat(" GMT");
-    return dayjs(date).format("MMM DD HH:mm a");
+    return dayjs(date).format("dddd MMM DD • HH:mm a");
   }
   let date = JSON.stringify(moment);
   if (date) {
     date = date.replace("T", " ");
     date = date.replace("Z", " ");
     date = date.concat(" GMT");
-    return dayjs(date).format("MMM DD HH:mm a");
+    return dayjs(date).format("dddd MMM DD • HH:mm a");
   } else {
     return "";
   }
 };
 
-const ExpandedEventPage = ({e}) => {
+const ExpandedEventPage = ({ e, close }) => {
   const dispatch = useDispatch();
   const attending = useSelector((state) => state.user.goingEvents);
+  const usertype = useSelector((state) => state.user.userType);
+  const [newEvent, setNewEvent] = useState(false);
   const hasID = (id) => {
     for (var i = 0; i < attending.length; i++) {
       if (attending[i]._id === id) {
@@ -114,6 +118,9 @@ const ExpandedEventPage = ({e}) => {
     }
     return false;
   };
+  const closePage = () => {
+    close();
+  }
   const goingClick = (id) => {
     if (hasID(id)) {
       dispatch(goingToEvent(id));
@@ -122,40 +129,54 @@ const ExpandedEventPage = ({e}) => {
     }
   };
 
+  useEffect(() => {
+    dispatch({ type: "CLUB_EVENT_EXPANSION", payload: {} })
+   } ,[]);
+
   return (
     <TextFieldWrapper>
-        <ProfileWrapper>
-          <HeaderImage src={lawn}></HeaderImage>
-          <ProfileInfo>
-              <ProfileAvatar></ProfileAvatar>
-              <UnderAvatar>
+      <NewEvent open={newEvent} handleClose={() => setNewEvent(false)} editId={e._id}/>
+      <ProfileWrapper>
+        <HeaderImage src={lawn}></HeaderImage>
+        <ProfileInfo>
+          <ProfileAvatar></ProfileAvatar>
+          <UnderAvatar>
+            <HeaderWrapper>
+              <ColumnWrapper>
+                <TimeTypography sz={"16px"}>
+                  {makeDay(e.startDate)}
+                </TimeTypography>
                 <HeaderWrapper>
-                  <ColumnWrapper>
-                  <TimeTypography sz={"24px"}>
-                      {makeDay(e.startDate)}
-                    </TimeTypography>
-                    <HeaderWrapper>
-                      <BoldTypography sz={"24px"}>{e.title}</BoldTypography>
+                  <BoldTypography sz={"24px"}>{e.title}</BoldTypography>
+                  { usertype!=="student" ? (                  
                       <GoingBtnExpand
-                      onClick={goingClick(e._id)}
-                      bgcolor={hasID(e._id)}
+                        onClick={goingClick(e._id)}
+                        bgcolor={hasID(e._id)}
                       >
                         Going
                       </GoingBtnExpand>
-                    </HeaderWrapper>
-                  </ColumnWrapper>
-                </HeaderWrapper>
-              </UnderAvatar>
-          </ProfileInfo>
-        </ProfileWrapper>
-        <ProfileWrapper>
-          <ProfileInfo>
-            <ProfileTabsWrapper> 
-              <ExpandedEventTabs e={e}/>
-            </ProfileTabsWrapper>
-          </ProfileInfo>
-        </ProfileWrapper>
+                    ) : (
+                      <CreateButton onClick={() => setNewEvent(true)}>
+                        Edit Event
+                      </CreateButton>
+                    )
+                  }
 
+                </HeaderWrapper>
+              </ColumnWrapper>
+            </HeaderWrapper>
+          </UnderAvatar>
+        </ProfileInfo>
+        <InfoSeperator></InfoSeperator>
+        <ProfileInfo>
+          <ProfileTabsWrapper>
+            <ExpandedEventTabs e={e} />
+          </ProfileTabsWrapper>
+          <RightWrapper>
+            <CreateButton onClick = {closePage}>Return Home</CreateButton>
+          </RightWrapper>
+        </ProfileInfo>
+      </ProfileWrapper>
     </TextFieldWrapper>
   );
 };

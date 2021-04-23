@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../shared/config";
 import { Avatar, Button, TextField, Typography } from "@material-ui/core";
+import { ActionButton } from "../../shared/Buttons";
 import { BoldTypography } from "../../shared/Typography";
 import {
   handleTagColor,
@@ -379,4 +380,23 @@ export const CommentWrapper = styled.div`
   gap: 20px;
   padding: 25px 0;
   background: ${colors.white};
+`;
+
+export const CreateButton = styled(ActionButton)`
+  height: 26px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  padding: 15px;
+  margin-top: 5px;
+  margin-right: 5px;
+  font-size: 14px;
+  text-transform: none;
+  align-self: flex-end;
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `;
