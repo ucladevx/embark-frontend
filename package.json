@@ -60,7 +60,7 @@
     "build": "react-app-rewired build/react-app-rewired start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "npx prettier --write --arrow-parens always --trailing-comma all 'src/**/*.js'",
+    "format": "npx prettier --write --arrow-parens always --trailing-comma all 'src/**/*.js' && git add -A ",
     "prepare": "husky install"
   },
   "eslintConfig": {
