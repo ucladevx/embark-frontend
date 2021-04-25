@@ -28,17 +28,13 @@ export const LandingPageWrapper = styled.div`
 
 export const LeftContainer = styled.div`
   ${StickyEffect};
-  flex: 1 1 630px;
   white-space: nowrap;
 `;
 
-export const MiddleContainer = styled.div`
-  flex: 2 1 auto;
-`;
+export const MiddleContainer = styled.div``;
 
 export const RightContainer = styled.div`
   ${StickyEffect};
-  flex: 1 2 auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
