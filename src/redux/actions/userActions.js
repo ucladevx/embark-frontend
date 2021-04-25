@@ -64,7 +64,6 @@ export const getClubData = () => async (dispatch) => {
   }
 };
 
-
 // Sign Up a user
 export const signupStudent = (newUserData, handleUser, handleStep) => async (
   dispatch,
