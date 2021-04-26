@@ -15,14 +15,10 @@ import { Field, Formik } from "formik";
 import * as Yup from "yup";
 import { signupStudent } from "../../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
-import { header1, header4 } from "../../shared/config";
+import { header4 } from "../../shared/config";
 import AuthButtons from "../../shared/AuthButtons";
 import { CLEAR_ERRORS } from "../../redux/types";
-
-const SignUpTitle = styled.div`
-  ${header1};
-  margin-bottom: 15px;
-`;
+import { TitleText } from "../../shared/Text/TitleText";
 
 const NameContainer = styled.div`
   display: flex;
@@ -64,8 +60,8 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
-        <Prompt link={"login"}></Prompt>
-        <SignUpTitle>Sign up to Embark</SignUpTitle>
+        <Prompt></Prompt>
+        <TitleText>Sign up to Embark</TitleText>
         <AuthButtons />
         <OrSeperator />
         <Formik
@@ -77,7 +73,6 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            const name = values.firstName + " " + values.lastName;
             const { firstName, lastName, email, password } = values;
             const postUser = {
               firstName,

@@ -17,6 +17,7 @@ import {
   SET_CLUB_LINKS,
   UPLOAD_CLUB_RESOURCES,
   UPLOAD_CLUB_LINKS,
+  SAVE_POST,
 } from "../types";
 
 import axios from "axios";
@@ -69,9 +70,10 @@ export const getNextPosts = () => async (dispatch, getState) => {
       },
     });
     const { posts } = getState().data;
+    console.log(res.data);
     const { results, next, hasNext } = res.data.paginatedPosts;
     const newPosts = [...posts, ...results];
-    if (next) localStorage.setItem("nextString", next.toString());
+    if (!!next) localStorage.setItem("nextString", next.toString());
     dispatch({ type: SET_POSTS, payload: newPosts });
     dispatch({ type: SET_NEXT_STRING, payload: next });
     dispatch({ type: SET_HAS_NEXT, payload: hasNext });
@@ -91,7 +93,19 @@ export const newPost = (newP) => async (dispatch) => {
     maintenanceErrorCheck(err);
   }
 };
-
+// Save a Post
+export const savePost = (post_id) => async (dispatch, getState) => {
+  try {
+    const { userType } = getState().user;
+    // TODO: Include accountType to default header once club flow is set up
+    const res = await axios.post("/posts/saved", { accountType: userType });
+    // TODO: check the documentation of save endpoint
+    console.log(res.data);
+    dispatch({ type: SAVE_POST, payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
 // Like a Post
 export const likePost = (post_id) => async (dispatch, getState) => {
   try {
@@ -148,6 +162,7 @@ export const submitComment = (post_id, commentData) => async (
 ) => {
   try {
     const { email } = getState().user;
+    // TODO: Add error display for comment
     if (commentData.trim().length === 0) throw Error("comment cannot be empty");
     const res = await axios.post(`/posts/comments`, {
       post_id,
@@ -211,7 +226,7 @@ export const removeFilter = () => (dispatch) => {
 // Create A New Event
 export const newEvent = (newE) => async (dispatch) => {
   try {
-    const res = await axios.post("/events", newE);
+    const res = await axios.post("/events/create", newE);
     dispatch({ type: NEW_EVENT, payload: res.data });
   } catch (err) {
     console.error(err);
@@ -219,12 +234,13 @@ export const newEvent = (newE) => async (dispatch) => {
 };
 
 // Get All Events - unsure how the backend will handle event storage(is it paginated?)
-export const getEvents = () => async (dispatch) => {
+export const getEvents = (amount) => async (dispatch) => {
   try {
-    const res = await axios.get("/events", {
+    const res = await axios.get("/events/discover", {
       params: {
-        limitNum: 8,
+        limitNum: amount,
       },
+      userType: "student",
     });
     console.log(res.data);
     dispatch({ type: SET_EVENTS, payload: res.data.events });

@@ -7,7 +7,9 @@ import {
   handleGoingBColor,
   handleGoingFColor,
 } from "../../utils/handleTagColors";
-import LinkEffect from "../../shared/LinkEffect";
+
+import LinkEffect from "../../shared/Effect/LinkEffect";
+import StickyEffect from "../../shared/Effect/StickyEffect";
 
 export const LandingPage = styled.div`
   background: ${colors.blue2};
@@ -16,7 +18,7 @@ export const LandingPage = styled.div`
 export const LandingPageWrapper = styled.div`
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 220px 540px 220px;
+  grid-template-columns: 290px 558px 290px;
   width: 100%;
   justify-content: center;
   min-height: 100vh;
@@ -25,23 +27,21 @@ export const LandingPageWrapper = styled.div`
 `;
 
 export const LeftContainer = styled.div`
-  flex: 1 1 630px;
+  ${StickyEffect};
   white-space: nowrap;
-  margin-left: -20px;
 `;
 
-export const MiddleContainer = styled.div`
-  flex: 2 1 auto;
-`;
+export const MiddleContainer = styled.div``;
 
 export const RightContainer = styled.div`
-  flex: 1 2 auto;
+  ${StickyEffect};
   display: flex;
   flex-direction: column;
   gap: 20px;
 `;
 
 export const InfoBoxes = styled.div`
+  ${StickyEffect}
   height: 235px;
   background-color: ${colors.white};
   border-radius: 5px;
@@ -77,6 +77,7 @@ export const InfoImage = styled.img`
 `;
 
 export const FilterWrapper = styled.div`
+  ${StickyEffect}
   box-sizing: border-box;
   margin-top: 20px;
   padding: 20px;
@@ -198,10 +199,12 @@ export const EventItems = styled.div`
 
 export const EventItem = styled.div`
   display: flex;
+  width: 90%;
 `;
 
 export const EventDescription = styled.div`
   margin-left: 15px;
+  width: 100%;
 `;
 
 export const EventAvatar = styled(Avatar)`
@@ -276,6 +279,8 @@ export const PostTitle = styled(BoldTypography)`
 export const PostContent = styled(Typography)`
   margin-top: 5px;
   font-size: 12px;
+  overflow: scroll;
+  max-height: 500px;
 `;
 
 export const ViewCommentLink = styled(Typography)`
@@ -311,6 +316,8 @@ export const PreviousCommentTitle = styled(BoldTypography)`
 
 export const PreviousCommentText = styled(Typography)`
   font-size: 12px;
+  overflow: scroll;
+  max-height: 150px;
 `;
 
 export const PreviousCommentContent = styled.div`

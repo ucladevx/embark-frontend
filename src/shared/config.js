@@ -1,5 +1,7 @@
 import { css } from "styled-components";
 
+export const HomeAddress = "http://localhost:3000/home";
+
 export const mediaQueries = {
   mobile: "@media screen and (max-width: 700px)",
 };
@@ -30,6 +32,7 @@ export const colors = {
   gray4: "#DCDCDC",
   gray5: "#6E6D79",
   gray6: "#7E7A7A",
+  gray7: "#838383",
   red1: "#EBAFAF",
   darkyellow: "#EFD69A",
   green1: "rgba(89, 193, 122, 0.4);",

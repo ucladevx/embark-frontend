@@ -112,6 +112,15 @@ const NewPost = ({ open, handleClose }) => {
   const handleSubmit = async () => {
     var post = null;
     //making sure not to send null objects in the post request
+    console.log(imgForm);
+    if (title && title.length > 100) {
+      alert("Title is too long! Please limit to <100 characters");
+      return;
+    }
+    if (description && description.length > 5000) {
+      alert("Description is too long! Please limit to <5000 characters");
+      return;
+    }
     if (form === null) {
       if (imgForm === null) {
         post = {

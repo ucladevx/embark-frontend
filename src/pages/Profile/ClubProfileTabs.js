@@ -13,6 +13,7 @@ import { Button, Dialog, DialogContent, DialogTitle } from "@material-ui/core";
 
 import ResourceUpload from "./ClubUploadResource/ResourceUpload";
 import ClubUploadResource from "./ClubUploadResource";
+import ClubEventsTab from "./ClubEventsTab.js";
 
 function TabPanel(props) {
   const { children, value, index, setNewResource, ...other } = props;
@@ -92,8 +93,8 @@ const ClubProfileTabs = () => {
         <BoldTypography>{post}</BoldTypography>
       ))} */}
       </TabPanel>
-      <TabPanel setNewResource={setNewResource} value={value} index={1}>
-        Followed Clubs
+      <TabPanel value={value} index={1}>
+        <ClubEventsTab />
       </TabPanel>
       <TabPanel setNewResource={setNewResource} value={value} index={2}>
         Saved Posts

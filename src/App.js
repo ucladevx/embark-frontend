@@ -15,10 +15,13 @@ import theme from "./utils/theme";
 // Pages
 import Login from "./pages/Login/Login.js";
 import OnBoarding from "./pages/OnBoarding";
-
 import Home from "./pages/Home";
 import StudentProfile from "./pages/Profile/StudentProfile";
 import ClubProfile from "./pages/Profile/ClubProfile";
+import { LinkedInPopUp } from "react-linkedin-login-oauth2";
+
+import ViewClubProfile from "./pages/Profile/viewClubProfile";
+import ViewStudentProfile from "./pages/Profile/viewStudentProfile";
 
 axios.defaults.baseURL = "http://localhost:9000/";
 
@@ -42,6 +45,7 @@ function App() {
         <Provider store={store}>
           <Router>
             <Switch>
+              <Route exact path="/linkedin" component={LinkedInPopUp}></Route>
               <Route exact path="/" component={OnBoarding}></Route>
               <Route exact path="/login" component={Login}></Route>
               <Route exact path="/home" component={Home}></Route>
@@ -50,7 +54,17 @@ function App() {
                 path="/user/:userid"
                 component={StudentProfile}
               ></Route>
-              <Route exact path="/club-profile" component={ClubProfile}></Route>
+              <Route exact path="/club/:clubid" component={ClubProfile}></Route>
+              <Route
+                exact
+                path="/view-club"
+                component={ViewClubProfile}
+              ></Route>
+              <Route
+                exact
+                path="/view-student"
+                component={ViewStudentProfile}
+              ></Route>
             </Switch>
           </Router>
         </Provider>

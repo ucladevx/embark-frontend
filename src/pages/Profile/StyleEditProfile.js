@@ -18,13 +18,15 @@ import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import styled from "styled-components";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import LinkEffect from "../../shared/LinkEffect";
+import LinkEffect from "../../shared/Effect/LinkEffect";
 
 export const EditProfileContainer = styled(Dialog)`
   box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   width: 100vw;
   height: 100vh;
+  margin: 0px;
+  overflow: hidden;
 `;
 
 export const TitleContainer = styled(DialogTitle)`
@@ -32,6 +34,7 @@ export const TitleContainer = styled(DialogTitle)`
   height: 10vh;
   max-height: 2vh;
   padding-bottom: 5.5vh;
+  overflow: hidden;
 `;
 export const EditProfileTitle = styled(BoldTypography)`
   font-size: 24px;
@@ -109,5 +112,67 @@ export const TextFieldWrapper = styled.div`
 export const DoneBtn = styled(ActionButton)`
   width: 120px;
   height: 40px;
-  margin: auto;
+  margin: 10px auto 20px auto;
+  color: #ffffff;
+  background-color: #5473bb;
+`;
+
+export const DropDownTitle = styled.div`
+  align-items: center;
+  padding: 7px 15px;
+  width: ${(props) => props.wd};
+  height: ${(props) => props.hg};
+  border-radius: 10px;
+  background-color: #e1dfdf;
+  color: ${colors.gray3};
+`;
+
+export const DropDownBox = styled.div`
+  width: ${(props) => props.wd};
+  height: ${(props) => props.hg};
+  top: ${(props) => props.top};
+  background: #ffffff;
+  box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  z-index: 10;
+  position: absolute;
+`;
+
+export const DropDownContent = styled.div`
+  background-color: ${colors.white};
+  width: ${(props) => props.wd};
+  height: ${(props) => props.hg};
+  max-height: 202px;
+  overflow-y: ${(props) => props.overflow};
+  border-radius: 3px;
+
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 76px;
+    margin-right: 100px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background: ${colors.silver};
+  }
+`;
+
+export const DropDownCheckBox = styled.img`
+  display: inline;
+  border: 1px solid #adafb0;
+  border-radius: 2px;
+  margin-right: 11px;
+`;
+export const Finished = styled.div`
+  display: flex;
+  justify-content: "center";
+  align-items: center;
+  padding-top: 10px;
+  padding-left: 122px;
+  width: ${(props) => props.wd};
+  height: ${(props) => props.hg};
+  background-color: #e1dfdf;
+  color: ${colors.gray3};
+  box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.25);
 `;

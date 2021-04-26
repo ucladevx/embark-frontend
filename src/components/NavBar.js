@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../shared/config";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // icons for navbar icons
 import { ReactComponent as EmbarkIcon } from "../images/navbar_embark_logo.svg";
@@ -12,7 +13,7 @@ import { ReactComponent as CollapseIcon } from "../images/navbar_collapse_icon.s
 // imports for search bar
 import { Autocomplete } from "@material-ui/lab";
 import { TextField } from "@material-ui/core";
-import LinkEffect from "../shared/LinkEffect";
+import LinkEffect from "../shared/Effect/LinkEffect";
 
 const NavBarWrapper = styled.div`
   display: flex;
@@ -85,6 +86,7 @@ const sampleSuggestions = [
 const NavBar = () => {
   const [search, setSearch] = useState("");
   const [showList, setShowList] = useState(false);
+  const user = useSelector((state) => state.user);
   const history = useHistory();
 
   const handleSearchChange = (e) => {
@@ -103,8 +105,17 @@ const NavBar = () => {
 
   const handleUserIconClick = (e) => {
     // just console log for now
+    if (user.userType === "club") {
+      history.push("/club-profile");
+    } else {
+      if (user._id) {
+        history.push(`/user/${user._id}`);
+      } else {
+        history.push("/user/:userid");
+      }
+    }
     console.log("User Icon Clicked");
-    history.push("/user/:userid");
+    history.push("/user/" + user._id);
   };
 
   const handleCollapseIconClick = (e) => {

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../shared/config";
 import { Form } from "formik";
+import { useLocation } from "react-router-dom";
 
 export const LeftFormContainer = styled.div`
   background: ${colors.blue1};
@@ -48,8 +49,9 @@ const PromptContainer = styled.div`
   right: 4vw;
 `;
 
-export const Prompt = ({ link }) => {
-  return link === "login" ? (
+export const Prompt = () => {
+  const page = useLocation().pathname;
+  return page === "/" ? (
     <PromptContainer>
       Already a member? <a href="/login">Sign in</a>
     </PromptContainer>
