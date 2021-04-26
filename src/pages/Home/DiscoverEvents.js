@@ -40,11 +40,11 @@ const test = (moment) => {
 const testEvent = [
   {
     _id: "123450",
-    title: "Embark Release",
-    authorEmail: "Embark",
+    name: "Embark Release",
+    organizerName: "Embark",
     startDate: /*"2021-03-03T08:00:00.000Z"*/ "2021-04-25T04:13:32.000Z",
     endDate: "2021-04-25T06:13:32.000Z",
-    description:
+    desc:
       "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
     venue: "here what do you think",
   },

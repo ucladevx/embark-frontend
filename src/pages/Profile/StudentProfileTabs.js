@@ -91,7 +91,7 @@ const UserProfileTabs = () => {
       ))} */}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {user.clubs.length === 0 ? (
+        {user.clubs.length > 0 ? (
           <FollowedClubsWrapper>
             <FollowedClubs></FollowedClubs>
             <ExploreClubsButton onClick={exploreClubs}>

@@ -15,10 +15,24 @@ import devxImg from "../../images/devx.jpeg";
 import dbImg from "../../images/dailyBruin.png";
 import consultingImg from "../../images/bruinConsulting.png";
 import { colors } from "../../shared/config";
+import axios from "axios";
+
+const getExpandedClub = (clubId) => async (dispatch)=> {
+  try {
+    const res = await axios.get(`/club/profilebyId?clubId=${clubId}`);
+    return res;
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 const FollowedClubs = () => {
-  const testmode = true;
+  const testmode = false;
   const clubs = useSelector((state) => state.user.clubs); //this isn't right, idk how to get clubs from club ids
+  let expandedClubs = [];
+  for(let i = 0; i < clubs.length; i++){
+    expandedClubs.push(getExpandedClub(clubs[i]));
+  }
   return (
     <>
       {/* CLUB CARDS CONTAINER: */}
@@ -72,7 +86,7 @@ const FollowedClubs = () => {
               </div>
             </>
           ) : (
-            clubs.map((c) => {
+            expandedClubs.map((c) => {
               return (
                 <div>
                   <ClubCard>

@@ -77,8 +77,8 @@ const Home = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getEvents(numEvents));
-  }, [dispatch, numEvents]);
+    dispatch(getEvents());
+  }, [dispatch]);
 
   useEffect(() => {
     styleCalendar();
