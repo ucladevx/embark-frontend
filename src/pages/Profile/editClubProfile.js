@@ -107,7 +107,7 @@ const EditClubProfile = ({ open, handleClose }) => {
     console.log(formData);
     axios.post(
       "http://localhost:9000/club/profile/image?pictureType=profile",
-      formData
+      formData,
     );
   };
 
@@ -119,7 +119,7 @@ const EditClubProfile = ({ open, handleClose }) => {
 
     axios.post(
       "http://localhost:9000/club/profile/image?pictureType=cover",
-      formData
+      formData,
     );
   };
 

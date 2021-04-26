@@ -113,12 +113,12 @@ export const DoneBtn = styled(ActionButton)`
   width: 120px;
   height: 40px;
   margin: 10px auto 20px auto;
-  color: #FFFFFF;
+  color: #ffffff;
   background-color: #5473bb;
 `;
 
 export const DropDownTitle = styled.div`
-  align-items: center; 
+  align-items: center;
   padding: 7px 15px;
   width: ${(props) => props.wd};
   height: ${(props) => props.hg};

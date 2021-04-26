@@ -87,7 +87,7 @@ export const EditProfileButton = styled(Button)`
   bottom: 1vw;
   font-size: 14px;
   text-transform: none;
-  color: #FFFFFF;
+  color: #ffffff;
   background: #5473bb;
   border-radius: 5px;
 `;
@@ -147,7 +147,7 @@ export const ButtonBox = styled.div`
   positon: absolute;
   width: fit-content;
   float: right;
-  align-items: "right"; 
+  align-items: "right";
   padding: 8px;
 `;
 

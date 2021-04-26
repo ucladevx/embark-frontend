@@ -131,7 +131,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     console.log(formData);
     axios.post(
       "http://localhost:9000/student/profile/image?pictureType=profile",
-      formData
+      formData,
     );
   };
 
@@ -142,7 +142,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     console.log(formData);
     axios.post(
       "http://localhost:9000/student/profile/image?pictureType=cover",
-      formData
+      formData,
     );
   };
 
@@ -317,60 +317,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             fwd="314px"
             fhg="46px"
           ></MultiDropDown>
-          {/* <div>
-            <DropDownTitle wd={"312px"} hg={"35px"} onClick={toggleOpenInd}>
-              <Typography style={{ display: "inline" }}>
-                Select all that apply
-              </Typography>
-              <img
-                src={DropdownArrow}
-                style={{ float: "right" }}
-                alt="arrow"
-              ></img>
-            </DropDownTitle>
-            {openInd && (
-              <DropDownBox wd={"314px"} hg={"202px"}>
-                <DropDownContent wd={"312px"} hg={"248px"} overflow={"scroll"}>
-                  {industry.map((name, index) => (
-                    <div
-                      key={name}
-                      style={{
-                        paddingLeft: "19px",
-                        height: "25px",
-                        marginTop: "14px",
-                        marginBottom: "14px",
-                      }}
-                    >
-                      <DropDownCheckBox
-                        onClick={() => {
-                          handleIndustries(name);
-                        }}
-                        src={
-                          industries && industries.includes(name)
-                            ? checked
-                            : unchecked
-                        }
-                      ></DropDownCheckBox>
-                      <Typography
-                        style={{
-                          fontSize: "18px",
-                          marginLeft: "3px",
-                          padding: "0px",
-                          display: "inline",
-                        }}
-                      >
-                        {name}
-                      </Typography>
-                    </div>
-                  ))}
-                </DropDownContent>
-
-                <Finished wd={"314px"} hg={"46px"} onClick={toggleOpenInd}>
-                  Finished
-                </Finished>
-              </DropDownBox>
-            )}
-          </div> */}
         </TextFieldWrapper>
 
         {/* linkedIn */}
