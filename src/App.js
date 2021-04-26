@@ -25,6 +25,10 @@ import ViewStudentProfile from "./pages/Profile/viewStudentProfile";
 
 axios.defaults.baseURL = "http://localhost:9000/";
 
+localStorage.setItem(
+  "AuthToken",
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNmU5NzA5MzU0Njk1MDA0ODkxNDM0MyIsIm5hbWUiOiJCdXNib3kiLCJlbWFpbCI6ImJ1c2JveTJAZ21haWwuY29tIiwiaWF0IjoxNjE3ODYwMzYxLCJleHAiOjE2MjY1MDAzNjF9.FutgK1EqOjXceZzLe0xODkO8T8ZRy9pu6sV72ADRxEQ",
+);
 const token = localStorage.getItem("AuthToken");
 
 // Check log in at first
