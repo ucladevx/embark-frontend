@@ -88,7 +88,6 @@ const NavBar = () => {
   const [showList, setShowList] = useState(false);
   const user = useSelector((state) => state.user);
   const history = useHistory();
-  const user = useSelector((state) => state.user);
 
   const handleSearchChange = (e) => {
     // just show suggestions
