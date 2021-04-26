@@ -232,8 +232,8 @@ export const newEvent = (newE) => async (dispatch) => {
 // Get All Events - unsure how the backend will handle event storage(is it paginated?)
 export const getEvents = (amount) => async (dispatch) => {
   try {
-    const res = await axios.get("/events/discover",{
-      userType : "student"
+    const res = await axios.get("/events/discover", {
+      userType: "student",
     });
     console.log(res.data);
     dispatch({ type: SET_EVENTS, payload: res.data.events });

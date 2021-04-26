@@ -2,6 +2,11 @@ import styled from "styled-components";
 import { colors } from "../../shared/config";
 import { Typography } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
+import {
+  handleTagColor,
+  handleGoingBColor,
+  handleGoingFColor,
+} from "../../utils/handleTagColors";
 
 export const ClubCardsContainer = styled.div`
   display: flex;
@@ -162,8 +167,8 @@ export const UpcomingItemDate = styled(Typography)`
 `;
 export const UpcomingItemGoingBtn = styled(Typography)`
   height: 24px;
-  background-color: ${(props) => props.bgcolor};
-  color: ${(props) => (props.textColor ? props.textColor : colors.black)};
+  background-color: ${(props) => handleGoingBColor(props.bgcolor)};;
+  color: ${(props) => handleGoingFColor(props.bgcolor)};;
   border-radius: 5px;
   width: 70px;
   padding: 0 8px;
