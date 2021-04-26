@@ -104,6 +104,15 @@ const NavBar = () => {
 
   const handleUserIconClick = (e) => {
     // just console log for now
+    if (user.userType === "club") {
+      history.push("/club-profile");
+    } else {
+      if (user._id) {
+        history.push(`/user/${user._id}`);
+      } else {
+        history.push("/user/:userid");
+      }
+    }
     console.log("User Icon Clicked");
     history.push("/user/" + user._id);
   };

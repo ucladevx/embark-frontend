@@ -8,6 +8,8 @@ export const AUTH_SIGNUP = "GOOGLE_SIGNUP";
 export const AUTH_SIGNIN = "GOOGLE_SIGNIN";
 
 export const GOING_EVENT = "GOING_EVENTS";
+export const CANCEL_ATTENDANCE_EVENT = "CANCEL_ATTENDANCE_EVENT";
+export const OWN_EVENTS = "OWN_EVENTS";
 
 // Data reducer types
 export const SET_POSTS = "SET_POSTS";

@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import Calendar from "react-calendar";
 // Styles
-import "./Calendar/HomeCalendar.css";
+import "../../components/Calendar/HomeCalendar.css";
 
 import {
   LandingPage,
@@ -43,10 +43,12 @@ import {
 import NewPost from "../../components/NewPost";
 import NewEvent from "../../components/NewEvent";
 import Explore from "./Explore";
-import { styleCalendar } from "./Calendar/HomeCalendar";
+import { styleCalendar } from "../../components/Calendar/HomeCalendar";
 import Posts from "./Posts";
 
 import Events from "./Events";
+import DiscoverEvents from "./DiscoverEvents";
+import MyEvents from "./MyEvents";
 
 // Dayjs
 import { useHistory } from "react-router-dom";
@@ -65,6 +67,7 @@ const Home = () => {
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
   const [newEvent, setNewEvent] = useState(false);
+  const [numEvents, setNumEvents] = useState(3);
 
   const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
 
@@ -73,8 +76,8 @@ const Home = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getEvents());
-  }, [dispatch]);
+    dispatch(getEvents(numEvents));
+  }, [dispatch, numEvents]);
 
   useEffect(() => {
     styleCalendar();
@@ -94,6 +97,16 @@ const Home = () => {
     setTagToAdd(e.target.value);
   };
 
+  const openEvents = () => {
+    setPage("events");
+    setNumEvents(50);
+  };
+
+  const closeEvents = () => {
+    setPage("main");
+    setNumEvents(3);
+  };
+
   return (
     <>
       <NewPost open={newPost} handleClose={() => setNewPost(false)} />
@@ -107,7 +120,9 @@ const Home = () => {
                 onClick={() => history.push(`/user/${user._id}`)}
               >
                 <InfoImage src={avatarImg} alt="user"></InfoImage>
-                <InfoEntryText>{user.name}</InfoEntryText>
+                <InfoEntryText>
+                  {user.firstName} {user.lastName}
+                </InfoEntryText>
               </InfoEntryWrapper>
               <InfoSeperator></InfoSeperator>
               <InfoEntryWrapper>
@@ -157,6 +172,8 @@ const Home = () => {
               <Posts setNewPost={setNewPost}></Posts>
             ) : page === "explore" ? (
               <Explore></Explore>
+            ) : page === "events" ? (
+              <DiscoverEvents closeEvents={closeEvents}></DiscoverEvents>
             ) : (
               <Fragment></Fragment>
             )}
@@ -166,8 +183,11 @@ const Home = () => {
             <CalanderWrapper>
               <Calendar></Calendar>
             </CalanderWrapper>
-
-            <Events setNewEvent={setNewEvent} />
+            {page === "events" ? (
+              <MyEvents></MyEvents>
+            ) : (
+              <Events setNewEvent={setNewEvent} openEvents={openEvents} />
+            )}
           </RightContainer>
         </LandingPageWrapper>
       </LandingPage>

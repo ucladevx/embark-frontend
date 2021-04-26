@@ -7,7 +7,6 @@ import {
   ListItemText,
   TextField,
   Typography,
-  IconButton,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { IndustryFilters } from "../../shared/dropdown";
@@ -144,6 +143,18 @@ const EditClubProfile = ({ open, handleClose }) => {
   };
 
   const handleSubmit = async () => {
+    if (name && name.length > 100) {
+      alert("Name is too long! Please limit to <100 characters");
+      return;
+    }
+    if (description && description.length > 10000) {
+      alert("Description is too long! Please limit to <10000 characters");
+      return;
+    }
+    if (website && website.length > 200) {
+      alert("Website link is too long! Please limit to <200 characters");
+      return;
+    }
     const updatedProfile = {
       name,
       industries,
@@ -166,6 +177,11 @@ const EditClubProfile = ({ open, handleClose }) => {
       <TitleContainer>
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
+          <img
+            src={close_window_x}
+            style={{ float: "right" }}
+            onClick={handleClose}
+          ></img>
         </EditProfileTitle>
         <IconButton
           className={classes.button}
@@ -220,7 +236,33 @@ const EditClubProfile = ({ open, handleClose }) => {
 
         {/* Description */}
         <TextFieldWrapper>
-          <BoldTypography sz={"16px"}>Description:</BoldTypography>
+          {/* <BoldTypography sz={"16px"}>Description:</BoldTypography>
+          <DialogTextField
+            autoFocus
+            margin="dense"
+            id="name"
+            placeholder={"Add your description"}
+            type="email"
+            fullWidth
+            multiline
+            rows={3}
+            InputProps={{
+              disableUnderline: true,
+              style: {
+                fontSize: 16,
+                fontWeight: 600,
+                padding: "8px 16px",
+              },
+            }}
+            style={{
+              padding: "10px 2px",
+              marginTop: "0px",
+              borderRadius: "10px",
+              backgroundColor: "#EDEDED",
+            }}
+            onChange={handleDescription}
+          /> */}
+          <BoldTypography sz={"16px"}>Major:</BoldTypography>
           <DialogTextField
             autoFocus
             margin="dense"

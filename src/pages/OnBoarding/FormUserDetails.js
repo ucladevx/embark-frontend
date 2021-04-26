@@ -60,7 +60,7 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
-        <Prompt link={"login"}></Prompt>
+        <Prompt></Prompt>
         <TitleText>Sign up to Embark</TitleText>
         <AuthButtons />
         <OrSeperator />
@@ -73,10 +73,10 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            const name = values.firstName + " " + values.lastName;
-            const { email, password } = values;
+            const { firstName, lastName, email, password } = values;
             const postUser = {
-              name,
+              firstName,
+              lastName,
               email,
               password,
               userType: "student",

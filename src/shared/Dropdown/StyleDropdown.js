@@ -1,6 +1,5 @@
-import { Select, makeStyles } from "@material-ui/core";
 import styled from "styled-components";
-import { colors } from "../shared/config";
+import { colors } from "../../shared/config";
 
 export const IndustryFilters = [
   "Medical",
@@ -22,15 +21,16 @@ export const IndustryFilters = [
   "Consulting",
   "Strategy Operations",
   "Investment Banking",
-  "Commercial Banking",
-  "Financial Planning",
-  "Private Equity/Venture Capital",
-  "Insurance",
   "Marketing",
   "Real Estate",
   "Accounting",
   "Corporate Finance",
   "Financial Technology",
+  "Commercial Banking",
+  "Financial Planning",
+  "Private Equity/Venture Capital",
+  "Insurance",
+  "Hedge Funds",
 ];
 
 export const DropDownTitle = styled.div`

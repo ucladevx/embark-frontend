@@ -8,6 +8,7 @@ import {
   ProfileAvatar,
   NameDescription,
   NameDescriptionWrapper,
+  ProfileTabsWrapper,
   IndustryWrapper,
   EditProfileButton,
   MiddleContainer,
@@ -105,7 +106,11 @@ const ClubProfile = (props) => {
               </NameDescription>
               {/* <NameDescription> */}
               <ClubWebsiteButton href={user.website}>
-                <img src={website_arrow} style={{ marginRight: "4px" }}></img>
+                <img
+                  src={website_arrow}
+                  style={{ marginRight: "4px" }}
+                  alt="website arrow"
+                ></img>
                 Club Website
               </ClubWebsiteButton>
               {/* </NameDescription> */}
@@ -130,7 +135,11 @@ const ClubProfile = (props) => {
                 seteditProfile(true);
               }}
             >
-              <img style={{ marginRight: "2px" }} src={pencil}></img>
+              <img
+                style={{ marginRight: "2px" }}
+                src={pencil}
+                alt="pencil"
+              ></img>
               Edit Profile
             </EditProfileButton>
           </ProfileInfo>
@@ -139,9 +148,9 @@ const ClubProfile = (props) => {
         <AboutContent />
         <ProfileWrapper>
           <ProfileInfo>
-            <NameDescriptionWrapper>
+            <ProfileTabsWrapper>
               <ClubProfileTabs />
-            </NameDescriptionWrapper>
+            </ProfileTabsWrapper>
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>

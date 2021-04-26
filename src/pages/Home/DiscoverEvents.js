@@ -11,36 +11,24 @@ import {
   InfoSeperator,
   AddFilter,
 } from "./StyleLanding";
+import { colors } from "../../shared/config";
 import styled from "styled-components";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { useSelector } from "react-redux";
+import { goingToEvent } from "../../redux/actions/userActions";
 import ExpandedEvent from "./ExpandedEvent.js";
 import Event from "./Event.js";
 import { ActionButton } from "../../shared/Buttons";
 
 // Dayjs
 import dayjs from "dayjs";
-
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
-export const CreateButton = styled(ActionButton)`
-  height: 26px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  width: fit-content;
+const DiscoverEventsWrapper = styled.div`
+  background-color: ${colors.white};
   padding: 15px;
-  margin-top: 5px;
-  margin-right: 5px;
-  font-size: 14px;
-  text-transform: none;
-  align-self: flex-end;
-  text-decoration: none;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
+  border-radius: 5px;
 `;
 
 const test = (moment) => {
@@ -52,8 +40,8 @@ const test = (moment) => {
 const testEvent = [
   {
     _id: "123450",
-    name: "Embark Release",
-    organizerName: "Embark",
+    title: "Embark Release",
+    authorEmail: "Embark",
     startDate: /*"2021-03-03T08:00:00.000Z"*/ "2021-04-25T04:13:32.000Z",
     endDate: "2021-04-25T06:13:32.000Z",
     description:
@@ -62,9 +50,8 @@ const testEvent = [
   },
 ];
 
-const Events = ({ setNewEvent, openEvents }) => {
+const DiscoverEvents = ({ closeEvents }) => {
   const events = useSelector((state) => state.data.events);
-  const usertype = useSelector((state) => state.user.userType);
 
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});
@@ -82,8 +69,8 @@ const Events = ({ setNewEvent, openEvents }) => {
         handleClose={() => setExpanded(false)}
         e={event}
       />
-      <EventsWrapper>
-        <TitleTypography>Upcoming Events</TitleTypography>
+      <DiscoverEventsWrapper>
+        <TitleTypography>Discover Events</TitleTypography>
         <EventItems>
           <EventItem>
             <EventAvatar></EventAvatar>
@@ -122,18 +109,11 @@ const Events = ({ setNewEvent, openEvents }) => {
               </>
             );
           })}
-          <AddFilter onClick={openEvents}>View More</AddFilter>
-          {usertype === "club" ? (
-            <CreateButton onClick={() => setNewEvent(true)}>
-              + Create
-            </CreateButton>
-          ) : (
-            <></>
-          )}
         </EventItems>
-      </EventsWrapper>
+        <AddFilter onClick={closeEvents}>Close View</AddFilter>
+      </DiscoverEventsWrapper>
     </>
   );
 };
 
-export default Events;
+export default DiscoverEvents;

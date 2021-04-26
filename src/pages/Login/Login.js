@@ -42,7 +42,7 @@ const Login = () => {
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
-        <Prompt link={"signup"}></Prompt>
+        <Prompt link={"Signup"}></Prompt>
         <TitleText>Log in to Embark</TitleText>
         <AuthButtons />
         <OrSeperator />

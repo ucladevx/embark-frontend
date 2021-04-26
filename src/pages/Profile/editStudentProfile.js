@@ -1,10 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  MenuItem,
-  InputAdornment,
-  Typography,
-  IconButton,
-} from "@material-ui/core";
+import React, { useState, useEffect, useMemo } from "react";
+import { MenuItem, InputAdornment, Typography } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import { IndustryFilters } from "../../shared/dropdown";
@@ -36,6 +31,8 @@ import {
   DropDownCheckBox,
   Finished,
 } from "../../shared/dropdown";
+import SingleDropDown from "../../shared/Dropdown/SingleDropdown";
+
 import Linkedin from "../../images/linkedin.png";
 import checked from "../../images/checked_24px.png";
 import unchecked from "../../images/unchecked_24px.png";
@@ -47,6 +44,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // import ImageUploader from 'react-images-upload';
 
 import axios from "axios";
+import MultiDropDown from "../../shared/Dropdown/MultiDropDown";
 const useStyles = makeStyles((theme) => ({
   button: {
     "&:hover": {
@@ -58,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 const EditProfile = ({ open, handleClose, allTags }) => {
   const classes = useStyles();
   const years = ["2024", "2023", "2022", "2021"];
-  const industry = IndustryFilters;
+  const industry = useMemo(() => IndustryFilters, []);
   const user = useSelector((state) => state.user);
   const [name, setName] = useState(user.name);
   const [major, setMajor] = useState(" ");
@@ -84,42 +82,12 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     setOpenInd(!openInd);
   };
 
-  //check if there is any changes
-  const saveStudent = () => {
-    // name,
-    // major,
-    // year,
-    // tags: updatedTags,
-    // bio,
-    // linkedIn: linkedin,
-    console.log("user.tags=", JSON.stringify(user.tags.sort()));
-    console.log("tags=", JSON.stringify(industries.sort()));
-    console.log("same major", user.major === major || major === "");
-    console.log("same year", user.year === parseInt(year));
-    console.log("same tags", user.tags.sort() === industries.sort());
-    console.log("same linkedIn", user.linkedIn === linkedin || linkedin === "");
-    return user.name === name &&
-      (user.major === major || major === "") &&
-      user.year === parseInt(year) &&
-      JSON.stringify(user.tags.sort()) === JSON.stringify(industries.sort()) &&
-      (user.linkedIn === linkedin || linkedin === "")
-      ? colors.gray
-      : "#5473bb";
-  };
-
   useEffect(() => {
-    // console.log("useEffect");
-    dispatch(getStudentData);
-    console.log("after render print user.tags", user.tags);
     setYear(user.year);
     setMajor(user.major);
     setLinkedin(user.linkedIn);
     setIndustries(user.tags);
-
-    return function cleanUp() {
-      console.log("clean it up");
-    };
-  }, []);
+  }, [user.year, user.major, user.linkedIn, user.tags]);
 
   const handleYear = (e) => {
     setYear(e);
@@ -140,11 +108,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     }
   };
 
-  // const addIndustries = (e) => {
-  //   // console.log("change industries to ", e.target.value);
-  //   setIndustries(e.target.value);
-  // };
-
   const removeIndustries = (name) => {
     const newIndustries = industries.filter((ind) => ind !== name);
     setIndustries(newIndustries);
@@ -152,6 +115,30 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
   const handlelinkedIn = (e) => {
     setLinkedin(e.target.value);
+    console.log(linkedin);
+  };
+
+  const handleProfileURL = (e) => {
+    console.log(e.target.files[0]);
+    setProfileURL({ url: URL.createObjectURL(e.target.files[0]) });
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]); // appending file
+    console.log(formData);
+    axios.post(
+      "http://localhost:9000/student/profile/image?pictureType=profile",
+      formData,
+    );
+  };
+
+  const handleCoverURL = (e) => {
+    setCoverURL({ url: URL.createObjectURL(e.target.files[0]) });
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]); // appending file
+    console.log(formData);
+    axios.post(
+      "http://localhost:9000/student/profile/image?pictureType=cover",
+      formData,
+    );
   };
 
   const handleProfileURL = (e) => {
@@ -179,6 +166,22 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
   const handleSubmit = async () => {
     //create an array of tags (deleted ones have rm before it)
+    if (name && name.length > 100) {
+      alert("Name is too long! Please limit to <100 characters");
+      return;
+    }
+    if (major && major.length > 50) {
+      alert("Major is too long! Please limit to <50 characters");
+      return;
+    }
+    if (bio && bio.length > 5000) {
+      alert("Bio is too long! Please limit to <5000 characters");
+      return;
+    }
+    if (linkedin && linkedin.length > 100) {
+      alert("LinkedIn is too long! Please limit to <100 characters");
+      return;
+    }
     let updatedTags = [];
     industry.forEach(function (ind) {
       if (industries && industries.includes(ind)) {
@@ -214,11 +217,15 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
   return (
     <EditProfileContainer scroll={"body"} open={open} onClose={onClose}>
-      {console.log("dialog user", user)}
-      {console.log("everything the same?", saveStudent())}
-      <TitleContainer>
+      <TitleContainer id="scroll-dialog-title">
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
+          <img
+            src={close_window_x}
+            style={{ float: "right" }}
+            onClick={handleClose}
+            alt="close"
+          ></img>
         </EditProfileTitle>
         <IconButton
           className={classes.button}
@@ -229,7 +236,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
         </IconButton>
       </TitleContainer>
       <EditProfileContent id="scroll-dialog-description">
-        {/* Avatar */}
         <EditProfileAvatar
           src={profileURL.url ? profileURL.url : user.profilePicURL}
           rounded="true"
@@ -273,43 +279,18 @@ const EditProfile = ({ open, handleClose, allTags }) => {
         {/* year */}
         <TextFieldWrapper>
           <BoldTypography sz={"18px"}>Year:</BoldTypography>
-          <div>
-            <DropDownTitle wd={"128px"} onClick={toggleOpenYear}>
-              {year}
-              <img src={DropdownArrow} style={{ float: "right" }}></img>
-            </DropDownTitle>
-            {openYear && (
-              <DropDownBox
-                wd={"97px"}
-                hg={"149px"}
-                top={"75px"}
-                style={{ marginLeft: "10px" }}
-              >
-                <DropDownContent wd={"97px"} hg={"149px"}>
-                  {years.map((year, index) => (
-                    <MenuItem
-                      onClick={() => {
-                        handleYear(year);
-                      }}
-                      key={index}
-                    >
-                      <Typography
-                        style={{
-                          fontSize: "16px",
-                          marginLeft: "3px",
-                          padding: "0px",
-                          align: "center",
-                          display: "inline",
-                        }}
-                      >
-                        {year}
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </DropDownContent>
-              </DropDownBox>
-            )}
-          </div>
+          <SingleDropDown
+            ttwd="128px"
+            onOpenClose={() => toggleOpenYear()}
+            title={year}
+            bwd="97px"
+            bhg="149px"
+            cwd="97px"
+            chg="149px"
+            content={years}
+            open={openYear}
+            onSelect={handleYear}
+          ></SingleDropDown>
         </TextFieldWrapper>
 
         {/* major */}
@@ -361,55 +342,22 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           </ExploreFilter>
 
           {/* dropdown menu */}
-
-          <DropDownTitle wd={"312px"} hg={"35px"} onClick={toggleOpenInd}>
-            <Typography style={{ display: "inline" }}>
-              Select all that apply
-            </Typography>
-            <img src={DropdownArrow} style={{ float: "right" }}></img>
-          </DropDownTitle>
-          {openInd && (
-            <DropDownBox wd={"314px"} hg={"202px"} top={"122px"}>
-              <DropDownContent wd={"312px"} hg={"248px"} overflow={"scroll"}>
-                {industry.map((name, index) => (
-                  <div
-                    key={name}
-                    style={{
-                      paddingLeft: "19px",
-                      height: "25px",
-                      marginTop: "14px",
-                      marginBottom: "14px",
-                    }}
-                  >
-                    <DropDownCheckBox
-                      onClick={() => {
-                        handleIndustries(name);
-                      }}
-                      src={
-                        industries && industries.includes(name)
-                          ? checked
-                          : unchecked
-                      }
-                    ></DropDownCheckBox>
-                    <Typography
-                      style={{
-                        fontSize: "18px",
-                        marginLeft: "3px",
-                        padding: "0px",
-                        display: "inline",
-                      }}
-                    >
-                      {name}
-                    </Typography>
-                  </div>
-                ))}
-              </DropDownContent>
-
-              <Finished wd={"314px"} hg={"46px"} onClick={toggleOpenInd}>
-                Finished
-              </Finished>
-            </DropDownBox>
-          )}
+          <MultiDropDown
+            onOpenClose={toggleOpenInd}
+            onSelect={handleIndustries}
+            options={industry}
+            selectedOptions={industries}
+            open={openInd}
+            title="Select all that apply"
+            ttwd="312px"
+            tthg="35px"
+            bwd="314px"
+            bhg="202px"
+            cef="312px"
+            chg="248px"
+            fwd="314px"
+            fhg="46px"
+          ></MultiDropDown>
         </TextFieldWrapper>
 
         {/* linkedIn */}
@@ -428,7 +376,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <img src={Linkedin}></img>
+                  <img src={Linkedin} alt="linkedin"></img>
                 </InputAdornment>
               ),
               disableUnderline: true,
@@ -450,14 +398,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
         {/* Done button */}
         <EditProfileDone>
-          <DoneBtn
-            onClick={handleSubmit}
-            bgcolor={() => {
-              saveStudent();
-            }}
-          >
-            Save
-          </DoneBtn>
+          <DoneBtn onClick={handleSubmit}>Save</DoneBtn>
         </EditProfileDone>
       </EditProfileContent>
     </EditProfileContainer>

@@ -30,10 +30,10 @@ export const EditProfileContainer = styled(Dialog)`
 `;
 
 export const TitleContainer = styled(DialogTitle)`
-  border-bottom: 1px solid ${colors.gray4};
-  height: fit-content;
-  padding-top: 25px;
-  padding-bottom: 11px;
+  border-bottom: 3px solid ${colors.gray4};
+  height: 10vh;
+  max-height: 2vh;
+  padding-bottom: 5.5vh;
   overflow: hidden;
 `;
 export const EditProfileTitle = styled(BoldTypography)`
@@ -115,8 +115,7 @@ export const DoneBtn = styled(ActionButton)`
   height: 40px;
   margin: 10px auto 20px auto;
   color: #ffffff;
-  ${"" /* background-color: #5473bb; */}
-  background-color: ${(props) => props.bgcolor};
+  background-color: #5473bb;
 `;
 
 export const DropDownTitle = styled.div`
