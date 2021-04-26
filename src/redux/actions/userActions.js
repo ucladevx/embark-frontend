@@ -58,6 +58,19 @@ export const getStudentData = () => async (dispatch) => {
     maintenanceErrorCheck(err);
   }
 };
+// export const getClubData = () => async (dispatch) => {
+//   try {
+//     const res = await axios.get("/club/profile");
+//     const payload = { ...res.data.student, userType: "club" };
+//     dispatch({
+//       type: SET_CLUB,
+//       payload,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     maintenanceErrorCheck(err);
+//   }
+// };
 
 // Sign Up a user
 export const signupStudent = (newUserData, handleUser, handleStep) => async (
