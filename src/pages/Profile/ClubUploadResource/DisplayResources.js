@@ -46,13 +46,14 @@ const LinkCardFormatter = ({ fileUrl }) => {
       <Card className={classes.root}>
         <CardActionArea
           onClick={() => {
+            console.log(fileUrl);
             window.open(link, "_blank");
           }}
         >
           <CardMedia className={classes.media} image={driveIcon} />
           <CardContent className={classes.content}>
             <Typography gutterBottom variant="subtitle1" component="h3">
-              {fileUrl.userNamed === null ? link : fileUrl.userNamed}
+              {(fileUrl.userNamed === null || fileUrl.userNamed === undefined || fileUrl.userNamed === "") ? link : fileUrl.userNamed}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -69,7 +70,7 @@ const LinkCardFormatter = ({ fileUrl }) => {
           <CardMedia className={classes.media} image={defaultFileIcon} />
           <CardContent className={classes.content}>
             <Typography gutterBottom variant="subtitle1" component="h3">
-              {fileUrl.userNamed === null ? link : fileUrl.userNamed}
+              {(fileUrl.userNamed === null || fileUrl.userNamed === undefined || fileUrl.userNamed === "") ? link : fileUrl.userNamed}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -99,7 +100,9 @@ const ResourceCardFormatter = ({ resource }) => {
           <CardMedia className={classes.media} image={wordIcon} />
           <CardContent className={classes.content}>
             <Typography gutterBottom variant="subtitle1" component="h3">
-              {(resource.userNamed === null || resource.userNamed === undefined) ? resource.Name : resource.userNamed}
+              {resource.userNamed === null || resource.userNamed === undefined
+                ? resource.Name
+                : resource.userNamed}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -116,7 +119,9 @@ const ResourceCardFormatter = ({ resource }) => {
           <CardMedia className={classes.media} image={pdfIcon} />
           <CardContent className={classes.content}>
             <Typography gutterBottom variant="subtitle1" component="h3">
-              {(resource.userNamed === null || resource.userNamed === undefined) ? resource.Name : resource.userNamed}
+              {resource.userNamed === null || resource.userNamed === undefined
+                ? resource.Name
+                : resource.userNamed}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -133,7 +138,9 @@ const ResourceCardFormatter = ({ resource }) => {
           <CardMedia className={classes.media} image={defaultFileIcon} />
           <CardContent className={classes.content}>
             <Typography gutterBottom variant="subtitle1" component="h3">
-              {(resource.userNamed === null || resource.userNamed === undefined) ? resource.Name : resource.userNamed}
+              {resource.userNamed === null || resource.userNamed === undefined
+                ? resource.Name
+                : resource.userNamed}
             </Typography>
           </CardContent>
         </CardActionArea>
