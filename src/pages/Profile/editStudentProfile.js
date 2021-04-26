@@ -24,13 +24,13 @@ import {
   TextFieldWrapper,
   DoneBtn,
 } from "./StyleEditProfile";
-import {
-  DropDownBox,
-  DropDownTitle,
-  DropDownContent,
-  DropDownCheckBox,
-  Finished,
-} from "../../shared/dropdown";
+// import {
+//   DropDownBox,
+//   DropDownTitle,
+//   DropDownContent,
+//   DropDownCheckBox,
+//   Finished,
+// } from "../../shared/dropdown";
 import SingleDropDown from "../../shared/Dropdown/SingleDropdown";
 
 import Linkedin from "../../images/linkedin.png";
@@ -46,10 +46,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import MultiDropDown from "../../shared/Dropdown/MultiDropDown";
 const useStyles = makeStyles((theme) => ({
-  button: {
-    "&:hover": {
-      backgroundColor: "transparent",
-    },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  menuPaper: {
+    maxHeight: 300,
   },
 }));
 
@@ -141,29 +146,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     );
   };
 
-  const handleProfileURL = (e) => {
-    console.log(e.target.files[0]);
-    setProfileURL({ url: URL.createObjectURL(e.target.files[0]) });
-    const formData = new FormData();
-    formData.append("image", e.target.files[0]); // appending file
-    console.log(formData);
-    axios.post(
-      "http://localhost:9000/student/profile/image?pictureType=profile",
-      formData,
-    );
-  };
-
-  const handleCoverURL = (e) => {
-    setCoverURL({ url: URL.createObjectURL(e.target.files[0]) });
-    const formData = new FormData();
-    formData.append("image", e.target.files[0]); // appending file
-    console.log(formData);
-    axios.post(
-      "http://localhost:9000/student/profile/image?pictureType=cover",
-      formData,
-    );
-  };
-
   const handleSubmit = async () => {
     //create an array of tags (deleted ones have rm before it)
     if (name && name.length > 100) {
@@ -227,13 +209,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             alt="close"
           ></img>
         </EditProfileTitle>
-        <IconButton
-          className={classes.button}
-          style={{ padding: "0" }}
-          onClick={handleClose}
-        >
-          <img src={close_window_x}></img>
-        </IconButton>
       </TitleContainer>
       <EditProfileContent id="scroll-dialog-description">
         <EditProfileAvatar

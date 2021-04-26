@@ -7,6 +7,7 @@ import {
   ListItemText,
   TextField,
   Typography,
+  IconButton,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { IndustryFilters } from "../../shared/dropdown";
@@ -46,6 +47,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { ActionButton } from "../../shared/Buttons";
+import MultiDropDown from "../../shared/Dropdown/MultiDropDown";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -119,7 +121,7 @@ const EditClubProfile = ({ open, handleClose }) => {
     setAbout(e.target.value);
   };
 
-  const handleProfileURL = (e) => {
+  const handleClubProfileURL = (e) => {
     console.log(e.target.files[0]);
     setProfileURL({ url: URL.createObjectURL(e.target.files[0]) });
     const formData = new FormData();
@@ -131,7 +133,7 @@ const EditClubProfile = ({ open, handleClose }) => {
     );
   };
 
-  const handleCoverURL = (e) => {
+  const handleClubCoverURL = (e) => {
     setCoverURL({ url: URL.createObjectURL(e.target.files[0]) });
     const formData = new FormData();
     formData.append("image", e.target.files[0]); // appending file
@@ -210,7 +212,7 @@ const EditClubProfile = ({ open, handleClose }) => {
           type="file"
           ref={hiddenProfileInput}
           style={{ display: "none" }}
-          onChange={handleProfileURL}
+          onChange={handleClubProfileURL}
         />
 
         {/* Cover Picture */}
@@ -231,7 +233,7 @@ const EditClubProfile = ({ open, handleClose }) => {
           type="file"
           ref={hiddenCoverInput}
           style={{ display: "none" }}
-          onChange={handleCoverURL}
+          onChange={handleClubCoverURL}
         />
 
         {/* Description */}
@@ -262,7 +264,7 @@ const EditClubProfile = ({ open, handleClose }) => {
             }}
             onChange={handleDescription}
           /> */}
-          <BoldTypography sz={"16px"}>Major:</BoldTypography>
+          <BoldTypography sz={"16px"}>Description:</BoldTypography>
           <DialogTextField
             autoFocus
             margin="dense"
@@ -311,54 +313,22 @@ const EditClubProfile = ({ open, handleClose }) => {
           </ExploreFilter>
 
           {/* dropdown menu */}
-          <DropDownTitle wd={"312px"} hg={"35px"} onClick={toggleOpenInd}>
-            <Typography style={{ display: "inline" }}>
-              Select all that apply
-            </Typography>
-            <img src={DropdownArrow} style={{ float: "right" }}></img>
-          </DropDownTitle>
-          {openInd && (
-            <DropDownBox wd={"314px"} hg={"202px"} top={"122px"}>
-              <DropDownContent wd={"312px"} hg={"248px"} overflow={"scroll"}>
-                {industry.map((name, index) => (
-                  <div
-                    key={name}
-                    style={{
-                      paddingLeft: "19px",
-                      height: "25px",
-                      marginTop: "14px",
-                      marginBottom: "14px",
-                    }}
-                  >
-                    <DropDownCheckBox
-                      onClick={() => {
-                        handleIndustries(name);
-                      }}
-                      src={
-                        industries && industries.includes(name)
-                          ? checked
-                          : unchecked
-                      }
-                    ></DropDownCheckBox>
-                    <Typography
-                      style={{
-                        fontSize: "18px",
-                        marginLeft: "3px",
-                        padding: "0px",
-                        display: "inline",
-                      }}
-                    >
-                      {name}
-                    </Typography>
-                  </div>
-                ))}
-              </DropDownContent>
-
-              <Finished wd={"314px"} hg={"46px"} onClick={toggleOpenInd}>
-                Finished
-              </Finished>
-            </DropDownBox>
-          )}
+          <MultiDropDown
+            onOpenClose={toggleOpenInd}
+            onSelect={handleIndustries}
+            options={industry}
+            selectedOptions={industries}
+            open={openInd}
+            title="Select all that apply"
+            ttwd="312px"
+            tthg="35px"
+            bwd="314px"
+            bhg="202px"
+            cef="312px"
+            chg="248px"
+            fwd="314px"
+            fhg="46px"
+          ></MultiDropDown>
         </TextFieldWrapper>
 
         {/* Website */}
