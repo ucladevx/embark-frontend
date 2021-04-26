@@ -22,15 +22,17 @@ const PrettyEvent = ({ e, makeDay, goingClick, hasID, loadExpanded }) => {
   return (
     <UpcomingItemBox>
       <UpcomingItem>
-        <UpcomingItemImage src={avatarImg} alt="date"
-            onClick={() => {
-                loadExpanded(e);
-              }}
+        <UpcomingItemImage
+          src={avatarImg}
+          alt="date"
+          onClick={() => {
+            loadExpanded(e);
+          }}
         ></UpcomingItemImage>
         <UpcomingItemInfoCol
-            onClick={() => {
-                loadExpanded(e);
-              }}
+          onClick={() => {
+            loadExpanded(e);
+          }}
         >
           <UpcomingItemTitle>{e.name}</UpcomingItemTitle>
           <UpcomingItemSubtitle>{e.organizerName}</UpcomingItemSubtitle>

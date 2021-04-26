@@ -167,8 +167,8 @@ export const UpcomingItemDate = styled(Typography)`
 `;
 export const UpcomingItemGoingBtn = styled(Typography)`
   height: 24px;
-  background-color: ${(props) => handleGoingBColor(props.bgcolor)};;
-  color: ${(props) => handleGoingFColor(props.bgcolor)};;
+  background-color: ${(props) => handleGoingBColor(props.bgcolor)};
+  color: ${(props) => handleGoingFColor(props.bgcolor)};
   border-radius: 5px;
   width: 70px;
   padding: 0 8px;
