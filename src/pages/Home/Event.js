@@ -69,8 +69,8 @@ const Event = (props) => {
             props.loadExpanded(props.e);
           }}
         >
-          <BoldTypography sz={"16px"}>{props.e.title}</BoldTypography>
-          <EventTypography>{props.e.authorEmail}</EventTypography>
+          <BoldTypography sz={"16px"}>{props.e.name}</BoldTypography>
+          <EventTypography>{props.e.organizerName}</EventTypography>
           <TimeTypography>{makeDay(props.e.startDate)}</TimeTypography>
         </EventDescription>
         <GoingBtn

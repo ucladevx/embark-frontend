@@ -148,6 +148,22 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
   const handleSubmit = async () => {
     //create an array of tags (deleted ones have rm before it)
+    if (name && name.length > 100) {
+      alert("Name is too long! Please limit to <100 characters");
+      return;
+    }
+    if (major && major.length > 50) {
+      alert("Major is too long! Please limit to <50 characters");
+      return;
+    }
+    if (bio && bio.length > 5000) {
+      alert("Bio is too long! Please limit to <5000 characters");
+      return;
+    }
+    if (linkedin && linkedin.length > 100) {
+      alert("LinkedIn is too long! Please limit to <100 characters");
+      return;
+    }
     let updatedTags = [];
     industry.forEach(function (ind) {
       if (industries && industries.includes(ind)) {

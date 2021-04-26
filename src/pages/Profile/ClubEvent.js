@@ -67,7 +67,7 @@ const ClubEvent = (props) => {
           }}
         >
           <TopBar>
-            <BoldTypography sz={"16px"}>{props.e.title}</BoldTypography>
+            <BoldTypography sz={"16px"}>{props.e.name}</BoldTypography>
             <AttendeesWrapper>
               <GoingTypography>
                 {props.e.attendees.length}
@@ -75,7 +75,7 @@ const ClubEvent = (props) => {
               </GoingTypography>
             </AttendeesWrapper>
           </TopBar>
-          <EventTypography>{props.e.authorEmail}</EventTypography>
+          <EventTypography>{props.e.organizerName}</EventTypography>
           <TimeTypography>{makeDay(props.e.startDate)}</TimeTypography>
         </EventDescription>
       </EventItem>
