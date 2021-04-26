@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../shared/config";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // icons for navbar icons
 import { ReactComponent as EmbarkIcon } from "../images/navbar_embark_logo.svg";
@@ -85,6 +86,7 @@ const sampleSuggestions = [
 const NavBar = () => {
   const [search, setSearch] = useState("");
   const [showList, setShowList] = useState(false);
+  const user = useSelector((state) => state.user);
   const history = useHistory();
 
   const handleSearchChange = (e) => {
@@ -103,8 +105,17 @@ const NavBar = () => {
 
   const handleUserIconClick = (e) => {
     // just console log for now
+    if (user.userType === "club") {
+      history.push("/club-profile");
+    } else {
+      if (user._id) {
+        history.push(`/user/${user._id}`);
+      } else {
+        history.push("/user/:userid");
+      }
+    }
     console.log("User Icon Clicked");
-    history.push("/user/:userid");
+    history.push("/user/" + user._id);
   };
 
   const handleCollapseIconClick = (e) => {

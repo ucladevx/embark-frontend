@@ -11,14 +11,14 @@ import {
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import { BoldTypography } from "../shared/Typography";
 import { colors } from "../shared/config";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { newEvent } from "../redux/actions/dataActions";
 import styled from "styled-components";
-import "../pages/Home/Calendar/EventCalendar.css";
+import "../components/Calendar/EventCalendar.css";
 import Datetime from "react-datetime";
 import moment from "moment";
 import { ActionButton } from "../shared/Buttons";
-import { StyleEventCalendar } from "../pages/Home/Calendar/EventCalender";
+import { StyleEventCalendar } from "../components/Calendar/EventCalender";
 import LinkEffect from "../shared/Effect/LinkEffect";
 
 const DialogTextField = styled(TextField)`
@@ -99,6 +99,8 @@ export const DropdownOption = styled(MenuItem)`
 `;
 
 const NewEvent = ({ open, handleClose }) => {
+  const user = useSelector((state) => state.user);
+
   // ref: https://stackoverflow.com/questions/36125038/generate-array-of-times-as-strings-for-every-x-minutes-in-javascript
   const timeIntervals = useMemo(() => {
     let x = 5; //minutes interval
@@ -173,10 +175,15 @@ const NewEvent = ({ open, handleClose }) => {
 
   const handleSubmit = async () => {
     const event = {
-      title,
-      body: description,
-      datetime: time,
-      location: location,
+      userType: "club",
+      name: title,
+      tags: [],
+      organizerName: user.name,
+      organizerEmail: user.email,
+      startDate: time._d,
+      endDate: time._d,
+      venue: location,
+      desc: description,
     };
     dispatch(newEvent(event));
     handleClose();
@@ -249,7 +256,7 @@ const NewEvent = ({ open, handleClose }) => {
             <AccessTimeIcon />
             <Datetime
               onChange={handleTime}
-              locale={""}
+              displayTimeZone={Intl.DateTimeFormat().resolvedOptions().timeZone}
               renderInput={renderInput}
               onClose={handleTime}
               value={time}

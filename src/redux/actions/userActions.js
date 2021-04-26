@@ -7,8 +7,11 @@ import {
   AUTH_SIGNIN,
   GOING_EVENT,
   SET_ERRORS,
+  OWN_EVENTS,
+  CANCEL_ATTENDANCE_EVENT,
 } from "../types";
 import axios from "axios";
+import { AccessibilityNewSharp } from "@material-ui/icons";
 
 const maintenanceErrorCheck = (err) => {
   if (err.message.includes(" 503")) {
@@ -44,6 +47,11 @@ export const getStudentData = () => async (dispatch) => {
     dispatch({
       type: SET_USER,
       payload,
+    });
+    const eventres = await axios.get("/events/going", { userType: "student" });
+    dispatch({
+      type: GOING_EVENT,
+      payload: eventres,
     });
   } catch (err) {
     console.error(err);
@@ -92,7 +100,8 @@ export const logoutUser = () => (dispatch) => {
 export const uploadImage = (formData) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .post("/user/image", formData)
+    //i changed it here,
+    .post("/profile/image?pictureType=cover", formData)
     .then((res) => {
       dispatch(getStudentData());
     })
@@ -157,8 +166,34 @@ export const studentGoogleSignIn = () => async (dispatch) => {
 //Mark going to an event
 export const goingToEvent = (eventId) => async (dispatch) => {
   try {
-    const res = await axios.post(`/student/events`, eventId);
+    const res = await axios.post(`/events/:${eventId}/attend`, {
+      userType: "student",
+    });
     dispatch({ type: GOING_EVENT, payload: eventId });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+//Cancel attending an event
+export const cancelAttendingEvent = (eventId) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/events/:${eventId}/cancel`, {
+      userType: "student",
+    });
+    dispatch({ type: CANCEL_ATTENDANCE_EVENT, payload: eventId });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+//get own Club events
+export const getOwnEvents = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`/events/me`, {
+      userType: "club",
+    });
+    dispatch({ type: OWN_EVENTS, payload: res });
   } catch (err) {
     console.error(err);
   }

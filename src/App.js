@@ -20,6 +20,9 @@ import StudentProfile from "./pages/Profile/StudentProfile";
 import ClubProfile from "./pages/Profile/ClubProfile";
 import { LinkedInPopUp } from "react-linkedin-login-oauth2";
 
+import ViewClubProfile from "./pages/Profile/viewClubProfile";
+import ViewStudentProfile from "./pages/Profile/viewStudentProfile";
+
 axios.defaults.baseURL = "http://localhost:9000/";
 
 const token = localStorage.getItem("AuthToken");
@@ -47,7 +50,17 @@ function App() {
                 path="/user/:userid"
                 component={StudentProfile}
               ></Route>
-              <Route exact path="/club-profile" component={ClubProfile}></Route>
+              <Route exact path="/club/:clubid" component={ClubProfile}></Route>
+              <Route
+                exact
+                path="/view-club"
+                component={ViewClubProfile}
+              ></Route>
+              <Route
+                exact
+                path="/view-student"
+                component={ViewStudentProfile}
+              ></Route>
             </Switch>
           </Router>
         </Provider>

@@ -199,10 +199,12 @@ export const EventItems = styled.div`
 
 export const EventItem = styled.div`
   display: flex;
+  width: 90%;
 `;
 
 export const EventDescription = styled.div`
   margin-left: 15px;
+  width: 100%;
 `;
 
 export const EventAvatar = styled(Avatar)`

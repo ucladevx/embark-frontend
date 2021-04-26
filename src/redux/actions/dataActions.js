@@ -222,8 +222,7 @@ export const removeFilter = () => (dispatch) => {
 // Create A New Event
 export const newEvent = (newE) => async (dispatch) => {
   try {
-    // TODO: Fix the endpoint later
-    const res = await axios.post("/events", newE);
+    const res = await axios.post("/events/create", newE);
     dispatch({ type: NEW_EVENT, payload: res.data });
   } catch (err) {
     console.error(err);
@@ -231,12 +230,13 @@ export const newEvent = (newE) => async (dispatch) => {
 };
 
 // Get All Events - unsure how the backend will handle event storage(is it paginated?)
-export const getEvents = () => async (dispatch) => {
+export const getEvents = (amount) => async (dispatch) => {
   try {
-    const res = await axios.get("/events", {
+    const res = await axios.get("/events/discover", {
       params: {
-        limitNum: 8,
+        limitNum: amount,
       },
+      userType: "student",
     });
     console.log(res.data);
     dispatch({ type: SET_EVENTS, payload: res.data.events });

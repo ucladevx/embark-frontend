@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { MenuItem, Typography } from "@material-ui/core";
 import styled from "styled-components";
-import { colors } from "../shared/config";
-import DropdownArrow from "../images/DropdownArrow.png";
+import { colors } from "../../shared/config";
 
 export const IndustryFilters = [
   "Medical",
@@ -95,71 +92,3 @@ export const Finished = styled.div`
   color: ${colors.gray3};
   box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.25);
 `;
-
-export const SingleDropDown = ({
-  title,
-  ttwd,
-  cwd,
-  chg,
-  bwd,
-  bhg,
-  open,
-  content,
-  onSelect,
-  onOpenClose,
-}) => {
-  const [isOpen, setIsOpen] = useState(open);
-  const dropdownRef = useRef();
-
-  useEffect(() => setIsOpen(open), [open]);
-
-  useEffect(() => {
-    const clickOut = (e) => {
-      if (isOpen) {
-        if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-          console.log(dropdownRef.current);
-          setIsOpen(false);
-          if (onOpenClose) onOpenClose();
-        }
-      }
-    };
-    document.addEventListener("mousedown", clickOut);
-    return () => {
-      document.removeEventListener("mousedown", clickOut);
-    };
-  }, [isOpen, onOpenClose]);
-
-  return (
-    <div ref={dropdownRef} style={{ width: ttwd }}>
-      <DropDownTitle
-        wd={ttwd}
-        onClick={() => onOpenClose()}
-        style={{ marginBottom: ".1em" }}
-      >
-        {title}
-        <img src={DropdownArrow} style={{ float: "right" }} alt="arrow"></img>
-      </DropDownTitle>
-      {isOpen && (
-        <DropDownBox wd={bwd} hg={bhg}>
-          <DropDownContent wd={cwd} hg={chg}>
-            {content.map((c) => (
-              <MenuItem onClick={() => onSelect(c)} key={c}>
-                <Typography
-                  style={{
-                    fontSize: "16px",
-                    marginLeft: "3px",
-                    padding: "0px",
-                    align: "center",
-                    display: "inline",
-                  }}
-                >
-                  {c}
-                </Typography>
-              </MenuItem>
-            ))}
-          </DropDownContent>
-        </DropDownBox>
-      )}
-    </div>
-  );
-};
