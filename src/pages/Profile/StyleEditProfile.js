@@ -115,7 +115,7 @@ export const DoneBtn = styled(ActionButton)`
   height: 40px;
   margin: 10px auto 20px auto;
   color: #ffffff;
-  ${'' /* background-color: #5473bb; */}
+  ${"" /* background-color: #5473bb; */}
   background-color: ${(props) => props.bgcolor};
 `;
 
@@ -164,7 +164,7 @@ export const DropDownCheckBox = styled.img`
   display: inline;
   border: 1px solid #adafb0;
   border-radius: 2px;
-  margin-right: 11px; 
+  margin-right: 11px;
 `;
 export const Finished = styled.div`
   display: flex;

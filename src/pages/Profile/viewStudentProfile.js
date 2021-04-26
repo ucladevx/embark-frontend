@@ -32,15 +32,18 @@ import { useDispatch, useSelector } from "react-redux";
 //
 import axios from "axios";
 const ViewStudentProfile = (props) => {
-  const [student, setStudent] = useState({})
+  const [student, setStudent] = useState({});
 
-  useEffect(async ()=>{
-    let params = (new URL(document.location)).searchParams;
-    let studentId = params.get('studentId'); 
-    console.log(studentId)
-    const data = await axios.get("http://localhost:9000/student/profileById?studentId="+"602e067f9be8700c3ccddfd4");
+  useEffect(async () => {
+    let params = new URL(document.location).searchParams;
+    let studentId = params.get("studentId");
+    console.log(studentId);
+    const data = await axios.get(
+      "http://localhost:9000/student/profileById?studentId=" + studentId,
+    );
     console.log(data.data.student);
-  })
+    setStudent(data.data.student);
+  }, []);
 
   return (
     <div>

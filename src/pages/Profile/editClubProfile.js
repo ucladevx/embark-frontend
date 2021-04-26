@@ -7,12 +7,14 @@ import {
   ListItemText,
   TextField,
   Typography,
-  IconButton
+  IconButton,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { IndustryFilters } from "../../shared/dropdown";
 import { colors } from "../../shared/config";
 import close_window_x from "../../images/close_window_x.png";
+import checked from "../../images/checked_24px.png";
+import unchecked from "../../images/unchecked_24px.png";
 import { useDispatch, useSelector } from "react-redux";
 import { editStudentDetails } from "../../redux/actions/userActions";
 import styled from "styled-components";
@@ -50,9 +52,9 @@ import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   button: {
     "&:hover": {
-      backgroundColor: "transparent"
-    }
-  }
+      backgroundColor: "transparent",
+    },
+  },
 }));
 
 const EditClubProfile = ({ open, handleClose }) => {
@@ -70,6 +72,18 @@ const EditClubProfile = ({ open, handleClose }) => {
   const hiddenProfileInput = React.useRef(null);
   const hiddenCoverInput = React.useRef(null);
 
+  //check if there is any changes
+  const saveClub = () => {
+    // industries,
+    // description,
+    // website,
+    return (
+      (user.about === about || about === "") &&
+      (user.description === description || description === "") &&
+      JSON.stringify(user.tags.sort()) === JSON.stringify(industries.sort()) &&
+      (user.website === website || website === "")
+    );
+  };
   //dropdown toggle
   const [openInd, setOpenInd] = useState(false);
   const toggleOpenInd = () => {
@@ -83,8 +97,19 @@ const EditClubProfile = ({ open, handleClose }) => {
     setDescription(e.target.value);
   };
 
-  const handleIndustries = (e) => {
-    setIndustries(e.target.value);
+  const removeIndustries = (name) => {
+    const newIndustries = industries.filter((ind) => ind !== name);
+    setIndustries(newIndustries);
+  };
+
+  const handleIndustries = (name) => {
+    if (industries && industries.includes(name)) {
+      const newIndustries = industries.filter((ind) => ind !== name);
+      setIndustries(newIndustries);
+    } else {
+      const newIndustries = [...industries, name];
+      setIndustries(newIndustries);
+    }
   };
 
   const handleWebsite = (e) => {
@@ -112,7 +137,6 @@ const EditClubProfile = ({ open, handleClose }) => {
     const formData = new FormData();
     formData.append("image", e.target.files[0]); // appending file
     console.log(formData);
-
     axios.post(
       "http://localhost:9000/club/profile/image?pictureType=cover",
       formData,
@@ -126,6 +150,7 @@ const EditClubProfile = ({ open, handleClose }) => {
       description,
       website,
     };
+    //is there a rdux for this?
     dispatch(editStudentDetails(updatedProfile));
     handleClose();
   };
@@ -142,13 +167,13 @@ const EditClubProfile = ({ open, handleClose }) => {
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
         </EditProfileTitle>
-          <IconButton className={classes.button} 
-          style={{padding:"0"}}
-          onClick={handleClose}>
-          <img
-            src={close_window_x}
-          ></img>
-          </IconButton>
+        <IconButton
+          className={classes.button}
+          style={{ padding: "0" }}
+          onClick={handleClose}
+        >
+          <img src={close_window_x}></img>
+        </IconButton>
       </TitleContainer>
       <EditProfileContent>
         {/* Avatar */}
@@ -234,9 +259,9 @@ const EditClubProfile = ({ open, handleClose }) => {
                 <ExploreObj
                   key={name}
                   bgcolor={colors.gray}
-                  // onClick={() => {
-                  //   removeIndustries(name);
-                  // }}
+                  onClick={() => {
+                    removeIndustries(name);
+                  }}
                 >
                   &times; {name}
                 </ExploreObj>
@@ -264,14 +289,14 @@ const EditClubProfile = ({ open, handleClose }) => {
                     }}
                   >
                     <DropDownCheckBox
-                    // onClick={() => {
-                    //   handleIndustries(name);
-                    // }}
-                    // src={
-                    //   industries && industries.includes(name)
-                    //     ? checked
-                    //     : unchecked
-                    // }
+                      onClick={() => {
+                        handleIndustries(name);
+                      }}
+                      src={
+                        industries && industries.includes(name)
+                          ? checked
+                          : unchecked
+                      }
                     ></DropDownCheckBox>
                     <Typography
                       style={{
@@ -357,7 +382,12 @@ const EditClubProfile = ({ open, handleClose }) => {
 
         {/* Done Button */}
         <EditProfileDone>
-          <DoneBtn onClick={handleSubmit}>Save</DoneBtn>
+          <DoneBtn
+            onClick={handleSubmit}
+            bgcolor={saveClub() ? colors.gray : "#5473bb"}
+          >
+            Save
+          </DoneBtn>
         </EditProfileDone>
       </EditProfileContent>
     </EditProfileContainer>

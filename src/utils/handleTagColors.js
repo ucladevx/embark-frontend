@@ -40,7 +40,7 @@ export function handleTagColor(tag) {
     case "Corporate Finance":
       return colors.brown;
     default:
-      return colors.gray; 
+      return colors.gray;
   }
 }
 

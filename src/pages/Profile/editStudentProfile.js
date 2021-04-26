@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { MenuItem, InputAdornment, Typography, IconButton } from "@material-ui/core";
+import {
+  MenuItem,
+  InputAdornment,
+  Typography,
+  IconButton,
+} from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import { IndustryFilters } from "../../shared/dropdown";
@@ -40,14 +45,14 @@ import { ActionButton } from "../../shared/Buttons";
 import linkedinStart from "../../images/linkedinStart.png";
 import { makeStyles } from "@material-ui/core/styles";
 // import ImageUploader from 'react-images-upload';
- 
+
 import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   button: {
     "&:hover": {
-      backgroundColor: "transparent"
-    }
-  }
+      backgroundColor: "transparent",
+    },
+  },
 }));
 
 const EditProfile = ({ open, handleClose, allTags }) => {
@@ -65,9 +70,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const [coverURL, setCoverURL] = useState({ url: user.coverPicURL });
   const hiddenProfileInput = React.useRef(null);
   const hiddenCoverInput = React.useRef(null);
-  const [save, setSave] = useState(false);
-
-  const tags = user.tags;
 
   // Redux
   const dispatch = useDispatch();
@@ -80,6 +82,29 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   };
   const toggleOpenInd = () => {
     setOpenInd(!openInd);
+  };
+
+  //check if there is any changes
+  const saveStudent = () => {
+    // name,
+    // major,
+    // year,
+    // tags: updatedTags,
+    // bio,
+    // linkedIn: linkedin,
+    console.log("user.tags=", JSON.stringify(user.tags.sort()));
+    console.log("tags=", JSON.stringify(industries.sort()));
+    console.log("same major", user.major === major || major === "");
+    console.log("same year", user.year === parseInt(year));
+    console.log("same tags", user.tags.sort() === industries.sort());
+    console.log("same linkedIn", user.linkedIn === linkedin || linkedin === "");
+    return user.name === name &&
+      (user.major === major || major === "") &&
+      user.year === parseInt(year) &&
+      JSON.stringify(user.tags.sort()) === JSON.stringify(industries.sort()) &&
+      (user.linkedIn === linkedin || linkedin === "")
+      ? colors.gray
+      : "#5473bb";
   };
 
   useEffect(() => {
@@ -103,7 +128,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
   const handleMajor = (e) => {
     setMajor(e.target.value);
-    setSave(true);
   };
 
   const handleIndustries = (name) => {
@@ -126,9 +150,8 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     setIndustries(newIndustries);
   };
 
-  const handlelinkedIn = (e) => { 
+  const handlelinkedIn = (e) => {
     setLinkedin(e.target.value);
-    console.log(linkedin);
   };
 
   const handleProfileURL = (e) => {
@@ -186,28 +209,27 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     setCoverURL(user.coverPicURL);
     setOpenInd(false);
     setOpenYear(false);
-    setSave(false);
     handleClose();
   };
 
   return (
     <EditProfileContainer scroll={"body"} open={open} onClose={onClose}>
       {console.log("dialog user", user)}
+      {console.log("everything the same?", saveStudent())}
       <TitleContainer>
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
         </EditProfileTitle>
-          <IconButton className={classes.button} 
-          style={{padding:"0"}}
-          onClick={handleClose}>
-          <img
-            src={close_window_x}
-          ></img>
-          </IconButton>
+        <IconButton
+          className={classes.button}
+          style={{ padding: "0" }}
+          onClick={handleClose}
+        >
+          <img src={close_window_x}></img>
+        </IconButton>
       </TitleContainer>
       <EditProfileContent id="scroll-dialog-description">
         {/* Avatar */}
-        {console.log("profileURL.url=", profileURL.url)}
         <EditProfileAvatar
           src={profileURL.url ? profileURL.url : user.profilePicURL}
           rounded="true"
@@ -428,7 +450,14 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
         {/* Done button */}
         <EditProfileDone>
-          <DoneBtn onClick={handleSubmit} bgcolor = {save? "#5473bb" : colors.gray }>Save</DoneBtn>
+          <DoneBtn
+            onClick={handleSubmit}
+            bgcolor={() => {
+              saveStudent();
+            }}
+          >
+            Save
+          </DoneBtn>
         </EditProfileDone>
       </EditProfileContent>
     </EditProfileContainer>

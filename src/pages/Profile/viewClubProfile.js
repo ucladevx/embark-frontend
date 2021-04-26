@@ -21,7 +21,7 @@ import {
   AboutWrapper,
   Footer,
   ExploreFilterTitle,
-  DescriptionTypography, 
+  DescriptionTypography,
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
@@ -35,39 +35,40 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 const ViewClubProfile = (props) => {
-  const [club, setClub] = useState({})
+  const [club, setClub] = useState({});
 
-  useEffect(()=>{
-    let params = (new URL(document.location)).searchParams;
-    let clubId = params.get('clubId'); 
-    axios.get("http://localhost:9000/club/profilebyId/clubId="+clubId)
-    .then((res)=>{
-      console.log(res);
-      setClub(res);
-    });
-  })
+  useEffect(async () => {
+    let params = new URL(document.location).searchParams;
+    let clubId = params.get("clubId");
+    console.log(clubId);
+    const data = await axios.get(
+      "http://localhost:9000/club/profileById?clubId=" + clubId,
+    );
+    console.log(data.data.club);
+    setClub(data.data.club);
+  }, []);
 
-  // const AboutContent = () => {
-  //   if (club.About.length > 0) {
-  //     return (
-  //       <ProfileWrapper>
-  //         <ProfileInfo>
-  //           <AboutTitle>
-  //             <BoldTypography sz={"16px"}>About</BoldTypography>
-  //           </AboutTitle>
-  //           <AboutWrapper>
-  //             <Typography sz={"14px"} style={{ fontWeight: "400" }}>
-  //               {club.About}
-  //             </Typography>
-  //           </AboutWrapper>
-  //         </ProfileInfo>
-  //         <QuestionBox></QuestionBox>
-  //       </ProfileWrapper>
-  //     );
-  //   } else {
-  //     return <ProfileWrapper></ProfileWrapper>;
-  //   }
-  // };
+  const AboutContent = () => {
+    if (club.description.length > 0) {
+      return (
+        <ProfileWrapper>
+          <ProfileInfo>
+            <AboutTitle>
+              <BoldTypography sz={"16px"}>About</BoldTypography>
+            </AboutTitle>
+            <AboutWrapper>
+              <Typography sz={"14px"} style={{ fontWeight: "400" }}>
+                {club.description}
+              </Typography>
+            </AboutWrapper>
+          </ProfileInfo>
+          <QuestionBox></QuestionBox>
+        </ProfileWrapper>
+      );
+    } else {
+      return <ProfileWrapper></ProfileWrapper>;
+    }
+  };
 
   return (
     <>
@@ -84,9 +85,9 @@ const ViewClubProfile = (props) => {
                 >
                   {club.name}
                 </TitleTypography>
-                <Typography style={{ fontSize: "18px" }}>
+                {/* <Typography style={{ fontSize: "18px" }}>
                   {club.description ? club.description : "Tech Club"}
-                </Typography>
+                </Typography> */}
               </NameDescription>
 
               <ButtonBox>
