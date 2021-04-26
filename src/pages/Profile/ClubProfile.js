@@ -8,6 +8,7 @@ import {
   ProfileAvatar,
   NameDescription,
   NameDescriptionWrapper,
+  ProfileTabsWrapper,
   IndustryWrapper,
   EditProfileButton,
   MiddleContainer,
@@ -141,9 +142,9 @@ const ClubProfile = (props) => {
         <AboutContent />
         <ProfileWrapper>
           <ProfileInfo>
-            <NameDescriptionWrapper>
+            <ProfileTabsWrapper>
               <ClubProfileTabs />
-            </NameDescriptionWrapper>
+            </ProfileTabsWrapper>
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>
