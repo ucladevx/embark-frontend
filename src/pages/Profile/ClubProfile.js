@@ -20,6 +20,7 @@ import {
   Footer,
   ExploreFilterTitle,
   DescriptionTypography,
+  ProfileTabsWrapper
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
@@ -133,9 +134,9 @@ const ClubProfile = (props) => {
         <AboutContent />
         <ProfileWrapper>
           <ProfileInfo>
-            <NameDescriptionWrapper>
+            <ProfileTabsWrapper>
               <ClubProfileTabs />
-            </NameDescriptionWrapper>
+            </ProfileTabsWrapper>
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>

@@ -104,6 +104,13 @@ export const CoverImage = styled.img`
   margin: auto;
 `;
 
+export const ProfileTabsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 1vh;
+  max-height: 100vh;
+`;
+
 export const ExploreObj = styled(Typography)`
   height: 26px;
   background-color: ${(props) => props.bgcolor};

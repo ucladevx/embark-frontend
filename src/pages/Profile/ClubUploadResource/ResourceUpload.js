@@ -133,7 +133,7 @@ const DriveUpload = ({ handleDrive, handleName, handleUploaded }) => {
         developerKey={API_KEY}
         scope={SCOPES}
         onChange={(data) => console.log("on change:", data)}
-        onAuthFailed={(data) => alert("on auth failed:", data)}
+        onAuthFailed={(data) => alert("Google Drive Authentication Failed")}
         multiselect={false}
         navHidden={false}
         authImmediate={false}
@@ -204,7 +204,7 @@ const RenderFileUpload = ({ handleTabClose }) => {
     if (selectedFile !== null) {
       dispatch(uploadResource(selectedFile, selectedFileName));
     } else {
-      dispatch(uploadLink(selectedDriveLink));
+      dispatch(uploadLink(selectedDriveLink, selectedFileName));
     }
     handleTabClose();
   };
