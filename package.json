@@ -6,6 +6,7 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
+    "@material-ui/styles": "^4.11.3",
     "@studyworld/react-file-viewer": "^2.0.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
@@ -36,6 +37,7 @@
     "react-google-button": "^0.7.2",
     "react-google-login": "^5.2.2",
     "react-hooks-helper": "^1.6.0",
+    "react-images-upload": "^1.2.8",
     "react-infinite-scroll-component": "^6.0.0",
     "react-intersection-observer": "^8.31.0",
     "react-linkedin-login-oauth2": "^1.0.9",
@@ -60,7 +62,7 @@
     "build": "react-app-rewired build/react-app-rewired start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "npx prettier --write --arrow-parens always --trailing-comma all 'src/**/*.js' && git add -A ",
+    "format": "npx prettier --write --arrow-parens always --trailing-comma all 'src/**/*.js' && git add -A",
     "prepare": "husky install"
   },
   "eslintConfig": {

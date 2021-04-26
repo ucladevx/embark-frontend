@@ -8,14 +8,15 @@ import {
   ProfileAvatar,
   NameDescription,
   NameDescriptionWrapper,
-  ProfileTabsWrapper,
   IndustryWrapper,
   EditProfileButton,
   MiddleContainer,
   QuestionBox,
   ExploreFilter,
   ExploreObj,
+  ButtonBox,
   ClubWebsiteButton,
+  FollowButton,
   AboutTitle,
   AboutWrapper,
   Footer,
@@ -26,32 +27,18 @@ import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
 import { ActionButton } from "../../shared/Buttons";
-import website_arrow from "../../images/website_arrow.png";
-import pencil from "../../images/pencil.png";
-import EditClubProfile from "./editClubProfile";
 import ClubProfileTabs from "./ClubProfileTabs";
-import { colors } from "../../shared/config";
 import { handleTagColor } from "../../utils/handleTagColors.js";
+import website_arrow from "../../images/website_arrow.png";
+import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
 
-const ClubProfile = (props) => {
+const ViewClubProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
   const [About, SetAbout] = useState(
     "Have you ever felt that all you were learning at UCLA was theory, with little opportunities to build out practical applications? DevX is a brand new program dedicated to solving that very problem! Build out real-world projects to help tackle pressing problems frustrating the UCLA community, grow your technical skills by pairing up with experienced students, and build a network that lasts beyond graduation.",
   );
-
-  // function handleAbout(newAbout) {
-  //   SetAbout(newAbout);
-  // }
-
-  // function handleWebsite(newWebsite) {
-  //   SetWebsite(newWebsite);
-  // }
-
-  // function handleDescription(newDescription) {
-  //   SetDescription(newDescription);
-  // }
 
   const AboutContent = () => {
     if (About.length > 0) {
@@ -77,10 +64,6 @@ const ClubProfile = (props) => {
 
   return (
     <>
-      <EditClubProfile
-        open={editProfile}
-        handleClose={() => seteditProfile(false)}
-      ></EditClubProfile>
       <NavBar></NavBar>
       <MiddleContainer>
         <ProfileWrapper>
@@ -98,16 +81,16 @@ const ClubProfile = (props) => {
                   {user.description ? user.description : "Tech Club"}
                 </Typography>
               </NameDescription>
+
+              <ButtonBox>
+                <FollowButton bgcolor={"#FFFFFF"}>Follow</FollowButton>
+                <ClubWebsiteButton href={user.website}>
+                  <img src={website_arrow} style={{ marginRight: "4px" }}></img>
+                  Club Website
+                </ClubWebsiteButton>
+              </ButtonBox>
+
               {/* <NameDescription> */}
-              <ClubWebsiteButton href={user.website}>
-                <img
-                  src={website_arrow}
-                  style={{ marginRight: "4px" }}
-                  alt="website arrow"
-                ></img>
-                Club Website
-              </ClubWebsiteButton>
-              {/* </NameDescription> */}
             </NameDescriptionWrapper>
 
             <IndustryWrapper>
@@ -123,28 +106,15 @@ const ClubProfile = (props) => {
                   })}
               </ExploreFilter>
             </IndustryWrapper>
-
-            <EditProfileButton
-              onClick={() => {
-                seteditProfile(true);
-              }}
-            >
-              <img
-                style={{ marginRight: "2px" }}
-                src={pencil}
-                alt="pencil"
-              ></img>
-              Edit Profile
-            </EditProfileButton>
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>
         <AboutContent />
         <ProfileWrapper>
           <ProfileInfo>
-            <ProfileTabsWrapper>
+            <NameDescriptionWrapper>
               <ClubProfileTabs />
-            </ProfileTabsWrapper>
+            </NameDescriptionWrapper>
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>
@@ -154,4 +124,4 @@ const ClubProfile = (props) => {
   );
 };
 
-export default ClubProfile;
+export default ViewClubProfile;
