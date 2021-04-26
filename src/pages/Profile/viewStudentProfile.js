@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import {
   HeaderImage,
@@ -28,34 +28,42 @@ import pencil from "../../images/pencil.png";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
+
+//
+import axios from "axios";
 const ViewStudentProfile = (props) => {
-  const user = useSelector((state) => state.user);
-  const [editProfile, seteditProfile] = useState(false);
-  const tags = user.tags;
+  const [student, setStudent] = useState({})
+
+  useEffect(async ()=>{
+    let params = (new URL(document.location)).searchParams;
+    let studentId = params.get('studentId'); 
+    console.log(studentId)
+    const data = await axios.get("http://localhost:9000/student/profileById?studentId="+"602e067f9be8700c3ccddfd4");
+    console.log(data.data.student);
+  })
 
   return (
     <div>
-      {console.log(user)}
       <NavBar></NavBar>
       <MiddleContainer>
         <ProfileWrapper>
-          <HeaderImage src={user.coverPicURL}></HeaderImage>
+          <HeaderImage src={student.coverPicURL}></HeaderImage>
           <ProfileInfo>
             <img
               src={linkedin}
               style={{ float: "right" }}
-              onClick={() => window.open(user.linkedIn)}
+              onClick={() => window.open(student.linkedIn)}
             ></img>
             <NameDescriptionWrapper>
-              <ProfileAvatar src={user.profilePicURL}></ProfileAvatar>
+              <ProfileAvatar src={student.profilePicURL}></ProfileAvatar>
               <NameDescription>
                 <TitleTypography
                   style={{ fontSize: "24px", paddingBottom: "0" }}
                 >
-                  {user.name}
+                  {student.name}
                 </TitleTypography>
                 <Typography style={{ fontSize: "18px" }}>
-                  {user.year} • {user.major}
+                  {student.year} • {student.major}
                 </Typography>
               </NameDescription>
             </NameDescriptionWrapper>
@@ -64,8 +72,8 @@ const ViewStudentProfile = (props) => {
                 Interested Industries:
               </BoldTypography>
               <ExploreFilter>
-                {tags &&
-                  tags.map((name) => {
+                {student.tags &&
+                  student.tags.map((name) => {
                     return (
                       <ExploreObj key={name} bgcolor={handleTagColor(name)}>
                         {name}

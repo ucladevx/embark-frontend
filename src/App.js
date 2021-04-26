@@ -52,12 +52,12 @@ function App() {
               <Route exact path="/club/:clubid" component={ClubProfile}></Route>
               <Route
                 exact
-                path="/view-club"
+                path="/view-club/:clubid"
                 component={ViewClubProfile}
               ></Route>
               <Route
                 exact
-                path="/view-student"
+                path="/view-student/:studentid"
                 component={ViewStudentProfile}
               ></Route>
             </Switch>

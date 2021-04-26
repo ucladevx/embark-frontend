@@ -85,7 +85,7 @@ const StudentProfile = (props) => {
               onClick={() => {
                 seteditProfile(true);
               }}
-            > 
+            >
               <img style={{ marginRight: "2px" }} src={pencil}></img>
               Edit Profile
             </EditProfileButton>

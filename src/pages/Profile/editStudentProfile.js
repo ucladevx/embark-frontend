@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MenuItem, InputAdornment, Typography } from "@material-ui/core";
+import { MenuItem, InputAdornment, Typography, IconButton } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import { IndustryFilters } from "../../shared/dropdown";
@@ -36,23 +36,18 @@ import checked from "../../images/checked_24px.png";
 import unchecked from "../../images/unchecked_24px.png";
 import DropdownArrow from "../../images/DropdownArrow.png";
 import close_window_x from "../../images/close_window_x.png";
-import { ActionButton } from "../../shared/Buttons";  
+import { ActionButton } from "../../shared/Buttons";
 import linkedinStart from "../../images/linkedinStart.png";
 import { makeStyles } from "@material-ui/core/styles";
 // import ImageUploader from 'react-images-upload';
-
+ 
 import axios from "axios";
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  menuPaper: {
-    maxHeight: 300,
-  },
+  button: {
+    "&:hover": {
+      backgroundColor: "transparent"
+    }
+  }
 }));
 
 const EditProfile = ({ open, handleClose, allTags }) => {
@@ -70,6 +65,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const [coverURL, setCoverURL] = useState({ url: user.coverPicURL });
   const hiddenProfileInput = React.useRef(null);
   const hiddenCoverInput = React.useRef(null);
+  const [save, setSave] = useState(false);
 
   const tags = user.tags;
 
@@ -103,12 +99,11 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const handleYear = (e) => {
     setYear(e);
     toggleOpenYear();
-
   };
 
   const handleMajor = (e) => {
     setMajor(e.target.value);
-
+    setSave(true);
   };
 
   const handleIndustries = (name) => {
@@ -129,13 +124,11 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const removeIndustries = (name) => {
     const newIndustries = industries.filter((ind) => ind !== name);
     setIndustries(newIndustries);
-
   };
 
-  const handlelinkedIn = (e) => {
+  const handlelinkedIn = (e) => { 
     setLinkedin(e.target.value);
     console.log(linkedin);
-
   };
 
   const handleProfileURL = (e) => {
@@ -148,7 +141,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       "http://localhost:9000/student/profile/image?pictureType=profile",
       formData,
     );
-
   };
 
   const handleCoverURL = (e) => {
@@ -160,7 +152,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       "http://localhost:9000/student/profile/image?pictureType=cover",
       formData,
     );
-
   };
 
   const handleSubmit = async () => {
@@ -195,17 +186,24 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     setCoverURL(user.coverPicURL);
     setOpenInd(false);
     setOpenYear(false);
+    setSave(false);
     handleClose();
   };
 
   return (
     <EditProfileContainer scroll={"body"} open={open} onClose={onClose}>
       {console.log("dialog user", user)}
-      <TitleContainer id="scroll-dialog-title">
+      <TitleContainer>
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
-          <img src={close_window_x} style={{float:"right"}} onClick={handleClose}></img>
         </EditProfileTitle>
+          <IconButton className={classes.button} 
+          style={{padding:"0"}}
+          onClick={handleClose}>
+          <img
+            src={close_window_x}
+          ></img>
+          </IconButton>
       </TitleContainer>
       <EditProfileContent id="scroll-dialog-description">
         {/* Avatar */}
@@ -392,7 +390,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           )}
         </TextFieldWrapper>
 
-        {/* linkedIn */} 
+        {/* linkedIn */}
         <TextFieldWrapper style={{ marginTop: "50px" }}>
           <BoldTypography sz={"18px"}>
             LinkedIn Profile (Optional):
@@ -430,7 +428,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
         {/* Done button */}
         <EditProfileDone>
-          <DoneBtn onClick={handleSubmit}>Save</DoneBtn>
+          <DoneBtn onClick={handleSubmit} bgcolor = {save? "#5473bb" : colors.gray }>Save</DoneBtn>
         </EditProfileDone>
       </EditProfileContent>
     </EditProfileContainer>

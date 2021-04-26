@@ -30,16 +30,17 @@ export const EditProfileContainer = styled(Dialog)`
 `;
 
 export const TitleContainer = styled(DialogTitle)`
-  border-bottom: 3px solid ${colors.gray4};
-  height: 10vh;
-  max-height: 2vh;
-  padding-bottom: 5.5vh;
+  border-bottom: 1px solid ${colors.gray4};
+  height: fit-content;
+  padding-top: 25px;
+  padding-bottom: 11px;
   overflow: hidden;
 `;
 export const EditProfileTitle = styled(BoldTypography)`
   font-size: 24px;
   font-weight: 700;
-  margin: 1vh auto;
+  margin: 0 173px 0 197px;
+  display: inline;
 `;
 
 export const EditProfileAvatar = styled(Avatar)`
@@ -113,12 +114,13 @@ export const DoneBtn = styled(ActionButton)`
   width: 120px;
   height: 40px;
   margin: 10px auto 20px auto;
-  color: #FFFFFF;
-  background-color: #5473bb;
+  color: #ffffff;
+  ${'' /* background-color: #5473bb; */}
+  background-color: ${(props) => props.bgcolor};
 `;
 
 export const DropDownTitle = styled.div`
-  align-items: center; 
+  align-items: center;
   padding: 7px 15px;
   width: ${(props) => props.wd};
   height: ${(props) => props.hg};
@@ -162,7 +164,7 @@ export const DropDownCheckBox = styled.img`
   display: inline;
   border: 1px solid #adafb0;
   border-radius: 2px;
-  margin-right: 11px;
+  margin-right: 11px; 
 `;
 export const Finished = styled.div`
   display: flex;
