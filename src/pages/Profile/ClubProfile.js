@@ -37,7 +37,7 @@ const ClubProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
   const [About, SetAbout] = useState(
-    "Have you ever felt that all you were learning at UCLA was theory, with little opportunities to build out practical applications? DevX is a brand new program dedicated to solving that very problem! Build out real-world projects to help tackle pressing problems frustrating the UCLA community, grow your technical skills by pairing up with experienced students, and build a network that lasts beyond graduation.",
+    "Have you ever felt that all you were learning at UCLA was theory, with little opportunities to build out practical applications? DevX is a brand new program dedicated to solving that very problem! Build out real-world projects to help tackle pressing problems frustrating the UCLA community, grow your technical skills by pairing up with experienced students, and build a network that lasts beyond graduation."
   );
 
   // function handleAbout(newAbout) {
@@ -79,12 +79,6 @@ const ClubProfile = (props) => {
       <EditClubProfile
         open={editProfile}
         handleClose={() => seteditProfile(false)}
-        // EditAbout={handleAbout}
-        // EditWebsite={handleWebsite}
-        // EditDescription={handleDescription}
-        // currentAbout={About}
-        // currentWebsite={website}
-        // currentDescription={description}
       ></EditClubProfile>
       <NavBar></NavBar>
       <MiddleContainer>
@@ -105,7 +99,11 @@ const ClubProfile = (props) => {
               </NameDescription>
               {/* <NameDescription> */}
               <ClubWebsiteButton href={user.website}>
-                <img src={website_arrow} style={{ marginRight: "4px" }}></img>
+                <img
+                  src={website_arrow}
+                  style={{ marginRight: "4px" }}
+                  alt="website arrow"
+                ></img>
                 Club Website
               </ClubWebsiteButton>
               {/* </NameDescription> */}
@@ -130,7 +128,11 @@ const ClubProfile = (props) => {
                 seteditProfile(true);
               }}
             >
-            <img style={{ marginRight: "2px" }} src={pencil}></img>
+              <img
+                style={{ marginRight: "2px" }}
+                src={pencil}
+                alt="pencil"
+              ></img>
               Edit Profile
             </EditProfileButton>
           </ProfileInfo>

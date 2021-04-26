@@ -31,7 +31,7 @@ import {
   TextFieldWrapper,
   DoneBtn,
 } from "./StyleEditProfile";
-import { 
+import {
   DropDownBox,
   DropDownTitle,
   DropDownContent,
@@ -43,7 +43,7 @@ import lawn from "../../images/lawn.png";
 import { makeStyles } from "@material-ui/core/styles";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { ActionButton } from "../../shared/Buttons";          
+import { ActionButton } from "../../shared/Buttons";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -79,7 +79,7 @@ const EditClubProfile = ({ open, handleClose }) => {
   const toggleOpenInd = () => {
     setOpenInd(!openInd);
   };
-    
+
   // Redux
   const dispatch = useDispatch();
 
@@ -107,7 +107,7 @@ const EditClubProfile = ({ open, handleClose }) => {
     console.log(formData);
     axios.post(
       "http://localhost:9000/club/profile/image?pictureType=profile",
-      formData,
+      formData
     );
   };
 
@@ -119,7 +119,7 @@ const EditClubProfile = ({ open, handleClose }) => {
 
     axios.post(
       "http://localhost:9000/club/profile/image?pictureType=cover",
-      formData,
+      formData
     );
   };
 
@@ -145,7 +145,11 @@ const EditClubProfile = ({ open, handleClose }) => {
       <TitleContainer>
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
-          <img src={close_window_x} style={{float:"right"}} onClick={handleClose}></img>
+          <img
+            src={close_window_x}
+            style={{ float: "right" }}
+            onClick={handleClose}
+          ></img>
         </EditProfileTitle>
       </TitleContainer>
       <EditProfileContent>
@@ -222,7 +226,7 @@ const EditClubProfile = ({ open, handleClose }) => {
             type="email"
             fullWidth
             multiline
-            rows={3}           
+            rows={3}
             InputProps={{
               disableUnderline: true,
               style: {
@@ -245,7 +249,7 @@ const EditClubProfile = ({ open, handleClose }) => {
         <TextFieldWrapper>
           <BoldTypography sz={"16px"}>Relevant Industries:</BoldTypography>
 
-        {/* Industry filters */}
+          {/* Industry filters */}
           <ExploreFilter>
             {industry &&
               industry.map((name) => (
@@ -282,14 +286,14 @@ const EditClubProfile = ({ open, handleClose }) => {
                     }}
                   >
                     <DropDownCheckBox
-                      // onClick={() => {
-                      //   handleIndustries(name);
-                      // }}
-                      // src={
-                      //   industries && industries.includes(name)
-                      //     ? checked
-                      //     : unchecked
-                      // }
+                    // onClick={() => {
+                    //   handleIndustries(name);
+                    // }}
+                    // src={
+                    //   industries && industries.includes(name)
+                    //     ? checked
+                    //     : unchecked
+                    // }
                     ></DropDownCheckBox>
                     <Typography
                       style={{
@@ -354,7 +358,7 @@ const EditClubProfile = ({ open, handleClose }) => {
             type="email"
             fullWidth
             multiline
-            rows={3}           
+            rows={3}
             InputProps={{
               disableUnderline: true,
               style: {
@@ -375,9 +379,7 @@ const EditClubProfile = ({ open, handleClose }) => {
 
         {/* Done Button */}
         <EditProfileDone>
-          <DoneBtn 
-          
-          onClick={handleSubmit}>{done}</DoneBtn>
+          <DoneBtn onClick={handleSubmit}>{done}</DoneBtn>
         </EditProfileDone>
       </EditProfileContent>
     </EditProfileContainer>
