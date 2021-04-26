@@ -5,7 +5,6 @@ import { colors } from "../../shared/config";
 import { IndustryFilters } from "../../shared/dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getStudentData,
   editStudentDetails,
   uploadImage,
 } from "../../redux/actions/userActions";

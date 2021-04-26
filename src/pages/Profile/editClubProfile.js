@@ -163,7 +163,7 @@ const EditClubProfile = ({ open, handleClose }) => {
       description,
       website,
     };
-    //is there a rdux for this?
+    //is there a rdux like this for club?
     dispatch(editStudentDetails(updatedProfile));
     handleClose();
   };

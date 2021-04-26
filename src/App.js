@@ -56,9 +56,9 @@ function App() {
               ></Route>
               <Route exact path="/club/:clubid" component={ClubProfile}></Route>
 
-              {/* http://localhost:3000/view-club/?clubId=CLUBID */}
+              {/* EXAMPLE: http://localhost:3000/view-club/?clubId=CLUBID */}
               <Route path="/view-club" component={ViewClubProfile}></Route>
-              {/* http://localhost:3000/view-student/?studentId=STUDENTID */}
+              {/* EXAMPLE: http://localhost:3000/view-student/?studentId=STUDENTID */}
               <Route
                 path="/view-student"
                 component={ViewStudentProfile}

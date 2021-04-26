@@ -36,7 +36,7 @@ const StudentProfile = (props) => {
 
   return (
     <div>
-      {console.log(user)}
+      {console.log("this is the user", user)}
       <EditProfile
         open={editProfile}
         handleClose={() => seteditProfile(false)}
