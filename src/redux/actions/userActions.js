@@ -78,6 +78,7 @@ export const signupStudent = (newUserData, handleUser, handleStep) => async (
 ) => {
   try {
     const res = await axios.post("/auth/signup", newUserData);
+    console.log(res.data);
     setAuthorizationHeader(res.data.token);
     dispatch(getStudentData());
     handleUser(newUserData);
