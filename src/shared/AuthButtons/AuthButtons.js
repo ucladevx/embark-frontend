@@ -46,7 +46,7 @@ const AuthButtons = () => {
   };
 
   useEffect(() => {
-    if (page === "signup") {
+    if (page !== "/login") {
       RenderBtnStyle(googleRef, "googlebtn", GoogleIcon, "Sign up with Google");
       RenderBtnStyle(
         linkedinRef,
