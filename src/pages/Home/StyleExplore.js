@@ -91,6 +91,7 @@ export const ExploreFilter = styled.div`
   margin-top: 15px;
   margin-bottom: 15px;
   flex-wrap: wrap;
+  position: relative;
 `;
 export const ExploreFilterTitle = styled(Typography)`
   text-transform: none;
@@ -110,6 +111,26 @@ export const ExploreAddFilter = styled(Typography)`
     text-decoration: underline;
   }
   margin-bottom: 7px;
+`;
+export const ExploreFilterCross = styled.div`
+  margin-right: 3px;
+  &:hover {
+    cursor: pointer;
+    text-decoration: bold;
+    color: ${colors.gray3};
+    transition: ease 0.3s;
+  }
+`;
+export const ExploreFilterPopup = styled.div`
+  position: absolute;
+  top: 35px;
+  right: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: ${colors.gray2};
+  padding: 10px;
+  z-index: 9;
+  display: none;
 `;
 export const UpcomingItemBox = styled.div`
   display: flex;

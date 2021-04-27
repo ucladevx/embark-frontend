@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -13,7 +13,9 @@ import {
   ExploreObj,
   ExploreFilter,
   ExploreAddFilter,
+  ExploreFilterCross,
   ExploreFilterTitle,
+  ExploreFilterPopup,
   ExploreSubtitle,
   UpcomingItemBox,
   UpcomingItem,
@@ -35,6 +37,34 @@ import consultingImg from "../../images/bruinConsulting.png";
 import { colors } from "../../shared/config";
 
 const Explore = () => {
+  // possible colors for filters: colors.red1, colors.darkyellow
+  const [filter, setFilter] = useState([
+    { title: "Product Management", visibility: true, id: 0 },
+    { title: "Product Design", visibility: true, id: 1 },
+    { title: "Accounting", visibility: false, id: 2 },
+  ]);
+  function displayFilterForm() {
+    let currentToggle = document.getElementById("filterPopup").style.display;
+    if (currentToggle == "block")
+      document.getElementById("filterPopup").style.display = "none";
+    else document.getElementById("filterPopup").style.display = "block";
+  }
+  function crossClicked() {
+    alert("Cross clicked");
+  }
+  const filterList = filter.map((item, index) => {
+    const currentColor = colors.red1;
+    if (!item.visibility) {
+      return <span></span>;
+    }
+    return (
+      <ExploreObj bgcolor={currentColor}>
+        <ExploreFilterCross onClick={crossClicked}>&times; </ExploreFilterCross>{" "}
+        {item.title}
+      </ExploreObj>
+    );
+  });
+
   return (
     <ExploreWrapper>
       <ExploreTitle>Explore Clubs</ExploreTitle>
@@ -42,12 +72,25 @@ const Explore = () => {
       <ExploreFilter>
         <ExploreFilterTitle>Filters:</ExploreFilterTitle>
         <ExploreObj bgcolor={colors.red1}>
-          &times; Product Management
+          <ExploreFilterCross onClick={crossClicked}>
+            &times;{" "}
+          </ExploreFilterCross>{" "}
+          Product Management
         </ExploreObj>
         <ExploreObj bgcolor={colors.darkyellow}>
-          &times; Product Design
+          <ExploreFilterCross onClick={crossClicked}>
+            &times;{" "}
+          </ExploreFilterCross>{" "}
+          Product Design
         </ExploreObj>
-        <ExploreAddFilter>+ Add Filter</ExploreAddFilter>
+        <ExploreAddFilter onClick={displayFilterForm}>
+          + Add Filter
+        </ExploreAddFilter>
+        <ExploreFilterPopup id="filterPopup">
+          <input type="checkbox" name="item1" /> Product Management <br />
+          <input type="checkbox" name="item2" /> Product Design <br />
+          <input type="checkbox" name="item3" /> Finance <br />
+        </ExploreFilterPopup>
       </ExploreFilter>
 
       {/* CLUB CARDS CONTAINER: */}
