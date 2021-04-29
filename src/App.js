@@ -15,6 +15,10 @@ import theme from "./utils/theme";
 // Pages
 import Login from "./pages/Login/Login.js";
 import OnBoarding from "./pages/OnBoarding";
+import ClubOnBoarding from "./pages/ClubOnBoarding";
+import ClubDetails from "./pages/ClubOnBoarding/FormPersonalDetails";
+import studentDetails from "./pages/OnBoarding/FormPersonalDetails";
+
 
 import Home from "./pages/Home";
 import StudentProfile from "./pages/Profile/StudentProfile";
@@ -38,9 +42,14 @@ function App() {
         <Provider store={store}>
           <Router>
             <Switch>
+              <Route exact path="/login" component={Login}></Route>
+              <Route exact path="/clubLogin" component={ClubOnBoarding}></Route>
               <Route exact path="/home" component={Home}></Route>
               <Route exact path="/" component={OnBoarding}></Route>
-              <Route exact path="/login" component={Login}></Route>
+              <Route exact path="/clubDetails" component={ClubDetails}></Route>
+              <Route exact path="/studentDetails" component={studentDetails}></Route>
+
+
               <Route
                 exact
                 path="/user/:userid"

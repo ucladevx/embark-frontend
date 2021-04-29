@@ -24,8 +24,7 @@ import dayjs from "dayjs";
 
 import { ActionButton } from "../../shared/Buttons";
 
-import calendar from '../../images/calendar.png';
-
+import calendar from "../../images/calendar.png";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -103,23 +102,23 @@ const Events = ({ setNewEvent }) => {
         <TitleTypography>Upcoming Events</TitleTypography>
         <EventItems>
           <EventItem>
-          <EventBadge
-            anchorOrigin =
-              {{
-                vertical:'bottom',
-                horizontal:'right',
-              }}
-              overlap='circle'
-              badgeContent={<p>{dayjs().format("DD")}</p>}>
             <EventBadge
-              anchorOrigin =
-              {{
-                vertical:'bottom',
-                horizontal:'right',
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
               }}
-              overlap='circle'
-              badgeContent={<img src={calendar} alt="" ></img>} >
-                <EventAvatar/>
+              overlap="circle"
+              badgeContent={<p>{dayjs().format("DD")}</p>}
+            >
+              <EventBadge
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "right",
+                }}
+                overlap="circle"
+                badgeContent={<img src={calendar} alt=""></img>}
+              >
+                <EventAvatar />
               </EventBadge>
             </EventBadge>
             <EventDescription>
@@ -133,23 +132,23 @@ const Events = ({ setNewEvent }) => {
           </EventItem>
           <InfoSeperator></InfoSeperator>
           <EventItem>
-          <EventBadge
-            anchorOrigin =
-              {{
-                vertical:'bottom',
-                horizontal:'right',
-              }}
-              overlap='circle'
-              badgeContent={<p>{dayjs().format("DD")}</p>}>
             <EventBadge
-              anchorOrigin =
-              {{
-                vertical:'bottom',
-                horizontal:'right',
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
               }}
-              overlap='circle'
-              badgeContent={<img src={calendar} alt="" ></img>} >
-                <EventAvatar/>
+              overlap="circle"
+              badgeContent={<p>{dayjs().format("DD")}</p>}
+            >
+              <EventBadge
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "right",
+                }}
+                overlap="circle"
+                badgeContent={<img src={calendar} alt=""></img>}
+              >
+                <EventAvatar />
               </EventBadge>
             </EventBadge>
             <EventDescription>
@@ -166,25 +165,27 @@ const Events = ({ setNewEvent }) => {
               <>
                 <InfoSeperator key={p._id + "sep"}></InfoSeperator>
                 <EventItem key={p._id}>
-                <EventBadge
-                  anchorOrigin =
-                  {{
-                    vertical:'bottom',
-                    horizontal:'right',
-                  }}
-                  overlap='circle'
-                  badgeContent={<p>{dayjs().format("DD")}</p>}>
                   <EventBadge
-                    anchorOrigin =
-                    {{
-                      vertical:'bottom',
-                      horizontal:'right',
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "right",
                     }}
-                    overlap='circle'
-                    badgeContent={<img src={calendar} alt="" ></img>} >
-                    <EventAvatar onClick={() => loadExpanded(p)}></EventAvatar>
+                    overlap="circle"
+                    badgeContent={<p>{dayjs().format("DD")}</p>}
+                  >
+                    <EventBadge
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "right",
+                      }}
+                      overlap="circle"
+                      badgeContent={<img src={calendar} alt=""></img>}
+                    >
+                      <EventAvatar
+                        onClick={() => loadExpanded(p)}
+                      ></EventAvatar>
+                    </EventBadge>
                   </EventBadge>
-                </EventBadge>
                   <EventDescription onClick={() => loadExpanded(p)}>
                     <BoldTypography sz={"16px"}>{p.title}</BoldTypography>
                     <EventTypography>{p.authorEmail}</EventTypography>

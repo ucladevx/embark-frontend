@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { colors } from "../../shared/config";
-import { Avatar, Button, TextField, Typography, Badge } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  TextField,
+  Typography,
+  Badge,
+} from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import {
   handleTagColor,
