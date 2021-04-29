@@ -83,11 +83,11 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
         >
           {(props) => {
             const { errors, setErrors } = props;
-            const hasError = 
+            const hasError =
               !!backend_errors ||
               !!errors.password ||
               !!errors.email ||
-               !!errors.clubName;
+              !!errors.clubName;
             const handleFocus = () => {
               setErrors({});
               dispatch({ type: CLEAR_ERRORS });
