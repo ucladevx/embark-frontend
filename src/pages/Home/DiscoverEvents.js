@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import {
-  EventItems,
-  AddFilter,
-} from "./StyleLanding";
+import { EventItems, AddFilter } from "./StyleLanding";
 import {
   UpcomingItemBox,
   UpcomingItem,
@@ -78,47 +75,51 @@ const DiscoverEvents = ({ closeEvents }) => {
       <DiscoverEventsWrapper>
         <TitleTypography>Discover Events</TitleTypography>
         <EventItems>
-        <UpcomingItemBox>
-        <UpcomingItem>
-          <UpcomingItemImage src={avatarImg} alt="date"></UpcomingItemImage>
-          <UpcomingItemInfoCol>
-            <UpcomingItemTitle>How to Ace the LSAT</UpcomingItemTitle>
-            <UpcomingItemSubtitle>Pre-Law Society at UCLA</UpcomingItemSubtitle>
-            <UpcomingItemObj bgcolor={colors.purple}>Law</UpcomingItemObj>
-          </UpcomingItemInfoCol>
-          <UpcomingItemWhenBox>
-            <UpcomingItemDate>Feb 11 &middot; 7:00pm</UpcomingItemDate>
-            <UpcomingItemGoingBtn
-              bgcolor={colors.green1}
-              textColor={colors.darkgreen}
-            >
-              Going
-            </UpcomingItemGoingBtn>
-          </UpcomingItemWhenBox>
-        </UpcomingItem>
-      </UpcomingItemBox>
+          <UpcomingItemBox>
+            <UpcomingItem>
+              <UpcomingItemImage src={avatarImg} alt="date"></UpcomingItemImage>
+              <UpcomingItemInfoCol>
+                <UpcomingItemTitle>How to Ace the LSAT</UpcomingItemTitle>
+                <UpcomingItemSubtitle>
+                  Pre-Law Society at UCLA
+                </UpcomingItemSubtitle>
+                <UpcomingItemObj bgcolor={colors.purple}>Law</UpcomingItemObj>
+              </UpcomingItemInfoCol>
+              <UpcomingItemWhenBox>
+                <UpcomingItemDate>Feb 11 &middot; 7:00pm</UpcomingItemDate>
+                <UpcomingItemGoingBtn
+                  bgcolor={colors.green1}
+                  textColor={colors.darkgreen}
+                >
+                  Going
+                </UpcomingItemGoingBtn>
+              </UpcomingItemWhenBox>
+            </UpcomingItem>
+          </UpcomingItemBox>
 
-      <UpcomingItemBox>
-        <UpcomingItem>
-          <UpcomingItemImage src={avatarImg} alt="date"></UpcomingItemImage>
-          <UpcomingItemInfoCol>
-            <UpcomingItemTitle>Medical School Interview Tips</UpcomingItemTitle>
-            <UpcomingItemSubtitle>
-              American Medical School Association
-            </UpcomingItemSubtitle>
-            <UpcomingItemObj bgcolor={colors.red1}>Health</UpcomingItemObj>
-          </UpcomingItemInfoCol>
-          <UpcomingItemWhenBox>
-            <UpcomingItemDate>Feb 11 &middot; 7:00pm</UpcomingItemDate>
-            <UpcomingItemGoingBtn
-              bgcolor={colors.green1}
-              textColor={colors.darkgreen}
-            >
-              Going
-            </UpcomingItemGoingBtn>
-          </UpcomingItemWhenBox>
-        </UpcomingItem>
-        </UpcomingItemBox>
+          <UpcomingItemBox>
+            <UpcomingItem>
+              <UpcomingItemImage src={avatarImg} alt="date"></UpcomingItemImage>
+              <UpcomingItemInfoCol>
+                <UpcomingItemTitle>
+                  Medical School Interview Tips
+                </UpcomingItemTitle>
+                <UpcomingItemSubtitle>
+                  American Medical School Association
+                </UpcomingItemSubtitle>
+                <UpcomingItemObj bgcolor={colors.red1}>Health</UpcomingItemObj>
+              </UpcomingItemInfoCol>
+              <UpcomingItemWhenBox>
+                <UpcomingItemDate>Feb 11 &middot; 7:00pm</UpcomingItemDate>
+                <UpcomingItemGoingBtn
+                  bgcolor={colors.green1}
+                  textColor={colors.darkgreen}
+                >
+                  Going
+                </UpcomingItemGoingBtn>
+              </UpcomingItemWhenBox>
+            </UpcomingItem>
+          </UpcomingItemBox>
 
           {testEvent.map((p) => {
             return (

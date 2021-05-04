@@ -64,7 +64,7 @@ const PrettyEvent = (props) => {
     }
   };
   return (
-    <UpcomingItemBox key= {props.e._id}>
+    <UpcomingItemBox key={props.e._id}>
       <UpcomingItem>
         <UpcomingItemImage
           src={avatarImg}
@@ -82,10 +82,11 @@ const PrettyEvent = (props) => {
           <UpcomingItemSubtitle>{props.e.organizerName}</UpcomingItemSubtitle>
         </UpcomingItemInfoCol>
         <UpcomingItemWhenBox>
-          <UpcomingItemDate           
-          onClick={() => {
-            props.loadExpanded(props.e);
-          }}>
+          <UpcomingItemDate
+            onClick={() => {
+              props.loadExpanded(props.e);
+            }}
+          >
             {makeDay(props.e.startDate)}
           </UpcomingItemDate>
           <UpcomingItemGoingBtn
