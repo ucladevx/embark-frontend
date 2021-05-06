@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ActionButton } from "../Buttons";
 import { colors, HomeAddress } from "../config";
 import GoogleIcon from "../../images/google.svg";
-import LinkedInIcon from "../../images/linkedin.svg";
+import LinkedInIcon from "../../images/linkedinAuth.svg";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
@@ -28,6 +28,7 @@ const AuthButtons = () => {
   const page = useLocation().pathname;
   const googleRef = useRef();
   const linkedinRef = useRef();
+
   const RenderBtnStyle = useCallback((ref, id, icon, prompt) => {
     const btn = ref.current.firstChild;
     btn.style = "";
@@ -37,6 +38,7 @@ const AuthButtons = () => {
     btn.appendChild(svg);
     const text = document.createElement("span");
     text.innerText = prompt;
+    if (id === "linkedinbtn") text.style.marginLeft = "-4px";
     btn.appendChild(text);
     btn.id = id;
   }, []);

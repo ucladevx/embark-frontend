@@ -28,6 +28,15 @@ export const FormWrapper = styled(Form)`
   width: 60%;
   gap: 15px;
   margin-top: 2rem;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  & > p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 14px;
+  }
 `;
 
 export const FieldContainer = styled.div`
