@@ -39,7 +39,9 @@ const Event = (props) => {
     return dayjs(date).format("MMM DD HH:mm a");
   };
   const dispatch = useDispatch();
-  const attending = useSelector((state) => state.user.goingEvents);
+  const user = useSelector((state) => state.user);
+  const attending = useSelector((state) => state.user.events);
+  console.log(attending);
   const hasID = (id) => {
     for (var i = 0; i < attending.length; i++) {
       if (attending[i]._id === id) {
