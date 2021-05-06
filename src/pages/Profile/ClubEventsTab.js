@@ -78,7 +78,7 @@ const testEvent = [
   {
     _id: "123450",
     title: "Embark Release",
-    authorEmail: "Embark",
+    organizerName: "Embark",
     startDate: "2021-04-03T08:00:00.000Z",
     endDate: "2021-04-03T09:00:00.000Z",
     description:

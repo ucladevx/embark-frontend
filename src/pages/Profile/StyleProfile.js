@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../shared/config";
-import { Avatar, Button, Typography } from "@material-ui/core";
+import { Avatar, Button, Typography, Box } from "@material-ui/core";
 import LinkEffect from "../../shared/Effect/LinkEffect";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 
@@ -86,7 +86,7 @@ export const NameDescription = styled.div`
 `;
 
 export const EditProfileButton = styled(Button)`
-  width: 89px;
+  width: fit-content;
   height: 30px;
   border-radius: 8px;
   position: absolute;
@@ -109,6 +109,13 @@ export const CoverImage = styled.img`
   left: 542px;
   top: 374px;
   margin: auto;
+`;
+
+export const ProfileTabsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 1vh;
+  max-height: 100vh;
 `;
 
 export const ExploreObj = styled(Typography)`
@@ -150,9 +157,19 @@ export const IndustryWrapper = styled.div`
 //User
 
 //Club
+export const ButtonBox = styled.div`
+  positon: absolute;
+  width: fit-content;
+  float: right;
+  align-items: "right";
+  padding: 8px;
+`;
+
 export const ClubWebsiteButton = styled(Button)`
   width: 130px;
   height: 32px;
+  font-size: 13px;
+  padding: 7px 16px 7px 6px;
   border-radius: 10px;
   position: absolute;
   right: 0.5vw;
@@ -161,6 +178,24 @@ export const ClubWebsiteButton = styled(Button)`
   background: #e5efff;
 `;
 
+export const FollowButton = styled(Button)`
+  width: 96px;
+  height: 29px;
+  variant: contained;
+  position: absolute;
+  right: 9vw;
+  padding: 4px 24px;
+  margin-top: 2px;
+  margin-right: 10px;
+  font-size: 16px;
+  color: #5473bb;
+  background-color: ${(props) => props.bgcolor};
+  /* action button */
+
+  border: 1px solid #5473bb;
+  box-sizing: border-box;
+  border-radius: 10px;
+`;
 export const AboutTitle = styled.div`
   display: flex 2 1 auto;
   margin-left: 15px;

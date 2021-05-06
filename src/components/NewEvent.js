@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Dialog,
   DialogContent,
@@ -103,7 +103,7 @@ const NewEvent = ({ open, handleClose, editId }) => {
   const user = useSelector((state) => state.user);
 
   // ref: https://stackoverflow.com/questions/36125038/generate-array-of-times-as-strings-for-every-x-minutes-in-javascript
-  const generateTimeIntervals = () => {
+  const timeIntervals = useMemo(() => {
     let x = 5; //minutes interval
     let times = []; // time array
     let tt = 0; // start time
@@ -121,16 +121,23 @@ const NewEvent = ({ open, handleClose, editId }) => {
       tt = tt + x;
     }
     return times;
-  };
-
-  const startTimes = generateTimeIntervals();
+  }, []);
 
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
-  const [time, setTime] = useState(moment(new Date()));
-  const [startTime, setStartTime] = useState(startTimes[120]);
-  const [endTime, setEndTime] = useState(startTimes[126]);
+
+  const [time, setTime] = useState(new moment()); // start time in backend
+  const [time2, setTime2] = useState(new moment()); // end time in backend
+
+  const [startTime, setStartTime] = useState(120);
+  const [endTime, setEndTime] = useState(126);
+
+  useEffect(() => {
+    if (startTime >= endTime) {
+      setEndTime(startTime + 6);
+    }
+  }, [startTime, endTime]);
   // Redux
   const dispatch = useDispatch();
 
@@ -156,44 +163,41 @@ const NewEvent = ({ open, handleClose, editId }) => {
   const handleStartTime = (startTime) => {
     const updateTimeString = `${time.format("YYYY-MM-DD")} ${startTime}`;
     handleEventTime(updateTimeString);
-    setStartTime(startTime);
+    const idx = timeIntervals.indexOf(startTime);
+    setStartTime(idx);
   };
 
-  const handleSubmit = async () => {
-    console.log(startTime);
-    console.log(endTime);
-    var temp = new Date();
-    const end = Object.assign(temp, time._d);
-    const endp1 = parseInt(endTime.substring(0, 2));
-    const endp2 = parseInt(endTime.substring(3, 5));
-    end.setHours(endp1, endp2, 0);
-    var event;
-    if (editId) {
-      event = {
-        _id: editId,
-        userType: "club",
-        name: title,
-        tags: [],
-        organizerName: user.name,
-        organizerEmail: user.email,
-        startDate: time._d,
-        endDate: end,
-        venue: location,
-        desc: description,
-      };
-    } else {
-      event = {
-        userType: "club",
-        name: title,
-        tags: [],
-        organizerName: user.name,
-        organizerEmail: user.email,
-        startDate: time._d,
-        endDate: end,
-        venue: location,
-        desc: description,
-      };
+  const handleEndTime = (endTime) => {
+    const updateTimeString = `${time.format("YYYY-MM-DD")} ${endTime}`;
+    setTime2(updateTimeString);
+    const idx = timeIntervals.indexOf(endTime);
+    setEndTime(idx);
+  };
+
+
+    if (title && title.length > 100) {
+      alert("Title is too long! Please limit to <100 characters");
+      return;
     }
+    if (description && description.length > 5000) {
+      alert("Description is too long! Please limit to <5000 characters");
+      return;
+    }
+    if (location && location.length > 100) {
+      alert("Location is too long! Please limit to <100 characters");
+      return;
+    }
+    const event = {
+      userType: "club",
+      name: title,
+      tags: [],
+      organizerName: user.name,
+      organizerEmail: user.email,
+      startDate: time._d,
+      endDate: time._d,
+      venue: location,
+      desc: description,
+    };
     dispatch(newEvent(event));
     handleClose();
   };
@@ -215,22 +219,24 @@ const NewEvent = ({ open, handleClose, editId }) => {
           </SelectDate>
         </BoldTypography>
         <SingleSelect
-          value={startTime}
+          value={timeIntervals[startTime]}
           onChange={(e) => {
             handleStartTime(e.target.value);
           }}
         >
-          {startTimes.map((t) => (
+          {timeIntervals.map((t) => (
             <DropdownOption key={t} value={t}>
               {t}
             </DropdownOption>
           ))}
         </SingleSelect>
         <SingleSelect
-          value={endTime}
-          onChange={(e) => setEndTime(e.target.value)}
+          value={timeIntervals[endTime]}
+          onChange={(e) => {
+            handleEndTime(e.target.value);
+          }}
         >
-          {startTimes.map((t) => (
+          {timeIntervals.slice(startTime + 1).map((t) => (
             <DropdownOption key={t} value={t}>
               {t}
             </DropdownOption>

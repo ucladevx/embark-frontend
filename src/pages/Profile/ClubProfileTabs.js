@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -7,10 +7,16 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { useDispatch, useSelector } from "react-redux";
+import { BoldTypography } from "../../shared/Typography";
+import FileViewer from "@studyworld/react-file-viewer";
+import { Button, Dialog, DialogContent, DialogTitle } from "@material-ui/core";
+
+import ResourceUpload from "./ClubUploadResource/ResourceUpload";
+import ClubUploadResource from "./ClubUploadResource";
 import ClubEventsTab from "./ClubEventsTab.js";
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index, setNewResource, ...other } = props;
 
   return (
     <div
@@ -20,10 +26,16 @@ function TabPanel(props) {
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
+      {value === index && index === 0 ? (
+        <Box p={3} style={{ background: 'white' }}>
+          <ClubUploadResource setNewResource={setNewResource} />
         </Box>
+      ) : (
+        value === index && (
+          <Box p={3}>
+            <Typography>{children}</Typography>
+          </Box>
+        )
       )}
     </div>
   );
@@ -46,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     elevation: 0,
     backgroundColor: theme.palette.background.paper,
-    width: 500,
+    width: '46vw',
   },
 }));
 
@@ -57,9 +69,14 @@ const ClubProfileTabs = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const [newResource, setNewResource] = React.useState(false);
 
   return (
     <div className={classes.root}>
+      <ResourceUpload
+        open={newResource}
+        handleClose={() => setNewResource(false)}
+      />
       <AppBar position="relative" color="transparent" elevation={0}>
         <Tabs
           value={value}
@@ -71,15 +88,13 @@ const ClubProfileTabs = () => {
           <Tab label="Board Members" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        {/* {user.posts.map((post) => (
-        <BoldTypography>{post}</BoldTypography>
-      ))} */}
+      <TabPanel setNewResource={setNewResource} value={value} index={0}>
+        
       </TabPanel>
       <TabPanel value={value} index={1}>
         <ClubEventsTab />
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel setNewResource={setNewResource} value={value} index={2}>
         Saved Posts
       </TabPanel>
     </div>

@@ -13,6 +13,10 @@ import {
   SET_HAS_NEXT,
   NEW_EVENT,
   SET_EVENTS,
+  SET_CLUB_RESOURCES,
+  SET_CLUB_LINKS,
+  UPLOAD_CLUB_RESOURCES,
+  UPLOAD_CLUB_LINKS,
   SAVE_POST,
 } from "../types";
 
@@ -242,5 +246,46 @@ export const getEvents = (amount) => async (dispatch) => {
     dispatch({ type: SET_EVENTS, payload: res.data.events });
   } catch (err) {
     console.error(err);
+  }
+};
+
+// Get club resources
+export const getResources = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/club/resources');
+    console.log(res);
+    dispatch({ type: SET_CLUB_RESOURCES, payload: res.data.resources });
+    dispatch({ type: SET_CLUB_LINKS, payload: res.data.embededlinks });
+  }
+  catch(error) {
+    console.log(error);
+  }
+};
+
+// Club upload one resource
+export const uploadResource = (newResource, resourceName) => async (dispatch) => {
+  try {
+    console.log(resourceName);
+    const formData = new FormData();
+    formData.append("file", newResource);
+    const res = await axios.post(`/club/resources?linkFile=file&userNamed=${resourceName}`, formData);
+    console.log(res);
+    dispatch({ type: UPLOAD_CLUB_RESOURCES, payload: res.data.fileUrls[0] });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const uploadLink = (newLink, linkName) => async (dispatch) => {
+  try {
+    console.log(linkName);
+    console.log(newLink);
+    const res = await axios.post(`/club/resources?linkFile=link&userNamed=${linkName}`, {
+      link: newLink,
+    });
+    console.log(res);
+    dispatch({ type: UPLOAD_CLUB_LINKS, payload: res.data.fileUrls });
+  } catch (err) {
+    console.log(err);
   }
 };

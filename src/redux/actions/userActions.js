@@ -58,6 +58,19 @@ export const getStudentData = () => async (dispatch) => {
     maintenanceErrorCheck(err);
   }
 };
+// export const getClubData = () => async (dispatch) => {
+//   try {
+//     const res = await axios.get("/club/profile");
+//     const payload = { ...res.data.student, userType: "club" };
+//     dispatch({
+//       type: SET_CLUB,
+//       payload,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     maintenanceErrorCheck(err);
+//   }
+// };
 
 // Sign Up a user
 export const signupStudent = (newUserData, handleUser, handleStep) => async (
@@ -65,6 +78,7 @@ export const signupStudent = (newUserData, handleUser, handleStep) => async (
 ) => {
   try {
     const res = await axios.post("/auth/signup", newUserData);
+    console.log(res.data);
     setAuthorizationHeader(res.data.token);
     dispatch(getStudentData());
     handleUser(newUserData);
@@ -87,7 +101,8 @@ export const logoutUser = () => (dispatch) => {
 export const uploadImage = (formData) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .post("/user/image", formData)
+    //i changed it here,
+    .post("/profile/image?pictureType=cover", formData)
     .then((res) => {
       dispatch(getStudentData());
     })

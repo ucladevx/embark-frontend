@@ -1,6 +1,6 @@
 import { colors } from "../shared/config";
 
-export const handleTagColor = (tag) => {
+export function handleTagColor(tag) {
   switch (tag) {
     case "Product Management":
       return colors.red1;
@@ -8,16 +8,16 @@ export const handleTagColor = (tag) => {
       return colors.blue3;
     case "Product Design":
       return colors.darkyellow;
-    case "law":
+    case "Law":
       return colors.gray2;
-    case "medicine":
+    case "Medicine":
       return colors.pink;
-    case "tech":
+    case "Tech":
       return colors.blue2;
     default:
-      return "#222";
+      return colors.gray;
   }
-};
+}
 
 export const handleGoingBColor = (flag) => {
   if (flag) {

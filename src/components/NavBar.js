@@ -86,8 +86,8 @@ const sampleSuggestions = [
 const NavBar = () => {
   const [search, setSearch] = useState("");
   const [showList, setShowList] = useState(false);
-  const history = useHistory();
   const user = useSelector((state) => state.user);
+  const history = useHistory();
 
   const handleSearchChange = (e) => {
     // just show suggestions
@@ -115,6 +115,7 @@ const NavBar = () => {
       }
     }
     console.log("User Icon Clicked");
+    history.push("/user/" + user._id);
   };
 
   const handleCollapseIconClick = (e) => {
