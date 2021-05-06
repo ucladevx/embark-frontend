@@ -36,6 +36,8 @@ export default function userReducer(state = intialState, action) {
       return {
         authenticated: true,
         ...action.payload,
+        goingEvents: [],
+        ownEvents: [],
       };
     // TODO: uncomment this after the like endpoint is updated
     // case LIKE_POST:

@@ -62,7 +62,7 @@ const testEvent = [
   },
 ];
 
-const Events = ({ setNewEvent, openEvents }) => {
+const Events = ({ setNewEvent, openEvents, home }) => {
   const events = useSelector((state) => state.data.events);
   const usertype = useSelector((state) => state.user.userType);
 
