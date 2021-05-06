@@ -86,6 +86,21 @@ const EditProfile = ({ open, handleClose, allTags }) => {
     setOpenInd(!openInd);
   };
 
+  //check if there is any changes
+  const saveStudent = () => {
+    // major,
+    // year,
+    // tags: updatedTags,
+    // bio,
+    // linkedIn: linkedin,
+    return (
+      (user.major === major || major === "") &&
+      parseInt(user.year) === year &&
+      JSON.stringify(user.tags.sort()) === JSON.stringify(industries.sort()) &&
+      (user.linkedIn === linkedin || linkedin === "")
+    );
+  };
+
   useEffect(() => {
     setYear(user.year);
     setMajor(user.major);
@@ -372,7 +387,12 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
         {/* Done button */}
         <EditProfileDone>
-          <DoneBtn onClick={handleSubmit}>Save</DoneBtn>
+          <DoneBtn
+            onClick={handleSubmit}
+            bgcolor={saveStudent() ? colors.gray : "#5473bb"}
+          >
+            Save
+          </DoneBtn>
         </EditProfileDone>
       </EditProfileContent>
     </EditProfileContainer>

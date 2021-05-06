@@ -69,7 +69,6 @@ const EditClubProfile = ({ open, handleClose }) => {
   const [industries, setIndustries] = useState(user.tags);
   const [website, setWebsite] = useState(user.website);
   const [about, setAbout] = useState(user.about);
-  const [save, setSave] = useState(false);
   const hiddenProfileInput = React.useRef(null);
   const hiddenCoverInput = React.useRef(null);
 
@@ -238,32 +237,6 @@ const EditClubProfile = ({ open, handleClose }) => {
 
         {/* Description */}
         <TextFieldWrapper>
-          {/* <BoldTypography sz={"16px"}>Description:</BoldTypography>
-          <DialogTextField
-            autoFocus
-            margin="dense"
-            id="name"
-            placeholder={"Add your description"}
-            type="email"
-            fullWidth
-            multiline
-            rows={3}
-            InputProps={{
-              disableUnderline: true,
-              style: {
-                fontSize: 16,
-                fontWeight: 600,
-                padding: "8px 16px",
-              },
-            }}
-            style={{
-              padding: "10px 2px",
-              marginTop: "0px",
-              borderRadius: "10px",
-              backgroundColor: "#EDEDED",
-            }}
-            onChange={handleDescription}
-          /> */}
           <BoldTypography sz={"16px"}>Description:</BoldTypography>
           <DialogTextField
             autoFocus
