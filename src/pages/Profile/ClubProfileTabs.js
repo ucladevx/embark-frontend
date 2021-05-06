@@ -27,7 +27,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && index === 0 ? (
-        <Box p={3} style={{ background: 'white' }}>
+        <Box p={3} style={{ background: "white" }}>
           <ClubUploadResource setNewResource={setNewResource} />
         </Box>
       ) : (
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     elevation: 0,
     backgroundColor: theme.palette.background.paper,
-    width: '46vw',
+    width: "46vw",
   },
 }));
 
@@ -88,9 +88,11 @@ const ClubProfileTabs = () => {
           <Tab label="Board Members" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      <TabPanel setNewResource={setNewResource} value={value} index={0}>
-        
-      </TabPanel>
+      <TabPanel
+        setNewResource={setNewResource}
+        value={value}
+        index={0}
+      ></TabPanel>
       <TabPanel value={value} index={1}>
         <ClubEventsTab />
       </TabPanel>

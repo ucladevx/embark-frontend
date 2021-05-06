@@ -174,33 +174,31 @@ const NewEvent = ({ open, handleClose, editId }) => {
     setEndTime(idx);
   };
 
-
-    if (title && title.length > 100) {
-      alert("Title is too long! Please limit to <100 characters");
-      return;
-    }
-    if (description && description.length > 5000) {
-      alert("Description is too long! Please limit to <5000 characters");
-      return;
-    }
-    if (location && location.length > 100) {
-      alert("Location is too long! Please limit to <100 characters");
-      return;
-    }
-    const event = {
-      userType: "club",
-      name: title,
-      tags: [],
-      organizerName: user.name,
-      organizerEmail: user.email,
-      startDate: time._d,
-      endDate: time._d,
-      venue: location,
-      desc: description,
-    };
-    dispatch(newEvent(event));
-    handleClose();
+  if (title && title.length > 100) {
+    alert("Title is too long! Please limit to <100 characters");
+    return;
+  }
+  if (description && description.length > 5000) {
+    alert("Description is too long! Please limit to <5000 characters");
+    return;
+  }
+  if (location && location.length > 100) {
+    alert("Location is too long! Please limit to <100 characters");
+    return;
+  }
+  const event = {
+    userType: "club",
+    name: title,
+    tags: [],
+    organizerName: user.name,
+    organizerEmail: user.email,
+    startDate: time._d,
+    endDate: time._d,
+    venue: location,
+    desc: description,
   };
+  dispatch(newEvent(event));
+  handleClose();
 
   const renderInput = (props, openCalendar, closeCalendar) => {
     return (
@@ -311,9 +309,7 @@ const NewEvent = ({ open, handleClose, editId }) => {
         </TextFieldWrapper>
       </DialogContent>
       <DialogActions>
-        <PostBtn onClick={handleSubmit} color="primary">
-          {editId ? <>Edit</> : <>Create</>}
-        </PostBtn>
+        <PostBtn color="primary">{editId ? <>Edit</> : <>Create</>}</PostBtn>
       </DialogActions>
     </Dialog>
   );
