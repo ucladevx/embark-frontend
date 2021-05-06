@@ -98,6 +98,7 @@ const ClubProfile = (props) => {
                 <TitleTypography
                   style={{ fontSize: "24px", paddingBottom: "0" }}
                 >
+                  {console.log(user)}
                   {user.name}
                 </TitleTypography>
                 <Typography style={{ fontSize: "18px" }}>

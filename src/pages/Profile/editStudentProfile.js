@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { MenuItem, InputAdornment, Typography } from "@material-ui/core";
+import {
+  MenuItem,
+  InputAdornment,
+  Typography,
+  Button,
+} from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import { IndustryFilters } from "../../shared/dropdown";
@@ -21,15 +26,10 @@ import {
   EditProfileDone,
   DialogTextField,
   TextFieldWrapper,
+  linkedinAdornment,
   DoneBtn,
 } from "./StyleEditProfile";
-// import {
-//   DropDownBox,
-//   DropDownTitle,
-//   DropDownContent,
-//   DropDownCheckBox,
-//   Finished,
-// } from "../../shared/dropdown";
+
 import SingleDropDown from "../../shared/Dropdown/SingleDropdown";
 
 import Linkedin from "../../images/linkedin.png";
@@ -44,6 +44,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import axios from "axios";
 import MultiDropDown from "../../shared/Dropdown/MultiDropDown";
+import zIndex from "@material-ui/core/styles/zIndex";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -351,7 +352,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           <BoldTypography sz={"18px"}>
             LinkedIn Profile (Optional):
           </BoldTypography>
-          {/* <img src={linkedinStart} style={{width: "46px", height: "40px"}}></img> */}
           <DialogTextField
             autoFocus
             margin="dense"
@@ -362,7 +362,28 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <img src={Linkedin} alt="linkedin"></img>
+                  <div
+                    style={{
+                      borderTopLeftRadius: "10px",
+                      borderBottomLeftRadius: "10px",
+                      width: "60px",
+                      height: "46px",
+                      marginLeft: "-20px",
+                      borderColor: "black",
+                      zIndex: "10",
+                    }}
+                  >
+                    sfg
+                    <img
+                      src={linkedinStart}
+                      style={{
+                        position: "absolute",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                      }}
+                      alt="linkedin"
+                    ></img>
+                  </div>
                 </InputAdornment>
               ),
               disableUnderline: true,

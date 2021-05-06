@@ -58,7 +58,7 @@ const StudentProfile = (props) => {
                 <TitleTypography
                   style={{ fontSize: "24px", paddingBottom: "0" }}
                 >
-                  {user.name}
+                  {user.firstName} {user.lastName}
                 </TitleTypography>
                 <Typography style={{ fontSize: "18px" }}>
                   {user.year} • {user.major}

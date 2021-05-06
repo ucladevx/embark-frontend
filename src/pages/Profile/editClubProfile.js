@@ -77,7 +77,7 @@ const EditClubProfile = ({ open, handleClose }) => {
     return (
       (user.about === about || about === "") &&
       (user.description === description || description === "") &&
-      JSON.stringify(user.tags.sort()) === JSON.stringify(industries.sort()) &&
+      //JSON.stringify(user.tags.sort()) === JSON.stringify(industries.sort()) &&
       (user.website === website || website === "")
     );
   };
