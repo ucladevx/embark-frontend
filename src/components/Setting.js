@@ -27,7 +27,11 @@ const SettingEntry = styled.div`
   line-height: 19px;
   display: flex;
   gap: 15px;
-  color: #282828;
+  & > a {
+    color: #282828;
+    text-decoration: none;
+    border: 0 none;
+  }
 `;
 
 const Setting = () => {
@@ -35,12 +39,16 @@ const Setting = () => {
     <SettingBox>
       <SettingEntry>
         <img src={Feedback} alt="feedback" style={{ width: "24px" }}></img>
-        <p>Give Feedback</p>
+        <a href="https://forms.gle/YuavtRJeBhrLKWPM6">Give Feedback</a>
       </SettingEntry>
       <Line width="155px"></Line>
       <SettingEntry>
-        <img src={Help} alt="help"></img>
-        <p>Report an issue</p>
+        <img
+          src={Help}
+          alt="help"
+          style={{ width: "28px", marginLeft: "2px" }}
+        ></img>
+        <a href="https://forms.gle/CMwS1Jnd7aSVFqcw5">Report an issue</a>
       </SettingEntry>
     </SettingBox>
   );

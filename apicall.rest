@@ -8,8 +8,8 @@ POST http://localhost:9000/auth/signin
 Content-Type: application/json
 
 {
-    "email": "embarkemail@gmail.com",
-    "password": "Emp!12345",
+    "email": "theembarktea232@gmail.com",
+    "password": "DevasfdEmbark123$",
     "userType": "student"
 }
 
