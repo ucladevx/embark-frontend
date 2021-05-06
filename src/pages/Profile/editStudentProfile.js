@@ -88,16 +88,13 @@ const EditProfile = ({ open, handleClose, allTags }) => {
 
   //check if there is any changes
   const saveStudent = () => {
-    // major,
-    // year,
-    // tags: updatedTags,
-    // bio,
-    // linkedIn: linkedin,
     return (
       (user.major === major || major === "") &&
       parseInt(user.year) === year &&
       JSON.stringify(user.tags.sort()) === JSON.stringify(industries.sort()) &&
-      (user.linkedIn === linkedin || linkedin === "")
+      (user.linkedIn === linkedin || linkedin === "") &&
+      user.coverPicURL === coverURL &&
+      user.profilePicURL === profileURL
     );
   };
 

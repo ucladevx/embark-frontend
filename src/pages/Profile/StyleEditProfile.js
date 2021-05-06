@@ -115,7 +115,7 @@ export const DoneBtn = styled(ActionButton)`
   height: 40px;
   margin: 10px auto 20px auto;
   color: #ffffff;
-  background-color: #5473bb;
+  background-color: ${(props) => props.bgcolor};
 `;
 
 export const DropDownTitle = styled.div`

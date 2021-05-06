@@ -74,9 +74,6 @@ const EditClubProfile = ({ open, handleClose }) => {
 
   //check if there is any changes
   const saveClub = () => {
-    // industries,
-    // description,
-    // website,
     return (
       (user.about === about || about === "") &&
       (user.description === description || description === "") &&
@@ -84,6 +81,7 @@ const EditClubProfile = ({ open, handleClose }) => {
       (user.website === website || website === "")
     );
   };
+
   //dropdown toggle
   const [openInd, setOpenInd] = useState(false);
   const toggleOpenInd = () => {
