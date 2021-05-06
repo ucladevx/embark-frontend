@@ -126,7 +126,7 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         links: action.payload,
-      }
+      };
     case UPLOAD_CLUB_RESOURCES:
       return {
         ...state,

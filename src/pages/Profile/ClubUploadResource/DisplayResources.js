@@ -53,7 +53,11 @@ const LinkCardFormatter = ({ fileUrl }) => {
           <CardMedia className={classes.media} image={driveIcon} />
           <CardContent className={classes.content}>
             <Typography gutterBottom variant="subtitle1" component="h3">
-              {(fileUrl.userNamed === null || fileUrl.userNamed === undefined || fileUrl.userNamed === "") ? link : fileUrl.userNamed}
+              {fileUrl.userNamed === null ||
+              fileUrl.userNamed === undefined ||
+              fileUrl.userNamed === ""
+                ? link
+                : fileUrl.userNamed}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -70,7 +74,11 @@ const LinkCardFormatter = ({ fileUrl }) => {
           <CardMedia className={classes.media} image={defaultFileIcon} />
           <CardContent className={classes.content}>
             <Typography gutterBottom variant="subtitle1" component="h3">
-              {(fileUrl.userNamed === null || fileUrl.userNamed === undefined || fileUrl.userNamed === "") ? link : fileUrl.userNamed}
+              {fileUrl.userNamed === null ||
+              fileUrl.userNamed === undefined ||
+              fileUrl.userNamed === ""
+                ? link
+                : fileUrl.userNamed}
             </Typography>
           </CardContent>
         </CardActionArea>

@@ -299,7 +299,7 @@ const RenderFileUpload = ({ handleTabClose }) => {
 
 const RenderEmbedLink = ({ handleTabClose }) => {
   const [url, setUrl] = useState("");
-  const [urlName, setUrlName] = useState('');
+  const [urlName, setUrlName] = useState("");
   const dispatch = useDispatch();
 
   const handleUrl = (e) => {
@@ -313,7 +313,7 @@ const RenderEmbedLink = ({ handleTabClose }) => {
 
   const handleUrlChangeName = (e) => {
     setUrlName(e.target.value);
-  }
+  };
 
   return (
     <Grid>
