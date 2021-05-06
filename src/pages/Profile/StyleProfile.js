@@ -161,6 +161,20 @@ export const ClubWebsiteButton = styled(Button)`
   background: #e5efff;
 `;
 
+export const FollowButton = styled(Button)`
+  width: 130px;
+  height: 32px;
+  border-radius: 10px;
+  position: absolute;
+  right: 9vw;
+  text-transform: none;
+  color: #5473bb;
+  background: #ffffff;
+  border: 2px;
+  border-style: solid;
+  border-color: #5473bb;
+`;
+
 export const AboutTitle = styled.div`
   display: flex 2 1 auto;
   margin-left: 15px;

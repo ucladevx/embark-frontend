@@ -21,6 +21,7 @@ import {
   Footer,
   ExploreFilterTitle,
   DescriptionTypography,
+  FollowButton,
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
@@ -30,6 +31,8 @@ import EditClubProfile from "./editClubProfile";
 import ClubProfileTabs from "./ClubProfileTabs";
 import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
+import { getExpandedClub } from "../../redux/actions/dataActions";
+import { editStudentDetails } from "../../redux/actions/userActions";
 
 const ClubProfile = (props) => {
   const user = useSelector((state) => state.user);
@@ -40,6 +43,30 @@ const ClubProfile = (props) => {
     "Have you ever felt that all you were learning at UCLA was theory, with little opportunities to build out practical applications? DevX is a brand new program dedicated to solving that very problem! Build out real-world projects to help tackle pressing problems frustrating the UCLA community, grow your technical skills by pairing up with experienced students, and build a network that lasts beyond graduation.",
   );
   const [website, SetWebsite] = useState("https://ucladevx.com/");
+
+  const dispatch = useDispatch();
+  const id = "fakeid";
+  let studentViewClub;
+  if (user.userType === "student") {
+    studentViewClub = getExpandedClub(id); //need to check this
+  } else {
+    studentViewClub = false;
+  }
+
+  const [followString, setFollowString] = useState("Follow");
+  const handleFollow = async () => {
+    const updatedProfile = {
+      clubs: [user.clubs, id],
+    };
+    dispatch(editStudentDetails(updatedProfile));
+  };
+  useEffect(() => {
+    if (user.clubs.includes(id)) {
+      setFollowString("Unfollow");
+    } else {
+      setFollowString("Follow");
+    }
+  }, [user]);
 
   function handleAbout(newAbout) {
     SetAbout(newAbout);
@@ -77,16 +104,20 @@ const ClubProfile = (props) => {
 
   return (
     <>
-      <EditClubProfile
-        open={editProfile}
-        handleClose={() => seteditProfile(false)}
-        EditAbout={handleAbout}
-        EditWebsite={handleWebsite}
-        EditDescription={handleDescription}
-        currentAbout={About}
-        currentWebsite={website}
-        currentDescription={description}
-      ></EditClubProfile>
+      {user.userType === "club" ? (
+        <EditClubProfile
+          open={editProfile}
+          handleClose={() => seteditProfile(false)}
+          EditAbout={handleAbout}
+          EditWebsite={handleWebsite}
+          EditDescription={handleDescription}
+          currentAbout={About}
+          currentWebsite={website}
+          currentDescription={description}
+        ></EditClubProfile>
+      ) : (
+        <></>
+      )}
       <NavBar></NavBar>
       <MiddleContainer>
         <ProfileWrapper>
@@ -104,9 +135,22 @@ const ClubProfile = (props) => {
                   {description}
                 </Typography>
               </NameDescription>
-              {/* <NameDescription> */}
-              <ClubWebsiteButton href={website}>Club Website</ClubWebsiteButton>
-              {/* </NameDescription> */}
+              <NameDescription>
+                {user.userType === "student" ? (
+                  <FollowButton
+                    onClick={() => {
+                      console.log("follow");
+                    }}
+                  >
+                    {followString}
+                  </FollowButton>
+                ) : (
+                  <></>
+                )}
+                <ClubWebsiteButton href={website}>
+                  Club Website
+                </ClubWebsiteButton>
+              </NameDescription>
             </NameDescriptionWrapper>
 
             <IndustryWrapper>
@@ -121,13 +165,17 @@ const ClubProfile = (props) => {
               </ExploreFilter>
             </IndustryWrapper>
 
-            <EditProfileButton
-              onClick={() => {
-                seteditProfile(true);
-              }}
-            >
-              Edit Profile
-            </EditProfileButton>
+            {user.userType === "club" ? (
+              <EditProfileButton
+                onClick={() => {
+                  seteditProfile(true);
+                }}
+              >
+                Edit Profile
+              </EditProfileButton>
+            ) : (
+              <></>
+            )}
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>

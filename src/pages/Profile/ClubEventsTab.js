@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
 import { Button } from "@material-ui/core";
-
+import axios from "axios";
 import { StyleEventCalendar } from "../../components/Calendar/EventCalender";
 import "../../components/Calendar/EventCalendar.css";
 import Datetime from "react-datetime";
@@ -13,6 +13,7 @@ import NewEvent from "../../components/NewEvent";
 import ExpandedEvent from "../Home/ExpandedEvent";
 import { BoldTypography } from "../../shared/Typography";
 import { getOwnEvents } from "../../redux/actions/userActions";
+import { getExpandedClub } from "../../redux/actions/dataActions";
 import "moment-timezone";
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
@@ -89,12 +90,13 @@ const testEvent = [
 ];
 
 const ClubEventsTab = () => {
+  const usertype = useSelector((state) => state.user.userType);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOwnEvents());
   }, []);
-
   const hostedEvents = useSelector((state) => state.user.ownEvents);
+  const studentViewEvents = dispatch(getExpandedClub("fakeID")).events; //need to check this
   const [viewDate, setViewDate] = useState(new Date());
   const [viewAll, setViewAll] = useState(false);
 
@@ -121,14 +123,23 @@ const ClubEventsTab = () => {
       setEvent({});
       return;
     }
-    for (let i = 0; i < hostedEvents.length; i++) {
-      const myDate = hostedEvents[i].startDate;
+    let events;
+    if (usertype === "club") {
+      events = hostedEvents;
+    } else {
+      if (studentViewEvents === undefined) {
+        return;
+      }
+      events = studentViewEvents;
+    }
+    for (let i = 0; i < events.length; i++) {
+      const myDate = events[i].startDate;
       if (
         myDate.getDate() === viewDate._d.getDate() &&
         myDate.getMonth() === viewDate._d.getMonth() &&
         myDate.getFullYear() === viewDate._d.getFullYear()
       ) {
-        setEvent(hostedEvents[i]);
+        setEvent(events[i]);
         eventFound = true;
       }
     }
@@ -177,7 +188,7 @@ const ClubEventsTab = () => {
         ) : (
           <></>
         )}
-        {viewAll ? (
+        {viewAll && usertype === "club" ? (
           hostedEvents.map((e) => {
             return (
               <>
@@ -185,14 +196,28 @@ const ClubEventsTab = () => {
               </>
             );
           })
-        ) : event === null ? (
+        ) : viewAll &&
+          usertype === "student" &&
+          studentViewEvents !== undefined ? (
+          studentViewEvents.map((e) => {
+            return (
+              <>
+                <ClubEvent loadExpanded={loadExpanded} e={e} test={false} />
+              </>
+            );
+          })
+        ) : event._id ? (
           <ClubEvent loadExpanded={loadExpanded} e={event} test={false} />
         ) : (
           <></>
         )}
         <ButtonWrapper>
           <ChangeViewButton onClick={changeView}>{viewButton}</ChangeViewButton>
-          <CreateButton onClick={() => setNewEvent(true)}>+</CreateButton>
+          {usertype === "club" ? (
+            <CreateButton onClick={() => setNewEvent(true)}>+</CreateButton>
+          ) : (
+            <></>
+          )}
         </ButtonWrapper>
       </InnerWrapper>
       <div>
