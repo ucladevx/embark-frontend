@@ -237,9 +237,6 @@ export const newEvent = (newE) => async (dispatch) => {
 export const getEvents = (amount) => async (dispatch) => {
   try {
     const res = await axios.get("/events/discover", {
-      params: {
-        limitNum: amount,
-      },
       userType: "student",
     });
     console.log(res.data);

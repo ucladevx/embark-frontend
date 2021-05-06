@@ -15,6 +15,7 @@ import {
   ExploreFilter,
   ExploreObj,
   Footer,
+  TabsDescriptionWrapper,
 } from "./StyleProfile";
 import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
@@ -94,9 +95,9 @@ const StudentProfile = (props) => {
         </ProfileWrapper>
         <ProfileWrapper>
           <ProfileInfo>
-            <NameDescriptionWrapper>
+            <TabsDescriptionWrapper>
               <UserProfileTabs />
-            </NameDescriptionWrapper>
+            </TabsDescriptionWrapper>
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>

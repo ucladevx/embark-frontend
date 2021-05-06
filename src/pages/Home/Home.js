@@ -60,6 +60,7 @@ const Home = () => {
   // Redux
   const filters = useSelector((state) => state.data.filter);
   const user = useSelector((state) => state.user);
+  const openExplore = useSelector((state) => state.ui.openExplore);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -76,11 +77,18 @@ const Home = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getEvents(numEvents));
-  }, [dispatch, numEvents]);
+    dispatch(getEvents());
+  }, [dispatch]);
 
   useEffect(() => {
     styleCalendar();
+  }, []);
+
+  useEffect(() => {
+    if (openExplore) {
+      setPage("explore");
+      dispatch({ type: "CLOSE_EXPLORE" });
+    }
   }, []);
 
   const removeUpdateFilters = (t) => {

@@ -5,12 +5,15 @@ import {
   STOP_LOADING_UI,
   OPEN_COMMENT,
   CLOSE_COMMENT,
+  OPEN_EXPLORE,
+  CLOSE_EXPLORE,
 } from "../types";
 
 const initialState = {
   loading: false,
   errors: null,
   newComment: "",
+  openExplore: false,
 };
 
 export default function uiReducer(state = initialState, action) {
@@ -46,6 +49,16 @@ export default function uiReducer(state = initialState, action) {
       return {
         ...state,
         newComment: "",
+      };
+    case OPEN_EXPLORE:
+      return {
+        ...state,
+        openExplore: true,
+      };
+    case CLOSE_EXPLORE:
+      return {
+        ...state,
+        openExplore: false,
       };
     default:
       return state;

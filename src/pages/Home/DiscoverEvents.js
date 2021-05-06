@@ -1,23 +1,26 @@
 import React, { useState } from "react";
+import { EventItems, AddFilter } from "./StyleLanding";
 import {
-  EventAvatar,
-  EventDescription,
-  EventItem,
-  EventItems,
-  EventTypography,
-  EventsWrapper,
-  TimeTypography,
-  GoingBtn,
-  InfoSeperator,
-  AddFilter,
-} from "./StyleLanding";
+  UpcomingItemBox,
+  UpcomingItem,
+  UpcomingItemImage,
+  UpcomingItemInfoCol,
+  UpcomingItemTitle,
+  UpcomingItemSubtitle,
+  UpcomingItemObj,
+  UpcomingItemWhenBox,
+  UpcomingItemDate,
+  UpcomingItemGoingBtn,
+} from "./StyleExplore";
+// Images
+import avatarImg from "../../images/avatar.svg";
 import { colors } from "../../shared/config";
 import styled from "styled-components";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { useSelector } from "react-redux";
 import { goingToEvent } from "../../redux/actions/userActions";
 import ExpandedEvent from "./ExpandedEvent.js";
-import Event from "./Event.js";
+import PrettyEvent from "./PrettyEvent.js";
 import { ActionButton } from "../../shared/Buttons";
 
 // Dayjs
@@ -40,11 +43,11 @@ const test = (moment) => {
 const testEvent = [
   {
     _id: "123450",
-    title: "Embark Release",
-    authorEmail: "Embark",
+    name: "Embark Release",
+    organizerName: "Embark",
     startDate: /*"2021-03-03T08:00:00.000Z"*/ "2021-04-25T04:13:32.000Z",
     endDate: "2021-04-25T06:13:32.000Z",
-    description:
+    desc:
       "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
     venue: "here what do you think",
   },
@@ -72,40 +75,63 @@ const DiscoverEvents = ({ closeEvents }) => {
       <DiscoverEventsWrapper>
         <TitleTypography>Discover Events</TitleTypography>
         <EventItems>
-          <EventItem>
-            <EventAvatar></EventAvatar>
-            <EventDescription>
-              <BoldTypography sz={"16px"}>Demo Day</BoldTypography>
-              <EventTypography>UCLA DevX</EventTypography>
-              <TimeTypography>
-                {test("2021-03-03T08:00:00.000Z")}
-              </TimeTypography>
-            </EventDescription>
-            <GoingBtn bgcolor={true}>Going</GoingBtn>
-          </EventItem>
-          <InfoSeperator></InfoSeperator>
-          <EventItem>
-            <EventAvatar></EventAvatar>
-            <EventDescription>
-              <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
-              <EventTypography>Club1234</EventTypography>
-              <TimeTypography>
-                {dayjs().format("MMM DD HH:mm a")}
-              </TimeTypography>
-            </EventDescription>
-            <GoingBtn bgcolor={false}>Going</GoingBtn>
-          </EventItem>
+          <UpcomingItemBox>
+            <UpcomingItem>
+              <UpcomingItemImage src={avatarImg} alt="date"></UpcomingItemImage>
+              <UpcomingItemInfoCol>
+                <UpcomingItemTitle>How to Ace the LSAT</UpcomingItemTitle>
+                <UpcomingItemSubtitle>
+                  Pre-Law Society at UCLA
+                </UpcomingItemSubtitle>
+                <UpcomingItemObj bgcolor={colors.purple}>Law</UpcomingItemObj>
+              </UpcomingItemInfoCol>
+              <UpcomingItemWhenBox>
+                <UpcomingItemDate>Feb 11 &middot; 7:00pm</UpcomingItemDate>
+                <UpcomingItemGoingBtn
+                  bgcolor={colors.green1}
+                  textColor={colors.darkgreen}
+                >
+                  Going
+                </UpcomingItemGoingBtn>
+              </UpcomingItemWhenBox>
+            </UpcomingItem>
+          </UpcomingItemBox>
+
+          <UpcomingItemBox>
+            <UpcomingItem>
+              <UpcomingItemImage src={avatarImg} alt="date"></UpcomingItemImage>
+              <UpcomingItemInfoCol>
+                <UpcomingItemTitle>
+                  Medical School Interview Tips
+                </UpcomingItemTitle>
+                <UpcomingItemSubtitle>
+                  American Medical School Association
+                </UpcomingItemSubtitle>
+                <UpcomingItemObj bgcolor={colors.red1}>Health</UpcomingItemObj>
+              </UpcomingItemInfoCol>
+              <UpcomingItemWhenBox>
+                <UpcomingItemDate>Feb 11 &middot; 7:00pm</UpcomingItemDate>
+                <UpcomingItemGoingBtn
+                  bgcolor={colors.green1}
+                  textColor={colors.darkgreen}
+                >
+                  Going
+                </UpcomingItemGoingBtn>
+              </UpcomingItemWhenBox>
+            </UpcomingItem>
+          </UpcomingItemBox>
+
           {testEvent.map((p) => {
             return (
               <>
-                <Event loadExpanded={loadExpanded} e={p} test={true} />
+                <PrettyEvent loadExpanded={loadExpanded} e={p} test={true} />
               </>
             );
           })}
           {events.map((e) => {
             return (
               <>
-                <Event loadExpanded={loadExpanded} e={e} test={false} />
+                <PrettyEvent loadExpanded={loadExpanded} e={e} test={false} />
               </>
             );
           })}
