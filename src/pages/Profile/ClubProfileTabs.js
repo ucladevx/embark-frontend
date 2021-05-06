@@ -27,7 +27,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && index === 0 ? (
-        <Box p={3}>
+        <Box p={3} style={{ background: 'white' }}>
           <ClubUploadResource setNewResource={setNewResource} />
         </Box>
       ) : (
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     elevation: 0,
     backgroundColor: theme.palette.background.paper,
-    width: 500,
+    width: '46vw',
   },
 }));
 
@@ -89,9 +89,7 @@ const ClubProfileTabs = () => {
         </Tabs>
       </AppBar>
       <TabPanel setNewResource={setNewResource} value={value} index={0}>
-        {/* {user.posts.map((post) => (
-        <BoldTypography>{post}</BoldTypography>
-      ))} */}
+        
       </TabPanel>
       <TabPanel value={value} index={1}>
         <ClubEventsTab />
