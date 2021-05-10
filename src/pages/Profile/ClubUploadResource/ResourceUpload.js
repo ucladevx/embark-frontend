@@ -54,9 +54,8 @@ const DriveUpload = ({ handleDrive, handleName, handleUploaded }) => {
   const [listDocumentsVisible, setListDocumentsVisibility] = useState(false);
   const [documents, setDocuments] = useState([]);
   const [isLoadingGoogleDriveApi, setIsLoadingGoogleDriveApi] = useState(false);
-  const [isFetchingGoogleDriveFiles, setIsFetchingGoogleDriveFiles] = useState(
-    false,
-  );
+  const [isFetchingGoogleDriveFiles, setIsFetchingGoogleDriveFiles] =
+    useState(false);
   const [oauthToken, setAuthToken] = useState("");
   const [signedInUser, setSignedInUser] = useState();
   const [pickerApiLoaded, setPickerLoaded] = useState(false);

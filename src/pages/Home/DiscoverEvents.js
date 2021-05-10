@@ -2,23 +2,20 @@ import React, { useState } from "react";
 import {
   EventAvatar,
   EventDescription,
-  EventItem,
   EventItems,
   EventTypography,
-  EventsWrapper,
   TimeTypography,
   GoingBtn,
   InfoSeperator,
   AddFilter,
+  FakeEventItem,
 } from "./StyleLanding";
 import { colors } from "../../shared/config";
 import styled from "styled-components";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { useSelector } from "react-redux";
-import { goingToEvent } from "../../redux/actions/userActions";
 import ExpandedEvent from "./ExpandedEvent.js";
 import Event from "./Event.js";
-import { ActionButton } from "../../shared/Buttons";
 
 // Dayjs
 import dayjs from "dayjs";
@@ -40,8 +37,8 @@ const test = (moment) => {
 const testEvent = [
   {
     _id: "123450",
-    title: "Embark Release",
-    authorEmail: "Embark",
+    name: "Embark Release",
+    organizerName: "Embark",
     startDate: /*"2021-03-03T08:00:00.000Z"*/ "2021-04-25T04:13:32.000Z",
     endDate: "2021-04-25T06:13:32.000Z",
     description:
@@ -73,7 +70,7 @@ const DiscoverEvents = ({ closeEvents, setExpandedEventPage }) => {
       <DiscoverEventsWrapper>
         <TitleTypography>Discover Events</TitleTypography>
         <EventItems>
-          <EventItem>
+          <FakeEventItem>
             <EventAvatar></EventAvatar>
             <EventDescription>
               <BoldTypography sz={"16px"}>Demo Day</BoldTypography>
@@ -83,9 +80,9 @@ const DiscoverEvents = ({ closeEvents, setExpandedEventPage }) => {
               </TimeTypography>
             </EventDescription>
             <GoingBtn bgcolor={true}>Going</GoingBtn>
-          </EventItem>
+          </FakeEventItem>
           <InfoSeperator></InfoSeperator>
-          <EventItem>
+          <FakeEventItem>
             <EventAvatar></EventAvatar>
             <EventDescription>
               <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
@@ -95,7 +92,7 @@ const DiscoverEvents = ({ closeEvents, setExpandedEventPage }) => {
               </TimeTypography>
             </EventDescription>
             <GoingBtn bgcolor={false}>Going</GoingBtn>
-          </EventItem>
+          </FakeEventItem>
           {testEvent.map((p) => {
             return (
               <>

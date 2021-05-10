@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   EventAvatar,
   EventDescription,
-  EventItem,
   EventItems,
   EventTypography,
   EventsWrapper,
@@ -11,8 +10,8 @@ import {
   InfoSeperator,
   AddFilter,
   CreateButton,
+  FakeEventItem,
 } from "./StyleLanding";
-import styled from "styled-components";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { useSelector } from "react-redux";
 import ExpandedEvent from "./ExpandedEvent.js";
@@ -68,7 +67,7 @@ const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
       <EventsWrapper>
         <TitleTypography>Upcoming Events</TitleTypography>
         <EventItems>
-          <EventItem>
+          <FakeEventItem>
             <EventAvatar></EventAvatar>
             <EventDescription>
               <BoldTypography sz={"16px"}>Demo Day</BoldTypography>
@@ -78,9 +77,9 @@ const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
               </TimeTypography>
             </EventDescription>
             <GoingBtn bgcolor={true}>Going</GoingBtn>
-          </EventItem>
+          </FakeEventItem>
           <InfoSeperator></InfoSeperator>
-          <EventItem>
+          <FakeEventItem>
             <EventAvatar></EventAvatar>
             <EventDescription>
               <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
@@ -90,7 +89,7 @@ const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
               </TimeTypography>
             </EventDescription>
             <GoingBtn bgcolor={false}>Going</GoingBtn>
-          </EventItem>
+          </FakeEventItem>
           {testEvent.map((p) => {
             return (
               <>

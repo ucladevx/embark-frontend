@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
-import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import styled from "styled-components";
 import NewEvent from "../../components/NewEvent";
 import {
-  EventAvatar,
-  EventDescription,
-  EventItem,
-  EventItems,
   EventTypography,
-  EventsWrapper,
   GoingBtnExpand,
   InfoSeperator,
   PostContent,
@@ -24,16 +18,10 @@ import {
   ProfileInfo,
   ProfileWrapper,
   ProfileAvatar,
-  NameDescription,
-  NameDescriptionWrapper,
   ProfileTabsWrapper,
-  MiddleContainer,
-  QuestionBox,
-  Footer,
 } from "./StyleEventPage";
 import lawn from "../../images/lawn.png";
-import { Typography } from "@material-ui/core";
-import { TitleTypography, BoldTypography } from "../../shared/Typography";
+import { BoldTypography } from "../../shared/Typography";
 import ExpandedEventTabs from "./ExpandedEventTabs";
 import { colors } from "../../shared/config";
 
@@ -151,7 +139,7 @@ const ExpandedEventPage = ({ e, close }) => {
                   {makeDay(e.startDate)}
                 </TimeTypography>
                 <HeaderWrapper>
-                  <BoldTypography sz={"24px"}>{e.title}</BoldTypography>
+                  <BoldTypography sz={"24px"}>{e.name}</BoldTypography>
                   {usertype === "student" ? (
                     <GoingBtnExpand
                       onClick={goingClick(e._id)}
