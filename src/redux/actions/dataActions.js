@@ -294,3 +294,13 @@ export const uploadLink = (newLink, linkName) => async (dispatch) => {
     console.log(err);
   }
 };
+
+//Grab a club's data as a non-club
+export const getExpandedClub = (clubId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/club/profilebyId?clubId=${clubId}`);
+    return res;
+  } catch (err) {
+    console.error(err);
+  }
+};

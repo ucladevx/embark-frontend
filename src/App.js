@@ -58,7 +58,7 @@ function App() {
               <Route exact path="/club/:clubid" component={ClubProfile}></Route>
               <Route
                 exact
-                path="/view-club"
+                path="/view-club/:clubId"
                 component={ViewClubProfile}
               ></Route>
               <Route
