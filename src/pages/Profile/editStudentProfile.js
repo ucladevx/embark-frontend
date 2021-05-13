@@ -373,7 +373,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
                       zIndex: "10",
                     }}
                   >
-                    sfg
                     <img
                       src={linkedinStart}
                       style={{

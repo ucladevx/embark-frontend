@@ -30,8 +30,7 @@ const ClubUploadResource = ({ setNewResource }) => {
       id: 1,
       type: "png",
       name: "sample png",
-      url:
-        "https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png",
+      url: "https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png",
     },
     {
       id: 2,
@@ -43,8 +42,7 @@ const ClubUploadResource = ({ setNewResource }) => {
       id: 3,
       type: "docx",
       name: "sample docx",
-      url:
-        "https://docs.google.com/document/d/1eOhrx6VCW88E-Krh3qKujkObSbpVbu2j4bCbUBAJrdY/edit?usp=sharing",
+      url: "https://docs.google.com/document/d/1eOhrx6VCW88E-Krh3qKujkObSbpVbu2j4bCbUBAJrdY/edit?usp=sharing",
     },
   ];
 
