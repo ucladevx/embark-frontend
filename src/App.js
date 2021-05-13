@@ -16,6 +16,7 @@ import theme from "./utils/theme";
 import Login from "./pages/Login/Login.js";
 import OnBoarding from "./pages/OnBoarding";
 import Home from "./pages/Home";
+import ErrorPage from "./pages/ErrorPage";
 import StudentProfile from "./pages/Profile/StudentProfile";
 import ClubProfile from "./pages/Profile/ClubProfile";
 import { LinkedInPopUp } from "react-linkedin-login-oauth2";
@@ -65,6 +66,7 @@ function App() {
                 path="/view-student"
                 component={ViewStudentProfile}
               ></Route>
+              <Route path="/" component={ErrorPage}></Route>
             </Switch>
           </Router>
         </Provider>

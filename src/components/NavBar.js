@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { colors } from "../shared/config";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useClickOutState } from "../shared/Hook";
 
 // icons for navbar icons
 import { ReactComponent as EmbarkIcon } from "../images/navbar_embark_logo.svg";
@@ -14,6 +15,7 @@ import { ReactComponent as CollapseIcon } from "../images/navbar_collapse_icon.s
 import { Autocomplete } from "@material-ui/lab";
 import { TextField } from "@material-ui/core";
 import LinkEffect from "../shared/Effect/LinkEffect";
+import Setting from "./Setting";
 
 const NavBarWrapper = styled.div`
   display: flex;
@@ -86,6 +88,7 @@ const sampleSuggestions = [
 const NavBar = () => {
   const [search, setSearch] = useState("");
   const [showList, setShowList] = useState(false);
+  const [showSetting, setShowSetting, settingRef] = useClickOutState();
   const user = useSelector((state) => state.user);
   const history = useHistory();
 
@@ -118,9 +121,8 @@ const NavBar = () => {
     history.push("/user/" + user._id);
   };
 
-  const handleCollapseIconClick = (e) => {
-    // just console log for now
-    console.log("Collapse Icon Clicked");
+  const handleCollapseIconClick = () => {
+    setShowSetting(!showSetting);
   };
 
   return (
@@ -156,9 +158,12 @@ const NavBar = () => {
         <UserLogo onClick={handleUserIconClick}>
           <UserIcon />
         </UserLogo>
-        <CollapseLogo onClick={handleCollapseIconClick}>
-          <CollapseIcon />
-        </CollapseLogo>
+        <span ref={settingRef}>
+          <CollapseLogo onClick={handleCollapseIconClick}>
+            <CollapseIcon />
+          </CollapseLogo>
+          {showSetting && <Setting></Setting>}
+        </span>
       </NavBarWrapper>
     </>
   );

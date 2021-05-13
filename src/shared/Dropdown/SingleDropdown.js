@@ -15,15 +15,15 @@ const SingleDropdown = ({
   content,
   onSelect,
   onOpenClose,
+  ...other
 }) => {
   const [isOpen, setIsOpen] = useState(open);
   const multiRef = useRef();
-
   useEffect(() => setIsOpen(open), [open]);
   useClickOut(multiRef, isOpen, setIsOpen, onOpenClose);
 
   return (
-    <div ref={multiRef} style={{ width: ttwd }}>
+    <div ref={multiRef} style={{ width: ttwd }} {...other}>
       <DropDownTitle
         wd={ttwd}
         onClick={() => onOpenClose()}
