@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
 import { Button } from "@material-ui/core";
-
+import { useHistory } from "react-router-dom";
 import { StyleEventCalendar } from "../../components/Calendar/EventCalender";
 import "../../components/Calendar/EventCalendar.css";
 import Datetime from "react-datetime";
@@ -89,6 +89,8 @@ const testEvent = [
 ];
 
 const ClubEventsTab = () => {
+  const history = useHistory();
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOwnEvents());
@@ -105,6 +107,8 @@ const ClubEventsTab = () => {
   const loadExpanded = (e) => {
     setEvent(e);
     setExpanded(true);
+    dispatch({ type: "CLUB_EVENT_EXPANSION", payload: e });
+    history.push("/home");
   };
   useEffect(() => {
     StyleEventCalendar();
