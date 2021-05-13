@@ -95,7 +95,7 @@ const Home = () => {
   }, [dispatch, numEvents]);
 
   useEffect(() => {
-    // styleCalendar();
+    styleCalendar();
   }, []);
 
   useEffect(() => {
