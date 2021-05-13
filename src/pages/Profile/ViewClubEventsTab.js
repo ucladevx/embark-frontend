@@ -120,6 +120,9 @@ const ClubEventsTab = ({ club }) => {
     }
     for (let i = 0; i < hostedEvents.length; i++) {
       const myDate = hostedEvents[i].startDate;
+      if (typeof myDate === "string") {
+        return;
+      }
       if (
         myDate.getDate() === viewDate._d.getDate() &&
         myDate.getMonth() === viewDate._d.getMonth() &&
@@ -177,7 +180,7 @@ const ClubEventsTab = ({ club }) => {
           hostedEvents.map((e) => {
             return (
               <>
-                <ClubEvent loadExpanded={loadExpanded} e={e} test={false} />
+                <ClubEvent loadExpanded={loadExpanded} e={e} test={e.test} />
               </>
             );
           })
