@@ -54,9 +54,8 @@ const DriveUpload = ({ handleDrive, handleName, handleUploaded }) => {
   const [listDocumentsVisible, setListDocumentsVisibility] = useState(false);
   const [documents, setDocuments] = useState([]);
   const [isLoadingGoogleDriveApi, setIsLoadingGoogleDriveApi] = useState(false);
-  const [isFetchingGoogleDriveFiles, setIsFetchingGoogleDriveFiles] = useState(
-    false,
-  );
+  const [isFetchingGoogleDriveFiles, setIsFetchingGoogleDriveFiles] =
+    useState(false);
   const [oauthToken, setAuthToken] = useState("");
   const [signedInUser, setSignedInUser] = useState();
   const [pickerApiLoaded, setPickerLoaded] = useState(false);
@@ -299,7 +298,7 @@ const RenderFileUpload = ({ handleTabClose }) => {
 
 const RenderEmbedLink = ({ handleTabClose }) => {
   const [url, setUrl] = useState("");
-  const [urlName, setUrlName] = useState('');
+  const [urlName, setUrlName] = useState("");
   const dispatch = useDispatch();
 
   const handleUrl = (e) => {
@@ -313,7 +312,7 @@ const RenderEmbedLink = ({ handleTabClose }) => {
 
   const handleUrlChangeName = (e) => {
     setUrlName(e.target.value);
-  }
+  };
 
   return (
     <Grid>

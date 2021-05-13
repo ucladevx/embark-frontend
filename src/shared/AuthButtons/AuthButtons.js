@@ -44,7 +44,19 @@ const AuthButtons = () => {
   }, []);
 
   const responseAuth = (response) => {
-    console.log(response);
+    if (page !== "/login") {
+      const { email, familyName, givenName } = response.profileObj;
+      const profile = {
+        firstName: givenName,
+        lastName: familyName,
+        email,
+      };
+      dispatch(studentGoogleSignUp(profile));
+    } else {
+      const { email } = response.profileObj;
+      const profile = { email };
+      dispatch(studentGoogleSignIn(profile));
+    }
   };
 
   useEffect(() => {
@@ -74,7 +86,9 @@ const AuthButtons = () => {
         <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           onSuccess={responseAuth}
-          onFailure={responseAuth}
+          onFailure={() => {
+            console.log("Google Auth Failed");
+          }}
           cookiePolicy={"single_host_origin"}
           redirectUri={HomeAddress}
         />
