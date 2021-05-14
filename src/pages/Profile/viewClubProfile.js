@@ -34,7 +34,10 @@ import website_arrow from "../../images/website_arrow.png";
 import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
 import { getExpandedClub } from "../../redux/actions/dataActions";
-import { editStudentDetails } from "../../redux/actions/userActions";
+import {
+  editStudentDetails,
+  getStudentData,
+} from "../../redux/actions/userActions";
 
 const testEvent = [
   {
@@ -52,8 +55,12 @@ const testEvent = [
 ];
 
 const ViewClubProfile = (props) => {
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getStudentData());
+  }, []);
+  const user = useSelector((state) => state.user);
+
   const [editProfile, seteditProfile] = useState(false);
   const [About, SetAbout] = useState("Club Not Found");
 
@@ -84,6 +91,9 @@ const ViewClubProfile = (props) => {
   const [followString, setFollowString] = useState("Follow");
   const handleFollow = async () => {
     let myclubs = user.clubs;
+    if (!user.clubs) {
+      return;
+    }
     if (user.clubs.includes(clubId)) {
       const index = myclubs.indexOf(clubId);
       myclubs.splice(index, 1);
@@ -103,6 +113,9 @@ const ViewClubProfile = (props) => {
     dispatch(editStudentDetails(updatedProfile));
   };
   useEffect(() => {
+    if (!user.clubs) {
+      return;
+    }
     if (user.clubs.includes(clubId)) {
       setFollowString("Unfollow");
     } else {

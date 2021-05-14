@@ -169,7 +169,7 @@ export const goingToEvent = (eventId) => async (dispatch) => {
     const res = await axios.post(`/events/:${eventId}/attend`, {
       userType: "student",
     });
-    dispatch({ type: GOING_EVENT, payload: eventId });
+    dispatch({ type: GOING_EVENT, payload: res });
   } catch (err) {
     console.error(err);
   }

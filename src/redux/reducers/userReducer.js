@@ -36,6 +36,8 @@ export default function userReducer(state = intialState, action) {
       return {
         authenticated: true,
         ...action.payload,
+        goingEvents: [],
+        ownEvents: [],
       };
     // TODO: uncomment this after the like endpoint is updated
     // case LIKE_POST:
@@ -64,7 +66,7 @@ export default function userReducer(state = intialState, action) {
     case GOING_EVENT:
       return {
         ...state,
-        goingEvents: [...state.goingEvents, action.payload],
+        goingEvents: action.payload.events,
       };
     case OWN_EVENTS:
       return {
