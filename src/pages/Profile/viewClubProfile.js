@@ -65,7 +65,7 @@ const ViewClubProfile = (props) => {
   const [About, SetAbout] = useState("Club Not Found");
 
   //testing purposes
-  const test = true;
+  const test = false;
   const testClub = {
     name: "Test Club",
     industries: ["testing", "fakeness"],
@@ -79,12 +79,9 @@ const ViewClubProfile = (props) => {
 
   //getting club information
   const { clubId } = useParams();
-  const [club, setClub] = useState({});
+  const club = useSelector((state) => state.data.club);
   useEffect(() => {
-    setClub(getExpandedClub(clubId));
-    if (test) {
-      setClub(testClub);
-    }
+    dispatch(getExpandedClub(clubId));
   }, []);
 
   //follow handling
