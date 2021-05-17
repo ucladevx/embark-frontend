@@ -24,7 +24,7 @@ export const LinkedinAdornment = () => {
             position: "absolute",
             marginLeft: "4px",
             marginTop: "8px",
-            zIndex: 10,
+            zIndex: 1,
           }}
           alt="linkedin"
         ></img>
