@@ -176,11 +176,6 @@ const EditClubProfile = ({ open, handleClose }) => {
       <TitleContainer>
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
-          <img
-            src={close_window_x}
-            style={{ float: "right" }}
-            onClick={handleClose}
-          ></img>
         </EditProfileTitle>
         <IconButton
           className={classes.button}
@@ -253,12 +248,6 @@ const EditClubProfile = ({ open, handleClose }) => {
                 padding: "8px 16px",
               },
             }}
-            style={{
-              padding: "10px 2px",
-              marginTop: "0px",
-              borderRadius: "10px",
-              backgroundColor: "#EDEDED",
-            }}
             onChange={handleDescription}
           />
         </TextFieldWrapper>
@@ -321,12 +310,6 @@ const EditClubProfile = ({ open, handleClose }) => {
                 padding: "8px 16px",
               },
             }}
-            style={{
-              padding: "0px",
-              marginTop: "0px",
-              borderRadius: "10px",
-              backgroundColor: "#EDEDED",
-            }}
             onChange={handleWebsite}
           />
         </TextFieldWrapper>
@@ -352,12 +335,6 @@ const EditClubProfile = ({ open, handleClose }) => {
                 fontWeight: 600,
                 padding: "8px 16px",
               },
-            }}
-            style={{
-              padding: "10px 2px",
-              marginTop: "0px",
-              borderRadius: "10px",
-              backgroundColor: "#EDEDED",
             }}
             onChange={handleAbout}
           />

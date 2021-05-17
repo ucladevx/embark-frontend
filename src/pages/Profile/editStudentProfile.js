@@ -1,20 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
-import {
-  MenuItem,
-  InputAdornment,
-  Typography,
-  Button,
-} from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import { IndustryFilters } from "../../shared/dropdown";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  editStudentDetails,
-  uploadImage,
-} from "../../redux/actions/userActions";
-import styled from "styled-components";
-import { ExploreObj, ExploreFilter, LinkedInIconC } from "./StyleProfile";
+import { editStudentDetails } from "../../redux/actions/userActions";
+import { ExploreObj, ExploreFilter } from "./StyleProfile";
 import {
   EditProfileContainer,
   EditProfileAvatar,
@@ -26,25 +17,17 @@ import {
   EditProfileDone,
   DialogTextField,
   TextFieldWrapper,
-  linkedinAdornment,
   DoneBtn,
 } from "./StyleEditProfile";
 
 import SingleDropDown from "../../shared/Dropdown/SingleDropdown";
-
-import Linkedin from "../../images/linkedin.png";
-import checked from "../../images/checked_24px.png";
-import unchecked from "../../images/unchecked_24px.png";
-import DropdownArrow from "../../images/DropdownArrow.png";
 import close_window_x from "../../images/close_window_x.png";
 import { ActionButton } from "../../shared/Buttons";
-import linkedinStart from "../../images/linkedinStart.png";
+import { LinkedinAdornment } from "../../shared/LinkedinAdornment";
 import { makeStyles } from "@material-ui/core/styles";
-// import ImageUploader from 'react-images-upload';
 
 import axios from "axios";
 import MultiDropDown from "../../shared/Dropdown/MultiDropDown";
-import zIndex from "@material-ui/core/styles/zIndex";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -214,13 +197,14 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       <TitleContainer id="scroll-dialog-title">
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
-          <img
-            src={close_window_x}
-            style={{ float: "right" }}
-            onClick={handleClose}
-            alt="close"
-          ></img>
         </EditProfileTitle>
+        <IconButton
+          className={classes.button}
+          style={{ padding: "0" }}
+          onClick={handleClose}
+        >
+          <img src={close_window_x}></img>
+        </IconButton>
       </TitleContainer>
       <EditProfileContent id="scroll-dialog-description">
         <EditProfileAvatar
@@ -269,7 +253,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           <SingleDropDown
             ttwd="128px"
             onOpenClose={() => toggleOpenYear()}
-            title={year}
+            title={year ? year : "Year"}
             bwd="97px"
             bhg="149px"
             cwd="97px"
@@ -287,7 +271,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             autoFocus
             margin="dense"
             id="name"
-            placeholder={user.major}
+            placeholder={user.major ? user.major : "Major"}
             type="email"
             fullWidth
             InputProps={{
@@ -297,12 +281,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
                 fontWeight: 600,
                 padding: "8px 16px",
               },
-            }}
-            style={{
-              padding: "0px",
-              marginTop: "0px",
-              borderRadius: "10px",
-              backgroundColor: "#EDEDED",
             }}
             onChange={handleMajor}
           />
@@ -360,44 +338,13 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             type="email"
             fullWidth
             InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <div
-                    style={{
-                      borderTopLeftRadius: "10px",
-                      borderBottomLeftRadius: "10px",
-                      width: "60px",
-                      height: "46px",
-                      marginLeft: "-20px",
-                      borderColor: "black",
-                      zIndex: "10",
-                    }}
-                  >
-                    sfg
-                    <img
-                      src={linkedinStart}
-                      style={{
-                        position: "absolute",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                      }}
-                      alt="linkedin"
-                    ></img>
-                  </div>
-                </InputAdornment>
-              ),
+              startAdornment: <LinkedinAdornment />,
               disableUnderline: true,
               style: {
                 fontSize: 16,
                 fontWeight: 600,
                 padding: "8px 16px",
               },
-            }}
-            style={{
-              padding: "0px",
-              marginTop: "0px",
-              borderRadius: "10px",
-              backgroundColor: "#EDEDED",
             }}
             onChange={handlelinkedIn}
           />

@@ -156,38 +156,37 @@ export const getPost = (post_id) => async (dispatch) => {
 };
 
 // Submit a comment
-export const submitComment = (post_id, commentData) => async (
-  dispatch,
-  getState,
-) => {
-  try {
-    const { email } = getState().user;
-    // TODO: Add error display for comment
-    if (commentData.trim().length === 0) throw Error("comment cannot be empty");
-    const res = await axios.post(`/posts/comments`, {
-      post_id,
-      authorEmail: email,
-      comment: commentData,
-    });
-    const newPosts = getState().data.posts.map((p, i) => {
-      if (p._id === post_id) {
-        p.comments = res.data.comments;
-      }
-      return p;
-    });
+export const submitComment =
+  (post_id, commentData) => async (dispatch, getState) => {
+    try {
+      const { email } = getState().user;
+      // TODO: Add error display for comment
+      if (commentData.trim().length === 0)
+        throw Error("comment cannot be empty");
+      const res = await axios.post(`/posts/comments`, {
+        post_id,
+        authorEmail: email,
+        comment: commentData,
+      });
+      const newPosts = getState().data.posts.map((p, i) => {
+        if (p._id === post_id) {
+          p.comments = res.data.comments;
+        }
+        return p;
+      });
 
-    dispatch({
-      type: SET_POSTS,
-      payload: newPosts,
-    });
-    dispatch({
-      type: CLOSE_COMMENT,
-    });
-  } catch (err) {
-    console.error(err);
-    maintenanceErrorCheck(err);
-  }
-};
+      dispatch({
+        type: SET_POSTS,
+        payload: newPosts,
+      });
+      dispatch({
+        type: CLOSE_COMMENT,
+      });
+    } catch (err) {
+      console.error(err);
+      maintenanceErrorCheck(err);
+    }
+  };
 
 // Get User Specific page
 export const getUserPage = (userHandle) => async (dispatch) => {

@@ -95,9 +95,12 @@ export const Suggested = styled(Typography)`
 
 export const DialogTextField = styled(TextField)`
   background: ${colors.gray1};
-  padding: 5px 5px;
   border-radius: 5px;
-  padding: 1em 1em;
+  height: 40px;
+  padding: 0px;
+  margintop: 0px;
+  border-radius: 10px;
+  background-color: "#EDEDED";
 `;
 
 export const TextFieldWrapper = styled.div`
@@ -118,11 +121,15 @@ export const DoneBtn = styled(ActionButton)`
   background-color: ${(props) => props.bgcolor};
 `;
 
-export const linkedinAdornment = styled.div`
+export const LinkedinAdornment = styled.div`
   display: flex;
+  justify-content: center;
   border-top-left-radius: 10px;
-  border-down-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   width: 46px;
-  height: 400px;
-  background-color: #abbaea;
+  height: 40px;
+  margin-left: -20px;
+  margin-bottom: 5px;
+  zindex: 10;
+  background-color: #3177b2;
 `;
