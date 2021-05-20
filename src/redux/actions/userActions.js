@@ -73,22 +73,21 @@ export const getStudentData = () => async (dispatch) => {
 // };
 
 // Sign Up a user
-export const signupStudent = (newUserData, handleUser, handleStep) => async (
-  dispatch,
-) => {
-  try {
-    const res = await axios.post("/auth/signup", newUserData);
-    console.log(res.data);
-    setAuthorizationHeader(res.data.token);
-    dispatch(getStudentData());
-    handleUser(newUserData);
-    handleStep(1);
-  } catch (err) {
-    console.log(err);
-    dispatch({ type: SET_ERRORS, payload: err.response.data });
-    maintenanceErrorCheck(err);
-  }
-};
+export const signupStudent =
+  (newUserData, handleUser, handleStep) => async (dispatch) => {
+    try {
+      const res = await axios.post("/auth/signup", newUserData);
+      console.log(res.data);
+      setAuthorizationHeader(res.data.token);
+      dispatch(getStudentData());
+      handleUser(newUserData);
+      handleStep(1);
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: SET_ERRORS, payload: err.response.data });
+      maintenanceErrorCheck(err);
+    }
+  };
 
 // Log out a user
 export const logoutUser = () => (dispatch) => {

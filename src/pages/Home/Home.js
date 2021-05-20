@@ -39,6 +39,7 @@ import {
   getEvents,
   addFilter,
   removeFilter,
+  setPage,
 } from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
 import NewEvent from "../../components/NewEvent";
@@ -60,11 +61,11 @@ const Home = () => {
   // Redux
   const filters = useSelector((state) => state.data.filter);
   const user = useSelector((state) => state.user);
+  const page = useSelector((state) => state.data.page);
   const dispatch = useDispatch();
   const history = useHistory();
 
   // States
-  const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
   const [newEvent, setNewEvent] = useState(false);
   const [numEvents, setNumEvents] = useState(3);
@@ -80,7 +81,7 @@ const Home = () => {
   }, [dispatch, numEvents]);
 
   useEffect(() => {
-    styleCalendar();
+    //styleCalendar();
   }, []);
 
   const removeUpdateFilters = (t) => {
@@ -98,15 +99,16 @@ const Home = () => {
   };
 
   const openEvents = () => {
-    setPage("events");
+    dispatch(setPage("events"));
     setNumEvents(50);
   };
 
   const closeEvents = () => {
-    setPage("main");
+    dispatch(setPage("main"));
     setNumEvents(3);
   };
 
+  console.log(page);
   return (
     <>
       <NewPost open={newPost} handleClose={() => setNewPost(false)} />
@@ -130,7 +132,7 @@ const Home = () => {
                 <InfoEntryText>Saved Resources</InfoEntryText>
               </InfoEntryWrapper>
               <InfoSeperator></InfoSeperator>
-              <InfoEntryWrapper onClick={() => setPage("explore")}>
+              <InfoEntryWrapper onClick={() => dispatch(setPage("explore"))}>
                 <InfoImage src={compassImg} alt="compass"></InfoImage>
                 <InfoEntryText>Explore Clubs</InfoEntryText>
               </InfoEntryWrapper>

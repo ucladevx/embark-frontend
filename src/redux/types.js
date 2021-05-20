@@ -16,6 +16,8 @@ export const SET_POSTS = "SET_POSTS";
 export const SET_POST = "SET_POST";
 export const SAVE_POST = "SAVE_POST";
 
+export const SET_PAGE = "SET_PAGE";
+
 export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
 export const DELETE_POST = "DELETE_POST";
