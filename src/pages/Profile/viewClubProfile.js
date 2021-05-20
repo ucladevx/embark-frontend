@@ -120,7 +120,6 @@ const ViewClubProfile = (props) => {
     }
   }, [user]);
 
-
   const AboutContent = () => {
     if (club.description.length > 0) {
       return (
