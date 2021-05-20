@@ -48,7 +48,9 @@ export const getStudentData = () => async (dispatch) => {
       type: SET_USER,
       payload,
     });
-    const eventres = await axios.get("/events/going", { userType: "student" });
+    const eventres = await axios.get("/events/going", {
+      params: { userType: "student" },
+    });
     dispatch({
       type: GOING_EVENT,
       payload: eventres,

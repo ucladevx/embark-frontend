@@ -39,7 +39,7 @@ const testEvent = [
 ];
 
 const MyEvents = () => {
-  const events = useSelector((state) => state.user.goingEvents);
+  const events = useSelector((state) => state.user.events);
 
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});

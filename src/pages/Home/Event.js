@@ -39,14 +39,16 @@ const Event = (props) => {
     return dayjs(date).format("MMM DD HH:mm a");
   };
   const dispatch = useDispatch();
-  const attending = useSelector((state) => state.user.goingEvents);
+  const attending = useSelector((state) => state.user.events);
   const hasID = (id) => {
-    for (var i = 0; i < attending.length; i++) {
-      if (attending[i]._id === id) {
-        return true;
+    if (attending) {
+      for (let i = 0; i < attending.length; i++) {
+        if (attending[i] && attending[i]._id === id) {
+          return true;
+        }
       }
+      return false;
     }
-    return false;
   };
   const goingClick = (id) => {
     if (hasID(id)) {

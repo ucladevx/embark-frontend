@@ -64,7 +64,6 @@ export const DropDownContent = styled.div`
   max-height: 202px;
   overflow-y: ${(props) => props.overflow};
   border-radius: 3px;
-
   ::-webkit-scrollbar {
     width: 7px;
     height: 76px;

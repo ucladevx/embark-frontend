@@ -32,16 +32,24 @@ import { handleTagColor } from "../../utils/handleTagColors.js";
 import website_arrow from "../../images/website_arrow.png";
 import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 const ViewClubProfile = (props) => {
-  const user = useSelector((state) => state.user);
-  const [editProfile, seteditProfile] = useState(false);
-  const [About, SetAbout] = useState(
-    "Have you ever felt that all you were learning at UCLA was theory, with little opportunities to build out practical applications? DevX is a brand new program dedicated to solving that very problem! Build out real-world projects to help tackle pressing problems frustrating the UCLA community, grow your technical skills by pairing up with experienced students, and build a network that lasts beyond graduation.",
-  );
+  const [club, setClub] = useState({});
+
+  useEffect(async () => {
+    let params = new URL(document.location).searchParams;
+    let clubId = params.get("clubId");
+    console.log(clubId);
+    const data = await axios.get(
+      "http://localhost:9000/club/profileById?clubId=" + clubId,
+    );
+    console.log(data.data.club);
+    setClub(data.data.club);
+  }, []);
 
   const AboutContent = () => {
-    if (About.length > 0) {
+    if (club.description.length > 0) {
       return (
         <ProfileWrapper>
           <ProfileInfo>
@@ -50,7 +58,7 @@ const ViewClubProfile = (props) => {
             </AboutTitle>
             <AboutWrapper>
               <Typography sz={"14px"} style={{ fontWeight: "400" }}>
-                {About}
+                {club.description}
               </Typography>
             </AboutWrapper>
           </ProfileInfo>
@@ -67,24 +75,24 @@ const ViewClubProfile = (props) => {
       <NavBar></NavBar>
       <MiddleContainer>
         <ProfileWrapper>
-          <HeaderImage src={user.coverPicURL}></HeaderImage>
+          <HeaderImage src={club.coverPicURL}></HeaderImage>
           <ProfileInfo>
             <NameDescriptionWrapper>
-              <ProfileAvatar src={user.profilePicURL}></ProfileAvatar>
+              <ProfileAvatar src={club.profilePicURL}></ProfileAvatar>
               <NameDescription>
                 <TitleTypography
                   style={{ fontSize: "24px", paddingBottom: "0" }}
                 >
-                  {user.name}
+                  {club.name}
                 </TitleTypography>
-                <Typography style={{ fontSize: "18px" }}>
-                  {user.description ? user.description : "Tech Club"}
-                </Typography>
+                {/* <Typography style={{ fontSize: "18px" }}>
+                  {club.description ? club.description : "Tech Club"}
+                </Typography> */}
               </NameDescription>
 
               <ButtonBox>
                 <FollowButton bgcolor={"#FFFFFF"}>Follow</FollowButton>
-                <ClubWebsiteButton href={user.website}>
+                <ClubWebsiteButton href={club.website}>
                   <img src={website_arrow} style={{ marginRight: "4px" }}></img>
                   Club Website
                 </ClubWebsiteButton>
@@ -96,8 +104,8 @@ const ViewClubProfile = (props) => {
             <IndustryWrapper>
               <BoldTypography sz={"14px"}>Relevant Industries:</BoldTypography>
               <ExploreFilter>
-                {user.tags &&
-                  user.tags.map((name) => {
+                {club.tags &&
+                  club.tags.map((name) => {
                     return (
                       <ExploreObj key={name} bgcolor={handleTagColor(name)}>
                         {name}
@@ -109,7 +117,7 @@ const ViewClubProfile = (props) => {
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>
-        <AboutContent />
+        {/* <AboutContent /> */}
         <ProfileWrapper>
           <ProfileInfo>
             <NameDescriptionWrapper>
