@@ -6,6 +6,20 @@ export const mediaQueries = {
   mobile: "@media screen and (max-width: 700px)",
 };
 
+export const DropdownConfigs = {
+  large: {
+    ttwd: "128px",
+    bwd: "97px",
+    bhg: "149px",
+    cwd: "97px",
+    chg: "149px",
+  },
+  small: {
+    ttwd: "128px",
+    bgh: "35px",
+  },
+};
+
 export const colors = {
   white: "#FFFFFF",
   lightpurple: "#E6EFFF",

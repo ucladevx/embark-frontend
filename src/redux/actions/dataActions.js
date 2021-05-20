@@ -250,30 +250,46 @@ export const getEvents = (amount) => async (dispatch) => {
 
 // Get club resources
 export const getResources = () => async (dispatch) => {
-  // Get request not implemented yet
-};
-
-// Club upload one resource
-export const uploadResource = (newResource) => async (dispatch) => {
   try {
-    const formData = new FormData();
-    formData.append("file", newResource);
-    const res = await axios.post("/club/resources?linkFile=file", formData);
+    const res = await axios.get("/club/resources");
     console.log(res);
-    dispatch({ type: UPLOAD_CLUB_RESOURCES, payload: res.data });
-  } catch (err) {
-    console.log(err);
+    dispatch({ type: SET_CLUB_RESOURCES, payload: res.data.resources });
+    dispatch({ type: SET_CLUB_LINKS, payload: res.data.embededlinks });
+  } catch (error) {
+    console.log(error);
   }
 };
 
-export const uploadLink = (newLink) => async (dispatch) => {
+// Club upload one resource
+export const uploadResource =
+  (newResource, resourceName) => async (dispatch) => {
+    try {
+      console.log(resourceName);
+      const formData = new FormData();
+      formData.append("file", newResource);
+      const res = await axios.post(
+        `/club/resources?linkFile=file&userNamed=${resourceName}`,
+        formData,
+      );
+      console.log(res);
+      dispatch({ type: UPLOAD_CLUB_RESOURCES, payload: res.data.fileUrls[0] });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+export const uploadLink = (newLink, linkName) => async (dispatch) => {
   try {
+    console.log(linkName);
     console.log(newLink);
-    const res = await axios.post("/club/resources?linkFile=link", {
-      link: newLink,
-    });
+    const res = await axios.post(
+      `/club/resources?linkFile=link&userNamed=${linkName}`,
+      {
+        link: newLink,
+      },
+    );
     console.log(res);
-    dispatch({ type: UPLOAD_CLUB_LINKS, payload: res.data });
+    dispatch({ type: UPLOAD_CLUB_LINKS, payload: res.data.fileUrls });
   } catch (err) {
     console.log(err);
   }

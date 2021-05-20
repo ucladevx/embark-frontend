@@ -1,105 +1,28 @@
 import React, { useState, useEffect, useMemo } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Select,
-  makeStyles,
-  MenuItem,
-} from "@material-ui/core";
+import { Dialog, DialogContent, DialogActions } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import { BoldTypography } from "../shared/Typography";
-import { colors } from "../shared/config";
 import { useDispatch, useSelector } from "react-redux";
-import { newEvent } from "../redux/actions/dataActions";
-import styled from "styled-components";
 import "../components/Calendar/EventCalendar.css";
 import Datetime from "react-datetime";
 import moment from "moment";
-import { ActionButton } from "../shared/Buttons";
 import { StyleEventCalendar } from "../components/Calendar/EventCalender";
-import LinkEffect from "../shared/Effect/LinkEffect";
+import {
+  DialogTextField,
+  TextFieldWrapper,
+  TimeWrapper,
+  PostBtn,
+  NameDiv,
+  SelectDate,
+  DropdownOption,
+} from "./NewEventPieces/StyleNewEvent";
+import { newEvent } from "../redux/actions/dataActions";
+import { eventCheck } from "./NewEventPieces/LengthCheck";
+import { SingleSelect } from "./NewEventPieces/SingleSelect";
 
-const DialogTextField = styled(TextField)`
-  background: ${colors.gray1};
-  padding: 5px 5px;
-  border-radius: 5px;
-`;
-
-const TextFieldWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-width: 500px;
-  margin-top: 20px;
-  min-height: 430px;
-`;
-
-const TimeWrapper = styled.div`
-  display: flex;
-  gap: 5px;
-  color: ${colors.gray7};
-`;
-
-const PostBtn = styled(ActionButton)`
-  width: 15em;
-  height: 3em;
-  margin: 10px auto;
-`;
-
-const NameDiv = styled.div`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 125%;
-`;
-
-const SelectDate = styled.div`
-  ${LinkEffect}
-`;
-
-const useStyles = makeStyles((theme) => ({
-  menuPaper: {
-    maxHeight: 300,
-    background: "#EBEEF1",
-    boxShadow: "3px 4px 4px rgba(0, 0, 0, 0.25)",
-    borderRadius: "10px",
-  },
-  select: {
-    color: "#838383",
-    height: "1.6em",
-    fontSize: "16px",
-    fontWeight: "600",
-    marginLeft: "5px",
-  },
-}));
-
-export const SingleSelect = ({ children, value, onChange }) => {
-  const classes = useStyles();
-  return (
-    <Select
-      disableUnderline={true}
-      value={value}
-      MenuProps={{ classes: { paper: classes.menuPaper } }}
-      className={classes.select}
-      onChange={onChange}
-    >
-      {children}
-    </Select>
-  );
-};
-
-export const DropdownOption = styled(MenuItem)`
-  background: #ebeef1;
-  box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
-  font-family: Open Sans;
-  font-style: normal;
-  font-size: 16px;
-  color: #838383;
-`;
-
-const NewEvent = ({ open, handleClose }) => {
+const NewEvent = ({ open, handleClose, editId }) => {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   // ref: https://stackoverflow.com/questions/36125038/generate-array-of-times-as-strings-for-every-x-minutes-in-javascript
   const timeIntervals = useMemo(() => {
@@ -125,6 +48,7 @@ const NewEvent = ({ open, handleClose }) => {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
+
   const [time, setTime] = useState(new moment()); // start time in backend
   const [time2, setTime2] = useState(new moment()); // end time in backend
 
@@ -136,8 +60,6 @@ const NewEvent = ({ open, handleClose }) => {
       setEndTime(startTime + 6);
     }
   }, [startTime, endTime]);
-  // Redux
-  const dispatch = useDispatch();
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
@@ -158,7 +80,6 @@ const NewEvent = ({ open, handleClose }) => {
     const updateTimeString = `${timeString} ${startTime}`;
     handleEventTime(updateTimeString);
   };
-
   const handleStartTime = (startTime) => {
     const updateTimeString = `${time.format("YYYY-MM-DD")} ${startTime}`;
     handleEventTime(updateTimeString);
@@ -173,32 +94,27 @@ const NewEvent = ({ open, handleClose }) => {
     setEndTime(idx);
   };
 
-  const handleSubmit = async () => {
-    if (title && title.length > 100) {
-      alert("Title is too long! Please limit to <100 characters");
-      return;
-    }
-    if (description && description.length > 5000) {
-      alert("Description is too long! Please limit to <5000 characters");
-      return;
-    }
-    if (location && location.length > 100) {
-      alert("Location is too long! Please limit to <100 characters");
-      return;
-    }
-    const event = {
-      userType: "club",
-      name: title,
-      tags: [],
-      organizerName: user.name,
-      organizerEmail: user.email,
-      startDate: time._d,
-      endDate: time._d,
-      venue: location,
-      desc: description,
+  const handleSubmit = () => {
+    const props = {
+      title: title,
+      description: description,
+      location: location,
     };
-    dispatch(newEvent(event));
-    handleClose();
+    if (eventCheck(props)) {
+      const event = {
+        userType: "club",
+        name: title,
+        tags: [],
+        organizerName: user.name,
+        organizerEmail: user.email,
+        startDate: time._d,
+        endDate: time2._d,
+        venue: location,
+        desc: description,
+      };
+      dispatch(newEvent(event));
+      handleClose();
+    }
   };
 
   const renderInput = (props, openCalendar, closeCalendar) => {
@@ -249,7 +165,9 @@ const NewEvent = ({ open, handleClose }) => {
     <Dialog open={open} onClose={handleClose}>
       <DialogContent>
         <TextFieldWrapper>
-          <BoldTypography sz={"24px"}>Create an Event</BoldTypography>
+          <BoldTypography sz={"24px"}>
+            {editId ? <>Edit Event</> : <>Create an Event</>}
+          </BoldTypography>
           <NameDiv>Add Title:</NameDiv>
           <DialogTextField
             autoFocus
@@ -308,8 +226,8 @@ const NewEvent = ({ open, handleClose }) => {
         </TextFieldWrapper>
       </DialogContent>
       <DialogActions>
-        <PostBtn onClick={handleSubmit} color="primary">
-          Create
+        <PostBtn color="primary" onClick={handleSubmit}>
+          {editId ? <>Edit</> : <>Create</>}
         </PostBtn>
       </DialogActions>
     </Dialog>

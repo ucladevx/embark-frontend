@@ -1,29 +1,17 @@
-import React, { useState, useRef } from "react";
-import FileViewer from "@studyworld/react-file-viewer";
+import React, { useState, useRef, useEffect } from "react";
 import { Button, Dialog, DialogContent, DialogTitle } from "@material-ui/core";
-
-import ResourceUpload from "./ResourceUpload";
-
-const FileView = ({ open, handleClose, file }) => {
-  return (
-    <Dialog open={open} onClose={handleClose}>
-      <FileViewer
-        style={{ margin: "auto", width: 600, height: "100%" }}
-        fileType={file.type}
-        filePath={file.url}
-      />
-    </Dialog>
-  );
-};
+import { useSelector, useDispatch } from "react-redux";
+import DisplayResources from "./DisplayResources";
+import { getResources } from "../../../redux/actions/dataActions";
 
 const ClubUploadResource = ({ setNewResource }) => {
   const [fileViewOpen, setFileViewOpen] = useState(false);
   const [displayFile, setDisplayFile] = useState({});
+  const resources = useSelector((state) => state.data.resources);
+  const links = useSelector((state) => state.data.links);
 
-  const handleViewSelect = (file) => {
-    setDisplayFile(file);
-    setFileViewOpen(true);
-  };
+  const dispatch = useDispatch();
+
 
   const sampleFiles = [
     {
@@ -46,37 +34,43 @@ const ClubUploadResource = ({ setNewResource }) => {
     },
   ];
 
+  useEffect(() => {
+    dispatch(getResources());
+  }, []);
+
+
   return (
-    <div>
-      <FileView
-        open={fileViewOpen}
-        handleClose={() => setFileViewOpen(false)}
-        file={displayFile}
-      />
+    <div style={{ margin: "auto" }}>
+      {resources.length === 0 && links.length === 0 ? (
+        <p style={{ marginTop: 50, textAlign: "center" }}>
+          You currently have no resources.
+        </p>
+      ) : (
+        <div style={{ maxHeight: "75vh", overflow: "auto" }}>
+          <DisplayResources
+            resources={resources}
+            links={links}
+          ></DisplayResources>
+        </div>
+      )}
       <div
         style={{
-          marginTop: 20,
-          marginBottom: 50,
-          display: "flex",
-          justifyContent: "space-between",
+          width: 148,
+          height: 47,
+          padding: 0,
+          margin: "auto",
+          marginTop: 50,
         }}
       >
-        {sampleFiles.map((file) => {
-          return (
-            <a key={file.id} onClick={() => handleViewSelect(file)}>
-              {file.name}
-            </a>
-          );
-        })}
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={() => setNewResource(true)}
+        >
+          Upload Resource
+        </Button>
       </div>
-      <Button
-        variant="contained"
-        color="primary"
-        size="large"
-        onClick={() => setNewResource(true)}
-      >
-        Upload Resource
-      </Button>
     </div>
   );
 };
