@@ -1,16 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { MenuItem, InputAdornment, Typography } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import { IndustryFilters } from "../../shared/dropdown";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getStudentData,
-  editStudentDetails,
-  uploadImage,
-} from "../../redux/actions/userActions";
-import styled from "styled-components";
-import { ExploreObj, ExploreFilter, LinkedInIconC } from "./StyleProfile";
+import { editStudentDetails } from "../../redux/actions/userActions";
+import { ExploreObj, ExploreFilter } from "./StyleProfile";
 import {
   EditProfileContainer,
   EditProfileAvatar,
@@ -24,24 +19,12 @@ import {
   TextFieldWrapper,
   DoneBtn,
 } from "./StyleEditProfile";
-import {
-  DropDownBox,
-  DropDownTitle,
-  DropDownContent,
-  DropDownCheckBox,
-  Finished,
-} from "../../shared/dropdown";
-import SingleDropDown from "../../shared/Dropdown/SingleDropdown";
 
-import Linkedin from "../../images/linkedin.png";
-import checked from "../../images/checked_24px.png";
-import unchecked from "../../images/unchecked_24px.png";
-import DropdownArrow from "../../images/DropdownArrow.png";
+import SingleDropDown from "../../shared/Dropdown/SingleDropdown";
 import close_window_x from "../../images/close_window_x.png";
 import { ActionButton } from "../../shared/Buttons";
-import linkedinStart from "../../images/linkedinStart.png";
+import { LinkedinAdornment } from "../../shared/LinkedinAdornment";
 import { makeStyles } from "@material-ui/core/styles";
-// import ImageUploader from 'react-images-upload';
 
 import axios from "axios";
 import MultiDropDown from "../../shared/Dropdown/MultiDropDown";
@@ -85,6 +68,18 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   };
   const toggleOpenInd = () => {
     setOpenInd(!openInd);
+  };
+
+  //check if there is any changes
+  const saveStudent = () => {
+    return (
+      (user.major === major || major === "") &&
+      parseInt(user.year) === year &&
+      JSON.stringify(user.tags.sort()) === JSON.stringify(industries.sort()) &&
+      (user.linkedIn === linkedin || linkedin === "") &&
+      user.coverPicURL === coverURL &&
+      user.profilePicURL === profileURL
+    );
   };
 
   useEffect(() => {
@@ -202,13 +197,14 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       <TitleContainer id="scroll-dialog-title">
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
-          <img
-            src={close_window_x}
-            style={{ float: "right" }}
-            onClick={handleClose}
-            alt="close"
-          ></img>
         </EditProfileTitle>
+        <IconButton
+          className={classes.button}
+          style={{ padding: "0" }}
+          onClick={handleClose}
+        >
+          <img src={close_window_x}></img>
+        </IconButton>
       </TitleContainer>
       <EditProfileContent id="scroll-dialog-description">
         <EditProfileAvatar
@@ -257,7 +253,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           <SingleDropDown
             ttwd="128px"
             onOpenClose={() => toggleOpenYear()}
-            title={year}
+            title={year ? year : "Year"}
             bwd="97px"
             bhg="149px"
             cwd="97px"
@@ -275,7 +271,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             autoFocus
             margin="dense"
             id="name"
-            placeholder={user.major}
+            placeholder={user.major ? user.major : "Major"}
             type="email"
             fullWidth
             InputProps={{
@@ -285,12 +281,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
                 fontWeight: 600,
                 padding: "8px 16px",
               },
-            }}
-            style={{
-              padding: "0px",
-              marginTop: "0px",
-              borderRadius: "10px",
-              backgroundColor: "#EDEDED",
             }}
             onChange={handleMajor}
           />
@@ -340,7 +330,6 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           <BoldTypography sz={"18px"}>
             LinkedIn Profile (Optional):
           </BoldTypography>
-          {/* <img src={linkedinStart} style={{width: "46px", height: "40px"}}></img> */}
           <DialogTextField
             autoFocus
             margin="dense"
@@ -349,11 +338,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
             type="email"
             fullWidth
             InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <img src={Linkedin} alt="linkedin"></img>
-                </InputAdornment>
-              ),
+              startAdornment: <LinkedinAdornment />,
               disableUnderline: true,
               style: {
                 fontSize: 16,
@@ -361,19 +346,18 @@ const EditProfile = ({ open, handleClose, allTags }) => {
                 padding: "8px 16px",
               },
             }}
-            style={{
-              padding: "0px",
-              marginTop: "0px",
-              borderRadius: "10px",
-              backgroundColor: "#EDEDED",
-            }}
             onChange={handlelinkedIn}
           />
         </TextFieldWrapper>
 
         {/* Done button */}
         <EditProfileDone>
-          <DoneBtn onClick={handleSubmit}>Save</DoneBtn>
+          <DoneBtn
+            onClick={handleSubmit}
+            bgcolor={saveStudent() ? colors.gray : "#5473bb"}
+          >
+            Save
+          </DoneBtn>
         </EditProfileDone>
       </EditProfileContent>
     </EditProfileContainer>

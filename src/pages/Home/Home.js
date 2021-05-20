@@ -96,6 +96,7 @@ const Home = () => {
 
   useEffect(() => {
     styleCalendar();
+
   }, []);
 
   useEffect(() => {

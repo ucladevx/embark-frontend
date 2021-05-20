@@ -120,8 +120,9 @@ const ViewClubProfile = (props) => {
     }
   }, [user]);
 
+
   const AboutContent = () => {
-    if (About.length > 0) {
+    if (club.description.length > 0) {
       return (
         <ProfileWrapper>
           <ProfileInfo>
@@ -166,6 +167,7 @@ const ViewClubProfile = (props) => {
                 <FollowButton onClick={handleFollow} bgcolor={"#FFFFFF"}>
                   {followString}
                 </FollowButton>
+
                 <ClubWebsiteButton href={club.website}>
                   <img src={website_arrow} style={{ marginRight: "4px" }}></img>
                   Club Website
@@ -191,7 +193,7 @@ const ViewClubProfile = (props) => {
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>
-        <AboutContent />
+        {/* <AboutContent /> */}
         <ProfileWrapper>
           <ProfileInfo>
             <ProfileTabsWrapper>
