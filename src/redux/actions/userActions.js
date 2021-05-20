@@ -11,6 +11,8 @@ import {
   CANCEL_ATTENDANCE_EVENT,
 } from "../types";
 import axios from "axios";
+import { useHistory } from "react-router";
+
 import { AccessibilityNewSharp } from "@material-ui/icons";
 
 const maintenanceErrorCheck = (err) => {
@@ -44,6 +46,7 @@ export const getStudentData = () => async (dispatch) => {
   try {
     const res = await axios.get("/student/profile");
     const payload = { ...res.data.student, userType: "student" };
+    console.log(payload);
     dispatch({
       type: SET_USER,
       payload,
@@ -129,21 +132,28 @@ export const markNotificationsRead = (notificationIds) => (dispatch) => {
     .catch((err) => console.error(err));
 };
 
-export const studentGoogleSignUp = (profile) => async (dispatch) => {
+export const studentGoogleSignUp = (profile, history) => async (dispatch) => {
   try {
-    const res = await axios.post("/auth/newsignup", profile);
-    console.log(res.data);
-    dispatch({ type: AUTH_SIGNUP, payload: res.data });
+    const res = await axios.post("/auth/newsignup", {
+      ...profile,
+      userType: "student",
+    });
+    setAuthorizationHeader(res.data.token);
+    history.push("/home");
   } catch (err) {
     console.error(err);
     maintenanceErrorCheck(err);
   }
 };
 
-export const studentGoogleSignIn = (profile) => async (dispatch) => {
+export const studentGoogleSignIn = (profile, history) => async (dispatch) => {
   try {
-    const res = await axios.post("/auth/newsignin", profile);
-    dispatch({ type: AUTH_SIGNIN, payload: res.data });
+    const res = await axios.post("/auth/newsignin", {
+      ...profile,
+      userType: "student",
+    });
+    setAuthorizationHeader(res.data.token);
+    history.push("/home");
   } catch (err) {
     console.error(err);
     maintenanceErrorCheck(err);
