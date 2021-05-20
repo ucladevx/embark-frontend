@@ -19,6 +19,7 @@ import {
   UPLOAD_CLUB_LINKS,
   SAVE_POST,
   GET_CLUB,
+  GET_CLUBS,
 } from "../types";
 
 import axios from "axios";
@@ -302,6 +303,32 @@ export const getExpandedClub = (clubId) => async (dispatch) => {
     const res = await axios.get(`/club/profilebyId?clubId=${clubId}`);
     dispatch({ type: GET_CLUB, payload: res });
     return res;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+//get a list of all clubs
+export const getClubs = () => async (dispatch) => {
+  try {
+    console.log("here");
+    const search = {
+      searchString: "club",
+    };
+    const clubs = await axios.get(`/search`, search);
+    console.log("here 2");
+    console.log(clubs);
+    let promises = [];
+    for (let i = 0; i < clubs.queries.length; i++) {
+      if (clubs.queries[i].accountType === "club") {
+        promises.push(
+          axios.get(`/club/profilebyId?clubId=${clubs.queries[i].id}`),
+        );
+      }
+    }
+
+    const res = await Promise.all(promises);
+    dispatch({ type: GET_CLUBS, payload: res });
   } catch (err) {
     console.error(err);
   }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -27,6 +27,8 @@ import {
   UpcomingItemGoingBtn,
   ViewMoreLink,
 } from "./StyleExplore";
+import { useSelector, useDispatch } from "react-redux";
+import { getClubs } from "../../redux/actions/dataActions";
 // Images
 import avatarImg from "../../images/avatar.svg";
 import devxImg from "../../images/devx.jpeg";
@@ -69,6 +71,12 @@ const testClubs = [
 ];
 
 const Explore = () => {
+  const clubs = useSelector((state) => state.data.clubs);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getClubs());
+  }, []);
+
   return (
     <ExploreWrapper>
       <ExploreTitle>Explore Clubs</ExploreTitle>
@@ -98,11 +106,18 @@ const Explore = () => {
           {testClubs.map((c) => {
             return <ClubThumbnail key={c._id + "key"} club={c} />;
           })}
+          {clubs ? (
+            clubs.map((c) => {
+              return <ClubThumbnail key={c._id + "key"} club={c} />;
+            })
+          ) : (
+            <></>
+          )}
         </OwlCarousel>
       </ClubCardsContainer>
 
       <ExploreInfoSeperator></ExploreInfoSeperator>
-
+      {/*
       <ExploreTitle style={{ "margin-top": 20 }}>Discover Events</ExploreTitle>
       <ExploreSubtitle>Events happening soon</ExploreSubtitle>
 
@@ -178,7 +193,7 @@ const Explore = () => {
             </UpcomingItemGoingBtn>
           </UpcomingItemWhenBox>
         </UpcomingItem>
-      </UpcomingItemBox>
+      </UpcomingItemBox>*/}
     </ExploreWrapper>
   );
 };

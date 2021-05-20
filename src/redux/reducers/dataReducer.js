@@ -17,6 +17,7 @@ import {
   UPLOAD_CLUB_RESOURCES,
   UPLOAD_CLUB_LINKS,
   GET_CLUB,
+  GET_CLUBS,
 } from "../types";
 
 const initialState = {
@@ -28,6 +29,7 @@ const initialState = {
   resources: [],
   links: [],
   club: {},
+  clubs: [],
 };
 
 export default function dataReducer(state = initialState, action) {
@@ -143,6 +145,11 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         club: action.payload,
+      };
+    case GET_CLUBS:
+      return {
+        ...state,
+        clubs: action.payload,
       };
     default:
       return state;
