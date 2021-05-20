@@ -203,7 +203,7 @@ const EditProfile = ({ open, handleClose, allTags }) => {
           style={{ padding: "0" }}
           onClick={handleClose}
         >
-          <img src={close_window_x}></img>
+          <img src={close_window_x} alt="close window"></img>
         </IconButton>
       </TitleContainer>
       <EditProfileContent id="scroll-dialog-description">
