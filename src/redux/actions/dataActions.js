@@ -18,6 +18,7 @@ import {
   UPLOAD_CLUB_RESOURCES,
   UPLOAD_CLUB_LINKS,
   SAVE_POST,
+  GET_CLUB,
 } from "../types";
 
 import axios from "axios";
@@ -292,5 +293,16 @@ export const uploadLink = (newLink, linkName) => async (dispatch) => {
     dispatch({ type: UPLOAD_CLUB_LINKS, payload: res.data.fileUrls });
   } catch (err) {
     console.log(err);
+  }
+};
+
+//Grab a club's data as a non-club
+export const getExpandedClub = (clubId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/club/profilebyId?clubId=${clubId}`);
+    dispatch({ type: GET_CLUB, payload: res });
+    return res;
+  } catch (err) {
+    console.error(err);
   }
 };

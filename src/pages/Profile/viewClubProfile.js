@@ -22,31 +22,103 @@ import {
   Footer,
   ExploreFilterTitle,
   DescriptionTypography,
+  ProfileTabsWrapper,
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
 import { ActionButton } from "../../shared/Buttons";
-import ClubProfileTabs from "./ClubProfileTabs";
+import ViewClubProfileTabs from "./viewClubProfileTabs";
 import { handleTagColor } from "../../utils/handleTagColors.js";
 import website_arrow from "../../images/website_arrow.png";
 import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import { getExpandedClub } from "../../redux/actions/dataActions";
+import {
+  editStudentDetails,
+  getStudentData,
+} from "../../redux/actions/userActions";
+
+const testEvent = [
+  {
+    _id: "123450",
+    name: "Embark Release",
+    organizerName: "Embark",
+    startDate: "2021-04-03T08:00:00.000Z",
+    endDate: "2021-04-03T09:00:00.000Z",
+    description:
+      "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
+    venue: "here what do you think",
+    attendees: [123, 147, 1492, 10238],
+    test: true,
+  },
+];
 
 const ViewClubProfile = (props) => {
-  const [club, setClub] = useState({});
-
-  useEffect(async () => {
-    let params = new URL(document.location).searchParams;
-    let clubId = params.get("clubId");
-    console.log(clubId);
-    const data = await axios.get(
-      "http://localhost:9000/club/profileById?clubId=" + clubId,
-    );
-    console.log(data.data.club);
-    setClub(data.data.club);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getStudentData());
   }, []);
+  const user = useSelector((state) => state.user);
+
+  const [editProfile, seteditProfile] = useState(false);
+  const [About, SetAbout] = useState("Club Not Found");
+
+  //testing purposes
+  const test = false;
+  const testClub = {
+    name: "Test Club",
+    industries: ["testing", "fakeness"],
+    description: "we're about testing",
+    about:
+      "Hi, we're all about being a fake test club made by our overlords to fill space",
+    website: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    ownEvents: testEvent,
+    tags: ["Design", "Testing"],
+  };
+
+  //getting club information
+  const { clubId } = useParams();
+  const club = useSelector((state) => state.data.club);
+  useEffect(() => {
+    dispatch(getExpandedClub(clubId));
+  }, []);
+
+  //follow handling
+  const [followString, setFollowString] = useState("Follow");
+  const handleFollow = async () => {
+    let myclubs = user.clubs;
+    if (!user.clubs) {
+      return;
+    }
+    if (user.clubs.includes(clubId)) {
+      const index = myclubs.indexOf(clubId);
+      myclubs.splice(index, 1);
+    } else {
+      myclubs.push(clubId);
+    }
+    console.log(`Follow ${clubId}`);
+    const updatedProfile = {
+      name: user.name,
+      major: user.major,
+      year: user.year,
+      tags: user.tags,
+      bio: user.bio,
+      linkedIn: user.linkedin,
+      clubs: myclubs,
+    };
+    dispatch(editStudentDetails(updatedProfile));
+  };
+  useEffect(() => {
+    if (!user.clubs) {
+      return;
+    }
+    if (user.clubs.includes(clubId)) {
+      setFollowString("Unfollow");
+    } else {
+      setFollowString("Follow");
+    }
+  }, [user]);
 
   const AboutContent = () => {
     if (club.description.length > 0) {
@@ -58,7 +130,7 @@ const ViewClubProfile = (props) => {
             </AboutTitle>
             <AboutWrapper>
               <Typography sz={"14px"} style={{ fontWeight: "400" }}>
-                {club.description}
+                {club.about}
               </Typography>
             </AboutWrapper>
           </ProfileInfo>
@@ -85,13 +157,16 @@ const ViewClubProfile = (props) => {
                 >
                   {club.name}
                 </TitleTypography>
-                {/* <Typography style={{ fontSize: "18px" }}>
-                  {club.description ? club.description : "Tech Club"}
-                </Typography> */}
+                <Typography style={{ fontSize: "18px" }}>
+                  {club.description ? club.description : "Club Not Found"}
+                </Typography>
               </NameDescription>
 
               <ButtonBox>
-                <FollowButton bgcolor={"#FFFFFF"}>Follow</FollowButton>
+                <FollowButton onClick={handleFollow} bgcolor={"#FFFFFF"}>
+                  {followString}
+                </FollowButton>
+
                 <ClubWebsiteButton href={club.website}>
                   <img src={website_arrow} style={{ marginRight: "4px" }}></img>
                   Club Website
@@ -120,9 +195,9 @@ const ViewClubProfile = (props) => {
         {/* <AboutContent /> */}
         <ProfileWrapper>
           <ProfileInfo>
-            <NameDescriptionWrapper>
-              <ClubProfileTabs />
-            </NameDescriptionWrapper>
+            <ProfileTabsWrapper>
+              <ViewClubProfileTabs club={club} />
+            </ProfileTabsWrapper>
           </ProfileInfo>
           <QuestionBox></QuestionBox>
         </ProfileWrapper>

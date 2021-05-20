@@ -71,13 +71,14 @@ const MyEvents = () => {
             </EventDescription>
             <GoingBtn bgcolor={true}>Going</GoingBtn>
           </EventItem>
-          {events.map((e) => {
-            return (
-              <>
-                <Event loadExpanded={loadExpanded} e={e} test={false} />
-              </>
-            );
-          })}
+          {events &&
+            events.map((e) => {
+              return (
+                <>
+                  <Event loadExpanded={loadExpanded} e={e} test={false} />
+                </>
+              );
+            })}
         </EventItems>
       </EventsWrapper>
     </>

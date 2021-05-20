@@ -12,7 +12,6 @@ const ClubUploadResource = ({ setNewResource }) => {
 
   const dispatch = useDispatch();
 
-
   const sampleFiles = [
     {
       id: 1,
@@ -37,7 +36,6 @@ const ClubUploadResource = ({ setNewResource }) => {
   useEffect(() => {
     dispatch(getResources());
   }, []);
-
 
   return (
     <div style={{ margin: "auto" }}>

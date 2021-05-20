@@ -41,14 +41,13 @@ const Event = (props) => {
   const dispatch = useDispatch();
   const attending = useSelector((state) => state.user.events);
   const hasID = (id) => {
-    if (attending) {
-      for (let i = 0; i < attending.length; i++) {
-        if (attending[i] && attending[i]._id === id) {
-          return true;
-        }
+    if (!attending) return false;
+    for (let i = 0; i < attending.length; i++) {
+      if (attending[i] && attending[i]._id === id) {
+        return true;
       }
-      return false;
     }
+    return false;
   };
   const goingClick = (id) => {
     if (hasID(id)) {
