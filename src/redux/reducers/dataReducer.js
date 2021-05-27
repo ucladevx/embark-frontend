@@ -17,6 +17,8 @@ import {
   UPLOAD_CLUB_RESOURCES,
   UPLOAD_CLUB_LINKS,
   SET_PAGE,
+  ADD_CLUB_FILTERS,
+  REMOVE_CLUB_FILTERS,
 } from "../types";
 
 const initialState = {
@@ -28,6 +30,7 @@ const initialState = {
   resources: [],
   links: [],
   page: "main",
+  clubFilters: [],
 };
 
 export default function dataReducer(state = initialState, action) {
@@ -89,6 +92,18 @@ export default function dataReducer(state = initialState, action) {
         filter: state.filter.filter(
           (eachfilter) => eachfilter !== action.payload,
         ),
+      };
+    case ADD_CLUB_FILTERS:
+      return {
+        ...state,
+        clubFilters: [...state.clubFilters, action.payload],
+      };
+    case REMOVE_CLUB_FILTERS:
+      return {
+        ...state,
+        clubFilters: state.clubFilters.filter((oneFilter) => {
+          return oneFilter.title !== action.payload;
+        }),
       };
     case FILTER_POSTS: {
       var postsCopy = state.posts;

@@ -38,28 +38,77 @@ import dbImg from "../../images/dailyBruin.png";
 import consultingImg from "../../images/bruinConsulting.png";
 import { colors } from "../../shared/config";
 
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addClubFilter,
+  removeClubFilter,
+} from "../../redux/actions/dataActions";
+import { FilterSharp } from "@material-ui/icons";
+
+import { clubFilterOptions } from "../../shared/clubFilterOptions";
+
+const FilterOption = ({ checkContains, handleFilter, filter }) => {
+  return (
+    <div>
+      <input
+        type="checkbox"
+        checked={checkContains(filter)}
+        name={filter}
+        onClick={handleFilter}
+      />{" "}
+      <label style={{ margin: 0, padding: 0, color: "#838383" }}>
+        {filter}
+      </label>{" "}
+      <br />
+    </div>
+  );
+};
+
 const Explore = () => {
-  // possible colors for filters: colors.red1, colors.darkyellow
-  const [filter, setFilter] = useState([
-    { title: "Product Management", visibility: true, id: 0 },
-    { title: "Product Design", visibility: true, id: 1 },
-    { title: "Accounting", visibility: false, id: 2 },
-  ]);
-
+  const filter = useSelector((state) => state.data.clubFilters);
   const [openFilter, setOpenFilter] = useState(false);
+  const dispatch = useDispatch();
 
-  function crossClicked() {
-    alert("Cross clicked");
-  }
+  const crossClicked = (title) => {
+    dispatch(removeClubFilter(title));
+  };
+
+  const handleFilter = (e) => {
+    let keys = Object.keys(colors);
+    let currentColor = colors[keys[(keys.length * Math.random()) << 0]];
+    let title = e.target.name;
+
+    let newFilter = {
+      title,
+      visibility: true,
+      color: currentColor,
+      id: filter.index,
+    };
+
+    if (checkContains(title)) {
+      dispatch(removeClubFilter(title));
+    } else {
+      dispatch(addClubFilter(newFilter));
+    }
+  };
+
+  const checkContains = (name) => {
+    let index = filter.findIndex((oneFilter) => {
+      return oneFilter.title === name;
+    });
+
+    return index !== -1;
+  };
 
   const filterList = filter.map((item, index) => {
-    const currentColor = colors.red1;
     if (!item.visibility) {
       return <span></span>;
     }
     return (
-      <ExploreObj bgcolor={currentColor}>
-        <ExploreFilterCross onClick={crossClicked}>&times; </ExploreFilterCross>{" "}
+      <ExploreObj bgcolor={item.color}>
+        <ExploreFilterCross onClick={() => crossClicked(item.title)}>
+          &times;{" "}
+        </ExploreFilterCross>{" "}
         {item.title}
       </ExploreObj>
     );
@@ -71,18 +120,9 @@ const Explore = () => {
 
       <ExploreFilter>
         <ExploreFilterTitle>Filters:</ExploreFilterTitle>
-        <ExploreObj bgcolor={colors.red1}>
-          <ExploreFilterCross onClick={crossClicked}>
-            &times;{" "}
-          </ExploreFilterCross>{" "}
-          Product Management
-        </ExploreObj>
-        <ExploreObj bgcolor={colors.darkyellow}>
-          <ExploreFilterCross onClick={crossClicked}>
-            &times;{" "}
-          </ExploreFilterCross>{" "}
-          Product Design
-        </ExploreObj>
+        <div style={{ display: "flex", flexWrap: "wrap", width: "70%" }}>
+          {filterList}
+        </div>
 
         {openFilter ? (
           <ExploreAddFilterOpened onClick={() => setOpenFilter(!openFilter)}>
@@ -97,21 +137,17 @@ const Explore = () => {
         {openFilter && (
           <div>
             <ExploreFilterPopup>
-              <input type="checkbox" name="item1" />{" "}
-              <label style={{ margin: 0, padding: 0, color: "#838383" }}>
-                Product Management
-              </label>{" "}
-              <br />
-              <input type="checkbox" name="item2" />{" "}
-              <label style={{ margin: 0, padding: 0, color: "#838383" }}>
-                Product Design
-              </label>{" "}
-              <br />
-              <input type="checkbox" name="item3" />{" "}
-              <label style={{ margin: 0, padding: 0, color: "#838383" }}>
-                Finance
-              </label>{" "}
-              <br />
+              {clubFilterOptions.map((filter) => {
+                return (
+                  <FilterOption
+                    style={{ maxHeight: 50, overflow: "auto" }}
+                    key={filter}
+                    checkContains={checkContains}
+                    handleFilter={handleFilter}
+                    filter={filter}
+                  />
+                );
+              })}
             </ExploreFilterPopup>
           </div>
         )}

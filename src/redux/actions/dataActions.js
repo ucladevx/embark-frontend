@@ -19,6 +19,8 @@ import {
   UPLOAD_CLUB_LINKS,
   SAVE_POST,
   SET_PAGE,
+  ADD_CLUB_FILTERS,
+  REMOVE_CLUB_FILTERS,
 } from "../types";
 
 import axios from "axios";
@@ -220,6 +222,20 @@ export const addFilter = (filterToAdd) => (dispatch) => {
 export const removeFilter = () => (dispatch) => {
   dispatch({
     type: REMOVE_FILTER,
+  });
+};
+
+export const addClubFilter = (newFilter) => (dispatch) => {
+  dispatch({
+    type: ADD_CLUB_FILTERS,
+    payload: newFilter,
+  });
+};
+
+export const removeClubFilter = (filterName) => (dispatch) => {
+  dispatch({
+    type: REMOVE_CLUB_FILTERS,
+    payload: filterName,
   });
 };
 
