@@ -64,6 +64,18 @@ const FilterOption = ({ checkContains, handleFilter, filter }) => {
   );
 };
 
+const colorCodes = [
+  "FFADAD",
+  "FFD6A5",
+  "FDFFB6",
+  "CAFFBF",
+  "9BF6FF",
+  "A0C4FF",
+  "BDB2FF",
+  "FFC6FF",
+  "DFA98C",
+];
+
 const Explore = () => {
   const filter = useSelector((state) => state.data.clubFilters);
   const [openFilter, setOpenFilter] = useState(false);
@@ -74,14 +86,13 @@ const Explore = () => {
   };
 
   const handleFilter = (e) => {
-    let keys = Object.keys(colors);
-    let currentColor = colors[keys[(keys.length * Math.random()) << 0]];
+    let colorIndex = Math.floor(Math.random() * 9);
     let title = e.target.name;
 
     let newFilter = {
       title,
       visibility: true,
-      color: currentColor,
+      color: "#" + colorCodes[colorIndex],
       id: filter.index,
     };
 
