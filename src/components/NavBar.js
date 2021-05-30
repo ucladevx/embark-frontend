@@ -85,7 +85,7 @@ const sampleSuggestions = [
   },
 ];
 
-const NavBar = () => {
+const NavBar = ({ setPage }) => {
   const [search, setSearch] = useState("");
   const [showList, setShowList] = useState(false);
   const [showSetting, setShowSetting, settingRef] = useClickOutState();
@@ -101,9 +101,8 @@ const NavBar = () => {
   };
 
   const handleEmbarkIconClick = (e) => {
-    // just console log for now
-    console.log("Embark Icon Clicked");
     history.push("/home");
+    if (setPage) setPage("main");
   };
 
   const handleUserIconClick = (e) => {
