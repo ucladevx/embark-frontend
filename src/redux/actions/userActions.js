@@ -51,22 +51,51 @@ export const getStudentData = () => async (dispatch) => {
   }
 };
 
-// Sign Up a user
-export const signupStudent = (newUserData, handleUser, handleStep) => async (
-  dispatch,
-) => {
+export const getClubData = () => async (dispatch) => {
   try {
-    const res = await axios.post("/auth/signup", newUserData);
-    setAuthorizationHeader(res.data.token);
-    dispatch(getStudentData());
-    handleUser(newUserData);
-    handleStep(1);
+    const res = await axios.get("/club/profile");
+    const payload = { ...res.data.club, userType: "club" };
+    console.log(payload);
+    dispatch({
+      type: SET_USER,
+      payload,
+    });
   } catch (err) {
-    console.log(err);
-    dispatch({ type: SET_ERRORS, payload: err.response.data });
+    console.error(err);
     maintenanceErrorCheck(err);
   }
 };
+
+// Sign Up a user
+export const signupStudent =
+  (newUserData, handleUser, handleStep) => async (dispatch) => {
+    try {
+      const res = await axios.post("/auth/signup", newUserData);
+      setAuthorizationHeader(res.data.token);
+      dispatch(getStudentData());
+      handleUser(newUserData);
+      handleStep(1);
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: SET_ERRORS, payload: err.response.data });
+      maintenanceErrorCheck(err);
+    }
+  };
+
+export const signupClub =
+  (newUserData, handleUser, handleStep) => async (dispatch) => {
+    try {
+      const res = await axios.post("/auth/signup", newUserData);
+      setAuthorizationHeader(res.data.token);
+      dispatch(getClubData());
+      handleUser(newUserData);
+      handleStep(1);
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: SET_ERRORS, payload: err.response.data });
+      maintenanceErrorCheck(err);
+    }
+  };
 
 // Log out a user
 export const logoutUser = () => (dispatch) => {
@@ -119,7 +148,7 @@ export const studentGoogleSignUp = () => async (dispatch) => {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
-      },
+      }
     );
     dispatch({ type: AUTH_SIGNUP, payload: res.data });
   } catch (err) {

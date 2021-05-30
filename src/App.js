@@ -42,7 +42,11 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/login" component={Login}></Route>
-              <Route exact path="/clubLogin" component={ClubOnBoarding}></Route>
+              <Route
+                exact
+                path="/club-signup"
+                component={ClubOnBoarding}
+              ></Route>
               <Route exact path="/home" component={Home}></Route>
               <Route exact path="/" component={OnBoarding}></Route>
               <Route exact path="/clubDetails" component={ClubDetails}></Route>

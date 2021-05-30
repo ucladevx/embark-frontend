@@ -13,7 +13,7 @@ import {
 import { ActionButton } from "../../shared/Buttons";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
-import { signupStudent } from "../../redux/actions/userActions";
+import { signupClub } from "../../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { header4 } from "../../shared/config";
 import AuthButtons from "../../shared/AuthButtons";
@@ -68,15 +68,14 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            const name = values.clubName;
             const { clubName, email, password } = values;
             const postUser = {
-              clubName,
+              firstName: clubName,
               email,
               password,
               userType: "club",
             };
-            dispatch(signupStudent(postUser, handleUser, handleStep));
+            dispatch(signupClub(postUser, handleUser, handleStep));
           }}
           validateOnBlur={false}
           validateOnChange={false}

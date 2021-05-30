@@ -47,18 +47,17 @@ const FormPersonalDetails = ({ user }) => {
   const years = ["2021", "2022", "2023", "2024"];
   const industry = ["Developer", "Design", "Marketing", "Product Mangement"];
   const dispatch = useDispatch();
-
   return (
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
         <Prompt link={"login"}></Prompt>
         <HeyTitle>
-          Hey {user.lastName}! <br /> Welcome to Embark
+          Hey {user.firstName}! <br /> Welcome to Embark
         </HeyTitle>
         <HeySubtitile>
-          Before we begin, fill in your graduating year, area of study, and the
-          industries or career paths you are interested in pursuing.
+          Before we begin, choose the industries or career paths that are
+          relevant to your club and provide a link to your club website
         </HeySubtitile>
         <Formik
           initialValues={{
