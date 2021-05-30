@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   EventAvatar,
   EventDescription,
-  EventItem,
   EventItems,
   EventTypography,
   EventsWrapper,
@@ -10,38 +9,19 @@ import {
   GoingBtn,
   InfoSeperator,
   AddFilter,
+  CreateButton,
+  FakeEventItem,
 } from "./StyleLanding";
-import styled from "styled-components";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { useSelector } from "react-redux";
 import ExpandedEvent from "./ExpandedEvent.js";
 import Event from "./Event.js";
-import { ActionButton } from "../../shared/Buttons";
 
 // Dayjs
 import dayjs from "dayjs";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
-
-export const CreateButton = styled(ActionButton)`
-  height: 26px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  padding: 15px;
-  margin-top: 5px;
-  margin-right: 5px;
-  font-size: 14px;
-  text-transform: none;
-  align-self: flex-end;
-  text-decoration: none;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`;
 
 const test = (moment) => {
   let date = moment.replace("T", " ");
@@ -58,21 +38,23 @@ const testEvent = [
     endDate: "2021-04-25T06:13:32.000Z",
     description:
       "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
-    venue: "here what do you think",
+    venue: "here what do you think, https://ucla.zoom.us/",
+    attendees: 4,
   },
 ];
 
-const Events = ({ setNewEvent, openEvents }) => {
+const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
   const events = useSelector((state) => state.data.events);
   const usertype = useSelector((state) => state.user.userType);
 
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});
   const loadExpanded = (e) => {
-    console.log(e);
+    //console.log(e);
     setEvent(e);
-    console.log(event);
-    setExpanded(true);
+    //console.log(event);
+    //setExpanded(true);
+    setExpandedEventPage(e);
   };
 
   return (
@@ -85,7 +67,7 @@ const Events = ({ setNewEvent, openEvents }) => {
       <EventsWrapper>
         <TitleTypography>Upcoming Events</TitleTypography>
         <EventItems>
-          <EventItem>
+          <FakeEventItem>
             <EventAvatar></EventAvatar>
             <EventDescription>
               <BoldTypography sz={"16px"}>Demo Day</BoldTypography>
@@ -95,9 +77,9 @@ const Events = ({ setNewEvent, openEvents }) => {
               </TimeTypography>
             </EventDescription>
             <GoingBtn bgcolor={true}>Going</GoingBtn>
-          </EventItem>
+          </FakeEventItem>
           <InfoSeperator></InfoSeperator>
-          <EventItem>
+          <FakeEventItem>
             <EventAvatar></EventAvatar>
             <EventDescription>
               <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
@@ -107,7 +89,7 @@ const Events = ({ setNewEvent, openEvents }) => {
               </TimeTypography>
             </EventDescription>
             <GoingBtn bgcolor={false}>Going</GoingBtn>
-          </EventItem>
+          </FakeEventItem>
           {testEvent.map((p) => {
             return (
               <>

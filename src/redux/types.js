@@ -15,7 +15,7 @@ export const OWN_EVENTS = "OWN_EVENTS";
 export const SET_POSTS = "SET_POSTS";
 export const SET_POST = "SET_POST";
 export const SAVE_POST = "SAVE_POST";
-
+export const GET_CLUB = "GET_CLUB";
 export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
 export const DELETE_POST = "DELETE_POST";
@@ -40,3 +40,4 @@ export const LOADING_UI = "LOADING_UI";
 export const STOP_LOADING_UI = "STOP_LOADING_UI";
 export const OPEN_COMMENT = "OPEN_COMMENT";
 export const CLOSE_COMMENT = "CLOSE_COMMENT";
+export const CLUB_EVENT_EXPANSION = "CLUB_EVENT_EXPANSION";

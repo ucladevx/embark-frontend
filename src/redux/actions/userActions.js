@@ -51,11 +51,14 @@ export const getStudentData = () => async (dispatch) => {
       type: SET_USER,
       payload,
     });
-    // const eventres = await axios.get("/events/going", { userType: "student" });
-    // dispatch({
-    //   type: GOING_EVENT,
-    //   payload: eventres,
-    // });
+
+    const eventres = await axios.get("/events/going", {
+      params: { userType: "student" },
+    });
+    dispatch({
+      type: GOING_EVENT,
+      payload: eventres,
+    });
   } catch (err) {
     console.error(err);
     maintenanceErrorCheck(err);
@@ -166,7 +169,7 @@ export const goingToEvent = (eventId) => async (dispatch) => {
     const res = await axios.post(`/events/:${eventId}/attend`, {
       userType: "student",
     });
-    dispatch({ type: GOING_EVENT, payload: eventId });
+    dispatch({ type: GOING_EVENT, payload: res });
   } catch (err) {
     console.error(err);
   }

@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { colors } from "../shared/config";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useClickOutState } from "../shared/Hook";
 
+import { useClickOutState } from "../shared/Hook";
 // icons for navbar icons
 import { ReactComponent as EmbarkIcon } from "../images/navbar_embark_logo.svg";
 import { ReactComponent as UserIcon } from "../images/navbar_user_logo.svg";

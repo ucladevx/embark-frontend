@@ -12,7 +12,6 @@ import ClubEvent from "./ClubEvent";
 import NewEvent from "../../components/NewEvent";
 import ExpandedEvent from "../Home/ExpandedEvent";
 import { BoldTypography } from "../../shared/Typography";
-import { getOwnEvents } from "../../redux/actions/userActions";
 import "moment-timezone";
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
@@ -77,7 +76,7 @@ const ButtonWrapper = styled.div`
 const testEvent = [
   {
     _id: "123450",
-    title: "Embark Release",
+    name: "Embark Release",
     organizerName: "Embark",
     startDate: "2021-04-03T08:00:00.000Z",
     endDate: "2021-04-03T09:00:00.000Z",
@@ -88,20 +87,14 @@ const testEvent = [
   },
 ];
 
-const ClubEventsTab = () => {
+const ClubEventsTab = ({ club }) => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getOwnEvents());
-  }, []);
 
-  const hostedEvents = useSelector((state) => state.user.ownEvents);
+  let hostedEvents = club?.ownEvents;
   const [viewDate, setViewDate] = useState(new Date());
   const [viewAll, setViewAll] = useState(false);
-
-  const [newEvent, setNewEvent] = useState(false);
-
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});
   const loadExpanded = (e) => {
@@ -121,12 +114,15 @@ const ClubEventsTab = () => {
 
   useEffect(() => {
     var eventFound = false;
-    if (!viewDate) {
+    if (!viewDate || hostedEvents === undefined) {
       setEvent({});
       return;
     }
     for (let i = 0; i < hostedEvents.length; i++) {
       const myDate = hostedEvents[i].startDate;
+      if (typeof myDate === "string") {
+        return;
+      }
       if (
         myDate.getDate() === viewDate._d.getDate() &&
         myDate.getMonth() === viewDate._d.getMonth() &&
@@ -173,19 +169,18 @@ const ClubEventsTab = () => {
         handleClose={() => setExpanded(false)}
         e={event}
       />
-      <NewEvent open={newEvent} handleClose={() => setNewEvent(false)} />
       <InnerWrapper>
-        <BoldTypography sz={"24px"}>My Events</BoldTypography>
+        <BoldTypography sz={"24px"}>Events</BoldTypography>
         {showTest & !viewAll ? (
           <ClubEvent loadExpanded={loadExpanded} e={testEvent[0]} test={true} />
         ) : (
           <></>
         )}
-        {viewAll ? (
+        {viewAll && hostedEvents ? (
           hostedEvents.map((e) => {
             return (
               <>
-                <ClubEvent loadExpanded={loadExpanded} e={e} test={false} />
+                <ClubEvent loadExpanded={loadExpanded} e={e} test={e.test} />
               </>
             );
           })
@@ -196,7 +191,6 @@ const ClubEventsTab = () => {
         )}
         <ButtonWrapper>
           <ChangeViewButton onClick={changeView}>{viewButton}</ChangeViewButton>
-          <CreateButton onClick={() => setNewEvent(true)}>+</CreateButton>
         </ButtonWrapper>
       </InnerWrapper>
       <div>

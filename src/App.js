@@ -52,13 +52,16 @@ function App() {
                 component={StudentProfile}
               ></Route>
               <Route exact path="/club/:clubid" component={ClubProfile}></Route>
+
+              {/* EXAMPLE: http://localhost:3000/view-club/?clubId=CLUBID */}
+              <Route path="/view-club" component={ViewClubProfile}></Route>
+              {/* EXAMPLE: http://localhost:3000/view-student/?studentId=STUDENTID */}
               <Route
                 exact
-                path="/view-club"
+                path="/view-club/:clubId"
                 component={ViewClubProfile}
               ></Route>
               <Route
-                exact
                 path="/view-student"
                 component={ViewStudentProfile}
               ></Route>
