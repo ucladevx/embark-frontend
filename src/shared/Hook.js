@@ -21,3 +21,24 @@ export const useClickOutState = (isOpen) => {
 
   return [open, setOpen, ref];
 };
+
+export const useIndustry = () => {
+  const [industries, setIndustries] = useState([]);
+  const [openInd, setOpenInd] = useState(false);
+
+  const handleIndustries = (name) => {
+    if (industries && industries.includes(name)) {
+      const newIndustries = industries.filter((ind) => ind !== name);
+      setIndustries(newIndustries);
+    } else {
+      const newIndustries = [...industries, name];
+      setIndustries(newIndustries);
+    }
+  };
+
+  const handleOpenInd = () => {
+    setOpenInd(!openInd);
+  };
+
+  return [industries, openInd, handleIndustries, handleOpenInd];
+};
