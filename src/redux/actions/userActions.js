@@ -55,7 +55,6 @@ export const getClubData = () => async (dispatch) => {
   try {
     const res = await axios.get("/club/profile");
     const payload = { ...res.data.club, userType: "club" };
-    console.log(payload);
     dispatch({
       type: SET_USER,
       payload,
