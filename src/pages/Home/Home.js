@@ -133,7 +133,7 @@ const Home = () => {
       <NewPost open={newPost} handleClose={() => setNewPost(false)} />
       <NewEvent open={newEvent} handleClose={() => setNewEvent(false)} />
       <LandingPage>
-        <NavBar></NavBar>
+        <NavBar setPage={setPage}></NavBar>
         <LandingPageWrapper>
           <LeftContainer>
             <InfoBoxes>
