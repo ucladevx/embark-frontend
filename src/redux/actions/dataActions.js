@@ -13,7 +13,12 @@ import {
   SET_HAS_NEXT,
   NEW_EVENT,
   SET_EVENTS,
+  SET_CLUB_RESOURCES,
+  SET_CLUB_LINKS,
+  UPLOAD_CLUB_RESOURCES,
+  UPLOAD_CLUB_LINKS,
   SAVE_POST,
+  GET_CLUB,
 } from "../types";
 
 import axios from "axios";
@@ -152,38 +157,37 @@ export const getPost = (post_id) => async (dispatch) => {
 };
 
 // Submit a comment
-export const submitComment = (post_id, commentData) => async (
-  dispatch,
-  getState,
-) => {
-  try {
-    const { email } = getState().user;
-    // TODO: Add error display for comment
-    if (commentData.trim().length === 0) throw Error("comment cannot be empty");
-    const res = await axios.post(`/posts/comments`, {
-      post_id,
-      authorEmail: email,
-      comment: commentData,
-    });
-    const newPosts = getState().data.posts.map((p, i) => {
-      if (p._id === post_id) {
-        p.comments = res.data.comments;
-      }
-      return p;
-    });
+export const submitComment =
+  (post_id, commentData) => async (dispatch, getState) => {
+    try {
+      const { email } = getState().user;
+      // TODO: Add error display for comment
+      if (commentData.trim().length === 0)
+        throw Error("comment cannot be empty");
+      const res = await axios.post(`/posts/comments`, {
+        post_id,
+        authorEmail: email,
+        comment: commentData,
+      });
+      const newPosts = getState().data.posts.map((p, i) => {
+        if (p._id === post_id) {
+          p.comments = res.data.comments;
+        }
+        return p;
+      });
 
-    dispatch({
-      type: SET_POSTS,
-      payload: newPosts,
-    });
-    dispatch({
-      type: CLOSE_COMMENT,
-    });
-  } catch (err) {
-    console.error(err);
-    maintenanceErrorCheck(err);
-  }
-};
+      dispatch({
+        type: SET_POSTS,
+        payload: newPosts,
+      });
+      dispatch({
+        type: CLOSE_COMMENT,
+      });
+    } catch (err) {
+      console.error(err);
+      maintenanceErrorCheck(err);
+    }
+  };
 
 // Get User Specific page
 export const getUserPage = (userHandle) => async (dispatch) => {
@@ -222,7 +226,7 @@ export const removeFilter = () => (dispatch) => {
 // Create A New Event
 export const newEvent = (newE) => async (dispatch) => {
   try {
-    const res = await axios.post("/events", newE);
+    const res = await axios.post("/events/create", newE);
     dispatch({ type: NEW_EVENT, payload: res.data });
   } catch (err) {
     console.error(err);
@@ -230,15 +234,74 @@ export const newEvent = (newE) => async (dispatch) => {
 };
 
 // Get All Events - unsure how the backend will handle event storage(is it paginated?)
-export const getEvents = () => async (dispatch) => {
+export const getEvents = (amount) => async (dispatch) => {
   try {
-    const res = await axios.get("/events", {
+    const res = await axios.get("/events/discover", {
       params: {
-        limitNum: 8,
+        limitNum: amount,
+        userType: "student",
       },
     });
     console.log(res.data);
     dispatch({ type: SET_EVENTS, payload: res.data.events });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+// Get club resources
+export const getResources = () => async (dispatch) => {
+  try {
+    const res = await axios.get("/club/resources");
+    console.log(res);
+    dispatch({ type: SET_CLUB_RESOURCES, payload: res.data.resources });
+    dispatch({ type: SET_CLUB_LINKS, payload: res.data.embededlinks });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Club upload one resource
+export const uploadResource =
+  (newResource, resourceName) => async (dispatch) => {
+    try {
+      console.log(resourceName);
+      const formData = new FormData();
+      formData.append("file", newResource);
+      const res = await axios.post(
+        `/club/resources?linkFile=file&userNamed=${resourceName}`,
+        formData,
+      );
+      console.log(res);
+      dispatch({ type: UPLOAD_CLUB_RESOURCES, payload: res.data.fileUrls[0] });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+export const uploadLink = (newLink, linkName) => async (dispatch) => {
+  try {
+    console.log(linkName);
+    console.log(newLink);
+    const res = await axios.post(
+      `/club/resources?linkFile=link&userNamed=${linkName}`,
+      {
+        link: newLink,
+      },
+    );
+    console.log(res);
+    dispatch({ type: UPLOAD_CLUB_LINKS, payload: res.data.fileUrls });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//Grab a club's data as a non-club
+export const getExpandedClub = (clubId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/club/profilebyId?clubId=${clubId}`);
+    dispatch({ type: GET_CLUB, payload: res });
+    return res;
   } catch (err) {
     console.error(err);
   }

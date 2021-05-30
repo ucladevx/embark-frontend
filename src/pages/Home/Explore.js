@@ -33,6 +33,40 @@ import devxImg from "../../images/devx.jpeg";
 import dbImg from "../../images/dailyBruin.png";
 import consultingImg from "../../images/bruinConsulting.png";
 import { colors } from "../../shared/config";
+import ClubThumbnail from "./ClubThumbnail";
+
+const testClubs = [
+  {
+    name: "UCLA DevX",
+    _id: 1,
+    profilePicURL: devxImg,
+  },
+  {
+    name: "Bruin Consulting",
+    _id: 2,
+    profilePicURL: consultingImg,
+  },
+  {
+    name: "UCLA DevX",
+    _id: 3,
+    profilePicURL: devxImg,
+  },
+  {
+    name: "Daily Bruin",
+    _id: 4,
+    profilePicURL: dbImg,
+  },
+  {
+    name: "UCLA DevX",
+    _id: 5,
+    profilePicURL: devxImg,
+  },
+  {
+    name: "Daily Bruin",
+    _id: 6,
+    profilePicURL: dbImg,
+  },
+];
 
 const Explore = () => {
   return (
@@ -61,42 +95,9 @@ const Explore = () => {
           dots={false}
           className="owl-theme"
         >
-          <div>
-            <ClubCard>
-              <ClubCardImage src={devxImg} />
-              <ClubCardCaption>UCLA DevX</ClubCardCaption>
-            </ClubCard>
-          </div>
-          <div>
-            <ClubCard>
-              <ClubCardImage src={consultingImg} />
-              <ClubCardCaption>Bruin Consulting</ClubCardCaption>
-            </ClubCard>
-          </div>
-          <div>
-            <ClubCard>
-              <ClubCardImage src={devxImg} />
-              <ClubCardCaption>UCLA DevX</ClubCardCaption>
-            </ClubCard>
-          </div>
-          <div>
-            <ClubCard>
-              <ClubCardImage src={dbImg} />
-              <ClubCardCaption>Daily Bruin</ClubCardCaption>
-            </ClubCard>
-          </div>
-          <div>
-            <ClubCard>
-              <ClubCardImage src={devxImg} />
-              <ClubCardCaption>UCLA DevX</ClubCardCaption>
-            </ClubCard>
-          </div>
-          <div>
-            <ClubCard>
-              <ClubCardImage src={dbImg} />
-              <ClubCardCaption>Daily Bruin</ClubCardCaption>
-            </ClubCard>
-          </div>
+          {testClubs.map((c) => {
+            return <ClubThumbnail key={c._id + "key"} club={c} />;
+          })}
         </OwlCarousel>
       </ClubCardsContainer>
 

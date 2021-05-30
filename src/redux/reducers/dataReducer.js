@@ -12,6 +12,11 @@ import {
   SET_NEXT_STRING,
   NEW_EVENT,
   SET_EVENTS,
+  SET_CLUB_RESOURCES,
+  SET_CLUB_LINKS,
+  UPLOAD_CLUB_RESOURCES,
+  UPLOAD_CLUB_LINKS,
+  GET_CLUB,
 } from "../types";
 
 const initialState = {
@@ -20,6 +25,9 @@ const initialState = {
   nextString: "",
   hasNext: true,
   events: [],
+  resources: [],
+  links: [],
+  club: {},
 };
 
 export default function dataReducer(state = initialState, action) {
@@ -110,6 +118,31 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         events: action.payload,
+      };
+    case SET_CLUB_RESOURCES:
+      return {
+        ...state,
+        resources: action.payload,
+      };
+    case SET_CLUB_LINKS:
+      return {
+        ...state,
+        links: action.payload,
+      };
+    case UPLOAD_CLUB_RESOURCES:
+      return {
+        ...state,
+        resources: [action.payload, ...state.resources],
+      };
+    case UPLOAD_CLUB_LINKS:
+      return {
+        ...state,
+        links: [action.payload, ...state.links],
+      };
+    case GET_CLUB:
+      return {
+        ...state,
+        club: action.payload,
       };
     default:
       return state;

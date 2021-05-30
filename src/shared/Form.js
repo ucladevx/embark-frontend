@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../shared/config";
 import { Form } from "formik";
+import { useLocation } from "react-router-dom";
 
 export const LeftFormContainer = styled.div`
   background: ${colors.blue1};
@@ -27,6 +28,15 @@ export const FormWrapper = styled(Form)`
   width: 60%;
   gap: 15px;
   margin-top: 2rem;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  & > p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 14px;
+  }
 `;
 
 export const FieldContainer = styled.div`
@@ -48,8 +58,9 @@ const PromptContainer = styled.div`
   right: 4vw;
 `;
 
-export const Prompt = ({ link }) => {
-  return link === "login" ? (
+export const Prompt = () => {
+  const page = useLocation().pathname;
+  return page === "/" ? (
     <PromptContainer>
       Already a member? <a href="/login">Sign in</a>
     </PromptContainer>

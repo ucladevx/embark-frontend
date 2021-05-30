@@ -25,6 +25,8 @@ export const EditProfileContainer = styled(Dialog)`
   border-radius: 20px;
   width: 100vw;
   height: 100vh;
+  margin: 0px;
+  overflow: hidden;
 `;
 
 export const TitleContainer = styled(DialogTitle)`
@@ -32,11 +34,13 @@ export const TitleContainer = styled(DialogTitle)`
   height: 10vh;
   max-height: 2vh;
   padding-bottom: 5.5vh;
+  overflow: hidden;
 `;
 export const EditProfileTitle = styled(BoldTypography)`
   font-size: 24px;
   font-weight: 700;
-  margin: 1vh auto;
+  margin: 0 173px 0 197px;
+  display: inline;
 `;
 
 export const EditProfileAvatar = styled(Avatar)`
@@ -91,9 +95,12 @@ export const Suggested = styled(Typography)`
 
 export const DialogTextField = styled(TextField)`
   background: ${colors.gray1};
-  padding: 5px 5px;
   border-radius: 5px;
-  padding: 1em 1em;
+  height: 40px;
+  padding: 0px;
+  margintop: 0px;
+  border-radius: 10px;
+  background-color: "#EDEDED";
 `;
 
 export const TextFieldWrapper = styled.div`
@@ -109,5 +116,20 @@ export const TextFieldWrapper = styled.div`
 export const DoneBtn = styled(ActionButton)`
   width: 120px;
   height: 40px;
-  margin: auto;
+  margin: 10px auto 20px auto;
+  color: #ffffff;
+  background-color: ${(props) => props.bgcolor};
+`;
+
+export const LinkedinAdornment = styled.div`
+  display: flex;
+  justify-content: center;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  width: 46px;
+  height: 40px;
+  margin-left: -20px;
+  margin-bottom: 5px;
+  zindex: 10;
+  background-color: #3177b2;
 `;
