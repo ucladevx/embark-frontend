@@ -12,15 +12,34 @@ Content-Type: application/json
     "password": "DevasfdEmbark123$",
     "userType": "student"
 }
+###
+POST http://localhost:9000/auth/newsignup
+Content-Type: application/json
+
+{
+    "email": "bru11a!!@email.com",
+    "firstName": "some",
+    "lastName": "email",
+    "userType": "student"
+}
+
+###
+POST http://localhost:9000/auth/newsignin
+Content-Type: application/json
+
+{
+    "email": "bru11a!!@email.com",
+    "userType": "student"
+}
 
 ###
 POST http://localhost:9000/auth/signup
 Content-Type: application/json
 
 {
-    "firstName": "helloa",
+    "firstName": "hello1a",
     "lastName": "bruin",
-    "email": "bruin151!!@email.com",
+    "email": "bruin151a!!@email.com",
     "password": "12345qQ!",
     "userType": "student"
 }

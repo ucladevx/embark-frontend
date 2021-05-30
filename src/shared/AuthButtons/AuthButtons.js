@@ -10,7 +10,7 @@ import {
   studentGoogleSignIn,
   studentGoogleSignUp,
 } from "../../redux/actions/userActions";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import { LinkedIn } from "react-linkedin-login-oauth2";
 import "./AuthButtons.css";
@@ -25,6 +25,7 @@ const AuthBtnWrapper = styled.div`
 const AuthButtons = () => {
   const dispatch = useDispatch();
   const userType = useSelector((state) => state.user.userType);
+  const history = useHistory();
   const page = useLocation().pathname;
   const googleRef = useRef();
   const linkedinRef = useRef();
@@ -44,7 +45,19 @@ const AuthButtons = () => {
   }, []);
 
   const responseAuth = (response) => {
-    console.log(response);
+    if (page !== "/login") {
+      const { email, familyName, givenName } = response.profileObj;
+      const profile = {
+        firstName: givenName,
+        lastName: familyName,
+        email,
+      };
+      dispatch(studentGoogleSignUp(profile, history));
+    } else {
+      const { email } = response.profileObj;
+      const profile = { email };
+      dispatch(studentGoogleSignIn(profile));
+    }
   };
 
   useEffect(() => {
@@ -74,7 +87,9 @@ const AuthButtons = () => {
         <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           onSuccess={responseAuth}
-          onFailure={responseAuth}
+          onFailure={() => {
+            console.log("Google Auth Failed");
+          }}
           cookiePolicy={"single_host_origin"}
           redirectUri={HomeAddress}
         />

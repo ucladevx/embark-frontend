@@ -11,6 +11,8 @@ import {
   CANCEL_ATTENDANCE_EVENT,
 } from "../types";
 import axios from "axios";
+import { useHistory } from "react-router";
+
 import { AccessibilityNewSharp } from "@material-ui/icons";
 
 const maintenanceErrorCheck = (err) => {
@@ -44,10 +46,12 @@ export const getStudentData = () => async (dispatch) => {
   try {
     const res = await axios.get("/student/profile");
     const payload = { ...res.data.student, userType: "student" };
+    console.log(payload);
     dispatch({
       type: SET_USER,
       payload,
     });
+
     const eventres = await axios.get("/events/going", {
       params: { userType: "student" },
     });
@@ -131,34 +135,28 @@ export const markNotificationsRead = (notificationIds) => (dispatch) => {
     .catch((err) => console.error(err));
 };
 
-export const studentGoogleSignUp = () => async (dispatch) => {
+export const studentGoogleSignUp = (profile, history) => async (dispatch) => {
   try {
-    const res = await axios.post(
-      "/auth/google",
-      {
-        type: "signup",
-        user: "student",
-      },
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      },
-    );
-    dispatch({ type: AUTH_SIGNUP, payload: res.data });
+    const res = await axios.post("/auth/newsignup", {
+      ...profile,
+      userType: "student",
+    });
+    setAuthorizationHeader(res.data.token);
+    history.push("/home");
   } catch (err) {
     console.error(err);
     maintenanceErrorCheck(err);
   }
 };
 
-export const studentGoogleSignIn = () => async (dispatch) => {
+export const studentGoogleSignIn = (profile, history) => async (dispatch) => {
   try {
-    const res = await axios.post("/auth/google", {
-      type: "signin",
-      user: "student",
+    const res = await axios.post("/auth/newsignin", {
+      ...profile,
+      userType: "student",
     });
-    dispatch({ type: AUTH_SIGNIN, payload: res.data });
+    setAuthorizationHeader(res.data.token);
+    history.push("/home");
   } catch (err) {
     console.error(err);
     maintenanceErrorCheck(err);
