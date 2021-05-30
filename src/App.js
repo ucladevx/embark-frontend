@@ -19,7 +19,6 @@ import ClubOnBoarding from "./pages/ClubOnBoarding";
 import ClubDetails from "./pages/ClubOnBoarding/FormPersonalDetails";
 import studentDetails from "./pages/OnBoarding/FormPersonalDetails";
 
-
 import Home from "./pages/Home";
 import ErrorPage from "./pages/ErrorPage";
 import StudentProfile from "./pages/Profile/StudentProfile";

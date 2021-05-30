@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  EventAvatar,
   EventDescription,
   EventItems,
   EventTypography,
@@ -8,7 +7,6 @@ import {
   TimeTypography,
   GoingBtn,
   InfoSeperator,
-  EventBadge,
   AddFilter,
   CreateButton,
   FakeEventItem,
@@ -17,13 +15,10 @@ import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { useSelector } from "react-redux";
 import ExpandedEvent from "./ExpandedEvent.js";
 import Event from "./Event.js";
+import BadgeEventAvatar from "./Event/BadgeEventAvatar";
 
 // Dayjs
 import dayjs from "dayjs";
-import { ActionButton } from "../../shared/Buttons";
-
-import calendar from "../../images/calendar.png";
-
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -72,31 +67,8 @@ const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
       <EventsWrapper>
         <TitleTypography>Upcoming Events</TitleTypography>
         <EventItems>
-
-          <EventItem>
-            <EventBadge
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              overlap="circle"
-              badgeContent={<p>{dayjs().format("DD")}</p>}
-            >
-              <EventBadge
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-                overlap="circle"
-                badgeContent={<img src={calendar} alt=""></img>}
-              >
-                <EventAvatar />
-              </EventBadge>
-            </EventBadge>
-
           <FakeEventItem>
-            <EventAvatar></EventAvatar>
-
+            <BadgeEventAvatar></BadgeEventAvatar>
             <EventDescription>
               <BoldTypography sz={"16px"}>Demo Day</BoldTypography>
               <EventTypography>UCLA DevX</EventTypography>
@@ -108,30 +80,8 @@ const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
           </FakeEventItem>
           <InfoSeperator></InfoSeperator>
 
-          <EventItem>
-            <EventBadge
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              overlap="circle"
-              badgeContent={<p>{dayjs().format("DD")}</p>}
-            >
-              <EventBadge
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-                overlap="circle"
-                badgeContent={<img src={calendar} alt=""></img>}
-              >
-                <EventAvatar />
-              </EventBadge>
-            </EventBadge>
-
           <FakeEventItem>
-            <EventAvatar></EventAvatar>
-
+            <BadgeEventAvatar></BadgeEventAvatar>
             <EventDescription>
               <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
               <EventTypography>Club1234</EventTypography>
@@ -141,41 +91,10 @@ const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
             </EventDescription>
             <GoingBtn bgcolor={false}>Going</GoingBtn>
           </FakeEventItem>
+
           {testEvent.map((p) => {
             return (
               <>
-
-                <InfoSeperator key={p._id + "sep"}></InfoSeperator>
-                <EventItem key={p._id}>
-                  <EventBadge
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "right",
-                    }}
-                    overlap="circle"
-                    badgeContent={<p>{dayjs().format("DD")}</p>}
-                  >
-                    <EventBadge
-                      anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "right",
-                      }}
-                      overlap="circle"
-                      badgeContent={<img src={calendar} alt=""></img>}
-                    >
-                      <EventAvatar
-                        onClick={() => loadExpanded(p)}
-                      ></EventAvatar>
-                    </EventBadge>
-                  </EventBadge>
-                  <EventDescription onClick={() => loadExpanded(p)}>
-                    <BoldTypography sz={"16px"}>{p.title}</BoldTypography>
-                    <EventTypography>{p.authorEmail}</EventTypography>
-                    <TimeTypography>{test(p.datetime)}</TimeTypography>
-                  </EventDescription>
-                  <GoingBtn bgcolor={false}>Going</GoingBtn>
-                </EventItem>
-
                 <Event loadExpanded={loadExpanded} e={p} test={true} />
               </>
             );
