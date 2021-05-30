@@ -1,8 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import Calendar from "react-calendar";
+import ExpandedEventPage from "./ExpandedEventPage";
 // Styles
-import "./Calendar/HomeCalendar.css";
+import "../../components/Calendar/HomeCalendar.css";
 
 import {
   LandingPage,
@@ -43,10 +44,12 @@ import {
 import NewPost from "../../components/NewPost";
 import NewEvent from "../../components/NewEvent";
 import Explore from "./Explore";
-import { styleCalendar } from "./Calendar/HomeCalendar";
+import { styleCalendar } from "../../components/Calendar/HomeCalendar";
 import Posts from "./Posts";
 
 import Events from "./Events";
+import DiscoverEvents from "./DiscoverEvents";
+import MyEvents from "./MyEvents";
 
 // Dayjs
 import { useHistory } from "react-router-dom";
@@ -58,6 +61,7 @@ const Home = () => {
   // Redux
   const filters = useSelector((state) => state.data.filter);
   const user = useSelector((state) => state.user);
+  const clubExpansionCase = useSelector((state) => state.ui.clubeventexpand);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -65,6 +69,20 @@ const Home = () => {
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
   const [newEvent, setNewEvent] = useState(false);
+  const [numEvents, setNumEvents] = useState(3);
+  const [selectedEvent, setSelectedEvent] = useState({});
+
+  const openExpandedEventPage = (e) => {
+    setPage("expandEvent");
+    setSelectedEvent(e);
+    console.log(e);
+  };
+
+  const closeExpandedEventPage = () => {
+    dispatch({ type: "CLUB_EVENT_EXPANSION", payload: {} });
+    setPage("main");
+    setSelectedEvent({});
+  };
 
   const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
 
@@ -73,11 +91,17 @@ const Home = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getEvents());
-  }, [dispatch]);
+    dispatch(getEvents(numEvents));
+  }, [dispatch, numEvents]);
 
   useEffect(() => {
     styleCalendar();
+  }, []);
+
+  useEffect(() => {
+    if (clubExpansionCase._id) {
+      openExpandedEventPage(clubExpansionCase);
+    }
   }, []);
 
   const removeUpdateFilters = (t) => {
@@ -92,6 +116,16 @@ const Home = () => {
   const [tagToAdd, setTagToAdd] = useState("");
   const handleChange = (e) => {
     setTagToAdd(e.target.value);
+  };
+
+  const openEvents = () => {
+    setPage("events");
+    setNumEvents(50);
+  };
+
+  const closeEvents = () => {
+    setPage("main");
+    setNumEvents(3);
   };
 
   return (
@@ -159,6 +193,18 @@ const Home = () => {
               <Posts setNewPost={setNewPost}></Posts>
             ) : page === "explore" ? (
               <Explore></Explore>
+            ) : page === "events" ? (
+              <DiscoverEvents
+                closeEvents={closeEvents}
+                setExpandedEventPage={openExpandedEventPage}
+              ></DiscoverEvents>
+            ) : page === "expandEvent" ? (
+              <>
+                <ExpandedEventPage
+                  e={selectedEvent}
+                  close={closeExpandedEventPage}
+                ></ExpandedEventPage>
+              </>
             ) : (
               <Fragment></Fragment>
             )}
@@ -168,8 +214,15 @@ const Home = () => {
             <CalanderWrapper>
               <Calendar></Calendar>
             </CalanderWrapper>
-
-            <Events setNewEvent={setNewEvent} />
+            {page === "events" ? (
+              <MyEvents></MyEvents>
+            ) : (
+              <Events
+                setNewEvent={setNewEvent}
+                openEvents={openEvents}
+                setExpandedEventPage={openExpandedEventPage}
+              />
+            )}
           </RightContainer>
         </LandingPageWrapper>
       </LandingPage>

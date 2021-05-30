@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../shared/config";
+
 import {
   Avatar,
   Button,
@@ -7,6 +8,9 @@ import {
   Typography,
   Badge,
 } from "@material-ui/core";
+
+import { ActionButton } from "../../shared/Buttons";
+
 import { BoldTypography } from "../../shared/Typography";
 import {
   handleTagColor,
@@ -24,7 +28,7 @@ export const LandingPage = styled.div`
 export const LandingPageWrapper = styled.div`
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 220px 540px 220px;
+  grid-template-columns: 290px 558px 290px;
   width: 100%;
   justify-content: center;
   min-height: 100vh;
@@ -34,18 +38,13 @@ export const LandingPageWrapper = styled.div`
 
 export const LeftContainer = styled.div`
   ${StickyEffect};
-  flex: 1 1 630px;
   white-space: nowrap;
-  margin-left: -20px;
 `;
 
-export const MiddleContainer = styled.div`
-  flex: 2 1 auto;
-`;
+export const MiddleContainer = styled.div``;
 
 export const RightContainer = styled.div`
   ${StickyEffect};
-  flex: 1 2 auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -210,10 +209,21 @@ export const EventItems = styled.div`
 
 export const EventItem = styled.div`
   display: flex;
+  width: 90%;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`;
+
+export const FakeEventItem = styled.div`
+  display: flex;
+  width: 90%;
 `;
 
 export const EventDescription = styled.div`
   margin-left: 15px;
+  width: 100%;
 `;
 
 export const EventAvatar = styled(Avatar)`
@@ -290,6 +300,8 @@ export const PostTitle = styled(BoldTypography)`
 export const PostContent = styled(Typography)`
   margin-top: 5px;
   font-size: 12px;
+  overflow: scroll;
+  max-height: 500px;
 `;
 
 export const ViewCommentLink = styled(Typography)`
@@ -325,6 +337,8 @@ export const PreviousCommentTitle = styled(BoldTypography)`
 
 export const PreviousCommentText = styled(Typography)`
   font-size: 12px;
+  overflow: scroll;
+  max-height: 150px;
 `;
 
 export const PreviousCommentContent = styled.div`
@@ -366,6 +380,14 @@ export const GoingBtn = styled(Button)`
   right: 1px;
 `;
 
+export const GoingBtnExpand = styled(Button)`
+  text-transform: none;
+  background-color: ${(props) => handleGoingBColor(props.bgcolor)};
+  height: 25px;
+  align-self: center;
+  color: ${(props) => handleGoingFColor(props.bgcolor)};
+`;
+
 export const ViewPost = styled.div`
   margin-top: 20px;
   border-radius: 5px;
@@ -377,4 +399,23 @@ export const CommentWrapper = styled.div`
   gap: 20px;
   padding: 25px 0;
   background: ${colors.white};
+`;
+
+export const CreateButton = styled(ActionButton)`
+  height: 26px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  padding: 15px;
+  margin-top: 5px;
+  margin-right: 5px;
+  font-size: 14px;
+  text-transform: none;
+  align-self: flex-end;
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `;

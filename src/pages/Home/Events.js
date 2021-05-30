@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   EventAvatar,
   EventDescription,
-  EventItem,
   EventItems,
   EventTypography,
   EventsWrapper,
@@ -10,50 +9,24 @@ import {
   GoingBtn,
   InfoSeperator,
   EventBadge,
+  AddFilter,
+  CreateButton,
+  FakeEventItem,
 } from "./StyleLanding";
-import styled from "styled-components";
-import { colors } from "../../shared/config";
-import { Typography } from "@material-ui/core";
 import { BoldTypography, TitleTypography } from "../../shared/Typography";
-import { useSelector, useDispatch } from "react-redux";
-import { goingToEvent } from "../../redux/actions/userActions";
+import { useSelector } from "react-redux";
 import ExpandedEvent from "./ExpandedEvent.js";
+import Event from "./Event.js";
 
 // Dayjs
 import dayjs from "dayjs";
-
 import { ActionButton } from "../../shared/Buttons";
 
 import calendar from "../../images/calendar.png";
 
+
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
-
-export const CreateButton = styled(ActionButton)`
-  height: 26px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  padding: 15px;
-  margin-top: 5px;
-  margin-right: 5px;
-  font-size: 14px;
-  text-transform: none;
-  align-self: flex-end;
-  text-decoration: none;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`;
-
-const makeDay = (moment) => {
-  let date = JSON.stringify(moment);
-  date = date.replace("T", " ");
-  date = date.replace("Z", " ");
-  return dayjs(date).format("MMM DD HH:mm a");
-};
 
 const test = (moment) => {
   let date = moment.replace("T", " ");
@@ -64,33 +37,31 @@ const test = (moment) => {
 const testEvent = [
   {
     _id: "123450",
-    title: "Embark Release",
-    authorEmail: "Embark",
-    datetime: "2021-03-03T08:00:00.000Z",
+    name: "Embark Release",
+    organizerName: "Embark",
+    startDate: /*"2021-03-03T08:00:00.000Z"*/ "2021-04-25T04:13:32.000Z",
+    endDate: "2021-04-25T06:13:32.000Z",
     description:
       "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
-    location: "here what do you think",
+    venue: "here what do you think, https://ucla.zoom.us/",
+    attendees: 4,
   },
 ];
 
-const Events = ({ setNewEvent }) => {
-  const dispatch = useDispatch();
-  const club = true; //use backend call to test if it is a club
-
-  const goingClick = (id) => {
-    dispatch(goingToEvent(id));
-  };
-
+const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
   const events = useSelector((state) => state.data.events);
-  const attending = useSelector((state) => state.user.goingEvents);
+  const usertype = useSelector((state) => state.user.userType);
+
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});
   const loadExpanded = (e) => {
-    console.log(e);
+    //console.log(e);
     setEvent(e);
-    console.log(event);
-    setExpanded(true);
+    //console.log(event);
+    //setExpanded(true);
+    setExpandedEventPage(e);
   };
+
   return (
     <>
       <ExpandedEvent
@@ -101,6 +72,7 @@ const Events = ({ setNewEvent }) => {
       <EventsWrapper>
         <TitleTypography>Upcoming Events</TitleTypography>
         <EventItems>
+
           <EventItem>
             <EventBadge
               anchorOrigin={{
@@ -121,6 +93,10 @@ const Events = ({ setNewEvent }) => {
                 <EventAvatar />
               </EventBadge>
             </EventBadge>
+
+          <FakeEventItem>
+            <EventAvatar></EventAvatar>
+
             <EventDescription>
               <BoldTypography sz={"16px"}>Demo Day</BoldTypography>
               <EventTypography>UCLA DevX</EventTypography>
@@ -129,8 +105,9 @@ const Events = ({ setNewEvent }) => {
               </TimeTypography>
             </EventDescription>
             <GoingBtn bgcolor={true}>Going</GoingBtn>
-          </EventItem>
+          </FakeEventItem>
           <InfoSeperator></InfoSeperator>
+
           <EventItem>
             <EventBadge
               anchorOrigin={{
@@ -151,6 +128,10 @@ const Events = ({ setNewEvent }) => {
                 <EventAvatar />
               </EventBadge>
             </EventBadge>
+
+          <FakeEventItem>
+            <EventAvatar></EventAvatar>
+
             <EventDescription>
               <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
               <EventTypography>Club1234</EventTypography>
@@ -159,10 +140,11 @@ const Events = ({ setNewEvent }) => {
               </TimeTypography>
             </EventDescription>
             <GoingBtn bgcolor={false}>Going</GoingBtn>
-          </EventItem>
+          </FakeEventItem>
           {testEvent.map((p) => {
             return (
               <>
+
                 <InfoSeperator key={p._id + "sep"}></InfoSeperator>
                 <EventItem key={p._id}>
                   <EventBadge
@@ -193,31 +175,20 @@ const Events = ({ setNewEvent }) => {
                   </EventDescription>
                   <GoingBtn bgcolor={false}>Going</GoingBtn>
                 </EventItem>
+
+                <Event loadExpanded={loadExpanded} e={p} test={true} />
               </>
             );
           })}
           {events.map((e) => {
             return (
               <>
-                <InfoSeperator key={e._id + "sep"}></InfoSeperator>
-                <EventItem key={e._id}>
-                  <EventAvatar onClick={() => loadExpanded(e)}></EventAvatar>
-                  <EventDescription onClick={() => loadExpanded(e)}>
-                    <BoldTypography sz={"16px"}>{e.title}</BoldTypography>
-                    <EventTypography>{e.authorEmail}</EventTypography>
-                    <TimeTypography>{makeDay(e.datetime)}</TimeTypography>
-                  </EventDescription>
-                  <GoingBtn
-                    onClick={goingClick(e._id)}
-                    bgcolor={attending.contains(e._id)}
-                  >
-                    Going
-                  </GoingBtn>
-                </EventItem>
+                <Event loadExpanded={loadExpanded} e={e} test={false} />
               </>
             );
           })}
-          {club === true ? (
+          <AddFilter onClick={openEvents}>View More</AddFilter>
+          {usertype === "club" ? (
             <CreateButton onClick={() => setNewEvent(true)}>
               + Create
             </CreateButton>

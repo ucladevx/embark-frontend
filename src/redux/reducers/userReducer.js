@@ -6,10 +6,13 @@ import {
   UNLIKE_POST,
   MARK_NOTIFICATIONS_READ,
   GOING_EVENT,
+  OWN_EVENTS,
+  CANCEL_ATTENDANCE_EVENT,
 } from "../types";
 
 const intialState = {
   authenticated: false,
+  _id: null,
   info: {},
   notifications: [],
   likedPosts: [],
@@ -17,6 +20,7 @@ const intialState = {
   clubs: [],
   industry: "",
   userType: "student",
+  ownEvents: [],
 };
 
 export default function userReducer(state = intialState, action) {
@@ -32,6 +36,8 @@ export default function userReducer(state = intialState, action) {
       return {
         authenticated: true,
         ...action.payload,
+        goingEvents: [],
+        ownEvents: [],
       };
     // TODO: uncomment this after the like endpoint is updated
     // case LIKE_POST:
@@ -60,7 +66,19 @@ export default function userReducer(state = intialState, action) {
     case GOING_EVENT:
       return {
         ...state,
-        goingEvents: [...state.goingEvents, action.payload],
+        goingEvents: action.payload.events,
+      };
+    case OWN_EVENTS:
+      return {
+        ...state,
+        ownEvents: [action.payload],
+      };
+    case CANCEL_ATTENDANCE_EVENT:
+      return {
+        ...state,
+        goingEvents: state.goingEvents.filter(
+          (event) => event.eventId !== action.payload,
+        ),
       };
     default:
       return state;

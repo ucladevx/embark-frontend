@@ -6,10 +6,15 @@ import {
   Checkbox,
   ListItemText,
   TextField,
+  Typography,
+  IconButton,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { IndustryFilters } from "../../shared/dropdown";
 import { colors } from "../../shared/config";
+import close_window_x from "../../images/close_window_x.png";
+import checked from "../../images/checked_24px.png";
+import unchecked from "../../images/unchecked_24px.png";
 import { useDispatch, useSelector } from "react-redux";
 import { editStudentDetails } from "../../redux/actions/userActions";
 import styled from "styled-components";
@@ -29,36 +34,59 @@ import {
   TextFieldWrapper,
   DoneBtn,
 } from "./StyleEditProfile";
+import {
+  DropDownBox,
+  DropDownTitle,
+  DropDownContent,
+  DropDownCheckBox,
+  Finished,
+} from "../../shared/dropdown";
+import DropdownArrow from "../../images/DropdownArrow.png";
 import lawn from "../../images/lawn.png";
 import { makeStyles } from "@material-ui/core/styles";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { ActionButton } from "../../shared/Buttons";
+import MultiDropDown from "../../shared/Dropdown/MultiDropDown";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  menuPaper: {
-    maxHeight: 300,
+  button: {
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
   },
 }));
 
-const EditClubProfile = ({ open, handleClose, currentAbout }) => {
+const EditClubProfile = ({ open, handleClose }) => {
   const classes = useStyles();
-  const years = ["2021", "2022", "2023", "2024"];
   const industry = IndustryFilters;
   const user = useSelector((state) => state.user);
-  const [name, setName] = useState("");
-  const [profilePicURL, setProfilePicURL] = useState("");
-  const [coverPicURL, setcoverPicURL] = useState("");
+  const [name, setName] = useState(user.name);
+  const [profileURL, setProfileURL] = useState({ url: user.profilePicURL });
+  const [coverURL, setCoverURL] = useState({ url: user.coverPicURL });
   const [description, setDescription] = useState(user.description);
   const [industries, setIndustries] = useState(user.tags);
   const [website, setWebsite] = useState(user.website);
-  const [about, setAbout] = useState(currentAbout);
+  const [about, setAbout] = useState(user.about);
+  const hiddenProfileInput = React.useRef(null);
+  const hiddenCoverInput = React.useRef(null);
+
+  //check if there is any changes
+  const saveClub = () => {
+    return (
+      (user.about === about || about === "") &&
+      (user.description === description || description === "") &&
+      //JSON.stringify(user.tags.sort()) === JSON.stringify(industries.sort()) &&
+      (user.website === website || website === "")
+    );
+  };
+
+  //dropdown toggle
+  const [openInd, setOpenInd] = useState(false);
+  const toggleOpenInd = () => {
+    setOpenInd(!openInd);
+  };
 
   // Redux
   const dispatch = useDispatch();
@@ -67,8 +95,19 @@ const EditClubProfile = ({ open, handleClose, currentAbout }) => {
     setDescription(e.target.value);
   };
 
-  const handleIndustries = (e) => {
-    setIndustries(e.target.value);
+  const removeIndustries = (name) => {
+    const newIndustries = industries.filter((ind) => ind !== name);
+    setIndustries(newIndustries);
+  };
+
+  const handleIndustries = (name) => {
+    if (industries && industries.includes(name)) {
+      const newIndustries = industries.filter((ind) => ind !== name);
+      setIndustries(newIndustries);
+    } else {
+      const newIndustries = [...industries, name];
+      setIndustries(newIndustries);
+    }
   };
 
   const handleWebsite = (e) => {
@@ -79,15 +118,49 @@ const EditClubProfile = ({ open, handleClose, currentAbout }) => {
     setAbout(e.target.value);
   };
 
+  const handleClubProfileURL = (e) => {
+    console.log(e.target.files[0]);
+    setProfileURL({ url: URL.createObjectURL(e.target.files[0]) });
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]); // appending file
+    console.log(formData);
+    axios.post(
+      "http://localhost:9000/club/profile/image?pictureType=profile",
+      formData,
+    );
+  };
+
+  const handleClubCoverURL = (e) => {
+    setCoverURL({ url: URL.createObjectURL(e.target.files[0]) });
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]); // appending file
+    console.log(formData);
+    axios.post(
+      "http://localhost:9000/club/profile/image?pictureType=cover",
+      formData,
+    );
+  };
+
   const handleSubmit = async () => {
+    if (name && name.length > 100) {
+      alert("Name is too long! Please limit to <100 characters");
+      return;
+    }
+    if (description && description.length > 10000) {
+      alert("Description is too long! Please limit to <10000 characters");
+      return;
+    }
+    if (website && website.length > 200) {
+      alert("Website link is too long! Please limit to <200 characters");
+      return;
+    }
     const updatedProfile = {
       name,
       industries,
       description,
-      profilePicURL,
-      coverPicURL,
       website,
     };
+    //is there a rdux like this for club?
     dispatch(editStudentDetails(updatedProfile));
     handleClose();
   };
@@ -104,114 +177,121 @@ const EditClubProfile = ({ open, handleClose, currentAbout }) => {
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
         </EditProfileTitle>
+        <IconButton
+          className={classes.button}
+          style={{ padding: "0" }}
+          onClick={handleClose}
+        >
+          <img src={close_window_x}></img>
+        </IconButton>
       </TitleContainer>
       <EditProfileContent>
-        <EditProfileAvatar rounded></EditProfileAvatar>
-        <ChangeAvatarLink fontColor="red" align="center">
-          Change Profile Photo
+        {/* Avatar */}
+        <EditProfileAvatar
+          src={profileURL.url ? profileURL.url : user.profilePicURL}
+          rounded="true"
+        ></EditProfileAvatar>
+        <ChangeAvatarLink
+          fontColor="red"
+          align="center"
+          onClick={() => {
+            hiddenProfileInput.current.click();
+          }}
+        >
+          Change Profile Picture
         </ChangeAvatarLink>
-        <TextFieldWrapper>
-          <EditCoverImage src={lawn}></EditCoverImage>
-        </TextFieldWrapper>
+        <input
+          type="file"
+          ref={hiddenProfileInput}
+          style={{ display: "none" }}
+          onChange={handleClubProfileURL}
+        />
 
-        <ChangeAvatarLink align="center">Change Cover Photo</ChangeAvatarLink>
+        {/* Cover Picture */}
+        <TextFieldWrapper>
+          <EditCoverImage
+            src={coverURL.url ? coverURL.url : user.coverPicURL}
+          ></EditCoverImage>
+        </TextFieldWrapper>
+        <ChangeAvatarLink
+          align="center"
+          onClick={() => {
+            hiddenCoverInput.current.click();
+          }}
+        >
+          Change Cover Photo
+        </ChangeAvatarLink>
+        <input
+          type="file"
+          ref={hiddenCoverInput}
+          style={{ display: "none" }}
+          onChange={handleClubCoverURL}
+        />
+
+        {/* Description */}
         <TextFieldWrapper>
           <BoldTypography sz={"16px"}>Description:</BoldTypography>
           <DialogTextField
-            value={description}
             autoFocus
             margin="dense"
             id="name"
-            placeholder="Add your description"
+            placeholder={"Add your description"}
             type="email"
             fullWidth
             multiline
-            rows={2}
+            rows={3}
             InputProps={{
               disableUnderline: true,
               style: {
                 fontSize: 16,
                 fontWeight: 600,
+                padding: "8px 16px",
               },
             }}
             onChange={handleDescription}
           />
         </TextFieldWrapper>
 
+        {/* Relevant Industries */}
         <TextFieldWrapper>
           <BoldTypography sz={"16px"}>Relevant Industries:</BoldTypography>
+
+          {/* Industry filters */}
           <ExploreFilter>
-            <ExploreObj bgcolor={colors.red1}>Product Management</ExploreObj>
-            <ExploreObj bgcolor={colors.darkyellow}>Product Design</ExploreObj>
+            {industry &&
+              industry.map((name) => (
+                <ExploreObj
+                  key={name}
+                  bgcolor={colors.gray}
+                  onClick={() => {
+                    removeIndustries(name);
+                  }}
+                >
+                  &times; {name}
+                </ExploreObj>
+              ))}
           </ExploreFilter>
-          <FormControlC>
-            <Select
-              multiple
-              disableUnderline
-              value={user.tags}
-              onChange={handleIndustries}
-              MenuProps={{
-                getContentAnchorEl: null,
-                anchorOrigin: {
-                  vertical: "bottom",
-                  horizontal: "left",
-                },
-                classes: { paper: classes.menuPaper },
-              }}
-            >
-              {industry &&
-                industry.map((name) => (
-                  <MenuItem key={name} value={name}>
-                    <Checkbox
-                      checked={industries && industries.includes(name)}
-                      color="default"
-                    />
-                    <ListItemText primary={name} />
-                  </MenuItem>
-                ))}
-            </Select>
-          </FormControlC>
-          {/* <TextField
-          select
-          value="Select all that apply"
-          onChange={handleTags}
-          InputProps={{ disableUnderline: true }}q
-          SelectProps={{
-            native: true,
-          }}
-          variant="filled"
-        >
-          {industry.map((name) => (
-            <MenuItem key={name} value={name}>
-                <Checkbox checked = {tags.includes(name)} color="default"/>
-                <ListItemText primary={name} />
-            </MenuItem>
-          ))}
-        </TextField> */}
 
-          {/* <FormControlC>
-              <InputLabel >Select all that apply</InputLabel>
-              <Select 
-              disableUnderline
-              multiple
-              value = {industry}
-
-              // defaultValue=""
-              onChange={handleTags}
-              >
-                <Suggested>Suggested</Suggested>
-
-                {industry.map((name, index) => (
-                  <MenuItem key={name} value={name}>
-                    <Checkbox checked = {false} color="default"/>
-                    <ListItemText primary={name} />
-                  </MenuItem>
-                ))}
-
-              </Select>
-            </FormControlC> */}
+          {/* dropdown menu */}
+          <MultiDropDown
+            onOpenClose={toggleOpenInd}
+            onSelect={handleIndustries}
+            options={industry}
+            selectedOptions={industries}
+            open={openInd}
+            title="Select all that apply"
+            ttwd="312px"
+            tthg="35px"
+            bwd="314px"
+            bhg="202px"
+            cef="312px"
+            chg="248px"
+            fwd="314px"
+            fhg="46px"
+          ></MultiDropDown>
         </TextFieldWrapper>
 
+        {/* Website */}
         <TextFieldWrapper>
           <BoldTypography sz={"16px"}>Website:</BoldTypography>
           <DialogTextField
@@ -227,37 +307,47 @@ const EditClubProfile = ({ open, handleClose, currentAbout }) => {
               style: {
                 fontSize: 16,
                 fontWeight: 600,
+                padding: "8px 16px",
               },
             }}
             onChange={handleWebsite}
           />
         </TextFieldWrapper>
 
+        {/* About */}
         <TextFieldWrapper>
           <BoldTypography sz={"16px"}>About:</BoldTypography>
+
           <DialogTextField
             value={about}
             autoFocus
             margin="dense"
             id="name"
-            placeholder="Add an About Section to your Page"
+            placeholder={"Add an About Section to your Page"}
             type="email"
             fullWidth
             multiline
-            rows={2}
+            rows={3}
             InputProps={{
               disableUnderline: true,
               style: {
                 fontSize: 16,
                 fontWeight: 600,
+                padding: "8px 16px",
               },
             }}
             onChange={handleAbout}
           />
         </TextFieldWrapper>
 
+        {/* Done Button */}
         <EditProfileDone>
-          <DoneBtn onClick={handleSubmit}>Done</DoneBtn>
+          <DoneBtn
+            onClick={handleSubmit}
+            bgcolor={saveClub() ? colors.gray : "#5473bb"}
+          >
+            Save
+          </DoneBtn>
         </EditProfileDone>
       </EditProfileContent>
     </EditProfileContainer>
