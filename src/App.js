@@ -15,6 +15,10 @@ import theme from "./utils/theme";
 // Pages
 import Login from "./pages/Login/Login.js";
 import OnBoarding from "./pages/OnBoarding";
+import ClubOnBoarding from "./pages/ClubOnBoarding";
+import ClubDetails from "./pages/ClubOnBoarding/FormPersonalDetails";
+import studentDetails from "./pages/OnBoarding/FormPersonalDetails";
+
 import Home from "./pages/Home";
 import ErrorPage from "./pages/ErrorPage";
 import StudentProfile from "./pages/Profile/StudentProfile";
@@ -45,7 +49,20 @@ function App() {
               <Route exact path="/linkedin" component={LinkedInPopUp}></Route>
               <Route exact path="/" component={OnBoarding}></Route>
               <Route exact path="/login" component={Login}></Route>
+              <Route
+                exact
+                path="/club-signup"
+                component={ClubOnBoarding}
+              ></Route>
               <Route exact path="/home" component={Home}></Route>
+              <Route exact path="/" component={OnBoarding}></Route>
+              <Route exact path="/clubDetails" component={ClubDetails}></Route>
+              <Route
+                exact
+                path="/studentDetails"
+                component={studentDetails}
+              ></Route>
+
               <Route
                 exact
                 path="/user/:userid"

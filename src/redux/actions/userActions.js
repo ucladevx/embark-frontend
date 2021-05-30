@@ -78,6 +78,20 @@ export const getStudentData = () => async (dispatch) => {
 //   }
 // };
 
+export const getClubData = () => async (dispatch) => {
+  try {
+    const res = await axios.get("/club/profile");
+    const payload = { ...res.data.club, userType: "club" };
+    dispatch({
+      type: SET_USER,
+      payload,
+    });
+  } catch (err) {
+    console.error(err);
+    maintenanceErrorCheck(err);
+  }
+};
+
 // Sign Up a user
 export const signupStudent =
   (newUserData, handleUser, handleStep) => async (dispatch) => {
@@ -86,6 +100,21 @@ export const signupStudent =
       console.log(res.data);
       setAuthorizationHeader(res.data.token);
       dispatch(getStudentData());
+      handleUser(newUserData);
+      handleStep(1);
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: SET_ERRORS, payload: err.response.data });
+      maintenanceErrorCheck(err);
+    }
+  };
+
+export const signupClub =
+  (newUserData, handleUser, handleStep) => async (dispatch) => {
+    try {
+      const res = await axios.post("/auth/signup", newUserData);
+      setAuthorizationHeader(res.data.token);
+      dispatch(getClubData());
       handleUser(newUserData);
       handleStep(1);
     } catch (err) {

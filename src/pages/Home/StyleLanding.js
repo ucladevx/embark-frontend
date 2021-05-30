@@ -1,7 +1,16 @@
 import styled from "styled-components";
 import { colors } from "../../shared/config";
-import { Avatar, Button, TextField, Typography } from "@material-ui/core";
+
+import {
+  Avatar,
+  Button,
+  TextField,
+  Typography,
+  Badge,
+} from "@material-ui/core";
+
 import { ActionButton } from "../../shared/Buttons";
+
 import { BoldTypography } from "../../shared/Typography";
 import {
   handleTagColor,
@@ -223,6 +232,8 @@ export const EventAvatar = styled(Avatar)`
   text-align: center;
   font-size: 15px;
 `;
+
+export const EventBadge = styled(Badge)``;
 
 export const PostWrapper = styled.div`
   margin-top: 20px;

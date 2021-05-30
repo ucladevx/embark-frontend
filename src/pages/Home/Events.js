@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  EventAvatar,
   EventDescription,
   EventItems,
   EventTypography,
@@ -16,6 +15,7 @@ import { BoldTypography, TitleTypography } from "../../shared/Typography";
 import { useSelector } from "react-redux";
 import ExpandedEvent from "./ExpandedEvent.js";
 import Event from "./Event.js";
+import BadgeEventAvatar from "./Event/BadgeEventAvatar";
 
 // Dayjs
 import dayjs from "dayjs";
@@ -68,7 +68,7 @@ const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
         <TitleTypography>Upcoming Events</TitleTypography>
         <EventItems>
           <FakeEventItem>
-            <EventAvatar></EventAvatar>
+            <BadgeEventAvatar></BadgeEventAvatar>
             <EventDescription>
               <BoldTypography sz={"16px"}>Demo Day</BoldTypography>
               <EventTypography>UCLA DevX</EventTypography>
@@ -79,8 +79,9 @@ const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
             <GoingBtn bgcolor={true}>Going</GoingBtn>
           </FakeEventItem>
           <InfoSeperator></InfoSeperator>
+
           <FakeEventItem>
-            <EventAvatar></EventAvatar>
+            <BadgeEventAvatar></BadgeEventAvatar>
             <EventDescription>
               <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
               <EventTypography>Club1234</EventTypography>
@@ -90,6 +91,7 @@ const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
             </EventDescription>
             <GoingBtn bgcolor={false}>Going</GoingBtn>
           </FakeEventItem>
+
           {testEvent.map((p) => {
             return (
               <>
