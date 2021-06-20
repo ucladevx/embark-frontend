@@ -51,32 +51,19 @@ export const getStudentData = () => async (dispatch) => {
       type: SET_USER,
       payload,
     });
-
-    const eventres = await axios.get("/events/going", {
-      params: { userType: "student" },
-    });
-    dispatch({
-      type: GOING_EVENT,
-      payload: eventres,
-    });
+    // TODO: uncomment once the backend is fixed
+    // const eventres = await axios.get("/events/going", {
+    //   params: { userType: "student" },
+    // });
+    // dispatch({
+    //   type: GOING_EVENT,
+    //   payload: eventres,
+    // });
   } catch (err) {
     console.error(err);
     maintenanceErrorCheck(err);
   }
 };
-// export const getClubData = () => async (dispatch) => {
-//   try {
-//     const res = await axios.get("/club/profile");
-//     const payload = { ...res.data.student, userType: "club" };
-//     dispatch({
-//       type: SET_CLUB,
-//       payload,
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     maintenanceErrorCheck(err);
-//   }
-// };
 
 export const getClubData = () => async (dispatch) => {
   try {
@@ -104,7 +91,8 @@ export const signupStudent =
       handleStep(1);
     } catch (err) {
       console.log(err);
-      dispatch({ type: SET_ERRORS, payload: err.response.data });
+      if (err.response.data)
+        dispatch({ type: SET_ERRORS, payload: err.response.data });
       maintenanceErrorCheck(err);
     }
   };
@@ -119,7 +107,8 @@ export const signupClub =
       handleStep(1);
     } catch (err) {
       console.log(err);
-      dispatch({ type: SET_ERRORS, payload: err.response.data });
+      if (err.response.data)
+        dispatch({ type: SET_ERRORS, payload: err.response.data });
       maintenanceErrorCheck(err);
     }
   };

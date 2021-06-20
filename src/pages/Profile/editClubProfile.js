@@ -182,7 +182,7 @@ const EditClubProfile = ({ open, handleClose }) => {
           style={{ padding: "0" }}
           onClick={handleClose}
         >
-          <img src={close_window_x}></img>
+          <img src={close_window_x} alt="close"></img>
         </IconButton>
       </TitleContainer>
       <EditProfileContent>

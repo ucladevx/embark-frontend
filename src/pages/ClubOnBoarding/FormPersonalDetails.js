@@ -2,6 +2,7 @@ import { TextField } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useHistory } from "react-router-dom";
 import { ActionButton } from "../../shared/Buttons";
+import { useState } from "react";
 
 import {
   LeftFormContainer,
@@ -10,6 +11,7 @@ import {
   FormContainer,
   Prompt,
 } from "../../shared/Form";
+import websiteIcon from "../../images/website.svg";
 
 import styled from "styled-components";
 import { colors } from "../../shared/config.js";
@@ -17,6 +19,9 @@ import { Formik, Field } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { editStudentDetails } from "../../redux/actions/userActions";
+import { IndustryFilters } from "../../shared/Dropdown/StyleDropdown";
+import MultiDropDown from "../../shared/Dropdown/MultiDropDown";
+import { useIndustry } from "../../shared/Hook";
 
 const HeyTitle = styled.div`
   font-weight: 700;
@@ -37,16 +42,25 @@ const DoneBtn = styled(ActionButton)`
 `;
 
 const validateSchema = Yup.object({
-  major: Yup.string().required("Major is required").max(20),
   industry: Yup.string().required(),
-  year: Yup.string().required(),
 });
+
+const MajorField = styled.input`
+  width: 310px;
+  height: 40px;
+  background-color: #e1dfdf;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  line-height: 22px;
+  padding-left: 12px;
+`;
 
 const FormPersonalDetails = ({ user }) => {
   const history = useHistory();
-  const years = ["2021", "2022", "2023", "2024"];
-  const industry = ["Developer", "Design", "Marketing", "Product Mangement"];
   const dispatch = useDispatch();
+  const [industries, openInd, handleIndustries, handleOpenInd] = useIndustry();
+
   return (
     <FormContainer>
       <LeftFormContainer />
@@ -61,21 +75,16 @@ const FormPersonalDetails = ({ user }) => {
         </HeySubtitile>
         <Formik
           initialValues={{
-            year: "",
-            major: "",
-            industry: "",
-            linkedIn: "",
+            website: "",
           }}
           validationSchema={validateSchema}
           validateOnBlur={false}
           validateOnChange={false}
           onSubmit={(values) => {
-            const { year, major, linkedIn, industry } = values;
+            const { website } = values;
             const profile = {
-              year,
-              major,
-              linkedIn,
-              tags: [industry],
+              tags: industries,
+              website,
             };
             dispatch(editStudentDetails(profile));
             history.push("/home");
@@ -83,46 +92,30 @@ const FormPersonalDetails = ({ user }) => {
         >
           {({ errors }) => (
             <FormWrapper>
+              Relavent industries to your club:
+              <MultiDropDown
+                onOpenClose={handleOpenInd}
+                onSelect={handleIndustries}
+                options={IndustryFilters}
+                selectedOptions={industries}
+                open={openInd}
+                title="Select all that apply"
+                ttwd="312px"
+                tthg="35px"
+                bwd="314px"
+                bhg="202px"
+                cef="312px"
+                chg="248px"
+                fwd="314px"
+                fhg="46px"
+              ></MultiDropDown>
+              <p>You can change your interested industries in your Profile.</p>
+              Club Website
               <Field
-                as={TextField}
-                select
-                name="year"
-                label="Year"
-                helperText={errors.year}
-                error={!!errors.year}
-              >
-                {years.map((y) => (
-                  <MenuItem key={y} value={y} name="year">
-                    {y}
-                  </MenuItem>
-                ))}
-              </Field>
-              <Field
-                as={TextField}
-                name="major"
-                label="Major"
-                helperText={errors.major}
-                error={!!errors.major}
-              ></Field>
-              <Field
-                as={TextField}
-                name="industry"
-                label="Interested Industries:"
-                select
-                error={!!errors.industry}
-                helperText={errors.industry}
-              >
-                {industry.map((ind) => (
-                  <MenuItem key={ind} value={ind} name="industry">
-                    {ind}
-                  </MenuItem>
-                ))}
-              </Field>
-              <Field
-                as={TextField}
-                label="LinkedIn Profile: (Optional)"
+                as={MajorField}
+                label="website"
                 margin="normal"
-                name="linkedIn"
+                name="website"
               ></Field>
               <DoneBtn type="submit">Done</DoneBtn>
             </FormWrapper>
