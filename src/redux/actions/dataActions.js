@@ -315,7 +315,7 @@ export const getClubs = () => async (dispatch) => {
     const search = {
       searchString: "club",
     };
-    const clubs = await axios.get(`/search`, search);
+    const clubs = await axios.get(`/search?searchString=club`);
     console.log("here 2");
     console.log(clubs);
     let promises = [];
