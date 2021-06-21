@@ -16,6 +16,8 @@ import {
   InputLabel,
   FormControl,
   Divider,
+  Checkbox,
+  FormControlLabel,
 } from "@material-ui/core";
 
 import { BoldTypography } from "../shared/Typography";
@@ -86,9 +88,10 @@ const NewPost = ({ open, handleClose }) => {
   const [industry, setIndustry] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  var form = null;
-  var imgForm = null;
+  const [form, setForm] = useState({});
+  const [imgForm, setImgForm] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
+  const [resources, setResources] = useState(false);
   // Redux
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -109,10 +112,15 @@ const NewPost = ({ open, handleClose }) => {
     setSelectedFile(e.target.files[0]);
   };
 
+  const handleResources = () => {
+    setResources(!resources);
+  };
+
   const handleSubmit = async () => {
     var post = null;
     //making sure not to send null objects in the post request
     console.log(imgForm);
+    console.log(form);
     if (title && title.length > 100) {
       alert("Title is too long! Please limit to <100 characters");
       return;
@@ -121,8 +129,8 @@ const NewPost = ({ open, handleClose }) => {
       alert("Description is too long! Please limit to <5000 characters");
       return;
     }
-    if (form === null) {
-      if (imgForm === null) {
+    if (form.name === null) {
+      if (imgForm.name === null) {
         post = {
           title: title,
           body: description,
@@ -137,7 +145,7 @@ const NewPost = ({ open, handleClose }) => {
         };
       }
     } else {
-      if (imgForm === null) {
+      if (imgForm.name === null) {
         post = {
           title: title,
           body: description,
@@ -154,12 +162,16 @@ const NewPost = ({ open, handleClose }) => {
       }
     }
 
-    post.accountType = user.userType;
+    if (resources) {
+      post.tags = [...post.tags, "resources"];
+    }
 
+    post.accountType = user.userType;
+    console.log(post);
     dispatch(newPost(post));
     //Clean up component contents
-    form = null;
-    imgForm = null;
+    setForm({});
+    setImgForm({});
     setFile({ url: PDF1_URL });
     setFileType("pdf");
     setImage({ url: PDF1_URL });
@@ -187,7 +199,7 @@ const NewPost = ({ open, handleClose }) => {
     setFileType(file.name.substring(file.name.lastIndexOf(".") + 1));
     console.log(fileType);
     let myForm = document.getElementById("myForm");
-    form = new FormData(myForm);
+    setForm(new FormData(myForm));
     fileReader.onload = (fileLoad) => {
       const { result } = fileLoad.target;
       setFile({ url: result });
@@ -199,7 +211,7 @@ const NewPost = ({ open, handleClose }) => {
   const clearFile = () => {
     setFile({ url: PDF1_URL });
     setFileType("pdf");
-    form = null;
+    setForm({});
   };
 
   //Image handling
@@ -212,7 +224,7 @@ const NewPost = ({ open, handleClose }) => {
       return;
     }
     let myForm = document.getElementById("myImgForm");
-    imgForm = new FormData(myForm);
+    setImgForm(new FormData(myForm));
     imgReader.onload = (fileLoad) => {
       const { result } = fileLoad.target;
       setImage({ url: result });
@@ -223,7 +235,7 @@ const NewPost = ({ open, handleClose }) => {
 
   const clearImage = () => {
     setImage({ url: PDF1_URL });
-    imgForm = null;
+    setImgForm({});
   };
 
   const clearAll = () => {
@@ -311,6 +323,17 @@ const NewPost = ({ open, handleClose }) => {
         )}
       </DialogContent>
       <DialogActions>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={resources}
+              onChange={handleResources}
+              name="resources"
+              color="primary"
+            />
+          }
+          label="Post Contains Resources"
+        />
         <FileUpload handleFileInput={onFileChange} />
         <ImageUpload handleImageInput={onImageChange} />
         <PostBtn onClick={handleSubmit} color="primary">
