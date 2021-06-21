@@ -136,6 +136,9 @@ const NewPost = ({ open, handleClose }) => {
           body: description,
           tags: [industry],
         };
+        if (resources) {
+          post.tags = [...post.tags, "resource"];
+        }
       } else {
         post = {
           title: title,
@@ -143,27 +146,26 @@ const NewPost = ({ open, handleClose }) => {
           tags: [industry],
           files: [imgForm],
         };
+        if (resources) {
+          post.tags = [...post.tags, "resource"];
+        }
       }
     } else {
       if (imgForm.name === null) {
         post = {
           title: title,
           body: description,
-          tags: [industry],
+          tags: [industry, "resource"],
           files: [form],
         };
       } else {
         post = {
           title: title,
           body: description,
-          tags: [industry],
+          tags: [industry, "resource"],
           files: [form, imgForm],
         };
       }
-    }
-
-    if (resources) {
-      post.tags = [...post.tags, "resources"];
     }
 
     post.accountType = user.userType;

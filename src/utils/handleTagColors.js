@@ -39,6 +39,8 @@ export function handleTagColor(tag) {
     case "Strategy Operations":
     case "Corporate Finance":
       return colors.brown;
+    case "resource":
+      return colors.blue3;
     default:
       return colors.gray;
   }
