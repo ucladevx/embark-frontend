@@ -5,12 +5,18 @@ import {
   DELETE_POST,
   NEW_POST,
   SET_POST,
-  SUBMIT_COMMENT,
   ADD_FILTER,
   REMOVE_FILTER,
   FILTER_POSTS,
   SET_HAS_NEXT,
   SET_NEXT_STRING,
+  NEW_EVENT,
+  SET_EVENTS,
+  SET_CLUB_RESOURCES,
+  SET_CLUB_LINKS,
+  UPLOAD_CLUB_RESOURCES,
+  UPLOAD_CLUB_LINKS,
+  GET_CLUB,
 } from "../types";
 
 const initialState = {
@@ -18,6 +24,10 @@ const initialState = {
   filter: [],
   nextString: "",
   hasNext: true,
+  events: [],
+  resources: [],
+  links: [],
+  club: {},
 };
 
 export default function dataReducer(state = initialState, action) {
@@ -44,14 +54,13 @@ export default function dataReducer(state = initialState, action) {
     case LIKE_POST:
     case UNLIKE_POST:
       index = state.posts.findIndex(
-        (post) => post.postId === action.payload.postId
+        (post) => post.post_id === action.payload.post.post_id,
       );
-      state.posts[index] = action.payload;
-      if (state.post.postId === action.payload.postId) {
-        state.post = action.payload;
-      }
+      const newPosts = [...state.posts];
+      newPosts[index] = action.payload.post;
       return {
         ...state,
+        posts: newPosts,
       };
     case SET_POST:
       return {
@@ -78,7 +87,7 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         filter: state.filter.filter(
-          (eachfilter) => eachfilter !== action.payload
+          (eachfilter) => eachfilter !== action.payload,
         ),
       };
     case FILTER_POSTS: {
@@ -100,6 +109,41 @@ export default function dataReducer(state = initialState, action) {
         posts: postsCopy,
       };
     }
+    case NEW_EVENT:
+      return {
+        ...state,
+        events: [action.payload, ...state.events],
+      };
+    case SET_EVENTS:
+      return {
+        ...state,
+        events: action.payload,
+      };
+    case SET_CLUB_RESOURCES:
+      return {
+        ...state,
+        resources: action.payload,
+      };
+    case SET_CLUB_LINKS:
+      return {
+        ...state,
+        links: action.payload,
+      };
+    case UPLOAD_CLUB_RESOURCES:
+      return {
+        ...state,
+        resources: [action.payload, ...state.resources],
+      };
+    case UPLOAD_CLUB_LINKS:
+      return {
+        ...state,
+        links: [action.payload, ...state.links],
+      };
+    case GET_CLUB:
+      return {
+        ...state,
+        club: action.payload,
+      };
     default:
       return state;
   }

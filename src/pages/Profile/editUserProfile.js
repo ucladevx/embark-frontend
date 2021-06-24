@@ -11,10 +11,7 @@ import { colors } from "../../shared/config";
 import { useDispatch, useSelector } from "react-redux";
 import { editStudentDetails } from "../../redux/actions/userActions";
 import styled from "styled-components";
-import{
-  ExploreObj,
-  ExploreFilter,
-} from "./StyleProfile";
+import { ExploreObj, ExploreFilter } from "./StyleProfile";
 import {
   EditProfileContainer,
   EditProfileAvatar,
@@ -29,22 +26,31 @@ import {
   DialogTextField,
   TextFieldWrapper,
   PostBtn,
-} from "./StyleEditProfile"
+} from "./StyleEditProfile";
 import lawn from "../../images/lawn.png";
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const EditProfile = ({ open, handleClose }) => {
   const years = ["2021", "2022", "2023", "2024"];
-  const industry = ["Business", "Computer Science", "Marketing", "Product Design", "Product Management", "Other"];
+  const industry = [
+    "Business",
+    "Computer Science",
+    "Marketing",
+    "Product Design",
+    "Product Management",
+    "Other",
+  ];
   const user = useSelector((state) => state.user);
-  const [name, setName] = useState(user.name)
-  const [email, setEmail] = useState(user.email)
-  const [major, setMajor] = useState(user.major)
-  const [year, setYear] = useState(user.year)
-  const [tags, setTags] = useState(["Business", "Computer Science"] + user.tags);
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [major, setMajor] = useState(user.major);
+  const [year, setYear] = useState(user.year);
+  const [tags, setTags] = useState(
+    ["Business", "Computer Science"] + user.tags,
+  );
   const [bio, setBio] = useState(user.bio);
-  const [linkedin, setLinkedin] = useState(user.linkedIn); 
+  const [linkedin, setLinkedin] = useState(user.linkedIn);
 
   // Redux
   const dispatch = useDispatch();
@@ -54,7 +60,6 @@ const EditProfile = ({ open, handleClose }) => {
   const handleMajor = (e) => {
     setMajor(e.target.value);
   };
-
 
   const handleTags = (e) => {
     let curTags = tags.slice();
@@ -68,11 +73,11 @@ const EditProfile = ({ open, handleClose }) => {
 
   const handleSubmit = async () => {
     const updatedProfile = {
-      name, 
-      major, 
-      year, 
-      tags, 
-      bio, 
+      name,
+      major,
+      year,
+      tags,
+      bio,
       linkedin,
     };
     dispatch(editStudentDetails(updatedProfile));
@@ -82,36 +87,38 @@ const EditProfile = ({ open, handleClose }) => {
   return (
     <EditProfileContainer open={open} onClose={handleClose}>
       <TitleContainer>
-        <EditProfileTitle align="center" sz={"18px"}>Edit Profile</EditProfileTitle>
+        <EditProfileTitle align="center" sz={"18px"}>
+          Edit Profile
+        </EditProfileTitle>
       </TitleContainer>
 
       <EditProfileContent>
+        <EditProfileAvatar rounded></EditProfileAvatar>
 
-          <EditProfileAvatar rounded></EditProfileAvatar>
+        <ChangeAvatarLink fontColor="red" align="center">
+          Change Profile Picture
+        </ChangeAvatarLink>
+        <TextFieldWrapper>
+          <EditCoverImage src={lawn}></EditCoverImage>
+        </TextFieldWrapper>
 
-
-      <ChangeAvatarLink fontColor="red" align="center">Change Profile Picture</ChangeAvatarLink>
-      <TextFieldWrapper>
-        <EditCoverImage src={lawn}></EditCoverImage>        
-      </TextFieldWrapper>
-
-      <ChangeAvatarLink align="center">Change Cover Photo</ChangeAvatarLink>
-      <TextFieldWrapper>
-        <BoldTypography  sz={"18px"}>Year:</BoldTypography>
-        <FormControlC>
-                <InputLabel>Year</InputLabel>
-                <Select value={year} onChange={handleYear}>
-                {years.map((y) => (
-                    <MenuItem key={y} value={y} name="year">
-                      {y}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControlC>        
-      </TextFieldWrapper>
+        <ChangeAvatarLink align="center">Change Cover Photo</ChangeAvatarLink>
+        <TextFieldWrapper>
+          <BoldTypography sz={"18px"}>Year:</BoldTypography>
+          <FormControlC>
+            <InputLabel>Year</InputLabel>
+            <Select value={year} onChange={handleYear}>
+              {years.map((y) => (
+                <MenuItem key={y} value={y} name="year">
+                  {y}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControlC>
+        </TextFieldWrapper>
 
         <TextFieldWrapper>
-        <BoldTypography  sz={"18px"}>Major:</BoldTypography>
+          <BoldTypography sz={"18px"}>Major:</BoldTypography>
           <DialogTextField
             autoFocus
             margin="dense"
@@ -127,49 +134,44 @@ const EditProfile = ({ open, handleClose }) => {
               },
             }}
             onChange={handleMajor}
-          />          
+          />
         </TextFieldWrapper>
-        
+
         <TextFieldWrapper>
-        <BoldTypography  sz={"18px"}>Interested Industries:</BoldTypography>
+          <BoldTypography sz={"18px"}>Interested Industries:</BoldTypography>
 
-        <ExploreFilter>
-        {tags.map((name) => (
-          <ExploreObj bgcolor={colors.darkyellow}>
-              &times; {name}
-          </ExploreObj>           
+          <ExploreFilter>
+            {tags.map((name) => (
+              <ExploreObj bgcolor={colors.darkyellow}>
+                &times; {name}
+              </ExploreObj>
+            ))}
+          </ExploreFilter>
 
-                ))}
-      </ExploreFilter>
-
-        {/* <NewPostInfo> */}
+          {/* <NewPostInfo> */}
           {/* <NewPostUser> */}
-            <FormControlC>
-              <InputLabel>Select all that apply</InputLabel>
-              <Select 
-              multiple
-              value={tags} 
-              onChange={handleTags}
-              >
-                <Suggested>Suggested</Suggested>
-                {industry.map((name, index) => (
-                  <MenuItem key={name} value={name}>
-                    <Checkbox checked = {tags.includes(name)} color="default"/>
-                    <ListItemText primary={name} />
-                  </MenuItem>
-                ))}
-
-              </Select>
-            </FormControlC>
+          <FormControlC>
+            <InputLabel>Select all that apply</InputLabel>
+            <Select multiple value={tags} onChange={handleTags}>
+              <Suggested>Suggested</Suggested>
+              {industry.map((name, index) => (
+                <MenuItem key={name} value={name}>
+                  <Checkbox checked={tags.includes(name)} color="default" />
+                  <ListItemText primary={name} />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControlC>
 
           {/* </NewPostUser> */}
-        {/* </NewPostInfo> */}
+          {/* </NewPostInfo> */}
         </TextFieldWrapper>
-          
 
         <TextFieldWrapper>
-        <BoldTypography>{linkedin}</BoldTypography>
-        <BoldTypography  sz={"18px"}>LinkedIn Profile (Optional):</BoldTypography>
+          <BoldTypography>{linkedin}</BoldTypography>
+          <BoldTypography sz={"18px"}>
+            LinkedIn Profile (Optional):
+          </BoldTypography>
           <DialogTextField
             autoFocus
             margin="dense"
@@ -185,16 +187,13 @@ const EditProfile = ({ open, handleClose }) => {
               },
             }}
             onChange={handlelinkedIn}
-          />          
+          />
         </TextFieldWrapper>
       </EditProfileContent>
 
       <EditProfileDone>
-        <PostBtn onClick={handleSubmit} >
-          Done
-        </PostBtn>
+        <PostBtn onClick={handleSubmit}>Done</PostBtn>
       </EditProfileDone>
-
     </EditProfileContainer>
   );
 };

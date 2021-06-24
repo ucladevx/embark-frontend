@@ -11,9 +11,24 @@ import {
   REMOVE_FILTER,
   SET_NEXT_STRING,
   SET_HAS_NEXT,
+  NEW_EVENT,
+  SET_EVENTS,
+  SET_CLUB_RESOURCES,
+  SET_CLUB_LINKS,
+  UPLOAD_CLUB_RESOURCES,
+  UPLOAD_CLUB_LINKS,
+  SAVE_POST,
+  GET_CLUB,
 } from "../types";
 
 import axios from "axios";
+
+const maintenanceErrorCheck = (err) => {
+  if (err.message.includes(" 503")) {
+    console.log("here");
+    alert("ERROR 503: " + "Embark is on maintenance, please check later");
+  }
+};
 
 // Get All Posts
 export const getPosts = () => async (dispatch) => {
@@ -33,12 +48,16 @@ export const getPosts = () => async (dispatch) => {
     const res = await axios.get("/posts", {
       params,
     });
-
-    localStorage.setItem("nextString", res.data.paginatedPosts.next.toString());
+    if (res.data.paginatedPosts.next)
+      localStorage.setItem(
+        "nextString",
+        res.data.paginatedPosts.next.toString(),
+      );
     dispatch({ type: SET_POSTS, payload: res.data.paginatedPosts.results });
     dispatch({ type: SET_NEXT_STRING, payload: res.data.paginatedPosts.next });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -52,15 +71,16 @@ export const getNextPosts = () => async (dispatch, getState) => {
       },
     });
     const { posts } = getState().data;
+    console.log(res.data);
     const { results, next, hasNext } = res.data.paginatedPosts;
     const newPosts = [...posts, ...results];
-    console.log(next === localStorage.getItem("nextString"));
-    localStorage.setItem("nextString", next.toString());
+    if (!!next) localStorage.setItem("nextString", next.toString());
     dispatch({ type: SET_POSTS, payload: newPosts });
     dispatch({ type: SET_NEXT_STRING, payload: next });
     dispatch({ type: SET_HAS_NEXT, payload: hasNext });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -68,12 +88,25 @@ export const getNextPosts = () => async (dispatch, getState) => {
 export const newPost = (newP) => async (dispatch) => {
   try {
     const res = await axios.post("/posts", newP);
-    dispatch({ type: NEW_POST, payload: res.data });
+    dispatch({ type: NEW_POST, payload: res.data.post });
+  } catch (err) {
+    console.error(err);
+    maintenanceErrorCheck(err);
+  }
+};
+// Save a Post
+export const savePost = (post_id) => async (dispatch, getState) => {
+  try {
+    const { userType } = getState().user;
+    // TODO: Include accountType to default header once club flow is set up
+    const res = await axios.post("/posts/saved", { accountType: userType });
+    // TODO: check the documentation of save endpoint
+    console.log(res.data);
+    dispatch({ type: SAVE_POST, payload: res.data });
   } catch (err) {
     console.error(err);
   }
 };
-
 // Like a Post
 export const likePost = (post_id) => async (dispatch, getState) => {
   try {
@@ -82,20 +115,22 @@ export const likePost = (post_id) => async (dispatch, getState) => {
       post_id,
       authorEmail: email,
     };
-    const res = await axios.get(`/posts/likes`, body);
+    const res = await axios.post(`/posts/likes`, body);
     dispatch({ type: LIKE_POST, payload: res.data });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
 // Unlike a Post
 export const unlikePost = (postId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/posts/${postId}/unlike`);
+    const res = await axios.get(`/posts/`);
     dispatch({ type: UNLIKE_POST, payload: res.data });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -106,6 +141,7 @@ export const deletePost = (postId) => async (dispatch) => {
     dispatch({ type: DELETE_POST, payload: postId });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -116,40 +152,42 @@ export const getPost = (post_id) => async (dispatch) => {
     dispatch({ type: SET_POST, payload: res.data });
   } catch (err) {
     console.error(err);
+    maintenanceErrorCheck(err);
   }
 };
 
 // Submit a comment
-export const submitComment = (post_id, commentData) => async (
-  dispatch,
-  getState
-) => {
-  try {
-    const { email } = getState().user;
-    if (commentData.trim().length === 0) throw Error("comment cannot be empty");
-    const res = await axios.post(`/posts/comments`, {
-      post_id,
-      authorEmail: email,
-      comment: commentData,
-    });
-    const newPosts = getState().data.posts.map((p, i) => {
-      if (p._id === post_id) {
-        p.comments = res.data.comments;
-      }
-      return p;
-    });
+export const submitComment =
+  (post_id, commentData) => async (dispatch, getState) => {
+    try {
+      const { email } = getState().user;
+      // TODO: Add error display for comment
+      if (commentData.trim().length === 0)
+        throw Error("comment cannot be empty");
+      const res = await axios.post(`/posts/comments`, {
+        post_id,
+        authorEmail: email,
+        comment: commentData,
+      });
+      const newPosts = getState().data.posts.map((p, i) => {
+        if (p._id === post_id) {
+          p.comments = res.data.comments;
+        }
+        return p;
+      });
 
-    dispatch({
-      type: SET_POSTS,
-      payload: newPosts,
-    });
-    dispatch({
-      type: CLOSE_COMMENT,
-    });
-  } catch (err) {
-    console.error(err);
-  }
-};
+      dispatch({
+        type: SET_POSTS,
+        payload: newPosts,
+      });
+      dispatch({
+        type: CLOSE_COMMENT,
+      });
+    } catch (err) {
+      console.error(err);
+      maintenanceErrorCheck(err);
+    }
+  };
 
 // Get User Specific page
 export const getUserPage = (userHandle) => async (dispatch) => {
@@ -158,6 +196,7 @@ export const getUserPage = (userHandle) => async (dispatch) => {
     dispatch({ type: SET_POSTS, payload: res.data.posts });
   } catch (err) {
     dispatch({ type: SET_POSTS, payload: null });
+    maintenanceErrorCheck(err);
   }
 };
 
@@ -182,4 +221,88 @@ export const removeFilter = () => (dispatch) => {
   dispatch({
     type: REMOVE_FILTER,
   });
+};
+
+// Create A New Event
+export const newEvent = (newE) => async (dispatch) => {
+  try {
+    const res = await axios.post("/events/create", newE);
+    dispatch({ type: NEW_EVENT, payload: res.data });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+// Get All Events - unsure how the backend will handle event storage(is it paginated?)
+export const getEvents = (amount) => async (dispatch) => {
+  try {
+    const res = await axios.get("/events/discover", {
+      params: {
+        limitNum: amount,
+        userType: "student",
+      },
+    });
+    console.log(res.data);
+    dispatch({ type: SET_EVENTS, payload: res.data.events });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+// Get club resources
+export const getResources = () => async (dispatch) => {
+  try {
+    const res = await axios.get("/club/resources");
+    console.log(res);
+    dispatch({ type: SET_CLUB_RESOURCES, payload: res.data.resources });
+    dispatch({ type: SET_CLUB_LINKS, payload: res.data.embededlinks });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Club upload one resource
+export const uploadResource =
+  (newResource, resourceName) => async (dispatch) => {
+    try {
+      console.log(resourceName);
+      const formData = new FormData();
+      formData.append("file", newResource);
+      const res = await axios.post(
+        `/club/resources?linkFile=file&userNamed=${resourceName}`,
+        formData,
+      );
+      console.log(res);
+      dispatch({ type: UPLOAD_CLUB_RESOURCES, payload: res.data.fileUrls[0] });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+export const uploadLink = (newLink, linkName) => async (dispatch) => {
+  try {
+    console.log(linkName);
+    console.log(newLink);
+    const res = await axios.post(
+      `/club/resources?linkFile=link&userNamed=${linkName}`,
+      {
+        link: newLink,
+      },
+    );
+    console.log(res);
+    dispatch({ type: UPLOAD_CLUB_LINKS, payload: res.data.fileUrls });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//Grab a club's data as a non-club
+export const getExpandedClub = (clubId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/club/profilebyId?clubId=${clubId}`);
+    dispatch({ type: GET_CLUB, payload: res });
+    return res;
+  } catch (err) {
+    console.error(err);
+  }
 };

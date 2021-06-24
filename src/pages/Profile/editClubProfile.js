@@ -5,16 +5,20 @@ import {
   InputLabel,
   Checkbox,
   ListItemText,
+  TextField,
+  Typography,
+  IconButton,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
+import { IndustryFilters } from "../../shared/dropdown";
 import { colors } from "../../shared/config";
+import close_window_x from "../../images/close_window_x.png";
+import checked from "../../images/checked_24px.png";
+import unchecked from "../../images/unchecked_24px.png";
 import { useDispatch, useSelector } from "react-redux";
 import { editStudentDetails } from "../../redux/actions/userActions";
 import styled from "styled-components";
-import{
-  ExploreObj,
-  ExploreFilter,
-} from "./StyleProfile";
+import { ExploreObj, ExploreFilter, NameDescription } from "./StyleProfile";
 import {
   EditProfileContainer,
   EditProfileAvatar,
@@ -28,38 +32,82 @@ import {
   Suggested,
   DialogTextField,
   TextFieldWrapper,
-  PostBtn,
-} from "./StyleEditProfile"
+  DoneBtn,
+} from "./StyleEditProfile";
+import {
+  DropDownBox,
+  DropDownTitle,
+  DropDownContent,
+  DropDownCheckBox,
+  Finished,
+} from "../../shared/dropdown";
+import DropdownArrow from "../../images/DropdownArrow.png";
 import lawn from "../../images/lawn.png";
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { makeStyles } from "@material-ui/core/styles";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { ActionButton } from "../../shared/Buttons";
+import MultiDropDown from "../../shared/Dropdown/MultiDropDown";
+import axios from "axios";
 
-const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, currentabout }) => {
-  const industry = ["Business", "Computer Science", "Marketing", "Product Design", "Product Management", "Other"];
+const useStyles = makeStyles((theme) => ({
+  button: {
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+  },
+}));
 
-  const club = useSelector((state) => state.club);
-  const [name, setName] = useState("")
-  const [tags, setTags] = useState("")
-  const [profilePicURL, setProfilePicURL] = useState("")
-  const [coverPicURL, setcoverPicURL] = useState("")
-  const [description, setDescription] = useState("");
-  const [tags, setTags] = useState(user.tags);
-  const [website, setWebsite] = useState("");
-  const [about, setAbout] = useState(currentabout)
+const EditClubProfile = ({ open, handleClose }) => {
+  const classes = useStyles();
+  const industry = IndustryFilters;
+  const user = useSelector((state) => state.user);
+  const [name, setName] = useState(user.name);
+  const [profileURL, setProfileURL] = useState({ url: user.profilePicURL });
+  const [coverURL, setCoverURL] = useState({ url: user.coverPicURL });
+  const [description, setDescription] = useState(user.description);
+  const [industries, setIndustries] = useState(user.tags);
+  const [website, setWebsite] = useState(user.website);
+  const [about, setAbout] = useState(user.about);
+  const hiddenProfileInput = React.useRef(null);
+  const hiddenCoverInput = React.useRef(null);
 
+  //check if there is any changes
+  const saveClub = () => {
+    return (
+      (user.about === about || about === "") &&
+      (user.description === description || description === "") &&
+      //JSON.stringify(user.tags.sort()) === JSON.stringify(industries.sort()) &&
+      (user.website === website || website === "")
+    );
+  };
+
+  //dropdown toggle
+  const [openInd, setOpenInd] = useState(false);
+  const toggleOpenInd = () => {
+    setOpenInd(!openInd);
+  };
 
   // Redux
   const dispatch = useDispatch();
 
   const handleDescription = (e) => {
     setDescription(e.target.value);
-  };  
-  
-  const handleTags = (e) => {
-    let curTags = tags.slice();
-    console.log(curTags);
-    curTags.push(e.target.value);
-    setTags(curTags);
+  };
+
+  const removeIndustries = (name) => {
+    const newIndustries = industries.filter((ind) => ind !== name);
+    setIndustries(newIndustries);
+  };
+
+  const handleIndustries = (name) => {
+    if (industries && industries.includes(name)) {
+      const newIndustries = industries.filter((ind) => ind !== name);
+      setIndustries(newIndustries);
+    } else {
+      const newIndustries = [...industries, name];
+      setIndustries(newIndustries);
+    }
   };
 
   const handleWebsite = (e) => {
@@ -70,90 +118,184 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, currentabo
     setAbout(e.target.value);
   };
 
+  const handleClubProfileURL = (e) => {
+    console.log(e.target.files[0]);
+    setProfileURL({ url: URL.createObjectURL(e.target.files[0]) });
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]); // appending file
+    console.log(formData);
+    axios.post(
+      "http://localhost:9000/club/profile/image?pictureType=profile",
+      formData,
+    );
+  };
+
+  const handleClubCoverURL = (e) => {
+    setCoverURL({ url: URL.createObjectURL(e.target.files[0]) });
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]); // appending file
+    console.log(formData);
+    axios.post(
+      "http://localhost:9000/club/profile/image?pictureType=cover",
+      formData,
+    );
+  };
+
   const handleSubmit = async () => {
-    EditAbout(about);
-    EditWebsite(website);
+    if (name && name.length > 100) {
+      alert("Name is too long! Please limit to <100 characters");
+      return;
+    }
+    if (description && description.length > 10000) {
+      alert("Description is too long! Please limit to <10000 characters");
+      return;
+    }
+    if (website && website.length > 200) {
+      alert("Website link is too long! Please limit to <200 characters");
+      return;
+    }
     const updatedProfile = {
-        name,
-        tags,
-        description,
-        profilePicURL,
-        coverPicURL,
-        website
+      name,
+      industries,
+      description,
+      website,
     };
+    //is there a rdux like this for club?
     dispatch(editStudentDetails(updatedProfile));
     handleClose();
   };
 
   return (
-    <EditProfileContainer open={open} onClose={handleClose}>
+    <EditProfileContainer
+      open={open}
+      onClose={handleClose}
+      scroll="body"
+      aria-labelledby="scroll-dialog-title"
+      aria-describedby="scroll-dialog-description"
+    >
       <TitleContainer>
-        <EditProfileTitle align="center" sz={"18px"}>Edit Profile</EditProfileTitle>
+        <EditProfileTitle align="center" sz={"18px"}>
+          Edit Profile
+        </EditProfileTitle>
+        <IconButton
+          className={classes.button}
+          style={{ padding: "0" }}
+          onClick={handleClose}
+        >
+          <img src={close_window_x} alt="close"></img>
+        </IconButton>
       </TitleContainer>
-
       <EditProfileContent>
+        {/* Avatar */}
+        <EditProfileAvatar
+          src={profileURL.url ? profileURL.url : user.profilePicURL}
+          rounded="true"
+        ></EditProfileAvatar>
+        <ChangeAvatarLink
+          fontColor="red"
+          align="center"
+          onClick={() => {
+            hiddenProfileInput.current.click();
+          }}
+        >
+          Change Profile Picture
+        </ChangeAvatarLink>
+        <input
+          type="file"
+          ref={hiddenProfileInput}
+          style={{ display: "none" }}
+          onChange={handleClubProfileURL}
+        />
 
-          <EditProfileAvatar rounded></EditProfileAvatar>
+        {/* Cover Picture */}
+        <TextFieldWrapper>
+          <EditCoverImage
+            src={coverURL.url ? coverURL.url : user.coverPicURL}
+          ></EditCoverImage>
+        </TextFieldWrapper>
+        <ChangeAvatarLink
+          align="center"
+          onClick={() => {
+            hiddenCoverInput.current.click();
+          }}
+        >
+          Change Cover Photo
+        </ChangeAvatarLink>
+        <input
+          type="file"
+          ref={hiddenCoverInput}
+          style={{ display: "none" }}
+          onChange={handleClubCoverURL}
+        />
 
-
-      <ChangeAvatarLink fontColor="red" align="center">Change Profile Photo</ChangeAvatarLink>
-      <TextFieldWrapper>
-        <EditCoverImage src={lawn}></EditCoverImage>        
-      </TextFieldWrapper>
-
-      <ChangeAvatarLink align="center">Change Cover Photo</ChangeAvatarLink>
-      <TextFieldWrapper>
-        <BoldTypography  sz={"16px"}>Description:</BoldTypography>
-        <DialogTextField
+        {/* Description */}
+        <TextFieldWrapper>
+          <BoldTypography sz={"16px"}>Description:</BoldTypography>
+          <DialogTextField
             autoFocus
             margin="dense"
             id="name"
-            placeholder="Add your description"
+            placeholder={"Add your description"}
             type="email"
             fullWidth
             multiline
-            rows={2}
+            rows={3}
             InputProps={{
               disableUnderline: true,
               style: {
                 fontSize: 16,
                 fontWeight: 600,
+                padding: "8px 16px",
               },
             }}
             onChange={handleDescription}
-          />  
-      </TextFieldWrapper>
-      <TextFieldWrapper>
-      <BoldTypography sz={"16px"}>Relevant Industries:</BoldTypography>
-            <ExploreFilter>
-            <ExploreObj bgcolor={colors.red1}>
-              Product Management
-            </ExploreObj>
-            <ExploreObj bgcolor={colors.darkyellow}>
-              Product Design
-            </ExploreObj>
-            </ExploreFilter> 
-            <FormControlC>
-              <InputLabel>Select all that apply</InputLabel>
-              <Select 
-              multiple 
-              value={industry} 
-              onChange={handleTags}
-              >
-                {tags.map((name) => (
-                  <MenuItem key={name} value={name}>
-                    <Checkbox checked = {tags.includes(name)} color="default"/>
-                    <ListItemText primary={name} />
-                  </MenuItem>
-                ))}
+          />
+        </TextFieldWrapper>
 
-              </Select>
-            </FormControlC>  
-      </TextFieldWrapper>
-
+        {/* Relevant Industries */}
         <TextFieldWrapper>
-        <BoldTypography  sz={"16px"}>Website:</BoldTypography>
+          <BoldTypography sz={"16px"}>Relevant Industries:</BoldTypography>
+
+          {/* Industry filters */}
+          <ExploreFilter>
+            {industry &&
+              industry.map((name) => (
+                <ExploreObj
+                  key={name}
+                  bgcolor={colors.gray}
+                  onClick={() => {
+                    removeIndustries(name);
+                  }}
+                >
+                  &times; {name}
+                </ExploreObj>
+              ))}
+          </ExploreFilter>
+
+          {/* dropdown menu */}
+          <MultiDropDown
+            onOpenClose={toggleOpenInd}
+            onSelect={handleIndustries}
+            options={industry}
+            selectedOptions={industries}
+            open={openInd}
+            title="Select all that apply"
+            ttwd="312px"
+            tthg="35px"
+            bwd="314px"
+            bhg="202px"
+            cef="312px"
+            chg="248px"
+            fwd="314px"
+            fhg="46px"
+          ></MultiDropDown>
+        </TextFieldWrapper>
+
+        {/* Website */}
+        <TextFieldWrapper>
+          <BoldTypography sz={"16px"}>Website:</BoldTypography>
           <DialogTextField
+            value={website}
             autoFocus
             margin="dense"
             id="name"
@@ -165,43 +307,49 @@ const EditClubProfile = ({ open, handleClose, EditAbout, EditWebsite, currentabo
               style: {
                 fontSize: 16,
                 fontWeight: 600,
+                padding: "8px 16px",
               },
             }}
             onChange={handleWebsite}
-          />          
+          />
         </TextFieldWrapper>
-        
-        
+
+        {/* About */}
         <TextFieldWrapper>
-        <BoldTypography  sz={"16px"}>About:</BoldTypography>
+          <BoldTypography sz={"16px"}>About:</BoldTypography>
+
           <DialogTextField
-            value = {about}
+            value={about}
             autoFocus
             margin="dense"
             id="name"
-            placeholder="Add an About Section to your Page"
+            placeholder={"Add an About Section to your Page"}
             type="email"
             fullWidth
             multiline
-            rows = {2}
+            rows={3}
             InputProps={{
               disableUnderline: true,
               style: {
                 fontSize: 16,
                 fontWeight: 600,
+                padding: "8px 16px",
               },
             }}
             onChange={handleAbout}
-          />          
+          />
         </TextFieldWrapper>
+
+        {/* Done Button */}
+        <EditProfileDone>
+          <DoneBtn
+            onClick={handleSubmit}
+            bgcolor={saveClub() ? colors.gray : "#5473bb"}
+          >
+            Save
+          </DoneBtn>
+        </EditProfileDone>
       </EditProfileContent>
-
-      <EditProfileDone>
-        <PostBtn onClick={handleSubmit} >
-          Done
-        </PostBtn>
-      </EditProfileDone>
-
     </EditProfileContainer>
   );
 };

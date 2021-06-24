@@ -1,17 +1,15 @@
 import React from "react";
 import Image from "@material-ui/icons/Image";
 import styled from "styled-components";
-import LinkEffect from "../shared/LinkEffect";
+import LinkEffect from "../shared/Effect/LinkEffect";
 
 const ImageIcon = styled(Image)`
   ${LinkEffect}
 `;
-
+const InputWrapper = styled.div`
+  display: none;
+`;
 const ImageUpload = ({ handleImageInput }) => {
-  const InputWrapper = styled.div`
-    display: none;
-  `;
-
   return (
     <div className="App">
       <form id="myImgForm">

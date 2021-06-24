@@ -18,18 +18,14 @@ import TypeBox from "../../shared/TypeBox";
 import AuthButtons from "../../shared/AuthButtons";
 import { ActionButton } from "../../shared/Buttons";
 import { CLEAR_ERRORS } from "../../redux/types";
-
-const SignUpTitle = styled.div`
-  font-weight: bold;
-  font-size: 24px;
-  margin-bottom: 15px;
-`;
+import { TitleText } from "../../shared/Text/TitleText";
 
 const AccountBtn = styled(ActionButton)`
   width: 200px;
   height: 38px;
   margin-top: 15px;
 `;
+
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
@@ -46,8 +42,8 @@ const Login = () => {
     <FormContainer>
       <LeftFormContainer />
       <RightFormContainer>
-        <Prompt link={"signup"}></Prompt>
-        <SignUpTitle>Log in to Embark</SignUpTitle>
+        <Prompt></Prompt>
+        <TitleText>Log in to Embark</TitleText>
         <AuthButtons />
         <OrSeperator />
         <Formik
@@ -67,43 +63,45 @@ const Login = () => {
           validateOnBlur={false}
           validateOnChange={false}
         >
-          {({ errors, setErrors }) => (
-            <FormWrapper>
-              <FieldContainer>
-                <Field
-                  name="email"
-                  placeholder="Email"
-                  as={TypeBox}
-                  margin="normal"
-                  error={!!errors.password || !!errors.email}
-                  onFocus={() => {
-                    setErrors({});
-                    dispatch({ type: CLEAR_ERRORS });
-                  }}
-                ></Field>
-              </FieldContainer>
-              <FieldContainer>
-                <Field
-                  name="password"
-                  placeholder="Password"
-                  as={TypeBox}
-                  margin="normal"
-                  error={!!errors.password || !!errors.email}
-                  type="password"
-                  onFocus={() => {
-                    setErrors({});
-                    dispatch({ type: CLEAR_ERRORS });
-                  }}
-                ></Field>
-              </FieldContainer>
-              <ErrorPrompt
-                error={!!back_end_errors || !!errors.password || !!errors.email}
-              >
-                Invalid email or password
-              </ErrorPrompt>
-              <AccountBtn type="submit">Log in</AccountBtn>
-            </FormWrapper>
-          )}
+          {({ errors, setErrors }) => {
+            const hasError =
+              !!back_end_errors || !!errors.password || !!errors.email;
+            return (
+              <FormWrapper>
+                <FieldContainer>
+                  <Field
+                    name="email"
+                    placeholder="Email"
+                    as={TypeBox}
+                    margin="normal"
+                    error={hasError}
+                    onFocus={() => {
+                      setErrors({});
+                      dispatch({ type: CLEAR_ERRORS });
+                    }}
+                  ></Field>
+                </FieldContainer>
+                <FieldContainer>
+                  <Field
+                    name="password"
+                    placeholder="Password"
+                    as={TypeBox}
+                    margin="normal"
+                    error={hasError}
+                    type="password"
+                    onFocus={() => {
+                      setErrors({});
+                      dispatch({ type: CLEAR_ERRORS });
+                    }}
+                  ></Field>
+                </FieldContainer>
+                <ErrorPrompt error={hasError}>
+                  Invalid email or password
+                </ErrorPrompt>
+                <AccountBtn type="submit">Log in</AccountBtn>
+              </FormWrapper>
+            );
+          }}
         </Formik>
       </RightFormContainer>
     </FormContainer>

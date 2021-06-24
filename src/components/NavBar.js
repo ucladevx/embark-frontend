@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../shared/config";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
+import { useClickOutState } from "../shared/Hook";
 // icons for navbar icons
-import { ReactComponent as EmbarkIcon } from '../images/navbar_embark_logo.svg';
-import { ReactComponent as UserIcon } from '../images/navbar_user_logo.svg';
-import { ReactComponent as DevXIcon } from '../images/navbar_club_logo.svg';
-import { ReactComponent as CollapseIcon } from '../images/navbar_collapse_icon.svg';
+import { ReactComponent as EmbarkIcon } from "../images/navbar_embark_logo.svg";
+import { ReactComponent as UserIcon } from "../images/navbar_user_logo.svg";
+import { ReactComponent as DevXIcon } from "../images/navbar_club_logo.svg";
+import { ReactComponent as CollapseIcon } from "../images/navbar_collapse_icon.svg";
 
 // imports for search bar
-import { Autocomplete } from '@material-ui/lab';
-import { TextField } from '@material-ui/core';
+import { Autocomplete } from "@material-ui/lab";
+import { TextField } from "@material-ui/core";
+import LinkEffect from "../shared/Effect/LinkEffect";
+import Setting from "./Setting";
 
 const NavBarWrapper = styled.div`
   display: flex;
@@ -30,6 +35,7 @@ const NavBarLogo = styled.div`
   display: grid;
   place-items: center;
   margin: auto 0px auto 85px;
+  ${LinkEffect};
 `;
 const SearchBar = styled.input`
   background-color: ${colors.gray};
@@ -52,6 +58,7 @@ const UserLogo = styled.div`
   width: 38px;
   height: 38px;
   margin: auto 0px auto 0px;
+  ${LinkEffect};
 `;
 const CollapseLogo = styled.div`
   border-radius: 50%;
@@ -60,29 +67,33 @@ const CollapseLogo = styled.div`
   display: grid;
   place-items: center;
   margin: auto 80px auto 0px;
+  ${LinkEffect};
 `;
 
 const sampleSuggestions = [
   {
-    title: 'DevX',
-    value: 'DevX'
+    title: "DevX",
+    value: "DevX",
   },
   {
-    title: 'Computer Science',
-    value: 'Computer Science'
+    title: "Computer Science",
+    value: "Computer Science",
   },
   {
-    title: 'Embark',
-    value: 'Embark'
-  }
+    title: "Embark",
+    value: "Embark",
+  },
 ];
 
-const NavBar = () => {
+const NavBar = ({ setPage }) => {
   const [search, setSearch] = useState("");
   const [showList, setShowList] = useState(false);
+  const [showSetting, setShowSetting, settingRef] = useClickOutState();
+  const user = useSelector((state) => state.user);
+  const history = useHistory();
 
   const handleSearchChange = (e) => {
-    // just show suggestions 
+    // just show suggestions
     // and console log for now
     setSearch(e.target.value);
     console.log(search);
@@ -90,40 +101,68 @@ const NavBar = () => {
   };
 
   const handleEmbarkIconClick = (e) => {
-    // just console log for now
-    console.log('Embark Icon Clicked')
-  }
+    history.push("/home");
+    if (setPage) setPage("main");
+  };
 
   const handleUserIconClick = (e) => {
     // just console log for now
-    console.log('User Icon Clicked')
-  }
+    if (user.userType === "club") {
+      history.push("/club-profile");
+    } else {
+      if (user._id) {
+        history.push(`/user/${user._id}`);
+      } else {
+        history.push("/user/:userid");
+      }
+    }
+    console.log("User Icon Clicked");
+    history.push("/user/" + user._id);
+  };
 
-  const handleCollapseIconClick = (e) => {
-    // just console log for now
-    console.log('Collapse Icon Clicked')
-  }
+  const handleCollapseIconClick = () => {
+    setShowSetting(!showSetting);
+  };
 
   return (
     <>
       <NavBarWrapper>
-        <NavBarLogo onClick={handleEmbarkIconClick}><EmbarkIcon /></NavBarLogo>
-        <section style={{ display: "flex", flexGrow: 2, justifyContent: "left" }}>
+        <NavBarLogo onClick={handleEmbarkIconClick}>
+          <EmbarkIcon />
+        </NavBarLogo>
+        <section
+          style={{ display: "flex", flexGrow: 2, justifyContent: "left" }}
+        >
           <div>
             <Autocomplete
               id="Search"
               options={showList ? sampleSuggestions : []}
-              placeholder='Search'
+              placeholder="Search"
               freeSolo
               getOptionLabel={(option) => option.title}
-              style={{ width: 610, backgroundColor: '#EDEDED' }}
+              style={{ width: 610, backgroundColor: "#EDEDED" }}
               onInputChange={handleSearchChange}
-              renderInput={(params) => <TextField {...params} placeholder='Search' size='small' onBlur={()=>setShowList(false)} variant="outlined" />}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  placeholder="Search"
+                  size="small"
+                  onBlur={() => setShowList(false)}
+                  variant="outlined"
+                />
+              )}
             />
           </div>
         </section>
-        <UserLogo onClick={handleUserIconClick}><UserIcon /></UserLogo>
-        <CollapseLogo onClick={handleCollapseIconClick}><CollapseIcon /></CollapseLogo>
+        <UserLogo onClick={handleUserIconClick}>
+          <UserIcon />
+        </UserLogo>
+        <span ref={settingRef}>
+          <CollapseLogo onClick={handleCollapseIconClick}>
+            <CollapseIcon />
+          </CollapseLogo>
+          {showSetting && <Setting></Setting>}
+        </span>
       </NavBarWrapper>
     </>
   );

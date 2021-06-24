@@ -41,7 +41,7 @@ export const styleCalendar = () => {
     day.style.textDecoration = "none";
   }
   const nodesContainer = document.querySelector(
-    ".react-calendar__month-view__days"
+    ".react-calendar__month-view__days",
   );
   nodesContainer.style = "";
 };

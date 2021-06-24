@@ -1,0 +1,26 @@
+#authBtns button {
+  display: flex;
+  padding-left: 6em;
+  align-items: center;
+  gap: 13px;
+  width: 380px;
+  height: 35px;
+  border-radius: 8px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+  outline: none;
+  border: 0;
+}
+#googlebtn {
+  background: #5187ed !important;
+}
+#linkedinbtn {
+  background: #2867b2;
+}
+#linkedinbtn:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}

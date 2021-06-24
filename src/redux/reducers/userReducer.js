@@ -5,18 +5,22 @@ import {
   LIKE_POST,
   UNLIKE_POST,
   MARK_NOTIFICATIONS_READ,
-  ADD_FILTER,
-  REMOVE_FILTER,
+  GOING_EVENT,
+  OWN_EVENTS,
+  CANCEL_ATTENDANCE_EVENT,
 } from "../types";
 
 const intialState = {
   authenticated: false,
+  _id: null,
   info: {},
   notifications: [],
   likedPosts: [],
+  goingEvents: [],
   clubs: [],
   industry: "",
   userType: "student",
+  ownEvents: [],
 };
 
 export default function userReducer(state = intialState, action) {
@@ -32,31 +36,50 @@ export default function userReducer(state = intialState, action) {
       return {
         authenticated: true,
         ...action.payload,
+        goingEvents: [],
+        ownEvents: [],
       };
-    case LIKE_POST:
-      return {
-        ...state,
-        likedPosts: [
-          ...state.likedPosts,
-          {
-            likeBy: state.info.name,
-            postId: action.payload.postId,
-          },
-        ],
-      };
-    case UNLIKE_POST:
-      return {
-        ...state,
-        likedPosts: state.likedPosts.filter(
-          (post) => post.postId !== action.payload.postId
-        ),
-      };
+    // TODO: uncomment this after the like endpoint is updated
+    // case LIKE_POST:
+    //   return {
+    //     ...state,
+    //     likedPosts: [
+    //       ...state.likedPosts,
+    //       {
+    //         likeBy: state.info.name,
+    //         postId: action.payload.postId,
+    //       },
+    //     ],
+    //   };
+    // case UNLIKE_POST:
+    //   return {
+    //     ...state,
+    //     likedPosts: state.likedPosts.filter(
+    //       (post) => post.postId !== action.payload.postId
+    //     ),
+    //   };
     case MARK_NOTIFICATIONS_READ:
       state.notifications.forEach((noti) => (noti.read = true));
       return {
         ...state,
       };
-
+    case GOING_EVENT:
+      return {
+        ...state,
+        goingEvents: action.payload.events,
+      };
+    case OWN_EVENTS:
+      return {
+        ...state,
+        ownEvents: [action.payload],
+      };
+    case CANCEL_ATTENDANCE_EVENT:
+      return {
+        ...state,
+        goingEvents: state.goingEvents.filter(
+          (event) => event.eventId !== action.payload,
+        ),
+      };
     default:
       return state;
   }

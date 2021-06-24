@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Line } from "../../shared/Separators";
 import Like from "../../images/heart-gray.svg";
 import Comment from "../../images/comment.svg";
+import thumbup from "../../images/thumbup.svg";
 import Share from "../../images/share.svg";
+import Save from "../../images/save.svg";
+import Saved from "../../images/saved.svg";
 import styled from "styled-components";
 import { colors } from "../../shared/config";
-import LinkEffect from "../../shared/LinkEffect";
+import LinkEffect from "../../shared/Effect/LinkEffect";
 import { useDispatch } from "react-redux";
-import { likePost } from "../../redux/actions/dataActions";
+import { likePost, savePost } from "../../redux/actions/dataActions";
 import { OPEN_COMMENT } from "../../redux/types";
 
 const InteractiveContainer = styled.div`
@@ -51,13 +54,26 @@ const InteractiveLine = styled(Line)`
 
 const Interactive = ({ post_id }) => {
   const dispatch = useDispatch();
+  const [liked, setLiked] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  const handleLike = () => {
+    if (!liked) dispatch(likePost(post_id));
+    // else dispatch(unlikePost(post_id));
+    setLiked(!liked);
+  };
+
+  const handleSaved = () => {
+    if (!saved) dispatch(savePost(post_id));
+    setSaved(!saved);
+  };
 
   return (
     <InteractiveContainer>
       <InteractiveLine></InteractiveLine>
       <IconWrapper>
-        <IconEntry onClick={() => dispatch(likePost(post_id))}>
-          <InteractiveIcon src={Like}></InteractiveIcon>
+        <IconEntry onClick={handleLike}>
+          <InteractiveIcon src={liked ? thumbup : Like}></InteractiveIcon>
           <IconText>Like</IconText>
         </IconEntry>
         <IconEntry
@@ -69,6 +85,10 @@ const Interactive = ({ post_id }) => {
         <IconEntry>
           <InteractiveIcon src={Share}></InteractiveIcon>
           <IconText>Share</IconText>
+        </IconEntry>
+        <IconEntry onClick={handleSaved}>
+          <InteractiveIcon src={saved ? Saved : Save}></InteractiveIcon>
+          <IconText>Save</IconText>
         </IconEntry>
       </IconWrapper>
       <InteractiveLine></InteractiveLine>

@@ -8,14 +8,6 @@ To install all the dependencies for the first time:
 Then,
 `npm start`
 
-## Before Push:
-
-Go to the top level of the repo, run
-`make`
-to format all your code
-
-Hint: You could also set up git hooks to automate this process.
-
 ## Overview w/ comments
 ```javascript
 import "./App.css";
@@ -95,7 +87,7 @@ since we are having inconsistency in our frontend, backend, and design, we'll fi
 ## Best Practices in this repo
 In src:
 - we use pages folder to organize all the pages. For each page, we create its own folder with its components storing in the same folder.
-- If there are functional components being used across differnet pages, or the component is very important, we put the components into components folder
+- If there are functional components being used across different pages, or the component is very important, we put the components into components folder
 - For each smaller component, we could write the styles in the same file. However, we should put the styles for the entire page to the StylexxPage.js because usually the styles for a page is a lot
 - shared: used for shared UI components and CSS resources, mediaQueries. You should put the components you used in more than one page to the shared folder
 - utils: utility functions and components
@@ -120,8 +112,6 @@ In src:
 ### 5. REST CLIENT: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
 - VScode's postman. Really easy to use, and you could save the scripts for the api backend calls.
 
-### 6. Makefile & Prettier
-- We use a prettier script to format the codebase before pushing. This script could be run at the root folder using commands `make` or `make format`.
 
 ## Future thoughts
 - We'll probably change the folder structure a little bit since there definitely are redundancies and unclear purpose folders using this structures. But rn is still the early stage.

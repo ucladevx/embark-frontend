@@ -1,7 +1,23 @@
 import { css } from "styled-components";
 
+export const HomeAddress = "http://localhost:3000/home";
+
 export const mediaQueries = {
   mobile: "@media screen and (max-width: 700px)",
+};
+
+export const DropdownConfigs = {
+  large: {
+    ttwd: "128px",
+    bwd: "97px",
+    bhg: "149px",
+    cwd: "97px",
+    chg: "149px",
+  },
+  small: {
+    ttwd: "128px",
+    bgh: "35px",
+  },
 };
 
 export const colors = {
@@ -14,14 +30,15 @@ export const colors = {
   blue3: "#8DC5D7",
   blue4: "#5187ed",
   blue5: "#2867B2",
-  pink: "#FFC6FF",
   red: "#FFADAD",
   orange: "#FFD6A5",
   yellow: "#FDFFB6",
   green: "#CAFFBF",
   lightBlue: "#9BF6FF",
   darkBlue: "#A0C4FF",
-  brwon: "#DFA98C",
+  purple: "#BDB2FF",
+  pink: "#FFC6FF",
+  brown: "#DFA98C",
   black: "#000000",
   gray: "#E5E5E5",
   gray1: "#EDEDED",
@@ -30,6 +47,7 @@ export const colors = {
   gray4: "#DCDCDC",
   gray5: "#6E6D79",
   gray6: "#7E7A7A",
+  gray7: "#838383",
   red1: "#EBAFAF",
   darkyellow: "#EFD69A",
   green1: "rgba(89, 193, 122, 0.4);",

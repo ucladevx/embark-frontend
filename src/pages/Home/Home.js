@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import Calendar from "react-calendar";
+import ExpandedEventPage from "./ExpandedEventPage";
 // Styles
-import "./Calendar/HomeCalendar.css";
+import "../../components/Calendar/HomeCalendar.css";
 
 import {
   LandingPage,
@@ -13,14 +14,7 @@ import {
   FilterObj,
   FilterWrapper,
   InteriorFilterWrapper,
-  PostTag,
   AddFilter,
-  EventAvatar,
-  EventDescription,
-  EventItem,
-  EventItems,
-  EventsWrapper,
-  TimeTypography,
   CalanderWrapper,
   InfoBoxes,
   InfoEntryWrapper,
@@ -32,7 +26,6 @@ import {
   GoingBtn,
   DialogTextField,
 } from "./StyleLanding";
-import { BoldTypography, TitleTypography } from "../../shared/Typography";
 // Images
 import avatarImg from "../../images/avatar.svg";
 import bookImg from "../../images/book.svg";
@@ -44,13 +37,22 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getPosts,
   filterPosts,
+  getEvents,
   addFilter,
   removeFilter,
 } from "../../redux/actions/dataActions";
 import NewPost from "../../components/NewPost";
+import NewEvent from "../../components/NewEvent";
 import Explore from "./Explore";
-import { styleCalendar } from "./Calendar/HomeCalendar";
+import { styleCalendar } from "../../components/Calendar/HomeCalendar";
 import Posts from "./Posts";
+
+import Events from "./Events";
+import DiscoverEvents from "./DiscoverEvents";
+import MyEvents from "./MyEvents";
+
+// Dayjs
+import { useHistory } from "react-router-dom";
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -59,11 +61,28 @@ const Home = () => {
   // Redux
   const filters = useSelector((state) => state.data.filter);
   const user = useSelector((state) => state.user);
+  const clubExpansionCase = useSelector((state) => state.ui.clubeventexpand);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // States
   const [page, setPage] = useState("main");
   const [newPost, setNewPost] = useState(false);
+  const [newEvent, setNewEvent] = useState(false);
+  const [numEvents, setNumEvents] = useState(3);
+  const [selectedEvent, setSelectedEvent] = useState({});
+
+  const openExpandedEventPage = (e) => {
+    setPage("expandEvent");
+    setSelectedEvent(e);
+    console.log(e);
+  };
+
+  const closeExpandedEventPage = () => {
+    dispatch({ type: "CLUB_EVENT_EXPANSION", payload: {} });
+    setPage("main");
+    setSelectedEvent({});
+  };
 
   const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
 
@@ -72,7 +91,17 @@ const Home = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    dispatch(getEvents(numEvents));
+  }, [dispatch, numEvents]);
+
+  useEffect(() => {
     styleCalendar();
+  }, []);
+
+  useEffect(() => {
+    if (clubExpansionCase._id) {
+      openExpandedEventPage(clubExpansionCase);
+    }
   }, []);
 
   const removeUpdateFilters = (t) => {
@@ -89,17 +118,32 @@ const Home = () => {
     setTagToAdd(e.target.value);
   };
 
+  const openEvents = () => {
+    setPage("events");
+    setNumEvents(50);
+  };
+
+  const closeEvents = () => {
+    setPage("main");
+    setNumEvents(3);
+  };
+
   return (
     <>
       <NewPost open={newPost} handleClose={() => setNewPost(false)} />
+      <NewEvent open={newEvent} handleClose={() => setNewEvent(false)} />
       <LandingPage>
-        <NavBar></NavBar>
+        <NavBar setPage={setPage}></NavBar>
         <LandingPageWrapper>
           <LeftContainer>
             <InfoBoxes>
-              <InfoEntryWrapper onClick={() => setPage("main")}>
+              <InfoEntryWrapper
+                onClick={() => history.push(`/user/${user._id}`)}
+              >
                 <InfoImage src={avatarImg} alt="user"></InfoImage>
-                <InfoEntryText>{user.name}</InfoEntryText>
+                <InfoEntryText>
+                  {user.firstName} {user.lastName}
+                </InfoEntryText>
               </InfoEntryWrapper>
               <InfoSeperator></InfoSeperator>
               <InfoEntryWrapper>
@@ -149,8 +193,20 @@ const Home = () => {
               <Posts setNewPost={setNewPost}></Posts>
             ) : page === "explore" ? (
               <Explore></Explore>
+            ) : page === "events" ? (
+              <DiscoverEvents
+                closeEvents={closeEvents}
+                setExpandedEventPage={openExpandedEventPage}
+              ></DiscoverEvents>
+            ) : page === "expandEvent" ? (
+              <>
+                <ExpandedEventPage
+                  e={selectedEvent}
+                  close={closeExpandedEventPage}
+                ></ExpandedEventPage>
+              </>
             ) : (
-              <></>
+              <Fragment></Fragment>
             )}
           </MiddleContainer>
 
@@ -158,39 +214,15 @@ const Home = () => {
             <CalanderWrapper>
               <Calendar></Calendar>
             </CalanderWrapper>
-
-            <EventsWrapper>
-              <TitleTypography>Upcoming Events</TitleTypography>
-              <EventItems>
-                <EventItem>
-                  <EventAvatar></EventAvatar>
-                  <EventDescription>
-                    <BoldTypography sz={"16px"}>Demo Day</BoldTypography>
-                    <EventTypography>UCLA DevX</EventTypography>
-                    <TimeTypography>
-                      {dayjs().format("MMM DD HH:mm a")}
-                    </TimeTypography>
-                  </EventDescription>
-                  <GoingBtn bgcolor={colors.green1} fcolor={colors.darkgreen}>
-                    Going
-                  </GoingBtn>
-                </EventItem>
-                <InfoSeperator></InfoSeperator>
-                <EventItem>
-                  <EventAvatar></EventAvatar>
-                  <EventDescription>
-                    <BoldTypography sz={"16px"}>Winter Info...</BoldTypography>
-                    <EventTypography>Club1234</EventTypography>
-                    <TimeTypography>
-                      {dayjs().format("MMM DD HH:mm a")}
-                    </TimeTypography>
-                  </EventDescription>
-                  <GoingBtn bgcolor={colors.gray1} fcolor={colors.gray2}>
-                    Going
-                  </GoingBtn>
-                </EventItem>
-              </EventItems>
-            </EventsWrapper>
+            {page === "events" ? (
+              <MyEvents></MyEvents>
+            ) : (
+              <Events
+                setNewEvent={setNewEvent}
+                openEvents={openEvents}
+                setExpandedEventPage={openExpandedEventPage}
+              />
+            )}
           </RightContainer>
         </LandingPageWrapper>
       </LandingPage>
