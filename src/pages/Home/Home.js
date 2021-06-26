@@ -4,6 +4,7 @@ import Calendar from "react-calendar";
 import ExpandedEventPage from "./ExpandedEventPage";
 // Styles
 import "../../components/Calendar/HomeCalendar.css";
+import ErrorPopup from "../..//components/ErrorPopup";
 
 import {
   LandingPage,
@@ -71,6 +72,7 @@ const Home = () => {
   const [newEvent, setNewEvent] = useState(false);
   const [numEvents, setNumEvents] = useState(3);
   const [selectedEvent, setSelectedEvent] = useState({});
+  const [errorPopup, setErrorPopup] = useState(false);
 
   const openExpandedEventPage = (e) => {
     setPage("expandEvent");
@@ -132,6 +134,7 @@ const Home = () => {
     <>
       <NewPost open={newPost} handleClose={() => setNewPost(false)} />
       <NewEvent open={newEvent} handleClose={() => setNewEvent(false)} />
+      <ErrorPopup open={errorPopup} onClose={() => setErrorPopup(false)} />
       <LandingPage>
         <NavBar setPage={setPage}></NavBar>
         <LandingPageWrapper>
@@ -146,7 +149,7 @@ const Home = () => {
                 </InfoEntryText>
               </InfoEntryWrapper>
               <InfoSeperator></InfoSeperator>
-              <InfoEntryWrapper>
+              <InfoEntryWrapper onClick={() => setErrorPopup(true)}>
                 <InfoImage src={bookImg} alt="book"></InfoImage>
                 <InfoEntryText>Saved Resources</InfoEntryText>
               </InfoEntryWrapper>
