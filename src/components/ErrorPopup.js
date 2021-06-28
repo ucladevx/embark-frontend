@@ -32,7 +32,7 @@ const PostBtn = styled(Button)`
   font-weight: 600;
   width: 160px;
   height: 70px;
-  background-color: ${colors.blue3};
+  background-color: #5473bb;
   margin: 10px;
 `;
 
