@@ -214,7 +214,7 @@ const Home = () => {
           </MiddleContainer>
 
           <RightContainer>
-            <CalanderWrapper>
+            <CalanderWrapper onClick={() => setErrorPopup(true)}>
               <Calendar></Calendar>
             </CalanderWrapper>
             {page === "events" ? (
