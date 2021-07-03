@@ -28,7 +28,7 @@ import {
   PostTag,
   FilesWrapper,
 } from "./StyleLanding";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Button } from "@material-ui/core";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { colors } from "../../shared/config";
@@ -63,6 +63,16 @@ const LikeCommentCount = styled.div`
   p:last-child {
     margin-left: auto;
   }
+`;
+
+export const FileButton = styled(Button)`
+  width: 89px;
+  height: 30px;
+  border-radius: 8px;
+  text-transform: none;
+  background: ${colors.pink};
+  display: flex;
+  flex-direction: column;
 `;
 
 const Loader = () => {
@@ -143,6 +153,9 @@ const Posts = ({ setNewPost }) => {
           testfiles.map((f, i) => {
             return (
               <FilesWrapper key={i}>
+                <FileButton onClick={() => window.open(f, "_blank")}>
+                  Expand File
+                </FileButton>
                 <FileViewer
                   tag={f}
                   fileType={f.substring(f.lastIndexOf(".") + 1)}
@@ -275,6 +288,9 @@ const Posts = ({ setNewPost }) => {
                 {p.files &&
                   p.files.map((f) => (
                     <FilesWrapper>
+                      <FileButton onClick={() => window.open(f, "_blank")}>
+                        Expand File
+                      </FileButton>
                       <FileViewer
                         tag={f}
                         fileType={f.substring(f.lastIndexOf(".") + 1)}

@@ -22,7 +22,7 @@ const FileUpload = ({ handleFileInput }) => {
               type="file"
               id="my_file"
               onChange={(e) => handleFileInput(e)}
-              accept=".pdf,.docx,.svg,.xls"
+              accept=".pdf,.docx,.svg,.xls,.txt,.cpp,.py,.xlsx,.doc"
             />
           </InputWrapper>
         </label>
