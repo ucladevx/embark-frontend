@@ -53,8 +53,14 @@ export const getPosts = () => async (dispatch) => {
         "nextString",
         res.data.paginatedPosts.next.toString(),
       );
-    dispatch({ type: SET_POSTS, payload: res.data.paginatedPosts.results });
-    dispatch({ type: SET_NEXT_STRING, payload: res.data.paginatedPosts.next });
+    dispatch({
+      type: SET_POSTS,
+      payload: res.data.paginatedPosts.result.results,
+    });
+    dispatch({
+      type: SET_NEXT_STRING,
+      payload: res.data.paginatedPosts.result.next,
+    });
   } catch (err) {
     console.error(err);
     maintenanceErrorCheck(err);
@@ -71,8 +77,7 @@ export const getNextPosts = () => async (dispatch, getState) => {
       },
     });
     const { posts } = getState().data;
-    console.log(res.data);
-    const { results, next, hasNext } = res.data.paginatedPosts;
+    const { results, next, hasNext } = res.data.paginatedPosts.result;
     const newPosts = [...posts, ...results];
     if (!!next) localStorage.setItem("nextString", next.toString());
     dispatch({ type: SET_POSTS, payload: newPosts });
@@ -119,6 +124,7 @@ export const likePost = (post_id) => async (dispatch, getState) => {
       authorEmail: email,
     };
     const res = await axios.post(`/posts/likes`, body);
+    console.log(res.data);
     dispatch({ type: LIKE_POST, payload: res.data });
   } catch (err) {
     console.error(err);

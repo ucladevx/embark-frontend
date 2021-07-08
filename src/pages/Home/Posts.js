@@ -36,7 +36,6 @@ import { colors } from "../../shared/config";
 // Infinite Scroll
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { kfjldfj } from "module";
 // Dayjs
 import dayjs from "dayjs";
 import { getNextPosts } from "../../redux/actions/dataActions";
@@ -228,7 +227,7 @@ const Posts = ({ setNewPost }) => {
       </PostWrapper>
 
       <InfiniteScroll
-        dataLength={posts.length}
+        dataLength={posts && posts.length}
         next={getMorePosts}
         hasMore={hasNext}
         loader={<Loader></Loader>}
