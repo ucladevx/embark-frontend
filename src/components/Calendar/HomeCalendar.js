@@ -12,7 +12,6 @@ export const styleCalendar = () => {
   // handle Month
   const monthPlain = document.createElement("div");
   let monthText = month.textContent.split(" ");
-  monthText[0] = monthText[0].slice(0, 3);
   monthPlain.textContent = `${monthText[0]} ${monthText[1]}`;
 
   monthPlain.className = "month-plain";

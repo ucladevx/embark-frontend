@@ -208,7 +208,9 @@ const EditProfile = ({ open, handleClose, allTags }) => {
       </TitleContainer>
       <EditProfileContent id="scroll-dialog-description">
         <EditProfileAvatar
-          src={profileURL.url ? profileURL.url : user.profilePicURL}
+          src={
+            profileURL && profileURL.url ? profileURL.url : user.profilePicURL
+          }
           rounded="true"
         ></EditProfileAvatar>
         <ChangeAvatarLink

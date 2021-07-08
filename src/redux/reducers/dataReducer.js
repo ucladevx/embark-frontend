@@ -54,7 +54,7 @@ export default function dataReducer(state = initialState, action) {
     case LIKE_POST:
     case UNLIKE_POST:
       index = state.posts.findIndex(
-        (post) => post.post_id === action.payload.post.post_id,
+        (post) => post._id === action.payload.post._id,
       );
       const newPosts = [...state.posts];
       newPosts[index] = action.payload.post;
