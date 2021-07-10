@@ -184,7 +184,7 @@ export const studentGoogleSignIn = (profile, history) => async (dispatch) => {
 //Mark going to an event
 export const goingToEvent = (eventId) => async (dispatch) => {
   try {
-    const res = await axios.post(`/events/:${eventId}/attend`, {
+    const res = await axios.post(`/events/${eventId}/attend`, {
       userType: "student",
     });
     dispatch({ type: GOING_EVENT, payload: res });
@@ -196,7 +196,7 @@ export const goingToEvent = (eventId) => async (dispatch) => {
 //Cancel attending an event
 export const cancelAttendingEvent = (eventId) => async (dispatch) => {
   try {
-    const res = await axios.post(`/events/:${eventId}/cancel`, {
+    await axios.post(`/events/${eventId}/cancel`, {
       userType: "student",
     });
     dispatch({ type: CANCEL_ATTENDANCE_EVENT, payload: eventId });

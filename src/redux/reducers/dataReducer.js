@@ -54,7 +54,7 @@ export default function dataReducer(state = initialState, action) {
     case LIKE_POST:
     case UNLIKE_POST:
       index = state.posts.findIndex(
-        (post) => post.post_id === action.payload.post.post_id,
+        (post) => post._id === action.payload.post._id,
       );
       const newPosts = [...state.posts];
       newPosts[index] = action.payload.post;
@@ -79,10 +79,17 @@ export default function dataReducer(state = initialState, action) {
         posts: [action.payload, ...state.posts],
       };
     case ADD_FILTER:
-      return {
-        ...state,
-        filter: [...state.filter, action.payload],
-      };
+      if (action.payload === "resource") {
+        return {
+          ...state,
+          filter: [action.payload, ...state.filter],
+        };
+      } else {
+        return {
+          ...state,
+          filter: [...state.filter, action.payload],
+        };
+      }
     case REMOVE_FILTER:
       return {
         ...state,

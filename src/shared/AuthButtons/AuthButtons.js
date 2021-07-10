@@ -56,7 +56,7 @@ const AuthButtons = () => {
     } else {
       const { email } = response.profileObj;
       const profile = { email };
-      dispatch(studentGoogleSignIn(profile));
+      dispatch(studentGoogleSignIn(profile, history));
     }
   };
 
