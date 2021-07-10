@@ -76,6 +76,7 @@ const Loader = () => {
 const Posts = ({ setNewPost }) => {
   // Redux
   const posts = useSelector((state) => state.data.posts);
+  const user = useSelector((state) => state.user);
   const hasNext = useSelector((state) => state.data.hasNext);
   const dispatch = useDispatch();
 
@@ -103,6 +104,9 @@ const Posts = ({ setNewPost }) => {
     return iterator.next().value;
   };
 
+  const isSaved = (post_id) => {
+    return user.savedPosts && user.savedPosts.includes(post_id);
+  };
   return (
     <>
       <QuestionBox>
@@ -164,7 +168,10 @@ const Posts = ({ setNewPost }) => {
           <p>5 Comments</p>
         </LikeCommentCount>
 
-        <Interactive />
+        <Interactive
+          post_id={"6012dce8eb36de011c96c7e4"}
+          isSaved={isSaved("6012dce8eb36de011c96c7e4")}
+        />
         <ViewPreviousCommentWrapper>
           <ViewCommentLink>View previous comments</ViewCommentLink>
           <PreviousCommentItem>

@@ -99,7 +99,10 @@ export const savePost = (post_id) => async (dispatch, getState) => {
   try {
     const { userType } = getState().user;
     // TODO: Include accountType to default header once club flow is set up
-    const res = await axios.post("/posts/saved", { accountType: userType });
+    const res = await axios.post("/posts/saved", {
+      accountType: userType,
+      post_id: post_id,
+    });
     // TODO: check the documentation of save endpoint
     console.log(res.data);
     dispatch({ type: SAVE_POST, payload: res.data });
