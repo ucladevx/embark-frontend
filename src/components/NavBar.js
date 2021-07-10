@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { colors } from "../shared/config";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useClickOutState } from "../shared/Hook";
 
+import { useClickOutState } from "../shared/Hook";
 // icons for navbar icons
 import { ReactComponent as EmbarkIcon } from "../images/navbar_embark_logo.svg";
 import { ReactComponent as UserIcon } from "../images/navbar_user_logo.svg";
@@ -85,7 +85,7 @@ const sampleSuggestions = [
   },
 ];
 
-const NavBar = () => {
+const NavBar = ({ setPage }) => {
   const [search, setSearch] = useState("");
   const [showList, setShowList] = useState(false);
   const [showSetting, setShowSetting, settingRef] = useClickOutState();
@@ -101,9 +101,8 @@ const NavBar = () => {
   };
 
   const handleEmbarkIconClick = (e) => {
-    // just console log for now
-    console.log("Embark Icon Clicked");
     history.push("/home");
+    if (setPage) setPage("main");
   };
 
   const handleUserIconClick = (e) => {

@@ -39,7 +39,7 @@ const testEvent = [
 ];
 
 const MyEvents = () => {
-  const events = useSelector((state) => state.user.goingEvents);
+  const events = useSelector((state) => state.user.events);
 
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});
@@ -71,13 +71,14 @@ const MyEvents = () => {
             </EventDescription>
             <GoingBtn bgcolor={true}>Going</GoingBtn>
           </EventItem>
-          {events.map((e) => {
-            return (
-              <>
-                <Event loadExpanded={loadExpanded} e={e} test={false} />
-              </>
-            );
-          })}
+          {events &&
+            events.map((e) => {
+              return (
+                <>
+                  <Event loadExpanded={loadExpanded} e={e} test={false} />
+                </>
+              );
+            })}
         </EventItems>
       </EventsWrapper>
     </>

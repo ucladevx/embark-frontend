@@ -21,6 +21,9 @@ import { useDispatch } from "react-redux";
 import { editStudentDetails } from "../../redux/actions/userActions";
 import { CLEAR_ERRORS, SET_ERRORS } from "../../redux/types";
 import SingleDropDown from "../../shared/Dropdown/SingleDropdown";
+import MultiDropDown from "../../shared/Dropdown/MultiDropDown";
+import { useIndustry } from "../../shared/Hook";
+import { IndustryFilters } from "../../shared/Dropdown/StyleDropdown";
 
 const HeyTitle = styled.div`
   font-weight: 700;
@@ -55,11 +58,9 @@ const FormPersonalDetails = ({ user }) => {
   const history = useHistory();
   const [year, setYear] = useState("");
   const [yearOpen, setYearOpen] = useState(false);
-  const [industry, setIndustry] = useState("");
-  const [industryOpen, setIndustryOpen] = useState(false);
   const years = ["2021", "2022", "2023", "2024"];
-  const industries = ["Developer", "Design", "Marketing", "Product Mangement"];
   const dispatch = useDispatch();
+  const [industries, openInd, handleIndustries, handleOpenInd] = useIndustry();
 
   return (
     <FormContainer>
@@ -83,7 +84,7 @@ const FormPersonalDetails = ({ user }) => {
           }}
           onSubmit={(values) => {
             const { major, linkedIn } = values;
-            if (!year || !industry || !major) {
+            if (!year || !industries || !major) {
               dispatch({ type: SET_ERRORS, payload: "Onboarding failure" });
               return;
             }
@@ -91,7 +92,7 @@ const FormPersonalDetails = ({ user }) => {
               year,
               major,
               linkedIn,
-              tags: [industry],
+              tags: industries,
             };
             console.log(profile);
             dispatch(editStudentDetails(profile));
@@ -127,13 +128,22 @@ const FormPersonalDetails = ({ user }) => {
                   error={!!errors.major}
                 ></Field>
                 Interested Industries:
-                <SingleDropDown
-                  content={industries}
-                  open={industryOpen}
-                  onOpenClose={() => setIndustryOpen(!industryOpen)}
-                  onSelect={setIndustry}
-                  title={industry ? industry : "Select"}
-                ></SingleDropDown>
+                <MultiDropDown
+                  onOpenClose={handleOpenInd}
+                  onSelect={handleIndustries}
+                  options={IndustryFilters}
+                  selectedOptions={industries}
+                  open={openInd}
+                  title="Select all that apply"
+                  ttwd="312px"
+                  tthg="35px"
+                  bwd="314px"
+                  bhg="202px"
+                  cef="312px"
+                  chg="248px"
+                  fwd="314px"
+                  fhg="46px"
+                ></MultiDropDown>
                 <p>You can change your interested industires in your profile</p>
                 Linkedin Profile(Optional):
                 <Field

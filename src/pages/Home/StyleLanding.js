@@ -1,6 +1,16 @@
 import styled from "styled-components";
 import { colors } from "../../shared/config";
-import { Avatar, Button, TextField, Typography } from "@material-ui/core";
+
+import {
+  Avatar,
+  Button,
+  TextField,
+  Typography,
+  Badge,
+} from "@material-ui/core";
+
+import { ActionButton } from "../../shared/Buttons";
+
 import { BoldTypography } from "../../shared/Typography";
 import {
   handleTagColor,
@@ -200,6 +210,15 @@ export const EventItems = styled.div`
 export const EventItem = styled.div`
   display: flex;
   width: 90%;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`;
+
+export const FakeEventItem = styled.div`
+  display: flex;
+  width: 90%;
 `;
 
 export const EventDescription = styled.div`
@@ -213,6 +232,8 @@ export const EventAvatar = styled(Avatar)`
   text-align: center;
   font-size: 15px;
 `;
+
+export const EventBadge = styled(Badge)``;
 
 export const PostWrapper = styled.div`
   margin-top: 20px;
@@ -359,6 +380,14 @@ export const GoingBtn = styled(Button)`
   right: 1px;
 `;
 
+export const GoingBtnExpand = styled(Button)`
+  text-transform: none;
+  background-color: ${(props) => handleGoingBColor(props.bgcolor)};
+  height: 25px;
+  align-self: center;
+  color: ${(props) => handleGoingFColor(props.bgcolor)};
+`;
+
 export const ViewPost = styled.div`
   margin-top: 20px;
   border-radius: 5px;
@@ -370,4 +399,23 @@ export const CommentWrapper = styled.div`
   gap: 20px;
   padding: 25px 0;
   background: ${colors.white};
+`;
+
+export const CreateButton = styled(ActionButton)`
+  height: 26px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  padding: 15px;
+  margin-top: 5px;
+  margin-right: 5px;
+  font-size: 14px;
+  text-transform: none;
+  align-self: flex-end;
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `;

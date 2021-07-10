@@ -80,6 +80,12 @@ const ClubProfile = (props) => {
       <EditClubProfile
         open={editProfile}
         handleClose={() => seteditProfile(false)}
+        // EditAbout={handleAbout}
+        // EditWebsite={handleWebsite}
+        // EditDescription={handleDescription}
+        // currentAbout={About}
+        // currentWebsite={website}
+        // currentDescription={description}
       ></EditClubProfile>
       <NavBar></NavBar>
       <MiddleContainer>
@@ -92,6 +98,7 @@ const ClubProfile = (props) => {
                 <TitleTypography
                   style={{ fontSize: "24px", paddingBottom: "0" }}
                 >
+                  {console.log(user)}
                   {user.name}
                 </TitleTypography>
                 <Typography style={{ fontSize: "18px" }}>

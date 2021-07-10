@@ -21,6 +21,7 @@ import {
   SET_PAGE,
   ADD_CLUB_FILTERS,
   REMOVE_CLUB_FILTERS,
+  GET_CLUB,
 } from "../types";
 
 import axios from "axios";
@@ -255,8 +256,8 @@ export const getEvents = (amount) => async (dispatch) => {
     const res = await axios.get("/events/discover", {
       params: {
         limitNum: amount,
+        userType: "student",
       },
-      userType: "student",
     });
     console.log(res.data);
     dispatch({ type: SET_EVENTS, payload: res.data.events });
@@ -314,4 +315,14 @@ export const uploadLink = (newLink, linkName) => async (dispatch) => {
 
 export const setPage = (newPage) => async (dispatch) => {
   dispatch({ type: SET_PAGE, payload: newPage });
+};
+//Grab a club's data as a non-club
+export const getExpandedClub = (clubId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/club/profilebyId?clubId=${clubId}`);
+    dispatch({ type: GET_CLUB, payload: res });
+    return res;
+  } catch (err) {
+    console.error(err);
+  }
 };

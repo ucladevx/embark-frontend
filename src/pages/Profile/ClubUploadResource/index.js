@@ -12,6 +12,27 @@ const ClubUploadResource = ({ setNewResource }) => {
 
   const dispatch = useDispatch();
 
+  const sampleFiles = [
+    {
+      id: 1,
+      type: "png",
+      name: "sample png",
+      url: "https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png",
+    },
+    {
+      id: 2,
+      type: "pdf",
+      name: "sample pdf",
+      url: "http://www.africau.edu/images/default/sample.pdf",
+    },
+    {
+      id: 3,
+      type: "docx",
+      name: "sample docx",
+      url: "https://docs.google.com/document/d/1eOhrx6VCW88E-Krh3qKujkObSbpVbu2j4bCbUBAJrdY/edit?usp=sharing",
+    },
+  ];
+
   useEffect(() => {
     dispatch(getResources());
   }, []);

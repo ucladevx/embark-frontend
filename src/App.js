@@ -15,6 +15,10 @@ import theme from "./utils/theme";
 // Pages
 import Login from "./pages/Login/Login.js";
 import OnBoarding from "./pages/OnBoarding";
+import ClubOnBoarding from "./pages/ClubOnBoarding";
+import ClubDetails from "./pages/ClubOnBoarding/FormPersonalDetails";
+import studentDetails from "./pages/OnBoarding/FormPersonalDetails";
+
 import Home from "./pages/Home";
 import ErrorPage from "./pages/ErrorPage";
 import StudentProfile from "./pages/Profile/StudentProfile";
@@ -26,11 +30,6 @@ import ViewStudentProfile from "./pages/Profile/viewStudentProfile";
 
 axios.defaults.baseURL = "http://localhost:9000/";
 
-localStorage.setItem(
-  "AuthToken",
-  //"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNmU5NzA5MzU0Njk1MDA0ODkxNDM0MyIsIm5hbWUiOiJCdXNib3kiLCJlbWFpbCI6ImJ1c2JveTJAZ21haWwuY29tIiwiaWF0IjoxNjE3ODYwMzYxLCJleHAiOjE2MjY1MDAzNjF9.FutgK1EqOjXceZzLe0xODkO8T8ZRy9pu6sV72ADRxEQ",
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzJlMDlhOGFlYmQ0MjI2ODkxMmZmYiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya2VtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTYxNzMxODgwMCwiZXhwIjoxNjI1OTU4ODAwfQ.YdEBvHBjaTqaQYZ70kPdwlpkkCTOFfrAkqTNFzodGYg",
-);
 const token = localStorage.getItem("AuthToken");
 
 // Check log in at first
@@ -50,20 +49,36 @@ function App() {
               <Route exact path="/linkedin" component={LinkedInPopUp}></Route>
               <Route exact path="/" component={OnBoarding}></Route>
               <Route exact path="/login" component={Login}></Route>
+              <Route
+                exact
+                path="/club-signup"
+                component={ClubOnBoarding}
+              ></Route>
               <Route exact path="/home" component={Home}></Route>
+              <Route exact path="/" component={OnBoarding}></Route>
+              <Route exact path="/clubDetails" component={ClubDetails}></Route>
+              <Route
+                exact
+                path="/studentDetails"
+                component={studentDetails}
+              ></Route>
+
               <Route
                 exact
                 path="/user/:userid"
                 component={StudentProfile}
               ></Route>
               <Route exact path="/club/:clubid" component={ClubProfile}></Route>
+
+              {/* EXAMPLE: http://localhost:3000/view-club/?clubId=CLUBID */}
+              <Route path="/view-club" component={ViewClubProfile}></Route>
+              {/* EXAMPLE: http://localhost:3000/view-student/?studentId=STUDENTID */}
               <Route
                 exact
-                path="/view-club"
+                path="/view-club/:clubId"
                 component={ViewClubProfile}
               ></Route>
               <Route
-                exact
                 path="/view-student"
                 component={ViewStudentProfile}
               ></Route>

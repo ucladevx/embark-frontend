@@ -19,6 +19,7 @@ import {
   SET_PAGE,
   ADD_CLUB_FILTERS,
   REMOVE_CLUB_FILTERS,
+  GET_CLUB,
 } from "../types";
 
 const initialState = {
@@ -31,6 +32,7 @@ const initialState = {
   links: [],
   page: "main",
   clubFilters: [],
+  club: {},
 };
 
 export default function dataReducer(state = initialState, action) {
@@ -158,6 +160,11 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         page: action.payload,
+      };
+    case GET_CLUB:
+      return {
+        ...state,
+        club: action.payload,
       };
     default:
       return state;

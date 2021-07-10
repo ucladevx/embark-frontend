@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Field, Formik } from "formik";
 import { loginUser } from "../../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +20,8 @@ import AuthButtons from "../../shared/AuthButtons";
 import { ActionButton } from "../../shared/Buttons";
 import { CLEAR_ERRORS } from "../../redux/types";
 import { TitleText } from "../../shared/Text/TitleText";
+import ForgetPassword from "./ForgetPassword";
+import { Button } from "@material-ui/core";
 
 const AccountBtn = styled(ActionButton)`
   width: 200px;
@@ -38,73 +41,89 @@ const Login = () => {
   const back_end_errors = useSelector((state) => state.ui.errors);
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const [passwordTab, setPasswordTab] = useState(false);
+
   return (
-    <FormContainer>
-      <LeftFormContainer />
-      <RightFormContainer>
-        <Prompt></Prompt>
-        <TitleText>Log in to Embark</TitleText>
-        <AuthButtons />
-        <OrSeperator />
-        <Formik
-          initialValues={{
-            email: "",
-            password: "",
-          }}
-          validationSchema={LoginSchema}
-          onSubmit={(values) => {
-            const { email, password } = values;
-            const oldUser = {
-              email,
-              password,
-            };
-            dispatch(loginUser(oldUser, history));
-          }}
-          validateOnBlur={false}
-          validateOnChange={false}
-        >
-          {({ errors, setErrors }) => {
-            const hasError =
-              !!back_end_errors || !!errors.password || !!errors.email;
-            return (
-              <FormWrapper>
-                <FieldContainer>
-                  <Field
-                    name="email"
-                    placeholder="Email"
-                    as={TypeBox}
-                    margin="normal"
-                    error={hasError}
-                    onFocus={() => {
-                      setErrors({});
-                      dispatch({ type: CLEAR_ERRORS });
-                    }}
-                  ></Field>
-                </FieldContainer>
-                <FieldContainer>
-                  <Field
-                    name="password"
-                    placeholder="Password"
-                    as={TypeBox}
-                    margin="normal"
-                    error={hasError}
-                    type="password"
-                    onFocus={() => {
-                      setErrors({});
-                      dispatch({ type: CLEAR_ERRORS });
-                    }}
-                  ></Field>
-                </FieldContainer>
-                <ErrorPrompt error={hasError}>
-                  Invalid email or password
-                </ErrorPrompt>
-                <AccountBtn type="submit">Log in</AccountBtn>
-              </FormWrapper>
-            );
-          }}
-        </Formik>
-      </RightFormContainer>
-    </FormContainer>
+    <div>
+      <ForgetPassword
+        open={passwordTab}
+        handleClose={() => setPasswordTab(false)}
+      />
+      <FormContainer>
+        <LeftFormContainer />
+        <RightFormContainer>
+          <Prompt></Prompt>
+          <TitleText>Log in to Embark</TitleText>
+          <AuthButtons />
+          <OrSeperator />
+          <Formik
+            initialValues={{
+              email: "",
+              password: "",
+            }}
+            validationSchema={LoginSchema}
+            onSubmit={(values) => {
+              const { email, password } = values;
+              const oldUser = {
+                email,
+                password,
+              };
+              dispatch(loginUser(oldUser, history));
+            }}
+            validateOnBlur={false}
+            validateOnChange={false}
+          >
+            {({ errors, setErrors }) => {
+              const hasError =
+                !!back_end_errors || !!errors.password || !!errors.email;
+              return (
+                <FormWrapper>
+                  <FieldContainer>
+                    <Field
+                      name="email"
+                      placeholder="Email"
+                      as={TypeBox}
+                      margin="normal"
+                      error={hasError}
+                      onFocus={() => {
+                        setErrors({});
+                        dispatch({ type: CLEAR_ERRORS });
+                      }}
+                    ></Field>
+                  </FieldContainer>
+                  <FieldContainer>
+                    <Field
+                      name="password"
+                      placeholder="Password"
+                      as={TypeBox}
+                      margin="normal"
+                      error={hasError}
+                      type="password"
+                      onFocus={() => {
+                        setErrors({});
+                        dispatch({ type: CLEAR_ERRORS });
+                      }}
+                    ></Field>
+                  </FieldContainer>
+                  <ErrorPrompt error={hasError}>
+                    Invalid email or password
+                  </ErrorPrompt>
+                  <AccountBtn type="submit">Log in</AccountBtn>
+                  <Button
+                    style={{ color: "#6E6D79", fontSize: 16, width: 200 }}
+                    href="#"
+                    onClick={() => setPasswordTab(true)}
+                  >
+                    Forgot your passwprd?
+                  </Button>
+                </FormWrapper>
+              );
+            }}
+          </Formik>
+        </RightFormContainer>
+      </FormContainer>
+    </div>
   );
 };
 

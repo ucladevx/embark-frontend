@@ -17,6 +17,7 @@ import {
 
 // Dayjs
 import dayjs from "dayjs";
+import BadgeEventAvatar from "./Event/BadgeEventAvatar";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
@@ -39,10 +40,11 @@ const Event = (props) => {
     return dayjs(date).format("MMM DD HH:mm a");
   };
   const dispatch = useDispatch();
-  const attending = useSelector((state) => state.user.goingEvents);
+  const attending = useSelector((state) => state.user.events);
   const hasID = (id) => {
-    for (var i = 0; i < attending.length; i++) {
-      if (attending[i]._id === id) {
+    if (!attending) return false;
+    for (let i = 0; i < attending.length; i++) {
+      if (attending[i] && attending[i]._id === id) {
         return true;
       }
     }
@@ -59,11 +61,11 @@ const Event = (props) => {
     <>
       <InfoSeperator key={props.e._id + "sep"}></InfoSeperator>
       <EventItem key={props.e._id}>
-        <EventAvatar
+        <BadgeEventAvatar
           onClick={() => {
             props.loadExpanded(props.e);
           }}
-        ></EventAvatar>
+        ></BadgeEventAvatar>
         <EventDescription
           onClick={() => {
             props.loadExpanded(props.e);

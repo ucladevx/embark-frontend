@@ -12,17 +12,48 @@ Content-Type: application/json
     "password": "DevasfdEmbark123$",
     "userType": "student"
 }
+###
+POST http://localhost:9000/auth/newsignup
+Content-Type: application/json
+
+{
+    "email": "bru11a!!@email.com",
+    "firstName": "some",
+    "lastName": "email",
+    "userType": "student"
+}
+
+###
+POST http://localhost:9000/auth/newsignin
+Content-Type: application/json
+
+{
+    "email": "bru11a!!@email.com",
+    "userType": "student"
+}
 
 ###
 POST http://localhost:9000/auth/signup
 Content-Type: application/json
 
 {
-    "firstName": "helloa",
+
+    "firstName": "hello1a",
     "lastName": "bruin",
-    "email": "bruin151!!@email.com",
+    "email": "bruin151a!!@email.com",
     "password": "12345qQ!",
     "userType": "student"
+}
+
+###
+POST http://localhost:9000/auth/signup
+Content-Type: application/json
+
+{
+    "firstName": "hellobruina",
+    "email": "brui11!!@email.com",
+    "password": "12345qQ!",
+    "userType": "club"
 }
 
 ###
@@ -111,6 +142,11 @@ Content-Type: application/json
 GET http://localhost:9000/student/profile
 Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImRlOTU1NmFkNDY4MDMxMmMxMTdhZmFlZjI5MjBmNWY5OWE0Yzc5ZmQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiODgyNzM0ODUwMzc0LWdydG9kaWE4NmtuZWVyODdtaWFzdTM2aDF0Z3QxNnY1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiODgyNzM0ODUwMzc0LWdydG9kaWE4NmtuZWVyODdtaWFzdTM2aDF0Z3QxNnY1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTAyNTI3ODg5NDM3MzY3MDQxNzQ4IiwiaGQiOiJnLnVjbGEuZWR1IiwiZW1haWwiOiJ0cmlzdGFucTgxNkBnLnVjbGEuZWR1IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJLMlVkWXNlQUJsenBPeG4yZURrbXFRIiwibmFtZSI6IlNISVdFSSBRVUUiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lDZk5wbG5DQkpxU1VHaVVqT0dMd2JENkhUcE9vMThUQ2wtTkxhPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IlNISVdFSSIsImZhbWlseV9uYW1lIjoiUVVFIiwibG9jYWxlIjoiZW4iLCJpYXQiOjE2MTkwNjc5NDIsImV4cCI6MTYxOTA3MTU0MiwianRpIjoiMGViYTdmNmY4NTU5NjUxNzIyN2E1NjQyNTdmMTlhODNkMzI0ZDZiMiJ9.VFl8M-V5qCm2QcXkaA4ctyZoKu1E0DZ6e6Myj1w9mNpeaLY-91lAJuM8PVUcp2UNAreCKyykLO3MzYrbY8Uljmnr7kxY9Gw0TXXNIBsPe0NUo_j86m8vEkECnYffPmX8Xs9VSIXJzDeb1rIqdQfU0Atvt6D4icwP1RiXrlXLykNxNxLFzUPjJqtcWxmyLaHCw7mYGMU15crjK64T1UUfHcFT69VaOdzIP95AKg6FPKYUMe3zIwlwPiTnCNytFjChOLDtLAZEE35JqASOsEn09MmHViOnqqDhKzsJuTy4mO0dcxPUf8m772veqa3o1sDeNJ8x0GUInhdsKo51YFGD_w
 Content-Type: application/json
+###
+GET http://localhost:9000/club/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYjNmYTZiYmI1NWZlMDBkNzJiMjIwYyIsIm5hbWUiOiJhc2RmYXNkIiwiZW1haWwiOiJ0ZXN0QDEyNDMuY29tIiwidXNlclR5cGUiOiJjbHViIiwiaWF0IjoxNjIyNDA3Nzg3LCJleHAiOjE2MzEwNDc3ODd9.UGi4VziJ2CY_dzeiUrE8AZMeM1cmmoUf-XiE06Tmwpc
+Content-Type: application/json
+
 ###
 POST http://localhost:9000/student/profile 
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTdjMjUzOTA3NzQ4MzJmMjEzYjNmYyIsIm5hbWUiOiJqb2huIHNtYWxsYmVyZzEiLCJlbWFpbCI6ImpvaG4xQGVtYWlsLmNvbSIsImlhdCI6MTYxMjIwNDA4NiwiZXhwIjoxNjIwODQ0MDg2fQ.kT3fUNe433ue1SG89ngnRjk5CErTMBZsH4X3xAeG_Pk

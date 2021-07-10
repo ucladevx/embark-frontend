@@ -7,11 +7,14 @@ import {
   ListItemText,
   TextField,
   Typography,
+  IconButton,
 } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { IndustryFilters } from "../../shared/dropdown";
 import { colors } from "../../shared/config";
 import close_window_x from "../../images/close_window_x.png";
+import checked from "../../images/checked_24px.png";
+import unchecked from "../../images/unchecked_24px.png";
 import { useDispatch, useSelector } from "react-redux";
 import { editStudentDetails } from "../../redux/actions/userActions";
 import styled from "styled-components";
@@ -44,18 +47,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { ActionButton } from "../../shared/Buttons";
+import MultiDropDown from "../../shared/Dropdown/MultiDropDown";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  menuPaper: {
-    maxHeight: 300,
+  button: {
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
   },
 }));
 
@@ -70,9 +69,18 @@ const EditClubProfile = ({ open, handleClose }) => {
   const [industries, setIndustries] = useState(user.tags);
   const [website, setWebsite] = useState(user.website);
   const [about, setAbout] = useState(user.about);
-  const [done, setDone] = useState("Cancel");
   const hiddenProfileInput = React.useRef(null);
   const hiddenCoverInput = React.useRef(null);
+
+  //check if there is any changes
+  const saveClub = () => {
+    return (
+      (user.about === about || about === "") &&
+      (user.description === description || description === "") &&
+      //JSON.stringify(user.tags.sort()) === JSON.stringify(industries.sort()) &&
+      (user.website === website || website === "")
+    );
+  };
 
   //dropdown toggle
   const [openInd, setOpenInd] = useState(false);
@@ -87,8 +95,19 @@ const EditClubProfile = ({ open, handleClose }) => {
     setDescription(e.target.value);
   };
 
-  const handleIndustries = (e) => {
-    setIndustries(e.target.value);
+  const removeIndustries = (name) => {
+    const newIndustries = industries.filter((ind) => ind !== name);
+    setIndustries(newIndustries);
+  };
+
+  const handleIndustries = (name) => {
+    if (industries && industries.includes(name)) {
+      const newIndustries = industries.filter((ind) => ind !== name);
+      setIndustries(newIndustries);
+    } else {
+      const newIndustries = [...industries, name];
+      setIndustries(newIndustries);
+    }
   };
 
   const handleWebsite = (e) => {
@@ -99,7 +118,7 @@ const EditClubProfile = ({ open, handleClose }) => {
     setAbout(e.target.value);
   };
 
-  const handleProfileURL = (e) => {
+  const handleClubProfileURL = (e) => {
     console.log(e.target.files[0]);
     setProfileURL({ url: URL.createObjectURL(e.target.files[0]) });
     const formData = new FormData();
@@ -111,12 +130,11 @@ const EditClubProfile = ({ open, handleClose }) => {
     );
   };
 
-  const handleCoverURL = (e) => {
+  const handleClubCoverURL = (e) => {
     setCoverURL({ url: URL.createObjectURL(e.target.files[0]) });
     const formData = new FormData();
     formData.append("image", e.target.files[0]); // appending file
     console.log(formData);
-
     axios.post(
       "http://localhost:9000/club/profile/image?pictureType=cover",
       formData,
@@ -142,6 +160,7 @@ const EditClubProfile = ({ open, handleClose }) => {
       description,
       website,
     };
+    //is there a rdux like this for club?
     dispatch(editStudentDetails(updatedProfile));
     handleClose();
   };
@@ -157,12 +176,14 @@ const EditClubProfile = ({ open, handleClose }) => {
       <TitleContainer>
         <EditProfileTitle align="center" sz={"18px"}>
           Edit Profile
-          <img
-            src={close_window_x}
-            style={{ float: "right" }}
-            onClick={handleClose}
-          ></img>
         </EditProfileTitle>
+        <IconButton
+          className={classes.button}
+          style={{ padding: "0" }}
+          onClick={handleClose}
+        >
+          <img src={close_window_x} alt="close"></img>
+        </IconButton>
       </TitleContainer>
       <EditProfileContent>
         {/* Avatar */}
@@ -183,7 +204,7 @@ const EditClubProfile = ({ open, handleClose }) => {
           type="file"
           ref={hiddenProfileInput}
           style={{ display: "none" }}
-          onChange={handleProfileURL}
+          onChange={handleClubProfileURL}
         />
 
         {/* Cover Picture */}
@@ -204,32 +225,12 @@ const EditClubProfile = ({ open, handleClose }) => {
           type="file"
           ref={hiddenCoverInput}
           style={{ display: "none" }}
-          onChange={handleCoverURL}
+          onChange={handleClubCoverURL}
         />
 
         {/* Description */}
         <TextFieldWrapper>
-          {/* <BoldTypography sz={"16px"}>Description:</BoldTypography>
-          <DialogTextField
-            value={description}
-            autoFocus
-            margin="dense"
-            id="name"
-            placeholder="Add your description"
-            type="email"
-            fullWidth
-            multiline
-            rows={2}
-            InputProps={{
-              disableUnderline: true,
-              style: {
-                fontSize: 16,
-                fontWeight: 600,
-              },
-            }}
-            onChange={handleDescription}
-          /> */}
-          <BoldTypography sz={"16px"}>Major:</BoldTypography>
+          <BoldTypography sz={"16px"}>Description:</BoldTypography>
           <DialogTextField
             autoFocus
             margin="dense"
@@ -247,12 +248,6 @@ const EditClubProfile = ({ open, handleClose }) => {
                 padding: "8px 16px",
               },
             }}
-            style={{
-              padding: "10px 2px",
-              marginTop: "0px",
-              borderRadius: "10px",
-              backgroundColor: "#EDEDED",
-            }}
             onChange={handleDescription}
           />
         </TextFieldWrapper>
@@ -268,9 +263,9 @@ const EditClubProfile = ({ open, handleClose }) => {
                 <ExploreObj
                   key={name}
                   bgcolor={colors.gray}
-                  // onClick={() => {
-                  //   removeIndustries(name);
-                  // }}
+                  onClick={() => {
+                    removeIndustries(name);
+                  }}
                 >
                   &times; {name}
                 </ExploreObj>
@@ -278,54 +273,22 @@ const EditClubProfile = ({ open, handleClose }) => {
           </ExploreFilter>
 
           {/* dropdown menu */}
-          <DropDownTitle wd={"312px"} hg={"35px"} onClick={toggleOpenInd}>
-            <Typography style={{ display: "inline" }}>
-              Select all that apply
-            </Typography>
-            <img src={DropdownArrow} style={{ float: "right" }}></img>
-          </DropDownTitle>
-          {openInd && (
-            <DropDownBox wd={"314px"} hg={"202px"} top={"122px"}>
-              <DropDownContent wd={"312px"} hg={"248px"} overflow={"scroll"}>
-                {industry.map((name, index) => (
-                  <div
-                    key={name}
-                    style={{
-                      paddingLeft: "19px",
-                      height: "25px",
-                      marginTop: "14px",
-                      marginBottom: "14px",
-                    }}
-                  >
-                    <DropDownCheckBox
-                    // onClick={() => {
-                    //   handleIndustries(name);
-                    // }}
-                    // src={
-                    //   industries && industries.includes(name)
-                    //     ? checked
-                    //     : unchecked
-                    // }
-                    ></DropDownCheckBox>
-                    <Typography
-                      style={{
-                        fontSize: "18px",
-                        marginLeft: "3px",
-                        padding: "0px",
-                        display: "inline",
-                      }}
-                    >
-                      {name}
-                    </Typography>
-                  </div>
-                ))}
-              </DropDownContent>
-
-              <Finished wd={"314px"} hg={"46px"} onClick={toggleOpenInd}>
-                Finished
-              </Finished>
-            </DropDownBox>
-          )}
+          <MultiDropDown
+            onOpenClose={toggleOpenInd}
+            onSelect={handleIndustries}
+            options={industry}
+            selectedOptions={industries}
+            open={openInd}
+            title="Select all that apply"
+            ttwd="312px"
+            tthg="35px"
+            bwd="314px"
+            bhg="202px"
+            cef="312px"
+            chg="248px"
+            fwd="314px"
+            fhg="46px"
+          ></MultiDropDown>
         </TextFieldWrapper>
 
         {/* Website */}
@@ -346,12 +309,6 @@ const EditClubProfile = ({ open, handleClose }) => {
                 fontWeight: 600,
                 padding: "8px 16px",
               },
-            }}
-            style={{
-              padding: "0px",
-              marginTop: "0px",
-              borderRadius: "10px",
-              backgroundColor: "#EDEDED",
             }}
             onChange={handleWebsite}
           />
@@ -379,19 +336,18 @@ const EditClubProfile = ({ open, handleClose }) => {
                 padding: "8px 16px",
               },
             }}
-            style={{
-              padding: "10px 2px",
-              marginTop: "0px",
-              borderRadius: "10px",
-              backgroundColor: "#EDEDED",
-            }}
             onChange={handleAbout}
           />
         </TextFieldWrapper>
 
         {/* Done Button */}
         <EditProfileDone>
-          <DoneBtn onClick={handleSubmit}>{done}</DoneBtn>
+          <DoneBtn
+            onClick={handleSubmit}
+            bgcolor={saveClub() ? colors.gray : "#5473bb"}
+          >
+            Save
+          </DoneBtn>
         </EditProfileDone>
       </EditProfileContent>
     </EditProfileContainer>
