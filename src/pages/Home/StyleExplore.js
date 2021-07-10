@@ -91,10 +91,12 @@ export const ExploreFilter = styled.div`
   margin-top: 15px;
   margin-bottom: 15px;
   flex-wrap: wrap;
+  position: relative;
 `;
 export const ExploreFilterTitle = styled(Typography)`
   text-transform: none;
-  align-self: flex-end;
+  margin-top: 5px;
+  align-self: flex-start;
   color: ${colors.gray3};
   text-decoration: none;
   margin-bottom: 7px;
@@ -102,7 +104,8 @@ export const ExploreFilterTitle = styled(Typography)`
 `;
 export const ExploreAddFilter = styled(Typography)`
   text-transform: none;
-  align-self: flex-end;
+  margin-top: 7px;
+  align-self: flex-start;
   color: ${colors.gray3};
   text-decoration: none;
   &:hover {
@@ -110,6 +113,56 @@ export const ExploreAddFilter = styled(Typography)`
     text-decoration: underline;
   }
   margin-bottom: 7px;
+`;
+
+export const ExploreAddFilterOpened = styled(Typography)`
+  text-transform: none;
+  align-self: flex-start;
+  color: #5473bb;
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 7px;
+
+  border-radius: 12px 12px 0px 0px;
+  margin-bottom: 7px;
+  background-color: #ebeef1;
+`;
+
+export const ExploreFilterCross = styled.div`
+  margin-right: 3px;
+  &:hover {
+    cursor: pointer;
+    text-decoration: bold;
+    color: ${colors.gray3};
+    transition: ease 0.3s;
+  }
+`;
+
+export const ExploreFilterPopupOpened = styled.div`
+  position: absolute;
+  width: 50px;
+  background-color: #ebeef1;
+`;
+
+export const ExploreFilterPopup = styled.div`
+  position: absolute;
+  top: 35px;
+  right: 15px;
+  width: 240px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ebeef1;
+  padding: 10px;
+  z-index: 9;
+  display: block;
+  overflow: auto;
+  height: 400px;
 `;
 export const UpcomingItemBox = styled.div`
   display: flex;

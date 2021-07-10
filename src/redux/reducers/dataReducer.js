@@ -16,6 +16,9 @@ import {
   SET_CLUB_LINKS,
   UPLOAD_CLUB_RESOURCES,
   UPLOAD_CLUB_LINKS,
+  SET_PAGE,
+  ADD_CLUB_FILTERS,
+  REMOVE_CLUB_FILTERS,
   GET_CLUB,
 } from "../types";
 
@@ -27,6 +30,8 @@ const initialState = {
   events: [],
   resources: [],
   links: [],
+  page: "main",
+  clubFilters: [],
   club: {},
 };
 
@@ -97,6 +102,18 @@ export default function dataReducer(state = initialState, action) {
           (eachfilter) => eachfilter !== action.payload,
         ),
       };
+    case ADD_CLUB_FILTERS:
+      return {
+        ...state,
+        clubFilters: [...state.clubFilters, action.payload],
+      };
+    case REMOVE_CLUB_FILTERS:
+      return {
+        ...state,
+        clubFilters: state.clubFilters.filter((oneFilter) => {
+          return oneFilter.title !== action.payload;
+        }),
+      };
     case FILTER_POSTS: {
       var postsCopy = state.posts;
       postsCopy = postsCopy.sort(function (post1, post2) {
@@ -145,6 +162,11 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         links: [action.payload, ...state.links],
+      };
+    case SET_PAGE:
+      return {
+        ...state,
+        page: action.payload,
       };
     case GET_CLUB:
       return {

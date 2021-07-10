@@ -15,6 +15,9 @@ export const OWN_EVENTS = "OWN_EVENTS";
 export const SET_POSTS = "SET_POSTS";
 export const SET_POST = "SET_POST";
 export const SAVE_POST = "SAVE_POST";
+
+export const SET_PAGE = "SET_PAGE";
+
 export const GET_CLUB = "GET_CLUB";
 export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
@@ -32,6 +35,8 @@ export const SET_CLUB_RESOURCES = "SET_CLUB_RESOURCES";
 export const SET_CLUB_LINKS = "SET_CLUB_LINKS";
 export const UPLOAD_CLUB_RESOURCES = "UPLOAD_CLUB_RESOURCES";
 export const UPLOAD_CLUB_LINKS = "UPLOAD_CLUB_LINKS";
+export const ADD_CLUB_FILTERS = "ADD_CLUB_FILTERS";
+export const REMOVE_CLUB_FILTERS = "REMOVE_CLUB_FILTERS";
 
 // Ui reducer types
 export const SET_ERRORS = "SET_ERRORS";

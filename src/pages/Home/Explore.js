@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -13,7 +13,11 @@ import {
   ExploreObj,
   ExploreFilter,
   ExploreAddFilter,
+  ExploreAddFilterOpened,
+  ExploreFilterCross,
   ExploreFilterTitle,
+  ExploreFilterPopup,
+  ExploreFilterPopupOpened,
   ExploreSubtitle,
   UpcomingItemBox,
   UpcomingItem,
@@ -34,6 +38,14 @@ import dbImg from "../../images/dailyBruin.png";
 import consultingImg from "../../images/bruinConsulting.png";
 import { colors } from "../../shared/config";
 import ClubThumbnail from "./ClubThumbnail";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addClubFilter,
+  removeClubFilter,
+} from "../../redux/actions/dataActions";
+import { FilterSharp } from "@material-ui/icons";
+
+import { clubFilterOptions } from "../../shared/clubFilterOptions";
 
 const testClubs = [
   {
@@ -68,20 +80,121 @@ const testClubs = [
   },
 ];
 
+const FilterOption = ({ checkContains, handleFilter, filter }) => {
+  return (
+    <div>
+      <input
+        type="checkbox"
+        checked={checkContains(filter)}
+        name={filter}
+        onClick={handleFilter}
+      />{" "}
+      <label style={{ margin: 0, padding: 0, color: "#838383" }}>
+        {filter}
+      </label>{" "}
+      <br />
+    </div>
+  );
+};
+
+const colorCodes = [
+  "FFADAD",
+  "FFD6A5",
+  "FDFFB6",
+  "CAFFBF",
+  "9BF6FF",
+  "A0C4FF",
+  "BDB2FF",
+  "FFC6FF",
+  "DFA98C",
+];
+
 const Explore = () => {
+  const filter = useSelector((state) => state.data.clubFilters);
+  const [openFilter, setOpenFilter] = useState(false);
+  const dispatch = useDispatch();
+
+  const crossClicked = (title) => {
+    dispatch(removeClubFilter(title));
+  };
+
+  const handleFilter = (e) => {
+    let colorIndex = Math.floor(Math.random() * 9);
+    let title = e.target.name;
+
+    let newFilter = {
+      title,
+      visibility: true,
+      color: "#" + colorCodes[colorIndex],
+      id: filter.index,
+    };
+
+    if (checkContains(title)) {
+      dispatch(removeClubFilter(title));
+    } else {
+      dispatch(addClubFilter(newFilter));
+    }
+  };
+
+  const checkContains = (name) => {
+    let index = filter.findIndex((oneFilter) => {
+      return oneFilter.title === name;
+    });
+
+    return index !== -1;
+  };
+
+  const filterList = filter.map((item, index) => {
+    if (!item.visibility) {
+      return <span></span>;
+    }
+    return (
+      <ExploreObj bgcolor={item.color}>
+        <ExploreFilterCross onClick={() => crossClicked(item.title)}>
+          &times;{" "}
+        </ExploreFilterCross>{" "}
+        {item.title}
+      </ExploreObj>
+    );
+  });
+
   return (
     <ExploreWrapper>
       <ExploreTitle>Explore Clubs</ExploreTitle>
 
       <ExploreFilter>
         <ExploreFilterTitle>Filters:</ExploreFilterTitle>
-        <ExploreObj bgcolor={colors.red1}>
-          &times; Product Management
-        </ExploreObj>
-        <ExploreObj bgcolor={colors.darkyellow}>
-          &times; Product Design
-        </ExploreObj>
-        <ExploreAddFilter>+ Add Filter</ExploreAddFilter>
+        <div style={{ display: "flex", flexWrap: "wrap", width: "70%" }}>
+          {filterList}
+        </div>
+
+        {openFilter ? (
+          <ExploreAddFilterOpened onClick={() => setOpenFilter(!openFilter)}>
+            + Add Filter
+          </ExploreAddFilterOpened>
+        ) : (
+          <ExploreAddFilter onClick={() => setOpenFilter(!openFilter)}>
+            + Add Filter
+          </ExploreAddFilter>
+        )}
+
+        {openFilter && (
+          <div>
+            <ExploreFilterPopup>
+              {clubFilterOptions.map((filter) => {
+                return (
+                  <FilterOption
+                    style={{ maxHeight: 50, overflow: "auto" }}
+                    key={filter}
+                    checkContains={checkContains}
+                    handleFilter={handleFilter}
+                    filter={filter}
+                  />
+                );
+              })}
+            </ExploreFilterPopup>
+          </div>
+        )}
       </ExploreFilter>
 
       {/* CLUB CARDS CONTAINER: */}

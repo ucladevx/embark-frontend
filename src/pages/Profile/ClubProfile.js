@@ -8,7 +8,6 @@ import {
   ProfileAvatar,
   NameDescription,
   NameDescriptionWrapper,
-  ProfileTabsWrapper,
   IndustryWrapper,
   EditProfileButton,
   MiddleContainer,
@@ -21,6 +20,7 @@ import {
   Footer,
   ExploreFilterTitle,
   DescriptionTypography,
+  ProfileTabsWrapper,
 } from "./StyleProfile";
 import lawn from "../../images/lawn.png";
 import { Typography } from "@material-ui/core";

@@ -18,6 +18,9 @@ import {
   UPLOAD_CLUB_RESOURCES,
   UPLOAD_CLUB_LINKS,
   SAVE_POST,
+  SET_PAGE,
+  ADD_CLUB_FILTERS,
+  REMOVE_CLUB_FILTERS,
   GET_CLUB,
 } from "../types";
 
@@ -232,6 +235,20 @@ export const removeFilter = () => (dispatch) => {
   });
 };
 
+export const addClubFilter = (newFilter) => (dispatch) => {
+  dispatch({
+    type: ADD_CLUB_FILTERS,
+    payload: newFilter,
+  });
+};
+
+export const removeClubFilter = (filterName) => (dispatch) => {
+  dispatch({
+    type: REMOVE_CLUB_FILTERS,
+    payload: filterName,
+  });
+};
+
 // Create A New Event
 export const newEvent = (newE) => async (dispatch) => {
   try {
@@ -305,6 +322,9 @@ export const uploadLink = (newLink, linkName) => async (dispatch) => {
   }
 };
 
+export const setPage = (newPage) => async (dispatch) => {
+  dispatch({ type: SET_PAGE, payload: newPage });
+};
 //Grab a club's data as a non-club
 export const getExpandedClub = (clubId) => async (dispatch) => {
   try {

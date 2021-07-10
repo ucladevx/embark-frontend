@@ -62,11 +62,17 @@ export const Prompt = () => {
   const page = useLocation().pathname;
   return page === "/" ? (
     <PromptContainer>
-      Already a member? <a href="/login">Sign in</a>
+      Already a member? <a href="/login">Sign in</a> <br></br>
+      <a href="/login" style={{ marginTop: 5, float: "right" }}>
+        Sign in as a club
+      </a>
     </PromptContainer>
   ) : (
     <PromptContainer>
-      New to Embark? <a href="/">Sign up</a>
+      New to Embark? <a href="/">Sign up</a> <br></br>
+      <a href="/" style={{ marginTop: 5, float: "right" }}>
+        Sign up as a club
+      </a>
     </PromptContainer>
   );
 };
