@@ -8,8 +8,8 @@ POST http://localhost:9000/auth/signin
 Content-Type: application/json
 
 {
-    "email": "theembarktea232@gmail.com",
-    "password": "DevasfdEmbark123$",
+    "email": "embarktester1234@gmail.com",
+    "password": "Embarktester1234!",
     "userType": "student"
 }
 ###
@@ -101,11 +101,11 @@ Content-Type: application/json
 
 ###
 POST http://localhost:9000/posts/likes
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzJlMDlhOGFlYmQ0MjI2ODkxMmZmYiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya2VtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTYxMzk1MDg4NiwiZXhwIjoxNjIyNTkwODg2fQ.-TZJmcfn1tro8kvAO_ThSAmhyDzhwuSicZlPk-i7Drc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTkxOGI5OTAwNWZkMDAyNDkyNjVhMiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya3Rlc3RlcjEyMzRAZ21haWwuY29tIiwidXNlclR5cGUiOiJzdHVkZW50IiwiaWF0IjoxNjI1OTc1MTcxLCJleHAiOjE2MzQ2MTUxNzF9.ZzjtwYAJ_B0yAaeqZ0srb7W4VlbIyyhdO4zo5nu5cAs
 Content-Type: application/json
 
 {
-    "authorEmail": "embarkemail@gmail.com",
+    "authorEmail": "embarktester1234@gmail.com",
     "post_id": "6046b8a11a39630050538c35"
 }
 
@@ -137,7 +137,7 @@ Content-Type: application/json
 
 ###
 POST http://localhost:9000/posts/likes
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMzJlMDlhOGFlYmQ0MjI2ODkxMmZmYiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya2VtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTYxMzk1MDg4NiwiZXhwIjoxNjIyNTkwODg2fQ.-TZJmcfn1tro8kvAO_ThSAmhyDzhwuSicZlPk-i7Drc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTM4NGYyNTY2OWJhMDA2MTA4N2U1YiIsIm5hbWUiOiJzb21lIiwiZW1haWwiOiJicnUxMWEhIUBlbWFpbC5jb20iLCJpYXQiOjE2MjU5NzUwOTcsImV4cCI6MTYzNDYxNTA5N30.VoznGZnYyjeRiEfjs3Yc3v42GAEZyYeTh2cFT9w50FA
 Content-Type: application/json
 
 {
@@ -174,3 +174,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNmE0YmJhY
 ###
 GET http://localhost:9000/events/discover
 Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImRlOTU1NmFkNDY4MDMxMmMxMTdhZmFlZjI5MjBmNWY5OWE0Yzc5ZmQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiODgyNzM0ODUwMzc0LWdydG9kaWE4NmtuZWVyODdtaWFzdTM2aDF0Z3QxNnY1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiODgyNzM0ODUwMzc0LWdydG9kaWE4NmtuZWVyODdtaWFzdTM2aDF0Z3QxNnY1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTAyNTI3ODg5NDM3MzY3MDQxNzQ4IiwiaGQiOiJnLnVjbGEuZWR1IiwiZW1haWwiOiJ0cmlzdGFucTgxNkBnLnVjbGEuZWR1IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJLMlVkWXNlQUJsenBPeG4yZURrbXFRIiwibmFtZSI6IlNISVdFSSBRVUUiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lDZk5wbG5DQkpxU1VHaVVqT0dMd2JENkhUcE9vMThUQ2wtTkxhPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IlNISVdFSSIsImZhbWlseV9uYW1lIjoiUVVFIiwibG9jYWxlIjoiZW4iLCJpYXQiOjE2MTkwNjc5NDIsImV4cCI6MTYxOTA3MTU0MiwianRpIjoiMGViYTdmNmY4NTU5NjUxNzIyN2E1NjQyNTdmMTlhODNkMzI0ZDZiMiJ9.VFl8M-V5qCm2QcXkaA4ctyZoKu1E0DZ6e6Myj1w9mNpeaLY-91lAJuM8PVUcp2UNAreCKyykLO3MzYrbY8Uljmnr7kxY9Gw0TXXNIBsPe0NUo_j86m8vEkECnYffPmX8Xs9VSIXJzDeb1rIqdQfU0Atvt6D4icwP1RiXrlXLykNxNxLFzUPjJqtcWxmyLaHCw7mYGMU15crjK64T1UUfHcFT69VaOdzIP95AKg6FPKYUMe3zIwlwPiTnCNytFjChOLDtLAZEE35JqASOsEn09MmHViOnqqDhKzsJuTy4mO0dcxPUf8m772veqa3o1sDeNJ8x0GUInhdsKo51YFGD_w
+
+###
+GET http://localhost:9000/moderation
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzdjN2YzYTk4YjdjMDAxZmJlZmNkOCIsIm5hbWUiOiJoZWxsb2EiLCJlbWFpbCI6ImJydWluMTUxISFAZW1haWwuY29tIiwiaWF0IjoxNjE4NDYyNzA3LCJleHAiOjE2MjcxMDI3MDd9.sJLdWdm3mLlGyGvs5xGKz8_JLGIT79G-zfPUaCy-57Q
+Content-Type: application/json
+
+###
+POST http://localhost:9000/moderation
+Content-Type: application/json
+
+{
+    "post_id": "601cf9a0912b5407fddafeb0"
+}
