@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useCallback, useState } from "react";
 import styled from "styled-components";
 import { ActionButton } from "../Buttons";
-import { ErrorPopup } from "../../components/ErrorPopup.js";
+import ErrorPopup from "../../components/ErrorPopup.js";
 import { colors, HomeAddress } from "../config";
 import GoogleIcon from "../../images/google.svg";
 import LinkedInIcon from "../../images/linkedinAuth.svg";
