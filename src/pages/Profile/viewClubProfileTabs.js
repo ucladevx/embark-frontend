@@ -82,7 +82,7 @@ const ViewClubProfileTabs = ({ club }) => {
           onChange={handleChange}
           // centered
         >
-          <Tab label="Resources" {...a11yProps(0)} />
+          {/*<Tab label="Resources" {...a11yProps(0)} />*/}
           <Tab label="Events" {...a11yProps(1)} />
           <Tab label="Board Members" {...a11yProps(2)} />
         </Tabs>

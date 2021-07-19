@@ -103,7 +103,7 @@ const Explore = () => {
 
       <ExploreInfoSeperator></ExploreInfoSeperator>
 
-      <ExploreTitle style={{ "margin-top": 20 }}>Discover Events</ExploreTitle>
+      {/*<ExploreTitle style={{ "margin-top": 20 }}>Discover Events</ExploreTitle>
       <ExploreSubtitle>Events happening soon</ExploreSubtitle>
 
       <UpcomingItemBox>
@@ -178,7 +178,7 @@ const Explore = () => {
             </UpcomingItemGoingBtn>
           </UpcomingItemWhenBox>
         </UpcomingItem>
-      </UpcomingItemBox>
+        </UpcomingItemBox>*/}
     </ExploreWrapper>
   );
 };
