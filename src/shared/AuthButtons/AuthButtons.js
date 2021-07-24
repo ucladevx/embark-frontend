@@ -1,6 +1,7 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import styled from "styled-components";
 import { ActionButton } from "../Buttons";
+import ErrorPopup from "../../components/ErrorPopup.js";
 import { colors, HomeAddress } from "../config";
 import GoogleIcon from "../../images/google.svg";
 import LinkedInIcon from "../../images/linkedinAuth.svg";
@@ -29,6 +30,7 @@ const AuthButtons = () => {
   const page = useLocation().pathname;
   const googleRef = useRef();
   const linkedinRef = useRef();
+  const [errorPopup, setErrorPopup] = useState(false);
 
   const RenderBtnStyle = useCallback((ref, id, icon, prompt) => {
     const btn = ref.current.firstChild;
@@ -83,6 +85,7 @@ const AuthButtons = () => {
 
   return (
     <AuthBtnWrapper id="authBtns">
+      <ErrorPopup open={errorPopup} onClose={() => setErrorPopup(false)} />
       <span ref={googleRef}>
         <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
@@ -94,14 +97,16 @@ const AuthButtons = () => {
           redirectUri={HomeAddress}
         />
       </span>
-      <span ref={linkedinRef}>
-        <LinkedIn
-          clientId={process.env.REACT_APP_LINKEDIN_CLIENT_ID}
-          redirectUri="http%3A%2F%2Flocalhost%3A9000%2Fauth%2Flinkedin%2Fredirect"
-          onSuccess={responseAuth}
-          onFailure={responseAuth}
-        ></LinkedIn>
-      </span>
+      <div onClick={() => setErrorPopup(true)}>
+        <span ref={linkedinRef}>
+          <LinkedIn
+            clientId={process.env.REACT_APP_LINKEDIN_CLIENT_ID}
+            redirectUri="http%3A%2F%2Flocalhost%3A9000%2Fauth%2Flinkedin%2Fredirect"
+            onSuccess={responseAuth}
+            onFailure={responseAuth}
+          ></LinkedIn>
+        </span>
+      </div>
     </AuthBtnWrapper>
   );
 };
