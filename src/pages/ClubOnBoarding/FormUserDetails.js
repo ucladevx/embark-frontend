@@ -6,7 +6,6 @@ import {
   RightFormContainer,
   FormContainer,
   FormWrapper,
-  Prompt,
   FieldContainer,
   ErrorPrompt,
 } from "../../shared/Form";
@@ -36,6 +35,13 @@ const AccountBtn = styled(ActionButton)`
   margin-top: 15px;
 `;
 
+const PromptContainer = styled.div`
+  font-size: 14px;
+  position: absolute;
+  top: 5vh;
+  right: 4vw;
+`;
+
 const SignupSchema = Yup.object().shape({
   clubName: Yup.string()
     .min(2, "Too Short!")
@@ -47,6 +53,16 @@ const SignupSchema = Yup.object().shape({
     .min(8, "Password is too short - should be 8 chars minimum.")
     .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
 });
+
+const Prompt = () => {
+  return (
+    <PromptContainer>
+      Already a member? <a href="/login">Sign in</a>
+      <br />
+      <a href="/">Sign up as a student</a>
+    </PromptContainer>
+  );
+};
 
 const FormUserDetails = ({ handleUser, handleStep }) => {
   const backend_errors = useSelector((state) => state.ui.errors);
