@@ -19,6 +19,7 @@
 }
 #linkedinbtn {
   background: #2867b2;
+  pointer-events: none;
 }
 #linkedinbtn:hover {
   cursor: pointer;

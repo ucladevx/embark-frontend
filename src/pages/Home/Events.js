@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import ExpandedEvent from "./ExpandedEvent.js";
 import Event from "./Event.js";
 import BadgeEventAvatar from "./Event/BadgeEventAvatar";
+import ErrorPopup from "../..//components/ErrorPopup";
 
 // Dayjs
 import dayjs from "dayjs";
@@ -57,8 +58,11 @@ const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
     setExpandedEventPage(e);
   };
 
+  const [errorPopup, setErrorPopup] = useState(false);
+
   return (
     <>
+      <ErrorPopup open={errorPopup} onClose={() => setErrorPopup(false)} />
       <ExpandedEvent
         open={expanded}
         handleClose={() => setExpanded(false)}
@@ -106,7 +110,7 @@ const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
               </>
             );
           })}
-          <AddFilter onClick={openEvents}>View More</AddFilter>
+          <AddFilter onClick={() => setErrorPopup(true)}>View More</AddFilter>
           {usertype === "club" ? (
             <CreateButton onClick={() => setNewEvent(true)}>
               + Create

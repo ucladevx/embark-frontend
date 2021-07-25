@@ -99,6 +99,7 @@ export const newPost = (newP) => async (dispatch) => {
     maintenanceErrorCheck(err);
   }
 };
+
 // Save a Post
 export const savePost = (post_id) => async (dispatch, getState) => {
   try {
@@ -115,6 +116,7 @@ export const savePost = (post_id) => async (dispatch, getState) => {
     console.error(err);
   }
 };
+
 // Like a Post
 export const likePost = (post_id) => async (dispatch, getState) => {
   try {
