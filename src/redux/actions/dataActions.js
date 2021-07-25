@@ -123,9 +123,11 @@ export const likePost = (post_id) => async (dispatch, getState) => {
       post_id,
       authorEmail: email,
     };
-    const res = await axios.post(`/posts/likes`, body);
-    console.log(res.data);
-    dispatch({ type: LIKE_POST, payload: res.data });
+    const res_post = await axios.post(`/posts/likes`, body);
+    console.log(res_post.data);
+    const res_student = await axios.post("student/likePost", { post_id });
+    console.log(res_student.data);
+    dispatch({ type: LIKE_POST, payload: res_post.data });
   } catch (err) {
     console.error(err);
     maintenanceErrorCheck(err);
@@ -133,6 +135,7 @@ export const likePost = (post_id) => async (dispatch, getState) => {
 };
 
 // Unlike a Post
+/**
 export const unlikePost = (postId) => async (dispatch) => {
   try {
     const res = await axios.get(`/posts/`);
@@ -141,7 +144,7 @@ export const unlikePost = (postId) => async (dispatch) => {
     console.error(err);
     maintenanceErrorCheck(err);
   }
-};
+}; */
 
 // Delete a Post
 export const deletePost = (postId) => async (dispatch) => {
