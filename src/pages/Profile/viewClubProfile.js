@@ -168,7 +168,11 @@ const ViewClubProfile = (props) => {
                 </FollowButton>
 
                 <ClubWebsiteButton href={club.website}>
-                  <img src={website_arrow} style={{ marginRight: "4px" }}></img>
+                  <img
+                    src={website_arrow}
+                    style={{ marginRight: "4px" }}
+                    alt="website arrow"
+                  ></img>
                   Club Website
                 </ClubWebsiteButton>
               </ButtonBox>

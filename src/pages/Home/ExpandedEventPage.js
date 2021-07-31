@@ -143,7 +143,7 @@ const ExpandedEventPage = ({ e, close }) => {
                   {usertype === "student" ? (
                     <GoingBtnExpand
                       onClick={goingClick(e._id)}
-                      bgcolor={hasID(e._id)}
+                      bgcolor={hasID(e._id) ? 1 : 0}
                     >
                       Going
                     </GoingBtnExpand>

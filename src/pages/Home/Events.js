@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import {
   EventDescription,
   EventItems,
@@ -80,7 +80,7 @@ const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
                 {test("2021-03-03T08:00:00.000Z")}
               </TimeTypography>
             </EventDescription>
-            <GoingBtn bgcolor={true}>Going</GoingBtn>
+            <GoingBtn bgcolor={true ? 1 : 0}>Going</GoingBtn>
           </FakeEventItem>
           <InfoSeperator></InfoSeperator>
 
@@ -93,21 +93,21 @@ const Events = ({ setNewEvent, openEvents, setExpandedEventPage }) => {
                 {dayjs().format("MMM DD HH:mm a")}
               </TimeTypography>
             </EventDescription>
-            <GoingBtn bgcolor={false}>Going</GoingBtn>
+            <GoingBtn bgcolor={true ? 1 : 0}>Going</GoingBtn>
           </FakeEventItem>
 
-          {testEvent.map((p) => {
+          {testEvent.map((p, i) => {
             return (
-              <>
+              <Fragment key={p.id || i}>
                 <Event loadExpanded={loadExpanded} e={p} test={true} />
-              </>
+              </Fragment>
             );
           })}
-          {events.map((e) => {
+          {events.map((e, i) => {
             return (
-              <>
+              <Fragment key={e.id || i}>
                 <Event loadExpanded={loadExpanded} e={e} test={false} />
-              </>
+              </Fragment>
             );
           })}
           <AddFilter onClick={() => setErrorPopup(true)}>View More</AddFilter>

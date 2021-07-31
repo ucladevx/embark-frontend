@@ -60,7 +60,7 @@ const Interactive = ({ post_id, isSaved }) => {
 
   useEffect(() => {
     setSaved(isSaved);
-  }, [user.savedPosts]);
+  }, [isSaved]);
 
   const handleLike = () => {
     if (!liked) dispatch(likePost(post_id));

@@ -86,7 +86,11 @@ const StudentProfile = (props) => {
                 seteditProfile(true);
               }}
             >
-              <img style={{ marginRight: "2px" }} src={pencil}></img>
+              <img
+                style={{ marginRight: "2px" }}
+                src={pencil}
+                alt="pencil"
+              ></img>
               Edit Profile
             </EditProfileButton>
           </ProfileInfo>

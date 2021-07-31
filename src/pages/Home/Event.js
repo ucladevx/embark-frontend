@@ -77,7 +77,7 @@ const Event = (props) => {
         </EventDescription>
         <GoingBtn
           onClick={goingClick(props.e._id)}
-          bgcolor={hasID(props.e._id)}
+          bgcolor={hasID(props.e._id) ? 1 : 0}
         >
           Going
         </GoingBtn>
