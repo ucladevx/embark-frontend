@@ -32,6 +32,7 @@ const Moderation = () => {
     <div style={{ display: "grid", placeItems: "center" }}>
       <StyledTableContainer>
         <TableHead>
+          <TableCell>Post id</TableCell>
           <TableCell>Timestamp</TableCell>
           <TableCell>Post Title</TableCell>
           <TableCell>Post Body</TableCell>
@@ -41,6 +42,7 @@ const Moderation = () => {
           {posts &&
             posts.map((p) => (
               <TableRow key={p._id}>
+                <TableCell>{p._id}</TableCell>
                 <TableCell>{p.timestamp}</TableCell>
                 <TableCell>{p.title}</TableCell>
                 <TableCell>{p.body}</TableCell>

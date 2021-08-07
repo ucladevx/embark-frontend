@@ -46,7 +46,6 @@ export const getStudentData = () => async (dispatch) => {
   try {
     const res = await axios.get("/student/profile");
     const payload = { ...res.data.student, userType: "student" };
-    console.log(payload);
     dispatch({
       type: SET_USER,
       payload,
