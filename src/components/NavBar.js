@@ -17,6 +17,7 @@ import { TextField } from "@material-ui/core";
 import LinkEffect from "../shared/Effect/LinkEffect";
 import Setting from "./Setting";
 
+import { AskAvatar } from "../pages/Home/StyleLanding";
 const NavBarWrapper = styled.div`
   display: flex;
   border-bottom: 1px solid ${colors.black};
@@ -57,7 +58,7 @@ const UserLogo = styled.div`
   border-radius: 50%;
   width: 38px;
   height: 38px;
-  margin: auto 0px auto 0px;
+  margin: auto 15px auto 0px;
   ${LinkEffect};
 `;
 const CollapseLogo = styled.div`
@@ -155,7 +156,8 @@ const NavBar = ({ setPage }) => {
           </div>
         </section>
         <UserLogo onClick={handleUserIconClick}>
-          <UserIcon />
+          <AskAvatar src={user.profilePicURL} />
+          {/* <UserIcon /> */}
         </UserLogo>
         <span ref={settingRef}>
           <CollapseLogo onClick={handleCollapseIconClick}>

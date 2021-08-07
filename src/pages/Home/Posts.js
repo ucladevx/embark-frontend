@@ -119,7 +119,7 @@ const Posts = ({ setNewPost }) => {
   return (
     <>
       <QuestionBox>
-        <AskAvatar></AskAvatar>
+        <AskAvatar src={user.profilePicURL}></AskAvatar>
         <AskaQuestion
           InputProps={{
             disableUnderline: true,
