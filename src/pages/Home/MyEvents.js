@@ -69,7 +69,7 @@ const MyEvents = () => {
                 {test("2021-03-03T08:00:00.000Z")}
               </TimeTypography>
             </EventDescription>
-            <GoingBtn bgcolor={true}>Going</GoingBtn>
+            <GoingBtn bgcolor={true ? 1 : 0}>Going</GoingBtn>
           </EventItem>
           {events &&
             events.map((e) => {

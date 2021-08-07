@@ -148,6 +148,7 @@ const Home = () => {
                   src={user.profilePicURL}
                   alt="user"
                 ></InfoProfilePic>
+
                 <InfoEntryText>
                   {user.firstName} {user.lastName}
                 </InfoEntryText>

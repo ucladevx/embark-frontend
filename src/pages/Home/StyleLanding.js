@@ -82,6 +82,7 @@ export const InfoSeperator = styled.div`
 `;
 
 export const InfoImage = styled.img`
+  border-radius: 50%;
   width: 35px;
   height: 35px;
 `;

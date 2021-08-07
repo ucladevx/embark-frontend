@@ -38,7 +38,7 @@ const CommentBox = ({ comments }) => {
         comments.map((c, i) => {
           if (i >= start && i < start + 4)
             return (
-              <PreviousCommentItem key={c._id + i}>
+              <PreviousCommentItem key={c._id || i}>
                 <PreviousCommentAvatar></PreviousCommentAvatar>
                 <div>
                   <PreviousCommentContent bgcolor={colors.gray1}>
