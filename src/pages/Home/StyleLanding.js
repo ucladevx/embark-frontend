@@ -87,6 +87,10 @@ export const InfoImage = styled.img`
   height: 35px;
 `;
 
+export const InfoProfilePic = styled(InfoImage)`
+  border-radius: 50%;
+`;
+
 export const FilterWrapper = styled.div`
   ${StickyEffect}
   box-sizing: border-box;
