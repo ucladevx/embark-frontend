@@ -20,6 +20,7 @@ import {
   InfoBoxes,
   InfoEntryWrapper,
   InfoImage,
+  InfoProfilePic,
   InfoSeperator,
   InfoEntryText,
   MiddleContainer,
@@ -143,7 +144,10 @@ const Home = () => {
               <InfoEntryWrapper
                 onClick={() => history.push(`/user/${user._id}`)}
               >
-                <InfoImage src={user.profilePicURL} alt="user"></InfoImage>
+                <InfoProfilePic
+                  src={user.profilePicURL}
+                  alt="user"
+                ></InfoProfilePic>
                 <InfoEntryText>
                   {user.firstName} {user.lastName}
                 </InfoEntryText>

@@ -82,9 +82,12 @@ export const InfoSeperator = styled.div`
 `;
 
 export const InfoImage = styled.img`
-  border-radius: 50%;
   width: 35px;
   height: 35px;
+`;
+
+export const InfoProfilePic = styled(InfoImage)`
+  border-radius: 50%;
 `;
 
 export const FilterWrapper = styled.div`
