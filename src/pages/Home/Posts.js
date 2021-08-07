@@ -118,7 +118,6 @@ const Posts = ({ setNewPost }) => {
   };
 
   const isLiked = (post_id) => {
-    console.log(user.likedPosts);
     return user.likedPosts && user.likedPosts.includes(post_id);
   };
 
