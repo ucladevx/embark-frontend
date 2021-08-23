@@ -1,28 +1,27 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Button, Dialog, DialogContent, DialogTitle } from "@material-ui/core";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import DisplayResources from "./DisplayResources";
 import { getResources } from "../../../redux/actions/dataActions";
 
 const ClubUploadResource = ({ club }) => {
-  const [fileViewOpen, setFileViewOpen] = useState(false);
-  const [displayFile, setDisplayFile] = useState({});
-  let resources = club?.resources;
-  let links = club?.links;
+  const [resources, setResources] = useState([]);
+  const [links, setLinks] = useState([]);
   useEffect(() => {
-    if (!resources) {
-      resources = [];
+    if (club) {
+      if (club.resources) {
+        setResources(club.resources);
+      }
+      if (club.links) {
+        setLinks(club.links);
+      }
     }
-    if (!links) {
-      links = [];
-    }
-  }, []);
+  }, [club]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getResources());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div style={{ margin: "auto" }}>

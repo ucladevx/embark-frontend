@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { MenuItem, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import { colors } from "../shared/config";
-import DropdownArrow from "../images/DropdownArrow.png";
 
 export const IndustryFilters = [
   "Medical",

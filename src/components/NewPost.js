@@ -90,7 +90,6 @@ const NewPost = ({ open, handleClose }) => {
   const [description, setDescription] = useState("");
   const [form, setForm] = useState({});
   const [imgForm, setImgForm] = useState({});
-  const [selectedFile, setSelectedFile] = useState(null);
   const [resources, setResources] = useState(false);
   // Redux
   const dispatch = useDispatch();
@@ -106,10 +105,6 @@ const NewPost = ({ open, handleClose }) => {
 
   const handleDescription = (e) => {
     setDescription(e.target.value);
-  };
-
-  const handleFileInput = (e) => {
-    setSelectedFile(e.target.files[0]);
   };
 
   const handleResources = () => {

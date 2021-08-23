@@ -94,7 +94,7 @@ const ClubEventsTab = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOwnEvents());
-  }, []);
+  }, [dispatch]);
 
   const hostedEvents = useSelector((state) => state.user.ownEvents);
   const [viewDate, setViewDate] = useState(new Date());

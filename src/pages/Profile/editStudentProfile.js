@@ -22,7 +22,6 @@ import {
 
 import SingleDropDown from "../../shared/Dropdown/SingleDropdown";
 import close_window_x from "../../images/close_window_x.png";
-import { ActionButton } from "../../shared/Buttons";
 import { LinkedinAdornment } from "../../shared/LinkedinAdornment";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -46,11 +45,11 @@ const EditProfile = ({ open, handleClose, allTags }) => {
   const years = ["2024", "2023", "2022", "2021"];
   const industry = useMemo(() => IndustryFilters, []);
   const user = useSelector((state) => state.user);
-  const [name, setName] = useState(user.name);
+  const [name] = useState(user.name);
   const [major, setMajor] = useState(" ");
   const [year, setYear] = useState(user.year);
   const [industries, setIndustries] = useState(user.tags);
-  const [bio, setBio] = useState(user.bio);
+  const [bio] = useState(user.bio);
   const [linkedin, setLinkedin] = useState(" ");
   const [profileURL, setProfileURL] = useState({ url: user.profilePicURL });
   const [coverURL, setCoverURL] = useState({ url: user.coverPicURL });

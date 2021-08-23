@@ -1,43 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import dayjs from "dayjs";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { StyleEventCalendar } from "../../components/Calendar/EventCalender";
 import "../../components/Calendar/EventCalendar.css";
 import Datetime from "react-datetime";
-import { ActionButton } from "../../shared/Buttons";
 import styled from "styled-components";
 import ClubEvent from "./ClubEvent";
-import NewEvent from "../../components/NewEvent";
 import ExpandedEvent from "../Home/ExpandedEvent";
 import { BoldTypography } from "../../shared/Typography";
 import "moment-timezone";
 // Dayjs
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
-
-const CreateButton = styled(ActionButton)`
-  width: fit-content;
-  height: 1.6vw;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  margin-top: 5px;
-  margin-right: 5px;
-  margin-left: 5px;
-  font-size: 30px;
-  text-transform: none;
-  text-align: center;
-  justify-content: center;
-  align-self: flex-end;
-  text-decoration: none;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`;
 
 const OuterWrapper = styled.div`
   display: flex;

@@ -14,16 +14,12 @@ import {
 } from "@material-ui/core";
 import "./resource-css.css";
 import { BoldTypography } from "../../../shared/Typography";
-import { colors, mediaQueries } from "../../../shared/config";
+import { colors } from "../../../shared/config";
 import { ExploreFilter, ExploreObj } from "../StyleProfile";
-import ListDocuments from "./ListDocuments";
-import axios from "axios";
 import GooglePicker from "react-google-picker";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { uploadResource, uploadLink } from "../../../redux/actions/dataActions";
-
-import { uploadFile } from "react-s3";
 
 // Import Google API
 import { gapi } from "gapi-script";
@@ -39,9 +35,6 @@ var DISCOVERY_DOCS = process.env.DISCOVERY_DOCS;
 // included, separated by spaces.
 var SCOPES = process.env.SCOPES;
 
-var appId = process.env.appId;
-const google = window.google;
-
 const a11yProps = (index) => {
   return {
     id: `full-width-tab-${index}`,
@@ -51,14 +44,12 @@ const a11yProps = (index) => {
 
 // Google Drive Upload Part
 const DriveUpload = ({ handleDrive, handleName, handleUploaded }) => {
-  const [listDocumentsVisible, setListDocumentsVisibility] = useState(false);
-  const [documents, setDocuments] = useState([]);
-  const [isLoadingGoogleDriveApi, setIsLoadingGoogleDriveApi] = useState(false);
-  const [isFetchingGoogleDriveFiles, setIsFetchingGoogleDriveFiles] =
-    useState(false);
-  const [oauthToken, setAuthToken] = useState("");
-  const [signedInUser, setSignedInUser] = useState();
-  const [pickerApiLoaded, setPickerLoaded] = useState(false);
+  const [, setListDocumentsVisibility] = useState(false);
+  const [, setDocuments] = useState([]);
+  const [, setIsLoadingGoogleDriveApi] = useState(false);
+  const [, setIsFetchingGoogleDriveFiles] = useState(false);
+  const [, setAuthToken] = useState("");
+  const [, setSignedInUser] = useState();
 
   const handleAuthClick = (event) => {
     gapi.auth2.getAuthInstance().signIn();
@@ -114,11 +105,6 @@ const DriveUpload = ({ handleDrive, handleName, handleUploaded }) => {
           console.log(error);
         },
       );
-  };
-
-  const handleSignOutClick = (event) => {
-    setListDocumentsVisibility(false);
-    gapi.auth2.getAuthInstance().signOut();
   };
 
   const handleDriveUpload = () => {

@@ -4,9 +4,9 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import {
   ClubCardsContainer,
-  ClubCard,
-  ClubCardImage,
-  ClubCardCaption,
+  // ClubCard,
+  // ClubCardImage,
+  // ClubCardCaption,
   ExploreWrapper,
   ExploreTitle,
   ExploreInfoSeperator,
@@ -14,21 +14,21 @@ import {
   ExploreFilter,
   ExploreAddFilter,
   ExploreFilterTitle,
-  ExploreSubtitle,
-  UpcomingItemBox,
-  UpcomingItem,
-  UpcomingItemImage,
-  UpcomingItemInfoCol,
-  UpcomingItemTitle,
-  UpcomingItemSubtitle,
-  UpcomingItemObj,
-  UpcomingItemWhenBox,
-  UpcomingItemDate,
-  UpcomingItemGoingBtn,
-  ViewMoreLink,
+  // ExploreSubtitle,
+  // UpcomingItemBox,
+  // UpcomingItem,
+  // UpcomingItemImage,
+  // UpcomingItemInfoCol,
+  // UpcomingItemTitle,
+  // UpcomingItemSubtitle,
+  // UpcomingItemObj,
+  // UpcomingItemWhenBox,
+  // UpcomingItemDate,
+  // UpcomingItemGoingBtn,
+  // ViewMoreLink,
 } from "./StyleExplore";
 // Images
-import avatarImg from "../../images/avatar.svg";
+// import avatarImg from "../../images/avatar.svg";
 import devxImg from "../../images/devx.jpeg";
 import dbImg from "../../images/dailyBruin.png";
 import consultingImg from "../../images/bruinConsulting.png";
