@@ -7,8 +7,6 @@ import { useSelector } from "react-redux";
 import { useClickOutState } from "../shared/Hook";
 // icons for navbar icons
 import { ReactComponent as EmbarkIcon } from "../images/navbar_embark_logo.svg";
-import { ReactComponent as UserIcon } from "../images/navbar_user_logo.svg";
-import { ReactComponent as DevXIcon } from "../images/navbar_club_logo.svg";
 import { ReactComponent as CollapseIcon } from "../images/navbar_collapse_icon.svg";
 
 // imports for search bar
@@ -37,22 +35,6 @@ const NavBarLogo = styled.div`
   place-items: center;
   margin: auto 0px auto 85px;
   ${LinkEffect};
-`;
-const SearchBar = styled.input`
-  background-color: ${colors.gray};
-  width: 610px;
-  height: 30px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: flex-start;
-  margin: auto 0px auto 0px;
-  align-items: center;
-  padding-left: 20px;
-  &::placeholder {
-    font-style: italic;
-  }
-  border: none;
-  outline: none;
 `;
 const UserLogo = styled.div`
   border-radius: 50%;
@@ -117,7 +99,6 @@ const NavBar = ({ setPage }) => {
         history.push("/user/:userid");
       }
     }
-    console.log("User Icon Clicked");
     history.push("/user/" + user._id);
   };
 

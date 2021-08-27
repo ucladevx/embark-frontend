@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import TypeBox from "../../shared/TypeBox";
-import { useHistory } from "react-router-dom";
 import React, { useState, useMemo } from "react";
-import { OrSeperator } from "../../shared/Separators";
 import {
   LeftFormContainer,
   RightFormContainer,
@@ -15,25 +13,15 @@ import { BoldTypography } from "../../shared/Typography";
 import { Typography } from "@material-ui/core";
 import { ActionButton } from "../../shared/Buttons";
 import { Field, Formik } from "formik";
-import * as Yup from "yup";
-import { editStudentDetails } from "../../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { header4 } from "../../shared/config";
-import AuthButtons from "../../shared/AuthButtons";
 import { CLEAR_ERRORS } from "../../redux/types";
 import { TitleText } from "../../shared/Text/TitleText";
 
 import { colors } from "../../shared/config.js";
 import { IndustryFilters } from "../../shared/Dropdown/StyleDropdown";
 import MultiDropDown from "../../shared/Dropdown/MultiDropDown";
-import { useIndustry } from "../../shared/Hook";
-import { useLocation } from "react-router-dom";
 import { LinkedinAdornment } from "../../shared/LinkedinAdornment";
-
-const HeyTitle = styled.div`
-  font-weight: 700;
-  font-size: 24px;
-`;
 
 const PromptContainer = styled.div`
   font-size: 14px;
@@ -63,20 +51,8 @@ const DoneBtn = styled(ActionButton)`
   height: 40px;
 `;
 
-const NameContainer = styled.div`
-  display: flex;
-  gap: 20px;
-  width: 380px;
-`;
-
 const FieldName = styled.p`
   ${header4}
-`;
-
-const AccountBtn = styled(ActionButton)`
-  width: 200px;
-  height: 38px;
-  margin-top: 15px;
 `;
 
 const TextFieldWrapper = styled.div`
@@ -157,10 +133,7 @@ const FormPersonalDetails = ({ handleUser, handleStep }) => {
         </HeySubtitile>
         <Formik
           initialValues={{ website: "" }}
-          onSubmit={(values) => {
-            const { website } = values;
-            const postUser = { website };
-          }}
+          onSubmit={(values) => {}}
           validateOnBlur={false}
           validateOnChange={false}
         >

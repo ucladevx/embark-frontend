@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import pdfIcon from "../../../images/pdf-icon.png";
 import wordIcon from "../../../images/word-icon.jpg";
 import driveIcon from "../../../images/drive-icon.png";
@@ -38,9 +38,7 @@ const LinkCardFormatter = ({ fileUrl }) => {
     return <div></div>;
   }
 
-  console.log(fileUrl);
   var link = String(fileUrl.link);
-  console.log(link);
   if (link.indexOf("drive.google.com") !== -1) {
     return (
       <Card className={classes.root}>
@@ -95,7 +93,6 @@ const ResourceCardFormatter = ({ resource }) => {
   }
 
   var type = resource.Location.substr(resource.Location.length - 4);
-  var link = resource.Location;
 
   if (type.indexOf("doc") !== -1 || type.indexOf("docx") !== -1) {
     return (

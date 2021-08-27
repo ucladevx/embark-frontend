@@ -27,3 +27,5 @@ yarn-error.log*
 .env
 
 compare
+# Local Netlify folder
+.netlify

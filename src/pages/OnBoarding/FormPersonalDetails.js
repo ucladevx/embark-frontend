@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { TextField } from "@material-ui/core";
-import MenuItem from "@material-ui/core/MenuItem";
 import { useHistory } from "react-router-dom";
 import { ActionButton } from "../../shared/Buttons";
 import { Field, Formik } from "formik";
@@ -16,7 +14,6 @@ import {
 import styled from "styled-components";
 import { colors, DropdownConfigs } from "../../shared/config.js";
 // import { Formik, Field } from "formik";
-import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { editStudentDetails } from "../../redux/actions/userActions";
 import { CLEAR_ERRORS, SET_ERRORS } from "../../redux/types";

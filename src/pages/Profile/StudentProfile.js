@@ -6,7 +6,6 @@ import {
   ProfileWrapper,
   ProfileAvatar,
   NameDescription,
-  NameTypography,
   NameDescriptionWrapper,
   IndustryWrapper,
   EditProfileButton,
@@ -19,16 +18,14 @@ import {
 import { Typography } from "@material-ui/core";
 import { TitleTypography, BoldTypography } from "../../shared/Typography";
 import EditProfile from "./editStudentProfile";
-import { ActionButton } from "../../shared/Buttons";
 import UserProfileTabs from "./StudentProfileTabs";
-import { colors } from "../../shared/config";
 import { handleTagColor } from "../../utils/handleTagColors.js";
 //image
 import linkedin from "../../images/linkedin.png";
 import pencil from "../../images/pencil.png";
 
 //redux
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 const StudentProfile = (props) => {
   const user = useSelector((state) => state.user);
   const [editProfile, seteditProfile] = useState(false);
@@ -36,7 +33,6 @@ const StudentProfile = (props) => {
 
   return (
     <div>
-      {console.log("this is the user", user)}
       <EditProfile
         open={editProfile}
         handleClose={() => seteditProfile(false)}
@@ -51,6 +47,7 @@ const StudentProfile = (props) => {
               src={linkedin}
               style={{ float: "right" }}
               onClick={() => window.open(user.linkedIn)}
+              alt="linkedin"
             ></img>
             <NameDescriptionWrapper>
               <ProfileAvatar src={user.profilePicURL}></ProfileAvatar>

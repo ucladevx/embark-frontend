@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -6,10 +6,6 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import { useDispatch, useSelector } from "react-redux";
-import { BoldTypography } from "../../shared/Typography";
-import FileViewer from "@studyworld/react-file-viewer";
-import { Button, Dialog, DialogContent, DialogTitle } from "@material-ui/core";
 
 import ResourceUpload from "./ClubUploadResource/ResourceUpload";
 import ClubUploadResource from "./ClubUploadResource/ViewResources";

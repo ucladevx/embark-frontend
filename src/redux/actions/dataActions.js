@@ -1,7 +1,6 @@
 import {
   SET_POSTS,
   LIKE_POST,
-  UNLIKE_POST,
   DELETE_POST,
   NEW_POST,
   SET_POST,
@@ -26,7 +25,7 @@ import axios from "axios";
 const maintenanceErrorCheck = (err) => {
   if (err.message.includes(" 503")) {
     console.log("here");
-    alert("ERROR 503: " + "Embark is on maintenance, please check later");
+    alert("ERROR 503: Embark is on maintenance, please check later");
   }
 };
 

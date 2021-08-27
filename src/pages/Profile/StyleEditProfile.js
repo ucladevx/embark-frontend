@@ -3,21 +3,15 @@ import {
   DialogContent,
   DialogActions,
   DialogTitle,
-  Button,
   TextField,
-  Select,
-  MenuItem,
   Typography,
-  InputLabel,
   FormControl,
-  Divider,
   Avatar,
 } from "@material-ui/core";
 import { ActionButton } from "../../shared/Buttons";
 import { BoldTypography } from "../../shared/Typography";
 import { colors } from "../../shared/config";
 import styled from "styled-components";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import LinkEffect from "../../shared/Effect/LinkEffect";
 
 export const EditProfileContainer = styled(Dialog)`

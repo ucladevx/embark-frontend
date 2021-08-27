@@ -6,11 +6,8 @@ import {
   DialogTitle,
   DialogContent,
   Grid,
-  Box,
-  Button,
   TextField,
 } from "@material-ui/core";
-import axios from "axios";
 import { BoldTypography } from "../../../shared/Typography";
 
 const ListDocuments = ({

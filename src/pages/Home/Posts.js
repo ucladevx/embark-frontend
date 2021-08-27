@@ -38,7 +38,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 // Dayjs
 import dayjs from "dayjs";
-import { getNextPosts, getPost } from "../../redux/actions/dataActions";
+import { getNextPosts } from "../../redux/actions/dataActions";
 import Interactive from "./Interactive";
 import WriteComment from "./Comment/WriteComment";
 import FileViewer from "@studyworld/react-file-viewer";
@@ -118,7 +118,6 @@ const Posts = ({ setNewPost }) => {
   };
 
   const isLiked = (post_id) => {
-    console.log(user.likedPosts);
     return user.likedPosts && user.likedPosts.includes(post_id);
   };
 

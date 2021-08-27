@@ -9,12 +9,8 @@ import Saved from "../../images/saved.svg";
 import styled from "styled-components";
 import { colors } from "../../shared/config";
 import LinkEffect from "../../shared/Effect/LinkEffect";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  likePost,
-  unlikePost,
-  savePost,
-} from "../../redux/actions/dataActions";
+import { useDispatch } from "react-redux";
+import { likePost, savePost } from "../../redux/actions/dataActions";
 import { OPEN_COMMENT } from "../../redux/types";
 
 const InteractiveContainer = styled.div`
@@ -60,7 +56,6 @@ const Interactive = ({ post_id, isSaved, isLiked }) => {
   const dispatch = useDispatch();
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
-  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     setSaved(isSaved);
@@ -68,7 +63,7 @@ const Interactive = ({ post_id, isSaved, isLiked }) => {
 
   useEffect(() => {
     setLiked(isLiked);
-  }, [user.likedPosts]);
+  }, [isLiked]);
 
   const handleLike = () => {
     dispatch(likePost(post_id));

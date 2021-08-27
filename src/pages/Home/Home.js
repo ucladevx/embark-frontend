@@ -24,16 +24,12 @@ import {
   InfoSeperator,
   InfoEntryText,
   MiddleContainer,
-  EventTypography,
-  GoingBtn,
   DialogTextField,
 } from "./StyleLanding";
 // Images
-import avatarImg from "../../images/avatar.svg";
 import bookImg from "../../images/book.svg";
 import compassImg from "../../images/compass.svg";
 // Utils
-import { colors } from "../../shared/config";
 import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -78,7 +74,6 @@ const Home = () => {
   const openExpandedEventPage = (e) => {
     setPage("expandEvent");
     setSelectedEvent(e);
-    console.log(e);
   };
 
   const closeExpandedEventPage = () => {
@@ -86,8 +81,6 @@ const Home = () => {
     setPage("main");
     setSelectedEvent({});
   };
-
-  const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
 
   useEffect(() => {
     dispatch(getPosts());
@@ -105,7 +98,7 @@ const Home = () => {
     if (clubExpansionCase._id) {
       openExpandedEventPage(clubExpansionCase);
     }
-  }, []);
+  }, [clubExpansionCase]);
 
   const removeUpdateFilters = (t) => {
     dispatch(removeFilter(t));
