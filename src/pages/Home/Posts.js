@@ -212,12 +212,10 @@ const Posts = ({ setNewPost }) => {
                   showGraphic={true}
                   maxLine={2}
                   minLine={1}
-                  url={
-                    backendHost +
-                    getURL(
-                      "Hey Christie! We have a slidedeck all about product thinking on our profile. You should totally apply to be on one of our teams this quarter to gain some more experience with the product development process!! https://ucladevx.com/",
-                    )
-                  }
+                  proxyUrl={backendHost}
+                  url={getURL(
+                    "Hey Christie! We have a slidedeck all about product thinking on our profile. You should totally apply to be on one of our teams this quarter to gain some more experience with the product development process!! https://ucladevx.com/",
+                  )}
                 />
               </PreviousCommentContent>
               <LikeReply>
@@ -310,9 +308,7 @@ const Posts = ({ setNewPost }) => {
                 {p.files &&
                   p.files.map((f) => (
                     <FilesWrapper>
-                      <FileButton
-                        onClick={() => window.open(backendHost + f, "_blank")}
-                      >
+                      <FileButton onClick={() => window.open(f, "_blank")}>
                         Expand File
                       </FileButton>
                       <FileViewer
