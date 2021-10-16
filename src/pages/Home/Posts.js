@@ -74,6 +74,8 @@ export const FileButton = styled(Button)`
   flex-direction: column;
 `;
 
+const backendHost = "https://embark-backend-dev.herokuapp.com/";
+
 const Loader = () => {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
@@ -102,7 +104,7 @@ const Posts = ({ setNewPost }) => {
   };
   //for test files, go to https://cors-anywhere.herokuapp.com to enable CORS on non-cors file links, see below for format
   const testfiles = [
-    "http://localhost:9000/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
+    "http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
   ];
 
   const getUrls = require("get-urls"); //url finder
@@ -167,7 +169,7 @@ const Posts = ({ setNewPost }) => {
                 <FileViewer
                   tag={f}
                   fileType={f.substring(f.lastIndexOf(".") + 1)}
-                  filePath={f}
+                  filePath={backendHost + f}
                 />
               </FilesWrapper>
             );
@@ -276,6 +278,7 @@ const Posts = ({ setNewPost }) => {
                 </Linkify>
                 {getURL(p.body) !== "" ? (
                   <ReactTinyLink
+                    proxyUrl={backendHost}
                     cardSize="small"
                     showGraphic={true}
                     maxLine={2}
@@ -304,13 +307,15 @@ const Posts = ({ setNewPost }) => {
                 {p.files &&
                   p.files.map((f) => (
                     <FilesWrapper>
-                      <FileButton onClick={() => window.open(f, "_blank")}>
+                      <FileButton
+                        onClick={() => window.open(backendHost + f, "_blank")}
+                      >
                         Expand File
                       </FileButton>
                       <FileViewer
                         tag={f}
                         fileType={f.substring(f.lastIndexOf(".") + 1)}
-                        filePath={f}
+                        filePath={backendHost + f}
                       />
                     </FilesWrapper>
                   ))}
