@@ -79,7 +79,7 @@ Content-Type: application/json
 ############ Posts ################################################
 ### Fixing in the backend
 GET http://localhost:9000/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTM4NGYyNTY2OWJhMDA2MTA4N2U1YiIsIm5hbWUiOiJzb21lIiwiZW1haWwiOiJicnUxMWEhIUBlbWFpbC5jb20iLCJpYXQiOjE2MjQ3NDQ3NjEsImV4cCI6MTYzMzM4NDc2MX0.0_AAGTLS0q3xqQv1_Ko0VN4Ts8d1sIgCpzHDJRt4suU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjIyNTNkZGFhMzM1MDAxNjk2YjcxMyIsIm5hbWUiOiJUcmlzdGFuIiwiZW1haWwiOiJ0ZXN0MWFzZmQwQGdtYWlsLmNvbSIsInVzZXJUeXBlIjoic3R1ZGVudCIsImlhdCI6MTYzMzgyMjAxMywiZXhwIjoxNjQyNDYyMDEzfQ.65vi3fTvkiG48An9sYcxNDuJaWBdFgJBcs1XnJxmSms
 Content-Type: application/json
 
 ### 
