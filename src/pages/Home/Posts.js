@@ -104,7 +104,7 @@ const Posts = ({ setNewPost }) => {
   };
   //for test files, go to https://cors-anywhere.herokuapp.com to enable CORS on non-cors file links, see below for format
   const testfiles = [
-    "http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
+    "https://club-resources-embark.s3.amazonaws.com/1625887134027ws7.pdf",
   ];
 
   const getUrls = require("get-urls"); //url finder
@@ -212,9 +212,12 @@ const Posts = ({ setNewPost }) => {
                   showGraphic={true}
                   maxLine={2}
                   minLine={1}
-                  url={getURL(
-                    "Hey Christie! We have a slidedeck all about product thinking on our profile. You should totally apply to be on one of our teams this quarter to gain some more experience with the product development process!! https://ucladevx.com/",
-                  )}
+                  url={
+                    backendHost +
+                    getURL(
+                      "Hey Christie! We have a slidedeck all about product thinking on our profile. You should totally apply to be on one of our teams this quarter to gain some more experience with the product development process!! https://ucladevx.com/",
+                    )
+                  }
                 />
               </PreviousCommentContent>
               <LikeReply>
