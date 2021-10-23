@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import TypeBox from "../../shared/TypeBox";
 import { OrSeperator } from "../../shared/Separators";
@@ -19,6 +20,7 @@ import { header4 } from "../../shared/config";
 import AuthButtons from "../../shared/AuthButtons";
 import { CLEAR_ERRORS } from "../../redux/types";
 import { TitleText } from "../../shared/Text/TitleText";
+import { useState } from "react";
 
 const NameContainer = styled.div`
   display: flex;
@@ -55,6 +57,14 @@ const SignupSchema = Yup.object().shape({
 const FormUserDetails = ({ handleUser, handleStep }) => {
   const backend_errors = useSelector((state) => state.ui.errors);
   const dispatch = useDispatch();
+
+  const [password, setPassword] = useState("");
+  const [passwordPopOver, setPasswordPopOver] = useState(false);
+
+  const numerialCharReg = new RegExp("^(?=.*\\d).+$");
+  const upperCaseReg = new RegExp("^(?=.*[A-Z])");
+  const lowercaseReg = new RegExp("^(?=.*[a-z])");
+  const specialCharReg = new RegExp("^(?=.*[-+_!@#$%^&*.,?])");
 
   return (
     <FormContainer>
@@ -97,6 +107,11 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
             const handleFocus = () => {
               setErrors({});
               dispatch({ type: CLEAR_ERRORS });
+            };
+
+            const handlePasswordFocus = () => {
+              handleFocus();
+              setPasswordPopOver(true);
             };
 
             return (
@@ -143,8 +158,55 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                     error={hasError}
                     type="password"
                     placeholder="8+ characters"
-                    onFocus={handleFocus}
+                    onFocus={handlePasswordFocus}
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    onBlur={() => setPasswordPopOver(false)}
                   ></Field>
+                  {password.length <= 8 ||
+                  !numerialCharReg.test(password) ||
+                  !upperCaseReg.test(password) ||
+                  !lowercaseReg.test(password) ||
+                  !specialCharReg.test(password) ? (
+                    <ErrorPrompt error={passwordPopOver}>
+                      <p style={{ fontSize: 7 }}>
+                        Password Still Needs to Have:
+                      </p>
+                      {password.length <= 8 && (
+                        <React.Fragment>
+                          <p style={{ fontSize: 4 }}>1. 8+ characters</p>
+                        </React.Fragment>
+                      )}
+                      {!numerialCharReg.test(password) && (
+                        <React.Fragment>
+                          <p style={{ fontSize: 4 }}>2. At least one number</p>
+                        </React.Fragment>
+                      )}
+                      {!upperCaseReg.test(password) && (
+                        <React.Fragment>
+                          <p style={{ fontSize: 4 }}>
+                            3. At least one upper case character
+                          </p>
+                        </React.Fragment>
+                      )}
+                      {!lowercaseReg.test(password) && (
+                        <React.Fragment>
+                          <p style={{ fontSize: 4 }}>
+                            4. At least one lower case character
+                          </p>
+                        </React.Fragment>
+                      )}
+                      {!specialCharReg.test(password) && (
+                        <React.Fragment>
+                          <p style={{ fontSize: 4 }}>
+                            5. At least one special character
+                          </p>
+                        </React.Fragment>
+                      )}
+                    </ErrorPrompt>
+                  ) : (
+                    <div></div>
+                  )}
                 </FieldContainer>
                 <ErrorPrompt error={hasError}>
                   Invalid name, email, or password
