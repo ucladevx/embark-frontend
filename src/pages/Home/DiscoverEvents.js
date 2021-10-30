@@ -79,7 +79,7 @@ const DiscoverEvents = ({ closeEvents, setExpandedEventPage }) => {
                 {test("2021-03-03T08:00:00.000Z")}
               </TimeTypography>
             </EventDescription>
-            <GoingBtn bgcolor={true}>Going</GoingBtn>
+            <GoingBtn bgcolor={true ? 1 : 0}>Going</GoingBtn>
           </FakeEventItem>
           <InfoSeperator></InfoSeperator>
           <FakeEventItem>
@@ -91,7 +91,7 @@ const DiscoverEvents = ({ closeEvents, setExpandedEventPage }) => {
                 {dayjs().format("MMM DD HH:mm a")}
               </TimeTypography>
             </EventDescription>
-            <GoingBtn bgcolor={false}>Going</GoingBtn>
+            <GoingBtn bgcolor={true ? 1 : 0}>Going</GoingBtn>
           </FakeEventItem>
           {testEvent.map((p) => {
             return (

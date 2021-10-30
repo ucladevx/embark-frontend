@@ -1,12 +1,10 @@
 import React, { useRef, useEffect, useCallback, useState } from "react";
 import styled from "styled-components";
-import { ActionButton } from "../Buttons";
 import ErrorPopup from "../../components/ErrorPopup.js";
-import { colors, HomeAddress } from "../config";
+import { HomeAddress } from "../config";
 import GoogleIcon from "../../images/google.svg";
 import LinkedInIcon from "../../images/linkedinAuth.svg";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import {
   studentGoogleSignIn,
   studentGoogleSignUp,
@@ -25,7 +23,6 @@ const AuthBtnWrapper = styled.div`
 
 const AuthButtons = () => {
   const dispatch = useDispatch();
-  const userType = useSelector((state) => state.user.userType);
   const history = useHistory();
   const page = useLocation().pathname;
   const googleRef = useRef();

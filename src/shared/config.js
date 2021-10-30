@@ -36,7 +36,6 @@ export const colors = {
   green: "#CAFFBF",
   lightBlue: "#9BF6FF",
   darkBlue: "#A0C4FF",
-  purple: "#BDB2FF",
   pink: "#FFC6FF",
   brown: "#DFA98C",
   black: "#000000",

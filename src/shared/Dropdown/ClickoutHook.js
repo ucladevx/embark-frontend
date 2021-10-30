@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const useClickOut = (dropdownRef, isOpen, setIsOpen, onOpenClose) => {
   useEffect(() => {

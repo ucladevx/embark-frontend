@@ -1,7 +1,6 @@
 import {
   SET_POSTS,
   LIKE_POST,
-  UNLIKE_POST,
   DELETE_POST,
   NEW_POST,
   SET_POST,
@@ -26,7 +25,7 @@ import axios from "axios";
 const maintenanceErrorCheck = (err) => {
   if (err.message.includes(" 503")) {
     console.log("here");
-    alert("ERROR 503: " + "Embark is on maintenance, please check later");
+    alert("ERROR 503: Embark is on maintenance, please check later");
   }
 };
 
@@ -72,7 +71,7 @@ export const getNextPosts = () => async (dispatch, getState) => {
     const { nextString } = getState().data;
     const res = await axios.get("/posts", {
       params: {
-        limit: 2,
+        limit: 6,
         nextPage: nextString,
       },
     });
@@ -125,8 +124,11 @@ export const likePost = (post_id) => async (dispatch, getState) => {
       post_id,
       authorEmail: email,
     };
-    const res = await axios.post(`/posts/likes`, body);
-    dispatch({ type: LIKE_POST, payload: res.data });
+    const res_post = await axios.post(`/posts/likes`, body);
+    console.log(res_post.data);
+    const res_student = await axios.post("student/likePost", { post_id });
+    console.log(res_student.data);
+    dispatch({ type: LIKE_POST, payload: res_post.data });
   } catch (err) {
     console.error(err);
     maintenanceErrorCheck(err);
@@ -134,6 +136,7 @@ export const likePost = (post_id) => async (dispatch, getState) => {
 };
 
 // Unlike a Post
+/**
 export const unlikePost = (postId) => async (dispatch) => {
   try {
     const res = await axios.get(`/posts/`);
@@ -142,7 +145,7 @@ export const unlikePost = (postId) => async (dispatch) => {
     console.error(err);
     maintenanceErrorCheck(err);
   }
-};
+}; */
 
 // Delete a Post
 export const deletePost = (postId) => async (dispatch) => {
@@ -170,22 +173,21 @@ export const getPost = (post_id) => async (dispatch) => {
 export const submitComment =
   (post_id, commentData) => async (dispatch, getState) => {
     try {
-      const { email } = getState().user;
+      const { _id: authorID } = getState().user;
       // TODO: Add error display for comment
       if (commentData.trim().length === 0)
         throw Error("comment cannot be empty");
       const res = await axios.post(`/posts/comments`, {
         post_id,
-        authorEmail: email,
-        comment: commentData,
+        authorID,
+        commentBody: commentData,
       });
-      const newPosts = getState().data.posts.map((p, i) => {
+      const newPosts = getState().data.posts.map((p) => {
         if (p._id === post_id) {
           p.comments = res.data.comments;
         }
         return p;
       });
-
       dispatch({
         type: SET_POSTS,
         payload: newPosts,

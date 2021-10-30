@@ -26,10 +26,6 @@ const TimeTypography = styled(EventTypography)`
   font-size: 16px;
 `;
 
-const NameTypography = styled(EventTypography)`
-  font-size: 16px;
-`;
-
 const EventContent = styled(PostContent)`
   font-size: 16px;
 `;

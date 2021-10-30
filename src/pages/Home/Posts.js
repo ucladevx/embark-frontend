@@ -102,7 +102,7 @@ const Posts = ({ setNewPost }) => {
   };
   //for test files, go to https://cors-anywhere.herokuapp.com to enable CORS on non-cors file links, see below for format
   const testfiles = [
-    "https://cors-anywhere.herokuapp.com/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
+    "http://localhost:9000/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
   ];
 
   const getUrls = require("get-urls"); //url finder
@@ -116,10 +116,15 @@ const Posts = ({ setNewPost }) => {
   const isSaved = (post_id) => {
     return user.savedPosts && user.savedPosts.includes(post_id);
   };
+
+  const isLiked = (post_id) => {
+    return user.likedPosts && user.likedPosts.includes(post_id);
+  };
+
   return (
     <>
       <QuestionBox>
-        <AskAvatar></AskAvatar>
+        <AskAvatar src={user.profilePicURL}></AskAvatar>
         <AskaQuestion
           InputProps={{
             disableUnderline: true,
@@ -175,14 +180,15 @@ const Posts = ({ setNewPost }) => {
               alt="thumbup"
               style={{ marginTop: "-3px" }}
             ></img>
+            {/* count the # of likes */}
             <p>11</p>
           </div>
           <p>5 Comments</p>
         </LikeCommentCount>
-
         <Interactive
           post_id={"6012dce8eb36de011c96c7e4"}
           isSaved={isSaved("6012dce8eb36de011c96c7e4")}
+          isLiked={isLiked("6012dce8eb36de011c96c7e4")}
         />
         <ViewPreviousCommentWrapper>
           <ViewCommentLink>View previous comments</ViewCommentLink>
@@ -290,7 +296,11 @@ const Posts = ({ setNewPost }) => {
                   </div>
                   <p>{p.comments ? p.comments.length : "0"} Comments</p>
                 </LikeCommentCount>
-                <Interactive post_id={p._id}></Interactive>
+                <Interactive
+                  post_id={p._id}
+                  isSaved={isSaved(p._id)}
+                  isLiked={isLiked(p._id)}
+                ></Interactive>
                 {p.files &&
                   p.files.map((f) => (
                     <FilesWrapper>

@@ -88,7 +88,7 @@ since we are having inconsistency in our frontend, backend, and design, we'll fi
 In src:
 - we use pages folder to organize all the pages. For each page, we create its own folder with its components storing in the same folder.
 - If there are functional components being used across different pages, or the component is very important, we put the components into components folder
-- For each smaller component, we could write the styles in the same file. However, we should put the styles for the entire page to the StylexxPage.js because usually the styles for a page is a lot
+- For each smaller component, we could write the styles in the same file. However, we should put the styles for the entire page to the StylexxPage.js because usually the styles for a page are a lot
 - shared: used for shared UI components and CSS resources, mediaQueries. You should put the components you used in more than one page to the shared folder
 - utils: utility functions and components
 - apicall.rest: pre-written apicall scripts. Add if you need to make api calls that are not in the file (You need to install REST CLIENT vscode extension, see below for the link)
@@ -104,10 +104,10 @@ In src:
 
 ### 3. React Redux: https://react-redux.js.org/
 - Redux is the most commonly used global state management tool for react. Since our application has lots of features, sometimes same chunks of information are shared across multiple components with no direct relationships. Redux helps make maintaining the shared states a lot easier
-- We also used redux thunk for async actions. By using redux thunk, redux actions could be async. It also has two nice functions: dispatch, for you to dispatch more actions, and getState, get the global state for an action to use. 
+- We also used redux thunk for async actions. By using redux thunk, redux actions could be async. It also has two nice functions: dispatch, for you to dispatch actions, and getState, get the global state for an action to use. 
 
 ### 4. Material UI: https://material-ui.com/
-- Material UI (MUI) is a UI library which contains all commonly used app components. Since our design team is also using material design, it is a consistent pratice to use Material UI in the frontend. Other frontend frameworks could also be used together with MUI. For instance, we use styled components with MUI. By using `<StyleProvider injectFirst />`, we increase the specificity of styled components over the theme of MUI, which saves some time chaning MUI components' styles.
+- Material UI (MUI) is a UI library which contains all commonly used app components. Since our design team is also using material design, it is a consistent pratice to use Material UI in the frontend. Other frontend frameworks could also be used together with MUI. For instance, we use styled components with MUI. By using `<StyleProvider injectFirst />` in app.js, we increase the specificity of styled components over the theme of MUI, which saves some time chaning MUI components' styles.
 
 ### 5. REST CLIENT: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
 - VScode's postman. Really easy to use, and you could save the scripts for the api backend calls.

@@ -1,24 +1,12 @@
 import React, { useState } from "react";
-import {
-  Select,
-  MenuItem,
-  InputLabel,
-  Checkbox,
-  ListItemText,
-  TextField,
-  Typography,
-  IconButton,
-} from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import { BoldTypography } from "../../shared/Typography";
 import { IndustryFilters } from "../../shared/dropdown";
 import { colors } from "../../shared/config";
 import close_window_x from "../../images/close_window_x.png";
-import checked from "../../images/checked_24px.png";
-import unchecked from "../../images/unchecked_24px.png";
 import { useDispatch, useSelector } from "react-redux";
 import { editStudentDetails } from "../../redux/actions/userActions";
-import styled from "styled-components";
-import { ExploreObj, ExploreFilter, NameDescription } from "./StyleProfile";
+import { ExploreObj, ExploreFilter } from "./StyleProfile";
 import {
   EditProfileContainer,
   EditProfileAvatar,
@@ -28,25 +16,12 @@ import {
   EditCoverImage,
   EditProfileContent,
   EditProfileDone,
-  FormControlC,
-  Suggested,
   DialogTextField,
   TextFieldWrapper,
   DoneBtn,
 } from "./StyleEditProfile";
-import {
-  DropDownBox,
-  DropDownTitle,
-  DropDownContent,
-  DropDownCheckBox,
-  Finished,
-} from "../../shared/dropdown";
-import DropdownArrow from "../../images/DropdownArrow.png";
-import lawn from "../../images/lawn.png";
+import {} from "../../shared/dropdown";
 import { makeStyles } from "@material-ui/core/styles";
-import LinkedInIcon from "@material-ui/icons/LinkedIn";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { ActionButton } from "../../shared/Buttons";
 import MultiDropDown from "../../shared/Dropdown/MultiDropDown";
 import axios from "axios";
 
@@ -62,7 +37,7 @@ const EditClubProfile = ({ open, handleClose }) => {
   const classes = useStyles();
   const industry = IndustryFilters;
   const user = useSelector((state) => state.user);
-  const [name, setName] = useState(user.name);
+  const [name] = useState(user.name);
   const [profileURL, setProfileURL] = useState({ url: user.profilePicURL });
   const [coverURL, setCoverURL] = useState({ url: user.coverPicURL });
   const [description, setDescription] = useState(user.description);

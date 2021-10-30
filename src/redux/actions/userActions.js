@@ -3,22 +3,17 @@ import {
   SET_UNAUTHENTICATED,
   LOADING_USER,
   MARK_NOTIFICATIONS_READ,
-  AUTH_SIGNUP,
-  AUTH_SIGNIN,
   GOING_EVENT,
   SET_ERRORS,
   OWN_EVENTS,
   CANCEL_ATTENDANCE_EVENT,
 } from "../types";
 import axios from "axios";
-import { useHistory } from "react-router";
-
-import { AccessibilityNewSharp } from "@material-ui/icons";
 
 const maintenanceErrorCheck = (err) => {
   if (err.message.includes(" 503")) {
     console.log("here");
-    alert("ERROR 503: " + "Embark is on maintenance, please check later");
+    alert("ERROR 503: Embark is on maintenance, please check later");
   }
 };
 
@@ -46,7 +41,6 @@ export const getStudentData = () => async (dispatch) => {
   try {
     const res = await axios.get("/student/profile");
     const payload = { ...res.data.student, userType: "student" };
-    console.log(payload);
     dispatch({
       type: SET_USER,
       payload,

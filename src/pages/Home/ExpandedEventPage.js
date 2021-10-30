@@ -5,7 +5,6 @@ import {
   EventTypography,
   GoingBtnExpand,
   InfoSeperator,
-  PostContent,
   CreateButton,
 } from "./StyleLanding";
 import { useSelector, useDispatch } from "react-redux";
@@ -50,14 +49,6 @@ const HeaderWrapper = styled.div`
 const ColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const NameTypography = styled(EventTypography)`
-  font-size: 16px;
-`;
-
-const EventContent = styled(PostContent)`
-  font-size: 16px;
 `;
 
 const TextFieldWrapper = styled.div`
@@ -119,7 +110,7 @@ const ExpandedEventPage = ({ e, close }) => {
 
   useEffect(() => {
     dispatch({ type: "CLUB_EVENT_EXPANSION", payload: {} });
-  }, []);
+  }, [dispatch]);
 
   return (
     <TextFieldWrapper>
@@ -143,7 +134,7 @@ const ExpandedEventPage = ({ e, close }) => {
                   {usertype === "student" ? (
                     <GoingBtnExpand
                       onClick={goingClick(e._id)}
-                      bgcolor={hasID(e._id)}
+                      bgcolor={hasID(e._id) ? 1 : 0}
                     >
                       Going
                     </GoingBtnExpand>

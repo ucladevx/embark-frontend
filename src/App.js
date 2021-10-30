@@ -15,7 +15,7 @@ import theme from "./utils/theme";
 // Pages
 import Login from "./pages/Login/Login.js";
 import OnBoarding from "./pages/OnBoarding";
-import ClubOnBoarding from "./pages/ClubOnBoarding";
+import ClubOnBoarding from "./pages/ClubOnBoarding/FormUserDetails";
 import ClubDetails from "./pages/ClubOnBoarding/FormPersonalDetails";
 import studentDetails from "./pages/OnBoarding/FormPersonalDetails";
 
@@ -29,7 +29,7 @@ import ViewClubProfile from "./pages/Profile/viewClubProfile";
 import ViewStudentProfile from "./pages/Profile/viewStudentProfile";
 import Moderation from "./pages/Moderation";
 
-axios.defaults.baseURL = "http://localhost:9000/";
+axios.defaults.baseURL = "https://embark-backend-dev.herokuapp.com/";
 
 const token = localStorage.getItem("AuthToken");
 
@@ -52,7 +52,7 @@ function App() {
               <Route exact path="/login" component={Login}></Route>
               <Route
                 exact
-                path="/club-signup"
+                path="/clubsignup"
                 component={ClubOnBoarding}
               ></Route>
               <Route exact path="/home" component={Home}></Route>

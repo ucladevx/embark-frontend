@@ -25,18 +25,18 @@ const test = (moment) => {
   return dayjs(date).format("MMM DD HH:mm a");
 };
 
-const testEvent = [
-  {
-    _id: "123450",
-    title: "Embark Release",
-    authorEmail: "Embark",
-    startDate: /*"2021-03-03T08:00:00.000Z"*/ "2021-04-25T04:13:32.000Z",
-    endDate: "2021-04-25T06:13:32.000Z",
-    description:
-      "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
-    venue: "here what do you think",
-  },
-];
+// const testEvent = [
+//   {
+//     _id: "123450",
+//     title: "Embark Release",
+//     authorEmail: "Embark",
+//     startDate: /*"2021-03-03T08:00:00.000Z"*/ "2021-04-25T04:13:32.000Z",
+//     endDate: "2021-04-25T06:13:32.000Z",
+//     description:
+//       "whats up guys aint this some awesome filler text come check out what we can do badslvjb sdvaksdjbv sadovnasdv asdovbalsdv",
+//     venue: "here what do you think",
+//   },
+// ];
 
 const MyEvents = () => {
   const events = useSelector((state) => state.user.events);
@@ -69,7 +69,7 @@ const MyEvents = () => {
                 {test("2021-03-03T08:00:00.000Z")}
               </TimeTypography>
             </EventDescription>
-            <GoingBtn bgcolor={true}>Going</GoingBtn>
+            <GoingBtn bgcolor={true ? 1 : 0}>Going</GoingBtn>
           </EventItem>
           {events &&
             events.map((e) => {

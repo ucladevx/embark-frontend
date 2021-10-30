@@ -7,8 +7,6 @@ import { useSelector } from "react-redux";
 import { useClickOutState } from "../shared/Hook";
 // icons for navbar icons
 import { ReactComponent as EmbarkIcon } from "../images/navbar_embark_logo.svg";
-import { ReactComponent as UserIcon } from "../images/navbar_user_logo.svg";
-import { ReactComponent as DevXIcon } from "../images/navbar_club_logo.svg";
 import { ReactComponent as CollapseIcon } from "../images/navbar_collapse_icon.svg";
 
 // imports for search bar
@@ -17,6 +15,7 @@ import { TextField } from "@material-ui/core";
 import LinkEffect from "../shared/Effect/LinkEffect";
 import Setting from "./Setting";
 
+import { AskAvatar } from "../pages/Home/StyleLanding";
 const NavBarWrapper = styled.div`
   display: flex;
   border-bottom: 1px solid ${colors.black};
@@ -37,27 +36,11 @@ const NavBarLogo = styled.div`
   margin: auto 0px auto 85px;
   ${LinkEffect};
 `;
-const SearchBar = styled.input`
-  background-color: ${colors.gray};
-  width: 610px;
-  height: 30px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: flex-start;
-  margin: auto 0px auto 0px;
-  align-items: center;
-  padding-left: 20px;
-  &::placeholder {
-    font-style: italic;
-  }
-  border: none;
-  outline: none;
-`;
 const UserLogo = styled.div`
   border-radius: 50%;
   width: 38px;
   height: 38px;
-  margin: auto 0px auto 0px;
+  margin: auto 15px auto 0px;
   ${LinkEffect};
 `;
 const CollapseLogo = styled.div`
@@ -116,7 +99,6 @@ const NavBar = ({ setPage }) => {
         history.push("/user/:userid");
       }
     }
-    console.log("User Icon Clicked");
     history.push("/user/" + user._id);
   };
 
@@ -155,7 +137,8 @@ const NavBar = ({ setPage }) => {
           </div>
         </section>
         <UserLogo onClick={handleUserIconClick}>
-          <UserIcon />
+          <AskAvatar src={user.profilePicURL} />
+          {/* <UserIcon /> */}
         </UserLogo>
         <span ref={settingRef}>
           <CollapseLogo onClick={handleCollapseIconClick}>

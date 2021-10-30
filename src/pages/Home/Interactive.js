@@ -9,7 +9,7 @@ import Saved from "../../images/saved.svg";
 import styled from "styled-components";
 import { colors } from "../../shared/config";
 import LinkEffect from "../../shared/Effect/LinkEffect";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { likePost, savePost } from "../../redux/actions/dataActions";
 import { OPEN_COMMENT } from "../../redux/types";
 
@@ -52,24 +52,25 @@ const InteractiveLine = styled(Line)`
   width: 100%;
 `;
 
-const Interactive = ({ post_id, isSaved }) => {
+const Interactive = ({ post_id, isSaved, isLiked }) => {
   const dispatch = useDispatch();
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
-  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     setSaved(isSaved);
-  }, [user.savedPosts]);
+  }, [isSaved]);
+
+  useEffect(() => {
+    setLiked(isLiked);
+  }, [isLiked]);
 
   const handleLike = () => {
-    if (!liked) dispatch(likePost(post_id));
-    // else dispatch(unlikePost(post_id));
+    dispatch(likePost(post_id));
     setLiked(!liked);
   };
 
   const handleSaved = () => {
-    console.log("post id is", post_id);
     dispatch(savePost(post_id));
     setSaved(!saved);
   };

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../shared/config";
-import { Avatar, Button, Typography } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 
 export const HeaderImage = styled.img`
   width: 33vw;

@@ -79,7 +79,7 @@ Content-Type: application/json
 ############ Posts ################################################
 ### Fixing in the backend
 GET http://localhost:9000/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTM4NGYyNTY2OWJhMDA2MTA4N2U1YiIsIm5hbWUiOiJzb21lIiwiZW1haWwiOiJicnUxMWEhIUBlbWFpbC5jb20iLCJpYXQiOjE2MjQ3NDQ3NjEsImV4cCI6MTYzMzM4NDc2MX0.0_AAGTLS0q3xqQv1_Ko0VN4Ts8d1sIgCpzHDJRt4suU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjIyNTNkZGFhMzM1MDAxNjk2YjcxMyIsIm5hbWUiOiJUcmlzdGFuIiwiZW1haWwiOiJ0ZXN0MWFzZmQwQGdtYWlsLmNvbSIsInVzZXJUeXBlIjoic3R1ZGVudCIsImlhdCI6MTYzMzgyMjAxMywiZXhwIjoxNjQyNDYyMDEzfQ.65vi3fTvkiG48An9sYcxNDuJaWBdFgJBcs1XnJxmSms
 Content-Type: application/json
 
 ### 
@@ -111,19 +111,23 @@ Content-Type: application/json
 
 ###
 GET http://localhost:9000/posts/comments
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzdjN2YzYTk4YjdjMDAxZmJlZmNkOCIsIm5hbWUiOiJoZWxsb2EiLCJlbWFpbCI6ImJydWluMTUxISFAZW1haWwuY29tIiwiaWF0IjoxNjE4NDYyNzA3LCJleHAiOjE2MjcxMDI3MDd9.sJLdWdm3mLlGyGvs5xGKz8_JLGIT79G-zfPUaCy-57Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTkxOGI5OTAwNWZkMDAyNDkyNjVhMiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya3Rlc3RlcjEyMzRAZ21haWwuY29tIiwidXNlclR5cGUiOiJzdHVkZW50IiwiaWF0IjoxNjI3Njg4NjA4LCJleHAiOjE2MzYzMjg2MDh9.74rnAYLyQfaOIxazPHceDFseLbQFd4CrfDnx3SdDUaI
 Content-Type: application/json
+
+{
+    "postID": "606e86b1791b49003a04c1e1"
+}
 
 
 ###
 POST http://localhost:9000/posts/comments
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzdjN2YzYTk4YjdjMDAxZmJlZmNkOCIsIm5hbWUiOiJoZWxsb2EiLCJlbWFpbCI6ImJydWluMTUxISFAZW1haWwuY29tIiwiaWF0IjoxNjE4NDYyNzA3LCJleHAiOjE2MjcxMDI3MDd9.sJLdWdm3mLlGyGvs5xGKz8_JLGIT79G-zfPUaCy-57Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTkxOGI5OTAwNWZkMDAyNDkyNjVhMiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya3Rlc3RlcjEyMzRAZ21haWwuY29tIiwidXNlclR5cGUiOiJzdHVkZW50IiwiaWF0IjoxNjI3Njg4NjA4LCJleHAiOjE2MzYzMjg2MDh9.74rnAYLyQfaOIxazPHceDFseLbQFd4CrfDnx3SdDUaI
 Content-Type: application/json
 
 {
-    "authorEmail": "bruin151!!@email.com",
-    "post_id": "6012dce8eb36de011c96c7e4",
-    "comment": "nothing"
+    "authorID": "60e918b99005fd00249265a2",
+    "post_id": "606e86b1791b49003a04c1e1",
+    "commentBody": "nothing"
 }
 
 ###

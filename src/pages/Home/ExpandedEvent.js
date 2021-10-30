@@ -3,7 +3,7 @@ import { Dialog, DialogContent } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import { BoldTypography } from "../../shared/Typography";
 import styled from "styled-components";
-import { PostContent, EventAvatar, EventTypography } from "./StyleLanding";
+import { PostContent, EventTypography } from "./StyleLanding";
 import { colors } from "../../shared/config";
 import Linkify from "react-linkify";
 

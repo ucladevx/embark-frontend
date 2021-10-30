@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  EventAvatar,
   EventDescription,
   EventItem,
   EventTypography,
@@ -34,10 +33,12 @@ const Event = (props) => {
       return test(moment);
     }
     let date = JSON.stringify(moment);
-    date = date.replace("T", " ");
-    date = date.replace("Z", " ");
-    date = date.concat(" GMT");
-    return dayjs(date).format("MMM DD HH:mm a");
+    if (date) {
+      date = date.replace("T", " ");
+      date = date.replace("Z", " ");
+      date = date.concat(" GMT");
+      return dayjs(date).format("MMM DD HH:mm a");
+    }
   };
   const dispatch = useDispatch();
   const attending = useSelector((state) => state.user.events);
@@ -76,8 +77,8 @@ const Event = (props) => {
           <TimeTypography>{makeDay(props.e.startDate)}</TimeTypography>
         </EventDescription>
         <GoingBtn
-          onClick={goingClick(props.e._id)}
-          bgcolor={hasID(props.e._id)}
+          onClick={() => goingClick(props.e._id)}
+          bgcolor={hasID(props.e._id) ? 1 : 0}
         >
           Going
         </GoingBtn>

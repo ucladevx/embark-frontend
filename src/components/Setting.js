@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Line, LineSeparator } from "../shared/Separators";
+import { Line } from "../shared/Separators";
 import Help from "../images/help.svg";
 import Feedback from "../images/feedback.svg";
 

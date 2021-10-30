@@ -3,7 +3,7 @@ import {
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   LIKE_POST,
-  UNLIKE_POST,
+  // UNLIKE_POST,
   MARK_NOTIFICATIONS_READ,
   GOING_EVENT,
   OWN_EVENTS,
@@ -40,17 +40,17 @@ export default function userReducer(state = intialState, action) {
         ownEvents: [],
       };
     // TODO: uncomment this after the like endpoint is updated
-    // case LIKE_POST:
-    //   return {
-    //     ...state,
-    //     likedPosts: [
-    //       ...state.likedPosts,
-    //       {
-    //         likeBy: state.info.name,
-    //         postId: action.payload.postId,
-    //       },
-    //     ],
-    //   };
+    case LIKE_POST:
+      return {
+        ...state,
+        likedPosts: [
+          ...state.likedPosts,
+          {
+            likeBy: state.info.name,
+            postId: action.payload.postId,
+          },
+        ],
+      };
     // case UNLIKE_POST:
     //   return {
     //     ...state,
