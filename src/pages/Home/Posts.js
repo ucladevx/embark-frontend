@@ -74,6 +74,8 @@ export const FileButton = styled(Button)`
   flex-direction: column;
 `;
 
+const backendHost = "https://embark-backend-dev.herokuapp.com";
+
 const Loader = () => {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
@@ -102,7 +104,7 @@ const Posts = ({ setNewPost }) => {
   };
   //for test files, go to https://cors-anywhere.herokuapp.com to enable CORS on non-cors file links, see below for format
   const testfiles = [
-    "http://localhost:9000/http://www.dhs.state.il.us/OneNetLibrary/27897/documents/Initiatives/IITAA/Sample-Document.docx",
+    "https://club-resources-embark.s3.amazonaws.com/1625887134027ws7.pdf",
   ];
 
   const getUrls = require("get-urls"); //url finder
@@ -167,7 +169,7 @@ const Posts = ({ setNewPost }) => {
                 <FileViewer
                   tag={f}
                   fileType={f.substring(f.lastIndexOf(".") + 1)}
-                  filePath={f}
+                  filePath={backendHost + "/" + f}
                 />
               </FilesWrapper>
             );
@@ -210,6 +212,7 @@ const Posts = ({ setNewPost }) => {
                   showGraphic={true}
                   maxLine={2}
                   minLine={1}
+                  proxyUrl={backendHost}
                   url={getURL(
                     "Hey Christie! We have a slidedeck all about product thinking on our profile. You should totally apply to be on one of our teams this quarter to gain some more experience with the product development process!! https://ucladevx.com/",
                   )}
@@ -276,6 +279,7 @@ const Posts = ({ setNewPost }) => {
                 </Linkify>
                 {getURL(p.body) !== "" ? (
                   <ReactTinyLink
+                    proxyUrl={backendHost}
                     cardSize="small"
                     showGraphic={true}
                     maxLine={2}
@@ -310,7 +314,7 @@ const Posts = ({ setNewPost }) => {
                       <FileViewer
                         tag={f}
                         fileType={f.substring(f.lastIndexOf(".") + 1)}
-                        filePath={f}
+                        filePath={backendHost + "/" + f}
                       />
                     </FilesWrapper>
                   ))}
