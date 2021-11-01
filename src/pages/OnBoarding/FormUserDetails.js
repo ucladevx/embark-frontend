@@ -174,32 +174,32 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                       </p>
                       {password.length <= 8 && (
                         <React.Fragment>
-                          <p style={{ fontSize: 4 }}>1. 8+ characters</p>
+                          <p style={{ fontSize: 4 }}>- 8+ characters</p>
                         </React.Fragment>
                       )}
                       {!numerialCharReg.test(password) && (
                         <React.Fragment>
-                          <p style={{ fontSize: 4 }}>2. At least one number</p>
+                          <p style={{ fontSize: 4 }}>- At least one number</p>
                         </React.Fragment>
                       )}
                       {!upperCaseReg.test(password) && (
                         <React.Fragment>
                           <p style={{ fontSize: 4 }}>
-                            3. At least one upper case character
+                            - At least one upper case character
                           </p>
                         </React.Fragment>
                       )}
                       {!lowercaseReg.test(password) && (
                         <React.Fragment>
                           <p style={{ fontSize: 4 }}>
-                            4. At least one lower case character
+                            - At least one lower case character
                           </p>
                         </React.Fragment>
                       )}
                       {!specialCharReg.test(password) && (
                         <React.Fragment>
                           <p style={{ fontSize: 4 }}>
-                            5. At least one special character
+                            - At least one special character
                           </p>
                         </React.Fragment>
                       )}
