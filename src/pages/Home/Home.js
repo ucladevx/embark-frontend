@@ -133,6 +133,7 @@ const Home = () => {
         <NavBar setPage={setPage}></NavBar>
         <LandingPageWrapper>
           <LeftContainer>
+            <div style={{ width: "100%", height: "4em" }}></div>
             <InfoBoxes>
               <InfoEntryWrapper
                 onClick={() => history.push(`/user/${user._id}`)}
@@ -213,6 +214,7 @@ const Home = () => {
 
           <RightContainer>
             <CalanderWrapper onClick={() => setErrorPopup(true)}>
+              <div style={{ width: "100%", height: "4em" }}></div>
               <Calendar></Calendar>
             </CalanderWrapper>
             {page === "events" ? (
