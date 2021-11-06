@@ -13,10 +13,13 @@ import { ReactComponent as CollapseIcon } from "../images/navbar_collapse_icon.s
 import { Autocomplete } from "@material-ui/lab";
 import { TextField } from "@material-ui/core";
 import LinkEffect from "../shared/Effect/LinkEffect";
+import StickyEffect from "../shared/Effect/StickyEffect";
 import Setting from "./Setting";
 
 import { AskAvatar } from "../pages/Home/StyleLanding";
 const NavBarWrapper = styled.div`
+  ${StickyEffect}
+  z-index: 4;
   display: flex;
   border-bottom: 1px solid ${colors.black};
   height: max(45px, 4%);
