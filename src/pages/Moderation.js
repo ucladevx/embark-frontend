@@ -50,7 +50,6 @@ const Moderation = () => {
                 <TableCell>{p.title}</TableCell>
                 <TableCell>{p.body}</TableCell>
                 <TableCell>
-                  {console.log("for each post this is the comment")}
                   {p.comments &&
                     p.comments.map((comment) => {
                       console.log(comment);
@@ -62,13 +61,16 @@ const Moderation = () => {
                               <p>{comment.body}</p>
                             </div>
                           );
+                        } else {
+                          return (
+                            <div>
+                              <h4>{comment.author}</h4>
+                              <p>{comment.body}</p>
+                            </div>
+                          );
                         }
-                        return (
-                          <div>
-                            <h4>{comment.author}</h4>
-                            <p>{comment.body}</p>
-                          </div>
-                        );
+                      } else {
+                        return <h4>no comment</h4>;
                       }
                     })}
                 </TableCell>
