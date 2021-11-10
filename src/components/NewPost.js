@@ -177,7 +177,7 @@ const NewPost = ({ open, handleClose }) => {
 
   //File handling
   const PDF1_URL =
-    "https://embark-backend-dev.herokuapp.com/http://africau.edu/images/default/sample.pdf";
+    "http://localhost:9000/http://africau.edu/images/default/sample.pdf";
   const [file, setFile] = useState({ url: PDF1_URL });
   const [fileType, setFileType] = useState("pdf");
 

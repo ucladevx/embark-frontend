@@ -74,7 +74,7 @@ export const FileButton = styled(Button)`
   flex-direction: column;
 `;
 
-const backendHost = "https://embark-backend-dev.herokuapp.com";
+const backendHost = "http://localhost:9000";
 
 const Loader = () => {
   return (
@@ -214,7 +214,7 @@ const Posts = ({ setNewPost }) => {
                   minLine={1}
                   proxyUrl={backendHost}
                   url={getURL(
-                    "Hey Christie! We have a slidedeck all about product thinking on our profile. You should totally apply to be on one of our teams this quarter to gain some more experience with the product development process!! https://ucladevx.com/",
+                    "Hey Christie! We have a slidedeck all about product thinking on our profile. You should totally apply to be on one of our teams this quarter to gain some more experience with the product development process!! https://ucladevx.com/"
                   )}
                 />
               </PreviousCommentContent>
