@@ -176,16 +176,15 @@ const NewPost = ({ open, handleClose }) => {
   };
 
   //File handling
-  const PDF1_URL =
-    "https://cors-anywhere.herokuapp.com/http://africau.edu/images/default/sample.pdf";
+  const PDF1_URL = "http://africau.edu/images/default/sample.pdf";
   const [file, setFile] = useState({ url: PDF1_URL });
   const [fileType, setFileType] = useState("pdf");
 
   const onFileChange = (event) => {
     const fileReader = new window.FileReader();
     const file = event.target.files[0];
-    if (file.size > 3145728) {
-      alert("File is too big! Please limit to 3MB");
+    if (file.size > 10485760) {
+      alert("File is too big! Please limit to 10MB");
       return;
     }
     console.log(file);
@@ -195,8 +194,11 @@ const NewPost = ({ open, handleClose }) => {
 
     setFileType(file.name.substring(file.name.lastIndexOf(".") + 1));
     console.log(fileType);
-    let myForm = document.getElementById("myForm");
-    setForm(new FormData(myForm));
+    //let myForm = document.getElementById("myForm");
+    //setForm(new FormData(myForm));
+    var formData = new FormData();
+    formData.append(file.name, file);
+    setForm(formData);
     fileReader.onload = (fileLoad) => {
       const { result } = fileLoad.target;
       setFile({ url: result });
@@ -216,12 +218,15 @@ const NewPost = ({ open, handleClose }) => {
   const onImageChange = (event) => {
     const imgReader = new window.FileReader();
     const img = event.target.files[0];
-    if (img.size > 3145728) {
-      alert("Image is too big! Please limit to 3MB");
+    if (img.size > 10485760) {
+      alert("Image is too big! Please limit to 10MB");
       return;
     }
-    let myForm = document.getElementById("myImgForm");
-    setImgForm(new FormData(myForm));
+    //let myForm = document.getElementById("myImgForm");
+    //setImgForm(new FormData(myForm));
+    var formData = new FormData();
+    formData.append(img.name, img);
+    setImgForm(formData);
     imgReader.onload = (fileLoad) => {
       const { result } = fileLoad.target;
       setImage({ url: result });
