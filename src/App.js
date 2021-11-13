@@ -30,7 +30,8 @@ import ViewStudentProfile from "./pages/Profile/viewStudentProfile";
 import Moderation from "./pages/Moderation";
 
 axios.defaults.baseURL =
-  process.env.REACT_APP_AXIOS || "https://embark-backend-dev.herokuapp.com/";
+  process.env.REACT_APP_BACKEND || "https://embark-backend-dev.herokuapp.com/";
+
 
 const token = localStorage.getItem("AuthToken");
 
