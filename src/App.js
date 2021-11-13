@@ -29,7 +29,8 @@ import ViewClubProfile from "./pages/Profile/viewClubProfile";
 import ViewStudentProfile from "./pages/Profile/viewStudentProfile";
 import Moderation from "./pages/Moderation";
 
-axios.defaults.baseURL = "http://localhost:9000/";
+axios.defaults.baseURL =
+  process.env.REACT_APP_BACKEND || "https://embark-backend-dev.herokuapp.com/";
 
 const token = localStorage.getItem("AuthToken");
 
