@@ -32,6 +32,7 @@ import Moderation from "./pages/Moderation";
 axios.defaults.baseURL =
   process.env.REACT_APP_BACKEND || "https://embark-backend-dev.herokuapp.com/";
 
+
 const token = localStorage.getItem("AuthToken");
 
 // Check log in at first
