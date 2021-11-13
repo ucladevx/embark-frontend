@@ -42,6 +42,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "devStart": "REACT_APP_AXIOS=http://localhost:9000/ npm start",
     "build": "react-app-rewired build/react-app-rewired start",
     "build2": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
