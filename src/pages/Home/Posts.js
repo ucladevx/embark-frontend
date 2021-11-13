@@ -3,6 +3,8 @@ import ImageIcon from "@material-ui/icons/Image";
 import LinkIcon from "@material-ui/icons/Link";
 import { ReactTinyLink } from "react-tiny-link"; //uses https://cors-anywhere.herokuapp.com by default.
 import Linkify from "react-linkify";
+import linksFinder from "links-finder";
+
 import {
   QuestionBox,
   AskAvatar,
@@ -107,12 +109,11 @@ const Posts = ({ setNewPost }) => {
     "https://club-resources-embark.s3.amazonaws.com/1625887134027ws7.pdf",
   ];
 
-  const getUrls = require("get-urls"); //url finder
   const getURL = (body) => {
-    const urlSet = getUrls(body);
-    if (urlSet.size <= 0) return "";
-    const iterator = urlSet[Symbol.iterator]();
-    return iterator.next().value;
+    const urlSet = linksFinder.findLinks(body);
+    if (urlSet.length <= 0) return "";
+    console.log(urlSet);
+    return body.substring(urlSet[0].start, urlSet[0].end);
   };
 
   const isSaved = (post_id) => {
@@ -214,7 +215,7 @@ const Posts = ({ setNewPost }) => {
                   minLine={1}
                   proxyUrl={backendHost}
                   url={getURL(
-                    "Hey Christie! We have a slidedeck all about product thinking on our profile. You should totally apply to be on one of our teams this quarter to gain some more experience with the product development process!! https://ucladevx.com/",
+                    "Hey Christie! We have a slidedeck all about product thinking on our profile. You should totally apply to be on one of our teams this quarter to gain some more experience with the product development process!! https://ucladevx.com/"
                   )}
                 />
               </PreviousCommentContent>

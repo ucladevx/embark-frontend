@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ReactTinyLink } from "react-tiny-link"; //uses https://cors-anywhere.herokuapp.com by default.
 import Linkify from "react-linkify";
+import linksFinder from "links-finder";
+
 import {
   PreviousCommentItem,
   PreviousCommentTitle,
@@ -17,12 +19,11 @@ import { colors } from "../../../shared/config";
 const CommentBox = ({ comments }) => {
   const [start, setStart] = useState(0);
 
-  const getUrls = require("get-urls"); //url finder
   const getURL = (body) => {
-    const urlSet = getUrls(body);
-    if (urlSet.size <= 0) return "";
-    const iterator = urlSet[Symbol.iterator]();
-    return iterator.next().value;
+    const urlSet = linksFinder.findLinks(body);
+    if (urlSet.length <= 0) return "";
+    console.log(urlSet);
+    return body.substring(urlSet[0].start, urlSet[0].end);
   };
 
   return (
