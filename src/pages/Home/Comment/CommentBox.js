@@ -48,7 +48,7 @@ const CommentBox = ({ comments }) => {
                 <div>
                   <PreviousCommentContent bgcolor={colors.gray1}>
                     <PreviousCommentTitle>
-                      {c.authorEmail ? c.authorEmail : c.author}
+                      {c.authorName || "authorNameDefault"}
                     </PreviousCommentTitle>
                     <Linkify>
                       <PreviousCommentText>{c.body}</PreviousCommentText>
