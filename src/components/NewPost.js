@@ -176,7 +176,8 @@ const NewPost = ({ open, handleClose }) => {
   };
 
   //File handling
-  const PDF1_URL = "http://africau.edu/images/default/sample.pdf";
+  const PDF1_URL =
+    "https://club-resources-embark.s3.amazonaws.com/1625887134027ws7.pdf";
   const [file, setFile] = useState({ url: PDF1_URL });
   const [fileType, setFileType] = useState("pdf");
 

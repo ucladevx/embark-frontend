@@ -76,8 +76,7 @@ export const FileButton = styled(Button)`
   flex-direction: column;
 `;
 
-const backendHost =
-  process.env.REACT_APP_BACKEND || "https://embark-backend-dev.herokuapp.com";
+const backendHost = "https://cors-anywhere-embark.herokuapp.com";
 
 const Loader = () => {
   return (
