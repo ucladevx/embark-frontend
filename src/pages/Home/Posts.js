@@ -114,7 +114,7 @@ const Posts = ({ setNewPost }) => {
     const urlSet = linksFinder.findLinks(body);
     if (urlSet.length <= 0) return "";
     console.log(urlSet);
-    return body.substring(urlSet[0].start, urlSet[0].end);
+    return body.substring(urlSet[0].start, urlSet[0].end + 1);
   };
 
   const isSaved = (post_id) => {
