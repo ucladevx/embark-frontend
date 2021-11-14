@@ -76,7 +76,7 @@ export const FileButton = styled(Button)`
   flex-direction: column;
 `;
 
-const backendHost = "https://embark-backend-dev.herokuapp.com";
+const backendHost = "https://cors-anywhere-embark.herokuapp.com";
 
 const Loader = () => {
   return (
@@ -113,7 +113,7 @@ const Posts = ({ setNewPost }) => {
     const urlSet = linksFinder.findLinks(body);
     if (urlSet.length <= 0) return "";
     console.log(urlSet);
-    return body.substring(urlSet[0].start, urlSet[0].end);
+    return body.substring(urlSet[0].start, urlSet[0].end + 1);
   };
 
   const isSaved = (post_id) => {

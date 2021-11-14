@@ -23,7 +23,7 @@ const CommentBox = ({ comments }) => {
     const urlSet = linksFinder.findLinks(body);
     if (urlSet.length <= 0) return "";
     console.log(urlSet);
-    return body.substring(urlSet[0].start, urlSet[0].end);
+    return body.substring(urlSet[0].start, urlSet[0].end + 1);
   };
 
   return (
@@ -37,13 +37,19 @@ const CommentBox = ({ comments }) => {
       )}
       {comments &&
         comments.map((c, i) => {
-          if (i >= start && i < start + 4)
+          if (i >= start && i < start + 4) {
+            console.log(c, i);
+            if (c === null) {
+              return <div></div>;
+            }
             return (
               <PreviousCommentItem key={c._id || i}>
                 <PreviousCommentAvatar></PreviousCommentAvatar>
                 <div>
                   <PreviousCommentContent bgcolor={colors.gray1}>
-                    <PreviousCommentTitle>{c.authorEmail}</PreviousCommentTitle>
+                    <PreviousCommentTitle>
+                      {c.authorEmail ? c.authorEmail : c.author}
+                    </PreviousCommentTitle>
                     <Linkify>
                       <PreviousCommentText>{c.body}</PreviousCommentText>
                     </Linkify>
@@ -67,7 +73,7 @@ const CommentBox = ({ comments }) => {
                 </div>
               </PreviousCommentItem>
             );
-          else return <React.Fragment key={i}></React.Fragment>;
+          } else return <React.Fragment key={i}></React.Fragment>;
         })}
       {comments && comments.length > start + 4 && (
         <ViewCommentLink onClick={() => setStart(start + 4)}>
