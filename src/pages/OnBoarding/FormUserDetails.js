@@ -169,36 +169,38 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                   !lowercaseReg.test(password) ||
                   !specialCharReg.test(password) ? (
                     <ErrorPrompt error={passwordPopOver}>
-                      <p style={{ fontSize: 7 }}>
+                      <p style={{ fontSize: "100%" }}>
                         Password Still Needs to Have:
                       </p>
                       {password.length <= 8 && (
                         <React.Fragment>
-                          <p style={{ fontSize: 4 }}>- 8+ characters</p>
+                          <p style={{ fontSize: "100%" }}>- 8+ characters</p>
                         </React.Fragment>
                       )}
                       {!numerialCharReg.test(password) && (
                         <React.Fragment>
-                          <p style={{ fontSize: 4 }}>- At least one number</p>
+                          <p style={{ fontSize: "100%" }}>
+                            - At least one number
+                          </p>
                         </React.Fragment>
                       )}
                       {!upperCaseReg.test(password) && (
                         <React.Fragment>
-                          <p style={{ fontSize: 4 }}>
+                          <p style={{ fontSize: "100%" }}>
                             - At least one upper case character
                           </p>
                         </React.Fragment>
                       )}
                       {!lowercaseReg.test(password) && (
                         <React.Fragment>
-                          <p style={{ fontSize: 4 }}>
+                          <p style={{ fontSize: "100%" }}>
                             - At least one lower case character
                           </p>
                         </React.Fragment>
                       )}
                       {!specialCharReg.test(password) && (
                         <React.Fragment>
-                          <p style={{ fontSize: 4 }}>
+                          <p style={{ fontSize: "100%" }}>
                             - At least one special character
                           </p>
                         </React.Fragment>
@@ -211,7 +213,17 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                 <ErrorPrompt error={hasError}>
                   Invalid name, email, or password
                 </ErrorPrompt>
-                <AccountBtn type="submit">Create Account</AccountBtn>
+                {passwordPopOver ? (
+                  password.length > 8 &&
+                  numerialCharReg.test(password) &&
+                  upperCaseReg.test(password) &&
+                  lowercaseReg.test(password) &&
+                  specialCharReg.test(password) && (
+                    <AccountBtn type="submit">Create Account</AccountBtn>
+                  )
+                ) : (
+                  <AccountBtn type="submit">Create Account</AccountBtn>
+                )}
               </FormWrapper>
             );
           }}
