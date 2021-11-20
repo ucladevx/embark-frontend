@@ -320,7 +320,7 @@ const Posts = ({ setNewPost }) => {
                     </FilesWrapper>
                   ))}
                 <CommentBox comments={p.comments}></CommentBox>
-                <WriteComment post_id={p._id}></WriteComment>
+                <WriteComment post_id={p._id + i}></WriteComment>
               </PostWrapper>
             );
           })}
