@@ -38,13 +38,6 @@ const AccountBtn = styled(ActionButton)`
   margin-top: 15px;
 `;
 
-const AccountDisabledBtn = styled(AccountBtn)`
-  width: 200px;
-  height: 38px;
-  margin-top: 15px;
-  background: #878787;
-`;
-
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
     .min(2, "Too Short!")
@@ -223,13 +216,13 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                   Invalid name, email, or password
                 </ErrorPrompt>
 
-                {passwordPopOver ? (
-                  <AccountDisabledBtn type="submit" disabled>
-                    Create Account
-                  </AccountDisabledBtn>
-                ) : (
-                  <AccountBtn type="submit">Create Account</AccountBtn>
-                )}
+                <AccountBtn
+                  type="submit"
+                  style={passwordPopOver ? { background: "#949492" } : {}}
+                  disabled={passwordPopOver}
+                >
+                  Create Account
+                </AccountBtn>
               </FormWrapper>
             );
           }}
