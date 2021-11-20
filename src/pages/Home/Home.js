@@ -29,6 +29,8 @@ import {
 // Images
 import bookImg from "../../images/book.svg";
 import compassImg from "../../images/compass.svg";
+import avatarImg from "../../images/avatar.svg";
+
 // Utils
 import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
@@ -133,12 +135,13 @@ const Home = () => {
         <NavBar setPage={setPage}></NavBar>
         <LandingPageWrapper>
           <LeftContainer>
+            <div style={{ width: "100%", height: "4em" }}></div>
             <InfoBoxes>
               <InfoEntryWrapper
                 onClick={() => history.push(`/user/${user._id}`)}
               >
                 <InfoProfilePic
-                  src={user.profilePicURL}
+                  src={user.profilePicURL || avatarImg}
                   alt="user"
                 ></InfoProfilePic>
 
@@ -213,6 +216,7 @@ const Home = () => {
 
           <RightContainer>
             <CalanderWrapper onClick={() => setErrorPopup(true)}>
+              <div style={{ width: "100%", height: "4em" }}></div>
               <Calendar></Calendar>
             </CalanderWrapper>
             {page === "events" ? (

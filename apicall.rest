@@ -191,3 +191,12 @@ Content-Type: application/json
 {
     "post_id": "601cf9a0912b5407fddafeb0"
 }
+
+###
+POST http://localhost:9000/search
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmI1YTg3ZmYzNzMyMDAxNmVjZjM2YiIsIm5hbWUiOiJ0YXNkZiIsImVtYWlsIjoidGVzdHRyaXN0YXd3bjFAZ21haWwuY29tIiwidXNlclR5cGUiOiJzdHVkZW50IiwiaWF0IjoxNjM0NDI1NDc5LCJleHAiOjE2NDMwNjU0Nzl9.WDc69eTtBtyJw7KvNTothAMGJZyKYldr2uExa2O1_Hs
+Content-Type: application/json
+
+{
+    "searchString": "test"
+}

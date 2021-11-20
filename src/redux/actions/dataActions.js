@@ -50,7 +50,7 @@ export const getPosts = () => async (dispatch) => {
     if (res.data.paginatedPosts.next)
       localStorage.setItem(
         "nextString",
-        res.data.paginatedPosts.next.toString(),
+        res.data.paginatedPosts.next.toString()
       );
     dispatch({
       type: SET_POSTS,
@@ -173,14 +173,16 @@ export const getPost = (post_id) => async (dispatch) => {
 export const submitComment =
   (post_id, commentData) => async (dispatch, getState) => {
     try {
-      const { _id: authorID } = getState().user;
+      const { _id: authorID, firstName, lastName } = getState().user;
       // TODO: Add error display for comment
       if (commentData.trim().length === 0)
         throw Error("comment cannot be empty");
+
       const res = await axios.post(`/posts/comments`, {
         post_id,
         authorID,
         commentBody: commentData,
+        authorName: `${firstName} ${lastName}`,
       });
       const newPosts = getState().data.posts.map((p) => {
         if (p._id === post_id) {
@@ -282,7 +284,7 @@ export const uploadResource =
       formData.append("file", newResource);
       const res = await axios.post(
         `/club/resources?linkFile=file&userNamed=${resourceName}`,
-        formData,
+        formData
       );
       console.log(res);
       dispatch({ type: UPLOAD_CLUB_RESOURCES, payload: res.data.fileUrls[0] });
@@ -299,7 +301,7 @@ export const uploadLink = (newLink, linkName) => async (dispatch) => {
       `/club/resources?linkFile=link&userNamed=${linkName}`,
       {
         link: newLink,
-      },
+      }
     );
     console.log(res);
     dispatch({ type: UPLOAD_CLUB_LINKS, payload: res.data.fileUrls });

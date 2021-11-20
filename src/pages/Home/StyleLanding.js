@@ -37,21 +37,24 @@ export const LandingPageWrapper = styled.div`
 `;
 
 export const LeftContainer = styled.div`
-  ${StickyEffect};
+  ${StickyEffect}
   white-space: nowrap;
+  margin-top: -5em;
 `;
 
-export const MiddleContainer = styled.div``;
+export const MiddleContainer = styled.div`
+  grid-column: 2/3;
+`;
 
 export const RightContainer = styled.div`
-  ${StickyEffect};
+  ${StickyEffect}
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-top: -5em;
 `;
 
 export const InfoBoxes = styled.div`
-  ${StickyEffect}
   height: 235px;
   background-color: ${colors.white};
   border-radius: 5px;
@@ -92,7 +95,6 @@ export const InfoProfilePic = styled(InfoImage)`
 `;
 
 export const FilterWrapper = styled.div`
-  ${StickyEffect}
   box-sizing: border-box;
   margin-top: 20px;
   padding: 20px;

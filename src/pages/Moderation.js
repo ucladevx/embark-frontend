@@ -33,9 +33,11 @@ const Moderation = () => {
       <StyledTableContainer>
         <TableHead>
           <TableCell>Post id</TableCell>
+          <TableCell>Post Author</TableCell>
           <TableCell>Timestamp</TableCell>
           <TableCell>Post Title</TableCell>
           <TableCell>Post Body</TableCell>
+          <TableCell>Post Comment</TableCell>
           <TableCell>Delete</TableCell>
         </TableHead>
         <TableBody>
@@ -43,9 +45,34 @@ const Moderation = () => {
             posts.map((p) => (
               <TableRow key={p._id}>
                 <TableCell>{p._id}</TableCell>
+                <TableCell>{p.authorName}</TableCell>
                 <TableCell>{p.timestamp}</TableCell>
                 <TableCell>{p.title}</TableCell>
                 <TableCell>{p.body}</TableCell>
+                <TableCell>
+                  {p.comments &&
+                    p.comments.map((comment) => {
+                      if (comment) {
+                        if (!comment.author) {
+                          return (
+                            <div key={comment._id}>
+                              <h4>NO AUTHOR</h4>
+                              <p>{comment.body}</p>
+                            </div>
+                          );
+                        } else {
+                          return (
+                            <div>
+                              <h4>{comment.author}</h4>
+                              <p>{comment.body}</p>
+                            </div>
+                          );
+                        }
+                      } else {
+                        return <h4>no comment</h4>;
+                      }
+                    })}
+                </TableCell>
                 <TableCell>
                   <DeleteIcon onClick={() => deletePost(p._id)}></DeleteIcon>
                 </TableCell>

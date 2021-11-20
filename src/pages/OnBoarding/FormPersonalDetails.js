@@ -51,11 +51,24 @@ const DoneBtn = styled(ActionButton)`
   height: 40px;
 `;
 
+// gets the next 4 years from now (to calculate the set of possible grad years)
+const getPossibleGraduatingYears = () => {
+  const d = new Date();
+  let year = d.getFullYear();
+  let grad = [];
+  for (let i = 0; i < 4; i++) {
+    grad.push(String(i + year));
+  }
+  return grad;
+};
+
 const FormPersonalDetails = ({ user }) => {
   const history = useHistory();
   const [year, setYear] = useState("");
   const [yearOpen, setYearOpen] = useState(false);
-  const years = ["2021", "2022", "2023", "2024"];
+  const grad_years = getPossibleGraduatingYears();
+  console.log(grad_years);
+  const years = grad_years;
   const dispatch = useDispatch();
   const [industries, openInd, handleIndustries, handleOpenInd] = useIndustry();
 

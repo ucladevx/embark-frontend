@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ReactTinyLink } from "react-tiny-link"; //uses https://cors-anywhere.herokuapp.com by default.
 import Linkify from "react-linkify";
+import linksFinder from "links-finder";
+
 import {
   PreviousCommentItem,
   PreviousCommentTitle,
@@ -17,12 +19,10 @@ import { colors } from "../../../shared/config";
 const CommentBox = ({ comments }) => {
   const [start, setStart] = useState(0);
 
-  const getUrls = require("get-urls"); //url finder
   const getURL = (body) => {
-    const urlSet = getUrls(body);
-    if (urlSet.size <= 0) return "";
-    const iterator = urlSet[Symbol.iterator]();
-    return iterator.next().value;
+    const urlSet = linksFinder.findLinks(body);
+    if (urlSet.length <= 0) return "";
+    return body.substring(urlSet[0].start, urlSet[0].end + 1);
   };
 
   return (
@@ -36,13 +36,18 @@ const CommentBox = ({ comments }) => {
       )}
       {comments &&
         comments.map((c, i) => {
-          if (i >= start && i < start + 4)
+          if (i >= start && i < start + 4) {
+            if (c === null) {
+              return <div></div>;
+            }
             return (
               <PreviousCommentItem key={c._id || i}>
                 <PreviousCommentAvatar></PreviousCommentAvatar>
                 <div>
                   <PreviousCommentContent bgcolor={colors.gray1}>
-                    <PreviousCommentTitle>{c.authorEmail}</PreviousCommentTitle>
+                    <PreviousCommentTitle>
+                      {c.authorName || "authorNameDefault"}
+                    </PreviousCommentTitle>
                     <Linkify>
                       <PreviousCommentText>{c.body}</PreviousCommentText>
                     </Linkify>
@@ -66,7 +71,7 @@ const CommentBox = ({ comments }) => {
                 </div>
               </PreviousCommentItem>
             );
-          else return <React.Fragment key={i}></React.Fragment>;
+          } else return <React.Fragment key={i}></React.Fragment>;
         })}
       {comments && comments.length > start + 4 && (
         <ViewCommentLink onClick={() => setStart(start + 4)}>
