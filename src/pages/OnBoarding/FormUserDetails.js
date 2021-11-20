@@ -38,6 +38,13 @@ const AccountBtn = styled(ActionButton)`
   margin-top: 15px;
 `;
 
+const AccountDisabledBtn = styled(AccountBtn)`
+  width: 200px;
+  height: 38px;
+  margin-top: 15px;
+  background: #878787;
+`;
+
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
     .min(2, "Too Short!")
@@ -163,64 +170,63 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                     value={password}
                     onBlur={() => setPasswordPopOver(false)}
                   ></Field>
-                  {password.length <= 8 ||
-                  !numerialCharReg.test(password) ||
-                  !upperCaseReg.test(password) ||
-                  !lowercaseReg.test(password) ||
-                  !specialCharReg.test(password) ? (
-                    <ErrorPrompt error={passwordPopOver}>
-                      <p style={{ fontSize: "100%" }}>
-                        Password Still Needs to Have:
-                      </p>
-                      {password.length <= 8 && (
-                        <React.Fragment>
-                          <p style={{ fontSize: "100%" }}>- 8+ characters</p>
-                        </React.Fragment>
-                      )}
-                      {!numerialCharReg.test(password) && (
-                        <React.Fragment>
-                          <p style={{ fontSize: "100%" }}>
-                            - At least one number
-                          </p>
-                        </React.Fragment>
-                      )}
-                      {!upperCaseReg.test(password) && (
-                        <React.Fragment>
-                          <p style={{ fontSize: "100%" }}>
-                            - At least one upper case character
-                          </p>
-                        </React.Fragment>
-                      )}
-                      {!lowercaseReg.test(password) && (
-                        <React.Fragment>
-                          <p style={{ fontSize: "100%" }}>
-                            - At least one lower case character
-                          </p>
-                        </React.Fragment>
-                      )}
-                      {!specialCharReg.test(password) && (
-                        <React.Fragment>
-                          <p style={{ fontSize: "100%" }}>
-                            - At least one special character
-                          </p>
-                        </React.Fragment>
-                      )}
-                    </ErrorPrompt>
-                  ) : (
-                    <div></div>
-                  )}
+                  {passwordPopOver &&
+                    (password.length <= 8 ||
+                      !numerialCharReg.test(password) ||
+                      !upperCaseReg.test(password) ||
+                      !lowercaseReg.test(password) ||
+                      !specialCharReg.test(password)) && (
+                      <ErrorPrompt
+                        error={passwordPopOver}
+                        style={{ height: 100 }}
+                      >
+                        <p style={{ fontSize: "100%" }}>
+                          Password Still Needs to Have:
+                        </p>
+                        {password.length <= 8 && (
+                          <React.Fragment>
+                            <p style={{ fontSize: "100%" }}>- 8+ characters</p>
+                          </React.Fragment>
+                        )}
+                        {!numerialCharReg.test(password) && (
+                          <React.Fragment>
+                            <p style={{ fontSize: "100%" }}>
+                              - At least one number
+                            </p>
+                          </React.Fragment>
+                        )}
+                        {!upperCaseReg.test(password) && (
+                          <React.Fragment>
+                            <p style={{ fontSize: "100%" }}>
+                              - At least one upper case character
+                            </p>
+                          </React.Fragment>
+                        )}
+                        {!lowercaseReg.test(password) && (
+                          <React.Fragment>
+                            <p style={{ fontSize: "100%" }}>
+                              - At least one lower case character
+                            </p>
+                          </React.Fragment>
+                        )}
+                        {!specialCharReg.test(password) && (
+                          <React.Fragment>
+                            <p style={{ fontSize: "100%" }}>
+                              - At least one special character
+                            </p>
+                          </React.Fragment>
+                        )}
+                      </ErrorPrompt>
+                    )}
                 </FieldContainer>
                 <ErrorPrompt error={hasError}>
                   Invalid name, email, or password
                 </ErrorPrompt>
+
                 {passwordPopOver ? (
-                  password.length > 8 &&
-                  numerialCharReg.test(password) &&
-                  upperCaseReg.test(password) &&
-                  lowercaseReg.test(password) &&
-                  specialCharReg.test(password) && (
-                    <AccountBtn type="submit">Create Account</AccountBtn>
-                  )
+                  <AccountDisabledBtn type="submit" disabled>
+                    Create Account
+                  </AccountDisabledBtn>
                 ) : (
                   <AccountBtn type="submit">Create Account</AccountBtn>
                 )}
