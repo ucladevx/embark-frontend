@@ -22,7 +22,6 @@ const CommentBox = ({ comments }) => {
   const getURL = (body) => {
     const urlSet = linksFinder.findLinks(body);
     if (urlSet.length <= 0) return "";
-    console.log(urlSet);
     return body.substring(urlSet[0].start, urlSet[0].end + 1);
   };
 
@@ -38,7 +37,6 @@ const CommentBox = ({ comments }) => {
       {comments &&
         comments.map((c, i) => {
           if (i >= start && i < start + 4) {
-            console.log(c, i);
             if (c === null) {
               return <div></div>;
             }
