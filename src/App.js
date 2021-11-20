@@ -28,6 +28,7 @@ import { LinkedInPopUp } from "react-linkedin-login-oauth2";
 import ViewClubProfile from "./pages/Profile/viewClubProfile";
 import ViewStudentProfile from "./pages/Profile/viewStudentProfile";
 import Moderation from "./pages/Moderation";
+import { Authenticated } from "./pages/Authenticated";
 
 axios.defaults.baseURL =
   process.env.REACT_APP_BACKEND || "https://embark-backend-dev.herokuapp.com/";
@@ -85,6 +86,11 @@ function App() {
                 component={ViewStudentProfile}
               ></Route>
               <Route path="/moderation" exact component={Moderation}></Route>
+              <Route
+                path="/auth/verifyAccount/:token"
+                exact
+                component={Authenticated}
+              ></Route>
               <Route path="/" component={ErrorPage}></Route>
             </Switch>
           </Router>
