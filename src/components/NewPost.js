@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import FileUpload from "./FileUpload.js";
 import ImageUpload from "./ImageUpload.js";
 import FileViewer from "@studyworld/react-file-viewer";
+
 import {
   Dialog,
   DialogContent,
@@ -22,6 +23,8 @@ import {
 
 import { BoldTypography } from "../shared/Typography";
 import { colors } from "../shared/config";
+import MultiDropDown from "../shared/Dropdown/MultiDropDown";
+import { IndustryFilters } from "../shared/dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { newPost } from "../redux/actions/dataActions";
 import styled from "styled-components";
@@ -91,12 +94,29 @@ const NewPost = ({ open, handleClose }) => {
   const [form, setForm] = useState({});
   const [imgForm, setImgForm] = useState({});
   const [resources, setResources] = useState(false);
+  const industryFilter = useMemo(() => IndustryFilters, []);
+  const [openInd, setOpenInd] = useState(false);
+
   // Redux
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const [industries, setIndustries] = useState(user.tags);
 
   const handleIndustry = (e) => {
     setIndustry(e.target.value);
+  };
+
+  const toggleOpenInd = () => {
+    setOpenInd(!openInd);
+  };
+  const handleIndustries = (name) => {
+    if (industries && industries.includes(name)) {
+      const newIndustries = industries.filter((ind) => ind !== name);
+      setIndustries(newIndustries);
+    } else {
+      const newIndustries = [...industries, name];
+      setIndustries(newIndustries);
+    }
   };
 
   const handleTitle = (e) => {
@@ -258,17 +278,30 @@ const NewPost = ({ open, handleClose }) => {
           <NewPostUser>
             <BoldTypography sz={"16px"}>{user.name}</BoldTypography>
             <FormControlC>
-              <InputLabel>Industry</InputLabel>
-              <Select value={industry} onChange={handleIndustry}>
+              {/* <InputLabel>Industry</InputLabel> */}
+              {/* <Select value={industry} onChange={handleIndustry}>
                 <Suggested>Suggested</Suggested>
                 <MenuItem value={"Product Design"}>Product Design</MenuItem>
-                <MenuItem value={"Product Management"}>
-                  Product Management
-                </MenuItem>
-                <Divider />
+                <MenuItem value={"Product Management"}>Product Management</MenuItem>
                 <MenuItem value={"Business"}>Business</MenuItem>
                 <MenuItem value={"Computer Science"}>Computer Science</MenuItem>
-              </Select>
+              </Select> */}
+              <MultiDropDown
+                onOpenClose={toggleOpenInd}
+                onSelect={handleIndustries}
+                options={industryFilter}
+                selectedOptions={industries}
+                open={openInd}
+                title="Select Relevent Industry"
+                ttwd="312px"
+                tthg="35px"
+                bwd="314px" //drop down width
+                bhg="202px" // dropdown height
+                cef="312px"
+                chg="145px" //dropdown height
+                fwd="314px" //"finished" block width
+                fhg="54px" //finish block height
+              ></MultiDropDown>
             </FormControlC>
           </NewPostUser>
         </NewPostInfo>
