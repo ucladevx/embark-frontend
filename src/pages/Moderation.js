@@ -52,11 +52,10 @@ const Moderation = () => {
                 <TableCell>
                   {p.comments &&
                     p.comments.map((comment) => {
-                      console.log(comment);
                       if (comment) {
                         if (!comment.author) {
                           return (
-                            <div>
+                            <div key={comment._id}>
                               <h4>NO AUTHOR</h4>
                               <p>{comment.body}</p>
                             </div>
