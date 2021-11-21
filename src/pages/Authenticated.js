@@ -34,12 +34,12 @@ const Authenticated = () => {
   const history = useHistory();
   const { token } = useParams();
   useEffect(() => {
-    // verify with token
-    axios.get(`/auth/verifyAccount/${token}`).then(function (res) {
+    const verify = async () => {
+      const res = await axios.get(`/auth/verifyAccount/${token}`);
       console.log(res);
-      setVerified(true);
-    });
-  });
+    };
+    verify();
+  }, []);
   return verified ? (
     <div>
       <TextFieldWrapper>
