@@ -35,7 +35,7 @@ const FieldName = styled.p`
 const AccountBtn = styled(ActionButton)`
   width: 200px;
   height: 38px;
-  margin-top: 15px;
+  margin-top: 5px;
 `;
 
 const SignupSchema = Yup.object().shape({
@@ -83,6 +83,7 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
             lastName: "",
             email: "",
             password: "",
+            confirmPassword: "",
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
@@ -106,13 +107,15 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
             const error_email = errors.email;
             const error_password = errors.password;
             const error_confirmPassword = errors.confirmPassword;
+
             const hasError =
               !!backend_errors ||
-              !!errors.password ||
-              !!errors.email ||
-              !!errors.firstName ||
-              !!errors.lastName ||
-              !!errors.confirmPassword;
+              !!error_firstName ||
+              !!error_lastName ||
+              !!error_email ||
+              !!error_password ||
+              !!error_confirmPassword;
+
             const handleFocus = () => {
               setErrors({});
               dispatch({ type: CLEAR_ERRORS });
@@ -190,55 +193,71 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                     value={password}
                     onBlur={() => setPasswordPopOver(false)}
                   ></Field>
-                  {passwordPopOver &&
-                    (password.length <= 8 ||
-                      !numerialCharReg.test(password) ||
-                      !upperCaseReg.test(password) ||
-                      !lowercaseReg.test(password) ||
-                      !specialCharReg.test(password)) && (
-                      <ErrorPrompt
-                        error={passwordPopOver}
-                        style={{ height: 100 }}
-                      >
-                        <p style={{ fontSize: "100%" }}>
-                          Password Still Needs to Have:
-                        </p>
-                        {password.length <= 8 && (
-                          <React.Fragment>
-                            <p style={{ fontSize: "100%" }}>- 8+ characters</p>
-                          </React.Fragment>
-                        )}
-                        {!numerialCharReg.test(password) && (
-                          <React.Fragment>
-                            <p style={{ fontSize: "100%" }}>
-                              - At least one number
-                            </p>
-                          </React.Fragment>
-                        )}
-                        {!upperCaseReg.test(password) && (
-                          <React.Fragment>
-                            <p style={{ fontSize: "100%" }}>
-                              - At least one upper case character
-                            </p>
-                          </React.Fragment>
-                        )}
-                        {!lowercaseReg.test(password) && (
-                          <React.Fragment>
-                            <p style={{ fontSize: "100%" }}>
-                              - At least one lower case character
-                            </p>
-                          </React.Fragment>
-                        )}
-                        {!specialCharReg.test(password) && (
-                          <React.Fragment>
-                            <p style={{ fontSize: "100%" }}>
-                              - At least one special character
-                            </p>
-                          </React.Fragment>
-                        )}
-                      </ErrorPrompt>
-                    )}
                 </FieldContainer>
+                <FieldContainer>
+                  <FieldName>Confirm Password</FieldName>
+                  <Field
+                    name="confirmPassword"
+                    as={TypeBox}
+                    margin="normal"
+                    error={hasError}
+                    type="password"
+                    placeholder="Retype your password"
+                    onFocus={handleFocus}
+                  ></Field>
+                  <ErrorPrompt error={error_confirmPassword}>
+                    Passwords do not match.
+                  </ErrorPrompt>
+                </FieldContainer>
+
+                {passwordPopOver &&
+                  (password.length <= 8 ||
+                    !numerialCharReg.test(password) ||
+                    !upperCaseReg.test(password) ||
+                    !lowercaseReg.test(password) ||
+                    !specialCharReg.test(password)) && (
+                    <ErrorPrompt
+                      error={passwordPopOver}
+                      style={{ height: 100 }}
+                    >
+                      <p style={{ fontSize: "90%" }}>
+                        Password Still Needs to Have:
+                      </p>
+                      {password.length <= 8 && (
+                        <React.Fragment>
+                          <p style={{ fontSize: "90%" }}>- 8+ characters</p>
+                        </React.Fragment>
+                      )}
+                      {!numerialCharReg.test(password) && (
+                        <React.Fragment>
+                          <p style={{ fontSize: "90%" }}>
+                            - At least one number
+                          </p>
+                        </React.Fragment>
+                      )}
+                      {!upperCaseReg.test(password) && (
+                        <React.Fragment>
+                          <p style={{ fontSize: "90%" }}>
+                            - At least one upper case character
+                          </p>
+                        </React.Fragment>
+                      )}
+                      {!lowercaseReg.test(password) && (
+                        <React.Fragment>
+                          <p style={{ fontSize: "90%" }}>
+                            - At least one lower case character
+                          </p>
+                        </React.Fragment>
+                      )}
+                      {!specialCharReg.test(password) && (
+                        <React.Fragment>
+                          <p style={{ fontSize: "90%" }}>
+                            - At least one special character
+                          </p>
+                        </React.Fragment>
+                      )}
+                    </ErrorPrompt>
+                  )}
                 <ErrorPrompt error={hasError}>
                   Invalid name, email, or password
                 </ErrorPrompt>

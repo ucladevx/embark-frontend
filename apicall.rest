@@ -33,14 +33,14 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:9000/auth/signup
+POST https://embark-backend-dev.herokuapp.com/auth/signup
 Content-Type: application/json
 
 {
 
-    "firstName": "hello1a",
+    "firstName": "hello11",
     "lastName": "bruin",
-    "email": "bruin151a!!@email.com",
+    "email": "bruin1511a!!@email.com",
     "password": "12345qQ!",
     "userType": "student"
 }

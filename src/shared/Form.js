@@ -48,6 +48,7 @@ export const FieldContainer = styled.div`
 
 export const ErrorPrompt = styled.div`
   color: ${(props) => (props.error ? "#ffadad" : "transparent")};
+  display: ${(props) => (props.error ? "block" : "none")};
   height: 20px;
 `;
 
