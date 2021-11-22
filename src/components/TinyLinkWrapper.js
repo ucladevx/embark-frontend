@@ -5,7 +5,7 @@ const backendHost = "https://cors-anywhere-embark.herokuapp.com";
 
 const TinyLinkWrapper = ({ link }) => {
   try {
-    let url = new URL(link);
+    new URL(link);
     return (
       <ReactTinyLink
         proxyUrl={backendHost}
