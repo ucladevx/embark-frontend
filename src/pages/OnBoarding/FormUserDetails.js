@@ -52,6 +52,9 @@ const SignupSchema = Yup.object().shape({
     .required("No password provided.")
     .min(8, "Password is too short - should be 8 chars minimum.")
     .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+  confirmPassword: Yup.string()
+    .required("Passwords need to match.")
+    .oneOf([Yup.ref("password"), null], "Passwords must match."),
 });
 
 const FormUserDetails = ({ handleUser, handleStep }) => {
@@ -98,12 +101,18 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
         >
           {(props) => {
             const { errors, setErrors } = props;
+            const error_firstName = errors.firstName;
+            const error_lastName = errors.lastName;
+            const error_email = errors.email;
+            const error_password = errors.password;
+            const error_confirmPassword = errors.confirmPassword;
             const hasError =
               !!backend_errors ||
               !!errors.password ||
               !!errors.email ||
               !!errors.firstName ||
-              !!errors.lastName;
+              !!errors.lastName ||
+              !!errors.confirmPassword;
             const handleFocus = () => {
               setErrors({});
               dispatch({ type: CLEAR_ERRORS });
@@ -127,6 +136,12 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                       error={hasError}
                       onFocus={handleFocus}
                     ></Field>
+                    <ErrorPrompt
+                      error={error_firstName}
+                      style={{ display: error_firstName ? "block" : "none" }}
+                    >
+                      Invalid first name.
+                    </ErrorPrompt>
                   </FieldContainer>
                   <FieldContainer>
                     <FieldName>Last Name</FieldName>
@@ -137,6 +152,12 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                       error={hasError}
                       onFocus={handleFocus}
                     ></Field>
+                    <ErrorPrompt
+                      error={error_lastName}
+                      style={{ display: error_lastName ? "block" : "none" }}
+                    >
+                      Invalid last name.
+                    </ErrorPrompt>
                   </FieldContainer>
                 </NameContainer>
                 <FieldContainer>
@@ -148,6 +169,12 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                     error={hasError}
                     onFocus={handleFocus}
                   ></Field>
+                  <ErrorPrompt
+                    error={error_email}
+                    style={{ display: error_email ? "block" : "none" }}
+                  >
+                    Invalid email.
+                  </ErrorPrompt>
                 </FieldContainer>
                 <FieldContainer>
                   <FieldName>Password</FieldName>

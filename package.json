@@ -15,11 +15,12 @@
     "dayjs": "^1.10.4",
     "formik": "^2.2.6",
     "gapi-script": "^1.2.0",
-    "get-urls": "^10.0.0",
+    "links-finder": "^1.0.0",
     "lodash": "^4.17.21",
     "mammoth": "^1.4.16",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
+    "prettier": "^2.4.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-app-rewired": "^2.1.8",
@@ -43,6 +44,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "devstart": "REACT_APP_BACKEND=http://localhost:9000/ npm start",
     "build": "react-app-rewired build/react-app-rewired start",
     "build2": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
@@ -69,7 +71,8 @@
     ]
   },
   "devDependencies": {
-    "husky": "^5.2.0",
+    "husky": "^7.0.0",
+    "pretty-quick": "^3.1.1",
     "redux-devtools-extension": "^2.13.9"
   }
 }
