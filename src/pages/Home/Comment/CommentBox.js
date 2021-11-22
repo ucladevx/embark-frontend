@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ReactTinyLink } from "react-tiny-link"; //uses https://cors-anywhere.herokuapp.com by default.
 import Linkify from "react-linkify";
 import linksFinder from "links-finder";
 import TinyLinkWrapper from "../../../components/TinyLinkWrapper";
