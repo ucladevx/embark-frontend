@@ -1,7 +1,7 @@
 import React from "react";
 import ImageIcon from "@material-ui/icons/Image";
 import LinkIcon from "@material-ui/icons/Link";
-import { ReactTinyLink } from "react-tiny-link"; //uses https://cors-anywhere.herokuapp.com by default.
+import TinyLinkWrapper from "../../components/TinyLinkWrapper";
 import Linkify from "react-linkify";
 import linksFinder from "links-finder";
 
@@ -112,7 +112,6 @@ const Posts = ({ setNewPost }) => {
   const getURL = (body) => {
     const urlSet = linksFinder.findLinks(body);
     if (urlSet.length <= 0) return "";
-    console.log(urlSet);
     return body.substring(urlSet[0].start, urlSet[0].end + 1);
   };
 
@@ -208,13 +207,8 @@ const Posts = ({ setNewPost }) => {
                     product development process!! https://ucladevx.com/
                   </PreviousCommentText>
                 </Linkify>
-                <ReactTinyLink
-                  cardSize="small"
-                  showGraphic={true}
-                  maxLine={2}
-                  minLine={1}
-                  proxyUrl={backendHost}
-                  url={getURL(
+                <TinyLinkWrapper
+                  link={getURL(
                     "Hey Christie! We have a slidedeck all about product thinking on our profile. You should totally apply to be on one of our teams this quarter to gain some more experience with the product development process!! https://ucladevx.com/"
                   )}
                 />
@@ -279,14 +273,7 @@ const Posts = ({ setNewPost }) => {
                   <PostContent>{p.body}</PostContent>
                 </Linkify>
                 {getURL(p.body) !== "" ? (
-                  <ReactTinyLink
-                    proxyUrl={backendHost}
-                    cardSize="small"
-                    showGraphic={true}
-                    maxLine={2}
-                    minLine={1}
-                    url={getURL(p.body)}
-                  />
+                  <TinyLinkWrapper link={getURL(p.body)} />
                 ) : (
                   <></>
                 )}
