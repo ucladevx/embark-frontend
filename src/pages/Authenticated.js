@@ -30,7 +30,7 @@ const TextBox = styled.div`
 `;
 
 const Authenticated = () => {
-  const [verified, setVerified] = useState(false);
+  const [verified] = useState(false);
   const history = useHistory();
   const { token } = useParams();
   useEffect(() => {
@@ -39,7 +39,7 @@ const Authenticated = () => {
       console.log(res);
     };
     verify();
-  }, []);
+  }, [token]);
   return verified ? (
     <div>
       <TextFieldWrapper>

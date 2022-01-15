@@ -121,13 +121,14 @@ Content-Type: application/json
 
 ###
 POST http://localhost:9000/posts/comments
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTkxOGI5OTAwNWZkMDAyNDkyNjVhMiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya3Rlc3RlcjEyMzRAZ21haWwuY29tIiwidXNlclR5cGUiOiJzdHVkZW50IiwiaWF0IjoxNjI3Njg4NjA4LCJleHAiOjE2MzYzMjg2MDh9.74rnAYLyQfaOIxazPHceDFseLbQFd4CrfDnx3SdDUaI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTkxOGI5OTAwNWZkMDAyNDkyNjVhMiIsIm5hbWUiOiJlbWJhcmsiLCJlbWFpbCI6ImVtYmFya3Rlc3RlcjEyMzRAZ21haWwuY29tIiwiaWF0IjoxNjQyMjc0OTAxLCJleHAiOjE2NTA5MTQ5MDF9.CdkPEhx1JHr7lDL5U4W-LCzTVBDisOGTAFQa-rLTTSU
 Content-Type: application/json
 
 {
     "authorID": "60e918b99005fd00249265a2",
-    "post_id": "606e86b1791b49003a04c1e1",
-    "commentBody": "nothing"
+    "post_id": "5fbb8518a42d3a00dca56efb",
+    "commentBody": "nothing",
+    "authorName": "embark tester"
 }
 
 ###
