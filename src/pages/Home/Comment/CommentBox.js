@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { ReactTinyLink } from "react-tiny-link"; //uses https://cors-anywhere.herokuapp.com by default.
 import Linkify from "react-linkify";
 import linksFinder from "links-finder";
+import TinyLinkWrapper from "../../../components/TinyLinkWrapper";
 
 import {
   PreviousCommentItem,
@@ -52,13 +52,7 @@ const CommentBox = ({ comments }) => {
                       <PreviousCommentText>{c.body}</PreviousCommentText>
                     </Linkify>
                     {c.body !== undefined && getURL(c.body) !== "" ? (
-                      <ReactTinyLink
-                        cardSize="small"
-                        showGraphic={true}
-                        maxLine={2}
-                        minLine={1}
-                        url={getURL(c.body)}
-                      />
+                      <TinyLinkWrapper link={getURL(c.body)} />
                     ) : (
                       <></>
                     )}
