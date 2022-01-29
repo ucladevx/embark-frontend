@@ -48,7 +48,7 @@ const SignupSchema = Yup.object().shape({
   email: Yup.string()
     .required("Required")
     .matches(
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       "Invalid email. Make sure the email you provide is a valid email."
     ),
   password: Yup.string()
@@ -56,7 +56,7 @@ const SignupSchema = Yup.object().shape({
     .min(8, "Password is too short - should be 8 chars minimum.")
     //.matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
     .matches(
-      /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
       "Password must be at least 8 characters, must have one uppercase char, one lowercase char, one number, and one special character."
     ),
   confirmPassword: Yup.string()
