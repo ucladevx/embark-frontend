@@ -269,18 +269,16 @@ export const PostTagWrapper = styled.div`
   margin-right: 10px;
 `;
 
-export const PostTag = styled(Button)`
+export const PostTag = styled(Typography)`
   background-color: ${(props) => handleTagColor(props.tag)};
   text-transform: none;
   width: fit-content;
   height: 18px;
   font-size: 10px;
   border-radius: 5px;
-  padding: 10px;
-  &:hover {
-    background-color: ${(props) => handleTagColor(props.tag)};
-    opacity: 0.8;
-  }
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
 `;
 
 export const PostNameTime = styled.div`
