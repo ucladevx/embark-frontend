@@ -67,6 +67,10 @@ const LikeCommentCount = styled.div`
 `;
 
 export const FileButton = styled(Button)`
+  position: sticky;
+  top: 0;
+  align-self: start;
+  z-index: 100;
   width: 89px;
   height: 30px;
   border-radius: 8px;
