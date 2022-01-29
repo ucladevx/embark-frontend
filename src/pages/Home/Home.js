@@ -92,9 +92,9 @@ const Home = () => {
     dispatch(getEvents(numEvents));
   }, [dispatch, numEvents]);
 
-  useEffect(() => {
-    styleCalendar();
-  }, []);
+  // useEffect(() => {
+  //   styleCalendar();
+  // }, []);
 
   useEffect(() => {
     if (clubExpansionCase._id) {
@@ -160,7 +160,38 @@ const Home = () => {
                 <InfoEntryText>Explore Clubs</InfoEntryText>
               </InfoEntryWrapper>
             </InfoBoxes>
+          </LeftContainer>
 
+          <MiddleContainer>
+            {page === "main" ? (
+              <Posts setNewPost={setNewPost}></Posts>
+            ) : page === "explore" ? (
+              <Explore></Explore>
+            ) : page === "events" ? (
+              <DiscoverEvents
+                closeEvents={closeEvents}
+                setExpandedEventPage={openExpandedEventPage}
+              ></DiscoverEvents>
+            ) : page === "expandEvent" ? (
+              <>
+                <ExpandedEventPage
+                  e={selectedEvent}
+                  close={closeExpandedEventPage}
+                ></ExpandedEventPage>
+              </>
+            ) : (
+              <Fragment></Fragment>
+            )}
+          </MiddleContainer>
+
+          <RightContainer>
+            {/* <CalanderWrapper onClick={() => setErrorPopup(true)}>
+              <div style={{ width: "100%", height: "4em" }}></div>
+              <Calendar></Calendar>
+            </CalanderWrapper> */}
+
+            <div></div>
+            <div></div>
             {page === "main" && (
               <FilterWrapper>
                 <FilterTitle>Filters:</FilterTitle>
@@ -190,36 +221,7 @@ const Home = () => {
                 </AddFilter>
               </FilterWrapper>
             )}
-          </LeftContainer>
-
-          <MiddleContainer>
-            {page === "main" ? (
-              <Posts setNewPost={setNewPost}></Posts>
-            ) : page === "explore" ? (
-              <Explore></Explore>
-            ) : page === "events" ? (
-              <DiscoverEvents
-                closeEvents={closeEvents}
-                setExpandedEventPage={openExpandedEventPage}
-              ></DiscoverEvents>
-            ) : page === "expandEvent" ? (
-              <>
-                <ExpandedEventPage
-                  e={selectedEvent}
-                  close={closeExpandedEventPage}
-                ></ExpandedEventPage>
-              </>
-            ) : (
-              <Fragment></Fragment>
-            )}
-          </MiddleContainer>
-
-          <RightContainer>
-            <CalanderWrapper onClick={() => setErrorPopup(true)}>
-              <div style={{ width: "100%", height: "4em" }}></div>
-              <Calendar></Calendar>
-            </CalanderWrapper>
-            {page === "events" ? (
+            {/* {page === "events" ? (
               <MyEvents></MyEvents>
             ) : (
               <Events
@@ -227,7 +229,7 @@ const Home = () => {
                 openEvents={openEvents}
                 setExpandedEventPage={openExpandedEventPage}
               />
-            )}
+            )} */}
           </RightContainer>
         </LandingPageWrapper>
       </LandingPage>
