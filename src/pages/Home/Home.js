@@ -106,14 +106,16 @@ const Home = () => {
     dispatch(removeFilter(t));
     dispatch(filterPosts());
   };
-  const addUpdateFilter = (t) => {
-    dispatch(addFilter(t));
-    dispatch(filterPosts());
-  };
 
   const [tagToAdd, setTagToAdd] = useState("");
   const handleChange = (e) => {
     setTagToAdd(e.target.value);
+  };
+
+  const addUpdateFilter = (t) => {
+    setTagToAdd("");
+    dispatch(addFilter(t));
+    dispatch(filterPosts());
   };
 
   const openEvents = () => {
@@ -167,7 +169,7 @@ const Home = () => {
                 <InteriorFilterWrapper>
                   {filters.map((t) => (
                     <FilterObj
-                      tag={t}
+                      tag={t.toLowerCase()}
                       key={t}
                       onClick={() => removeUpdateFilters(t)}
                     >
@@ -180,6 +182,7 @@ const Home = () => {
                   id="tag"
                   placeholder="Enter tag..."
                   type="text"
+                  value={tagToAdd}
                   InputProps={{
                     disableUnderline: true,
                   }}

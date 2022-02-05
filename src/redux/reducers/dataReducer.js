@@ -54,7 +54,7 @@ export default function dataReducer(state = initialState, action) {
     case LIKE_POST:
     case UNLIKE_POST:
       index = state.posts.findIndex(
-        (post) => post._id === action.payload.post._id,
+        (post) => post._id === action.payload.post._id
       );
       const newPosts = [...state.posts];
       newPosts[index] = action.payload.post;
@@ -94,18 +94,31 @@ export default function dataReducer(state = initialState, action) {
       return {
         ...state,
         filter: state.filter.filter(
-          (eachfilter) => eachfilter !== action.payload,
+          (eachfilter) => eachfilter !== action.payload
         ),
       };
     case FILTER_POSTS: {
       var postsCopy = state.posts;
       postsCopy = postsCopy.sort(function (post1, post2) {
         for (var i = 0; i < state.filter.length; i++) {
-          if (post1.tags.includes(state.filter[i])) {
-            if (!post2.tags.includes(state.filter[i])) {
+          if (!post1 || !post1.tags) return 1; // post 2 comes before post 1
+          if (!post2 || !post2.tags) return -1; // post 1 comes before post 2
+          // create copy of post1 tags that are all lowercase
+          let post1Tags = post1.tags.slice();
+          for (let i = 0; i < post1Tags.length; i++)
+            post1Tags[i] = post1Tags[i].toLowerCase();
+          // create copy of post2 tags that are all lowercase
+          let post2Tags = post2.tags.slice();
+          for (let i = 0; i < post2Tags.length; i++)
+            post2Tags[i] = post2Tags[i].toLowerCase();
+          if (post1Tags.includes(state.filter[i].toLowerCase())) {
+            // if first post contains tag
+            if (!post2Tags.includes(state.filter[i].toLowerCase())) {
+              // but the second post doesn't
               return -1;
             }
-          } else if (post2.tags.includes(state.filter[i])) {
+          } else if (post2Tags.includes(state.filter[i].toLowerCase())) {
+            // lowercase because case insensitive
             return 1;
           }
         }
