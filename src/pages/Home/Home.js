@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
-import Calendar from "react-calendar";
+// import Calendar from "react-calendar";
 import ExpandedEventPage from "./ExpandedEventPage";
 // Styles
 import "../../components/Calendar/HomeCalendar.css";
@@ -16,7 +16,7 @@ import {
   FilterWrapper,
   InteriorFilterWrapper,
   AddFilter,
-  CalanderWrapper,
+  // CalanderWrapper,
   InfoBoxes,
   InfoEntryWrapper,
   InfoImage,
@@ -44,12 +44,12 @@ import {
 import NewPost from "../../components/NewPost";
 import NewEvent from "../../components/NewEvent";
 import Explore from "./Explore";
-import { styleCalendar } from "../../components/Calendar/HomeCalendar";
+// import { styleCalendar } from "../../components/Calendar/HomeCalendar";
 import Posts from "./Posts";
 
-import Events from "./Events";
+// import Events from "./Events";
 import DiscoverEvents from "./DiscoverEvents";
-import MyEvents from "./MyEvents";
+// import MyEvents from "./MyEvents";
 
 // Dayjs
 import { useHistory } from "react-router-dom";
@@ -92,9 +92,9 @@ const Home = () => {
     dispatch(getEvents(numEvents));
   }, [dispatch, numEvents]);
 
-  useEffect(() => {
-    styleCalendar();
-  }, []);
+  // useEffect(() => {
+  //   styleCalendar();
+  // }, []);
 
   useEffect(() => {
     if (clubExpansionCase._id) {
@@ -118,10 +118,10 @@ const Home = () => {
     dispatch(filterPosts());
   };
 
-  const openEvents = () => {
-    setPage("events");
-    setNumEvents(50);
-  };
+  // const openEvents = () => {
+  //   setPage("events");
+  //   setNumEvents(50);
+  // };
 
   const closeEvents = () => {
     setPage("main");
@@ -162,7 +162,38 @@ const Home = () => {
                 <InfoEntryText>Explore Clubs</InfoEntryText>
               </InfoEntryWrapper>
             </InfoBoxes>
+          </LeftContainer>
 
+          <MiddleContainer>
+            {page === "main" ? (
+              <Posts setNewPost={setNewPost}></Posts>
+            ) : page === "explore" ? (
+              <Explore></Explore>
+            ) : page === "events" ? (
+              <DiscoverEvents
+                closeEvents={closeEvents}
+                setExpandedEventPage={openExpandedEventPage}
+              ></DiscoverEvents>
+            ) : page === "expandEvent" ? (
+              <>
+                <ExpandedEventPage
+                  e={selectedEvent}
+                  close={closeExpandedEventPage}
+                ></ExpandedEventPage>
+              </>
+            ) : (
+              <Fragment></Fragment>
+            )}
+          </MiddleContainer>
+
+          <RightContainer>
+            {/* <CalanderWrapper onClick={() => setErrorPopup(true)}>
+              <div style={{ width: "100%", height: "4em" }}></div>
+              <Calendar></Calendar>
+            </CalanderWrapper> */}
+
+            <div></div>
+            <div></div>
             {page === "main" && (
               <FilterWrapper>
                 <FilterTitle>Filters:</FilterTitle>
@@ -193,36 +224,7 @@ const Home = () => {
                 </AddFilter>
               </FilterWrapper>
             )}
-          </LeftContainer>
-
-          <MiddleContainer>
-            {page === "main" ? (
-              <Posts setNewPost={setNewPost}></Posts>
-            ) : page === "explore" ? (
-              <Explore></Explore>
-            ) : page === "events" ? (
-              <DiscoverEvents
-                closeEvents={closeEvents}
-                setExpandedEventPage={openExpandedEventPage}
-              ></DiscoverEvents>
-            ) : page === "expandEvent" ? (
-              <>
-                <ExpandedEventPage
-                  e={selectedEvent}
-                  close={closeExpandedEventPage}
-                ></ExpandedEventPage>
-              </>
-            ) : (
-              <Fragment></Fragment>
-            )}
-          </MiddleContainer>
-
-          <RightContainer>
-            <CalanderWrapper onClick={() => setErrorPopup(true)}>
-              <div style={{ width: "100%", height: "4em" }}></div>
-              <Calendar></Calendar>
-            </CalanderWrapper>
-            {page === "events" ? (
+            {/* {page === "events" ? (
               <MyEvents></MyEvents>
             ) : (
               <Events
@@ -230,7 +232,7 @@ const Home = () => {
                 openEvents={openEvents}
                 setExpandedEventPage={openExpandedEventPage}
               />
-            )}
+            )} */}
           </RightContainer>
         </LandingPageWrapper>
       </LandingPage>
