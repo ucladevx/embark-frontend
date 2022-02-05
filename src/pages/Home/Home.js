@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
-import Calendar from "react-calendar";
+// import Calendar from "react-calendar";
 import ExpandedEventPage from "./ExpandedEventPage";
 // Styles
 import "../../components/Calendar/HomeCalendar.css";
@@ -16,7 +16,7 @@ import {
   FilterWrapper,
   InteriorFilterWrapper,
   AddFilter,
-  CalanderWrapper,
+  // CalanderWrapper,
   InfoBoxes,
   InfoEntryWrapper,
   InfoImage,
@@ -44,12 +44,12 @@ import {
 import NewPost from "../../components/NewPost";
 import NewEvent from "../../components/NewEvent";
 import Explore from "./Explore";
-import { styleCalendar } from "../../components/Calendar/HomeCalendar";
+// import { styleCalendar } from "../../components/Calendar/HomeCalendar";
 import Posts from "./Posts";
 
-import Events from "./Events";
+// import Events from "./Events";
 import DiscoverEvents from "./DiscoverEvents";
-import MyEvents from "./MyEvents";
+// import MyEvents from "./MyEvents";
 
 // Dayjs
 import { useHistory } from "react-router-dom";
@@ -116,10 +116,10 @@ const Home = () => {
     setTagToAdd(e.target.value);
   };
 
-  const openEvents = () => {
-    setPage("events");
-    setNumEvents(50);
-  };
+  // const openEvents = () => {
+  //   setPage("events");
+  //   setNumEvents(50);
+  // };
 
   const closeEvents = () => {
     setPage("main");
