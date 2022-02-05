@@ -45,11 +45,20 @@ const SignupSchema = Yup.object().shape({
     .min(2, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
+  email: Yup.string()
+    .required("Required")
+    .matches(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "Invalid email. Make sure the email you provide is a valid email."
+    ),
   password: Yup.string()
     .required("No password provided.")
     .min(8, "Password is too short - should be 8 chars minimum.")
-    .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+    //.matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+    .matches(
+      /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
+      "Password must be at least 8 characters, must have one uppercase char, one lowercase char, one number, and one special character."
+    ),
   confirmPassword: Yup.string()
     .required("Passwords need to match.")
     .oneOf([Yup.ref("password"), null], "Passwords must match."),
@@ -156,9 +165,14 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                   ></Field>
                   <ErrorPrompt
                     error={error_email}
-                    style={{ display: error_email ? "block" : "none" }}
+                    style={{
+                      height: "auto",
+                      minHeight: "100%",
+                      display: error_email ? "block" : "none",
+                    }}
                   >
-                    Invalid email.
+                    Invalid email. Make sure the email you provide is a valid
+                    email.
                   </ErrorPrompt>
                 </FieldContainer>
                 <FieldContainer>
@@ -169,14 +183,20 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                     margin="normal"
                     error={hasError}
                     type="password"
-                    placeholder="8+ characters"
+                    placeholder="8+ letters with uppercase, lowercase, numbers, special"
                     onFocus={handleFocus}
                   ></Field>
                   <ErrorPrompt
                     error={error_password}
-                    style={{ display: error_password ? "block" : "none" }}
+                    style={{
+                      height: "auto",
+                      minHeight: "100%",
+                      display: error_password ? "block" : "none",
+                    }}
                   >
-                    Invalid password.
+                    Password must be at least 8 characters, must have one
+                    uppercase char, one lowercase char, one number, and one
+                    special character.
                   </ErrorPrompt>
                 </FieldContainer>
                 <FieldContainer>
@@ -193,14 +213,34 @@ const FormUserDetails = ({ handleUser, handleStep }) => {
                   <ErrorPrompt
                     error={error_confirmPassword}
                     style={{
+                      height: "auto",
+                      minHeight: "100%",
                       display: error_confirmPassword ? "block" : "none",
                     }}
                   >
                     Passwords do not match.
                   </ErrorPrompt>
                 </FieldContainer>
-                <ErrorPrompt error={hasError}>
-                  Invalid name, email, or password
+                {
+                  // Below is redundant
+                  /*
+                <ErrorPrompt style={{
+                  height:"auto",minHeight:"100%",display: hasError ? "block" : "none",
+                }} error={hasError}>
+                  Invalid name, email, or password.
+                </ErrorPrompt>
+                  */
+                }
+
+                <ErrorPrompt
+                  style={{
+                    height: "auto",
+                    minHeight: "100%",
+                    display: backend_errors ? "block" : "none",
+                  }}
+                  error={hasError}
+                >
+                  {backend_errors ? backend_errors.message : ""}
                 </ErrorPrompt>
 
                 <AccountBtn type="submit">Create Account</AccountBtn>

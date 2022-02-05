@@ -126,40 +126,93 @@ const NewPost = ({ open, handleClose }) => {
     }
     if (form.name === null) {
       if (imgForm.name === null) {
-        post = {
-          title: title,
-          body: description,
-          tags: [industry],
-        };
-        if (resources) {
-          post.tags = [...post.tags, "resource"];
+        if (industry.trim().length < 1) {
+          post = {
+            title: title,
+            body: description,
+            tags: null,
+          };
+          if (resources) {
+            post.tags = ["resource"];
+          }
+        } else {
+          post = {
+            title: title,
+            body: description,
+            tags: [industry],
+          };
+          if (resources) {
+            post.tags = [...post.tags, "resource"];
+          }
         }
       } else {
-        post = {
-          title: title,
-          body: description,
-          tags: [industry],
-          files: [imgForm],
-        };
-        if (resources) {
-          post.tags = [...post.tags, "resource"];
+        if (industry.trim().length < 1) {
+          post = {
+            title: title,
+            body: description,
+            files: [imgForm],
+            tags: null,
+          };
+          if (resources) {
+            post.tags = ["resource"];
+          }
+        } else {
+          post = {
+            title: title,
+            body: description,
+            tags: [industry],
+            files: [imgForm],
+          };
+          if (resources) {
+            post.tags = [...post.tags, "resource"];
+          }
         }
       }
     } else {
       if (imgForm.name === null) {
-        post = {
-          title: title,
-          body: description,
-          tags: [industry, "resource"],
-          files: [form],
-        };
+        if (industry.trim().length < 1) {
+          post = {
+            title: title,
+            body: description,
+            tags: null,
+            files: [form],
+          };
+          if (resources) {
+            post.tags = ["resource"];
+          }
+        } else {
+          post = {
+            title: title,
+            body: description,
+            tags: [industry],
+            files: [form],
+          };
+          if (resources) {
+            post.tags = [...post.tags, "resource"];
+          }
+        }
       } else {
-        post = {
-          title: title,
-          body: description,
-          tags: [industry, "resource"],
-          files: [form, imgForm],
-        };
+        if (industry.trim().length < 1) {
+          post = {
+            title: title,
+            body: description,
+            tags: null,
+            files: [form, imgForm],
+          };
+          if (resources) {
+            post.tags = ["resource"];
+          }
+        } else {
+          post = {
+            title: title,
+            body: description,
+            tags: [industry],
+            files: [form, imgForm],
+          };
+          if (resources) {
+            post.tags = [...post.tags, "resource"];
+          }
+        }
       }
     }
 
