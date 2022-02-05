@@ -93,9 +93,11 @@ export const newPost = (newP) => async (dispatch) => {
   try {
     const res = await axios.post("/posts", newP);
     dispatch({ type: NEW_POST, payload: res.data.post });
+    alert("Post successfully created");
   } catch (err) {
     console.error(err);
     maintenanceErrorCheck(err);
+    alert("Post failed to be created");
   }
 };
 

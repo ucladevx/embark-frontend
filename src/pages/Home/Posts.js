@@ -101,7 +101,7 @@ const Posts = ({ setNewPost }) => {
   const renderedTags = tags.map((each) => {
     return (
       <div key={each.key}>
-        <PostTag tag={each.key}>{each.key}</PostTag>
+        <PostTag tag={each.key.toLowerCase()}>{each.key}</PostTag>
       </div>
     );
   });
@@ -266,7 +266,7 @@ const Posts = ({ setNewPost }) => {
                   <PostTagWrapper>
                     {p.tags &&
                       p.tags.map((t) => (
-                        <PostTag tag={t} key={t}>
+                        <PostTag tag={t.toLowerCase()} key={t}>
                           {t}
                         </PostTag>
                       ))}
