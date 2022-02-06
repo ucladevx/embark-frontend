@@ -233,9 +233,10 @@ export const addFilter = (filterToAdd) => (dispatch) => {
 };
 
 // Remove a filter on the landing page
-export const removeFilter = () => (dispatch) => {
+export const removeFilter = (filterToRemove) => (dispatch) => {
   dispatch({
     type: REMOVE_FILTER,
+    payload: filterToRemove,
   });
 };
 
