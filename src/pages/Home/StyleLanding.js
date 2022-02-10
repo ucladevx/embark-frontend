@@ -113,7 +113,7 @@ export const InteriorFilterWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-export const FilterObj = styled(Typography)`
+export const FilterObj = styled(Button)`
   height: 26px;
   background-color: ${(props) => handleTagColor(props.tag)};
   border-radius: 5px;

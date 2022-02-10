@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import NavBar from "../../components/NavBar";
-import Calendar from "react-calendar";
+// import Calendar from "react-calendar";
 import ExpandedEventPage from "./ExpandedEventPage";
 // Styles
 import "../../components/Calendar/HomeCalendar.css";
@@ -16,7 +16,7 @@ import {
   FilterWrapper,
   InteriorFilterWrapper,
   AddFilter,
-  CalanderWrapper,
+  // CalanderWrapper,
   InfoBoxes,
   InfoEntryWrapper,
   InfoImage,
@@ -44,12 +44,12 @@ import {
 import NewPost from "../../components/NewPost";
 import NewEvent from "../../components/NewEvent";
 import Explore from "./Explore";
-import { styleCalendar } from "../../components/Calendar/HomeCalendar";
+// import { styleCalendar } from "../../components/Calendar/HomeCalendar";
 import Posts from "./Posts";
 
-import Events from "./Events";
+// import Events from "./Events";
 import DiscoverEvents from "./DiscoverEvents";
-import MyEvents from "./MyEvents";
+// import MyEvents from "./MyEvents";
 
 // Dayjs
 import { useHistory } from "react-router-dom";
@@ -92,9 +92,9 @@ const Home = () => {
     dispatch(getEvents(numEvents));
   }, [dispatch, numEvents]);
 
-  useEffect(() => {
-    styleCalendar();
-  }, []);
+  // useEffect(() => {
+  //   styleCalendar();
+  // }, []);
 
   useEffect(() => {
     if (clubExpansionCase._id) {
@@ -106,20 +106,22 @@ const Home = () => {
     dispatch(removeFilter(t));
     dispatch(filterPosts());
   };
-  const addUpdateFilter = (t) => {
-    dispatch(addFilter(t));
-    dispatch(filterPosts());
-  };
 
   const [tagToAdd, setTagToAdd] = useState("");
   const handleChange = (e) => {
     setTagToAdd(e.target.value);
   };
 
-  const openEvents = () => {
-    setPage("events");
-    setNumEvents(50);
+  const addUpdateFilter = (t) => {
+    setTagToAdd("");
+    dispatch(addFilter(t));
+    dispatch(filterPosts());
   };
+
+  // const openEvents = () => {
+  //   setPage("events");
+  //   setNumEvents(50);
+  // };
 
   const closeEvents = () => {
     setPage("main");
@@ -160,36 +162,6 @@ const Home = () => {
                 <InfoEntryText>Explore Clubs</InfoEntryText>
               </InfoEntryWrapper>
             </InfoBoxes>
-
-            {page === "main" && (
-              <FilterWrapper>
-                <FilterTitle>Filters:</FilterTitle>
-                <InteriorFilterWrapper>
-                  {filters.map((t) => (
-                    <FilterObj
-                      tag={t}
-                      key={t}
-                      onClick={() => removeUpdateFilters(t)}
-                    >
-                      {t}
-                    </FilterObj>
-                  ))}
-                </InteriorFilterWrapper>
-                <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
-                <DialogTextField
-                  id="tag"
-                  placeholder="Enter tag..."
-                  type="text"
-                  InputProps={{
-                    disableUnderline: true,
-                  }}
-                  onChange={handleChange}
-                />
-                <AddFilter onClick={() => addUpdateFilter(tagToAdd)}>
-                  + Add Filter
-                </AddFilter>
-              </FilterWrapper>
-            )}
           </LeftContainer>
 
           <MiddleContainer>
@@ -215,11 +187,44 @@ const Home = () => {
           </MiddleContainer>
 
           <RightContainer>
-            <CalanderWrapper onClick={() => setErrorPopup(true)}>
+            {/* <CalanderWrapper onClick={() => setErrorPopup(true)}>
               <div style={{ width: "100%", height: "4em" }}></div>
               <Calendar></Calendar>
-            </CalanderWrapper>
-            {page === "events" ? (
+            </CalanderWrapper> */}
+
+            <div></div>
+            <div></div>
+            {page === "main" && (
+              <FilterWrapper>
+                <FilterTitle>Filters:</FilterTitle>
+                <InteriorFilterWrapper>
+                  {filters.map((t) => (
+                    <FilterObj
+                      tag={t.toLowerCase()}
+                      key={t}
+                      onClick={() => removeUpdateFilters(t)}
+                    >
+                      {t}
+                    </FilterObj>
+                  ))}
+                </InteriorFilterWrapper>
+                <InfoSeperator style={{ marginTop: "7px" }}></InfoSeperator>
+                <DialogTextField
+                  id="tag"
+                  placeholder="Enter tag..."
+                  type="text"
+                  value={tagToAdd}
+                  InputProps={{
+                    disableUnderline: true,
+                  }}
+                  onChange={handleChange}
+                />
+                <AddFilter onClick={() => addUpdateFilter(tagToAdd)}>
+                  + Add Filter
+                </AddFilter>
+              </FilterWrapper>
+            )}
+            {/* {page === "events" ? (
               <MyEvents></MyEvents>
             ) : (
               <Events
@@ -227,7 +232,7 @@ const Home = () => {
                 openEvents={openEvents}
                 setExpandedEventPage={openExpandedEventPage}
               />
-            )}
+            )} */}
           </RightContainer>
         </LandingPageWrapper>
       </LandingPage>
