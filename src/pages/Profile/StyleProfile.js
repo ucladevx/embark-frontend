@@ -28,7 +28,7 @@ export const QuestionBox = styled.div`
 
 export const MiddleContainer = styled.div`
   flex: 2 1 auto;
-  height: 100vh;
+  min-height: 93vh;
   background: ${colors.blue2};
 `;
 
