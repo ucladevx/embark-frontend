@@ -39,7 +39,9 @@ const MultiDropDown = ({
   return (
     <div style={{ width: ttwd }} ref={dropdownRef}>
       <DropDownTitle onClick={onOpenClose}>
-        <Typography style={{ display: "inline" }}>{title}</Typography>
+        <Typography style={{ display: "inline" }}>
+          {selected.length > 0 ? selected.join(", ") : title}
+        </Typography>
         <img src={DropdownArrow} style={{ float: "right" }} alt="arrow"></img>
       </DropDownTitle>
       {isOpen && (
