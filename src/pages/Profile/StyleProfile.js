@@ -36,7 +36,6 @@ export const NameDescriptionWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 1vh;
-  max-height: 12vh;
 `;
 
 export const ProfileTabsWrapper = styled.div`
