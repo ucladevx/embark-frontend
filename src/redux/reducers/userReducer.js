@@ -2,7 +2,7 @@ import {
   SET_USER,
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
-  LIKE_POST,
+  // LIKE_POST,
   // UNLIKE_POST,
   MARK_NOTIFICATIONS_READ,
   GOING_EVENT,
@@ -40,24 +40,25 @@ export default function userReducer(state = intialState, action) {
         ownEvents: [],
       };
     // TODO: uncomment this after the like endpoint is updated
+    /** 
     case LIKE_POST:
       return {
         ...state,
         likedPosts: [
           ...state.likedPosts,
           {
-            likeBy: state.info.name,
-            postId: action.payload.postId,
+            //likeBy: state.info.name, // error: undefined
+            postId: action.payload.post._id,
           },
         ],
       };
-    // case UNLIKE_POST:
-    //   return {
-    //     ...state,
-    //     likedPosts: state.likedPosts.filter(
-    //       (post) => post.postId !== action.payload.postId
-    //     ),
-    //   };
+     case UNLIKE_POST:
+       return {
+         ...state,
+         likedPosts: state.likedPosts.filter(
+           (post) => post.postId !== action.payload.postId
+         ),
+       };*/
     case MARK_NOTIFICATIONS_READ:
       state.notifications.forEach((noti) => (noti.read = true));
       return {
@@ -77,7 +78,7 @@ export default function userReducer(state = intialState, action) {
       return {
         ...state,
         goingEvents: state.goingEvents.filter(
-          (event) => event.eventId !== action.payload,
+          (event) => event.eventId !== action.payload
         ),
       };
     default:
