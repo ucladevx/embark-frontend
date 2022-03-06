@@ -88,6 +88,19 @@ export const getNextPosts = () => async (dispatch, getState) => {
   }
 };
 
+// search posts using the search bar and display relevant posts
+export const searchPosts = (string) => async (dispatch) => {
+  console.log("seaching posts...");
+  try {
+    const res = await axios.post("search/posts", { searchString: string });
+    //const res = await axios.get("/posts");
+    dispatch({ type: SET_POSTS, payload: res.data.posts });
+    console.log(res);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // Create A New Post
 export const newPost = (newP) => async (dispatch) => {
   try {
