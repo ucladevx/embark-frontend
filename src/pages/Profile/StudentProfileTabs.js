@@ -102,8 +102,8 @@ const UserProfileTabs = () => {
       <AppBar position="relative" color="transparent" elevation={0}>
         <Tabs value={value} onChange={handleChange}>
           <Tab label="My Posts" {...a11yProps(0)} />
-          <Tab label="Followed Clubs" {...a11yProps(1)} />
-          <Tab label="Saved Posts" {...a11yProps(2)} />
+          {/**<Tab label="Followed Clubs" {...a11yProps(1)} />
+          <Tab label="Saved Posts" {...a11yProps(2)} />**/}
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} id="posts">
@@ -127,12 +127,12 @@ const UserProfileTabs = () => {
           {"Next>"}
         </NextButton>
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      {/**<TabPanel value={value} index={1}>
         Followed Clubs
       </TabPanel>
       <TabPanel value={value} index={2}>
         Saved Posts
-      </TabPanel>
+        </TabPanel>**/}
     </div>
   );
 };
