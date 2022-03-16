@@ -104,8 +104,22 @@ export const searchPosts = (string) => async (dispatch) => {
 // Create A New Post
 export const newPost = (newP) => async (dispatch) => {
   try {
-    const res = await axios.post("/posts", newP);
-    dispatch({ type: NEW_POST, payload: res.data.post });
+    const files = newP.files;
+    if (files && files.length > 0) {
+      const resFiles = await axios.post(
+        `/posts/resources?linkFile=file&userNamed=EmbarkResource`,
+        { file: files }
+      );
+      const post = {
+        ...newP,
+        files: resFiles.data.fileUrls,
+      };
+      const res = await axios.post("/posts", post);
+      dispatch({ type: NEW_POST, payload: res.data.post });
+    } else {
+      const res = await axios.post("/posts", newP);
+      dispatch({ type: NEW_POST, payload: res.data.post });
+    }
     alert("Post successfully created");
   } catch (err) {
     console.error(err);
