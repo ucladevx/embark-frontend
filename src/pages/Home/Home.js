@@ -152,12 +152,20 @@ const Home = () => {
                 </InfoEntryText>
               </InfoEntryWrapper>
               <InfoSeperator></InfoSeperator>
-              <InfoEntryWrapper onClick={() => setErrorPopup(true)}>
+              <InfoEntryWrapper
+                onClick={() =>
+                  window.open(
+                    "https://drive.google.com/drive/folders/1rggLRrWshVaPzxT1sOvFqvBhW1OUdzuP?usp=sharing"
+                  )
+                }
+              >
                 <InfoImage src={bookImg} alt="book"></InfoImage>
                 <InfoEntryText>Saved Resources</InfoEntryText>
               </InfoEntryWrapper>
               <InfoSeperator></InfoSeperator>
-              <InfoEntryWrapper onClick={() => setPage("explore")}>
+              <InfoEntryWrapper
+                onClick={() => window.open("https://oncampus.us/")}
+              >
                 <InfoImage src={compassImg} alt="compass"></InfoImage>
                 <InfoEntryText>Explore Clubs</InfoEntryText>
               </InfoEntryWrapper>
