@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../shared/config";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useClickOutState } from "../shared/Hook";
 // icons for navbar icons
@@ -15,6 +15,9 @@ import { TextField } from "@material-ui/core";
 import LinkEffect from "../shared/Effect/LinkEffect";
 import StickyEffect from "../shared/Effect/StickyEffect";
 import Setting from "./Setting";
+
+// imports for data actions
+import { searchPosts } from "../redux/actions/dataActions";
 
 import { AskAvatar } from "../pages/Home/StyleLanding";
 const NavBarWrapper = styled.div`
@@ -76,13 +79,14 @@ const NavBar = ({ setPage }) => {
   const [showList, setShowList] = useState(false);
   const [showSetting, setShowSetting, settingRef] = useClickOutState();
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const handleSearchChange = (e) => {
     // just show suggestions
     // and console log for now
     setSearch(e.target.value);
-    console.log(search);
+    //console.log(search);
     setShowList(true);
   };
 
@@ -107,6 +111,18 @@ const NavBar = ({ setPage }) => {
 
   const handleCollapseIconClick = () => {
     setShowSetting(!showSetting);
+  };
+
+  const handleSearchSubmit = () => {
+    //console.log("got:" +search);
+    dispatch(searchPosts(search));
+  };
+
+  const handleSearchKeydown = (e) => {
+    //console.log("key pressed")
+    if (e.keyCode === 13 && e.target.value) {
+      handleSearchSubmit();
+    }
   };
 
   return (
@@ -134,6 +150,7 @@ const NavBar = ({ setPage }) => {
                   size="small"
                   onBlur={() => setShowList(false)}
                   variant="outlined"
+                  onKeyDown={handleSearchKeydown}
                 />
               )}
             />
