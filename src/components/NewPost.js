@@ -251,7 +251,7 @@ const NewPost = ({ open, handleClose }) => {
     //let myForm = document.getElementById("myForm");
     //setForm(new FormData(myForm));
     var formData = new FormData();
-    formData.append(file.name, file);
+    formData.append("file", file);
     setForm(formData);
     fileReader.onload = (fileLoad) => {
       const { result } = fileLoad.target;

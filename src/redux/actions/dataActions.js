@@ -106,10 +106,23 @@ export const newPost = (newP) => async (dispatch) => {
   try {
     const files = newP.files;
     if (files && files.length > 0) {
-      const resFiles = await axios.post(
+      console.log(files[0]);
+      /**const resFiles = await fetch("http://localhost:9000/posts/resources?linkFile=file&userNamed=EmbarkResource", {
+        mode: 'no-cors',
+        method: "POST",
+        body: { file: files[0] }
+      })
+      console.log(resFiles);*/
+      const resFiles = await axios({
+        method: "post",
+        url: "http://localhost:9000/posts/resources?linkFile=file&userNamed=EmbarkResource",
+        data: files[0],
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      /**const resFiles = await axios.post(
         `/posts/resources?linkFile=file&userNamed=EmbarkResource`,
-        { file: files }
-      );
+        { file: files[0] },
+      );*/
       const post = {
         ...newP,
         files: resFiles.data.fileUrls,
