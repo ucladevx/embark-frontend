@@ -104,7 +104,7 @@ export const searchPosts = (string) => async (dispatch) => {
 // Create A New Post
 export const newPost = (newP) => async (dispatch) => {
   try {
-    const files = newP.files;
+    const files = newP.files.filter((val) => val instanceof FormData);
     if (files && files.length > 0) {
       console.log(files[0]);
       /**const resFiles = await fetch("http://localhost:9000/posts/resources?linkFile=file&userNamed=EmbarkResource", {
@@ -115,17 +115,31 @@ export const newPost = (newP) => async (dispatch) => {
       console.log(resFiles);*/
       const resFiles = await axios({
         method: "post",
-        url: "http://localhost:9000/posts/resources?linkFile=file&userNamed=EmbarkResource",
+        url: "/posts/resources?linkFile=file&userNamed=EmbarkResource",
         data: files[0],
         headers: { "Content-Type": "multipart/form-data" },
       });
+      let resFiles2;
+      if (files[1]) {
+        resFiles2 = await axios({
+          method: "post",
+          url: "/posts/resources?linkFile=file&userNamed=EmbarkResource",
+          data: files[1],
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      }
+      const fileUrls = resFiles2.data
+        ? resFiles.data.fileUrls.concat(resFiles2.data.fileUrls)
+        : resFiles.data.fileUrls;
       /**const resFiles = await axios.post(
         `/posts/resources?linkFile=file&userNamed=EmbarkResource`,
         { file: files[0] },
       );*/
       const post = {
-        ...newP,
-        files: resFiles.data.fileUrls,
+        title: newP.title,
+        body: newP.body,
+        tags: newP.tags,
+        files: fileUrls,
       };
       const res = await axios.post("/posts", post);
       dispatch({ type: NEW_POST, payload: res.data.post });

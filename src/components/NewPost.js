@@ -279,7 +279,7 @@ const NewPost = ({ open, handleClose }) => {
     //let myForm = document.getElementById("myImgForm");
     //setImgForm(new FormData(myForm));
     var formData = new FormData();
-    formData.append(img.name, img);
+    formData.append("file", img);
     setImgForm(formData);
     imgReader.onload = (fileLoad) => {
       const { result } = fileLoad.target;
