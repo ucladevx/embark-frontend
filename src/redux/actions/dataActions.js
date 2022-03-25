@@ -135,13 +135,26 @@ export const newPost = (newP) => async (dispatch) => {
         `/posts/resources?linkFile=file&userNamed=EmbarkResource`,
         { file: files[0] },
       );*/
-      const post = {
-        accountType: "student",
-        title: newP.title,
-        body: newP.body,
-        tags: newP.tags,
-        files: fileUrls.map((val) => val.Location),
-      };
+      let post;
+      const filesFinal = fileUrls
+        .map((val) => val.Location)
+        .filter((val) => typeof val === "string");
+      if (filesFinal && filesFinal.length > 0) {
+        post = {
+          accountType: "student",
+          title: newP.title,
+          body: newP.body,
+          tags: newP.tags,
+          files: filesFinal,
+        };
+      } else {
+        post = {
+          accountType: "student",
+          title: newP.title,
+          body: newP.body,
+          tags: newP.tags,
+        };
+      }
       //console.log(post);
       const res = await axios.post("/posts", post);
       dispatch({ type: NEW_POST, payload: res.data.post });

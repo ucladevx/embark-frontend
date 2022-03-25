@@ -260,7 +260,7 @@ const Posts = ({ setNewPost }) => {
               <PostWrapper key={p._id + i}>
                 <PostHeader>
                   <BigImage
-                    src={user.profilePicURL || avatarImg}
+                    src={p.authorProfilePic || avatarImg}
                     alt="user"
                   ></BigImage>
                   <PostNameTime>
