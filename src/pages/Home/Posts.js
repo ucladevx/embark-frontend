@@ -280,6 +280,19 @@ const Posts = ({ setNewPost }) => {
                 ) : (
                   <></>
                 )}
+                {p.files &&
+                  p.files.map((f) => (
+                    <FilesWrapper>
+                      <FileButton onClick={() => window.open(f, "_blank")}>
+                        Expand File
+                      </FileButton>
+                      <FileViewer
+                        tag={f}
+                        fileType={f.substring(f.lastIndexOf(".") + 1)}
+                        filePath={backendHost + "/" + f}
+                      />
+                    </FilesWrapper>
+                  ))}
                 <LikeCommentCount>
                   <div style={{ display: "flex", gap: "3px" }}>
                     <img
@@ -296,19 +309,7 @@ const Posts = ({ setNewPost }) => {
                   isSaved={isSaved(p._id)}
                   isLiked={isLiked(p._id)}
                 ></Interactive>
-                {p.files &&
-                  p.files.map((f) => (
-                    <FilesWrapper>
-                      <FileButton onClick={() => window.open(f, "_blank")}>
-                        Expand File
-                      </FileButton>
-                      <FileViewer
-                        tag={f}
-                        fileType={f.substring(f.lastIndexOf(".") + 1)}
-                        filePath={backendHost + "/" + f}
-                      />
-                    </FilesWrapper>
-                  ))}
+
                 <CommentBox comments={p.comments}></CommentBox>
                 <WriteComment post_id={p._id}></WriteComment>
               </PostWrapper>
