@@ -128,7 +128,7 @@ export const newPost = (newP) => async (dispatch) => {
           headers: { "Content-Type": "multipart/form-data" },
         });
       }
-      const fileUrls = resFiles2.data
+      const fileUrls = resFiles2?.data
         ? resFiles.data.fileUrls.concat(resFiles2.data.fileUrls)
         : resFiles.data.fileUrls;
       /**const resFiles = await axios.post(
@@ -136,11 +136,13 @@ export const newPost = (newP) => async (dispatch) => {
         { file: files[0] },
       );*/
       const post = {
+        accountType: "student",
         title: newP.title,
         body: newP.body,
         tags: newP.tags,
-        files: fileUrls,
+        files: fileUrls.map((val) => val.Location),
       };
+      console.log(post);
       const res = await axios.post("/posts", post);
       dispatch({ type: NEW_POST, payload: res.data.post });
     } else {
