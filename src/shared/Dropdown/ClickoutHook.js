@@ -5,7 +5,7 @@ const useClickOut = (dropdownRef, isOpen, setIsOpen, onOpenClose) => {
     const clickOut = (e) => {
       if (isOpen) {
         if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-          console.log("run");
+          //console.log("run");
           setIsOpen(false);
           if (onOpenClose) onOpenClose();
         }

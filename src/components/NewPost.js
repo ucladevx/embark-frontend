@@ -114,8 +114,8 @@ const NewPost = ({ open, handleClose }) => {
   const handleSubmit = async () => {
     var post = null;
     //making sure not to send null objects in the post request
-    console.log(imgForm);
-    console.log(form);
+    //console.log(imgForm);
+    //console.log(form);
     if (title && title.length > 100) {
       alert("Title is too long! Please limit to <100 characters");
       return;
@@ -217,7 +217,7 @@ const NewPost = ({ open, handleClose }) => {
     }
 
     post.accountType = user.userType;
-    console.log(post);
+    //console.log(post);
     dispatch(newPost(post));
     //Clean up component contents
     setForm({});
@@ -241,13 +241,13 @@ const NewPost = ({ open, handleClose }) => {
       alert("File is too big! Please limit to 10MB");
       return;
     }
-    console.log(file);
+    //console.log(file);
 
     setFile({ url: PDF1_URL });
     setFileType("pdf");
 
     setFileType(file.name.substring(file.name.lastIndexOf(".") + 1));
-    console.log(fileType);
+    //console.log(fileType);
     //let myForm = document.getElementById("myForm");
     //setForm(new FormData(myForm));
     var formData = new FormData();

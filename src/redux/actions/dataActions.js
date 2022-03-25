@@ -24,7 +24,7 @@ import axios from "axios";
 
 const maintenanceErrorCheck = (err) => {
   if (err.message.includes(" 503")) {
-    console.log("here");
+    //console.log("here");
     alert("ERROR 503: Embark is on maintenance, please check later");
   }
 };
@@ -95,7 +95,7 @@ export const searchPosts = (string) => async (dispatch) => {
     const res = await axios.post("search/posts", { searchString: string });
     //const res = await axios.get("/posts");
     dispatch({ type: SET_POSTS, payload: res.data.posts });
-    console.log(res);
+    //console.log(res);
   } catch (err) {
     console.log(err);
   }
@@ -106,7 +106,7 @@ export const newPost = (newP) => async (dispatch) => {
   try {
     const files = newP.files.filter((val) => val instanceof FormData);
     if (files && files.length > 0) {
-      console.log(files[0]);
+      //console.log(files[0]);
       /**const resFiles = await fetch("http://localhost:9000/posts/resources?linkFile=file&userNamed=EmbarkResource", {
         mode: 'no-cors',
         method: "POST",
@@ -142,7 +142,7 @@ export const newPost = (newP) => async (dispatch) => {
         tags: newP.tags,
         files: fileUrls.map((val) => val.Location),
       };
-      console.log(post);
+      //console.log(post);
       const res = await axios.post("/posts", post);
       dispatch({ type: NEW_POST, payload: res.data.post });
     } else {
@@ -167,7 +167,7 @@ export const savePost = (post_id) => async (dispatch, getState) => {
       post_id: post_id,
     });
     // TODO: check the documentation of save endpoint
-    console.log(res.data);
+    //console.log(res.data);
     dispatch({ type: SAVE_POST, payload: res.data });
   } catch (err) {
     console.error(err);
@@ -183,9 +183,9 @@ export const likePost = (post_id) => async (dispatch, getState) => {
       authorEmail: email,
     };
     const res_post = await axios.post(`/posts/likes`, body);
-    console.log(res_post.data);
-    const res_student = await axios.post("student/likePost", { post_id });
-    console.log(res_student.data);
+    //console.log(res_post.data);
+    /**const res_student = */ await axios.post("student/likePost", { post_id });
+    //console.log(res_student.data);
     dispatch({ type: LIKE_POST, payload: res_post.data });
   } catch (err) {
     console.error(err);
@@ -315,7 +315,7 @@ export const getEvents = (amount) => async (dispatch) => {
         userType: "student",
       },
     });
-    console.log(res.data);
+    //console.log(res.data);
     dispatch({ type: SET_EVENTS, payload: res.data.events });
   } catch (err) {
     console.error(err);
@@ -326,7 +326,7 @@ export const getEvents = (amount) => async (dispatch) => {
 export const getResources = () => async (dispatch) => {
   try {
     const res = await axios.get("/club/resources");
-    console.log(res);
+    //console.log(res);
     dispatch({ type: SET_CLUB_RESOURCES, payload: res.data.resources });
     dispatch({ type: SET_CLUB_LINKS, payload: res.data.embededlinks });
   } catch (error) {
@@ -338,14 +338,14 @@ export const getResources = () => async (dispatch) => {
 export const uploadResource =
   (newResource, resourceName) => async (dispatch) => {
     try {
-      console.log(resourceName);
+      //console.log(resourceName);
       const formData = new FormData();
       formData.append("file", newResource);
       const res = await axios.post(
         `/club/resources?linkFile=file&userNamed=${resourceName}`,
         formData
       );
-      console.log(res);
+      //console.log(res);
       dispatch({ type: UPLOAD_CLUB_RESOURCES, payload: res.data.fileUrls[0] });
     } catch (err) {
       console.log(err);
@@ -354,15 +354,15 @@ export const uploadResource =
 
 export const uploadLink = (newLink, linkName) => async (dispatch) => {
   try {
-    console.log(linkName);
-    console.log(newLink);
+    //console.log(linkName);
+    //console.log(newLink);
     const res = await axios.post(
       `/club/resources?linkFile=link&userNamed=${linkName}`,
       {
         link: newLink,
       }
     );
-    console.log(res);
+    //console.log(res);
     dispatch({ type: UPLOAD_CLUB_LINKS, payload: res.data.fileUrls });
   } catch (err) {
     console.log(err);

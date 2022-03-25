@@ -94,14 +94,14 @@ const EditClubProfile = ({ open, handleClose }) => {
   };
 
   const handleClubProfileURL = (e) => {
-    console.log(e.target.files[0]);
+    //console.log(e.target.files[0]);
     setProfileURL({ url: URL.createObjectURL(e.target.files[0]) });
     const formData = new FormData();
     formData.append("image", e.target.files[0]); // appending file
-    console.log(formData);
+    //console.log(formData);
     axios.post(
       "http://localhost:9000/club/profile/image?pictureType=profile",
-      formData,
+      formData
     );
   };
 
@@ -109,10 +109,10 @@ const EditClubProfile = ({ open, handleClose }) => {
     setCoverURL({ url: URL.createObjectURL(e.target.files[0]) });
     const formData = new FormData();
     formData.append("image", e.target.files[0]); // appending file
-    console.log(formData);
+    //console.log(formData);
     axios.post(
       "http://localhost:9000/club/profile/image?pictureType=cover",
-      formData,
+      formData
     );
   };
 
