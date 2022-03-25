@@ -12,18 +12,18 @@ import {
   PostAvatar,
   PostTitle,
   PostContent,
-  ViewCommentLink,
-  ViewPreviousCommentWrapper,
+  //ViewCommentLink,
+  //ViewPreviousCommentWrapper,
   PostWrapper,
   PostHeader,
   PostTagWrapper,
-  PreviousCommentItem,
-  PreviousCommentTitle,
-  PreviousCommentAvatar,
-  PreviousCommentContent,
-  PreviousCommentText,
-  LikeReply,
-  LikeReplyText,
+  //PreviousCommentItem,
+  //PreviousCommentTitle,
+  //PreviousCommentAvatar,
+  //PreviousCommentContent,
+  //PreviousCommentText,
+  //LikeReply,
+  //LikeReplyText,
   PostNameTime,
   PostTime,
   PostUserName,
@@ -97,21 +97,21 @@ const Posts = ({ setNewPost }) => {
   const hasNext = useSelector((state) => state.data.hasNext);
   const dispatch = useDispatch();
 
-  const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
+  /**const tags = [{ key: "Product Management" }, { key: "Computer Science" }];
   const renderedTags = tags.map((each) => {
     return (
       <div key={each.key}>
         <PostTag tag={each.key.toLowerCase()}>{each.key}</PostTag>
       </div>
     );
-  });
+  });*/
   const getMorePosts = () => {
     if (hasNext) dispatch(getNextPosts());
   };
   //for test files, go to https://cors-anywhere.herokuapp.com to enable CORS on non-cors file links, see below for format
-  const testfiles = [
+  /**const testfiles = [
     "https://club-resources-embark.s3.amazonaws.com/1625887134027ws7.pdf",
-  ];
+  ];*/
 
   const getURL = (body) => {
     const urlSet = linksFinder.findLinks(body);
@@ -145,7 +145,7 @@ const Posts = ({ setNewPost }) => {
         <LinkIcon />
       </QuestionBox>
 
-      <PostWrapper>
+      {/**<PostWrapper>
         <PostHeader>
           <PostAvatar />
           <PostNameTime>
@@ -186,7 +186,6 @@ const Posts = ({ setNewPost }) => {
               alt="thumbup"
               style={{ marginTop: "-3px" }}
             ></img>
-            {/* count the # of likes */}
             <p>11</p>
           </div>
           <p>5 Comments</p>
@@ -245,7 +244,7 @@ const Posts = ({ setNewPost }) => {
           <ViewCommentLink>View More comments</ViewCommentLink>
           <WriteComment></WriteComment>
         </ViewPreviousCommentWrapper>
-      </PostWrapper>
+      </PostWrapper>*/}
 
       <InfiniteScroll
         dataLength={posts && posts.length}

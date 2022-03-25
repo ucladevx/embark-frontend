@@ -67,7 +67,7 @@ const FormPersonalDetails = ({ user }) => {
   const [year, setYear] = useState("");
   const [yearOpen, setYearOpen] = useState(false);
   const grad_years = getPossibleGraduatingYears();
-  console.log(grad_years);
+  //console.log(grad_years);
   const years = grad_years;
   const dispatch = useDispatch();
   const [industries, openInd, handleIndustries, handleOpenInd] = useIndustry();
@@ -104,7 +104,7 @@ const FormPersonalDetails = ({ user }) => {
               linkedIn,
               tags: industries,
             };
-            console.log(profile);
+            //console.log(profile);
             dispatch(editStudentDetails(profile));
             history.push("/home");
           }}

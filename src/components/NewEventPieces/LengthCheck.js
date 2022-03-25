@@ -2,7 +2,7 @@ export const eventCheck = (props) => {
   const title = props.title;
   const description = props.description;
   const location = props.location;
-  console.log(title);
+  //console.log(title);
 
   if (title && title.length > 100) {
     alert("Title is too long! Please limit to <100 characters");

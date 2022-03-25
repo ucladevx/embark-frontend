@@ -44,9 +44,9 @@ const MyEvents = () => {
   const [expanded, setExpanded] = useState(false);
   const [event, setEvent] = useState({});
   const loadExpanded = (e) => {
-    console.log(e);
+    //console.log(e);
     setEvent(e);
-    console.log(event);
+    //console.log(event);
     setExpanded(true);
   };
 

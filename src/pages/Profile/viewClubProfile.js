@@ -86,7 +86,7 @@ const ViewClubProfile = (props) => {
     } else {
       myclubs.push(clubId);
     }
-    console.log(`Follow ${clubId}`);
+    //console.log(`Follow ${clubId}`);
     const updatedProfile = {
       name: user.name,
       major: user.major,

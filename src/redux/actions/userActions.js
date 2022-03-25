@@ -12,7 +12,7 @@ import axios from "axios";
 
 const maintenanceErrorCheck = (err) => {
   if (err.message.includes(" 503")) {
-    console.log("here");
+    //console.log("here");
     alert("ERROR 503: Embark is on maintenance, please check later");
   }
 };
@@ -78,7 +78,7 @@ export const signupStudent =
   (newUserData, handleUser, handleStep) => async (dispatch) => {
     try {
       const res = await axios.post("/auth/signup", newUserData);
-      console.log(res.data);
+      //console.log(res.data);
       setAuthorizationHeader(res.data.token);
       dispatch(getStudentData());
       handleUser(newUserData);

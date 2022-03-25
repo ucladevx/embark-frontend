@@ -8,7 +8,7 @@ export const useClickOutState = (isOpen) => {
     const clickOut = (e) => {
       if (open) {
         if (ref.current && !ref.current.contains(e.target)) {
-          console.log(ref.current);
+          //console.log(ref.current);
           setOpen(false);
         }
       }

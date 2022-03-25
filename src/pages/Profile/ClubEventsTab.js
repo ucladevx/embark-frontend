@@ -115,7 +115,7 @@ const ClubEventsTab = () => {
   }, []);
 
   const handleTime = (time) => {
-    console.log(time);
+    //console.log(time);
     setViewDate(time);
   };
 

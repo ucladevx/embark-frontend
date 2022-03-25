@@ -25,7 +25,7 @@ const ListDocuments = ({
   };
 
   const handleListItemClick = (event, id) => {
-    console.log(documents.filter((doc) => doc.id === id)[0].name);
+    //console.log(documents.filter((doc) => doc.id === id)[0].name);
     handleName(documents.filter((doc) => doc.id === id)[0].name);
     handleDrive(id);
     handleClose();
