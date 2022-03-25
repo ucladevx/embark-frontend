@@ -94,6 +94,13 @@ export const InfoProfilePic = styled(InfoImage)`
   border-radius: 50%;
 `;
 
+export const BigImage = styled.img`
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  margin-right: 10px;
+`;
+
 export const FilterWrapper = styled.div`
   box-sizing: border-box;
   margin-top: 20px;

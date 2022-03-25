@@ -6,15 +6,17 @@ import TinyLinkWrapper from "../../../components/TinyLinkWrapper";
 import {
   PreviousCommentItem,
   PreviousCommentTitle,
-  PreviousCommentAvatar,
+  //PreviousCommentAvatar,
   PreviousCommentContent,
   PreviousCommentText,
   ViewPreviousCommentWrapper,
   ViewCommentLink,
   LikeReply,
   LikeReplyText,
+  InfoProfilePic,
 } from "../StyleLanding";
 import { colors } from "../../../shared/config";
+import avatarImg from "../../../images/avatar.svg";
 
 const CommentBox = ({ comments }) => {
   const [start, setStart] = useState(0);
@@ -42,7 +44,10 @@ const CommentBox = ({ comments }) => {
             }
             return (
               <PreviousCommentItem key={c._id || i}>
-                <PreviousCommentAvatar></PreviousCommentAvatar>
+                <InfoProfilePic
+                  src={c.authorProfilePic || avatarImg}
+                  alt="commentAuthorPic"
+                ></InfoProfilePic>
                 <div>
                   <PreviousCommentContent bgcolor={colors.gray1}>
                     <PreviousCommentTitle>

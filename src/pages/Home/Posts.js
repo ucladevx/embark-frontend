@@ -4,12 +4,13 @@ import LinkIcon from "@material-ui/icons/Link";
 import TinyLinkWrapper from "../../components/TinyLinkWrapper";
 import Linkify from "react-linkify";
 import linksFinder from "links-finder";
+import avatarImg from "../../images/avatar.svg";
 
 import {
   QuestionBox,
   AskAvatar,
   AskaQuestion,
-  PostAvatar,
+  //PostAvatar,
   PostTitle,
   PostContent,
   //ViewCommentLink,
@@ -29,6 +30,7 @@ import {
   PostUserName,
   PostTag,
   FilesWrapper,
+  BigImage,
 } from "./StyleLanding";
 import { CircularProgress, Button } from "@material-ui/core";
 import styled from "styled-components";
@@ -257,7 +259,10 @@ const Posts = ({ setNewPost }) => {
             return (
               <PostWrapper key={p._id + i}>
                 <PostHeader>
-                  <PostAvatar />
+                  <BigImage
+                    src={user.profilePicURL || avatarImg}
+                    alt="user"
+                  ></BigImage>
                   <PostNameTime>
                     <PostUserName>{p.authorEmail}</PostUserName>
                     <PostTime>{dayjs(p.timestamp).fromNow()}</PostTime>
