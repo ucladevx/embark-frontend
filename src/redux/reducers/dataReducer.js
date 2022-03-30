@@ -104,11 +104,11 @@ export default function dataReducer(state = initialState, action) {
           if (!post1 || !post1.tags) return 1; // post 2 comes before post 1
           if (!post2 || !post2.tags) return -1; // post 1 comes before post 2
           // create copy of post1 tags that are all lowercase
-          let post1Tags = post1.tags.slice();
+          let post1Tags = post1.tags.filter((t) => t !== null).slice();
           for (let i = 0; i < post1Tags.length; i++)
             post1Tags[i] = post1Tags[i].toLowerCase();
           // create copy of post2 tags that are all lowercase
-          let post2Tags = post2.tags.slice();
+          let post2Tags = post2.tags.filter((t) => t !== null).slice();
           for (let i = 0; i < post2Tags.length; i++)
             post2Tags[i] = post2Tags[i].toLowerCase();
           if (post1Tags.includes(state.filter[i].toLowerCase())) {

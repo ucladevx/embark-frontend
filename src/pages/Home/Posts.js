@@ -269,11 +269,13 @@ const Posts = ({ setNewPost }) => {
                   </PostNameTime>
                   <PostTagWrapper>
                     {p.tags &&
-                      p.tags.map((t) => (
-                        <PostTag tag={t.toLowerCase()} key={t}>
-                          {t}
-                        </PostTag>
-                      ))}
+                      p.tags
+                        .filter((t) => t !== null)
+                        .map((t) => (
+                          <PostTag tag={t.toLowerCase()} key={t}>
+                            {t}
+                          </PostTag>
+                        ))}
                   </PostTagWrapper>
                 </PostHeader>
                 <PostTitle>{p.title}</PostTitle>

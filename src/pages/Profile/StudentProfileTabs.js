@@ -107,19 +107,21 @@ const UserProfileTabs = () => {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} id="posts">
-        {posts.map((p) => (
-          <PostBox key={p._id}>
-            <PostTitle>
-              <BoldTypography>{p.title}</BoldTypography>
-            </PostTitle>
-            <PostBody>
-              <Typography>
-                {p.body.slice(0, 70)}
-                {p.body.length > 50 && "..."}
-              </Typography>
-            </PostBody>
-          </PostBox>
-        ))}
+        {posts
+          .filter((p) => p !== null)
+          .map((p) => (
+            <PostBox key={p._id}>
+              <PostTitle>
+                <BoldTypography>{p.title}</BoldTypography>
+              </PostTitle>
+              <PostBody>
+                <Typography>
+                  {p.body.slice(0, 70)}
+                  {p.body.length > 50 && "..."}
+                </Typography>
+              </PostBody>
+            </PostBox>
+          ))}
         <PrevButton onClick={() => postPage > 0 && setPostPage(postPage - 1)}>
           {"Prev<"}
         </PrevButton>
