@@ -15,6 +15,9 @@ const StyledTableContainer = styled(TableContainer)`
 
 const Moderation = () => {
   const [posts, setPosts] = useState([]);
+  const [display, setDisplay] = useState(false);
+  const [password, setPassword] = useState("");
+
   useEffect(() => {
     const getModPosts = async () => {
       const res = await axios.get("/moderation");
@@ -23,12 +26,20 @@ const Moderation = () => {
     getModPosts();
   }, []);
 
+  useEffect(() => {
+    const checked = localStorage.getItem("password") === "1";
+    if (password === process.env.REACT_APP_MODERATION_PASSWORD || checked) {
+      setDisplay(true);
+      if (!checked) localStorage.setItem("password", "1");
+    }
+  }, [password]);
+
   const deletePost = async (post_id) => {
     await axios.post("/moderation", { post_id });
     window.location.reload();
   };
 
-  return (
+  return display ? (
     <div style={{ display: "grid", placeItems: "center" }}>
       <StyledTableContainer>
         <TableHead>
@@ -81,6 +92,14 @@ const Moderation = () => {
         </TableBody>
       </StyledTableContainer>
     </div>
+  ) : (
+    <form>
+      <input
+        placeholder="Enter the correct password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      ></input>
+    </form>
   );
 };
 
